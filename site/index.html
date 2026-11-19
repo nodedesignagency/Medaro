@@ -14,9 +14,11 @@
   <!-- Components (shared across pages) -->
   <link rel="stylesheet" href="components/header.css">
   <link rel="stylesheet" href="components/promo-card.css">
+  <link rel="stylesheet" href="components/product.css">
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
   <link rel="stylesheet" href="sections/home/hero--v1.css">
   <link rel="stylesheet" href="sections/home/hero--v2.css">
+  <link rel="stylesheet" href="sections/home/hero--v3.css">
 </head>
 <body id="top">
 
@@ -114,7 +116,7 @@
     <!-- SECTION:header--plain END -->
 
     <main id="main-v2">
-      <!-- SECTION:home/hero--v2 START · styles: sections/home/hero--v2.css · assets: assets/images/products/ (stage-plate.webp, pen-glp1.webp, pen-glp1-capped.webp, tablet-white.webp, tablet-oval-lime.webp) -->
+      <!-- SECTION:home/hero--v2 START · styles: sections/home/hero--v2.css, components/product.css · assets: assets/images/products/ (stage-plate.webp, pen-glp1.webp, pen-glp1-capped.webp, tablet-white.webp, tablet-oval-lime.webp) -->
       <section class="hero-v2" aria-labelledby="hero-v2-title">
         <div class="hero-v2__frame">
 
@@ -225,6 +227,142 @@
         </div>
       </section>
       <!-- SECTION:home/hero--v2 END -->
+    </main>
+  </div>
+
+  <!-- ================= HERO V3 (V2's stage and products, laid out after the px push reference) ================= -->
+  <div data-version="hero:v3">
+
+    <!-- SECTION:header--plain START · styles: components/header.css · scripts: main.js (header) -->
+    <header class="site-header site-header--plain" data-header>
+      <div class="site-header__bar">
+        <a class="logo" href="#top" aria-label="MEDARO, back to top"><svg aria-hidden="true"><use href="#wordmark"/></svg></a>
+        <nav class="site-header__links" aria-label="Main">
+          <a href="#weight-loss">Weight Loss</a>
+          <a href="#mens-health">Men's Health</a>
+          <a href="#womens-health">Women's Health</a>
+          <a href="#supplements">Supplement</a>
+          <a href="#how-it-works">How Medaro Works</a>
+          <a href="about.html">About Us</a>
+        </nav>
+        <div class="site-header__actions">
+          <a class="btn btn--outline btn--pill" href="contact.html">Contact</a>
+          <a class="btn btn--dark btn--pill" href="#how-it-works">Get Started</a>
+        </div>
+      </div>
+    </header>
+    <!-- SECTION:header--plain END -->
+
+    <main id="main-v3">
+      <!-- SECTION:home/hero--v3 START · styles: sections/home/hero--v3.css, components/product.css, components/promo-card.css · assets: assets/images/products/ (stage-plate.webp, pen-glp1.webp, pen-glp1-capped.webp, tablet-white.webp, tablet-oval-lime.webp), assets/images/standin-supplement.svg
+           Layout after the user's px push reference: one big line across the top on a hairline, the products
+           floating in the centre, the supplement promo card bottom left, the client's sentence bottom right.
+           Copy: the client's Home intro (content/home.md), word for word. -->
+      <section class="hero-v3" aria-labelledby="hero-v3-title">
+        <div class="hero-v3__frame">
+
+          <div class="hero-v3__head">
+            <h1 class="hero-v3__title" id="hero-v3-title">Made for Better Health.</h1>
+          </div>
+
+          <!-- Supplement promo card (component: components/promo-card.css), the same one as V1. Finish: paper.
+               Image is a stand-in: MEDARO supplement bottle, square. [LINK NEEDED] "Explore Supplements". -->
+          <a class="promo-card promo-card--paper hero-v3__card" href="#supplements">
+            <img class="promo-card__img media-brief" src="assets/images/standin-supplement.svg" alt="" width="240" height="240">
+            <span class="promo-card__text">
+              <span class="promo-card__label">Supplements</span>
+              <span class="promo-card__title">Better support for your everyday health.</span>
+            </span>
+            <span class="promo-card__go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
+          </a>
+
+          <p class="hero-v3__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
+
+          <!-- Backdrop: the same studio plate as V2 -->
+          <div class="hero-v3__media" aria-hidden="true">
+            <img class="hero-v3__plate" src="assets/images/products/stage-plate.webp" alt="" width="3840" height="2143">
+            <div class="hero-v3__scrim"></div>
+          </div>
+
+          <!-- Products: the same four objects and labels as V2 (components/product.css), centred -->
+          <div class="hero-v3__scene" aria-hidden="true">
+
+            <div class="product product--pen-capped">
+              <div class="product__float">
+                <img src="assets/images/products/pen-glp1-capped.webp" alt="" width="307" height="2284">
+                <svg class="product__print" viewBox="0 0 307 2284">
+                  <!-- Label after the Superpower tube and kits, Face Formula serum and Immortals vials: olive sleeve; two
+                       hairlines along the label; a solid lime tab with the dose at the cap end, the product name after
+                       it; Rx only above the tab, MEDARO mark above the name (the label's far end hides behind the white
+                       pen, so nothing sits there), one use line below. Every word readable in the hero (no text
+                       under 20 units here, about 6.5px on screen at 1440): the user, "small texts … feel like its ai".
+                       Text runs along the pen; rows off the axis are squeezed by the cylinder (scale 1 k).
+                       Sleeve x 8.5–256.8, y 1067.4–1816.8; axis x 132.65.
+                       [DATA NEEDED] dose: 2.5 mg/0.5 mL is tirzepatide's standard starting strength, a stand-in. -->
+                  <defs><clipPath id="v3-sleeve-capped"><rect x="10" y="1067.4" width="245.3" height="749.4" rx="3"/></clipPath></defs>
+                  <g clip-path="url(#v3-sleeve-capped)">
+                    <rect x="8.5" y="1067.4" width="248.3" height="749.4" fill="#343B29"/>
+                    <rect x="100.65" y="1067.4" width="64" height="250.0" fill="#D5E5AD"/>
+                    <rect x="163.95" y="1067.4" width="1.4" height="749.4" fill="#F4F5EF" fill-opacity="0.4"/>
+                    <rect x="99.95" y="1067.4" width="1.4" height="749.4" fill="#F4F5EF" fill-opacity="0.4"/>
+                    <text class="print-dose" transform="translate(124.95 1093.4) rotate(90)" fill="#343B29">2.5 mg/0.5 mL</text>
+                    <text class="print-name" transform="translate(119.35 1343.4) rotate(90)" fill="#F4F5EF">Tirzepatide</text>
+                    <g transform="translate(203.09 1343.4) rotate(90) scale(1 0.88)" color="#F4F5EF"><use href="#wordmark" width="161.1" height="26"/></g>
+                    <text class="print-meta" transform="translate(184.65 1101.4) rotate(90) scale(1 0.88)" fill="#D9DCCF">Rx only</text>
+                    <text class="print-meta" transform="translate(66.65 1343.4) rotate(90) scale(1 0.88)" fill="#D9DCCF">Injection · Single-dose pen</text>
+                  </g>
+                </svg>
+                <!-- the dark sleeve catches the key light: a soft highlight band on its lit side -->
+                <svg class="product__sheen" viewBox="0 0 307 2284">
+                  <defs>
+                    <linearGradient id="v3-sheen-capped" x1="8.5" x2="256.8" gradientUnits="userSpaceOnUse">
+                      <stop offset="0.5" stop-color="#fff" stop-opacity="0"/>
+                      <stop offset="0.74" stop-color="#fff" stop-opacity="0.13"/>
+                      <stop offset="0.84" stop-color="#fff" stop-opacity="0.07"/>
+                      <stop offset="0.97" stop-color="#fff" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <rect x="10" y="1067.4" width="245.3" height="749.4" fill="url(#v3-sheen-capped)"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="product product--pen">
+              <div class="product__float">
+                <img src="assets/images/products/pen-glp1.webp" alt="" width="299" height="2200">
+                <svg class="product__print" viewBox="0 0 299 2200">
+                  <!-- Label after the Superpower tube and kits, Face Formula serum and Wegovy pen: white sleeve; two
+                       hairlines along the label; the product name, then a solid olive tab with the dose in lime running
+                       to the end; MEDARO mark and Rx only above, one use line below. Every word readable in the hero.
+                       Sleeve x 11.7–286.7, y 980.1–1657.2; axis x 149.2.
+                       [DATA NEEDED] dose: 0.25 mg/0.5 mL is semaglutide's standard starting strength, a stand-in. -->
+                  <defs><clipPath id="v3-sleeve-pen"><rect x="13.2" y="980.1" width="272" height="677.1" rx="3"/></clipPath></defs>
+                  <g clip-path="url(#v3-sleeve-pen)">
+                    <rect x="113.20" y="1410.1" width="72" height="247.1" fill="#343B29"/>
+                    <rect x="184.50" y="980.1" width="1.4" height="677.1" fill="#343B29" fill-opacity="0.4"/>
+                    <rect x="112.50" y="980.1" width="1.4" height="677.1" fill="#343B29" fill-opacity="0.4"/>
+                    <text class="print-dose" transform="translate(141.50 1436.1) rotate(90)" fill="#D5E5AD">0.25 mg/0.5 mL</text>
+                    <text class="print-name" transform="translate(135.90 1014.1) rotate(90)" fill="#343B29">Semaglutide</text>
+                    <g transform="translate(223.76 1014.1) rotate(90) scale(1 0.889)" color="#343B29"><use href="#wordmark" width="161.1" height="26"/></g>
+                    <text class="print-meta" transform="translate(205.20 1623.2) rotate(90) scale(1 0.889)" text-anchor="end" fill="#5E6551">Rx only</text>
+                    <text class="print-meta" transform="translate(79.20 1014.1) rotate(90) scale(1 0.889)" fill="#5E6551">Injection · Single-dose pen</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <!-- oval lime tablet, cut out of the earlier "macro set" render (the user's pick, a different pill style) -->
+            <div class="product product--tablet-oval">
+              <div class="product__float"><img src="assets/images/products/tablet-oval-lime.webp" alt="" width="900" height="620"></div>
+            </div>
+
+            <div class="product product--tablet-white">
+              <div class="product__float"><img src="assets/images/products/tablet-white.webp" alt="" width="669" height="662"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:home/hero--v3 END -->
     </main>
   </div>
 

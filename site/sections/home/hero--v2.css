@@ -129,73 +129,10 @@
   container-type: size;
 }
 
-.product {
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  height: var(--h);
-  aspect-ratio: var(--ar);
-  transform: translate(-50%, -50%) rotate(var(--r));
-  z-index: var(--z, 1);
-}
-.product__float {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  animation: product-float var(--dur, 8s) var(--ease, ease-in-out) var(--delay, 0s) infinite;
-  will-change: transform;
-}
-.product__float > img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-/* Pen labels: SVG in the pen image's own pixels, printed onto the blank
-   sleeve. Multiply lets the render's shading and paper texture through; an
-   SVG clipPath keeps the print on the sleeve. (Not a CSS mask-image: those
-   are blocked when the page is opened from disk and the label vanishes.) */
-.product__print,
-.product__sheen {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  mix-blend-mode: multiply;
-}
-/* a soft highlight on dark print, where multiply can't lighten */
-.product__sheen { mix-blend-mode: screen; }
-.product__print { font-family: var(--font-body); }
-/* every word on a pack is readable in the hero: nothing under 20 units in
-   the pen image's pixels (about 6.5px on screen at 1440) */
-.print-name { font-size: 38px; font-weight: var(--weight-medium); letter-spacing: -0.015em; }
-.print-dose { font-size: 22px; font-weight: var(--weight-medium); letter-spacing: -0.01em; }
-.print-meta { font-size: 20px; font-weight: var(--weight-regular); letter-spacing: 0; }
-
-/* The four objects. Each floats on its own: different period, drift, tilt
-   and phase, so they never move in step. */
-.product--pen-capped {
-  --ar: 307 / 2284; --h: 86%; --x: 42%; --y: 55%; --r: -34deg; --z: 1;
-  --dur: 9.5s; --delay: -3s; --fx: -0.4cqh; --fy: -1.4cqh; --fr: -1.2deg;
-}
-.product--pen {
-  --ar: 299 / 2200; --h: 94%; --x: 60%; --y: 49%; --r: -14deg; --z: 2;
-  --dur: 7.5s; --delay: -1s; --fx: 0.3cqh; --fy: -1.8cqh; --fr: 0.9deg;
-}
-.product--tablet-white {
-  --ar: 669 / 662; --h: 24%; --x: 79%; --y: 25%; --r: 0deg; --z: 3;
-  --dur: 6.2s; --delay: -2.4s; --fx: 0.6cqh; --fy: -2.4cqh; --fr: 7deg;
-}
-.product--tablet-oval {
-  --ar: 900 / 620; --h: 19%; --x: 20%; --y: 64%; --r: 0deg; --z: 3;
-  --dur: 7s; --delay: -4.6s; --fx: -0.5cqh; --fy: -2cqh; --fr: -6deg;
-}
-
-/* rests where it is placed, drifts and settles */
-@keyframes product-float {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-  50% { transform: translate3d(var(--fx, 0), var(--fy, -1.6cqh), 0) rotate(var(--fr, 0deg)); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .product__float { animation: none; }
-}
+/* Where the four objects sit in V2 (their material, size ratio and float
+   live in components/product.css). Placed in % of the scene box: --x/--y
+   centre, --h height, --r tilt. */
+.hero-v2 .product--pen-capped   { --h: 86%; --x: 42%; --y: 55%; --r: -34deg; }
+.hero-v2 .product--pen          { --h: 94%; --x: 60%; --y: 49%; --r: -14deg; }
+.hero-v2 .product--tablet-white { --h: 24%; --x: 79%; --y: 25%; --r: 0deg; }
+.hero-v2 .product--tablet-oval  { --h: 19%; --x: 20%; --y: 64%; --r: 0deg; }
