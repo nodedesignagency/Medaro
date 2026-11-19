@@ -1,0 +1,204 @@
+/* ==========================================================================
+   Home · Weight Loss (#weight-loss), the second section
+   Layout after the user's Good Life reference (video, 2026-11-19), measured
+   from it and scaled to our frame:
+   - Intro: the product set on the left, running off the screen edge; on the
+     right, starting on the third column line, eyebrow, a 3-line headline
+     (≈4.7vw), a hairline, the paragraph and the CTA.
+   - Below: a 2-line heading, then the care points as columns with a hairline
+     on top, a 24px icon and the title. The reference has 4 columns with
+     descriptions; the client's list has 5 points and no descriptions.
+   Not in the reference (our proposal, to review): the two follow-on blocks
+   (patient portal, ongoing care) as two cards, and the medical disclaimer,
+   which must stay visible in this section.
+   Copy: content/home.md → Weight Loss, word for word.
+   One 5-column grid (12px gaps) runs through the whole section, so the
+   copy, the third column and the disclaimer text share one line.
+   ========================================================================== */
+
+.wl {
+  --wl-pad-top: clamp(112px, 10vw, 192px);
+  --wl-gap: 12px;
+  /* the frame (DESIGN.md): content edges on the nav bar's edges, max 1888 */
+  --wl-frame: min(100cqw - 2 * var(--edge), var(--frame-max));
+  --wl-span2: calc((var(--wl-frame) - 4 * var(--wl-gap)) * 2 / 5 + var(--wl-gap)); /* two columns */
+  --wl-title-fs: clamp(56px, 4.7vw, 92px);
+  container-type: inline-size;
+  padding: var(--wl-pad-top) 0 clamp(96px, 8vw, 160px);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  /* the nav link lands with the product set 48px under the nav bar */
+  scroll-margin-top: calc(var(--edge) + 56px + 48px - var(--header-h) - var(--wl-pad-top));
+}
+
+.wl__frame {
+  width: min(100% - 2 * var(--edge), var(--frame-max));
+  margin-inline: auto;
+}
+
+.wl__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: var(--wl-gap);
+}
+
+/* ---------- Intro ---------- */
+.wl__stage {
+  grid-column: 1 / 3;
+  /* run off the left screen edge, like the reference */
+  margin-left: calc((var(--wl-frame) - 100cqw) / 2);
+  align-self: start;
+}
+/* The image is sized by the frame (two columns wide, 640:900), so zooming out
+   doesn't blow it up; the stand-in is anchored right and its boxes carry on to
+   the screen edge (preserveAspectRatio xMaxYMin). */
+.wl__stage img {
+  width: 100%;
+  height: calc(var(--wl-span2) * 900 / 640);
+}
+
+.wl__copy {
+  grid-column: 3 / 6;
+  align-self: start;
+  /* headline cap height level with the top of the tallest bottle, as in the
+     reference: bottle top = 104/640 of the image width; minus the eyebrow
+     (13 + 28) and the headline's half-leading above the caps (≈0.16em) */
+  padding-top: max(0px, calc(var(--wl-span2) * 104 / 640 - 41px - 0.16 * var(--wl-title-fs)));
+}
+
+.wl__eyebrow {
+  margin-bottom: 28px;
+  color: #56662f; /* olive, 5.3:1 on paper (same as the promo card label) */
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wl__title {
+  font-family: var(--font-display);
+  font-size: var(--wl-title-fs);
+  font-weight: var(--weight-medium);
+  line-height: 1.02;
+  letter-spacing: -0.042em;
+  margin-left: -0.05em; /* side bearing of the R back onto the column line */
+}
+
+.wl__body {
+  max-width: 26rem;
+  margin-top: clamp(36px, 3vw, 52px);
+  padding-top: clamp(24px, 1.9vw, 32px);
+  border-top: 1px solid color-mix(in srgb, var(--color-ink) 28%, transparent);
+}
+.wl__body p {
+  text-wrap: pretty;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+.wl__body .btn { margin-top: 32px; }
+
+/* ---------- More than weight loss ---------- */
+.wl__more {
+  margin-top: clamp(48px, 4.4vw, 80px);
+  align-items: end;
+}
+.wl__subtitle {
+  grid-column: 1 / 3;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 2.5vw, 48px);
+  font-weight: var(--weight-medium);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-left: -0.04em;
+}
+.wl__lead {
+  grid-column: 3 / 5;
+  text-wrap: pretty;
+  max-width: 26rem;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Your care, made simple: the columns ---------- */
+.wl__care { margin-top: clamp(56px, 4.4vw, 80px); }
+.wl__label {
+  margin-bottom: 16px;
+  font-size: 15px;
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+}
+.wl__cols > li {
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px;
+  border-top: 1px solid color-mix(in srgb, var(--color-ink) 28%, transparent);
+}
+.wl__icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-ink);
+}
+.wl__nowrap { white-space: nowrap; } /* keeps "GLP-1" on one line */
+.wl__point {
+  max-width: 15em;
+  margin-top: clamp(48px, 4vw, 72px);
+  font-size: clamp(18px, 1.35vw, 22px);
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  text-wrap: balance; /* "Fast, Discreet Delivery / to Your Door", no lone last word */
+}
+
+/* ---------- Follow-on blocks (our proposal) ---------- */
+.wl__cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--wl-gap);
+  margin-top: clamp(80px, 6.7vw, 128px);
+}
+.wl__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  min-height: clamp(260px, 20vw, 340px);
+  padding: 32px;
+  border-radius: 12px; /* the nav bar's radius */
+  background: var(--color-surface);
+}
+.wl__card h3 {
+  max-width: 13em;
+  font-size: clamp(26px, 2.1vw, 36px);
+  font-weight: var(--weight-medium);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+.wl__card p {
+  text-wrap: pretty;
+  max-width: 30rem;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Medical disclaimer: stays in the section, near the claims ---------- */
+.wl__disclaimer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-line);
+}
+.wl__disclaimer h3 {
+  grid-column: 1 / 3;
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+  line-height: 1.55;
+}
+.wl__disclaimer p {
+  grid-column: 3 / 6;
+  max-width: 68ch;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}

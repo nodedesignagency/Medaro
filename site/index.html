@@ -17,6 +17,7 @@
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
   <link rel="stylesheet" href="sections/home/hero--v1.css">
   <link rel="stylesheet" href="sections/home/hero--v2.css">
+  <link rel="stylesheet" href="sections/home/weight-loss.css">
 </head>
 <body id="top">
 
@@ -27,6 +28,12 @@
     <!-- UI icons -->
     <symbol id="i-arrow-ne" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <!-- Line icons, 24px, 1.5 stroke (Weight Loss care points) -->
+    <symbol id="i-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
+    <symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.75 3.25H5a1 1 0 0 0-1 1V9a4.5 4.5 0 0 0 9 0V4.25a1 1 0 0 0-1-1h-.75"/><path d="M8.5 13.5v1.75a4.5 4.5 0 0 0 9 0V13"/><circle cx="17.5" cy="11" r="2"/></g></symbol>
+    <symbol id="i-plan" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.75A2.75 2.75 0 0 1 6.75 4h10.5A2.75 2.75 0 0 1 20 6.75v7.5A2.75 2.75 0 0 1 17.25 17H10.5L6 20.5V17h0.75A2.75 2.75 0 0 1 4 14.25Z"/><path d="M8.5 9h7M8.5 12.5h4.5"/></g></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5Z"/><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9M7.75 5.25l8.5 4.5"/></g></symbol>
   </svg>
 
   <a class="visually-hidden" href="#main">Skip to content</a>
@@ -155,6 +162,66 @@
       <!-- SECTION:home/hero--v2 END -->
     </main>
   </div>
+
+  <!-- SECTION:home/weight-loss START · styles: sections/home/weight-loss.css · assets: assets/images/standin-weight-loss.svg · icons: sprite #i-vial #i-stethoscope #i-plan #i-chat #i-box, #i-arrow-right
+       Layout after the user's Good Life reference (video, 2026-11-19). Copy: content/home.md → Weight Loss, word for word.
+       Sits after the hero versions while hero V1/V2 are both on the page; once one hero is promoted, the page has a
+       single <main> holding every section. -->
+  <section class="wl" id="weight-loss" aria-labelledby="wl-title">
+    <div class="wl__frame">
+
+      <div class="wl__intro wl__grid">
+        <!-- Stand-in: the real photo is made after the design is approved (see data-brief). -->
+        <figure class="wl__stage media-brief" data-brief="Wide studio photo: MEDARO weight-loss set (two plain dark-olive boxes with the wordmark, frosted vial with olive cap and cream label, tablet bottle) on the left, running off the edge, soft light from the upper left on a paper backdrop; no drug names, doses or pens">
+          <img src="assets/images/standin-weight-loss.svg" alt="" width="640" height="900">
+        </figure>
+        <div class="wl__copy">
+          <p class="wl__eyebrow">Medically guided weight management</p>
+          <h2 class="wl__title" id="wl-title">Real Medical Care.<br>A Better Way<br>to Lose Weight.</h2>
+          <div class="wl__body">
+            <p>Weight loss is personal. Your treatment should be too. Explore prescription weight-loss options with licensed medical providers, without the unnecessary complications of traditional care.</p>
+            <a class="btn btn--primary btn--arrow" href="weight-loss.html"><span class="btn__label">Learn more</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wl__more wl__grid">
+        <h3 class="wl__subtitle">More Than Weight Loss.<br>A Healthier Way Forward.</h3>
+        <p class="wl__lead">Just straightforward access to medical guidance and treatment options designed around your individual needs.</p>
+      </div>
+
+      <div class="wl__care">
+        <p class="wl__label" id="wl-care">Your care, made simple</p>
+        <ul class="wl__cols wl__grid" aria-labelledby="wl-care">
+          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-vial"/></svg><span class="wl__point">Personalized <span class="wl__nowrap">GLP-1</span> treatment options</span></li>
+          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-stethoscope"/></svg><span class="wl__point">Medical evaluation by licensed providers</span></li>
+          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-plan"/></svg><span class="wl__point">Treatment plans tailored to your health goals</span></li>
+          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-chat"/></svg><span class="wl__point">24/7 Convenient online consultations</span></li>
+          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-box"/></svg><span class="wl__point">Fast, Discreet Delivery to Your Door</span></li>
+        </ul>
+      </div>
+
+      <!-- Not in the reference: our proposal for the two follow-on blocks. -->
+      <div class="wl__cards">
+        <article class="wl__card">
+          <h3>Your Health. One Place.<br>Total Clarity.</h3>
+          <p>Stay connected to your care without the complications. Access your treatment information, track your progress, and stay in touch with your care team—all through one convenient patient portal.</p>
+        </article>
+        <article class="wl__card">
+          <h3>Your Care Doesn't End<br>at the Prescription.</h3>
+          <p>Getting treatment is just the beginning. Stay connected with your care team for medical guidance, follow-ups, and support throughout your treatment journey.</p>
+        </article>
+      </div>
+
+      <!-- Compliance: stays visible in this section, near the claims it qualifies. -->
+      <aside class="wl__disclaimer wl__grid" aria-labelledby="wl-disclaimer">
+        <h3 id="wl-disclaimer">Medical Disclaimer</h3>
+        <p>Prescription medications are provided only when an independent licensed healthcare provider determines they are medically appropriate following a clinical evaluation. Compounded medications, when legally available and prescribed, are not FDA-approved. Services, provider access, support hours, and treatment availability may vary by state and program.</p>
+      </aside>
+
+    </div>
+  </section>
+  <!-- SECTION:home/weight-loss END -->
 
   <script src="main.js" defer></script>
 </body>
