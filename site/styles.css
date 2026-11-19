@@ -46,6 +46,7 @@
   /* Type: Host Grotesk for everything. Montserrat is the logo only. */
   --font-display: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace; /* panel nav chip only */
   --weight-light: 300;
   --weight-regular: 400;
   --weight-medium: 500;

@@ -69,7 +69,7 @@ Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
 
 | Component | Variants | Used on | Status |
 |---|---|---|---|
-| Header | One structure (user, 2026-11-19): **logo left · all seven links from the brief centred** (Weight Loss, Men's Health, Women's Health, Supplement, How Medaro Works, About Us, Contact Support) **· Get Started right. No login.** Over the photo (V1), three surfaces to compare with `?nav=`: `--tinted` (dark translucent bar, the current one, kept), `--frosted` (milky light glass, ink type, dark CTA), `--liquid` (floating glass capsule for the links with a highlight that slides behind the hovered link, separate glowing lime CTA). All turn light past the photo. On the page background (V2): `--plain`. `landing` (logo + one CTA, no links out) not started | all | exploring |
+| Header | One structure (user, 2026-11-19): **logo left · all seven links from the brief centred** (Weight Loss, Men's Health, Women's Health, Supplement, How Medaro Works, About Us, Contact Support) **· Get Started right. No login.** Over the photo (V1), surfaces to compare with `?nav=`: `--tinted` (dark translucent bar, kept), `--smoke` (visionOS glass: grey, desaturated, 44px blur, faint top rim, radius 22; hover = soft lighter patch; flat lime pill CTA, no glow), `--panel` (dark instrument panel: near-opaque, radius 3, hairline edge, corner brackets; CTA as a tinted lime chip in Geist Mono caps). All turn light past the photo. On the page background (V2): `--plain`. `landing` (logo + one CTA, no links out) not started | all | exploring |
 | Footer | `full` · `landing` (legal links only, pending client answer) | all | not started |
 | Button | `primary` (lime) · `dark` (ink); sizes `--s` 40, default 48, `--l` 54; `--pill` for V2. No arrows | all | exploring |
 | Text link | `.link-underline` | all | exploring |
@@ -89,7 +89,7 @@ Status: `exploring` (on a branch) · `approved` (on `main`) · `rejected`. Add a
 
 | Section | Status | Branch | Notes |
 |---|---|---|---|
-| header | exploring | `claude/upbeat-lamport-vxbm8d` | Logo left, seven links centred, CTA right. V1 has three surfaces to compare (`?nav=tinted|frosted|liquid`); V2 uses `--plain`. |
+| header | exploring | `claude/upbeat-lamport-vxbm8d` | Logo left, seven links centred, CTA right. V1 has three surfaces to compare (`?nav=tinted|smoke|panel`); V2 uses `--plain`. |
 | hero | exploring | `claude/upbeat-lamport-vxbm8d` | Round 2: two versions (`?hero=v1|v2`). **V1, after avenn**: full-bleed photo, glass nav, "Made for Better Health." top left, "Care Without the Runaround." bottom right (tag removed), one sentence + Get Started bottom left. Photo concept: a soft mossy peak in morning mist (the Λ as a landscape); SVG stand-in for now. **V2, after Superpower**: split header, dark olive rounded stage, eyebrow "Made for Better Health.", "Expert medical care, from the comfort of home.", sentence, Get Started + "How Medaro Works" link, three facts, ticker of trust points; right, a phone with the MEDARO patient portal and a pharmacy bottle, built in code (bottle = stand-in for a render). More reference versions coming from the user. |
 | weight-loss | — | | |
 | mens-health | — | | |
@@ -126,6 +126,7 @@ Write what the user said, in their words where possible, with the date.
   - Invented devices the references don't have: mono uppercase labels everywhere, a custom chevron on every button and row, "coming soon" pills, hover-swapping image frames.
   - Blurry gradient-blob placeholders with caption boxes stamped on them.
 - 2026-11-19, round 2: the small "■ LICENSED MEDICAL PROVIDERS" tag in V1 ("remove that"), and the login icon in the nav ("why there is login i dont need that").
+- 2026-11-19, nav round 1: the **frosted** (milky glass bar, dark CTA) and **liquid** (glass capsule with a bouncy sliding highlight, glowing gradient lime CTA, gradient rim) navs: "slop". Lesson: no glows, no gradient rims, no springy effects; match the reference's values and stay restrained.
 
 ### Copy flags to raise with the user
 
@@ -145,6 +146,8 @@ Write what the user said, in their words where possible, with the date.
 | goodlifemeds.com | Full-bleed lifestyle photo hero, big light grotesk headlines, mono uppercase labels, sage and warm neutrals, product cards with "Get started / Learn more" | user (liked) |
 | superpower.com | **Hero V2.** Quiet header with centred logo; dark rounded stage; product scene (tube + phone app) lit from above; three facts with hairline dividers; ticker along the bottom | user (liked) |
 | avenn (screenshot) | **Hero V1.** Full-bleed photo, frosted nav bar inside it, headline split top-left / bottom-right, sentence + CTA bottom left | user |
-| Atlas menu, liquid-glass sliders (screenshots) | **Nav surfaces.** Milky frosted panel with dark type; translucent capsules with a bright rim and a lighter "thumb" that moves between options | user |
+| Atlas menu, liquid-glass sliders (screenshots) | Nav surfaces, round 1 (results rejected) | user |
+| Dolomites glass cards, visionOS Notes and "Jupiter from Amalthea" windows (screenshots) | **Nav `--smoke`.** Grey desaturated glass, heavy blur, faint light rim, big radius, lighter glass patch for hover/selected, flat solid primary button | user |
+| "Signal strength" panel (screenshot) | **Nav `--panel`.** Near-opaque dark panel, hairline dividers, corner brackets, mono caps labels, tinted accent chip | user |
 | Cosmos, Analogue Agency, Fuser (Mobbin) | **Nav surfaces.** Dark glass pill of links between a free-standing logo and a glowing CTA (Cosmos); light frosted bars (Analogue, Fuser) | Mobbin |
 | nekohealth.com | *Couldn't load (bot check). Waiting for screenshots.* | user (liked) |
