@@ -110,6 +110,15 @@
   height: 100%;
   object-fit: cover;
 }
+/* Photos sit in a soft circle that fades into the tile colour (user,
+   2026-11-19: "show these images inside a circular mask which fades"),
+   like the product renders sit on their tiles. Solid to half the radius,
+   gone just inside the tile edge. Photos are framed with the subject in
+   the middle (see data-brief). */
+.mh__tile--photo img {
+  -webkit-mask-image: radial-gradient(circle closest-side at 50% 50%, #000 52%, #0000 97%);
+  mask-image: radial-gradient(circle closest-side at 50% 50%, #000 52%, #0000 97%);
+}
 .mh__tile--text {
   display: grid;
   place-items: center;
