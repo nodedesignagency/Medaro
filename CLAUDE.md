@@ -116,3 +116,7 @@ See `DESIGN.md`. Breakpoints match Framer: desktop ≥1200, tablet 810–1199, p
 ## Checking pages in the container
 
 Chromium and Playwright are pre-installed. Serve `site/` with `python3 -m http.server`, screenshot at 1440 (deviceScaleFactor 2 for anything the user sees; 1280 and 1920 for your own range check), and send screenshots from `review/`. For WebGL, launch Chromium with `--use-angle=swiftshader --enable-unsafe-swiftshader --ignore-gpu-blocklist`.
+
+Network: launch Chromium with `proxy: { server: process.env.HTTPS_PROXY, bypass: '<-loopback>,localhost,127.0.0.1' }` so Google Fonts load and localhost isn't sent to the proxy (it returns a 405 page otherwise). The same launch can screenshot reference sites the user shares; save them to `review/inspo/`. Sites behind a bot check (nekohealth.com) won't load: ask the user for screenshots instead of working around it.
+
+Images: Magnific (Freepik) is connected on a paid plan. Stock downloads and generations cost credits (a free-licence stock photo is 40), so ask the user before spending any.

@@ -1,0 +1,125 @@
+/* ==========================================================================
+   Home · hero, version B: "Care cards"
+   After the client's references (Hers, Hims, Immortals): the thesis line on
+   top, then one card per line of care. Weight Loss and Men's Health are big
+   (they have landing pages); Women's Health (coming soon) and Supplement
+   sit underneath as slim rows. Every card scrolls to its section on Home.
+   ========================================================================== */
+
+.hero-b {
+  padding-block: var(--space-5) var(--space-6);
+}
+
+.hero-b__top {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gap);
+  align-items: end;
+  padding-top: var(--space-4);
+}
+.hero-b__title {
+  grid-column: 1 / span 7;
+  font-family: var(--font-display);
+  font-size: 100px;
+  font-weight: var(--weight-display);
+  line-height: var(--lh-display);
+  letter-spacing: -0.05em;
+  color: var(--color-ink);
+}
+.hero-b__aside {
+  grid-column: 8 / span 5;
+  padding-bottom: 6px;
+  padding-left: var(--space-8);
+}
+.hero-b__lede {
+  font-size: var(--fs-lede);
+  line-height: var(--lh-lede);
+  color: var(--color-text-muted);
+}
+.hero-b__aside .btn { margin-top: var(--space-5); }
+
+/* Cards */
+.hero-b__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: clamp(280px, calc(100svh - 530px), 380px) 104px;
+  gap: 12px;
+  margin-top: var(--space-7);
+}
+
+.care-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: var(--space-6);
+  border-radius: var(--radius-l);
+  color: var(--color-ink);
+  text-decoration: none;
+  isolation: isolate;
+}
+.care-card__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transition: transform 900ms var(--ease-out);
+}
+.care-card:hover .care-card__media { transform: scale(1.03); }
+
+.care-card__tag { display: block; margin-bottom: 14px; }
+.care-card__name {
+  font-size: 44px;
+  font-weight: var(--weight-display);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.care-card__line {
+  max-width: 22em;
+  margin-top: 14px;
+  font-size: 20px;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+}
+.care-card__go {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-top: auto;
+  align-self: flex-start;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  transition: transform var(--dur-base) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+}
+.care-card__go .chev { width: 16px; height: 16px; }
+.care-card:hover .care-card__go { transform: translateX(4px); background: var(--color-accent-hover); }
+
+.care-card--dark { color: var(--color-on-dark); }
+
+/* Slim rows */
+.care-card--slim {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-5);
+  padding: 0 var(--space-5) 0 var(--space-6);
+  background: var(--color-surface);
+}
+.care-card--slim .care-card__name { font-size: 30px; letter-spacing: -0.02em; }
+.care-card--slim .care-card__tag { margin: 0; color: var(--color-text-muted); }
+.care-card--slim .care-card__text { display: flex; align-items: baseline; gap: var(--space-5); flex: 1; }
+.care-card__thumb {
+  width: 132px;
+  height: 84px;
+  flex: none;
+  border-radius: var(--radius-m);
+}
+.care-card__thumb.ph::after { display: none; }
+.care-card--slim .care-card__go { margin: 0; align-self: center; width: 44px; height: 44px; }
+.care-card__soon {
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  color: var(--color-ink);
+}

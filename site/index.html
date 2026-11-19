@@ -1,43 +1,169 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-palettes="a">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>MEDARO · Made for Better Health</title>
   <meta name="description" content="Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.">
   <meta name="robots" content="noindex, nofollow"><!-- Draft: keep staging out of search -->
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#f4f5ef">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="styles.css">
   <!-- Components (shared across pages) -->
+  <link rel="stylesheet" href="components/header.css">
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
-  <link rel="stylesheet" href="sections/home/placeholder.css">
+  <link rel="stylesheet" href="sections/home/hero--a.css">
+  <link rel="stylesheet" href="sections/home/hero--b.css">
+  <link rel="stylesheet" href="sections/home/hero--c.css">
 </head>
-<body>
+<body id="top">
 
   <!-- Sprite: logo and icons. One source for header, menu and footer -->
   <svg class="sprite" aria-hidden="true" focusable="false">
     <!-- Official MEDARO wordmark (site/assets/logo/, from the client), cropped tight, currentColor -->
     <symbol id="wordmark" viewBox="194 74 4413 712"><g fill="currentColor" transform="translate(80 780) scale(1 -1)"><path transform="translate(0 0)" d="M114 0V700H175L495 154H463L780 700H841V0H770V589H787L495 89H460L166 589H185V0Z"/><path transform="translate(870 0)" d="M114 0V700H594V636H188V64H609V0ZM180 324V387H550V324Z"/><path transform="translate(1500 0)" d="M114 0V700H399Q511 700 595.5 655.5Q680 611 727.0 532.0Q774 453 774 350Q774 247 727.0 168.0Q680 89 595.5 44.5Q511 0 399 0ZM188 64H395Q488 64 556.5 100.5Q625 137 663.0 201.5Q701 266 701 350Q701 435 663.0 499.0Q625 563 556.5 599.5Q488 636 395 636H188Z"/><path transform="translate(2300 0)" d="M2 0 L322 700 L395 700 L715 0 L637 0 L343 657 L373 657 L79 0 Z"/><path transform="translate(3040 0)" d="M114 0V700H376Q509 700 585.5 636.5Q662 573 662 460Q662 386 627.5 332.5Q593 279 529.0 250.5Q465 222 376 222H155L188 256V0ZM592 0 412 254H492L673 0ZM188 250 155 285H374Q479 285 533.5 331.0Q588 377 588 460Q588 544 533.5 590.0Q479 636 374 636H155L188 671Z"/><path transform="translate(3740 0)" d="M420 -6Q341 -6 273.5 20.5Q206 47 156.5 95.5Q107 144 79.5 208.5Q52 273 52 350Q52 427 79.5 491.5Q107 556 156.5 604.5Q206 653 273.0 679.5Q340 706 420 706Q499 706 566.0 679.5Q633 653 682.5 605.0Q732 557 759.5 492.0Q787 427 787 350Q787 273 759.5 208.0Q732 143 682.5 95.0Q633 47 566.0 20.5Q499 -6 420 -6ZM420 60Q483 60 536.5 81.5Q590 103 629.5 142.5Q669 182 691.0 234.5Q713 287 713 350Q713 413 691.0 465.5Q669 518 629.5 557.5Q590 597 536.5 618.5Q483 640 420 640Q357 640 303.0 618.5Q249 597 209.5 557.5Q170 518 147.5 465.5Q125 413 125 350Q125 288 147.5 235.0Q170 182 209.5 142.5Q249 103 303.0 81.5Q357 60 420 60Z"/></g></symbol>
+    <!-- Chevron: the logo's crossbar-less A (Λ) turned on its side. Same proportions as the wordmark's A -->
+    <symbol id="chev" viewBox="0 0 720 720"><path d="M42 710 L360 30 L678 710" transform="rotate(90 360 360)" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke" stroke-linejoin="miter"/></symbol>
   </svg>
 
   <a class="visually-hidden" href="#main">Skip to content</a>
 
+  <!-- SECTION:header START · styles: components/header.css · scripts: main.js (header)
+       Full header. Index links scroll on Home (like home.medvi.org); page links open pages. -->
+  <header class="site-header" data-header>
+    <div class="site-header__inner container">
+      <a class="logo site-header__logo" href="#top" aria-label="MEDARO, back to top"><svg aria-hidden="true"><use href="#wordmark"/></svg></a>
+      <nav aria-label="On this page">
+        <ul class="site-header__index">
+          <li><a href="#weight-loss">Weight Loss</a></li>
+          <li><a href="#mens-health">Men's Health</a></li>
+          <li><a href="#womens-health">Women's Health</a></li>
+          <li><a href="#supplements">Supplement</a></li>
+          <li><a href="#how-it-works">How Medaro Works</a></li>
+        </ul>
+      </nav>
+      <nav class="site-header__pages" aria-label="Pages">
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Support</a>
+      </nav>
+    </div>
+  </header>
+  <!-- SECTION:header END -->
+
   <main id="main">
 
-    <!-- SECTION:home/placeholder START · styles: sections/home/placeholder.css
-         Setup only: delete this block and its stylesheet when the first real section lands. -->
-    <section class="placeholder" aria-labelledby="placeholder-title">
-      <span class="logo placeholder__logo" role="img" aria-label="MEDARO"><svg aria-hidden="true"><use href="#wordmark"/></svg></span>
-      <h1 class="placeholder__title" id="placeholder-title">Made for Better Health.</h1>
-      <p class="placeholder__note">Home page · sections arrive here one by one. Next: the hero.</p>
+    <!-- SECTION:home/hero--a START · styles: sections/home/hero--a.css · scripts: sections/home/hero.js
+         Version A, "Care index". [LINK NEEDED] hero CTA destination: Get Started scrolls to How Medaro Works for now. -->
+    <section class="hero-a" data-version="hero:a" aria-labelledby="hero-a-title">
+      <div class="hero-a__inner container">
+        <div class="hero-a__text">
+          <h1 class="hero-a__title" id="hero-a-title">Made for<br>Better Health.</h1>
+          <p class="hero-a__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
+          <div class="hero-a__actions">
+            <a class="btn btn--primary" href="#how-it-works">Get Started <svg class="chev" aria-hidden="true"><use href="#chev"/></svg></a>
+          </div>
+        </div>
+
+        <ul class="hero-a__index" aria-label="Care at MEDARO">
+          <li><a class="hero-a__row" href="#weight-loss" data-media="wl"><span class="hero-a__name">Weight Loss</span><span class="label hero-a__tag">GLP-1 treatment options</span><svg class="chev" aria-hidden="true"><use href="#chev"/></svg></a></li>
+          <li><a class="hero-a__row" href="#mens-health" data-media="mh"><span class="hero-a__name">Men's Health</span><span class="label hero-a__tag">Sexual health &amp; confidence</span><svg class="chev" aria-hidden="true"><use href="#chev"/></svg></a></li>
+          <li><a class="hero-a__row" href="#womens-health" data-media="wh"><span class="hero-a__name">Women's Health</span><span class="label hero-a__soon">Coming soon</span><svg class="chev" aria-hidden="true"><use href="#chev"/></svg></a></li>
+          <li><a class="hero-a__row" href="#supplements" data-media="sp"><span class="hero-a__name">Supplement</span><span class="label hero-a__tag">Everyday wellness</span><svg class="chev" aria-hidden="true"><use href="#chev"/></svg></a></li>
+        </ul>
+
+        <figure class="hero-a__media" aria-hidden="true">
+          <div class="hero-a__layer ph" data-layer="all" data-tone="light" data-brief="Calm adult at home in soft morning light, looking off-frame. Portrait 4:5."></div>
+          <div class="hero-a__layer ph" data-layer="wl" data-tone="light" data-tag="Weight Loss" data-caption="Real Medical Care. A Better Way to Lose Weight." data-brief="Woman 35–55, relaxed, everyday clothes, natural light. No scales, no before/after."></div>
+          <div class="hero-a__layer ph ph--deep" data-layer="mh" data-tone="dark" data-tag="Men's Health" data-caption="Better Care for Men Who Want More." data-brief="Man 35–55, at ease at home, warm low light."></div>
+          <div class="hero-a__layer ph ph--light" data-layer="wh" data-tone="light" data-tag="Women's Health · Coming soon" data-caption="Better Care for Every Chapter of Womanhood." data-brief="Woman 45–55, serene, natural light."></div>
+          <div class="hero-a__layer ph ph--lime" data-layer="sp" data-tone="light" data-tag="Supplement" data-caption="Supplements designed to support better health and lasting wellness." data-brief="Unbranded supplement jar and capsules on stone, soft light."></div>
+          <figcaption class="hero-a__caption" hidden>
+            <span class="label hero-a__caption-tag"></span>
+            <span class="hero-a__caption-text"></span>
+          </figcaption>
+        </figure>
+      </div>
     </section>
-    <!-- SECTION:home/placeholder END -->
+    <!-- SECTION:home/hero--a END -->
+
+    <!-- SECTION:home/hero--b START · styles: sections/home/hero--b.css
+         Version B, "Care cards", after the client's references (Hers, Hims, Immortals). -->
+    <section class="hero-b" data-version="hero:b" aria-labelledby="hero-b-title">
+      <div class="container">
+        <div class="hero-b__top">
+          <h1 class="hero-b__title" id="hero-b-title">Made for<br>Better Health.</h1>
+          <div class="hero-b__aside">
+            <p class="hero-b__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
+            <a class="btn btn--primary" href="#how-it-works">Get Started <svg class="chev" aria-hidden="true"><use href="#chev"/></svg></a>
+          </div>
+        </div>
+
+        <div class="hero-b__cards">
+          <a class="care-card" href="#weight-loss">
+            <div class="care-card__media ph" data-brief="Woman 35–55, relaxed, natural light, room for type top-left. No scales, no before/after."></div>
+            <div>
+              <span class="label care-card__tag">Medically guided weight management</span>
+              <h2 class="care-card__name">Weight Loss</h2>
+              <p class="care-card__line">Real Medical Care. A Better Way to Lose Weight.</p>
+            </div>
+            <span class="care-card__go"><svg class="chev" aria-hidden="true"><use href="#chev"/></svg></span>
+          </a>
+          <a class="care-card care-card--dark" href="#mens-health">
+            <div class="care-card__media ph ph--deep" data-brief="Man 35–55, at ease at home, warm low light, room for type top-left."></div>
+            <div>
+              <span class="label care-card__tag">Men's health. On your terms.</span>
+              <h2 class="care-card__name">Men's Health</h2>
+              <p class="care-card__line">Better Care for Men Who Want More.</p>
+            </div>
+            <span class="care-card__go"><svg class="chev" aria-hidden="true"><use href="#chev"/></svg></span>
+          </a>
+          <a class="care-card care-card--slim" href="#womens-health">
+            <div class="care-card__text">
+              <h2 class="care-card__name">Women's Health</h2>
+              <span class="label care-card__soon">Coming soon</span>
+            </div>
+            <div class="care-card__thumb ph ph--light" aria-hidden="true"></div>
+          </a>
+          <a class="care-card care-card--slim" href="#supplements">
+            <div class="care-card__text">
+              <h2 class="care-card__name">Supplement</h2>
+              <span class="label care-card__tag">Everyday wellness</span>
+            </div>
+            <div class="care-card__thumb ph ph--lime" aria-hidden="true"></div>
+            <span class="care-card__go"><svg class="chev" aria-hidden="true"><use href="#chev"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION:home/hero--b END -->
+
+    <!-- SECTION:home/hero--c START · styles: sections/home/hero--c.css
+         Version C, "Portrait", after the references the user liked (Good Life, Superpower, Neko). -->
+    <section class="hero-c" data-version="hero:c" aria-labelledby="hero-c-title">
+      <div class="hero-c__frame">
+        <div class="hero-c__media ph ph--deep" data-brief="One person 35–55 at home by a window, morning light, calm and unposed. Landscape, darker lower third for type."></div>
+        <div class="hero-c__content">
+          <h1 class="hero-c__title" id="hero-c-title">Made for<br>Better Health.</h1>
+          <div class="hero-c__aside">
+            <p class="hero-c__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
+            <a class="btn btn--primary" href="#how-it-works">Get Started <svg class="chev" aria-hidden="true"><use href="#chev"/></svg></a>
+          </div>
+        </div>
+        <nav class="hero-c__strip" aria-label="Care at MEDARO">
+          <a class="hero-c__tab" href="#weight-loss"><span class="hero-c__tab-name">Weight Loss <svg class="chev" aria-hidden="true"><use href="#chev"/></svg></span><span class="label">GLP-1 treatment options</span></a>
+          <a class="hero-c__tab" href="#mens-health"><span class="hero-c__tab-name">Men's Health <svg class="chev" aria-hidden="true"><use href="#chev"/></svg></span><span class="label">Sexual health &amp; confidence</span></a>
+          <a class="hero-c__tab" href="#womens-health"><span class="hero-c__tab-name">Women's Health <svg class="chev" aria-hidden="true"><use href="#chev"/></svg></span><span class="label">Coming soon</span></a>
+          <a class="hero-c__tab" href="#supplements"><span class="hero-c__tab-name">Supplement <svg class="chev" aria-hidden="true"><use href="#chev"/></svg></span><span class="label">Everyday wellness</span></a>
+        </nav>
+      </div>
+    </section>
+    <!-- SECTION:home/hero--c END -->
 
   </main>
 
   <script src="main.js" defer></script>
+  <script src="sections/home/hero.js" defer></script>
 </body>
 </html>
