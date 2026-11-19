@@ -61,7 +61,7 @@ Use the same class names everywhere (BEM-ish: `.hero__title`, `.btn--primary`). 
 
 | Page | File | Copy | Nav |
 |---|---|---|---|
-| Home | `index.html` | `content/home.md` | Full header. Weight Loss · Men's Health · Women's Health · Supplement · How Medaro Works **scroll** to sections on Home (like home.medvi.org). About Us · Contact Support **open pages**. |
+| Home | `index.html` | `content/home.md` | Full header: **logo left · seven links centred · Get Started right, no login**. Weight Loss · Men's Health · Women's Health · Supplement · How Medaro Works **scroll** to sections on Home (like home.medvi.org). About Us · Contact Support **open pages**. |
 | About Us | `about.html` | `content/about.md` | Full header |
 | Contact Support | `contact.html` | **[COPY NEEDED]** | Full header |
 | Weight Loss landing | `weight-loss.html` | `content/weight-loss.md` | **No links to Home or any other page.** Logo is not a link. Every CTA goes to the Weight Loss intake form. |

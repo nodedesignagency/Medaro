@@ -2,7 +2,7 @@
    Home · hero V1 (after avenn)
    One full-bleed photograph. The line is split across the frame: "Made for
    Better Health." top left, "Care Without the Runaround." bottom right,
-   with a small tag above it. Bottom left: one sentence and the CTA.
+   Bottom left: one sentence and the CTA.
    Header: components/header.css, --glass.
    ========================================================================== */
 
@@ -74,4 +74,3 @@
   align-items: flex-end;
   text-align: right;
 }
-.hero-v1__end .tag { margin-bottom: 22px; color: #fff; }

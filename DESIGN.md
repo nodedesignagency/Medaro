@@ -48,7 +48,6 @@ Contrast: ink on paper ≈ 10:1, ink on lime ≈ 8.6:1, ink on sage ≈ 5.2:1, p
 ### Type
 
 - **Host Grotesk** for everything (Google Fonts, available in Framer). V1 headlines Medium 500 with tight tracking (−0.048em), like avenn; V2 headlines Regular 400 (−0.035em), like Superpower. Text Regular 400, buttons and nav 400–500.
-- **Tags** (`.tag`): small caps chip with a square bullet and a hairline border, after avenn ("■ LICENSED MEDICAL PROVIDERS"). Use sparingly, one per screen at most.
 - **Montserrat** is the logo only, never set in text.
 - Desktop sizes: V1 hero 88–140 (7.2vw), V2 hero 62, lede 16–20, body 17, nav 14–15. Phone starting points for Framer: hero 48, h2 34, h3 24, lede 18, body 16.
 - Line length for body copy: 60–72 characters.
@@ -70,11 +69,10 @@ Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
 
 | Component | Variants | Used on | Status |
 |---|---|---|---|
-| Header | `--glass` (V1): frosted bar floating over the photo, logo · 5 in-page links centred · About Us, Contact Support, Get Started (lime), patient-login icon; turns light after the photo. `--split` (V2): page background, 4 care links left · logo centred · How Medaro Works, About Us, Contact Support, Get Started (dark pill) right. `landing`: logo + one CTA, no links out (not started) | all | exploring |
+| Header | One structure (user, 2026-11-19): **logo left · all seven links from the brief centred** (Weight Loss, Men's Health, Women's Health, Supplement, How Medaro Works, About Us, Contact Support) **· Get Started right. No login.** Over the photo (V1), three surfaces to compare with `?nav=`: `--tinted` (dark translucent bar, the current one, kept), `--frosted` (milky light glass, ink type, dark CTA), `--liquid` (floating glass capsule for the links with a highlight that slides behind the hovered link, separate glowing lime CTA). All turn light past the photo. On the page background (V2): `--plain`. `landing` (logo + one CTA, no links out) not started | all | exploring |
 | Footer | `full` · `landing` (legal links only, pending client answer) | all | not started |
 | Button | `primary` (lime) · `dark` (ink); sizes `--s` 40, default 48, `--l` 54; `--pill` for V2. No arrows | all | exploring |
 | Text link | `.link-underline` | all | exploring |
-| Tag | `.tag` small caps chip | all | exploring |
 | Stand-in image | `.media-brief` + `assets/images/standin-*.svg`; `?briefs=on` shows the photo brief | all | exploring |
 | Phone (portal UI) | built in code: status bar, greeting, care update card, rows, tab bar | Home V2 | exploring |
 | Check list | the "Your care, made simple" style bullet lists | Home, landings | not started |
@@ -91,8 +89,8 @@ Status: `exploring` (on a branch) · `approved` (on `main`) · `rejected`. Add a
 
 | Section | Status | Branch | Notes |
 |---|---|---|---|
-| header | exploring | `claude/upbeat-lamport-vxbm8d` | Two variants, one per hero version (see Components). |
-| hero | exploring | `claude/upbeat-lamport-vxbm8d` | Round 2: two versions (`?hero=v1|v2`). **V1, after avenn**: full-bleed photo, glass nav, "Made for Better Health." top left, tag + "Care Without the Runaround." bottom right, one sentence + Get Started bottom left. Photo concept: a soft mossy peak in morning mist (the Λ as a landscape); SVG stand-in for now. **V2, after Superpower**: split header, dark olive rounded stage, eyebrow "Made for Better Health.", "Expert medical care, from the comfort of home.", sentence, Get Started + "How Medaro Works" link, three facts, ticker of trust points; right, a phone with the MEDARO patient portal and a pharmacy bottle, built in code (bottle = stand-in for a render). More reference versions coming from the user. |
+| header | exploring | `claude/upbeat-lamport-vxbm8d` | Logo left, seven links centred, CTA right. V1 has three surfaces to compare (`?nav=tinted|frosted|liquid`); V2 uses `--plain`. |
+| hero | exploring | `claude/upbeat-lamport-vxbm8d` | Round 2: two versions (`?hero=v1|v2`). **V1, after avenn**: full-bleed photo, glass nav, "Made for Better Health." top left, "Care Without the Runaround." bottom right (tag removed), one sentence + Get Started bottom left. Photo concept: a soft mossy peak in morning mist (the Λ as a landscape); SVG stand-in for now. **V2, after Superpower**: split header, dark olive rounded stage, eyebrow "Made for Better Health.", "Expert medical care, from the comfort of home.", sentence, Get Started + "How Medaro Works" link, three facts, ticker of trust points; right, a phone with the MEDARO patient portal and a pharmacy bottle, built in code (bottle = stand-in for a render). More reference versions coming from the user. |
 | weight-loss | — | | |
 | mens-health | — | | |
 | womens-health | — | | Coming Soon |
@@ -118,6 +116,7 @@ Write what the user said, in their words where possible, with the date.
 ### Likes
 
 - 2026-11-19: Hero references to build from: **avenn** (V1) and **Superpower** (V2). More references coming.
+- 2026-11-19: Nav: "left we should have logo, center all the nav links … and on right CTA". Keep the current tinted bar as one option; explore glass looks (references: Atlas menu, liquid-glass sliders, Cosmos, Analogue, Fuser).
 
 ### Rejected
 
@@ -126,12 +125,13 @@ Write what the user said, in their words where possible, with the date.
   - Not reading the copy brief before designing.
   - Invented devices the references don't have: mono uppercase labels everywhere, a custom chevron on every button and row, "coming soon" pills, hover-swapping image frames.
   - Blurry gradient-blob placeholders with caption boxes stamped on them.
+- 2026-11-19, round 2: the small "■ LICENSED MEDICAL PROVIDERS" tag in V1 ("remove that"), and the login icon in the nav ("why there is login i dont need that").
 
 ### Copy flags to raise with the user
 
 - The nav says "Supplement" (client's word); the section copy says "Supplements". We use "Supplement" in nav and hero rows for now. Suggest "Supplements".
 - The hero has no CTA in the brief. We use "Get Started" (the client's label elsewhere) and scroll to How Medaro Works until told otherwise. `[LINK NEEDED]`
-- V1 and V2 headers add a Get Started button; V1 adds a patient-login icon (the copy mentions a patient portal). `[LINK NEEDED]` for both.
+- The header adds a Get Started button (not in the brief's nav list). `[LINK NEEDED]`
 - V2 facts: "24/7, from home" comes from the client's "24/7 Convenient online consultations". Avoid "100% online": the FAQ says some states need a live visit.
 
 ## 7. Inspiration
@@ -144,5 +144,7 @@ Write what the user said, in their words where possible, with the date.
 | immortals.com | Soft gradient surfaces, rounded cards, two big entry cards in the hero, product shots on clean backgrounds | client |
 | goodlifemeds.com | Full-bleed lifestyle photo hero, big light grotesk headlines, mono uppercase labels, sage and warm neutrals, product cards with "Get started / Learn more" | user (liked) |
 | superpower.com | **Hero V2.** Quiet header with centred logo; dark rounded stage; product scene (tube + phone app) lit from above; three facts with hairline dividers; ticker along the bottom | user (liked) |
-| avenn (screenshot) | **Hero V1.** Full-bleed photo, frosted nav bar inside it, headline split top-left / bottom-right, small square-bullet tag, sentence + CTA bottom left | user |
+| avenn (screenshot) | **Hero V1.** Full-bleed photo, frosted nav bar inside it, headline split top-left / bottom-right, sentence + CTA bottom left | user |
+| Atlas menu, liquid-glass sliders (screenshots) | **Nav surfaces.** Milky frosted panel with dark type; translucent capsules with a bright rim and a lighter "thumb" that moves between options | user |
+| Cosmos, Analogue Agency, Fuser (Mobbin) | **Nav surfaces.** Dark glass pill of links between a free-standing logo and a glowing CTA (Cosmos); light frosted bars (Analogue, Fuser) | Mobbin |
 | nekohealth.com | *Couldn't load (bot check). Waiting for screenshots.* | user (liked) |

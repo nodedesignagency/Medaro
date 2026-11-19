@@ -18,6 +18,41 @@
   window.addEventListener('version-change', update);
 })();
 
+/* ---------- Header: highlight that slides behind the hovered link ----------
+   Used by the liquid-glass nav (data-thumb on the links). */
+(function headerThumb() {
+  document.querySelectorAll('.site-header__links[data-thumb]').forEach((nav) => {
+    const thumb = document.createElement('span');
+    thumb.className = 'site-header__thumb';
+    thumb.setAttribute('aria-hidden', 'true');
+    nav.prepend(thumb);
+    const place = (a) => {
+      thumb.style.width = `${a.offsetWidth}px`;
+      thumb.style.transform = `translateX(${a.offsetLeft}px)`;
+    };
+    const moveTo = (a) => {
+      if (!thumb.classList.contains('is-on')) {
+        // appear in place on the first hover, then slide between links
+        thumb.style.transition = 'none';
+        place(a);
+        void thumb.offsetWidth;
+        thumb.style.transition = '';
+      } else {
+        place(a);
+      }
+      thumb.classList.add('is-on');
+    };
+    nav.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('pointerenter', () => moveTo(a));
+      a.addEventListener('focus', () => moveTo(a));
+    });
+    nav.addEventListener('pointerleave', () => thumb.classList.remove('is-on'));
+    nav.addEventListener('focusout', (e) => {
+      if (!nav.contains(e.relatedTarget)) thumb.classList.remove('is-on');
+    });
+  });
+})();
+
 /* ---------- Review-only: versions and palettes ----------
    Sections offered in several versions are marked data-version="<slot>:<id>",
    e.g. data-version="hero:a" and data-version="hero:b". One per slot is shown,

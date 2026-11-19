@@ -42,25 +42,51 @@
   <div data-version="hero:v1">
 
     <!-- SECTION:header--glass START · styles: components/header.css · scripts: main.js (header)
-         [LINK NEEDED] Get Started destination, patient login URL. -->
-    <header class="site-header site-header--glass" data-header data-solid-after=".hero-v1">
+         Logo left · all seven links centred · Get Started right. Three surface treatments to compare: ?nav=tinted|frosted|liquid.
+         [LINK NEEDED] Get Started destination. -->
+    <header class="site-header site-header--glass site-header--tinted" data-header data-solid-after=".hero-v1" data-version="nav:tinted">
       <div class="site-header__bar">
         <a class="logo" href="#top" aria-label="MEDARO, back to top"><svg aria-hidden="true"><use href="#wordmark"/></svg></a>
-        <nav class="site-header__links" aria-label="On this page">
+        <nav class="site-header__links" aria-label="Main">
           <a href="#weight-loss">Weight Loss</a>
           <a href="#mens-health">Men's Health</a>
           <a href="#womens-health">Women's Health</a>
           <a href="#supplements">Supplement</a>
           <a href="#how-it-works">How Medaro Works</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Support</a>
         </nav>
-        <div class="site-header__end">
-          <nav class="site-header__pages" aria-label="Pages">
-            <a href="about.html">About Us</a>
-            <a href="contact.html">Contact Support</a>
-          </nav>
-          <a class="btn btn--primary btn--s" href="#how-it-works">Get Started</a>
-          <a class="site-header__icon" href="#patient-login" aria-label="Patient login"><svg aria-hidden="true"><use href="#i-user"/></svg></a>
-        </div>
+        <a class="btn btn--primary btn--s" href="#how-it-works">Get Started</a>
+      </div>
+    </header>
+    <header class="site-header site-header--glass site-header--frosted" data-header data-solid-after=".hero-v1" data-version="nav:frosted">
+      <div class="site-header__bar">
+        <a class="logo" href="#top" aria-label="MEDARO, back to top"><svg aria-hidden="true"><use href="#wordmark"/></svg></a>
+        <nav class="site-header__links" aria-label="Main">
+          <a href="#weight-loss">Weight Loss</a>
+          <a href="#mens-health">Men's Health</a>
+          <a href="#womens-health">Women's Health</a>
+          <a href="#supplements">Supplement</a>
+          <a href="#how-it-works">How Medaro Works</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Support</a>
+        </nav>
+        <a class="btn btn--dark btn--s" href="#how-it-works">Get Started</a>
+      </div>
+    </header>
+    <header class="site-header site-header--glass site-header--liquid" data-header data-solid-after=".hero-v1" data-version="nav:liquid">
+      <div class="site-header__bar">
+        <a class="logo" href="#top" aria-label="MEDARO, back to top"><svg aria-hidden="true"><use href="#wordmark"/></svg></a>
+        <nav class="site-header__links liquid-glass" aria-label="Main" data-thumb>
+          <a href="#weight-loss">Weight Loss</a>
+          <a href="#mens-health">Men's Health</a>
+          <a href="#womens-health">Women's Health</a>
+          <a href="#supplements">Supplement</a>
+          <a href="#how-it-works">How Medaro Works</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Support</a>
+        </nav>
+        <a class="btn btn--glow" href="#how-it-works">Get Started</a>
       </div>
     </header>
     <!-- SECTION:header--glass END -->
@@ -77,7 +103,6 @@
               <a class="btn btn--primary" href="#how-it-works">Get Started</a>
             </div>
             <div class="hero-v1__end">
-              <span class="tag">Licensed medical providers</span>
               <p class="hero-v1__title">Care Without<br>the Runaround.</p>
             </div>
           </div>
@@ -90,27 +115,23 @@
   <!-- ================= HERO V2 (after Superpower) ================= -->
   <div data-version="hero:v2">
 
-    <!-- SECTION:header--split START · styles: components/header.css · scripts: main.js (header) -->
-    <header class="site-header site-header--split" data-header>
-      <div class="site-header__inner">
-        <nav class="site-header__links" aria-label="On this page">
+    <!-- SECTION:header--plain START · styles: components/header.css · scripts: main.js (header) -->
+    <header class="site-header site-header--plain" data-header>
+      <div class="site-header__bar">
+        <a class="logo" href="#top" aria-label="MEDARO, back to top"><svg aria-hidden="true"><use href="#wordmark"/></svg></a>
+        <nav class="site-header__links" aria-label="Main">
           <a href="#weight-loss">Weight Loss</a>
           <a href="#mens-health">Men's Health</a>
           <a href="#womens-health">Women's Health</a>
           <a href="#supplements">Supplement</a>
+          <a href="#how-it-works">How Medaro Works</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Support</a>
         </nav>
-        <a class="logo" href="#top" aria-label="MEDARO, back to top"><svg aria-hidden="true"><use href="#wordmark"/></svg></a>
-        <div class="site-header__end">
-          <nav class="site-header__pages" aria-label="Pages">
-            <a href="#how-it-works">How Medaro Works</a>
-            <a href="about.html">About Us</a>
-            <a href="contact.html">Contact Support</a>
-          </nav>
-          <a class="btn btn--dark btn--pill" href="#how-it-works">Get Started</a>
-        </div>
+        <a class="btn btn--dark btn--pill" href="#how-it-works">Get Started</a>
       </div>
     </header>
-    <!-- SECTION:header--split END -->
+    <!-- SECTION:header--plain END -->
 
     <main id="main-v2">
       <!-- SECTION:home/hero--v2 START · styles: sections/home/hero--v2.css
