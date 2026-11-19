@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#f4f5ef">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="styles.css">
   <!-- Components (shared across pages) -->
   <link rel="stylesheet" href="components/header.css">
@@ -114,7 +114,7 @@
     <!-- SECTION:header--plain END -->
 
     <main id="main-v2">
-      <!-- SECTION:home/hero--v2 START · styles: sections/home/hero--v2.css · assets: assets/images/supplements/pens-plate.webp, pens-products.webp -->
+      <!-- SECTION:home/hero--v2 START · styles: sections/home/hero--v2.css · assets: assets/images/products/ (stage-plate.webp, pen-glp1.webp, pen-glp1-capped.webp, tablet-white.webp, tablet-lime.webp) -->
       <section class="hero-v2" aria-labelledby="hero-v2-title">
         <div class="hero-v2__frame">
 
@@ -134,13 +134,80 @@
             <li><strong>Discreet delivery</strong><span>If prescribed, to your door</span></li>
           </ul>
 
-          <!-- Product photo, after the user's floating-pens reference: one Nano Banana 2.1 render (their reference for
-               composition, the official logo for branding). Split into a clean backdrop plate (same render, objects removed)
-               and a cut-out of the pens and tablets, which floats over it exactly where it was shot. -->
+          <!-- Backdrop: the dark olive studio plate with its diagonal beam (no objects in it). -->
           <div class="hero-v2__media" aria-hidden="true">
-            <img class="hero-v2__plate" src="assets/images/supplements/pens-plate.webp" alt="" width="3840" height="2143">
+            <img class="hero-v2__plate" src="assets/images/products/stage-plate.webp" alt="" width="3840" height="2143">
             <div class="hero-v2__scrim"></div>
-            <img class="hero-v2__products" src="assets/images/supplements/pens-products.webp" alt="" width="1586" height="2143">
+          </div>
+
+          <!-- Products: four separate renders (Nano Banana 2.1 via Magnific, each object complete, blank, on the stage
+               backdrop and light, cut out with background removal). Each one floats on its own. The pens are rendered
+               upright and BLANK; their labels are the SVG below, drawn in the pen image's own pixels and printed onto
+               the blank sleeve with multiply (the render's shading shows through) and the pen's alpha as a mask.
+               Labels copy the user's references (Zepbound vial and pen, hims vial, Wegovy pen): Rx only, name +
+               "injection", strength pill, use line, small maker's mark. Molecules from the client's copy; strengths
+               are stand-ins, [DATA NEEDED]; no NDC numbers. -->
+          <div class="hero-v2__scene" aria-hidden="true">
+
+            <div class="product product--pen-capped">
+              <div class="product__float">
+                <img src="assets/images/products/pen-glp1-capped.webp" alt="" width="307" height="2284">
+                <svg class="product__print" viewBox="0 0 307 2284">
+                  <!-- Label after the Zepbound vial and the hims vial: "Rx only", product name + "injection", strength
+                       pill, use line; the MEDARO mark small at the end, like a maker's mark (the user: a giant wordmark
+                       looks bad). Text runs along the pen; lines off the axis are squeezed by the cylinder (scale 1 k).
+                       Sleeve x 8.5–256.8, y 1067.4–1816.8; axis x 132.65, radius 124.
+                       [DATA NEEDED] strength: 2.5 mg/0.5 mL is tirzepatide's standard starting strength, a stand-in
+                       until the client confirms what they dispense. -->
+                  <rect x="8.5" y="1067.4" width="248.3" height="749.4" fill="#343B29"/>
+                  <text class="print-mono" transform="translate(184.65 1107.4) rotate(90) scale(1 0.89)" fill="#F4F5EF" fill-opacity=".78">Rx only</text>
+                  <text class="print-name" transform="translate(146.65 1107.4) rotate(90) scale(1 0.977)" fill="#F4F5EF">Tirzepatide<tspan class="print-name-sub" dx="9">injection</tspan></text>
+                  <rect x="105.65" y="1107.4" width="23" height="138" rx="11.5" fill="#D5E5AD"/>
+                  <text class="print-dose" transform="translate(112.05 1176.4) rotate(90)" text-anchor="middle" fill="#343B29">2.5 mg/0.5 mL</text>
+                  <text class="print-small" transform="translate(86.65 1107.4) rotate(90) scale(1 0.944)" fill="#F4F5EF" fill-opacity=".78">Single-dose pen · For subcutaneous use</text>
+                  <g transform="translate(142.65 1648.4) rotate(90)" color="#D5E5AD"><use href="#wordmark" width="124" height="20"/></g>
+                </svg>
+                <!-- the dark sleeve catches the key light: a soft highlight band on its lit side -->
+                <svg class="product__sheen" viewBox="0 0 307 2284">
+                  <defs>
+                    <linearGradient id="sheen-capped" x1="8.5" x2="256.8" gradientUnits="userSpaceOnUse">
+                      <stop offset="0.5" stop-color="#fff" stop-opacity="0"/>
+                      <stop offset="0.74" stop-color="#fff" stop-opacity="0.13"/>
+                      <stop offset="0.84" stop-color="#fff" stop-opacity="0.07"/>
+                      <stop offset="0.97" stop-color="#fff" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <rect x="8.5" y="1067.4" width="248.3" height="749.4" fill="url(#sheen-capped)"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="product product--pen">
+              <div class="product__float">
+                <img src="assets/images/products/pen-glp1.webp" alt="" width="299" height="2200">
+                <svg class="product__print" viewBox="0 0 299 2200">
+                  <!-- Label after the Zepbound vial and pen: "Rx only", product name + "injection", strength pill, use
+                       line; the MEDARO mark small at the end, like a maker's mark. Text runs along the pen.
+                       Sleeve x 11.7–286.7, y 980.1–1657.2; axis x 149.2, radius 137.5.
+                       [DATA NEEDED] strength: 0.25 mg/0.5 mL is semaglutide's standard starting strength, a stand-in
+                       until the client confirms what they dispense. -->
+                  <text class="print-mono" transform="translate(205.2 1020.1) rotate(90) scale(1 0.9)" fill="#343B29">Rx only</text>
+                  <text class="print-name" transform="translate(165.2 1020.1) rotate(90) scale(1 0.977)" fill="#343B29">Semaglutide<tspan class="print-name-sub" dx="9">injection</tspan></text>
+                  <rect x="121.2" y="1020.1" width="24" height="148" rx="12" fill="#343B29"/>
+                  <text class="print-dose" transform="translate(127.95 1094.1) rotate(90)" text-anchor="middle" fill="#F4F5EF">0.25 mg/0.5 mL</text>
+                  <text class="print-small" transform="translate(101.2 1020.1) rotate(90) scale(1 0.95)" fill="#5E6551">Single-dose pen · For subcutaneous use</text>
+                  <g transform="translate(159.2 1493.1) rotate(90)" color="#343B29"><use href="#wordmark" width="124" height="20"/></g>
+                </svg>
+              </div>
+            </div>
+
+            <div class="product product--tablet-lime">
+              <div class="product__float"><img src="assets/images/products/tablet-lime.webp" alt="" width="630" height="614"></div>
+            </div>
+
+            <div class="product product--tablet-white">
+              <div class="product__float"><img src="assets/images/products/tablet-white.webp" alt="" width="669" height="662"></div>
+            </div>
           </div>
         </div>
       </section>

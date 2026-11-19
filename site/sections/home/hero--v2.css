@@ -3,11 +3,12 @@
    A dark, rounded stage under a quiet header. Left: one-line eyebrow, the
    headline, a sentence, CTA and a text link; three plain facts at the foot.
    Right: the user's floating-pens reference, in MEDARO branding: two
-   GLP-1 pens crossing diagonally and two debossed tablets in a beam of
-   light. One render, split into a backdrop plate and a cut-out of the
-   products, which floats slowly over the plate where it was shot. The
-   stage IS the photo (plate covers it); a soft scrim on the left keeps
-   the copy readable where the beam crosses.
+   GLP-1 pens crossing and two debossed tablets in a beam of light. Each
+   object is its own render and its own layer with its own float (the
+   user, 2026-11-19: "generate all one by one … all will have different
+   motion"). The pens are rendered blank; their labels are SVG in the
+   page markup. A backdrop plate covers the stage; a soft scrim on the
+   left keeps the copy readable where the beam crosses.
    Frame: the stage sits on the frame edge (16px, max 1888px, centred); the
    header's logo and CTA line up with the content inset inside the stage.
    Header: components/header.css, --plain.
@@ -86,14 +87,13 @@
 .hero-v2__facts li + li { box-shadow: -1px 0 0 rgba(255, 255, 255, 0.18); }
 .hero-v2__facts span { color: rgba(255, 255, 255, 0.6); }
 
-/* ---------- Product photo ---------- */
-/* covers the stage like object-fit: cover, anchored right, so the plate and
-   the products stay locked together at every size */
+/* ---------- Backdrop ---------- */
+/* the studio plate (dark olive, diagonal beam) covers the stage like
+   object-fit: cover, anchored right */
 .hero-v2__media {
   position: absolute;
   top: 50%;
-  /* slide right on narrower stages so the pen cap clears the headline */
-  right: min(0px, calc(50cqw - 790px));
+  right: 0;
   width: max(100cqw, 179.17cqh);
   aspect-ratio: 3840 / 2143;
   transform: translateY(-50%);
@@ -109,20 +109,104 @@
   inset: 0;
   background: linear-gradient(90deg, rgba(22, 26, 16, 0.72) 0%, rgba(22, 26, 16, 0.5) 28%, rgba(22, 26, 16, 0) 48%);
 }
-.hero-v2__products {
+
+/* ---------- Products ---------- */
+/* One box on the right of the stage holds four separate objects. It is sized
+   by the stage height and by the room the copy leaves, so every object stays
+   whole inside the stage at every desktop size (the user: nothing cut off).
+   Inside, objects are placed in % of the box: --x/--y centre, --h height,
+   --r tilt. */
+.hero-v2__scene {
+  --scene-ratio: 0.78;
+  --copy-room: 740px; /* stage-left to just past the headline's longest line */
   position: absolute;
-  left: 46.7%;
-  top: 0;
-  width: 41.3%;
-  height: auto;
-  animation: hero-v2-float 7s ease-in-out infinite;
+  top: 50%;
+  right: 32px;
+  height: min(100cqh - 48px, (100cqw - 32px - var(--copy-room)) / var(--scene-ratio));
+  aspect-ratio: var(--scene-ratio);
+  transform: translateY(-50%);
+  z-index: -1;
+  container-type: size;
+}
+
+.product {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  height: var(--h);
+  aspect-ratio: var(--ar);
+  transform: translate(-50%, -50%) rotate(var(--r));
+  z-index: var(--z, 1);
+}
+.product__float {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: product-float var(--dur, 8s) var(--ease, ease-in-out) var(--delay, 0s) infinite;
   will-change: transform;
 }
-/* rests exactly where it was shot, lifts and settles */
-@keyframes hero-v2-float {
+.product__float > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Pen labels: SVG in the pen image's own pixels, printed onto the blank
+   sleeve. Multiply lets the render's shading and paper texture through;
+   the pen's own alpha masks the print to the pen's silhouette. */
+.product__print {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  mix-blend-mode: multiply;
+  -webkit-mask: var(--mask) 0 0 / 100% 100% no-repeat;
+  mask: var(--mask) 0 0 / 100% 100% no-repeat;
+  font-family: var(--font-body);
+}
+/* a soft highlight on dark print, where multiply can't lighten */
+.product__sheen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+  -webkit-mask: var(--mask) 0 0 / 100% 100% no-repeat;
+  mask: var(--mask) 0 0 / 100% 100% no-repeat;
+}
+.print-name { font-size: 38px; font-weight: var(--weight-medium); letter-spacing: -0.02em; }
+.print-name-sub { font-size: 20px; font-weight: var(--weight-regular); letter-spacing: 0; }
+.print-dose { font-size: 15px; font-weight: var(--weight-medium); letter-spacing: -0.005em; }
+.print-mono { font-family: "DM Mono", ui-monospace, monospace; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+.print-small { font-size: 13px; font-weight: var(--weight-regular); }
+
+/* The four objects. Each floats on its own: different period, drift, tilt
+   and phase, so they never move in step. */
+.product--pen-capped {
+  --mask: url("../../assets/images/products/pen-glp1-capped.webp");
+  --ar: 307 / 2284; --h: 86%; --x: 42%; --y: 55%; --r: -34deg; --z: 1;
+  --dur: 9.5s; --delay: -3s; --fx: -0.4cqh; --fy: -1.4cqh; --fr: -1.2deg;
+}
+.product--pen {
+  --mask: url("../../assets/images/products/pen-glp1.webp");
+  --ar: 299 / 2200; --h: 94%; --x: 60%; --y: 49%; --r: -14deg; --z: 2;
+  --dur: 7.5s; --delay: -1s; --fx: 0.3cqh; --fy: -1.8cqh; --fr: 0.9deg;
+}
+.product--tablet-white {
+  --ar: 669 / 662; --h: 24%; --x: 79%; --y: 25%; --r: 0deg; --z: 3;
+  --dur: 6.2s; --delay: -2.4s; --fx: 0.6cqh; --fy: -2.4cqh; --fr: 7deg;
+}
+.product--tablet-lime {
+  --ar: 630 / 614; --h: 22%; --x: 21%; --y: 63%; --r: 0deg; --z: 3;
+  --dur: 7s; --delay: -4.6s; --fx: -0.5cqh; --fy: -2cqh; --fr: -8deg;
+}
+
+/* rests where it is placed, drifts and settles */
+@keyframes product-float {
   0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-  50% { transform: translate3d(0, -1.6cqh, 0) rotate(-0.6deg); }
+  50% { transform: translate3d(var(--fx, 0), var(--fy, -1.6cqh), 0) rotate(var(--fr, 0deg)); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-v2__products { animation: none; }
+  .product__float { animation: none; }
 }
