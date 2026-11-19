@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#f4f5ef">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="styles.css">
   <!-- Components (shared across pages) -->
   <link rel="stylesheet" href="components/header.css">
@@ -145,34 +145,26 @@
                upright and BLANK; their labels are the SVG below, drawn in the pen image's own pixels and printed onto
                the blank sleeve with multiply (the render's shading shows through), clipped to the sleeve in SVG.
                No CSS image masks: they fail when the page is opened from disk (file://) and the label disappears.
-               Labels: clean but with structure and colour, after the Superpower tube, Immortals vials, Wegovy and
-               Zepbound pens. Molecules from the client's copy; doses are stand-ins, [DATA NEEDED]; no NDC numbers. -->
+               Labels after the Wegovy pens: colour sleeve, white window with name + MEDARO mark, dose chip, no small
+               print. Molecules from the client's copy; doses are stand-ins, [DATA NEEDED]. -->
           <div class="hero-v2__scene" aria-hidden="true">
 
             <div class="product product--pen-capped">
               <div class="product__float">
                 <img src="assets/images/products/pen-glp1-capped.webp" alt="" width="307" height="2284">
                 <svg class="product__print" viewBox="0 0 307 2284">
-                  <!-- Label after the Superpower tube, Immortals vials and Zepbound pen: olive sleeve; two hairlines along the
-                       label; a solid lime tab with the dose at the cap end, the product name after it; MEDARO mark and
-                       Rx only above, use line and Lot/Exp fields below. Text runs along the pen; rows off the axis are
-                       squeezed by the cylinder (scale 1 k). Sleeve x 8.5–256.8, y 1067.4–1816.8; axis x 132.65.
-                       [DATA NEEDED] dose: 2.5 mg/0.5 mL is tirzepatide's standard starting strength, a stand-in. -->
+                  <!-- Label after the Wegovy pens: olive sleeve, a white rounded window with the product name and the MEDARO
+                       mark, a lime dose chip. Few words, all readable; no small print (the user: small text reads as AI).
+                       Text runs along the pen. Sleeve x 8.5–256.8, y 1067.4–1816.8; axis x 132.65.
+                       [DATA NEEDED] dose: 2.5 mg is tirzepatide's standard starting dose, a stand-in. -->
                   <defs><clipPath id="sleeve-capped"><rect x="10" y="1067.4" width="245.3" height="749.4" rx="3"/></clipPath></defs>
                   <g clip-path="url(#sleeve-capped)">
                     <rect x="8.5" y="1067.4" width="248.3" height="749.4" fill="#343B29"/>
-                    <rect x="102.65" y="1067.4" width="60" height="232.0" fill="#D5E5AD"/>
-                    <rect x="162.05" y="1067.4" width="1.2" height="749.4" fill="#F4F5EF" fill-opacity="0.4"/>
-                    <rect x="102.05" y="1067.4" width="1.2" height="749.4" fill="#F4F5EF" fill-opacity="0.4"/>
-                    <text class="print-dose" transform="translate(127.05 1091.4) rotate(90)" fill="#343B29">2.5 mg/0.5 mL</text>
-                    <text class="print-name" transform="translate(120.75 1325.4) rotate(90)" fill="#F4F5EF">Tirzepatide</text>
-                    <g transform="translate(200.37 1325.4) rotate(90) scale(1 0.884)" color="#F4F5EF"><use href="#wordmark" width="136.4" height="22"/></g>
-                    <text class="print-rx" transform="translate(182.65 1780.8) rotate(90) scale(1 0.902)" text-anchor="end" fill="#C9CDBE">Rx only</text>
-                    <text class="print-small" transform="translate(78.65 1325.4) rotate(90) scale(1 0.917)" fill="#C9CDBE">Injection · Single-dose pen</text>
-                    <text class="print-rx" transform="translate(78.65 1590.8) rotate(90) scale(1 0.914)" fill="#C9CDBE">Lot</text>
-                    <rect x="76.15" y="1620.8" width="1" height="62.0" fill="#C9CDBE" fill-opacity="0.6"/>
-                    <text class="print-rx" transform="translate(78.65 1694.8) rotate(90) scale(1 0.914)" fill="#C9CDBE">Exp</text>
-                    <rect x="76.15" y="1724.8" width="1" height="56.0" fill="#C9CDBE" fill-opacity="0.6"/>
+                    <rect x="72.65" y="1103.4" width="120.0" height="336.0" rx="16" fill="#FFFFFF"/>
+                    <text class="print-name" transform="translate(134.65 1131.4) rotate(90) scale(1 0.99)" fill="#343B29">Tirzepatide</text>
+                    <g transform="translate(111.38 1133.4) rotate(90) scale(1 0.97)" color="#343B29"><use href="#wordmark" width="111.6" height="18"/></g>
+                    <rect x="108.65" y="1461.4" width="48.0" height="126.0" rx="9" fill="#D5E5AD"/>
+                    <text class="print-dose" transform="translate(124.25 1524.4) rotate(90)" text-anchor="middle" fill="#343B29">2.5 mg</text>
                   </g>
                 </svg>
                 <!-- the dark sleeve catches the key light: a soft highlight band on its lit side -->
@@ -194,24 +186,17 @@
               <div class="product__float">
                 <img src="assets/images/products/pen-glp1.webp" alt="" width="299" height="2200">
                 <svg class="product__print" viewBox="0 0 299 2200">
-                  <!-- Label after the Superpower tube, Immortals vials and Wegovy pen: white sleeve; two hairlines along the
-                       label; the product name, then a solid olive tab with the dose in lime running to the end; MEDARO
-                       mark and Rx only above, use line and Lot/Exp fields below. Sleeve x 11.7–286.7, y 980.1–1657.2;
-                       axis x 149.2. [DATA NEEDED] dose: 0.25 mg/0.5 mL is semaglutide's standard starting strength. -->
+                  <!-- Label after the Wegovy pens: lime sleeve, a white rounded window with the product name and the MEDARO
+                       mark, an olive dose chip. Few words, all readable; no small print. Sleeve x 11.7–286.7,
+                       y 980.1–1657.2; axis x 149.2. [DATA NEEDED] dose: 0.25 mg is semaglutide's standard starting dose. -->
                   <defs><clipPath id="sleeve-pen"><rect x="13.2" y="980.1" width="272" height="677.1" rx="3"/></clipPath></defs>
                   <g clip-path="url(#sleeve-pen)">
-                    <rect x="115.20" y="1410.1" width="68" height="247.1" fill="#343B29"/>
-                    <rect x="182.60" y="980.1" width="1.2" height="677.1" fill="#343B29" fill-opacity="0.4"/>
-                    <rect x="114.60" y="980.1" width="1.2" height="677.1" fill="#343B29" fill-opacity="0.4"/>
-                    <text class="print-dose" transform="translate(143.60 1434.1) rotate(90)" fill="#D5E5AD">0.25 mg/0.5 mL</text>
-                    <text class="print-name" transform="translate(137.30 1014.1) rotate(90)" fill="#343B29">Semaglutide</text>
-                    <g transform="translate(221.02 1014.1) rotate(90) scale(1 0.893)" color="#343B29"><use href="#wordmark" width="136.4" height="22"/></g>
-                    <text class="print-rx" transform="translate(203.20 1621.2) rotate(90) scale(1 0.908)" text-anchor="end" fill="#5E6551">Rx only</text>
-                    <text class="print-small" transform="translate(91.20 1014.1) rotate(90) scale(1 0.921)" fill="#5E6551">Injection · Single-dose pen</text>
-                    <text class="print-rx" transform="translate(91.20 1431.2) rotate(90) scale(1 0.918)" fill="#5E6551">Lot</text>
-                    <rect x="88.70" y="1461.2" width="1" height="62.0" fill="#5E6551" fill-opacity="0.6"/>
-                    <text class="print-rx" transform="translate(91.20 1535.2) rotate(90) scale(1 0.918)" fill="#5E6551">Exp</text>
-                    <rect x="88.70" y="1565.2" width="1" height="56.0" fill="#5E6551" fill-opacity="0.6"/>
+                    <rect x="11.7" y="980.1" width="275" height="677.1" fill="#D5E5AD"/>
+                    <rect x="89.20" y="1016.1" width="120.0" height="336.0" rx="16" fill="#FFFFFF"/>
+                    <text class="print-name" transform="translate(151.20 1044.1) rotate(90) scale(1 0.992)" fill="#343B29">Semaglutide</text>
+                    <g transform="translate(127.98 1046.1) rotate(90) scale(1 0.976)" color="#343B29"><use href="#wordmark" width="111.6" height="18"/></g>
+                    <rect x="125.20" y="1374.1" width="48.0" height="126.0" rx="9" fill="#343B29"/>
+                    <text class="print-dose" transform="translate(140.80 1437.1) rotate(90)" text-anchor="middle" fill="#F4F5EF">0.25 mg</text>
                   </g>
                 </svg>
               </div>

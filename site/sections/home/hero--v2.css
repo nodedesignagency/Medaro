@@ -166,10 +166,8 @@
 /* a soft highlight on dark print, where multiply can't lighten */
 .product__sheen { mix-blend-mode: screen; }
 .product__print { font-family: var(--font-body); }
-.print-name { font-size: 34px; font-weight: var(--weight-medium); letter-spacing: -0.015em; }
-.print-dose { font-size: 16px; font-weight: var(--weight-medium); letter-spacing: -0.005em; }
-.print-small { font-size: 13px; font-weight: var(--weight-regular); }
-.print-rx { font-family: "DM Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+.print-name { font-size: 44px; font-weight: var(--weight-medium); letter-spacing: -0.02em; }
+.print-dose { font-size: 24px; font-weight: var(--weight-medium); letter-spacing: -0.01em; }
 
 /* The four objects. Each floats on its own: different period, drift, tilt
    and phase, so they never move in step. */
