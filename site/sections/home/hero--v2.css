@@ -2,18 +2,24 @@
    Home · hero V2 (after Superpower)
    A dark, rounded stage under a quiet header. Left: one-line eyebrow, the
    headline, a sentence, CTA and a text link; three plain facts at the foot.
-   Right: the product scene, lit from above: the MEDARO patient portal on a
-   phone and a pharmacy bottle (both built in code; the bottle is a stand-in
-   for a render). A slow ticker runs along the bottom edge.
-   Header: components/header.css, --split.
+   Right: the MEDARO supplement range floating in the light, after the
+   user's floating-pens reference: jar, carton, sachet and three capsules,
+   each bobbing on its own slow loop. One Nano Banana render (so the light
+   is shared), background removed, split into pieces, then recomposed in
+   depth: carton high at the back, jar in front overlapping it, sachet to
+   the right, capsules scattered below. A slow ticker runs along the bottom.
+   Frame: the stage sits on the frame edge (16px, max 1888px, centred); the
+   header's logo and CTA line up with the content inset inside the stage.
+   Header: components/header.css, --plain.
    ========================================================================== */
 
-.hero-v2 { padding: 0 8px 8px; }
+.hero-v2 {
+  --v2-inset: 48px; /* content inset inside the stage; the header uses it too */
+  padding: 0 var(--frame-side) var(--edge);
+}
 
 .hero-v2__frame {
   position: relative;
-  max-width: var(--frame-max);
-  margin-inline: auto;
   height: clamp(680px, calc(100svh - 96px), 940px);
   overflow: hidden;
   border-radius: 18px;
@@ -28,7 +34,7 @@
 /* Copy */
 .hero-v2__content {
   position: absolute;
-  left: 64px;
+  left: var(--v2-inset);
   top: 47%;
   transform: translateY(-50%);
   max-width: 780px;
@@ -64,7 +70,7 @@
 /* Facts */
 .hero-v2__facts {
   position: absolute;
-  left: 64px;
+  left: var(--v2-inset);
   bottom: 92px;
   display: flex;
 }
@@ -118,224 +124,48 @@
 @keyframes hero-v2-ticker { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .hero-v2__track { animation: none; } }
 
-/* ---------- Product scene ---------- */
+/* ---------- Floating supplements ---------- */
 .hero-v2__scene {
   position: absolute;
-  right: 11%;
-  bottom: 96px;
-  display: flex;
-  align-items: flex-end;
-  gap: 0;
+  right: var(--v2-inset);
+  top: 46%;
+  /* 43% of the stage, but never closer than ~40px to the headline (whose
+     right edge sits ~760px into the stage) */
+  width: min(43%, calc(100% - var(--v2-inset) - 800px));
+  transform: translateY(-50%);
   z-index: -1;
 }
-/* soft floor shadow */
-.hero-v2__scene::after {
+/* soft pale light behind the set so the products sit in it */
+.hero-v2__scene::before {
   content: "";
   position: absolute;
-  left: -40px;
-  right: -40px;
-  bottom: -26px;
-  height: 52px;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
-  z-index: -1;
+  inset: -30% -18%;
+  background: radial-gradient(closest-side, rgba(214, 226, 178, 0.22), rgba(214, 226, 178, 0.06) 60%, rgba(214, 226, 178, 0));
+  pointer-events: none;
 }
 
-/* Pharmacy bottle (stand-in for a render) */
-.vial {
+.float-set {
   position: relative;
-  width: 112px;
-  margin-right: -18px;
-  margin-bottom: 4px;
-  z-index: 2;
-  filter: drop-shadow(0 30px 30px rgba(0, 0, 0, 0.45));
+  aspect-ratio: 1.15;
 }
-.vial__cap {
-  height: 54px;
-  margin: 0 4px;
-  border-radius: 9px 9px 4px 4px;
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.28), rgba(255, 255, 255, 0.0) 22%, rgba(255, 255, 255, 0.35) 62%, rgba(0, 0, 0, 0.25)),
-    repeating-linear-gradient(90deg, #ecede4 0 3px, #d7d9cc 3px 5px);
-  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.7);
-}
-.vial__neck {
-  height: 8px;
-  margin: 0 10px;
-  background: linear-gradient(90deg, #2a1705, #7a4514 35%, #a8682a 55%, #3a2008);
-}
-.vial__body {
-  position: relative;
-  height: 200px;
-  border-radius: 12px 12px 16px 16px;
-  background: linear-gradient(90deg, #2b1706 0%, #6e3e12 14%, #b0702c 30%, #d39448 36%, #9a5c22 48%, #6b3b11 72%, #2e1907 100%);
-  overflow: hidden;
-}
-.vial__body::after { /* glass highlight */
-  content: "";
+.float-set__piece {
   position: absolute;
-  top: 10px;
-  bottom: 14px;
-  left: 30%;
-  width: 7px;
-  border-radius: 4px;
-  background: linear-gradient(180deg, rgba(255, 240, 210, 0.75), rgba(255, 240, 210, 0.08));
-  filter: blur(1px);
+  height: auto;
+  filter: drop-shadow(0 26px 30px rgba(8, 10, 5, 0.45));
+  animation: float-set var(--dur) ease-in-out var(--delay) infinite;
+  will-change: transform;
 }
-.vial__label {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 46px;
-  height: 104px;
-  padding: 16px 12px 0;
-  background: linear-gradient(90deg, #cfd1c4 0%, #f2f3ea 24%, #fafaf4 55%, #e2e4d8 82%, #bfc1b3 100%);
-  color: var(--p-ink);
+@keyframes float-set {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--r0)); }
+  50% { transform: translate3d(0, var(--amp), 0) rotate(var(--r1)); }
 }
-.vial__label .logo { color: var(--p-ink); font-size: 9px; }
-.vial__label i {
-  display: block;
-  height: 3px;
-  margin-top: 9px;
-  border-radius: 2px;
-  background: rgba(52, 59, 41, 0.22);
+@media (prefers-reduced-motion: reduce) {
+  .float-set__piece { animation: none; transform: rotate(var(--r0)); }
 }
-.vial__label i:nth-of-type(2) { width: 70%; }
-.vial__label i:nth-of-type(3) { width: 48%; }
-
-/* Phone with the MEDARO patient portal */
-.phone {
-  position: relative;
-  width: 292px;
-  height: 600px;
-  padding: 9px;
-  border-radius: 50px;
-  background: linear-gradient(135deg, #3a3f33, #15180f 40%, #2c3026);
-  box-shadow:
-    inset 0 0 0 1.5px rgba(255, 255, 255, 0.14),
-    0 50px 80px -30px rgba(0, 0, 0, 0.75),
-    0 20px 40px -20px rgba(0, 0, 0, 0.6);
-}
-.phone__screen {
-  position: relative;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 42px;
-  background: var(--p-paper);
-  color: var(--p-ink);
-  font-size: 12px;
-  line-height: 1.35;
-}
-.phone__island {
-  position: absolute;
-  top: 11px;
-  left: 50%;
-  width: 80px;
-  height: 25px;
-  transform: translateX(-50%);
-  border-radius: 20px;
-  background: #0b0d08;
-}
-.phone__status {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 48px;
-  padding: 4px 22px 0 30px;
-  font-size: 13px;
-  font-weight: var(--weight-medium);
-}
-.phone__status svg { height: 11px; width: auto; }
-.phone__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 18px 0;
-}
-.phone__top .logo { font-size: 10px; }
-.phone__avatar {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--p-sage);
-  color: var(--p-ink);
-  font-size: 12px;
-  font-weight: var(--weight-medium);
-}
-.phone__hello {
-  padding: 22px 18px 14px;
-  font-size: 24px;
-  font-weight: var(--weight-light);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-}
-.phone__card {
-  margin: 0 12px;
-  padding: 14px 14px 13px;
-  border-radius: 16px;
-  background: var(--p-accent);
-}
-.phone__card small {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  opacity: 0.7;
-}
-.phone__card p { font-size: 13.5px; line-height: 1.3; letter-spacing: -0.01em; }
-.phone__card a {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 12px;
-  font-weight: var(--weight-medium);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.phone__list { margin: 10px 12px 0; display: grid; gap: 8px; }
-.phone__row {
-  display: grid;
-  grid-template-columns: 30px 1fr 8px;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 1px 2px rgba(38, 43, 30, 0.06);
-}
-.phone__row b { display: block; font-weight: var(--weight-medium); font-size: 12.5px; }
-.phone__row span { color: var(--p-ink-soft); font-size: 11px; }
-.phone__dot {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
-  background: var(--p-mist);
-}
-.phone__dot svg { width: 15px; height: 15px; }
-.phone__row > svg { width: 7px; height: 11px; opacity: 0.45; }
-.phone__tabs {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 10px 14px 24px;
-  background: rgba(244, 245, 239, 0.92);
-  box-shadow: 0 -1px 0 rgba(52, 59, 41, 0.08);
-  font-size: 9.5px;
-  text-align: center;
-  color: var(--p-ink-soft);
-}
-.phone__tabs span { display: grid; justify-items: center; gap: 4px; }
-.phone__tabs svg { width: 18px; height: 18px; }
-.phone__tabs .is-on { color: var(--p-ink); font-weight: var(--weight-medium); }
-
-/* Shorter screens: scale the product scene so the phone keeps its headroom */
-.hero-v2__scene { transform-origin: 100% 100%; }
-@media (max-height: 880px) { .hero-v2__scene { transform: scale(0.86); } }
-@media (max-height: 780px) { .hero-v2__scene { transform: scale(0.76); } }
+/* Composition (container %), back to front */
+.float-set__piece--box       { left: 34%; top: 6%;  width: 43%;  z-index: 1; --dur: 7.6s; --delay: -4s;   --amp: -22px; --r0: 1deg;    --r1: -1deg; }
+.float-set__piece--sachet    { left: 75%; top: 22%; width: 22%;  z-index: 2; --dur: 6.1s; --delay: -2.4s; --amp: -16px; --r0: -1deg;   --r1: 2deg; }
+.float-set__piece--jar       { left: 10%; top: 40%; width: 40%;  z-index: 3; --dur: 6.8s; --delay: -1.2s; --amp: -18px; --r0: -1.5deg; --r1: 1deg; }
+.float-set__piece--capsule-1 { left: 52%; top: 80%; width: 5.5%; z-index: 4; --dur: 4.8s; --delay: -0.6s; --amp: -14px; --r0: -6deg;   --r1: 4deg; }
+.float-set__piece--capsule-2 { left: 58%; top: 70%; width: 4.3%; z-index: 4; --dur: 5.4s; --delay: -3.1s; --amp: -12px; --r0: 5deg;    --r1: -5deg; }
+.float-set__piece--capsule-3 { left: 48%; top: 89%; width: 4.6%; z-index: 4; --dur: 4.4s; --delay: -1.9s; --amp: -10px; --r0: -4deg;   --r1: 6deg; }

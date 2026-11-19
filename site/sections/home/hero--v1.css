@@ -94,15 +94,5 @@
   text-align: right;
 }
 
-/* Generated photos: position so the people clear the headline and the card.
-   The photos are 16:9 in a ~16:10 frame, so there is only ~6% to play with
-   sideways; the real fix is a wider composition (see DESIGN.md). */
-.hero-v1__img--run { object-position: 100% 50%; }     /* runners shift left, the man's head clears the card */
-.hero-v1__img--stretch { object-position: 0% 50%; }   /* the pair shift right, her arms clear "Health." */
-/* Light sky behind the headline in the stretch photo: deepen the top-left shade */
-.hero-v1:has(.hero-v1__img--stretch:not([hidden]))::before {
-  background:
-    radial-gradient(80% 70% at 0% 0%, rgba(20, 24, 14, 0.55) 0%, rgba(20, 24, 14, 0) 70%),
-    linear-gradient(180deg, rgba(20, 24, 14, 0.32) 0%, rgba(20, 24, 14, 0) 34%),
-    linear-gradient(0deg, rgba(20, 24, 14, 0.5) 0%, rgba(20, 24, 14, 0) 42%);
-}
+/* Generated photo: position so the runners clear the headline and the card. */
+.hero-v1__img--run { object-position: 100% 50%; }
