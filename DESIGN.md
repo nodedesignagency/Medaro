@@ -69,7 +69,7 @@ Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
 
 | Component | Variants | Used on | Status |
 |---|---|---|---|
-| Header | One structure (user, 2026-11-19): **logo left · all seven links from the brief centred** (Weight Loss, Men's Health, Women's Health, Supplement, How Medaro Works, About Us, Contact Support) **· Get Started right. No login.** Over the photo (V1): **`--tinted` is the user's favourite and its geometry is the standard** (bar 56px tall, inset 16px, radius 12, padding 0 8 0 22, links 14px at 88% white 24px apart, lime Get Started 40px radius 8). Other surfaces change only the glass, with values measured from the user's references: `--smoke` (Dolomites cards: rgb(19,19,19) ~58%, darker at top, faint top edge), `--vision` (visionOS windows: rgb(66,66,66) ~60%, blur 48, desaturated, soft rim), `--dark` (signal panel: rgb(22,22,22) ~76%, hairline). Compare with `?nav=`. All turn light past the photo. On the page background (V2): `--plain`. `landing` (logo + one CTA, no links out) not started | all | exploring |
+| Header | One structure (user, 2026-11-19): **logo left · six links centred** (Weight Loss, Men's Health, Women's Health, Supplement, How Medaro Works, About Us) **· "Contact" secondary button + Get Started right. No login.** Secondary on glass = `.btn--glass` (white 14%), on the page = `.btn--outline`. Over the photo (V1): **`--tinted` is the user's favourite and its geometry is the standard** (bar 56px tall, inset 16px, radius 12, padding 0 8 0 22, links 14px at 88% white 24px apart, Contact + lime Get Started 40px radius 8, 8px apart). Other surfaces change only the glass, with values measured from the user's references: `--smoke` (Dolomites cards: rgb(19,19,19) ~58%, darker at top), `--vision` (visionOS windows: rgb(66,66,66) ~60%, blur 48, desaturated, soft rim), `--dark` (signal panel: rgb(22,22,22) ~76%). No light hairline on the dark glasses: it read as a "weird border". Compare with `?nav=`. All turn light past the photo. On the page background (V2): `--plain`. `landing` (logo + one CTA, no links out) not started | all | exploring |
 | Footer | `full` · `landing` (legal links only, pending client answer) | all | not started |
 | Button | `primary` (lime) · `dark` (ink); sizes `--s` 40, default 48, `--l` 54; `--pill` for V2. No arrows | all | exploring |
 | Text link | `.link-underline` | all | exploring |
@@ -118,6 +118,7 @@ Write what the user said, in their words where possible, with the date.
 - 2026-11-19: Hero references to build from: **avenn** (V1) and **Superpower** (V2). More references coming.
 - 2026-11-19: Nav: "left we should have logo, center all the nav links … and on right CTA". Keep the current tinted bar as one option; explore glass looks (references: Atlas menu, liquid-glass sliders, Cosmos, Analogue, Fuser).
 - 2026-11-19: "tinted is still far better than all … dont change size and corner radius, tinted one has best stuff". Tinted's geometry is fixed; explorations change the material only.
+- 2026-11-19: Add a secondary button before the CTA, named "Contact" (not "Contact Support"); it replaces Contact Support in the centre links. Smoke and dark had a "weird border": removed the white hairline on dark glass.
 
 ### Rejected
 
@@ -135,6 +136,7 @@ Write what the user said, in their words where possible, with the date.
 - The nav says "Supplement" (client's word); the section copy says "Supplements". We use "Supplement" in nav and hero rows for now. Suggest "Supplements".
 - The hero has no CTA in the brief. We use "Get Started" (the client's label elsewhere) and scroll to How Medaro Works until told otherwise. `[LINK NEEDED]`
 - The header adds a Get Started button (not in the brief's nav list). `[LINK NEEDED]`
+- The brief's "Contact Support" nav item is now the "Contact" button (user's call). The page can keep the title "Contact Support".
 - V2 facts: "24/7, from home" comes from the client's "24/7 Convenient online consultations". Avoid "100% online": the FAQ says some states need a live visit.
 
 ## 7. Inspiration

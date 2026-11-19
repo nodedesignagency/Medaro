@@ -1,9 +1,9 @@
 /* ==========================================================================
    Component: header
-   One structure everywhere (user, 2026-11-19): logo left · all seven links
-   from the brief centred · one CTA right. No login.
-   Links: Weight Loss, Men's Health, Women's Health, Supplement, How Medaro
-   Works scroll on Home; About Us and Contact Support open pages.
+   One structure everywhere (user, 2026-11-19): logo left · six links
+   centred · a secondary "Contact" button and the Get Started CTA right.
+   No login. Weight Loss, Men's Health, Women's Health, Supplement, How
+   Medaro Works scroll on Home; About Us and Contact open pages.
 
    Over the hero photo (V1), surfaces to compare (?nav=). The user's pick is
    --tinted; its size, radius, padding, links and CTA are the standard and
@@ -11,10 +11,11 @@
    the user's reference images (glass colour fitted against what's behind it):
      --tinted  olive rgb(32,38,24) at 26%, blur 20, 12% white edge (the pick)
      --smoke   Dolomites glass cards: near-black rgb(19,19,19) at ~58%,
-               a little darker at the top, faint light top edge
+               a little darker at the top. No light edge: on dark glass a
+               white hairline reads as an outline (user, 2026-11-19)
      --vision  visionOS windows (Notes, Jupiter): neutral grey rgb(66,66,66)
                at ~60%, heavy blur, desaturated, very soft 1px rim
-     --dark    "signal strength" panel: rgb(22,22,22) at ~76%, hairline edge
+     --dark    "signal strength" panel: rgb(22,22,22) at ~76%, no edge
    All turn light once the photo has scrolled away (is-solid).
    On the page background (V2): --plain.
    ========================================================================== */
@@ -27,7 +28,12 @@
   align-items: center;
 }
 .site-header__bar > .logo { justify-self: start; }
-.site-header__bar > .btn { justify-self: end; }
+.site-header__actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 .site-header__links {
   position: relative;
@@ -65,7 +71,16 @@
 .site-header--glass .site-header__links a { opacity: 0.88; }
 .site-header--glass .site-header__links a:hover { opacity: 1; }
 
-/* Past the photo: light bar, ink type (all three treatments) */
+/* Secondary button on the glass: a lighter pane of the same glass */
+.site-header--glass .btn--glass {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+.site-header--glass .btn--glass:hover { background: rgba(255, 255, 255, 0.22); }
+.site-header--glass.is-solid .btn--glass { background: var(--color-surface); color: var(--color-ink); }
+.site-header--glass.is-solid .btn--glass:hover { background: color-mix(in srgb, var(--color-surface) 80%, var(--color-ink) 8%); }
+
+/* Past the photo: light bar, ink type (all treatments) */
 .site-header--glass.is-solid .site-header__bar {
   background: color-mix(in srgb, var(--color-bg) 86%, transparent);
   box-shadow: inset 0 0 0 1px var(--color-line), 0 8px 24px -12px rgba(0, 0, 0, 0.12);
@@ -85,7 +100,7 @@
 /* ---------- 2. Smoke: Dolomites glass cards ---------- */
 .site-header--smoke .site-header__bar {
   background: linear-gradient(180deg, rgba(19, 19, 19, 0.62) 0%, rgba(19, 19, 19, 0.54) 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  box-shadow: none;
   backdrop-filter: blur(32px) saturate(0.9);
   -webkit-backdrop-filter: blur(32px) saturate(0.9);
 }
@@ -103,7 +118,7 @@
 /* ---------- 4. Dark: the "signal strength" panel ---------- */
 .site-header--dark .site-header__bar {
   background: rgba(22, 22, 22, 0.76);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  box-shadow: none;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
 }
