@@ -179,28 +179,16 @@
   border-radius: 0;
 }
 
-/* Cut-outs: people and MEDARO renders with no background, floating on the
-   tile colour with a soft shadow, lit from above (user, 2026-11-19: "lets
-   make images like this with no background", pointing at the tablet).
-   --figure: a whole person. --rise: a half figure standing on the tile's
-   bottom edge. */
-.mh__tile--cutout {
+/* Product tiles: a MEDARO macro render on the tile colour, lit from above */
+.mh__tile--product {
   background:
     radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--color-surface) 82%, #fff 10%) 0%, transparent 62%),
     var(--color-surface);
 }
-.mh__tile--cutout img {
+.mh__tile--product img {
   object-fit: contain;
   padding: 16%;
   filter: drop-shadow(0 24px 28px rgba(0, 0, 0, 0.35));
-}
-/* --figure: whole people are tall and narrow, so they get less padding
-   than a round tablet to fill the tile as much */
-.mh__tile--figure img { padding: 7% 10%; }
-.mh__tile--rise img {
-  padding: 14% 14% 0;
-  object-position: 50% 100%;
-  filter: none;
 }
 
 /* ---------- Paragraph and CTA ---------- */
