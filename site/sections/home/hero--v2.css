@@ -166,8 +166,11 @@
 /* a soft highlight on dark print, where multiply can't lighten */
 .product__sheen { mix-blend-mode: screen; }
 .product__print { font-family: var(--font-body); }
-.print-name { font-size: 44px; font-weight: var(--weight-medium); letter-spacing: -0.02em; }
-.print-dose { font-size: 24px; font-weight: var(--weight-medium); letter-spacing: -0.01em; }
+/* every word on a pack is readable in the hero: nothing under 20 units in
+   the pen image's pixels (about 6.5px on screen at 1440) */
+.print-name { font-size: 38px; font-weight: var(--weight-medium); letter-spacing: -0.015em; }
+.print-dose { font-size: 22px; font-weight: var(--weight-medium); letter-spacing: -0.01em; }
+.print-meta { font-size: 20px; font-weight: var(--weight-regular); letter-spacing: 0; }
 
 /* The four objects. Each floats on its own: different period, drift, tilt
    and phase, so they never move in step. */
