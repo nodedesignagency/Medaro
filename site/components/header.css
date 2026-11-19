@@ -108,6 +108,7 @@
 .site-header--plain .logo { font-size: 21px; }
 /* Compact (Home V3, user 2026-11-19: "nav looks so big heightwise"): 18px shorter */
 .site-header--plain.site-header--compact .site-header__bar { height: 70px; }
+.site-header--compact .site-header__actions .btn { --btn-h: 44px; } /* 4px shorter than the default 48 (user, 2026-11-19) */
 .site-header--plain .site-header__links { gap: 28px; }
 .site-header--plain .site-header__links a { font-size: 15px; }
 .site-header--plain .site-header__links a:hover { opacity: 0.6; }
