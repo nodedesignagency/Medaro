@@ -152,44 +152,31 @@
 }
 
 /* Pen labels: SVG in the pen image's own pixels, printed onto the blank
-   sleeve. Multiply lets the render's shading and paper texture through;
-   the pen's own alpha masks the print to the pen's silhouette. */
-.product__print {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  mix-blend-mode: multiply;
-  -webkit-mask: var(--mask) 0 0 / 100% 100% no-repeat;
-  mask: var(--mask) 0 0 / 100% 100% no-repeat;
-  font-family: var(--font-body);
-}
-/* a soft highlight on dark print, where multiply can't lighten */
+   sleeve. Multiply lets the render's shading and paper texture through; an
+   SVG clipPath keeps the print on the sleeve. (Not a CSS mask-image: those
+   are blocked when the page is opened from disk and the label vanishes.) */
+.product__print,
 .product__sheen {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  mix-blend-mode: screen;
-  -webkit-mask: var(--mask) 0 0 / 100% 100% no-repeat;
-  mask: var(--mask) 0 0 / 100% 100% no-repeat;
+  mix-blend-mode: multiply;
 }
-.print-name { font-size: 38px; font-weight: var(--weight-medium); letter-spacing: -0.02em; }
-.print-name-sub { font-size: 20px; font-weight: var(--weight-regular); letter-spacing: 0; }
-.print-dose { font-size: 15px; font-weight: var(--weight-medium); letter-spacing: -0.005em; }
-.print-mono { font-family: "DM Mono", ui-monospace, monospace; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
-.print-small { font-size: 13px; font-weight: var(--weight-regular); }
+/* a soft highlight on dark print, where multiply can't lighten */
+.product__sheen { mix-blend-mode: screen; }
+.product__print { font-family: var(--font-body); }
+.print-name { font-size: 34px; font-weight: var(--weight-regular); letter-spacing: -0.01em; }
+.print-dose { font-size: 14px; font-weight: var(--weight-regular); }
+.print-rx { font-family: "DM Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* The four objects. Each floats on its own: different period, drift, tilt
    and phase, so they never move in step. */
 .product--pen-capped {
-  --mask: url("../../assets/images/products/pen-glp1-capped.webp");
   --ar: 307 / 2284; --h: 86%; --x: 42%; --y: 55%; --r: -34deg; --z: 1;
   --dur: 9.5s; --delay: -3s; --fx: -0.4cqh; --fy: -1.4cqh; --fr: -1.2deg;
 }
 .product--pen {
-  --mask: url("../../assets/images/products/pen-glp1.webp");
   --ar: 299 / 2200; --h: 94%; --x: 60%; --y: 49%; --r: -14deg; --z: 2;
   --dur: 7.5s; --delay: -1s; --fx: 0.3cqh; --fy: -1.8cqh; --fr: 0.9deg;
 }

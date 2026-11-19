@@ -143,29 +143,28 @@
           <!-- Products: four separate renders (Nano Banana 2.1 via Magnific, each object complete, blank, on the stage
                backdrop and light, cut out with background removal). Each one floats on its own. The pens are rendered
                upright and BLANK; their labels are the SVG below, drawn in the pen image's own pixels and printed onto
-               the blank sleeve with multiply (the render's shading shows through) and the pen's alpha as a mask.
-               Labels copy the user's references (Zepbound vial and pen, hims vial, Wegovy pen): Rx only, name +
-               "injection", strength pill, use line, small maker's mark. Molecules from the client's copy; strengths
-               are stand-ins, [DATA NEEDED]; no NDC numbers. -->
+               the blank sleeve with multiply (the render's shading shows through), clipped to the sleeve in SVG.
+               No CSS image masks: they fail when the page is opened from disk (file://) and the label disappears.
+               Labels: minimal, after the user's Good Life and hims vials (Rx only, name, dose, small MEDARO mark).
+               Molecules from the client's copy; doses are stand-ins, [DATA NEEDED]; no NDC numbers. -->
           <div class="hero-v2__scene" aria-hidden="true">
 
             <div class="product product--pen-capped">
               <div class="product__float">
                 <img src="assets/images/products/pen-glp1-capped.webp" alt="" width="307" height="2284">
                 <svg class="product__print" viewBox="0 0 307 2284">
-                  <!-- Label after the Zepbound vial and the hims vial: "Rx only", product name + "injection", strength
-                       pill, use line; the MEDARO mark small at the end, like a maker's mark (the user: a giant wordmark
-                       looks bad). Text runs along the pen; lines off the axis are squeezed by the cylinder (scale 1 k).
-                       Sleeve x 8.5–256.8, y 1067.4–1816.8; axis x 132.65, radius 124.
-                       [DATA NEEDED] strength: 2.5 mg/0.5 mL is tirzepatide's standard starting strength, a stand-in
-                       until the client confirms what they dispense. -->
-                  <rect x="8.5" y="1067.4" width="248.3" height="749.4" fill="#343B29"/>
-                  <text class="print-mono" transform="translate(184.65 1107.4) rotate(90) scale(1 0.89)" fill="#F4F5EF" fill-opacity=".78">Rx only</text>
-                  <text class="print-name" transform="translate(146.65 1107.4) rotate(90) scale(1 0.977)" fill="#F4F5EF">Tirzepatide<tspan class="print-name-sub" dx="9">injection</tspan></text>
-                  <rect x="105.65" y="1107.4" width="23" height="138" rx="11.5" fill="#D5E5AD"/>
-                  <text class="print-dose" transform="translate(112.05 1176.4) rotate(90)" text-anchor="middle" fill="#343B29">2.5 mg/0.5 mL</text>
-                  <text class="print-small" transform="translate(86.65 1107.4) rotate(90) scale(1 0.944)" fill="#F4F5EF" fill-opacity=".78">Single-dose pen · For subcutaneous use</text>
-                  <g transform="translate(142.65 1648.4) rotate(90)" color="#D5E5AD"><use href="#wordmark" width="124" height="20"/></g>
+                  <!-- Label after the Good Life and hims vials: minimal. "Rx only" tiny at the start, the product name in
+                       regular weight with a quiet dose line, the MEDARO mark small at the end. Text runs along the pen.
+                       Clipped to the sleeve (x 8.5–256.8, inset 1.5; y 1067.4–1816.8); axis x 132.65.
+                       [DATA NEEDED] dose: 2.5 mg/0.5 mL is tirzepatide's standard starting strength, a stand-in. -->
+                  <defs><clipPath id="sleeve-capped"><rect x="10" y="1067.4" width="245.3" height="749.4" rx="3"/></clipPath></defs>
+                  <g clip-path="url(#sleeve-capped)">
+                    <rect x="8.5" y="1067.4" width="248.3" height="749.4" fill="#343B29"/>
+                    <text class="print-rx" transform="translate(128.8 1111.4) rotate(90)" fill="#F4F5EF" fill-opacity=".7">Rx only</text>
+                    <text class="print-name" transform="translate(131.65 1442.1) rotate(90)" text-anchor="middle" fill="#F4F5EF">Tirzepatide</text>
+                    <text class="print-dose" transform="translate(109.85 1442.1) rotate(90)" text-anchor="middle" fill="#F4F5EF" fill-opacity=".7">2.5 mg/0.5 mL</text>
+                    <g transform="translate(141.68 1660.8) rotate(90)" color="#F4F5EF"><use href="#wordmark" width="112" height="18.07"/></g>
+                  </g>
                 </svg>
                 <!-- the dark sleeve catches the key light: a soft highlight band on its lit side -->
                 <svg class="product__sheen" viewBox="0 0 307 2284">
@@ -177,7 +176,7 @@
                       <stop offset="0.97" stop-color="#fff" stop-opacity="0"/>
                     </linearGradient>
                   </defs>
-                  <rect x="8.5" y="1067.4" width="248.3" height="749.4" fill="url(#sheen-capped)"/>
+                  <rect x="10" y="1067.4" width="245.3" height="749.4" fill="url(#sheen-capped)"/>
                 </svg>
               </div>
             </div>
@@ -186,17 +185,17 @@
               <div class="product__float">
                 <img src="assets/images/products/pen-glp1.webp" alt="" width="299" height="2200">
                 <svg class="product__print" viewBox="0 0 299 2200">
-                  <!-- Label after the Zepbound vial and pen: "Rx only", product name + "injection", strength pill, use
-                       line; the MEDARO mark small at the end, like a maker's mark. Text runs along the pen.
-                       Sleeve x 11.7–286.7, y 980.1–1657.2; axis x 149.2, radius 137.5.
-                       [DATA NEEDED] strength: 0.25 mg/0.5 mL is semaglutide's standard starting strength, a stand-in
-                       until the client confirms what they dispense. -->
-                  <text class="print-mono" transform="translate(205.2 1020.1) rotate(90) scale(1 0.9)" fill="#343B29">Rx only</text>
-                  <text class="print-name" transform="translate(165.2 1020.1) rotate(90) scale(1 0.977)" fill="#343B29">Semaglutide<tspan class="print-name-sub" dx="9">injection</tspan></text>
-                  <rect x="121.2" y="1020.1" width="24" height="148" rx="12" fill="#343B29"/>
-                  <text class="print-dose" transform="translate(127.95 1094.1) rotate(90)" text-anchor="middle" fill="#F4F5EF">0.25 mg/0.5 mL</text>
-                  <text class="print-small" transform="translate(101.2 1020.1) rotate(90) scale(1 0.95)" fill="#5E6551">Single-dose pen · For subcutaneous use</text>
-                  <g transform="translate(159.2 1493.1) rotate(90)" color="#343B29"><use href="#wordmark" width="124" height="20"/></g>
+                  <!-- Label after the Good Life and hims vials: minimal. "Rx only" tiny at the start, the product name in
+                       regular weight with a quiet dose line, the MEDARO mark small at the end. Text runs along the pen.
+                       Clipped to the sleeve (x 11.7–286.7, inset 1.5; y 980.1–1657.2); axis x 149.2.
+                       [DATA NEEDED] dose: 0.25 mg/0.5 mL is semaglutide's standard starting strength, a stand-in. -->
+                  <defs><clipPath id="sleeve-pen"><rect x="13.2" y="980.1" width="272" height="677.1" rx="3"/></clipPath></defs>
+                  <g clip-path="url(#sleeve-pen)">
+                    <text class="print-rx" transform="translate(145.35 1024.1) rotate(90)" fill="#5E6551">Rx only</text>
+                    <text class="print-name" transform="translate(148.2 1318.6) rotate(90)" text-anchor="middle" fill="#343B29">Semaglutide</text>
+                    <text class="print-dose" transform="translate(126.4 1318.6) rotate(90)" text-anchor="middle" fill="#5E6551">0.25 mg/0.5 mL</text>
+                    <g transform="translate(158.23 1501.1) rotate(90)" color="#343B29"><use href="#wordmark" width="112" height="18.07"/></g>
+                  </g>
                 </svg>
               </div>
             </div>
