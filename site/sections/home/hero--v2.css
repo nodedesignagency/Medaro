@@ -21,7 +21,7 @@
 
 .hero-v2__frame {
   position: relative;
-  height: clamp(680px, calc(100svh - 96px), 940px);
+  height: clamp(680px, calc(100svh - 88px - var(--edge)), 940px); /* header 88 + bottom edge 16: the page never scrolls */
   overflow: hidden;
   border-radius: 18px;
   color: #fff;

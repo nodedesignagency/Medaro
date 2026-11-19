@@ -2,13 +2,13 @@
    Home · hero V3 (V2's stage and products, laid out after px push)
    The same dark rounded stage, studio plate and four floating products as
    V2, arranged like the user's px push reference: one big line across the
-   top that runs edge to edge on a hairline, the products floating in the
+   top that runs edge to edge, the products floating in the
    centre (where px push has its 3D logo), the supplement promo card bottom
    left (where px push has its thumbnail), the client's sentence bottom right.
    Copy: content/home.md, word for word.
    Frame: the stage sits on the frame edge (16px, max 1888px, centred); the
    header's logo and CTA line up with the content inset (48px) inside it.
-   Header: components/header.css, --plain. Products: components/product.css.
+   Header: components/header.css, --plain --compact (70px). Products: components/product.css.
    ========================================================================== */
 
 .hero-v3 {
@@ -19,9 +19,9 @@
 .hero-v3__frame {
   /* bottom of the headline row: top gap + cap height + gap to the hairline */
   --lede-w: min(390px, 31cqw); /* 390 wraps into three near-full lines and a short last one */
-  --head-b: calc(44px + (100cqw - 2 * var(--v3-inset)) * 0.0716 + 32px);
+  --head-b: calc(44px + (100cqw - 2 * var(--v3-inset)) * 0.0716);
   position: relative;
-  height: clamp(680px, calc(100svh - 96px), 940px);
+  height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* compact header 70 + bottom edge 16: fills the screen (up to 1080 tall), never scrolls */
   overflow: hidden;
   border-radius: 18px;
   color: #fff;
@@ -32,14 +32,13 @@
 
 /* ---------- Headline row ---------- */
 /* One line, sized to run exactly from inset to inset at every width
-   ("Made for Better Health." is 9.86em wide at this tracking), on a hairline. */
+   ("Made for Better Health." is 9.86em wide at this tracking). No hairline
+   under it (the user: "remove the bottom line below the h1"). */
 .hero-v3__head {
   position: absolute;
   top: 44px;
   left: var(--v3-inset);
   right: var(--v3-inset);
-  padding-bottom: 32px;
-  border-bottom: 1px solid rgba(244, 245, 239, 0.28);
 }
 .hero-v3__title {
   font-family: var(--font-display);
@@ -101,12 +100,12 @@
    every object stays whole and clear of the type. */
 .hero-v3__scene {
   --scene-ratio: 0.78;
-  --avail: calc(100cqh - var(--head-b) - 24px - 44px);
+  --avail: calc(100cqh - var(--head-b) - 24px - 56px);
   --gap: calc(100cqw - 2 * var(--v3-inset) - 384px - var(--lede-w) - 2 * 24px);
   --sh: min(var(--avail), var(--gap) * 1.5); /* the card and sentence only fill the foot, so the box may be wider than the gap above them */
   position: absolute;
   left: 50%;
-  top: calc(var(--head-b) + 44px + (var(--avail) - var(--sh)) / 2);
+  top: calc(var(--head-b) + 56px + (var(--avail) - var(--sh)) / 2);
   height: var(--sh);
   aspect-ratio: var(--scene-ratio);
   transform: translateX(-50%);
