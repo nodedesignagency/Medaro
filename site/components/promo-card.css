@@ -3,12 +3,23 @@
    A small clickable card, after the user's reference (image left, small
    coloured label, two-line title, round arrow button top-right). First use:
    the supplement card in the top-right of hero V1.
-   Two finishes to compare (?card=):
+   Finishes to compare (?card=), paper first (the user's pick):
      --glass  the favourite nav's tinted glass (olive rgb(32,38,24), blur 20,
               12% white edge) but deeper: 66% instead of 26%. The card sits
               on the brightest part of the sky, and at 26% its text measured
               2.4:1; at 66% white and the lime label clear 4.5:1
-     --paper  a light card like the reference, ink type, olive label
+     --paper  a light card like the reference, ink type, olive label, no
+              shadow (user: "i like paper version but dont like shadow")
+     --specs  the SPECS hero card, measured from the user's screenshot:
+              523×111, square corners, flush 111px image, title 18px white,
+              second line 18px #A6A6A6, 8×13 chevron 26px from the right,
+              charcoal frost, no edge
+     --frost  our layout with the SPECS material: charcoal frost, white
+              title, #A6A6A6 label, no edge
+   SPECS material: the reference glass fits to rgb(37,37,37) at ~67% + blur
+   over a black backdrop (it reads ~28). Over our bright sky that recipe
+   reads mid-grey, so --specs/--frost use rgb(30,30,30) at 88% + blur 24 to
+   look the same and keep the grey line above 4.5:1.
    Geometry is shared: 10px padding, 104px image (radius 13), outer radius
    23 so the corners stay concentric, 40px round button. The label line
    stops short of the button; the title runs full width underneath it.
@@ -91,7 +102,57 @@
 .promo-card--paper {
   color: var(--color-ink);
   background: var(--color-bg);
-  box-shadow: 0 1px 2px rgba(20, 24, 14, 0.08), 0 16px 40px -16px rgba(20, 24, 14, 0.4);
 }
 .promo-card--paper .promo-card__label { color: #56662f; } /* olive, 5.3:1 on paper */
 .promo-card--paper .promo-card__go { background: var(--color-surface); color: var(--color-ink); }
+
+/* SPECS material, shared by --specs and --frost */
+.promo-card--specs,
+.promo-card--frost {
+  color: #fff;
+  background: rgba(30, 30, 30, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+.promo-card--specs:hover,
+.promo-card--frost:hover { background: rgba(40, 40, 40, 0.92); }
+
+/* Frost: our layout */
+.promo-card--frost .promo-card__label { color: #a6a6a6; }
+.promo-card--frost .promo-card__go { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+/* SPECS: the reference's own layout */
+.promo-card--specs {
+  grid-template-columns: 111px 1fr 8px;
+  gap: 19px;
+  width: 523px;
+  height: 111px;
+  padding: 0 26px 0 0;
+  border-radius: 0;
+}
+.promo-card--specs .promo-card__img {
+  width: 111px;
+  height: 111px;
+  border-radius: 0;
+}
+.promo-card--specs .promo-card__title {
+  font-size: 18px;
+  font-weight: var(--weight-regular);
+  line-height: 28px;
+  letter-spacing: -0.005em;
+  -webkit-line-clamp: 1;
+}
+.promo-card__sub {
+  display: block;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.005em;
+  color: #a6a6a6;
+}
+.promo-card__chev {
+  width: 8px;
+  height: 13px;
+  color: #eee;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.promo-card--specs:hover .promo-card__chev { transform: translateX(3px); }

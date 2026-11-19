@@ -74,7 +74,7 @@ Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
 | Button | `primary` (lime) · `dark` (ink); sizes `--s` 40, default 48, `--l` 54; `--pill` for V2. No arrows | all | exploring |
 | Text link | `.link-underline` | all | exploring |
 | Stand-in image | `.media-brief` + `assets/images/standin-*.svg`; `?briefs=on` shows the photo brief | all | exploring |
-| Promo card | `components/promo-card.css`, after the user's reference: 104px square image left, small coloured caps label, two-line title, 40px round ↗ button top-right; 10px padding, outer radius 23 / image 13 (concentric). `--glass`: the nav's tinted olive glass, deepened to 66% so text passes 4.5:1 on the bright sky (white 6.3:1, lime label 4.7:1). `--paper`: light card, ink title, olive label `#56662F`. Compare with `?card=` | Home V1 | exploring |
+| Promo card | `components/promo-card.css`. Default **`--paper`** (the user's pick): light card, ink title, olive label `#56662F`, **no shadow**; 104px image left (radius 13), caps label, two-line title, 40px round ↗ top-right, 10px padding, radius 23. **`--specs`**: the SPECS card measured from the user's screenshot (523×111, square corners, flush 111px image, 18px white title + 18px `#A6A6A6` second line "Explore Supplements", 8×13 chevron 26px from the right, charcoal frost, no edge). **`--frost`**: our layout in the SPECS material. Charcoal = rgb(30,30,30) at 88% + blur 24: the reference recipe (rgb(37,37,37) ~67%) reads mid-grey over our bright sky, so it is deepened to look the same; grey text 5.0:1. `--glass` (olive 66%) kept for comparison. `?card=paper|specs|frost|glass` | Home V1 | exploring |
 | Phone (portal UI) | built in code: status bar, greeting, care update card, rows, tab bar | Home V2 | exploring |
 | Check list | the "Your care, made simple" style bullet lists | Home, landings | not started |
 | Steps | 01 / 02 / 03 process | Home, both landings | not started |
@@ -120,6 +120,7 @@ Write what the user said, in their words where possible, with the date.
 - 2026-11-19: Nav: "left we should have logo, center all the nav links … and on right CTA". Keep the current tinted bar as one option; explore glass looks (references: Atlas menu, liquid-glass sliders, Cosmos, Analogue, Fuser).
 - 2026-11-19: "tinted is still far better than all … dont change size and corner radius, tinted one has best stuff". Tinted's geometry is fixed; explorations change the material only.
 - 2026-11-19: Add a secondary button before the CTA, named "Contact" (not "Contact Support"); it replaces Contact Support in the centre links. Smoke and dark had a "weird border": removed the white hairline on dark glass.
+- 2026-11-19: Promo card: "i like paper version but dont like shadow" → paper is the default, shadow removed. Asked for a version with the SPECS card's UI and one with its colour and frost → `--specs` and `--frost`.
 - 2026-11-19: Fill V1's empty top-right. Two ideas from the user: (1) a short supplement promo card like their reference card, built now; (2) a 3D supplement floating up and down, like a floating-pens-and-pills reference. **Build (2) only when the user asks.**
 
 ### Rejected
@@ -158,6 +159,7 @@ Write what the user said, in their words where possible, with the date.
 | visionOS Notes and "Jupiter from Amalthea" windows (screenshots) | **Nav `--vision` glass**: measured rgb(66,66,66) at ~60%, heavy blur, desaturated, soft rim | user |
 | "Signal strength" panel (screenshot) | **Nav `--dark` glass**: measured rgb(22,22,22) at ~76% | user |
 | "Making Rama unmistakable" project card (screenshot) | **Promo card**: rounded card, square image left, coloured caps label, bold two-line title, round arrow button top-right | user |
+| SPECS hero (screenshot) | **Promo card `--specs` / `--frost`**: square charcoal frosted card, flush product image, white title, grey second line, small chevron | user |
 | Floating GLP-1 pens and pills render (screenshot) | **Idea for V1's top-right, on hold**: a 3D supplement floating up and down. Use our own unbranded product, never the branded pens shown | user |
 | Cosmos, Analogue Agency, Fuser (Mobbin) | **Nav surfaces.** Dark glass pill of links between a free-standing logo and a glowing CTA (Cosmos); light frosted bars (Analogue, Fuser) | Mobbin |
 | nekohealth.com | *Couldn't load (bot check). Waiting for screenshots.* | user (liked) |
