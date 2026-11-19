@@ -19,7 +19,7 @@ The single source of truth for how MEDARO looks and behaves. Every branch reads 
 - **Follow the user's references closely.** When the user names a reference for a section, build that layout faithfully and make it ours through copy, colour, imagery and finish. Don't add devices the reference doesn't have.
 - **Two jobs:** trust (licensed providers, a clear process, honest qualifiers) and ease (one obvious next step on every screen).
 - **Feel:** calm, premium, botanical. The client's olive greens, lime only on buttons. Big confident grotesk headlines, short copy, generous space, real photography doing the emotional work.
-- **The four care lines (Weight Loss, Men's Health, Women's Health, Supplement) live in the header nav only.** They never appear as cards, lists, tabs or strips in the hero (user, 2026-11-19).
+- **The four care lines (Weight Loss, Men's Health, Women's Health, Supplement) live in the header nav only.** They never appear as cards, lists, tabs or strips in the hero (user, 2026-11-19). Exception the user asked for: one supplement promo card in V1's top-right.
 - **Hero copy is ours to write** (user: "we have freedom there"). Everywhere else, use the client's copy word for word.
 
 ## 3. Tokens
@@ -74,6 +74,7 @@ Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
 | Button | `primary` (lime) · `dark` (ink); sizes `--s` 40, default 48, `--l` 54; `--pill` for V2. No arrows | all | exploring |
 | Text link | `.link-underline` | all | exploring |
 | Stand-in image | `.media-brief` + `assets/images/standin-*.svg`; `?briefs=on` shows the photo brief | all | exploring |
+| Promo card | `components/promo-card.css`, after the user's reference: 104px square image left, small coloured caps label, two-line title, 40px round ↗ button top-right; 10px padding, outer radius 23 / image 13 (concentric). `--glass`: the nav's tinted olive glass, deepened to 66% so text passes 4.5:1 on the bright sky (white 6.3:1, lime label 4.7:1). `--paper`: light card, ink title, olive label `#56662F`. Compare with `?card=` | Home V1 | exploring |
 | Phone (portal UI) | built in code: status bar, greeting, care update card, rows, tab bar | Home V2 | exploring |
 | Check list | the "Your care, made simple" style bullet lists | Home, landings | not started |
 | Steps | 01 / 02 / 03 process | Home, both landings | not started |
@@ -90,7 +91,7 @@ Status: `exploring` (on a branch) · `approved` (on `main`) · `rejected`. Add a
 | Section | Status | Branch | Notes |
 |---|---|---|---|
 | header | exploring | `claude/upbeat-lamport-vxbm8d` | Logo left, seven links centred, CTA right. V1: tinted (favourite) plus three measured glass surfaces on the same geometry (`?nav=tinted|smoke|vision|dark`); V2 uses `--plain`. |
-| hero | exploring | `claude/upbeat-lamport-vxbm8d` | Round 2: two versions (`?hero=v1|v2`). **V1, after avenn**: full-bleed photo, glass nav, "Made for Better Health." top left, "Care Without the Runaround." bottom right (tag removed), one sentence + Get Started bottom left. Photo concept: a soft mossy peak in morning mist (the Λ as a landscape); SVG stand-in for now. **V2, after Superpower**: split header, dark olive rounded stage, eyebrow "Made for Better Health.", "Expert medical care, from the comfort of home.", sentence, Get Started + "How Medaro Works" link, three facts, ticker of trust points; right, a phone with the MEDARO patient portal and a pharmacy bottle, built in code (bottle = stand-in for a render). More reference versions coming from the user. |
+| hero | exploring | `claude/upbeat-lamport-vxbm8d` | Round 2: two versions (`?hero=v1|v2`). **V1, after avenn**: full-bleed photo, glass nav, "Made for Better Health." top left with a **supplement promo card** top right ("Supplements" / "Better support for your everyday health.", ↗ to the Supplement section; `?card=glass|paper`), "Care Without the Runaround." bottom right (tag removed), one sentence + Get Started bottom left. Photo concept: a soft mossy peak in morning mist (the Λ as a landscape); SVG stand-in for now. **V2, after Superpower**: split header, dark olive rounded stage, eyebrow "Made for Better Health.", "Expert medical care, from the comfort of home.", sentence, Get Started + "How Medaro Works" link, three facts, ticker of trust points; right, a phone with the MEDARO patient portal and a pharmacy bottle, built in code (bottle = stand-in for a render). More reference versions coming from the user. |
 | weight-loss | — | | |
 | mens-health | — | | |
 | womens-health | — | | Coming Soon |
@@ -119,6 +120,7 @@ Write what the user said, in their words where possible, with the date.
 - 2026-11-19: Nav: "left we should have logo, center all the nav links … and on right CTA". Keep the current tinted bar as one option; explore glass looks (references: Atlas menu, liquid-glass sliders, Cosmos, Analogue, Fuser).
 - 2026-11-19: "tinted is still far better than all … dont change size and corner radius, tinted one has best stuff". Tinted's geometry is fixed; explorations change the material only.
 - 2026-11-19: Add a secondary button before the CTA, named "Contact" (not "Contact Support"); it replaces Contact Support in the centre links. Smoke and dark had a "weird border": removed the white hairline on dark glass.
+- 2026-11-19: Fill V1's empty top-right. Two ideas from the user: (1) a short supplement promo card like their reference card, built now; (2) a 3D supplement floating up and down, like a floating-pens-and-pills reference. **Build (2) only when the user asks.**
 
 ### Rejected
 
@@ -137,6 +139,7 @@ Write what the user said, in their words where possible, with the date.
 - The hero has no CTA in the brief. We use "Get Started" (the client's label elsewhere) and scroll to How Medaro Works until told otherwise. `[LINK NEEDED]`
 - The header adds a Get Started button (not in the brief's nav list). `[LINK NEEDED]`
 - The brief's "Contact Support" nav item is now the "Contact" button (user's call). The page can keep the title "Contact Support".
+- V1 promo card copy: label "Supplements", title "Better support for your everyday health." (client's line). Links to the Supplement section until the "Explore Supplements" URL exists. `[LINK NEEDED]`
 - V2 facts: "24/7, from home" comes from the client's "24/7 Convenient online consultations". Avoid "100% online": the FAQ says some states need a live visit.
 
 ## 7. Inspiration
@@ -154,5 +157,7 @@ Write what the user said, in their words where possible, with the date.
 | Dolomites glass cards (screenshot) | **Nav `--smoke` glass**: measured rgb(19,19,19) at ~58%, darker at the top | user |
 | visionOS Notes and "Jupiter from Amalthea" windows (screenshots) | **Nav `--vision` glass**: measured rgb(66,66,66) at ~60%, heavy blur, desaturated, soft rim | user |
 | "Signal strength" panel (screenshot) | **Nav `--dark` glass**: measured rgb(22,22,22) at ~76% | user |
+| "Making Rama unmistakable" project card (screenshot) | **Promo card**: rounded card, square image left, coloured caps label, bold two-line title, round arrow button top-right | user |
+| Floating GLP-1 pens and pills render (screenshot) | **Idea for V1's top-right, on hold**: a 3D supplement floating up and down. Use our own unbranded product, never the branded pens shown | user |
 | Cosmos, Analogue Agency, Fuser (Mobbin) | **Nav surfaces.** Dark glass pill of links between a free-standing logo and a glowing CTA (Cosmos); light frosted bars (Analogue, Fuser) | Mobbin |
 | nekohealth.com | *Couldn't load (bot check). Waiting for screenshots.* | user (liked) |

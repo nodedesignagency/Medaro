@@ -120,6 +120,7 @@ body {
   font-feature-settings: "ss01", "cv11";
 }
 
+[hidden] { display: none !important; } /* version switcher: hidden always wins over component display rules */
 h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 img, svg, video { display: block; max-width: 100%; }

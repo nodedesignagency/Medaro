@@ -72,7 +72,7 @@ Women's Health shows **Coming Soon** (no link). Intake form URLs, the Supplement
 
 ## Copy and compliance (telehealth: this matters)
 
-- **Read the copy brief before designing a section.** The four care lines (Weight Loss, Men's Health, Women's Health, Supplement) live in the header nav only, never in the hero.
+- **Read the copy brief before designing a section.** The four care lines (Weight Loss, Men's Health, Women's Health, Supplement) live in the header nav only, never in the hero, except where the user asks for something specific (V1 has one supplement promo card at their request).
 - **When the user gives a reference, follow it closely**; don't invent extra devices. The first round of heroes was rejected as "AI slop" (see `DESIGN.md` → Rejected).
 - Hero copy is ours to write (the user said so); everywhere else, use the client's copy from `content/` word for word. You may change case and layout, not words. If a design needs shorter copy, propose the cut to the user; never edit silently. Missing copy: a short placeholder marked `[COPY NEEDED]`. No lorem ipsum.
 - **Never remove or soften a qualifier or disclaimer** ("when medically appropriate", "if prescribed", "has not been demonstrated", "not FDA-approved", "results vary"). Disclaimers stay visible near the claims they qualify, not only in the footer.
