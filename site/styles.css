@@ -76,6 +76,13 @@
   --gutter: 40px;
   --grid-gap: 24px;
   --header-h: 84px;
+  /* The frame: the glass nav sits 16px in from the screen edge and the hero
+     content shares exactly that edge (after avenn). Past --frame-max wide
+     (zooming out, big screens) the frame stops growing and centres.
+     --frame-side resolves per element: % is that element's container. */
+  --edge: 16px;
+  --frame-max: 1888px;
+  --frame-side: max(var(--edge), calc((100% - var(--frame-max)) / 2));
 
   /* Radius */
   --radius-s: 8px;

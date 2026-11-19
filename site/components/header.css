@@ -56,9 +56,9 @@
 /* ---------- Over the photo: shared ---------- */
 .site-header--glass {
   position: fixed;
-  top: 16px;
-  left: 16px;
-  right: 16px;
+  top: var(--edge);
+  left: var(--frame-side);
+  right: var(--frame-side);
 }
 .site-header--glass .site-header__bar {
   height: 56px;
@@ -132,6 +132,8 @@
 }
 .site-header--plain.is-scrolled { box-shadow: 0 1px 0 var(--color-line); }
 .site-header--plain .site-header__bar {
+  max-width: var(--frame-max);
+  margin-inline: auto;
   height: 88px;
   padding-inline: 48px;
   color: var(--color-ink);

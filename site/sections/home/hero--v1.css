@@ -5,11 +5,16 @@
    "Care Without the Runaround." bottom right,
    Bottom left: one sentence and the CTA.
    Header: components/header.css, --glass.
+   Alignment (after avenn): every block sits on the nav bar's outer edges.
+   Left: headline, sentence and button start where the bar starts. Right:
+   the card and "the Runaround." end where the bar ends. 16px from the
+   bottom, 32px under the bar. Headlines are trimmed to cap height and
+   baseline (text-box) so their ink, not their line box, sits on the edge.
    ========================================================================== */
 
 .hero-v1 {
   position: relative;
-  height: clamp(700px, 100svh, 1200px);
+  height: max(700px, 100svh); /* always fills the screen, also when zoomed out */
   overflow: hidden;
   color: #fff;
   isolation: isolate;
@@ -43,7 +48,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 128px 48px 48px;
+  /* top: nav inset + nav height + 32 gap */
+  padding: calc(var(--edge) + 56px + 32px) var(--frame-side) var(--edge);
 }
 
 .hero-v1__title {
@@ -52,7 +58,10 @@
   font-weight: var(--weight-medium);
   line-height: 0.95;
   letter-spacing: -0.048em;
+  text-box: trim-both cap alphabetic; /* box = cap top to baseline */
+  margin-left: -0.055em; /* pull the M's side bearing back onto the edge */
 }
+.hero-v1__end .hero-v1__title { margin-left: 0; margin-right: 0.024em; } /* the tight tracking lets the full stop overhang; pull it back onto the edge */
 
 .hero-v1__top {
   display: flex;
@@ -61,7 +70,7 @@
   gap: var(--space-7);
 }
 .hero-v1__top .hero-v1__title { flex: 1 1 auto; min-width: 0; }
-.hero-v1__top .promo-card { flex: none; margin-top: 8px; }
+.hero-v1__top .promo-card { flex: none; }
 
 .hero-v1__foot {
   display: flex;

@@ -9,6 +9,7 @@ Read `DESIGN.md` before designing anything. It holds the design system, the sect
 - **Phase 1 is HTML**: fast static drafts in `/site` so we can review and change things quickly.
 - **Phase 2 is Framer**, through the Framer MCP, only once `main` holds approved pages and the user has created the Framer file and says "move to Framer". Never touch Framer before that.
 - **Page by page, section by section.** Mostly one page at a time, but any session may work on any page. Show each section before moving on. For key sections (heroes, the first fold of each landing page) offer 2–3 versions.
+- **Alignment:** every section sits on the frame (`--frame-side`, see `DESIGN.md` → Space, layout, shape): content edges line up with the nav bar's edges, and nothing stretches past 1888px. Check edges by measuring rendered pixels, not by eye.
 - **Desktop only in the HTML phase.** Don't build or check tablet or phone layouts until Framer. Before handing anything over, check it in a browser at 1440 wide (and at 1280 and 1920 to make sure the desktop range holds); fix overflow, overlaps and broken wraps. Also check at 2x pixel density: the user reviews on a Retina Mac.
 - Use skills when they help (list below). Load `anthropic-skills:frontend-design` before starting a new section's visual direction.
 

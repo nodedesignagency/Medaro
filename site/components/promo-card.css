@@ -20,9 +20,10 @@
    over a black backdrop (it reads ~28). Over our bright sky that recipe
    reads mid-grey, so --specs/--frost use rgb(30,30,30) at 88% + blur 24 to
    look the same and keep the grey line above 4.5:1.
-   Geometry is shared: 10px padding, 104px image (radius 13), outer radius
-   23 so the corners stay concentric, 40px round button. The label line
-   stops short of the button; the title runs full width underneath it.
+   Geometry matches the nav (user, 2026-11-19): radius 12 like the bar, 8px
+   inset like the nav's buttons, image radius 8 like the nav's buttons,
+   104px image, 40px round button 8px from the corner. The label line stops
+   short of the button; the title runs full width underneath it.
    ========================================================================== */
 
 .promo-card {
@@ -32,8 +33,8 @@
   align-items: center;
   gap: 18px;
   width: 384px;
-  padding: 10px 16px 10px 10px;
-  border-radius: 23px;
+  padding: 8px 16px 8px 8px;
+  border-radius: 12px;
   text-decoration: none;
   transition: background-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
 }
@@ -41,7 +42,7 @@
 .promo-card__img {
   width: 104px;
   height: 104px;
-  border-radius: 13px;
+  border-radius: 8px;
   object-fit: cover;
 }
 
@@ -69,8 +70,8 @@
 
 .promo-card__go {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
   display: grid;
   place-items: center;
   width: 40px;

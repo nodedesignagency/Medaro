@@ -12,6 +12,8 @@
 
 .hero-v2__frame {
   position: relative;
+  max-width: var(--frame-max);
+  margin-inline: auto;
   height: clamp(680px, calc(100svh - 96px), 940px);
   overflow: hidden;
   border-radius: 18px;
