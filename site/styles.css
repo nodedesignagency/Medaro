@@ -22,6 +22,16 @@
   --p-deep: #262b1e;       /* derived: dark sections, from the ink */
 }
 
+/* ---------- Animatable colour tokens ----------
+   Registered so a scene (a section that recolours the page, e.g. Men's
+   Health in blue: :root[data-scene="mens"]) fades every colour at once. */
+@property --color-bg { syntax: "<color>"; inherits: true; initial-value: #f4f5ef; }
+@property --color-surface { syntax: "<color>"; inherits: true; initial-value: #e7eadf; }
+@property --color-ink { syntax: "<color>"; inherits: true; initial-value: #343b29; }
+@property --color-text { syntax: "<color>"; inherits: true; initial-value: #343b29; }
+@property --color-text-muted { syntax: "<color>"; inherits: true; initial-value: #5e6551; }
+@property --color-line { syntax: "<color>"; inherits: true; initial-value: transparent; }
+
 /* ---------- Tokens ---------- */
 :root {
   /* Colour (semantic) */
@@ -36,6 +46,7 @@
   --color-sage: var(--p-sage);
   --color-deep: var(--p-deep);
   --color-on-dark: var(--p-paper);
+  --color-on-accent: var(--p-ink); /* text on lime buttons: stays dark in every scene */
   --color-on-dark-muted: color-mix(in srgb, var(--p-paper) 72%, transparent);
   /* Per-line tints: Weight Loss, Men's, Women's, Supplements */
   --color-wl: var(--p-sage);
@@ -100,6 +111,13 @@
   --dur-fast: 160ms;
   --dur-base: 260ms;
   --dur-slow: 560ms;
+}
+
+/* Scene changes fade the whole page (reduced motion: instant, see below) */
+:root {
+  transition: --color-bg 700ms var(--ease-in-out), --color-surface 700ms var(--ease-in-out),
+    --color-ink 700ms var(--ease-in-out), --color-text 700ms var(--ease-in-out),
+    --color-text-muted 700ms var(--ease-in-out), --color-line 700ms var(--ease-in-out);
 }
 
 /* ---------- Base ---------- */
@@ -199,10 +217,10 @@ button { font: inherit; color: inherit; }
 .btn--l { --btn-h: 54px; padding: 0 28px; font-size: 16px; }
 
 /* Fills go through --btn-bg so the arrow variant's pieces share one colour */
-.btn--primary { --btn-bg: var(--color-accent); background: var(--btn-bg); color: var(--color-ink); }
+.btn--primary { --btn-bg: var(--color-accent); background: var(--btn-bg); color: var(--color-on-accent); }
 .btn--primary:hover { --btn-bg: var(--color-accent-hover); }
 
-.btn--dark { --btn-bg: var(--color-ink); background: var(--btn-bg); color: var(--color-on-dark); }
+.btn--dark { --btn-bg: var(--p-ink); background: var(--btn-bg); color: var(--color-on-dark); } /* raw ink: a scene that turns --color-ink light keeps this button dark */
 .btn--dark:hover { --btn-bg: var(--color-deep); }
 
 /* Arrow button (user, 2026-11-19, after the Verdant "Try now" reference):

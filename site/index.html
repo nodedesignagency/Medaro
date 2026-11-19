@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-palettes="a">
+<html lang="en" data-palettes="a" data-options="blue:a,b">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="sections/home/hero--v1.css">
   <link rel="stylesheet" href="sections/home/hero--v2.css">
   <link rel="stylesheet" href="sections/home/weight-loss.css">
+  <link rel="stylesheet" href="sections/home/mens-health.css">
 </head>
 <body id="top">
 
@@ -222,6 +223,57 @@
     </div>
   </section>
   <!-- SECTION:home/weight-loss END -->
+
+  <!-- SECTION:home/mens-health START · styles: sections/home/mens-health.css · scripts: main.js (scenes, drift) · assets: assets/images/standin-mh-*.webp, assets/images/supplements/tablet-round.webp, capsule.webp
+       After the user's "When we can help" reference (2026-11-19). The page turns blue while this section holds the middle of
+       the screen (data-scene). Copy: content/home.md → Men's Health, word for word. Photos are stand-ins cropped from the hero
+       photo; real ones are made after the design is approved (data-brief). Each row repeats its tiles so it covers any width;
+       only the first set is read by screen readers. -->
+  <section class="mh" id="mens-health" aria-labelledby="mh-title" data-scene="mens">
+    <div class="mh__frame">
+      <p class="mh__eyebrow">Men's Health. On Your Terms.</p>
+      <h2 class="mh__title" id="mh-title">Better Care for Men<br>Who Want More.</h2>
+      <p class="mh__lede">Personalized care to help you feel your best and perform with confidence.</p>
+      <p class="mh__label" id="mh-care">Care that focuses on what matters</p>
+    </div>
+
+    <div class="mh__rows" role="list" aria-labelledby="mh-care">
+      <div class="mh__row" data-drift="-1">
+            <div class="mh__tile mh__tile--photo media-brief" data-brief="Man in his forties outdoors, relaxed and confident, soft daylight, olive and blue tones; real, not posed" aria-hidden="true"><img src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="mh__tile mh__tile--text" role="listitem">Sexual Health &amp; Confidence</div>
+            <div class="mh__tile mh__tile--product" aria-hidden="true"><img src="assets/images/supplements/tablet-round.webp" alt="" loading="lazy"></div>
+            <div class="mh__tile mh__tile--text" role="listitem">Hormonal Health</div>
+            <div class="mh__tile mh__tile--photo media-brief" data-brief="Man in his forties outdoors, relaxed and confident, soft daylight, olive and blue tones; real, not posed" aria-hidden="true"><img src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="mh__tile mh__tile--text" aria-hidden="true">Sexual Health &amp; Confidence</div>
+            <div class="mh__tile mh__tile--product" aria-hidden="true"><img src="assets/images/supplements/tablet-round.webp" alt="" loading="lazy"></div>
+            <div class="mh__tile mh__tile--text" aria-hidden="true">Hormonal Health</div>
+            <div class="mh__tile mh__tile--photo media-brief" data-brief="Man in his forties outdoors, relaxed and confident, soft daylight, olive and blue tones; real, not posed" aria-hidden="true"><img src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="mh__tile mh__tile--text" aria-hidden="true">Sexual Health &amp; Confidence</div>
+            <div class="mh__tile mh__tile--product" aria-hidden="true"><img src="assets/images/supplements/tablet-round.webp" alt="" loading="lazy"></div>
+            <div class="mh__tile mh__tile--text" aria-hidden="true">Hormonal Health</div>
+      </div>
+      <div class="mh__row" data-drift="1" data-phase="0.5">
+            <div class="mh__tile mh__tile--text" role="listitem">Energy &amp; Vitality</div>
+            <div class="mh__tile mh__tile--photo media-brief" data-brief="Couple at ease together outdoors, candid, warm light; no clinical setting" aria-hidden="true"><img src="assets/images/standin-mh-couple.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="mh__tile mh__tile--text" role="listitem">Performance &amp; Well-Being</div>
+            <div class="mh__tile mh__tile--photo media-brief" data-brief="Close crop of a man running or training, motion, morning light" aria-hidden="true"><img src="assets/images/standin-mh-stride.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="mh__tile mh__tile--text" role="listitem">Fast, Discreet Delivery</div>
+            <div class="mh__tile mh__tile--product" aria-hidden="true"><img src="assets/images/supplements/capsule.webp" alt="" loading="lazy"></div>
+            <div class="mh__tile mh__tile--text" aria-hidden="true">Energy &amp; Vitality</div>
+            <div class="mh__tile mh__tile--photo media-brief" data-brief="Couple at ease together outdoors, candid, warm light; no clinical setting" aria-hidden="true"><img src="assets/images/standin-mh-couple.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="mh__tile mh__tile--text" aria-hidden="true">Performance &amp; Well-Being</div>
+            <div class="mh__tile mh__tile--photo media-brief" data-brief="Close crop of a man running or training, motion, morning light" aria-hidden="true"><img src="assets/images/standin-mh-stride.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="mh__tile mh__tile--text" aria-hidden="true">Fast, Discreet Delivery</div>
+            <div class="mh__tile mh__tile--product" aria-hidden="true"><img src="assets/images/supplements/capsule.webp" alt="" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="mh__frame mh__foot">
+      <p>From sexual health to hormone concerns, get access to licensed medical providers and personalized treatment options designed around your needs. No awkward waiting rooms. No unnecessary complications. Just straightforward care that puts you first.</p>
+      <a class="btn btn--primary btn--arrow" href="mens-health.html"><span class="btn__label">Explore Men's Health</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+    </div>
+  </section>
+  <!-- SECTION:home/mens-health END -->
 
   <script src="main.js" defer></script>
 </body>
