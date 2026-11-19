@@ -9,7 +9,7 @@ Read `DESIGN.md` before designing anything. It holds the design system, the sect
 - **Phase 1 is HTML**: fast static drafts in `/site` so we can review and change things quickly.
 - **Phase 2 is Framer**, through the Framer MCP, only once `main` holds approved pages and the user has created the Framer file and says "move to Framer". Never touch Framer before that.
 - **Page by page, section by section.** Mostly one page at a time, but any session may work on any page. Show each section before moving on. For key sections (heroes, the first fold of each landing page) offer 2–3 versions.
-- Before handing anything over, check it in a browser at 1440 and 390 wide (and 810 when tablet is in scope); fix overflow, overlaps and broken wraps. Also check at 2x pixel density: the user reviews on a Retina Mac.
+- **Desktop only in the HTML phase.** Don't build or check tablet or phone layouts until Framer. Before handing anything over, check it in a browser at 1440 wide (and at 1280 and 1920 to make sure the desktop range holds); fix overflow, overlaps and broken wraps. Also check at 2x pixel density: the user reviews on a Retina Mac.
 - Use skills when they help (list below). Load `anthropic-skills:frontend-design` before starting a new section's visual direction.
 
 ## Branches: `main` is approved work only
@@ -84,7 +84,7 @@ Women's Health shows **Coming Soon** (no link). Intake form URLs, the Supplement
 - Intake form URLs (weight loss, men's health) and the Supplements link.
 - Contact Support page copy (email, phone, hours, form?).
 - Landing-page footer: may it link to Privacy / Terms? (Ad platforms and state laws usually require it, even when the page has no other links.)
-- Photography and product renders: does the client have any (Quad 4, packaging, vials, people)? Otherwise we generate or source them.
+- Photography and product renders: we will need to create a few images; the user will decide how with us when we get there.
 - Body/UI typeface: the logo is Montserrat; is there a brand palette or font beyond the logo?
 
 ## Skills and tools
@@ -96,22 +96,23 @@ Use these when the task calls for them:
 - `anthropic-skills:animate`, `anthropic-skills:interaction-design`: scroll reveals, nav behaviour, hover and press states. `anthropic-skills:find-animation-opportunities` to look for gaps.
 - `anthropic-skills:accessibility`: audit each page before it is promoted to `main`.
 - `anthropic-skills:beautiful-shadows`: card, button and media elevation.
-- `anthropic-skills:mobile-native`: phone pass on the landing pages (they get paid mobile traffic).
+- `anthropic-skills:mobile-native`: during the Framer transfer only, for the phone layouts (the landing pages get paid mobile traffic).
 - `anthropic-skills:break-ui`: stress-test components with long copy before promotion.
 - `run` / Playwright: screenshots for review.
 - MCP: **Mobbin** for reference screens and sections; **Magnific** to generate or edit imagery (ask the user before spending credits); **Figma** if the user shares a Figma link; **Framer** for Phase 2 only.
 
 ## Design direction
 
-See `DESIGN.md`. Breakpoints match Framer: desktop ≥1200, tablet 810–1199, phone ≤809. Desktop at 1440 is the main review size; phone (390) is checked on every section because the landing pages are mobile-first in practice. Tablet only once the user asks.
+See `DESIGN.md`. Breakpoints match Framer: desktop ≥1200, tablet 810–1199, phone ≤809. **HTML is desktop only** (review size 1440, 2x). The user confirms desktop sections, they move to `main`, and the **responsive versions (tablet and phone) are built in Framer during the transfer**, not in HTML. Still build desktop so it can adapt: real grid, no fixed-pixel tricks that can't collapse, no copy baked into images.
 
 ## Phase 2 (Framer) rules, only once the user says "move to Framer"
 
 - Work only in the Framer project the user names. Never touch their other Framer projects.
 - Order: text and colour styles from the tokens first, then components (header, footer, buttons, steps, FAQ, CTA band, disclaimer, cards), then pages, section by section from `main` only.
+- **Responsive happens here.** For every component and section, build the tablet (810–1199) and phone (≤809) breakpoints as it is transferred, using the phone type scale in `DESIGN.md`. Show the user the phone and tablet versions before moving to the next section.
 - Home nav scroll links become section anchors; landing pages get the minimal header with no links out.
 - Tell the user before anything destructive, like deleting pages or overwriting styles.
 
 ## Checking pages in the container
 
-Chromium and Playwright are pre-installed. Serve `site/` with `python3 -m http.server`, screenshot at 1440 and 390 (deviceScaleFactor 2 for anything the user sees), and send screenshots from `review/`. For WebGL, launch Chromium with `--use-angle=swiftshader --enable-unsafe-swiftshader --ignore-gpu-blocklist`.
+Chromium and Playwright are pre-installed. Serve `site/` with `python3 -m http.server`, screenshot at 1440 (deviceScaleFactor 2 for anything the user sees; 1280 and 1920 for your own range check), and send screenshots from `review/`. For WebGL, launch Chromium with `--use-angle=swiftshader --enable-unsafe-swiftshader --ignore-gpu-blocklist`.

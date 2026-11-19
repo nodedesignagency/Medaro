@@ -44,7 +44,7 @@ Defined in `site/styles.css`. These become Framer colour and text styles in Phas
 ### Type *(provisional)*
 
 - `--font-display`: Montserrat for now (matches the logo). `--font-body`: Montserrat for now. Both may change with the direction.
-- Scale (desktop / phone): hero 72/44, h2 48/32, h3 28/22, lede 20/18, body 17/16, small 14, caps 12 (tracking 0.12em).
+- Scale (desktop / phone): hero 72/44, h2 48/32, h3 28/22, lede 20/18, body 17/16, small 14, caps 12 (tracking 0.12em). The HTML only uses the desktop sizes; the phone sizes are a starting point for the Framer breakpoints.
 - Line length for body copy: 60–72 characters.
 
 ### Space, layout, shape
@@ -56,7 +56,9 @@ Defined in `site/styles.css`. These become Framer colour and text styles in Phas
 
 ### Breakpoints (match Framer)
 
-Desktop ≥1200 · Tablet 810–1199 · Phone ≤809. Review at 1440 and 390 (2x).
+Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
+
+**HTML phase is desktop only** (review at 1440, 2x). Tablet and phone are designed and built in Framer during the transfer, section by section, and shown to the user there.
 
 ## 4. Components (built Framer-ready)
 
@@ -97,6 +99,12 @@ Not started.
 ## 6. Decisions log
 
 Write what the user said, in their words where possible, with the date.
+
+### Process
+
+- 2026-11-19: Desktop only in HTML. Confirmed sections move to `main`; when the user says "move to Framer", the responsive versions are built in Framer during the transfer.
+- 2026-11-19: `main` created from the setup (docs, copy, logo, Home placeholder). No sections on it yet.
+- 2026-11-19: A few images will need to be created; how is still to be decided with the user.
 
 ### Likes
 
