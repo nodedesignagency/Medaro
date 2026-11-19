@@ -21,6 +21,7 @@ The single source of truth for how MEDARO looks and behaves. Every branch reads 
 - **Feel:** calm, premium, botanical. The client's olive greens, lime only on buttons. Big confident grotesk headlines, short copy, generous space, real photography doing the emotional work.
 - **The four care lines (Weight Loss, Men's Health, Women's Health, Supplement) live in the header nav only.** They never appear as cards, lists, tabs or strips in the hero (user, 2026-11-19). Exception the user asked for: one supplement promo card in V1's top-right.
 - **Hero copy is ours to write** (user: "we have freedom there"). Everywhere else, use the client's copy word for word.
+- **MEDARO product renders (for every product image):** premium pharma macro, not packaging mock-ups. The medicine is the hero, close to camera: a soft nude lime `#D5E5AD` oval tablet with the MEDARO wordmark **debossed**, a dusty olive `#A8AF98` round scored tablet, a two-piece capsule (glossy dark olive `#343B29` half with the wordmark printed in cream, matte cream half), a frosted vial with a brushed aluminium cap anodised dark olive and a cream label carrying only the wordmark. Prompt as a real studio photograph (medium format, 100mm macro), hard warm-neutral key light from the upper left, rim light behind right, tactile detail (speckled compressed powder, crisp deboss, brushed metal, glass refraction), **shot on the dark olive stage colour `#262B1E`** so the light matches where it's placed. Upload `site/assets/logo/medaro-logo.jpg` as an image reference so the logo is the real one (crossbar-less A). The wordmark is the only text: no product names, doses, claims or icons. Render a set in **one** image (shared light, pieces not overlapping), cut out the background (3 credits), split into pieces in code; depth comes from blurred copies (`--bokeh`) in CSS, not extra renders.
 
 ## 3. Tokens
 
@@ -76,7 +77,7 @@ Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
 | Text link | `.link-underline` | all | exploring |
 | Stand-in image | `.media-brief` + `assets/images/standin-*.svg`; `?briefs=on` shows the photo brief | all | exploring |
 | Promo card | `components/promo-card.css`, **`--paper` (locked)**: light card, ink title, olive label `#56662F`, no shadow; radius 12 like the nav, 8px inset and 8px image radius like the nav buttons; 104px image left, caps label, two-line title, 40px round ↗ 8px from the corner | Home V1 | locked |
-| Floating set | `.float-set` in V2: transparent product pieces positioned in % of a 1.15:1 box, each with its own slow float loop (`--dur` 4.4–7.6s, `--amp` −10 to −24px, `--r0`/`--r1` small tilts, negative `--delay`s so they never sync), soft drop shadow, pale light behind; still under reduced motion. Framer: one component, pieces as images with a loop animation each | Home V2 | exploring |
+| Floating set | `.float-set` in V2: a square set of transparent pieces positioned in %, each on its own slow float loop (`--dur` 5.6–10s, `--amp` −10 to −26px, small tilts `--r0`/`--r1`, negative `--delay`s so they never sync), drop shadows, a warm pool of light behind; two blurred copies (`--bokeh-front` partly out of frame, `--bokeh-back` far away) for depth; still under reduced motion. Width min(46% of stage, stage − 848px, 100svh − 300px). Framer: one component, pieces as images with a loop animation each | Home V2 | exploring |
 | Check list | the "Your care, made simple" style bullet lists | Home, landings | not started |
 | Steps | 01 / 02 / 03 process | Home, both landings | not started |
 | FAQ | accordion | both landings | not started |
@@ -92,7 +93,7 @@ Status: `exploring` (on a branch) · `approved` (on `main`) · `rejected`. Add a
 | Section | Status | Branch | Notes |
 |---|---|---|---|
 | header | V1 locked · V2 exploring | `claude/upbeat-lamport-vxbm8d` | V1: glass + smoke (user's pick, 2026-11-19). V2: plain, aligned to the V2 content inset. |
-| hero | V1 locked · V2 exploring | `claude/upbeat-lamport-vxbm8d` | Two versions (`?hero=v1|v2`). **V1 (locked by the user, 2026-11-19), after avenn**: full-bleed photo `hero-run.webp` (man and woman running side by side, low angle, olive-to-sage sky; Nano Banana 2.1, 4K), smoke glass nav, "Made for Better Health." top left with the paper supplement card top right, "Care Without the Runaround." bottom right, sentence + Get Started bottom left, everything on the frame edges. **V2, after Superpower + the floating-pens reference**: plain header, dark olive rounded stage on the frame (16px, max 1888), eyebrow "Made for Better Health.", "Expert medical care, from the comfort of home.", sentence, Get Started + "How Medaro Works" link, three facts, ticker of trust points; right, the **MEDARO supplement range floating** (jar, carton, sachet, three capsules), each piece bobbing on its own loop. Set width min(43%, stage − 848px) so it always clears the headline. |
+| hero | V1 locked · V2 exploring | `claude/upbeat-lamport-vxbm8d` | Two versions (`?hero=v1|v2`). **V1 (locked by the user, 2026-11-19), after avenn**: full-bleed photo `hero-run.webp` (man and woman running side by side, low angle, olive-to-sage sky; Nano Banana 2.1, 4K), smoke glass nav, "Made for Better Health." top left with the paper supplement card top right, "Care Without the Runaround." bottom right, sentence + Get Started bottom left, everything on the frame edges. **V2, after Superpower + the floating-pens reference**: plain header, dark olive rounded stage on the frame (16px, max 1888), eyebrow "Made for Better Health.", "Expert medical care, from the comfort of home.", sentence, Get Started + "How Medaro Works" link, three facts, ticker of trust points; right, the **MEDARO range floating in macro** (debossed oval tablet, round tablet, vial, capsule, plus two blurred tablets for depth), each piece bobbing on its own loop; always clears the headline. |
 | weight-loss | — | | |
 | mens-health | — | | |
 | womens-health | — | | Coming Soon |
@@ -118,6 +119,7 @@ Write what the user said, in their words where possible, with the date.
 ### Likes
 
 - 2026-11-19: **V1 locked**: hero V1 with the smoke nav, the run photo and the paper card ("for v1 we are using these"). Other navs (tinted, vision, dark), photos (stretch, peak stand-in) and cards (specs, frost, olive glass) removed from the page.
+- 2026-11-19: Product renders must feel "sexy premium" like Good Life's tumbling debossed tablets, Good Life vials, hims' debossed tablet and printed capsule, and the floating pens: macro, tactile, dramatic light.
 - 2026-11-19: V2 gets the floating-supplement idea (from the user's floating-pens reference), in our branding. References: Good Life box set, besea floating sachets, Bionoss green packaging; Seed jars on Mobbin.
 
 - 2026-11-19: Hero references to build from: **avenn** (V1) and **Superpower** (V2). More references coming.
@@ -139,6 +141,8 @@ Write what the user said, in their words where possible, with the date.
 - 2026-11-19, round 2: the small "■ LICENSED MEDICAL PROVIDERS" tag in V1 ("remove that"), and the login icon in the nav ("why there is login i dont need that").
 - 2026-11-19, nav round 1: the **frosted** (milky glass bar, dark CTA) and **liquid** (glass capsule with a bouncy sliding highlight, glowing gradient lime CTA, gradient rim) navs: "slop". Lesson: no glows, no gradient rims, no springy effects; match the reference's values and stay restrained.
 - 2026-11-19, nav round 2: **smoke** (radius 22, 64px tall, hover patches) and **panel** (radius 3, corner brackets, mono chip): rejected, mainly for changing tinted's size and radius. Lesson: when the user likes something, vary only what they asked about, and take values from the reference by measuring it, not by eye.
+
+- 2026-11-19: Packaging render (frosted jar, lime carton, olive sachet, small capsules; flat even light on light grey, pasted onto the dark stage): "looks cheap as ai gen images". Lesson: no generic cartons; macro scale, real materials, hard light, rendered on the stage colour.
 
 ### Copy flags to raise with the user
 
@@ -168,6 +172,7 @@ Write what the user said, in their words where possible, with the date.
 | Runner and stretch photos (screenshots: arms-overhead stretch, meditation with glass chips, two blurred sprinters, golden-hour runner, low-angle runner on blue sky) | **Hero V1 photo style**: real people, outdoor, low angles against open sky, motion blur, film grain, natural light | user |
 | SPECS hero (screenshot) | **Promo card `--specs` / `--frost`**: square charcoal frosted card, flush product image, white title, grey second line, small chevron | user |
 | Floating GLP-1 pens and pills render (screenshot) | **V2's floating supplements**: products drifting in the light at different angles. Built with our own MEDARO packs, never the branded pens shown | user |
+| Good Life tablets and vials, hims tablet/capsule/vial row (screenshots) | **Product render quality bar**: macro tablets with debossed logos and powder texture, metal-capped vials, printed capsules, hard shadows | user |
 | Good Life box set, besea floating sachets, Bionoss shelf (screenshots) | **Packaging direction**: premium matte boxes and jars, sachets floating, a deep-green range | user |
 | Seed (Mobbin) | **Packaging direction**: deep olive and frosted glass jars with dark lids, minimal wordmark | Mobbin |
 | Cosmos, Analogue Agency, Fuser (Mobbin) | **Nav surfaces.** Dark glass pill of links between a free-standing logo and a glowing CTA (Cosmos); light frosted bars (Analogue, Fuser) | Mobbin |
