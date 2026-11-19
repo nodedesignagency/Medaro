@@ -2,12 +2,13 @@
    Home · hero V2 (after Superpower)
    A dark, rounded stage under a quiet header. Left: one-line eyebrow, the
    headline, a sentence, CTA and a text link; three plain facts at the foot.
-   Right: the MEDARO supplement range floating in the light, after the
-   user's floating-pens reference: jar, carton, sachet and three capsules,
-   each bobbing on its own slow loop. One Nano Banana render (so the light
-   is shared), background removed, split into pieces, then recomposed in
-   depth: carton high at the back, jar in front overlapping it, sachet to
-   the right, capsules scattered below. A slow ticker runs along the bottom.
+   Right: the MEDARO range floating close to camera, after the user's
+   premium references (floating pens, Good Life tablets, hims): a debossed
+   oval tablet, a round tablet, a vial and a capsule, macro-lit on dark
+   olive, each bobbing on its own slow loop, with two blurred tablets (one
+   in front, one far back) for depth. One Nano Banana macro render (shared
+   light), background removed, split into pieces. A slow ticker runs along
+   the bottom.
    Frame: the stage sits on the frame edge (16px, max 1888px, centred); the
    header's logo and CTA line up with the content inset inside the stage.
    Header: components/header.css, --plain.
@@ -124,34 +125,34 @@
 @keyframes hero-v2-ticker { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .hero-v2__track { animation: none; } }
 
-/* ---------- Floating supplements ---------- */
+/* ---------- Floating MEDARO range ---------- */
 .hero-v2__scene {
   position: absolute;
   right: var(--v2-inset);
   top: 46%;
-  /* 43% of the stage, but never closer than ~40px to the headline (whose
-     right edge sits ~760px into the stage) */
-  width: min(43%, calc(100% - var(--v2-inset) - 800px));
+  /* square set: 46% of the stage, never closer than ~40px to the headline
+     (right edge ~760px into the stage), never taller than the stage allows */
+  width: min(46%, calc(100% - var(--v2-inset) - 800px), calc(100svh - 300px));
   transform: translateY(-50%);
   z-index: -1;
 }
-/* soft pale light behind the set so the products sit in it */
+/* warm pool of light behind the set, like the light behind the floating pens */
 .hero-v2__scene::before {
   content: "";
   position: absolute;
-  inset: -30% -18%;
-  background: radial-gradient(closest-side, rgba(214, 226, 178, 0.22), rgba(214, 226, 178, 0.06) 60%, rgba(214, 226, 178, 0));
+  inset: -25% -20% -20% -25%;
+  background: radial-gradient(closest-side, rgba(226, 216, 176, 0.2), rgba(226, 216, 176, 0.06) 55%, rgba(226, 216, 176, 0));
   pointer-events: none;
 }
 
 .float-set {
   position: relative;
-  aspect-ratio: 1.15;
+  aspect-ratio: 1;
 }
 .float-set__piece {
   position: absolute;
   height: auto;
-  filter: drop-shadow(0 26px 30px rgba(8, 10, 5, 0.45));
+  filter: drop-shadow(0 30px 36px rgba(6, 8, 4, 0.5));
   animation: float-set var(--dur) ease-in-out var(--delay) infinite;
   will-change: transform;
 }
@@ -162,10 +163,11 @@
 @media (prefers-reduced-motion: reduce) {
   .float-set__piece { animation: none; transform: rotate(var(--r0)); }
 }
-/* Composition (container %), back to front */
-.float-set__piece--box       { left: 34%; top: 6%;  width: 43%;  z-index: 1; --dur: 7.6s; --delay: -4s;   --amp: -22px; --r0: 1deg;    --r1: -1deg; }
-.float-set__piece--sachet    { left: 75%; top: 22%; width: 22%;  z-index: 2; --dur: 6.1s; --delay: -2.4s; --amp: -16px; --r0: -1deg;   --r1: 2deg; }
-.float-set__piece--jar       { left: 10%; top: 40%; width: 40%;  z-index: 3; --dur: 6.8s; --delay: -1.2s; --amp: -18px; --r0: -1.5deg; --r1: 1deg; }
-.float-set__piece--capsule-1 { left: 52%; top: 80%; width: 5.5%; z-index: 4; --dur: 4.8s; --delay: -0.6s; --amp: -14px; --r0: -6deg;   --r1: 4deg; }
-.float-set__piece--capsule-2 { left: 58%; top: 70%; width: 4.3%; z-index: 4; --dur: 5.4s; --delay: -3.1s; --amp: -12px; --r0: 5deg;    --r1: -5deg; }
-.float-set__piece--capsule-3 { left: 48%; top: 89%; width: 4.6%; z-index: 4; --dur: 4.4s; --delay: -1.9s; --amp: -10px; --r0: -4deg;   --r1: 6deg; }
+
+/* Composition (set %), back to front */
+.float-set__piece--bokeh-back   { left: 74%; top: -12%; width: 22%; z-index: 0; opacity: 0.55; filter: blur(5px);  --dur: 10s;  --delay: -3s;   --amp: -10px; --r0: -8deg; --r1: -4deg; }
+.float-set__piece--tablet-round { left: 48%; top: 0%;   width: 32%; z-index: 1; --dur: 6.4s; --delay: -2.2s; --amp: -14px; --r0: 3deg;   --r1: -2deg; }
+.float-set__piece--vial         { left: 60%; top: 27%;  width: 36%; z-index: 2; --dur: 8s;   --delay: -5s;   --amp: -20px; --r0: 1.5deg; --r1: -1.5deg; }
+.float-set__piece--tablet-oval  { left: 0%;  top: 18%;  width: 64%; z-index: 3; --dur: 7.2s; --delay: -0.8s; --amp: -18px; --r0: -2deg;  --r1: 1.5deg; }
+.float-set__piece--capsule      { left: 20%; top: 62%;  width: 44%; z-index: 4; --dur: 5.6s; --delay: -3.6s; --amp: -16px; --r0: -4deg;  --r1: 3deg; }
+.float-set__piece--bokeh-front  { left: 88%; top: 80%;  width: 32%; z-index: 5; opacity: 0.75; filter: blur(16px) brightness(0.85); --dur: 9s;   --delay: -1.4s; --amp: -26px; --r0: 0deg;   --r1: 6deg; }
