@@ -186,9 +186,9 @@
   --ar: 669 / 662; --h: 24%; --x: 79%; --y: 25%; --r: 0deg; --z: 3;
   --dur: 6.2s; --delay: -2.4s; --fx: 0.6cqh; --fy: -2.4cqh; --fr: 7deg;
 }
-.product--tablet-lime {
-  --ar: 630 / 614; --h: 22%; --x: 21%; --y: 63%; --r: 0deg; --z: 3;
-  --dur: 7s; --delay: -4.6s; --fx: -0.5cqh; --fy: -2cqh; --fr: -8deg;
+.product--tablet-oval {
+  --ar: 900 / 620; --h: 19%; --x: 20%; --y: 64%; --r: 0deg; --z: 3;
+  --dur: 7s; --delay: -4.6s; --fx: -0.5cqh; --fy: -2cqh; --fr: -6deg;
 }
 
 /* rests where it is placed, drifts and settles */
