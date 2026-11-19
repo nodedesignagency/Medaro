@@ -1,0 +1,77 @@
+/* ==========================================================================
+   Home · hero V1 (after avenn)
+   One full-bleed photograph. The line is split across the frame: "Made for
+   Better Health." top left, "Care Without the Runaround." bottom right,
+   with a small tag above it. Bottom left: one sentence and the CTA.
+   Header: components/header.css, --glass.
+   ========================================================================== */
+
+.hero-v1 {
+  position: relative;
+  height: clamp(700px, 100svh, 1200px);
+  overflow: hidden;
+  color: #fff;
+  isolation: isolate;
+}
+
+.hero-v1__img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* Shade so white type holds on any photo: a little at the top, more at the foot */
+.hero-v1::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(20, 24, 14, 0.32) 0%, rgba(20, 24, 14, 0) 34%),
+    linear-gradient(0deg, rgba(20, 24, 14, 0.5) 0%, rgba(20, 24, 14, 0) 42%);
+  pointer-events: none;
+}
+
+.hero-v1__inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 128px 48px 48px;
+}
+
+.hero-v1__title {
+  font-family: var(--font-display);
+  font-size: clamp(88px, 7.2vw, 140px);
+  font-weight: var(--weight-medium);
+  line-height: 0.95;
+  letter-spacing: -0.048em;
+}
+
+.hero-v1__foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.hero-v1__intro { max-width: 360px; }
+.hero-v1__intro p {
+  font-size: 16px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.9);
+}
+.hero-v1__intro .btn { margin-top: 22px; }
+
+.hero-v1__end {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+.hero-v1__end .tag { margin-bottom: 22px; color: #fff; }

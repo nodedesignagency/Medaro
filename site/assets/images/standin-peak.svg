@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <!-- STAND-IN for the V1 hero photo, not final art.
+       Brief: a soft, moss-covered peak rising out of morning mist under a pale
+       sage sky (the Λ of MEDARO as a landscape), soft meadow in front.
+       Dark mass top-left and bottom for white type; light sky top-right. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9c4ad"/>
+      <stop offset="0.45" stop-color="#dfe3d4"/>
+      <stop offset="0.7" stop-color="#eceee3"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.74" cy="0.3" r="0.35">
+      <stop offset="0" stop-color="#fbfbf3" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#fbfbf3" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="peak" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0" stop-color="#2f3a1f"/>
+      <stop offset="0.38" stop-color="#4a5a2c"/>
+      <stop offset="0.55" stop-color="#6f8441"/>
+      <stop offset="0.7" stop-color="#8fa159"/>
+      <stop offset="1" stop-color="#55663a"/>
+    </linearGradient>
+    <linearGradient id="peakShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#1b2212" stop-opacity="0.6"/>
+    </linearGradient>
+    <radialGradient id="mist">
+      <stop offset="0" stop-color="#f3f4ec" stop-opacity="0.8"/>
+      <stop offset="0.6" stop-color="#f3f4ec" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#f3f4ec" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="meadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d4a26"/>
+      <stop offset="1" stop-color="#1f2714"/>
+    </linearGradient>
+    <filter id="soft" filterUnits="userSpaceOnUse" x="-300" y="-300" width="2200" height="1600"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="softer" filterUnits="userSpaceOnUse" x="-300" y="-300" width="2200" height="1600"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="dof" filterUnits="userSpaceOnUse" x="-300" y="-300" width="2200" height="1600"><feGaussianBlur stdDeviation="2.2"/></filter>
+    <filter id="moss" filterUnits="userSpaceOnUse" x="0" y="0" width="1600" height="1000">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="4" seed="11" result="big"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="5" result="fine"/>
+      <feBlend in="big" in2="fine" mode="multiply" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.08  0 0 0 0 0.11  0 0 0 0 0.03  -1.4 0 0 0 1.05"/>
+    </filter>
+    <clipPath id="hillClip"><path d="M-20 1000 L-20 300 C 120 250 330 190 520 150 C 585 137 640 138 700 160 C 860 222 1060 420 1290 600 C 1400 685 1500 735 1620 770 L1620 1000 Z"/></clipPath>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.45  0 0 0 0.13 0"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <rect width="1600" height="1000" fill="url(#sun)"/>
+
+  <!-- far ridges in haze -->
+  <path d="M600 650 C 900 560 1060 590 1200 560 C 1330 535 1460 560 1900 520 L1900 800 L600 800 Z" fill="#b4bea2" filter="url(#soft)" opacity="0.85"/>
+  <path d="M800 700 C 1080 630 1250 660 1400 630 C 1480 615 1550 625 1900 600 L1900 840 L800 840 Z" fill="#9aa684" filter="url(#soft)" opacity="0.8"/>
+  <ellipse cx="1250" cy="660" rx="760" ry="130" fill="url(#mist)"/>
+
+  <!-- the peak -->
+  <g filter="url(#dof)">
+    <path id="hill" d="M-20 1000 L-20 300 C 120 250 330 190 520 150 C 585 137 640 138 700 160 C 860 222 1060 420 1290 600 C 1400 685 1500 735 1620 770 L1620 1000 Z" fill="url(#peak)"/>
+    <path d="M-20 1000 L-20 300 C 120 250 330 190 520 150 C 585 137 640 138 700 160 C 860 222 1060 420 1290 600 C 1400 685 1500 735 1620 770 L1620 1000 Z" fill="url(#peakShade)"/>
+    <!-- sun catching the ridge -->
+    <path d="M560 146 C 610 136 650 140 700 160 C 860 222 1060 420 1290 600" fill="none" stroke="#c9d58f" stroke-width="10" stroke-linecap="round" opacity="0.55" filter="url(#soft)"/>
+  </g>
+
+  <!-- moss texture on the peak -->
+  <g clip-path="url(#hillClip)" opacity="0.55"><rect width="1600" height="1000" filter="url(#moss)"/></g>
+
+  <!-- low mist at the foot of the peak -->
+  <ellipse cx="1350" cy="790" rx="560" ry="95" fill="url(#mist)" opacity="0.9"/>
+
+  <!-- foreground meadow, out of focus -->
+  <path d="M-20 1000 L-20 860 C 220 820 520 840 820 870 C 1100 898 1350 880 1620 850 L1620 1000 Z" fill="url(#meadow)" filter="url(#soft)"/>
+
+  <rect width="1600" height="1000" filter="url(#grain)"/>
+</svg>

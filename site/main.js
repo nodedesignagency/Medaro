@@ -1,12 +1,21 @@
 /* MEDARO — shared JS. Keep it small; each part is labelled with what it serves. */
 
-/* ---------- Header: solid background once the page scrolls ---------- */
+/* ---------- Header ----------
+   is-scrolled: the page has moved. is-solid (glass header): the element named
+   in data-solid-after has scrolled up behind the bar, so the bar turns light. */
 (function header() {
-  const el = document.querySelector('[data-header]');
-  if (!el) return;
-  const update = () => el.classList.toggle('is-scrolled', window.scrollY > 8);
+  const headers = Array.from(document.querySelectorAll('[data-header]'));
+  if (!headers.length) return;
+  const update = () => {
+    headers.forEach((el) => {
+      el.classList.toggle('is-scrolled', window.scrollY > 8);
+      const after = el.dataset.solidAfter && document.querySelector(el.dataset.solidAfter);
+      if (after) el.classList.toggle('is-solid', after.getBoundingClientRect().bottom < el.getBoundingClientRect().bottom + 8);
+    });
+  };
   update();
   window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('version-change', update);
 })();
 
 /* ---------- Review-only: versions and palettes ----------
@@ -15,7 +24,7 @@
    chosen with ?hero=b (default: the first one in the page).
    Palettes: <html data-palettes="a,b,c"> lists them; ?palette=b applies one
    (see the palette blocks at the top of styles.css).
-   ?briefs=off hides the image briefs on empty image slots.
+   ?briefs=on shows what each stand-in image should become.
    A small switcher appears bottom-left; hide it with ?review=0. Never goes to Framer. */
 (function review() {
   const params = new URLSearchParams(location.search);
@@ -33,7 +42,7 @@
     const wanted = params.get('palette');
     root.dataset.palette = palettes.includes(wanted) ? wanted : palettes[0];
   }
-  if (params.get('briefs') === 'off') root.dataset.briefs = 'off';
+  if (params.get('briefs') === 'on') root.dataset.briefs = 'on';
 
   function apply(slot, id) {
     if (slot === 'palette') {

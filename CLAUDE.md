@@ -34,7 +34,7 @@ Every message that follows a push ends with the exact command and the commit the
 cd ~/Desktop/medaro-preview && ./preview.sh <branch>
 ```
 
-`preview.sh` fetches, switches to the branch, pulls (fast-forward only) and opens `site/index.html`. Other pages or review switches: `./preview.sh <branch> weight-loss.html`, `./preview.sh <branch> "index.html?hero=b"`. With no branch it opens `main`. The user's local clone is `~/Desktop/medaro-preview`; the first time only:
+`preview.sh` fetches, switches to the branch, pulls (fast-forward only) and opens `site/index.html`. Other pages or review switches: `./preview.sh <branch> weight-loss.html`, `./preview.sh <branch> "index.html?hero=v2"`. With no branch it opens `main`. The user's local clone is `~/Desktop/medaro-preview`; the first time only:
 
 ```bash
 git clone https://github.com/nodedesignagency/Medaro.git ~/Desktop/medaro-preview
@@ -53,7 +53,7 @@ git clone https://github.com/nodedesignagency/Medaro.git ~/Desktop/medaro-previe
 - `content/`: the client's copy as Markdown, word for word: `home.md`, `about.md`, `weight-loss.md`, `mens-health.md`. Originals in `content/source/` (`medaro-copy.pdf` and `legal/*.pdf`, 11 legal documents).
 - `review/`: screenshots and videos for review. Git-ignored; send them to the user, don't commit them.
 
-**Versions inside one branch:** when offering versions of a section, give each its own block and stylesheet (`SECTION:home/hero--a`, `sections/home/hero--a.css`, same for `--b`) and mark the wrapper `data-version="hero:a"`. `main.js` shows one at a time, chosen with `?hero=b`, and adds a small review switcher in the corner (hidden with `?review=0`). The switcher is review-only and never goes to Framer.
+**Versions inside one branch:** when offering versions of a section, give each its own block and stylesheet (`SECTION:home/hero--v1`, `sections/home/hero--v1.css`, same for `--v2`) and mark the wrapper `data-version="hero:v1"`. `main.js` shows one at a time, chosen with `?hero=v2`, and adds a small review switcher in the corner (hidden with `?review=0`). The switcher is review-only and never goes to Framer. If a version needs its own header, put the header inside the same wrapper.
 
 Use the same class names everywhere (BEM-ish: `.hero__title`, `.btn--primary`). Reusable parts (header, footer, buttons, steps, FAQ, CTA band, disclaimer, cards) must be built the way Framer will need them: one structure, variants by modifier, no page-specific hacks.
 
@@ -72,7 +72,9 @@ Women's Health shows **Coming Soon** (no link). Intake form URLs, the Supplement
 
 ## Copy and compliance (telehealth: this matters)
 
-- Use the client's copy from `content/` word for word. You may change case and layout, not words. If a design needs shorter copy, propose the cut to the user; never edit silently. Missing copy: a short placeholder marked `[COPY NEEDED]`. No lorem ipsum.
+- **Read the copy brief before designing a section.** The four care lines (Weight Loss, Men's Health, Women's Health, Supplement) live in the header nav only, never in the hero.
+- **When the user gives a reference, follow it closely**; don't invent extra devices. The first round of heroes was rejected as "AI slop" (see `DESIGN.md` → Rejected).
+- Hero copy is ours to write (the user said so); everywhere else, use the client's copy from `content/` word for word. You may change case and layout, not words. If a design needs shorter copy, propose the cut to the user; never edit silently. Missing copy: a short placeholder marked `[COPY NEEDED]`. No lorem ipsum.
 - **Never remove or soften a qualifier or disclaimer** ("when medically appropriate", "if prescribed", "has not been demonstrated", "not FDA-approved", "results vary"). Disclaimers stay visible near the claims they qualify, not only in the footer.
 - **Never invent** numbers, prices, pounds lost, percentages, patient counts, ratings, reviews, testimonials, doctor names or credentials, "as seen in" logos, or certification badges. Placeholders only, marked `[DATA NEEDED]`.
 - Quad 4 is a proposed compounded formulation: never call it FDA-approved, never imply speed or duration claims the copy explicitly denies.
@@ -84,7 +86,7 @@ Women's Health shows **Coming Soon** (no link). Intake form URLs, the Supplement
 - Intake form URLs (weight loss, men's health) and the Supplements link.
 - Contact Support page copy (email, phone, hours, form?).
 - Landing-page footer: may it link to Privacy / Terms? (Ad platforms and state laws usually require it, even when the page has no other links.)
-- Photography and product renders: we will need to create a few images; the user will decide how with us when we get there.
+- Photography and product renders: **images are made after the user confirms a design** (user, 2026-11-19). Until then use stand-ins (`assets/images/standin-*.svg`, or UI built in code) and write the photo brief in `data-brief`.
 - Body/UI typeface: the logo is Montserrat; is there a brand palette or font beyond the logo?
 
 ## Skills and tools

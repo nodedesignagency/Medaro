@@ -43,13 +43,10 @@
   --color-wh: var(--p-mist);
   --color-sp: var(--p-accent);
 
-  /* Type: Host Grotesk for display and text, Geist Mono for labels
-     (the vernacular of a prescription label). Montserrat is the logo only. */
+  /* Type: Host Grotesk for everything. Montserrat is the logo only. */
   --font-display: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --weight-light: 300;
-  --weight-display: 300;  /* headlines: light, to sit with the thin wordmark */
   --weight-regular: 400;
   --weight-medium: 500;
 
@@ -60,7 +57,7 @@
   --fs-lede: 20px;   --lh-lede: 1.45;
   --fs-body: 17px;   --lh-body: 1.55;
   --fs-small: 14px;  --lh-small: 1.45;
-  --fs-label: 12px;  --ls-label: 0.06em;  /* mono labels, uppercase */
+  --fs-tag: 11px;    --ls-tag: 0.08em;   /* small caps tags */
 
   /* Spacing: 4px base */
   --space-1: 4px;
@@ -169,36 +166,39 @@ button { font: inherit; color: inherit; }
 .logo { display: inline-flex; color: var(--color-ink); text-decoration: none; }
 .logo svg { width: auto; height: 1em; aspect-ratio: 4413 / 712; }
 
-/* ---------- Label (mono, uppercase): eyebrows, tags, captions ---------- */
-.label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  font-weight: var(--weight-regular);
-  line-height: 1.2;
-  letter-spacing: var(--ls-label);
+/* ---------- Tag: small caps chip with a square bullet (after avenn) ---------- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 9px 5px 8px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 28%, transparent);
+  font-size: var(--fs-tag);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: var(--ls-tag);
   text-transform: uppercase;
 }
-
-/* ---------- Chevron: the logo's Λ turned on its side ----------
-   The A in MEDARO has no crossbar; turned 90° it is our arrow.
-   Use <svg class="chev"><use href="#chev"/></svg>. Points right by default. */
-.chev { width: 0.62em; height: 0.62em; flex: none; }
-.chev--up { transform: rotate(-90deg); }
-.chev--down { transform: rotate(90deg); }
+.tag::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: currentColor;
+}
 
 /* ---------- Buttons ---------- */
 .btn {
-  --btn-h: 52px;
+  --btn-h: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
   height: var(--btn-h);
-  padding: 0 24px 0 26px;
+  padding: 0 22px;
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-s);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: var(--weight-medium);
   letter-spacing: -0.005em;
   text-decoration: none;
@@ -206,91 +206,48 @@ button { font: inherit; color: inherit; }
   cursor: pointer;
   transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
-.btn .chev { transition: transform var(--dur-base) var(--ease-out); }
-.btn:hover .chev { transform: translateX(3px); }
 .btn:active { transform: scale(0.98); }
+.btn--pill { border-radius: var(--radius-pill); }
+.btn--s { --btn-h: 40px; padding: 0 16px; font-size: 14px; }
+.btn--l { --btn-h: 54px; padding: 0 28px; font-size: 16px; }
 
-.btn--primary {
-  background: var(--color-accent);
-  color: var(--color-ink);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--p-ink) 8%, transparent);
-}
+.btn--primary { background: var(--color-accent); color: var(--color-ink); }
 .btn--primary:hover { background: var(--color-accent-hover); }
 
-.btn--dark {
-  background: var(--color-ink);
-  color: var(--color-on-dark);
-}
+.btn--dark { background: var(--color-ink); color: var(--color-on-dark); }
 .btn--dark:hover { background: var(--color-deep); }
 
-.btn--ghost {
-  background: transparent;
-  color: var(--color-ink);
-  box-shadow: inset 0 0 0 1px var(--color-line);
-}
-.btn--ghost:hover { box-shadow: inset 0 0 0 1px var(--color-ink); }
-
-/* Text link with the chevron */
-.link-arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--color-ink);
+/* Underlined text link */
+.link-underline {
+  color: inherit;
   font-size: 16px;
-  font-weight: var(--weight-medium);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-underline-offset var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
 }
-.link-arrow span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size var(--dur-base) var(--ease-out); }
-.link-arrow:hover span { background-size: 100% 1px; }
-.link-arrow .chev { transition: transform var(--dur-base) var(--ease-out); }
-.link-arrow:hover .chev { transform: translateX(3px); }
+.link-underline:hover { text-underline-offset: 6px; }
 
-/* ---------- Image slot (review only until real images arrive) ----------
-   A soft, out-of-focus wash in the palette so a missing photo reads as
-   intended light, not a grey box. data-brief says what the photo should be. */
-.ph {
-  position: relative;
-  overflow: hidden;
-  background:
-    radial-gradient(60% 55% at 70% 30%, color-mix(in srgb, var(--p-paper) 85%, transparent), transparent 70%),
-    radial-gradient(70% 60% at 25% 85%, color-mix(in srgb, var(--p-ink) 30%, transparent), transparent 70%),
-    radial-gradient(50% 50% at 15% 20%, color-mix(in srgb, var(--p-accent) 70%, transparent), transparent 70%),
-    var(--p-sage);
-}
-.ph--deep {
-  background:
-    radial-gradient(55% 50% at 72% 28%, color-mix(in srgb, var(--p-sage) 55%, transparent), transparent 70%),
-    radial-gradient(60% 60% at 20% 90%, color-mix(in srgb, #000 35%, transparent), transparent 70%),
-    var(--p-deep);
-}
-.ph--light {
-  background:
-    radial-gradient(60% 60% at 75% 25%, #fff, transparent 70%),
-    radial-gradient(70% 60% at 20% 80%, color-mix(in srgb, var(--p-sage) 60%, transparent), transparent 70%),
-    var(--p-mist);
-}
-.ph--lime {
-  background:
-    radial-gradient(55% 55% at 70% 30%, color-mix(in srgb, #fff 80%, transparent), transparent 70%),
-    radial-gradient(70% 60% at 25% 85%, color-mix(in srgb, var(--p-sage) 70%, transparent), transparent 70%),
-    var(--p-accent);
-}
-.ph[data-brief]::after {
-  content: "Image · " attr(data-brief);
+/* ---------- Stand-in images ----------
+   Photos are added after the user confirms a design. Until then image slots
+   use a stand-in from assets/images/standin-*.svg. ?briefs=on shows what the
+   real photo should be (data-brief). */
+.media-brief { position: relative; }
+:root[data-briefs="on"] .media-brief[data-brief]::after {
+  content: "Stand-in · " attr(data-brief);
   position: absolute;
-  right: 16px;
-  bottom: 14px;
-  max-width: 60%;
+  left: 50%;
+  bottom: 12px;
+  z-index: 5;
+  transform: translateX(-50%);
+  max-width: 70%;
   padding: 6px 10px;
   border-radius: 6px;
-  background: color-mix(in srgb, var(--p-paper) 78%, transparent);
-  color: var(--p-ink);
-  font: 400 11px/1.35 var(--font-mono);
-  letter-spacing: 0.02em;
-  text-align: right;
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.86);
+  color: #222;
+  font: 500 11px/1.35 system-ui, sans-serif;
+  text-align: center;
 }
-:root[data-briefs="off"] .ph[data-brief]::after { display: none; }
 
 /* ---------- Review-only: version switcher (never goes to Framer) ---------- */
 .review-switcher {

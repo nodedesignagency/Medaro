@@ -12,15 +12,15 @@ The single source of truth for how MEDARO looks and behaves. Every branch reads 
   - Header size: 20px tall (≈124px wide). Minimum width: 88px on screen.
   - Clear space: at least the height of the letters on every side.
   - Never typeset it, stretch it, outline it, add effects or recolour it outside ink/paper.
-- **Chevron (`#chev`):** the logo's crossbar-less A (Λ) turned on its side, same narrow angle. It is the site's only arrow: buttons, links, rows, cards. Points right by default; `.chev--up` / `.chev--down` rotate it.
 - **Favicon:** none yet (no symbol). *[Pending: the Λ as a monogram? Ask before making one.]*
 
 ## 2. Direction *(working, until the Home hero is approved)*
 
+- **Follow the user's references closely.** When the user names a reference for a section, build that layout faithfully and make it ours through copy, colour, imagery and finish. Don't add devices the reference doesn't have.
 - **Two jobs:** trust (licensed providers, a clear process, honest qualifiers) and ease (one obvious next step on every screen).
-- **Feel:** calm, botanical, clinical-but-warm. Light olive paper, the client's olive greens, lime only where you act (buttons, hover). Big light headlines that echo the thin wordmark; small mono labels like a prescription label; generous space; rounded photo frames.
-- **Photography carries the warmth** (as on Good Life, Superpower, Neko): real people in natural light, at home, calm and unposed; unbranded products on natural surfaces. See the compliance rules in `CLAUDE.md` (no before/after, no scales, no branded drugs).
-- **Home is an index.** Its sections are MEDARO's four lines of care, and the header's in-page links scroll to them (the client's home.medvi.org request). The hero should say so.
+- **Feel:** calm, premium, botanical. The client's olive greens, lime only on buttons. Big confident grotesk headlines, short copy, generous space, real photography doing the emotional work.
+- **The four care lines (Weight Loss, Men's Health, Women's Health, Supplement) live in the header nav only.** They never appear as cards, lists, tabs or strips in the hero (user, 2026-11-19).
+- **Hero copy is ours to write** (user: "we have freedom there"). Everywhere else, use the client's copy word for word.
 
 ## 3. Tokens
 
@@ -47,17 +47,17 @@ Contrast: ink on paper ≈ 10:1, ink on lime ≈ 8.6:1, ink on sage ≈ 5.2:1, p
 
 ### Type
 
-- **Host Grotesk** for display and text (Google Fonts, available in Framer). Headlines in **Light 300** (`--weight-display`) with tight tracking (−0.05em at display sizes), so they sit with the thin wordmark. Text in Regular 400, buttons and nav in Medium 500.
-- **Geist Mono** for labels (`.label`): 12px, uppercase, +0.06em. Eyebrows, tags, captions: the vernacular of a prescription label. Labels are always anchored to something (a row, a card, a heading), never floating alone.
+- **Host Grotesk** for everything (Google Fonts, available in Framer). V1 headlines Medium 500 with tight tracking (−0.048em), like avenn; V2 headlines Regular 400 (−0.035em), like Superpower. Text Regular 400, buttons and nav 400–500.
+- **Tags** (`.tag`): small caps chip with a square bullet and a hairline border, after avenn ("■ LICENSED MEDICAL PROVIDERS"). Use sparingly, one per screen at most.
 - **Montserrat** is the logo only, never set in text.
-- Desktop scale: display 100–112 (hero), h2 56, h3 30, lede 20, body 17, small 14, label 12. Phone starting points for Framer: display 48, h2 34, h3 24, lede 18, body 16.
+- Desktop sizes: V1 hero 88–140 (7.2vw), V2 hero 62, lede 16–20, body 17, nav 14–15. Phone starting points for Framer: hero 48, h2 34, h3 24, lede 18, body 16.
 - Line length for body copy: 60–72 characters.
 
 ### Space, layout, shape
 
 - Spacing on a 4px base: `--space-1` (4) … `--space-11` (160).
 - Container max 1520px, gutter 40px, 12-column grid, 24px gap. Header 84px.
-- Radius: `--radius-s` 8, `--radius-m` 16, `--radius-l` 28 (photo frames, cards), `--radius-pill` 999 (buttons, nav pill, tags).
+- Radius: `--radius-s` 8 (V1 buttons, nav icon), `--radius-m` 16, `--radius-l` 28, `--radius-pill` 999 (V2 buttons). V1 nav bar 10, V2 hero frame 18.
 - Motion: `--ease-out` cubic-bezier(0.22, 1, 0.36, 1), `--dur-fast` 160ms, `--dur-base` 260ms, `--dur-slow` 560ms. Every animation has a reduced-motion fallback.
 
 ### Breakpoints (match Framer)
@@ -70,16 +70,15 @@ Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
 
 | Component | Variants | Used on | Status |
 |---|---|---|---|
-| Header | `full`: logo · in-page index in one pill (scroll links) · page links (About Us, Contact Support). `landing`: logo only + one CTA, no links out | all | `full` exploring |
+| Header | `--glass` (V1): frosted bar floating over the photo, logo · 5 in-page links centred · About Us, Contact Support, Get Started (lime), patient-login icon; turns light after the photo. `--split` (V2): page background, 4 care links left · logo centred · How Medaro Works, About Us, Contact Support, Get Started (dark pill) right. `landing`: logo + one CTA, no links out (not started) | all | exploring |
 | Footer | `full` · `landing` (legal links only, pending client answer) | all | not started |
-| Button | `primary` (lime) · `dark` (ink) · `ghost` (outline), all pill, with `#chev` | all | exploring |
-| Link with chevron | `.link-arrow` | all | exploring |
-| Label | `.label` mono caps | all | exploring |
-| Image slot | `.ph` (+ `--deep`, `--light`, `--lime`) with `data-brief`: review-only stand-in until photos exist | all | exploring |
-| Care index row | name · tag · chevron, lime fill sweeps in on hover (hero A) | Home | exploring |
-| Care card | big (image, tag, name, headline, round lime button) · slim (name, tag, thumb) (hero B) | Home | exploring |
+| Button | `primary` (lime) · `dark` (ink); sizes `--s` 40, default 48, `--l` 54; `--pill` for V2. No arrows | all | exploring |
+| Text link | `.link-underline` | all | exploring |
+| Tag | `.tag` small caps chip | all | exploring |
+| Stand-in image | `.media-brief` + `assets/images/standin-*.svg`; `?briefs=on` shows the photo brief | all | exploring |
+| Phone (portal UI) | built in code: status bar, greeting, care update card, rows, tab bar | Home V2 | exploring |
 | Check list | the "Your care, made simple" style bullet lists | Home, landings | not started |
-| Steps | 01 / 02 / 03 process (a real sequence, so numbers are right here) | Home, both landings | not started |
+| Steps | 01 / 02 / 03 process | Home, both landings | not started |
 | FAQ | accordion | both landings | not started |
 | Disclaimer | medical disclaimer block | Home, landings | not started |
 | CTA band | closing call to action | both landings, About | not started |
@@ -92,8 +91,8 @@ Status: `exploring` (on a branch) · `approved` (on `main`) · `rejected`. Add a
 
 | Section | Status | Branch | Notes |
 |---|---|---|---|
-| header | exploring | `claude/upbeat-lamport-vxbm8d` | Full variant. Sticky; turns solid with a hairline once you scroll. |
-| hero | exploring | `claude/upbeat-lamport-vxbm8d` | Three versions (`?hero=a|b|c`). **A, Care index**: headline and the four lines of care as a big list; hovering a line changes the portrait photo and shows that line's headline. **B, Care cards**: headline on top, two big cards (Weight Loss, Men's Health) and two slim ones (Women's Health, Supplement), after the client's refs. **C, Portrait**: one big photo, headline over it, frosted strip with the four lines, after the user's refs. All photos are stand-ins (`.ph`) until images are decided. |
+| header | exploring | `claude/upbeat-lamport-vxbm8d` | Two variants, one per hero version (see Components). |
+| hero | exploring | `claude/upbeat-lamport-vxbm8d` | Round 2: two versions (`?hero=v1|v2`). **V1, after avenn**: full-bleed photo, glass nav, "Made for Better Health." top left, tag + "Care Without the Runaround." bottom right, one sentence + Get Started bottom left. Photo concept: a soft mossy peak in morning mist (the Λ as a landscape); SVG stand-in for now. **V2, after Superpower**: split header, dark olive rounded stage, eyebrow "Made for Better Health.", "Expert medical care, from the comfort of home.", sentence, Get Started + "How Medaro Works" link, three facts, ticker of trust points; right, a phone with the MEDARO patient portal and a pharmacy bottle, built in code (bottle = stand-in for a render). More reference versions coming from the user. |
 | weight-loss | — | | |
 | mens-health | — | | |
 | womens-health | — | | Coming Soon |
@@ -118,17 +117,22 @@ Write what the user said, in their words where possible, with the date.
 
 ### Likes
 
-- *(none yet)*
+- 2026-11-19: Hero references to build from: **avenn** (V1) and **Superpower** (V2). More references coming.
 
 ### Rejected
 
-- *(none yet)*
+- 2026-11-19, round 1 heroes A/B/C, called "full AI slop" by the user. What to avoid from now on:
+  - Putting the care lines in the hero (index list, cards, frosted strip). They stay in the nav.
+  - Not reading the copy brief before designing.
+  - Invented devices the references don't have: mono uppercase labels everywhere, a custom chevron on every button and row, "coming soon" pills, hover-swapping image frames.
+  - Blurry gradient-blob placeholders with caption boxes stamped on them.
 
 ### Copy flags to raise with the user
 
 - The nav says "Supplement" (client's word); the section copy says "Supplements". We use "Supplement" in nav and hero rows for now. Suggest "Supplements".
 - The hero has no CTA in the brief. We use "Get Started" (the client's label elsewhere) and scroll to How Medaro Works until told otherwise. `[LINK NEEDED]`
-- Row tags in the hero are the client's own phrases, shortened: "GLP-1 treatment options", "Sexual health & confidence", "Everyday wellness".
+- V1 and V2 headers add a Get Started button; V1 adds a patient-login icon (the copy mentions a patient portal). `[LINK NEEDED]` for both.
+- V2 facts: "24/7, from home" comes from the client's "24/7 Convenient online consultations". Avoid "100% online": the FAQ says some states need a live visit.
 
 ## 7. Inspiration
 
@@ -139,5 +143,6 @@ Write what the user said, in their words where possible, with the date.
 | hims.com | Same system as Hers: tiles per condition, short headlines with one coloured phrase | client |
 | immortals.com | Soft gradient surfaces, rounded cards, two big entry cards in the hero, product shots on clean backgrounds | client |
 | goodlifemeds.com | Full-bleed lifestyle photo hero, big light grotesk headlines, mono uppercase labels, sage and warm neutrals, product cards with "Get started / Learn more" | user (liked) |
-| superpower.com | Rounded inset hero photo under a quiet header, big clean grotesk, calm white space, frosted UI over photos | user (liked) |
+| superpower.com | **Hero V2.** Quiet header with centred logo; dark rounded stage; product scene (tube + phone app) lit from above; three facts with hairline dividers; ticker along the bottom | user (liked) |
+| avenn (screenshot) | **Hero V1.** Full-bleed photo, frosted nav bar inside it, headline split top-left / bottom-right, small square-bullet tag, sentence + CTA bottom left | user |
 | nekohealth.com | *Couldn't load (bot check). Waiting for screenshots.* | user (liked) |
