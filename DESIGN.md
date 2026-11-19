@@ -69,7 +69,7 @@ Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
 
 | Component | Variants | Used on | Status |
 |---|---|---|---|
-| Header | One structure (user, 2026-11-19): **logo left · all seven links from the brief centred** (Weight Loss, Men's Health, Women's Health, Supplement, How Medaro Works, About Us, Contact Support) **· Get Started right. No login.** Over the photo (V1), surfaces to compare with `?nav=`: `--tinted` (dark translucent bar, kept), `--smoke` (visionOS glass: grey, desaturated, 44px blur, faint top rim, radius 22; hover = soft lighter patch; flat lime pill CTA, no glow), `--panel` (dark instrument panel: near-opaque, radius 3, hairline edge, corner brackets; CTA as a tinted lime chip in Geist Mono caps). All turn light past the photo. On the page background (V2): `--plain`. `landing` (logo + one CTA, no links out) not started | all | exploring |
+| Header | One structure (user, 2026-11-19): **logo left · all seven links from the brief centred** (Weight Loss, Men's Health, Women's Health, Supplement, How Medaro Works, About Us, Contact Support) **· Get Started right. No login.** Over the photo (V1): **`--tinted` is the user's favourite and its geometry is the standard** (bar 56px tall, inset 16px, radius 12, padding 0 8 0 22, links 14px at 88% white 24px apart, lime Get Started 40px radius 8). Other surfaces change only the glass, with values measured from the user's references: `--smoke` (Dolomites cards: rgb(19,19,19) ~58%, darker at top, faint top edge), `--vision` (visionOS windows: rgb(66,66,66) ~60%, blur 48, desaturated, soft rim), `--dark` (signal panel: rgb(22,22,22) ~76%, hairline). Compare with `?nav=`. All turn light past the photo. On the page background (V2): `--plain`. `landing` (logo + one CTA, no links out) not started | all | exploring |
 | Footer | `full` · `landing` (legal links only, pending client answer) | all | not started |
 | Button | `primary` (lime) · `dark` (ink); sizes `--s` 40, default 48, `--l` 54; `--pill` for V2. No arrows | all | exploring |
 | Text link | `.link-underline` | all | exploring |
@@ -89,7 +89,7 @@ Status: `exploring` (on a branch) · `approved` (on `main`) · `rejected`. Add a
 
 | Section | Status | Branch | Notes |
 |---|---|---|---|
-| header | exploring | `claude/upbeat-lamport-vxbm8d` | Logo left, seven links centred, CTA right. V1 has three surfaces to compare (`?nav=tinted|smoke|panel`); V2 uses `--plain`. |
+| header | exploring | `claude/upbeat-lamport-vxbm8d` | Logo left, seven links centred, CTA right. V1: tinted (favourite) plus three measured glass surfaces on the same geometry (`?nav=tinted|smoke|vision|dark`); V2 uses `--plain`. |
 | hero | exploring | `claude/upbeat-lamport-vxbm8d` | Round 2: two versions (`?hero=v1|v2`). **V1, after avenn**: full-bleed photo, glass nav, "Made for Better Health." top left, "Care Without the Runaround." bottom right (tag removed), one sentence + Get Started bottom left. Photo concept: a soft mossy peak in morning mist (the Λ as a landscape); SVG stand-in for now. **V2, after Superpower**: split header, dark olive rounded stage, eyebrow "Made for Better Health.", "Expert medical care, from the comfort of home.", sentence, Get Started + "How Medaro Works" link, three facts, ticker of trust points; right, a phone with the MEDARO patient portal and a pharmacy bottle, built in code (bottle = stand-in for a render). More reference versions coming from the user. |
 | weight-loss | — | | |
 | mens-health | — | | |
@@ -117,6 +117,7 @@ Write what the user said, in their words where possible, with the date.
 
 - 2026-11-19: Hero references to build from: **avenn** (V1) and **Superpower** (V2). More references coming.
 - 2026-11-19: Nav: "left we should have logo, center all the nav links … and on right CTA". Keep the current tinted bar as one option; explore glass looks (references: Atlas menu, liquid-glass sliders, Cosmos, Analogue, Fuser).
+- 2026-11-19: "tinted is still far better than all … dont change size and corner radius, tinted one has best stuff". Tinted's geometry is fixed; explorations change the material only.
 
 ### Rejected
 
@@ -127,6 +128,7 @@ Write what the user said, in their words where possible, with the date.
   - Blurry gradient-blob placeholders with caption boxes stamped on them.
 - 2026-11-19, round 2: the small "■ LICENSED MEDICAL PROVIDERS" tag in V1 ("remove that"), and the login icon in the nav ("why there is login i dont need that").
 - 2026-11-19, nav round 1: the **frosted** (milky glass bar, dark CTA) and **liquid** (glass capsule with a bouncy sliding highlight, glowing gradient lime CTA, gradient rim) navs: "slop". Lesson: no glows, no gradient rims, no springy effects; match the reference's values and stay restrained.
+- 2026-11-19, nav round 2: **smoke** (radius 22, 64px tall, hover patches) and **panel** (radius 3, corner brackets, mono chip): rejected, mainly for changing tinted's size and radius. Lesson: when the user likes something, vary only what they asked about, and take values from the reference by measuring it, not by eye.
 
 ### Copy flags to raise with the user
 
@@ -147,7 +149,8 @@ Write what the user said, in their words where possible, with the date.
 | superpower.com | **Hero V2.** Quiet header with centred logo; dark rounded stage; product scene (tube + phone app) lit from above; three facts with hairline dividers; ticker along the bottom | user (liked) |
 | avenn (screenshot) | **Hero V1.** Full-bleed photo, frosted nav bar inside it, headline split top-left / bottom-right, sentence + CTA bottom left | user |
 | Atlas menu, liquid-glass sliders (screenshots) | Nav surfaces, round 1 (results rejected) | user |
-| Dolomites glass cards, visionOS Notes and "Jupiter from Amalthea" windows (screenshots) | **Nav `--smoke`.** Grey desaturated glass, heavy blur, faint light rim, big radius, lighter glass patch for hover/selected, flat solid primary button | user |
-| "Signal strength" panel (screenshot) | **Nav `--panel`.** Near-opaque dark panel, hairline dividers, corner brackets, mono caps labels, tinted accent chip | user |
+| Dolomites glass cards (screenshot) | **Nav `--smoke` glass**: measured rgb(19,19,19) at ~58%, darker at the top | user |
+| visionOS Notes and "Jupiter from Amalthea" windows (screenshots) | **Nav `--vision` glass**: measured rgb(66,66,66) at ~60%, heavy blur, desaturated, soft rim | user |
+| "Signal strength" panel (screenshot) | **Nav `--dark` glass**: measured rgb(22,22,22) at ~76% | user |
 | Cosmos, Analogue Agency, Fuser (Mobbin) | **Nav surfaces.** Dark glass pill of links between a free-standing logo and a glowing CTA (Cosmos); light frosted bars (Analogue, Fuser) | Mobbin |
 | nekohealth.com | *Couldn't load (bot check). Waiting for screenshots.* | user (liked) |
