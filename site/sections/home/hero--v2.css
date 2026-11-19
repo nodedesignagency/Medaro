@@ -3,12 +3,11 @@
    A dark, rounded stage under a quiet header. Left: one-line eyebrow, the
    headline, a sentence, CTA and a text link; three plain facts at the foot.
    Right: the MEDARO range floating close to camera, after the user's
-   premium references (floating pens, Good Life tablets, hims): a debossed
-   oval tablet, a round tablet, a vial and a capsule, macro-lit on dark
-   olive, each bobbing on its own slow loop, with two blurred tablets (one
-   in front, one far back) for depth. One Nano Banana macro render (shared
-   light), background removed, split into pieces. A slow ticker runs along
-   the bottom.
+   premium references (hims and Zepbound vials, Good Life tablets, floating
+   pens): a GLP-1 vial and a Quad 4 bottle with real label artwork
+   (components/pack-label.css over blank-label renders), a debossed oval
+   tablet and a printed capsule, each bobbing on its own slow loop, with two
+   blurred tablets for depth. A slow ticker runs along the bottom.
    Frame: the stage sits on the frame edge (16px, max 1888px, centred); the
    header's logo and CTA line up with the content inset inside the stage.
    Header: components/header.css, --plain.
@@ -152,6 +151,7 @@
 .float-set__piece {
   position: absolute;
   height: auto;
+  display: block;
   filter: drop-shadow(0 30px 36px rgba(6, 8, 4, 0.5));
   animation: float-set var(--dur) ease-in-out var(--delay) infinite;
   will-change: transform;
@@ -164,10 +164,12 @@
   .float-set__piece { animation: none; transform: rotate(var(--r0)); }
 }
 
+.float-set__piece > img { display: block; width: 100%; height: auto; }
+
 /* Composition (set %), back to front */
-.float-set__piece--bokeh-back   { left: 74%; top: -12%; width: 22%; z-index: 0; opacity: 0.55; filter: blur(5px);  --dur: 10s;  --delay: -3s;   --amp: -10px; --r0: -8deg; --r1: -4deg; }
-.float-set__piece--tablet-round { left: 48%; top: 0%;   width: 32%; z-index: 1; --dur: 6.4s; --delay: -2.2s; --amp: -14px; --r0: 3deg;   --r1: -2deg; }
-.float-set__piece--vial         { left: 60%; top: 27%;  width: 36%; z-index: 2; --dur: 8s;   --delay: -5s;   --amp: -20px; --r0: 1.5deg; --r1: -1.5deg; }
-.float-set__piece--tablet-oval  { left: 0%;  top: 18%;  width: 64%; z-index: 3; --dur: 7.2s; --delay: -0.8s; --amp: -18px; --r0: -2deg;  --r1: 1.5deg; }
-.float-set__piece--capsule      { left: 20%; top: 62%;  width: 44%; z-index: 4; --dur: 5.6s; --delay: -3.6s; --amp: -16px; --r0: -4deg;  --r1: 3deg; }
-.float-set__piece--bokeh-front  { left: 88%; top: 80%;  width: 32%; z-index: 5; opacity: 0.75; filter: blur(16px) brightness(0.85); --dur: 9s;   --delay: -1.4s; --amp: -26px; --r0: 0deg;   --r1: 6deg; }
+.float-set__piece--bokeh-back   { left: 76%; top: -8%;  width: 20%; z-index: 0; opacity: 0.5;  filter: blur(6px);  --dur: 10s;  --delay: -3s;   --amp: -10px; --r0: -8deg; --r1: -4deg; }
+.float-set__piece--bottle       { left: 52%; top: 2%;   width: 27%; z-index: 1; --dur: 8.4s; --delay: -2.2s; --amp: -16px; --r0: 5deg;   --r1: 3deg; }
+.float-set__piece--vial         { left: 24%; top: 6%;   width: 29%; z-index: 2; --dur: 7.4s; --delay: -5s;   --amp: -20px; --r0: -7deg;  --r1: -5deg; }
+.float-set__piece--tablet-oval  { left: -2%; top: 70%;  width: 44%; z-index: 3; --dur: 6.6s; --delay: -0.8s; --amp: -18px; --r0: -6deg;  --r1: -2deg; }
+.float-set__piece--capsule      { left: 60%; top: 64%;  width: 34%; z-index: 4; --dur: 5.6s; --delay: -3.6s; --amp: -16px; --r0: 8deg;   --r1: 12deg; }
+.float-set__piece--bokeh-front  { left: 88%; top: 82%;  width: 30%; z-index: 5; opacity: 0.75; filter: blur(16px) brightness(0.85); --dur: 9s; --delay: -1.4s; --amp: -26px; --r0: 0deg; --r1: 6deg; }

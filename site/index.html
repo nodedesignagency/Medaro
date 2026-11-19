@@ -14,6 +14,7 @@
   <!-- Components (shared across pages) -->
   <link rel="stylesheet" href="components/header.css">
   <link rel="stylesheet" href="components/promo-card.css">
+  <link rel="stylesheet" href="components/pack-label.css">
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
   <link rel="stylesheet" href="sections/home/hero--v1.css">
   <link rel="stylesheet" href="sections/home/hero--v2.css">
@@ -134,14 +135,39 @@
             <li><strong>Discreet delivery</strong><span>If prescribed, to your door</span></li>
           </ul>
 
-          <!-- Floating MEDARO range: one Nano Banana 2.1 macro render (official wordmark as reference: debossed on the
-               tablet, printed on the capsule and vial label), background removed, split into pieces. The two
-               --bokeh pieces are blurred copies for depth (no extra files). -->
+          <!-- Floating MEDARO range. Containers: Nano Banana 2.1 render with BLANK labels; the label artwork is real
+               HTML (components/pack-label.css) laid on the measured label rectangle, so the type and wordmark are exact.
+               Tablet and capsule: macro render with the official wordmark as reference. --bokeh pieces are blurred copies.
+               Label copy is from the client's brief only; doses/NDC wait for real data. -->
           <div class="hero-v2__scene" aria-hidden="true">
             <div class="float-set">
               <img class="float-set__piece float-set__piece--bokeh-back" src="assets/images/supplements/tablet-oval.webp" alt="" width="1100" height="754">
-              <img class="float-set__piece float-set__piece--tablet-round" src="assets/images/supplements/tablet-round.webp" alt="" width="760" height="770">
-              <img class="float-set__piece float-set__piece--vial" src="assets/images/supplements/vial.webp" alt="" width="900" height="1184">
+              <div class="float-set__piece float-set__piece--bottle">
+                <img src="assets/images/supplements/bottle-quad4.webp" alt="" width="820" height="1768">
+                <div class="pack-label pack-label--light" style="--l: 0.0%; --t: 37.77%; --w: 99.7%; --h: 51.6%">
+                  <div class="pack-label__body">
+                    <svg class="pack-label__logo"><use href="#wordmark"/></svg>
+                    <p class="pack-label__name">Quad 4</p>
+                    <p class="pack-label__desc">Sublingual formulation</p>
+                    <span class="pack-label__rule"></span>
+                    <p class="pack-label__list">Sildenafil · Vardenafil<br>Tadalafil · Apomorphine</p>
+                    <span class="pack-label__chip">Rx only</span>
+                    <p class="pack-label__fine">Dissolves under the tongue</p>
+                  </div>
+                </div>
+              </div>
+              <div class="float-set__piece float-set__piece--vial">
+                <img src="assets/images/supplements/vial-glp1.webp" alt="" width="820" height="1964">
+                <div class="pack-label pack-label--dark" style="--l: 0.0%; --t: 37.75%; --w: 100.0%; --h: 56.69%">
+                  <div class="pack-label__body">
+                    <p class="pack-label__name">GLP-1</p>
+                    <p class="pack-label__desc">Weight management</p>
+                    <span class="pack-label__chip">Rx only</span>
+                    <p class="pack-label__fine">Prescribed only when medically appropriate</p>
+                  </div>
+                  <svg class="pack-label__mark"><use href="#wordmark"/></svg>
+                </div>
+              </div>
               <img class="float-set__piece float-set__piece--tablet-oval" src="assets/images/supplements/tablet-oval.webp" alt="" width="1100" height="754">
               <img class="float-set__piece float-set__piece--capsule" src="assets/images/supplements/capsule.webp" alt="" width="820" height="684">
               <img class="float-set__piece float-set__piece--bokeh-front" src="assets/images/supplements/tablet-round.webp" alt="" width="760" height="770">
