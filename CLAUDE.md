@@ -122,6 +122,6 @@ Chromium and Playwright are pre-installed. Serve `site/` with `python3 -m http.s
 
 Network: launch Chromium with `proxy: { server: process.env.HTTPS_PROXY, bypass: '<-loopback>,localhost,127.0.0.1' }` so Google Fonts load and localhost isn't sent to the proxy (it returns a 405 page otherwise). The same launch can screenshot reference sites the user shares; save them to `review/inspo/`. Sites behind a bot check (nekohealth.com) won't load: ask the user for screenshots instead of working around it.
 
-Product renders: follow "MEDARO product renders" in `DESIGN.md` → Direction (the real wordmark goes in as an image reference; one render per set, then cut out with background removal at 3 credits and split into pieces in code).
+Product imagery: follow "MEDARO product imagery" in `DESIGN.md` → Direction. **When the user gives an exact reference image, upload it to Magnific as the reference and recreate it; only branding and colours change.** (the real wordmark goes in as an image reference; one render per set, then cut out with background removal at 3 credits and split into pieces in code).
 
 Images: Magnific (Freepik) is connected on a paid plan. Stock downloads and generations cost credits (a free-licence stock photo is 40), so ask the user before spending any.
