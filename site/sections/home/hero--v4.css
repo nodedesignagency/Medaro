@@ -1,0 +1,62 @@
+/* ==========================================================================
+   Home · hero V4 (exploring, user 2026-11-20)
+   The approved hero's stage (sections/home/hero.css: frame, headline, light,
+   products) with a new arrangement:
+   - the client's sentence moves up, under the headline, on the left inset;
+   - the supplement card is gone;
+   - the three care categories run in one row along the foot, inset to
+     inset, as large white cards after hims' (components/category-tile.css);
+   - the client's packs float side by side (the trio) in the room between.
+   Promotion: fold these rules into hero.css as the default and drop V3's.
+   ========================================================================== */
+
+.hero--v4 .hero__frame {
+  /* the card row: a fifth of the stage, 160–208px */
+  --tile-h: clamp(160px, 21cqh, 208px);
+  --tiles-t: calc(100cqh - var(--hero-inset) - var(--tile-h)); /* top of the card row */
+}
+
+/* ---------- The sentence, under the headline on the left inset ---------- */
+.hero--v4 .hero__lede {
+  position: absolute;
+  top: calc(var(--head-b) + 36px);
+  left: var(--hero-inset);
+  width: var(--lede-w);
+  margin: 0;
+}
+
+/* ---------- The care categories, one row along the foot ---------- */
+.hero--v4 .hero__tiles {
+  position: absolute;
+  left: var(--hero-inset);
+  right: var(--hero-inset);
+  bottom: var(--hero-inset);
+}
+.hero--v4 .category-tile:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* ---------- Light: the sentence now sits top left ---------- */
+/* No pool of shade bottom right any more (the cards are solid); the top
+   band is deeper on the left, where the sentence sits under the headline. */
+.hero--v4 .hero__scrim {
+  background:
+    radial-gradient(38% 30% at 14% 30%, rgba(22, 26, 16, 0.6) 0%, rgba(22, 26, 16, 0) 100%),
+    linear-gradient(180deg, rgba(22, 26, 16, 0.62) 0%, rgba(22, 26, 16, 0.3) 24%, rgba(22, 26, 16, 0) 42%),
+    linear-gradient(0deg, rgba(22, 26, 16, 0.5) 0%, rgba(22, 26, 16, 0) 32%);
+}
+
+/* ---------- Products: the trio, between the headline and the cards ---------- */
+/* As tall as the room between the headline row and the card row allows,
+   centred on the stage; the sentence keeps to the left of it. */
+.hero--v4 .hero__scene {
+  --avail: calc(var(--tiles-t) - var(--head-b) - 40px - 28px);
+  --sh: var(--avail);
+  --spill: 0px;
+  top: calc(var(--head-b) + 40px);
+}
+/* this branch's packs (user, 2026-11-20: "lets replace images we used there"): the Quad 4 ampoule in the
+   middle, the moss-label vials either side, the two MEDARO tablets above */
+.hero--v4 .hero__set--trio .product--ampoule      { --h: 90%; --x: 50%; --y: 52%; --r: -3deg; }
+.hero--v4 .hero__set--trio .product--vial-a       { --h: 50%; --x: 17%; --y: 62%; --r: 6deg; }
+.hero--v4 .hero__set--trio .product--vial-b       { --h: 46%; --x: 83%; --y: 63%; --r: -6deg; }
+.hero--v4 .hero__set--trio .product--tablet-white { --h: 16%; --x: 22%; --y: 18%; --r: 0deg; }
+.hero--v4 .hero__set--trio .product--tablet-oval  { --h: 14%; --x: 79%; --y: 22%; --r: 0deg; }
