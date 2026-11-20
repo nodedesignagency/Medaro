@@ -1,0 +1,31 @@
+/* ==========================================================================
+   Home · Women's Health (#womens-health), the fourth section
+   Same layout as Men's Health (components/care-tiles.css), at the user's
+   ask (2026-11-20): "now lets make womens health section make its color pink
+   when we scroll … it will have similar layout as mens health". This file
+   holds only the Women's Health scene: the page fades from Men's Health
+   blue to pink while this section holds the middle of the screen.
+   Two pinks to compare: ?pink=a (blush, light, plum text, default) and
+   ?pink=b (rose, deep, paper text).
+   Copy: content/home.md → Women's Health, word for word. Women's Health is
+   not live: the client's CTA is "Coming Soon", shown as text, not a link.
+   ========================================================================== */
+
+:root {
+  --wh-pink: #efd9d8;       /* a: blush */
+  --wh-pink-tile: #e6c6c7;
+  --wh-ink: #3a2127;        /* deep plum: 10:1 on the tile */
+}
+:root[data-pink="b"] {
+  --wh-pink: #7e3650;       /* b: rose */
+  --wh-pink-tile: #8f4560;
+  --wh-ink: var(--p-paper);
+}
+:root[data-scene="womens"] {
+  --color-bg: var(--wh-pink);
+  --color-surface: var(--wh-pink-tile);
+  --color-ink: var(--wh-ink);
+  --color-text: var(--wh-ink);
+  --color-text-muted: color-mix(in srgb, var(--wh-ink) 76%, var(--wh-pink));
+  --color-line: color-mix(in srgb, var(--wh-ink) 18%, transparent);
+}

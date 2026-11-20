@@ -4,7 +4,9 @@
    coloured label, two-line title, round arrow button top-right). First use:
    the supplement card in the top-right of hero V1.
    Finish: --paper, the user's pick (2026-11-19): light card, ink title,
-   olive label, no shadow. (Olive glass, SPECS and charcoal frost versions
+   olive label, no shadow. --glass on the hero's dark stage (user,
+   2026-11-20: "less prominant"): the stage's own olive, see-through, over
+   a blur, with a hairline border. (Olive glass, SPECS and charcoal frost versions
    were compared and dropped; see DESIGN.md.)
    Geometry matches the nav (user, 2026-11-19): radius 12 like the bar, 8px
    inset like the nav's buttons, image radius 8 like the nav's buttons,
@@ -80,3 +82,21 @@
 }
 .promo-card--paper .promo-card__label { color: #56662f; } /* olive, 5.3:1 on paper */
 .promo-card--paper .promo-card__go { background: var(--color-surface); color: var(--color-ink); }
+
+/* Glass: on the hero's dark stage the card steps back (user, 2026-11-20: "I want it to be less prominant maybe we can
+   use this kind of color with less opacity fill and maybe some background blur with some border"). The stage's own
+   dark olive (#1A1F16, sampled from the stage) at 42%, a 20px blur of the light behind it, a 1px paper hairline
+   inside the edge (inset, so the card keeps its size); light type, the arrow on 10% white like the hero's rows. */
+.promo-card--glass {
+  color: #fff;
+  background: rgba(26, 31, 22, 0.42);
+  box-shadow: inset 0 0 0 1px rgba(244, 245, 239, 0.16);
+  -webkit-backdrop-filter: blur(20px) saturate(1.1);
+  backdrop-filter: blur(20px) saturate(1.1);
+}
+.promo-card--glass:hover { background: rgba(26, 31, 22, 0.52); }
+.promo-card--glass .promo-card__label { color: rgba(244, 245, 239, 0.8); } /* 5.4:1+ on the lightest beam behind it (1280–1920) */
+.promo-card--glass .promo-card__title { color: rgba(255, 255, 255, 0.94); }
+.promo-card--glass .promo-card__go { background: rgba(255, 255, 255, 0.1); color: #fff; }
+.promo-card--glass:hover .promo-card__go { background: var(--color-accent); color: var(--color-ink); }
+.promo-card--glass:focus-visible { outline-color: #fff; }

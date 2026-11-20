@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Home · How Medaro Works (#how-it-works)
+   Layout: components/steps.css, after the user's Givingli reference
+   (2026-11-20): pinned stage, number left, card middle, text right; the
+   step changes with a smooth roll / slide as you scroll.
+   This file holds the section's scene. The reference sits on a strong red
+   with a near-black card; ours uses the client's palette: ?hiw=a the client's
+   Dusty Olive (sage, default), ?hiw=b dark olive. Text on sage is always ink (sage takes no light text).
+   Copy: content/home.md → How Medaro Works, word for word. Each card is one
+   image with no text (user, 2026-11-20); stand-ins until the photos exist.
+   ========================================================================== */
+
+:root {
+  --hw-bg: #a8af98;            /* a: Dusty Olive (client) */
+  --hw-surface: #b9bfaa;
+  --hw-ink: #262b1e;           /* 7.7:1 on sage */
+  --hw-muted: #343b29;         /* 5.2:1 on sage */
+  --hw-card: #262b1e;
+}
+:root[data-hiw="b"] {
+  --hw-bg: #262b1e;            /* b: dark olive */
+  --hw-surface: #343b29;
+  --hw-ink: #f4f5ef;
+  --hw-muted: color-mix(in srgb, #f4f5ef 74%, #262b1e);
+  --hw-card: #f4f5ef;
+}
+:root[data-scene="steps"] {
+  --color-bg: var(--hw-bg);
+  --color-surface: var(--hw-surface);
+  --color-ink: var(--hw-ink);
+  --color-text: var(--hw-ink);
+  --color-text-muted: var(--hw-muted);
+  --color-line: color-mix(in srgb, var(--hw-ink) 18%, transparent);
+}
+.steps--home {
+  --steps-card: var(--hw-card); /* behind the image while it loads */
+}
