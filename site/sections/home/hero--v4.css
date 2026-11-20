@@ -63,43 +63,27 @@
   bottom: calc(100cqh - var(--tiles-t) + 32px); /* 32px above the cards */
 }
 
-/* ---------- Products: the V3 float arrangement, along the free diagonal ----------
-   User, 2026-11-20: "lets use images like image 3 no overlapping for now".
-   With the headline split, the free room is a diagonal band from bottom left
-   (beside "Better Health.") to top right (beside "Made for"). The headline
-   scales with the stage's width, the room with its height, so the products sit
-   in two boxes that follow the room exactly:
-   - the band: from 24px under "Made for" to 24px above "Better Health.", from
-     the sentence's right side to the right inset (the ampoule leaning, the
-     Multidose vial further back, the tablets);
-   - the pocket: left of "Better" (which starts at 42% of the content width at
-     every size) and under the sentence, down to 24px above the cards (the
-     Microdose vial, large and in front). */
+/* ---------- Products: the V3 cluster, top right ----------
+   User, 2026-11-20: "lets use images like image 3 no overlapping for now", then
+   "what you are doing spreading these … it should stay like this on top right".
+   The V3 float arrangement as one cluster, unchanged inside (same box shape
+   and the same positions as hero.css), placed top right: from the top of
+   "Made for" to 24px above "Better Health.", its box on the right inset. */
 .hero--v4 .hero__frame {
   --cap: calc((100cqw - 2 * var(--hero-inset)) / 9.861 * 0.7);
   --line-b-t: calc(var(--tiles-t) - 32px - var(--cap)); /* top of "Better Health." */
-  --content-w: calc(100cqw - 2 * var(--hero-inset));
 }
-.hero--v4 .hero__scene {
+.hero--v4 .hero__scene--cluster {
   --spill: 0px;
-  width: auto;
-  aspect-ratio: auto;
-  transform: none;
-}
-.hero--v4 .hero__scene--band {
-  left: calc(var(--hero-inset) + var(--content-w) * 0.33);
+  --scene-ratio: 0.78; /* the V3 box */
+  left: auto;
   right: var(--hero-inset);
-  top: calc(var(--head-b) + 24px);
-  height: calc(var(--line-b-t) - 24px - var(--head-b) - 24px);
+  transform: none;
+  top: 44px;
+  height: calc(var(--line-b-t) - 24px - 44px);
 }
-.hero--v4 .hero__scene--pocket {
-  left: var(--hero-inset);
-  width: calc(var(--content-w) * 0.42 - 24px);
-  top: calc(var(--head-b) + 36px + 64px + 24px); /* under the sentence (three lines) */
-  height: calc(var(--tiles-t) - 24px - var(--head-b) - 36px - 64px - 24px);
-}
-.hero--v4 .hero__scene--band .product--ampoule      { --h: 100%; --x: 32%; --y: 50%; --r: -14deg; }
-.hero--v4 .hero__scene--band .product--vial-b       { --h: 56%;  --x: 72%; --y: 36%; --r: -18deg; }
-.hero--v4 .hero__scene--band .product--tablet-white { --h: 21%;  --x: 12%; --y: 26%; --r: 0deg; }
-.hero--v4 .hero__scene--band .product--tablet-oval  { --h: 19%;  --x: 49%; --y: 78%; --r: 0deg; }
-.hero--v4 .hero__scene--pocket .product--vial-a     { --h: 88%;  --x: 80%; --y: 52%; --r: 10deg; }
+.hero--v4 .hero__scene--cluster .product--ampoule      { --h: 84.6%; --x: 58%; --y: 49%;   --r: -14deg; }
+.hero--v4 .hero__scene--cluster .product--vial-a       { --h: 54%;   --x: 32%; --y: 66%;   --r: 10deg; }
+.hero--v4 .hero__scene--cluster .product--vial-b       { --h: 32.4%; --x: 77%; --y: 16.5%; --r: -18deg; }
+.hero--v4 .hero__scene--cluster .product--tablet-white { --h: 17%;   --x: 20%; --y: 22%;   --r: 0deg; }
+.hero--v4 .hero__scene--cluster .product--tablet-oval  { --h: 14%;   --x: 80%; --y: 64%;   --r: 0deg; }
