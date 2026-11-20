@@ -115,8 +115,8 @@
   transition: background-color var(--dur-fast) var(--ease-out);
 }
 .menu__arrow {
-  width: 22px;
-  height: 22px;
+  width: 20px; /* the MEDARO arrow (assets/icons/arrow.svg) */
+  height: 20px;
   margin-left: auto;
   color: var(--color-text-muted);
   transition: transform var(--dur-base) var(--ease-out), color var(--dur-fast) var(--ease-out);

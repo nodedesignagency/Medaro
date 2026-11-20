@@ -107,7 +107,7 @@
   background: rgba(255, 255, 255, 0.1); /* user: a 10% white fill, no outline */
   transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 }
-.hero-v3__cat-go svg { width: 18px; height: 18px; transition: transform var(--dur-base) var(--ease-out); }
+.hero-v3__cat-go svg { width: 16px; height: 16px; /* the MEDARO arrow (assets/icons/arrow.svg) */ transition: transform var(--dur-base) var(--ease-out); }
 a.hero-v3__cat:hover .hero-v3__cat-go { background: var(--color-accent); color: var(--color-ink); }
 a.hero-v3__cat:hover .hero-v3__cat-go svg { transform: translateX(2px); }
 a.hero-v3__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 4px; }

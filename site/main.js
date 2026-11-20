@@ -91,9 +91,25 @@
   }
   if (params.get('briefs') === 'on') root.dataset.briefs = 'on';
 
+  /* Options inside a section (not whole versions), e.g. the stage light's
+     looks: data-review-option="light:dust,rays,soft" sets data-light on the
+     element; ?light=rays picks one (default: the first). */
+  const options = new Map();
+  document.querySelectorAll('[data-review-option]').forEach((el) => {
+    const [slot, list] = el.dataset.reviewOption.split(':');
+    const ids = list.split(',').map((s) => s.trim());
+    if (!options.has(slot)) options.set(slot, { ids, els: [] });
+    options.get(slot).els.push(el);
+    const wanted = params.get(slot);
+    el.dataset[slot] = ids.includes(wanted) ? wanted : ids[0];
+  });
+
   function apply(slot, id) {
     if (slot === 'palette') {
       root.dataset.palette = id;
+    } else if (options.has(slot)) {
+      options.get(slot).els.forEach((el) => { el.dataset[slot] = id; });
+      window.dispatchEvent(new CustomEvent('version-change', { detail: { slot, id } }));
     } else {
       slots.get(slot).forEach((v) => { v.el.hidden = v.id !== id; });
       window.dispatchEvent(new CustomEvent('version-change', { detail: { slot, id } }));
@@ -111,6 +127,9 @@
   const rows = [];
   slots.forEach((list, slot) => {
     if (list.length > 1) rows.push({ slot, ids: list.map((v) => v.id), current: (list.find((v) => !v.el.hidden) || list[0]).id });
+  });
+  options.forEach(({ ids, els }, slot) => {
+    if (ids.length > 1) rows.push({ slot, ids, current: els[0].dataset[slot] });
   });
   if (palettes.length > 1) rows.push({ slot: 'palette', ids: palettes, current: root.dataset.palette });
   if (!rows.length) return;
