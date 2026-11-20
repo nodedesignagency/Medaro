@@ -4,8 +4,8 @@
    V2, arranged like the user's px push reference: one big line across the
    top that runs edge to edge, the products floating in the
    centre (where px push has its 3D logo); bottom left the supplement promo
-   card with the client's sentence under it; bottom right the three care
-   categories as CTA rows (client, 2026-11-20; after Arcovia and TrueBody).
+   card; bottom right the client's sentence above the three care categories
+   as CTA rows (client, 2026-11-20; after Arcovia and TrueBody).
    Copy: content/home.md, word for word.
    Frame: the stage sits on the frame edge (16px, max 1888px, centred); the
    header's logo and CTA line up with the content inset (48px) inside it.
@@ -52,36 +52,36 @@
   text-box: trim-both cap alphabetic; /* box = cap top to baseline */
 }
 
-/* ---------- Foot, left: card, then the sentence ---------- */
-.hero-v3__intro {
+/* ---------- Foot, left: the supplement card ---------- */
+.hero-v3__card {
   position: absolute;
   left: var(--v3-inset);
   bottom: var(--v3-inset);
+}
+
+/* ---------- Foot, right: the sentence, then the care categories ---------- */
+.hero-v3__side {
+  position: absolute;
+  right: var(--v3-inset);
+  bottom: var(--v3-inset);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 32px;
-  width: max(var(--lede-w), 384px);
+  width: var(--cats-w);
 }
 .hero-v3__lede {
   width: var(--lede-w);
   font-size: 18px;
   line-height: 1.45;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.88);
   text-wrap: pretty;
-  text-box: trim-end alphabetic; /* last baseline sits on the inset, level with the rows' bottom line */
 }
 
 /* ---------- Foot, right: the care categories ----------
    CTA rows after the user's Arcovia reference: hairlines between rows, a
    large label, an arrow in a ring that fills lime on hover. The last line
-   sits on the bottom inset. */
-.hero-v3__cats {
-  position: absolute;
-  right: var(--v3-inset);
-  bottom: var(--v3-inset);
-  width: var(--cats-w);
-}
+   sits on the bottom inset, level with the card's foot. */
+.hero-v3__cats { width: 100%; }
 .hero-v3__cats ul { list-style: none; margin: 0; padding: 0; }
 .hero-v3__cats li { border-top: 1px solid rgba(244, 245, 239, 0.24); }
 .hero-v3__cats li:last-child { border-bottom: 1px solid rgba(244, 245, 239, 0.24); }
@@ -111,7 +111,7 @@
 a.hero-v3__cat:hover .hero-v3__cat-go { background: var(--color-accent); box-shadow: none; color: var(--color-ink); }
 a.hero-v3__cat:hover .hero-v3__cat-go svg { transform: translateX(2px); }
 a.hero-v3__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 4px; }
-.hero-v3__cat--soon { color: rgba(255, 255, 255, 0.6); cursor: default; }
+.hero-v3__cat--soon { color: rgba(255, 255, 255, 0.68); cursor: default; }
 .hero-v3__cat-tag {
   padding: 6px 10px;
   border-radius: var(--radius-pill);
@@ -145,6 +145,9 @@ a.hero-v3__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; bor
   position: absolute;
   inset: 0;
   background:
+    /* the sentence and the rows sit where the beam is brightest: fade it out
+       behind them so the type keeps WCAG AA (4.5:1) on the brightest pixel */
+    radial-gradient(44% 78% at 84% 76%, rgba(22, 26, 16, 0.78) 0%, rgba(22, 26, 16, 0.68) 48%, rgba(22, 26, 16, 0) 100%),
     linear-gradient(180deg, rgba(22, 26, 16, 0.62) 0%, rgba(22, 26, 16, 0.3) 22%, rgba(22, 26, 16, 0) 40%),
     linear-gradient(0deg, rgba(22, 26, 16, 0.55) 0%, rgba(22, 26, 16, 0) 30%);
 }
@@ -156,7 +159,7 @@ a.hero-v3__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; bor
 .hero-v3__scene {
   --scene-ratio: 0.78;
   --avail: calc(100cqh - var(--head-b) - 24px - 56px);
-  --gap: calc(100cqw - 2 * var(--v3-inset) - max(var(--lede-w), 384px) - var(--cats-w) - 2 * 24px);
+  --gap: calc(100cqw - 2 * var(--v3-inset) - 384px - var(--cats-w) - 2 * 24px);
   --sh: min(var(--avail), var(--gap) * 1.5); /* the card and sentence only fill the foot, so the box may be wider than the gap above them */
   position: absolute;
   left: 50%;
@@ -171,7 +174,7 @@ a.hero-v3__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; bor
 /* Same arrangement as V2, centred */
 .hero-v3 .product--pen-capped   { --h: 86%; --x: 42%; --y: 55%; --r: -34deg; }
 .hero-v3 .product--pen          { --h: 94%; --x: 60%; --y: 49%; --r: -14deg; }
-.hero-v3 .product--tablet-white { --h: 24%; --x: 79%; --y: 25%; --r: 0deg; }
+.hero-v3 .product--tablet-white { --h: 23%; --x: 75%; --y: 19%; --r: 0deg; }
 .hero-v3 .product--tablet-oval  { --h: 19%; --x: 29%; --y: 59%; --r: 0deg; }
 
 /* The pens are smaller here than in V2 (about 530px tall at 1440×900), so the
