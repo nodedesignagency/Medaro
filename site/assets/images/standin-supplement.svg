@@ -1,21 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
   <!-- STAND-IN for the supplement product shot in the hero card, not final art.
-       Brief: a MEDARO supplement bottle with a few capsules on a matte mid
+       Brief: a MEDARO supplement bottle with a few capsules on a matte dark
        grey background, dull and low-key, no bright highlights (user,
        2026-11-20: "make this background greyish", "I want it to be dull look
-       not light look"), soft light from the top left. Square. -->
+       not light look", "make more darkish"), soft light from the top left.
+       Square. -->
   <defs>
     <radialGradient id="bg" cx="0.3" cy="0.2" r="0.95">
-      <stop offset="0" stop-color="#8e8f8a"/>
-      <stop offset="0.55" stop-color="#7a7b76"/>
-      <stop offset="1" stop-color="#63645f"/>
+      <stop offset="0" stop-color="#5f605b"/>
+      <stop offset="0.55" stop-color="#4f504b"/>
+      <stop offset="1" stop-color="#3c3d39"/>
     </radialGradient>
     <linearGradient id="body" x1="0" x2="1">
-      <stop offset="0" stop-color="#a9aba1"/>
-      <stop offset="0.18" stop-color="#d4d5ce"/>
-      <stop offset="0.42" stop-color="#e2e3dc"/>
-      <stop offset="0.75" stop-color="#c9cac2"/>
-      <stop offset="1" stop-color="#9c9f93"/>
+      <stop offset="0" stop-color="#8e9087"/>
+      <stop offset="0.18" stop-color="#b9bab3"/>
+      <stop offset="0.42" stop-color="#c8c9c2"/>
+      <stop offset="0.75" stop-color="#afb0a8"/>
+      <stop offset="1" stop-color="#83867b"/>
     </linearGradient>
     <linearGradient id="cap" x1="0" x2="1">
       <stop offset="0" stop-color="#2a3020"/>
@@ -34,8 +35,8 @@
       <stop offset="1" stop-color="#4c5636"/>
     </linearGradient>
     <linearGradient id="capsB" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fbfbf6"/>
-      <stop offset="1" stop-color="#d6d8cc"/>
+      <stop offset="0" stop-color="#c9cac2"/>
+      <stop offset="1" stop-color="#9fa197"/>
     </linearGradient>
     <filter id="blur6"><feGaussianBlur stdDeviation="6"/></filter>
   </defs>
@@ -43,7 +44,7 @@
   <rect width="240" height="240" fill="url(#bg)"/>
 
   <!-- shadow -->
-  <ellipse cx="124" cy="206" rx="70" ry="10" fill="#2f3326" opacity="0.45" filter="url(#blur6)"/>
+  <ellipse cx="124" cy="206" rx="70" ry="10" fill="#1a1d14" opacity="0.55" filter="url(#blur6)"/>
 
   <!-- bottle -->
   <rect x="86" y="44" width="68" height="26" rx="5" fill="url(#cap)"/>
@@ -67,7 +68,7 @@
   <rect x="97" y="152" width="34" height="2.5" rx="1.2" fill="#343b29" opacity="0.35"/>
   <rect x="97" y="158" width="22" height="2.5" rx="1.2" fill="#343b29" opacity="0.25"/>
   <!-- highlight -->
-  <rect x="98" y="84" width="6" height="112" rx="3" fill="#fff" opacity="0.3"/>
+  <rect x="98" y="84" width="6" height="112" rx="3" fill="#fff" opacity="0.18"/>
 
   <!-- capsules in front -->
   <g transform="rotate(-24 60 196)">
