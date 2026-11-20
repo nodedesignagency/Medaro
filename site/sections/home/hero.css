@@ -1,0 +1,173 @@
+/* ==========================================================================
+   Home · hero (approved: hero V3, user 2026-11-20)
+   The same dark rounded stage, studio plate and four floating products as
+   V2, arranged like the user's px push reference: one big line across the
+   top that runs edge to edge, the products floating in the
+   centre (where px push has its 3D logo); bottom left the supplement promo
+   card; bottom right the client's sentence above the three care categories
+   as CTA rows (client, 2026-11-20; after Arcovia and TrueBody).
+   Copy: content/home.md, word for word.
+   Frame: the stage sits on the frame edge (16px, max 1888px, centred); the
+   header's logo and CTA line up with the content inset (48px) inside it.
+   Header: components/header.css, --plain --compact (70px). Products: components/product.css.
+   ========================================================================== */
+
+.hero {
+  --hero-inset: 48px; /* content inset inside the stage; the header uses it too */
+  padding: 0 var(--frame-side) var(--edge);
+}
+
+.hero__frame {
+  /* bottom of the headline row: top gap + cap height + gap to the hairline */
+  --lede-w: min(390px, 31cqw); /* 390 wraps into three near-full lines and a short last one */
+  --cats-w: min(420px, 32cqw);
+  --head-b: calc(44px + (100cqw - 2 * var(--hero-inset)) * 0.0716);
+  position: relative;
+  height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* compact header 70 + bottom edge 16: fills the screen (up to 1080 tall), never scrolls */
+  overflow: hidden;
+  border-radius: 18px;
+  color: #fff;
+  background: #171b11; /* the plate's own tone, under the plate */
+  container-type: size;
+  isolation: isolate;
+}
+
+/* ---------- Headline row ---------- */
+/* One line, sized to run exactly from inset to inset at every width
+   ("Made for Better Health." is 9.86em wide at this tracking). No hairline
+   under it (the user: "remove the bottom line below the h1"). */
+.hero__head {
+  position: absolute;
+  top: 44px;
+  left: var(--hero-inset);
+  right: var(--hero-inset);
+}
+.hero__title {
+  font-family: var(--font-display);
+  font-size: calc((100cqw - 2 * var(--hero-inset)) / 9.861);
+  font-weight: var(--weight-regular);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+  text-box: trim-both cap alphabetic; /* box = cap top to baseline */
+}
+
+/* ---------- Foot, left: the supplement card ---------- */
+.hero__card {
+  position: absolute;
+  left: var(--hero-inset);
+  bottom: var(--hero-inset);
+}
+
+/* ---------- Foot, right: the sentence, then the care categories ---------- */
+.hero__side {
+  position: absolute;
+  right: var(--hero-inset);
+  bottom: var(--hero-inset);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: var(--cats-w);
+}
+.hero__lede {
+  width: var(--lede-w);
+  font-size: 14px; /* user, 2026-11-20 (was 18, then 12) */
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+  text-wrap: pretty;
+}
+
+/* ---------- Foot, right: the care categories ----------
+   CTA rows after the user's Arcovia reference: hairlines between rows, a
+   large label, an arrow in a 10% white circle that turns lime on hover. The last line
+   sits on the bottom inset, level with the card's foot. */
+.hero__cats { width: 100%; }
+.hero__cats ul { list-style: none; margin: 0; padding: 0; }
+.hero__cats li { border-top: 1px solid rgba(244, 245, 239, 0.24); }
+.hero__cats li:last-child { border-bottom: 1px solid rgba(244, 245, 239, 0.24); }
+.hero__cat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  font-size: 24px;
+  font-weight: var(--weight-regular);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-decoration: none;
+}
+.hero__cat-go {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1); /* user: a 10% white fill, no outline */
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.hero__cat-go svg { width: 16px; height: 16px; /* the MEDARO arrow (assets/icons/arrow.svg) */ transition: transform var(--dur-base) var(--ease-out); }
+a.hero__cat:hover .hero__cat-go { background: var(--color-accent); color: var(--color-ink); }
+a.hero__cat:hover .hero__cat-go svg { transform: translateX(2px); }
+a.hero__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 4px; }
+
+
+/* ---------- Backdrop ---------- */
+/* the studio plate covers the stage like object-fit: cover, anchored right */
+.hero__media {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: max(100cqw, 179.17cqh);
+  aspect-ratio: 3840 / 2143;
+  transform: translateY(-50%);
+  z-index: -2;
+}
+.hero__plate {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* shade where the type sits: the headline across the top (the beam is
+   brightest top right), the sentence bottom right */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    /* the sentence and the rows sit where the beam is brightest: fade it out
+       behind them so the type keeps WCAG AA (4.5:1) on the brightest pixel */
+    radial-gradient(44% 78% at 84% 76%, rgba(22, 26, 16, 0.78) 0%, rgba(22, 26, 16, 0.68) 48%, rgba(22, 26, 16, 0) 100%),
+    linear-gradient(180deg, rgba(22, 26, 16, 0.62) 0%, rgba(22, 26, 16, 0.3) 22%, rgba(22, 26, 16, 0) 40%),
+    linear-gradient(0deg, rgba(22, 26, 16, 0.55) 0%, rgba(22, 26, 16, 0) 30%);
+}
+
+/* ---------- Products ---------- */
+/* A box centred between the headline row and the foot, as tall as that room
+   allows but no wider than the gap between the card and the sentence, so
+   every object stays whole and clear of the type. */
+.hero__scene {
+  --scene-ratio: 0.78;
+  --avail: calc(100cqh - var(--head-b) - 24px - 56px);
+  --gap: calc(100cqw - 2 * var(--hero-inset) - 384px - var(--cats-w) - 2 * 24px);
+  --sh: min(var(--avail), var(--gap) * 1.5); /* the card and sentence only fill the foot, so the box may be wider than the gap above them */
+  position: absolute;
+  left: 50%;
+  top: calc(var(--head-b) + 56px + (var(--avail) - var(--sh)) / 2);
+  height: var(--sh);
+  aspect-ratio: var(--scene-ratio);
+  transform: translateX(-50%);
+  z-index: -1;
+  container-type: size;
+}
+
+/* Same arrangement as V2, centred */
+.hero .product--pen-capped   { --h: 86%; --x: 42%; --y: 55%; --r: -34deg; }
+.hero .product--pen          { --h: 94%; --x: 60%; --y: 49%; --r: -14deg; }
+.hero .product--tablet-white { --h: 23%; --x: 75%; --y: 19%; --r: 0deg; }
+.hero .product--tablet-oval  { --h: 19%; --x: 29%; --y: 59%; --r: 0deg; }
+
+/* The pens are smaller here than in V2 (about 530px tall at 1440×900), so the
+   20-unit label lines (Rx only, use line) would fall under ~6.5px on screen:
+   cut them, don't shrink them (DESIGN.md → Direction, rule 6). */
+.hero .print-meta { display: none; }

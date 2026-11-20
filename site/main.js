@@ -18,6 +18,53 @@
   window.addEventListener('version-change', update);
 })();
 
+/* ---------- Menu sheet (components/menu.css) ----------
+   The header's menu button opens a <dialog> as a modal: focus stays inside,
+   the page behind is inert. .is-open is added a frame after opening and
+   removed before closing, so the sheet slides both ways. Esc, the scrim,
+   the close button and in-page links close it; the page doesn't scroll
+   behind it. */
+(function menu() {
+  const dialogs = Array.from(document.querySelectorAll('[data-menu]'));
+  if (!dialogs.length) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const root = document.documentElement;
+
+  dialogs.forEach((dialog) => {
+    const openers = Array.from(document.querySelectorAll(`[aria-controls="${dialog.id}"]`));
+    let closing = null;
+
+    const open = () => {
+      if (dialog.open) return;
+      const gap = window.innerWidth - root.clientWidth; // keep the page from shifting when the scrollbar goes
+      root.style.overflow = 'hidden';
+      if (gap) root.style.paddingRight = gap + 'px';
+      dialog.showModal();
+      openers.forEach((b) => b.setAttribute('aria-expanded', 'true'));
+      requestAnimationFrame(() => requestAnimationFrame(() => dialog.classList.add('is-open')));
+    };
+
+    const close = () => {
+      if (!dialog.open || closing) return;
+      dialog.classList.remove('is-open');
+      const done = () => {
+        clearTimeout(closing); closing = null;
+        dialog.close();
+        root.style.overflow = '';
+        root.style.paddingRight = '';
+        openers.forEach((b) => b.setAttribute('aria-expanded', 'false'));
+      };
+      closing = setTimeout(done, reduce.matches ? 200 : 420);
+    };
+
+    openers.forEach((b) => b.addEventListener('click', open));
+    dialog.addEventListener('cancel', (e) => { e.preventDefault(); close(); }); // Esc
+    dialog.addEventListener('click', (e) => {
+      if (e.target.closest('[data-menu-close]')) close();
+    });
+  });
+})();
+
 /* ---------- Rolling links (.link-roll) ----------
    Splits each link's text into letters for the hover roll (styles.css).
    Only the link's text is split; icons inside it (a menu arrow) stay as
