@@ -174,14 +174,20 @@ a.hero__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border
 .hero__set { position: absolute; inset: 0; }
 
 /* float (default): the approved pens' composition with the client's packs.
-   The bottle takes the front pen's place, leaning across the beam; the
-   Microdose vial floats in front of its lower half, where the oval tablet was;
-   the Multidose vial further back, top right, where the white tablet was. */
-.hero__set--float .product--bottle { --h: 96%; --x: 58%; --y: 50%; --r: -14deg; }
-.hero__set--float .product--vial-a { --h: 47%; --x: 33%; --y: 65%; --r: 11deg; }
-.hero__set--float .product--vial-b { --h: 28%; --x: calc(77% - var(--spill)); --y: 15%; --r: -19deg; }
+   The Quad 4 ampoule leans across the beam where the front pen was, about
+   the vial's size now (user: "i dont want that big bottle to be way bigger
+   than others"); the Microdose vial floats in front of its lower half; the
+   Multidose vial further back, top right; the two tablets back where they
+   were (user: "lets add tablet back"). */
+.hero__set--float .product--ampoule      { --h: 66%; --x: 57%; --y: 44%; --r: -16deg; }
+.hero__set--float .product--vial-a       { --h: 46%; --x: 38%; --y: 67%; --r: 10deg; }
+.hero__set--float .product--vial-b       { --h: 28%; --x: calc(80% - var(--spill)); --y: 17%; --r: -19deg; }
+.hero__set--float .product--tablet-white { --h: 17%; --x: calc(22% + var(--spill)); --y: 26%; --r: 0deg; }
+.hero__set--float .product--tablet-oval  { --h: 14%; --x: calc(78% - var(--spill)); --y: 58%; --r: 0deg; }
 
-/* trio: the range side by side, labels to camera, each on its own float */
-.hero__set--trio .product--bottle { --h: 94%; --x: 50%; --y: 49%; --r: -3deg; }
-.hero__set--trio .product--vial-a { --h: 43%; --x: calc(22% + var(--spill)); --y: 57%; --r: 5deg; }
-.hero__set--trio .product--vial-b { --h: 40%; --x: calc(78% - var(--spill)); --y: 59%; --r: -6deg; }
+/* trio: the range side by side, labels to camera, the tablets above */
+.hero__set--trio .product--ampoule      { --h: 68%; --x: 50%; --y: 52%; --r: -3deg; }
+.hero__set--trio .product--vial-a       { --h: 43%; --x: calc(21% + var(--spill)); --y: 62%; --r: 5deg; }
+.hero__set--trio .product--vial-b       { --h: 40%; --x: calc(79% - var(--spill)); --y: 64%; --r: -6deg; }
+.hero__set--trio .product--tablet-white { --h: 15%; --x: calc(27% + var(--spill)); --y: 20%; --r: 0deg; }
+.hero__set--trio .product--tablet-oval  { --h: 13%; --x: calc(74% - var(--spill)); --y: 24%; --r: 0deg; }

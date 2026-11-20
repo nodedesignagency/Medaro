@@ -100,7 +100,7 @@
   --cc-shadow-w: 42px;
   --cc-delay: -1.5s;
 }
-/* Men's Health: the client's Quad 4 bottle, lying almost flat like hims' objects */
+/* Men's Health: the Quad 4 ampoule, lying almost flat like hims' objects */
 .category-card--mens {
   --cc-obj-h: 98px;
   --cc-obj-r: 64deg;
@@ -131,5 +131,5 @@
   .category-card__media::after { animation: none; }
 }
 
-/* a card with no product yet (Women's Health): no shadow either */
+/* a card with no product: no shadow either */
 .category-card__media:empty::after { display: none; }

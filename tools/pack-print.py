@@ -45,7 +45,8 @@ CACHE = os.path.join(ROOT, "tools", ".cache")
 FONT_URL = "https://fonts.gstatic.com/s/hostgrotesk/v5/co3BmWBnlCJ3U42vbbfdwMjZpFjm.woff2"
 
 # Brand colours (site/styles.css, palette A)
-INK = "#343B29"     # Dark Olive Green: the label body
+INK = "#343B29"     # Dark Olive Green: text on lime
+MOSS = "#6B7A45"    # the vial label body: a lighter olive green (user, 2026-11-20: "the green you used is also too dark")
 LIME = "#D5E5AD"    # Soft Nude Lime
 PAPER = "#F4F5EF"
 
@@ -185,16 +186,19 @@ class Print:
         pen.closePath()
         self.layers.append((fill, opacity, svg.getCommands()))
 
-    def text(self, s, u, y, size, weight=400, fill=LIME, anchor="start", tracking=0.0, opacity=1.0):
-        """One line of text; returns its flat width."""
+    def text(self, s, u, y, size, weight=400, fill=LIME, anchor="start", tracking=0.0, opacity=1.0, along=False):
+        """One line of text; returns its flat length.
+        along=False: across the pack, baseline at height y, starting at u.
+        along=True: down the pack's axis, reading top to bottom like the pen labels (the tops of the
+        letters face right): baseline at u, starting at height y."""
         glyphs, width, scale, glyphset = shape(s, weight, size, tracking)
-        if anchor == "middle":
-            u -= width / 2
-        elif anchor == "end":
-            u -= width
+        shift = {"middle": width / 2, "end": width}.get(anchor, 0)
         svg, pen = self._pen()
         for name, gx, gy in glyphs:
-            tp = TransformPen(pen, (scale, 0, 0, -scale, u + gx, y - gy))
+            if along:  # font x → down the axis, font up → +u
+                tp = TransformPen(pen, (0, scale, scale, 0, u + gy, y - shift + gx))
+            else:
+                tp = TransformPen(pen, (scale, 0, 0, -scale, u - shift + gx, y - gy))
             glyphset[name].draw(tp)
         self.layers.append((fill, opacity, svg.getCommands()))
         return width
@@ -276,7 +280,7 @@ def vial(variant):
     p = Print(VIAL)
     L = -152  # content edge, flat (−0.67 rad: still face-on); hairlines run right round
     edge = math.pi / 2 * VIAL.r
-    p.band(VIAL_TOP, VIAL_BOT, INK, *VIAL_X)
+    p.band(VIAL_TOP, VIAL_BOT, MOSS, *VIAL_X)
     p.text("RX ONLY", L, 465, 25, 500, PAPER, tracking=0.12, opacity=0.82)
     p.line(-edge, edge, 503, 2.2, PAPER, 0.36)
     p.text("Compounded", L - 1, 583, 40, 400, LIME)
@@ -308,57 +312,45 @@ def vial_sheen():
             f'<g clip-path="url(#c)"><rect width="466" height="1100" fill="url(#s)"/><rect width="466" height="1100" fill="url(#r)"/></g></svg>\n')
 
 
-# ----------------------------------------------------------- the bottle ----
-# assets/images/products/bottle-quad4.webp, 439×2200: blank olive glass, long
-# neck, crown cap. Body x 7–431 (centre 219, R 212) from y 950 to 2150. Print
-# goes straight on the glass in lime (screen), like the client's reference.
-BOTTLE = Cylinder(cx=219, r=212, eye=1400, k=0.026)
+# ---------------------------------------------------------- the ampoule ----
+# assets/images/products/ampoule-quad4.webp, 406×2200: a blank glass ampoule,
+# light sage-lime glass and liquid (Nano Banana 2.1, 2026-11-20, after the
+# user's ampoule references). Body x 6–399 (centre 202.5, R 197) from the
+# shoulder at y 980 to the base at 2194; the liquid starts at y 1060.
+AMPOULE = Cylinder(cx=202.5, r=197, eye=1100, k=0.03)
 
 
-def bottle():
-    """The client's bottle (their reference, 2026-11-20), its words kept and CoreAge Rx removed:
-    the 4PLAY mark (P L / A Y set in the quarters of a line-drawn 4) · Apomorphine · Sildenafil ·
-    Tadalafil · Vardenafil · Sublingual Medication · 1 dose | Use as directed · 60ml · Rx Only.
-    Our layout: the mark drawn in hairlines and set in Host Grotesk, hairlines between the blocks,
-    and one solid lime tab (Sublingual Medication, knocked out to the glass)."""
-    p = Print(BOTTLE)
-    # The mark: a 4 in hairlines (diagonal, crossbar, stem) with P L above the bar, A Y below.
-    stem_u, top, bar, foot = 0, 1150, 1332, 1448
-    left, right = -122, 112
-    w = 4.2
-    p.segment((stem_u, top), (left, bar), w, LIME)
-    p.segment((left - w * 0.6, bar), (right, bar), w, LIME)
-    p.segment((stem_u, top - w * 0.4), (stem_u, foot), w, LIME)
-    size, gap = 86, 15
-    p.text("P", stem_u - gap, bar - gap - 2, size, 400, LIME, anchor="end")
-    p.text("L", stem_u + gap, bar - gap - 2, size, 400, LIME)
-    cap = 0.7 * size
-    p.text("A", stem_u - gap, bar + gap + cap + 4, size, 400, LIME, anchor="end")
-    p.text("Y", stem_u + gap, bar + gap + cap + 4, size, 400, LIME)
-    # ingredients between hairlines
-    p.line(-118, 118, 1500, 2.4, LIME, 0.6)
-    for i, word in enumerate(("Apomorphine", "Sildenafil", "Tadalafil", "Vardenafil")):
-        p.text(word, 0, 1566 + i * 47, 37, 400, LIME, anchor="middle")
-    p.line(-118, 118, 1752, 2.4, LIME, 0.6)
-    # the solid tab: knocked out, so the glass shows through the letters
-    tw = p.text("Sublingual Medication", 0, -100, 27, 500, LIME, anchor="middle")  # measure
-    p.layers.pop()
-    p.rect(-tw / 2 - 16, 1786, tw / 2 + 16, 1834, LIME)
-    p.text("Sublingual Medication", 0, 1819, 27, 500, "#000", anchor="middle")
-    p.text("1 dose | Use as directed", 0, 1882, 27, 400, LIME, anchor="middle")
-    # the foot
-    p.text("60ml", -150, 2078, 25, 400, LIME, opacity=0.9)
-    p.text("Rx Only", 150, 2078, 25, 400, LIME, anchor="end", opacity=0.9)
-    # the glass catches the key light on the right: the print fades a little towards the left side
-    fade = [(0, 0.38), (0.16, 0.66), (0.36, 0.92), (0.55, 1), (0.88, 1), (1, 0.7)]
-    return p.svg(439, 2200, "4PLAY bottle: print on glass", fade=fade)
+def ampoule():
+    """Quad 4 (Men's Health) as a glass ampoule, after the user's references (Rising, SNP, Dr.Melaxin,
+    Avon): print straight on the glass, running along the axis. Words: the client's own copy only
+    (content/mens-health.md): Quad 4 · Sildenafil · Vardenafil · Tadalafil · Apomorphine · Sublingual ·
+    Rx only. Nothing from the competitor's bottle (user, 2026-11-20: "that is competitor details i dont
+    want"). Layout: the pen-label system, along the axis: two hairlines the length of the print, the name
+    in the band between them, one solid ink tab at the band's end (Sublingual, knocked out to the glass),
+    Rx only in the lane on one side, the ingredients in the lane on the other. Dark olive ink, multiplied
+    onto the light glass."""
+    p = Print(AMPOULE)
+    top, foot = 1150, 2118          # the print's length down the axis
+    band_l, band_r = -62, 64        # the hairlines: the name band between them
+    p.segment((band_l, top), (band_l, foot), 2.2, INK, 0.55)
+    p.segment((band_r, top), (band_r, foot), 2.2, INK, 0.55)
+    # the name, along the band (cap height spans the band's middle)
+    p.text("Quad 4", -40, top + 34, 124, 500, INK, tracking=-0.02, along=True)
+    # the solid tab at the band's foot end, its word knocked out
+    tab_top = 1924
+    p.rect(band_l, tab_top, band_r, foot, INK, 0.94)
+    p.text("Sublingual", -11, tab_top + 26, 32, 500, "#fff", along=True)
+    # the lanes either side
+    p.text("Rx only", band_r + 18, top + 4, 27, 500, INK, opacity=0.9, along=True)
+    p.text("Sildenafil · Vardenafil · Tadalafil · Apomorphine", band_l - 38, top + 4, 26, 400, INK, opacity=0.9, along=True)
+    return p.svg(406, 2200, "Quad 4 ampoule: print on glass")
 
 
 if __name__ == "__main__":
     files = {
         "print-vial-microdose.svg": vial("Microdose"),
         "print-vial-multidose.svg": vial("Multidose"),
-        "print-bottle-4play.svg": bottle(),
+        "print-ampoule-quad4.svg": ampoule(),
         "sheen-vial.svg": vial_sheen(),
     }
     for name, data in files.items():

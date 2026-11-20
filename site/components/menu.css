@@ -189,11 +189,11 @@ a.menu__link:hover .menu__arrow { transform: translateX(3px); color: var(--color
 .treat-card:hover .treat-card__media > * { transform: translateY(-3px) rotate(var(--hover-r, 0deg)); }
 
 .treat-card__tab { width: 88px; height: auto; }
-/* the client's packs (2026-11-20): the Tirzepatide vials upright, a little tilted each way, the 4PLAY bottle
+/* the client's packs (2026-11-20): the Tirzepatide vials upright, a little tilted each way, the Quad 4 ampoule
    leaning like the hero's */
 .treat-card__pack--vial { height: 112px; rotate: 8deg; }
 .treat-card__pack--vial-b { rotate: -7deg; }
-.treat-card__pack--bottle { height: 138px; rotate: -18deg; }
+.treat-card__pack--ampoule { height: 136px; rotate: -16deg; }
 .treat-card__tab--white { width: 74px; }
 
 /* ---------- Foot ---------- */
