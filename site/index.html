@@ -14,6 +14,7 @@
   <!-- Components (shared across pages) -->
   <link rel="stylesheet" href="components/header.css">
   <link rel="stylesheet" href="components/promo-card.css">
+  <link rel="stylesheet" href="components/category-card.css">
   <link rel="stylesheet" href="components/menu.css">
   <link rel="stylesheet" href="components/product.css">
   <link rel="stylesheet" href="components/stage-light.css">
@@ -180,7 +181,7 @@
   <!-- SECTION:header--menu END -->
 
   <main id="main">
-    <!-- SECTION:home/hero START · styles: sections/home/hero.css, components/product.css, components/promo-card.css, components/stage-light.css · scripts: components/stage-light.js · assets: assets/images/products/ (stage-plate.webp, pen-glp1.webp, pen-glp1-capped.webp, tablet-white.webp, tablet-oval-lime.webp), assets/images/standin-supplement.svg
+    <!-- SECTION:home/hero START · styles: sections/home/hero.css, components/product.css, components/promo-card.css, components/category-card.css, components/stage-light.css · scripts: components/stage-light.js · assets: assets/images/products/ (stage-plate.webp, pen-glp1.webp, pen-glp1-capped.webp, tablet-white.webp, tablet-oval-lime.webp), assets/images/supplements/ (tablet-round.webp, vial.webp), assets/images/standin-supplement.svg
          Layout after the user's px push reference: one big line across the top on a hairline, the products
          floating in the centre, the supplement promo card bottom left, the client's sentence bottom right.
          Copy: the client's Home intro (content/home.md), word for word. -->
@@ -205,17 +206,50 @@
 
         <!-- Foot, right: the client's sentence, then the three care categories (client, 2026-11-20: "three clickable
              links … Weight Loss, Men's Health, and Women's Health … each should direct visitors to its respective
-             page"), as CTA rows after the user's Arcovia and TrueBody references. Women's Health has no page: it
-             scrolls to the Women's Health section on Home, which shows the client's [Coming Soon] (client, 2026-11-20). -->
+             page"). Women's Health has no page: it scrolls to the Women's Health section on Home, which shows the
+             client's [Coming Soon] (client, 2026-11-20).
+             Two looks for review (?cats=cards|rows):
+             cards (default): the client's request (2026-11-20), after hims' category cards, in the promo card's finish
+               (components/category-card.css);
+             rows: the hairline CTA rows approved on main (after Arcovia and TrueBody). -->
         <div class="hero__side">
           <p class="hero__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
-          <nav class="hero__cats" aria-label="Care">
-            <ul>
-              <li><a class="hero__cat" href="weight-loss.html">Weight Loss<span class="hero__cat-go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></li>
-              <li><a class="hero__cat" href="mens-health.html">Men's Health<span class="hero__cat-go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></li>
-              <li><a class="hero__cat" href="#womens-health">Women's Health<span class="hero__cat-go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></li>
-            </ul>
-          </nav>
+          <div data-version="cats:cards">
+            <nav class="hero__cards" aria-label="Care">
+              <ul class="category-cards">
+                <li>
+                  <a class="category-card category-card--weight" href="weight-loss.html">
+                    <span class="category-card__name">Weight Loss</span>
+                    <span class="category-card__media" aria-hidden="true"><span class="category-card__float"><img class="category-card__obj" src="assets/images/products/pen-glp1.webp" alt="" width="299" height="2200"></span></span>
+                    <span class="category-card__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+                  </a>
+                </li>
+                <li>
+                  <a class="category-card category-card--mens" href="mens-health.html">
+                    <span class="category-card__name">Men's Health</span>
+                    <span class="category-card__media" aria-hidden="true"><span class="category-card__float"><img class="category-card__obj" src="assets/images/supplements/tablet-round.webp" alt="" width="760" height="770"></span></span>
+                    <span class="category-card__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+                  </a>
+                </li>
+                <li>
+                  <a class="category-card category-card--womens" href="#womens-health">
+                    <span class="category-card__name">Women's Health</span>
+                    <span class="category-card__media" aria-hidden="true"><span class="category-card__float"><img class="category-card__obj" src="assets/images/supplements/vial.webp" alt="" width="900" height="1184"></span></span>
+                    <span class="category-card__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div data-version="cats:rows">
+            <nav class="hero__cats" aria-label="Care">
+              <ul>
+                <li><a class="hero__cat" href="weight-loss.html">Weight Loss<span class="hero__cat-go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></li>
+                <li><a class="hero__cat" href="mens-health.html">Men's Health<span class="hero__cat-go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></li>
+                <li><a class="hero__cat" href="#womens-health">Women's Health<span class="hero__cat-go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></li>
+              </ul>
+            </nav>
+          </div>
         </div>
 
         <!-- Backdrop: the studio light, drawn live over the V2 plate -->

@@ -112,6 +112,9 @@ a.hero__cat:hover .hero__cat-go { background: var(--color-accent); color: var(--
 a.hero__cat:hover .hero__cat-go svg { transform: translateX(2px); }
 a.hero__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 4px; }
 
+/* Cards (client, 2026-11-20, components/category-card.css): on the dark stage the focus ring is white */
+.hero .category-card:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 12px; }
+
 
 /* ---------- Backdrop ---------- */
 /* the studio plate covers the stage like object-fit: cover, anchored right */
