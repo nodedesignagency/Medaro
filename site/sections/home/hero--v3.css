@@ -3,8 +3,9 @@
    The same dark rounded stage, studio plate and four floating products as
    V2, arranged like the user's px push reference: one big line across the
    top that runs edge to edge, the products floating in the
-   centre (where px push has its 3D logo), the supplement promo card bottom
-   left (where px push has its thumbnail), the client's sentence bottom right.
+   centre (where px push has its 3D logo); bottom left the supplement promo
+   card with the client's sentence under it; bottom right the three care
+   categories as CTA rows (client, 2026-11-20; after Arcovia and TrueBody).
    Copy: content/home.md, word for word.
    Frame: the stage sits on the frame edge (16px, max 1888px, centred); the
    header's logo and CTA line up with the content inset (48px) inside it.
@@ -19,6 +20,7 @@
 .hero-v3__frame {
   /* bottom of the headline row: top gap + cap height + gap to the hairline */
   --lede-w: min(390px, 31cqw); /* 390 wraps into three near-full lines and a short last one */
+  --cats-w: min(420px, 32cqw);
   --head-b: calc(44px + (100cqw - 2 * var(--v3-inset)) * 0.0716);
   position: relative;
   height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* compact header 70 + bottom edge 16: fills the screen (up to 1080 tall), never scrolls */
@@ -50,22 +52,75 @@
   text-box: trim-both cap alphabetic; /* box = cap top to baseline */
 }
 
-/* ---------- Foot: card left, sentence right ---------- */
-.hero-v3__card {
+/* ---------- Foot, left: card, then the sentence ---------- */
+.hero-v3__intro {
   position: absolute;
   left: var(--v3-inset);
   bottom: var(--v3-inset);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  width: max(var(--lede-w), 384px);
 }
 .hero-v3__lede {
-  position: absolute;
-  right: var(--v3-inset);
-  bottom: var(--v3-inset);
   width: var(--lede-w);
   font-size: 18px;
   line-height: 1.45;
   color: rgba(255, 255, 255, 0.8);
   text-wrap: pretty;
-  text-box: trim-end alphabetic; /* last baseline sits on the inset, level with the card's foot */
+  text-box: trim-end alphabetic; /* last baseline sits on the inset, level with the rows' bottom line */
+}
+
+/* ---------- Foot, right: the care categories ----------
+   CTA rows after the user's Arcovia reference: hairlines between rows, a
+   large label, an arrow in a ring that fills lime on hover. The last line
+   sits on the bottom inset. */
+.hero-v3__cats {
+  position: absolute;
+  right: var(--v3-inset);
+  bottom: var(--v3-inset);
+  width: var(--cats-w);
+}
+.hero-v3__cats ul { list-style: none; margin: 0; padding: 0; }
+.hero-v3__cats li { border-top: 1px solid rgba(244, 245, 239, 0.24); }
+.hero-v3__cats li:last-child { border-bottom: 1px solid rgba(244, 245, 239, 0.24); }
+.hero-v3__cat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  font-size: 24px;
+  font-weight: var(--weight-regular);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-decoration: none;
+}
+.hero-v3__cat-go {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(244, 245, 239, 0.4);
+  transition: background-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.hero-v3__cat-go svg { width: 18px; height: 18px; transition: transform var(--dur-base) var(--ease-out); }
+a.hero-v3__cat:hover .hero-v3__cat-go { background: var(--color-accent); box-shadow: none; color: var(--color-ink); }
+a.hero-v3__cat:hover .hero-v3__cat-go svg { transform: translateX(2px); }
+a.hero-v3__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 4px; }
+.hero-v3__cat--soon { color: rgba(255, 255, 255, 0.6); cursor: default; }
+.hero-v3__cat-tag {
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(244, 245, 239, 0.14);
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.86);
 }
 
 /* ---------- Backdrop ---------- */
@@ -101,7 +156,7 @@
 .hero-v3__scene {
   --scene-ratio: 0.78;
   --avail: calc(100cqh - var(--head-b) - 24px - 56px);
-  --gap: calc(100cqw - 2 * var(--v3-inset) - 384px - var(--lede-w) - 2 * 24px);
+  --gap: calc(100cqw - 2 * var(--v3-inset) - max(var(--lede-w), 384px) - var(--cats-w) - 2 * 24px);
   --sh: min(var(--avail), var(--gap) * 1.5); /* the card and sentence only fill the foot, so the box may be wider than the gap above them */
   position: absolute;
   left: 50%;
@@ -117,7 +172,7 @@
 .hero-v3 .product--pen-capped   { --h: 86%; --x: 42%; --y: 55%; --r: -34deg; }
 .hero-v3 .product--pen          { --h: 94%; --x: 60%; --y: 49%; --r: -14deg; }
 .hero-v3 .product--tablet-white { --h: 24%; --x: 79%; --y: 25%; --r: 0deg; }
-.hero-v3 .product--tablet-oval  { --h: 19%; --x: 25%; --y: 60%; --r: 0deg; }
+.hero-v3 .product--tablet-oval  { --h: 19%; --x: 29%; --y: 59%; --r: 0deg; }
 
 /* The pens are smaller here than in V2 (about 530px tall at 1440×900), so the
    20-unit label lines (Rx only, use line) would fall under ~6.5px on screen:

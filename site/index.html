@@ -378,18 +378,32 @@
             <h1 class="hero-v3__title" id="hero-v3-title">Made for Better Health.</h1>
           </div>
 
-          <!-- Supplement promo card (component: components/promo-card.css), the same one as V1. Finish: paper.
-               Image is a stand-in: MEDARO supplement bottle, square. [LINK NEEDED] "Explore Supplements". -->
-          <a class="promo-card promo-card--paper hero-v3__card" href="#supplements">
-            <img class="promo-card__img media-brief" src="assets/images/standin-supplement.svg" alt="" width="240" height="240">
-            <span class="promo-card__text">
-              <span class="promo-card__label">Supplements</span>
-              <span class="promo-card__title">Better support for your everyday health.</span>
-            </span>
-            <span class="promo-card__go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
-          </a>
+          <!-- Foot, left: the supplement card, and the client's sentence under it -->
+          <div class="hero-v3__intro">
+            <!-- Supplement promo card (component: components/promo-card.css), the same one as V1. Finish: paper.
+                 Image is a stand-in: MEDARO supplement bottle, square. [LINK NEEDED] "Explore Supplements". -->
+            <a class="promo-card promo-card--paper" href="#supplements">
+              <img class="promo-card__img media-brief" src="assets/images/standin-supplement.svg" alt="" width="240" height="240">
+              <span class="promo-card__text">
+                <span class="promo-card__label">Supplements</span>
+                <span class="promo-card__title">Better support for your everyday health.</span>
+              </span>
+              <span class="promo-card__go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
+            </a>
 
-          <p class="hero-v3__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
+            <p class="hero-v3__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
+          </div>
+
+          <!-- Foot, right: the three care categories (client, 2026-11-20: "three clickable links … Weight Loss, Men's
+               Health, and Women's Health … each should direct visitors to its respective page"), as CTA rows after the
+               user's Arcovia and TrueBody references. Women's Health has no page yet: Coming soon, not a link. -->
+          <nav class="hero-v3__cats" aria-label="Care">
+            <ul>
+              <li><a class="hero-v3__cat" href="weight-loss.html">Weight Loss<span class="hero-v3__cat-go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></li>
+              <li><a class="hero-v3__cat" href="mens-health.html">Men's Health<span class="hero-v3__cat-go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></li>
+              <li><span class="hero-v3__cat hero-v3__cat--soon" aria-disabled="true">Women's Health <span class="hero-v3__cat-tag">Coming soon</span></span></li>
+            </ul>
+          </nav>
 
           <!-- Backdrop: the same studio plate as V2 -->
           <div class="hero-v3__media" aria-hidden="true">
