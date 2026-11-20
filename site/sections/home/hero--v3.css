@@ -71,8 +71,8 @@
 }
 .hero-v3__lede {
   width: var(--lede-w);
-  font-size: 18px;
-  line-height: 1.45;
+  font-size: 12px; /* user, 2026-11-20: "6px smaller" (was 18) */
+  line-height: 1.5;
   color: rgba(255, 255, 255, 0.88);
   text-wrap: pretty;
 }
