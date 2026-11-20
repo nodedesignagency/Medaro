@@ -1,12 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
   <!-- STAND-IN for the supplement product shot in the hero card, not final art.
-       Brief: a MEDARO supplement bottle with a few capsules on a soft sage
-       background, studio light from the top left. Square. -->
+       Brief: a MEDARO supplement bottle with a few capsules on a soft grey
+       background (user, 2026-11-20: "make this background greyish"), studio
+       light from the top left. Square. -->
   <defs>
     <radialGradient id="bg" cx="0.3" cy="0.2" r="0.95">
-      <stop offset="0" stop-color="#f4f5ef"/>
-      <stop offset="0.55" stop-color="#d9ddcd"/>
-      <stop offset="1" stop-color="#a8af98"/>
+      <stop offset="0" stop-color="#e6e6e3"/>
+      <stop offset="0.55" stop-color="#c6c6c2"/>
+      <stop offset="1" stop-color="#9b9b97"/>
     </radialGradient>
     <linearGradient id="body" x1="0" x2="1">
       <stop offset="0" stop-color="#c9ccc0"/>
