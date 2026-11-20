@@ -14,6 +14,7 @@
   <!-- Components (shared across pages) -->
   <link rel="stylesheet" href="components/header.css">
   <link rel="stylesheet" href="components/promo-card.css">
+  <link rel="stylesheet" href="components/menu.css">
   <link rel="stylesheet" href="components/product.css">
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
   <link rel="stylesheet" href="sections/home/hero--v1.css">
@@ -27,6 +28,7 @@
     <!-- Official MEDARO wordmark (site/assets/logo/, from the client), cropped tight, currentColor -->
     <symbol id="wordmark" viewBox="194 74 4413 712"><g fill="currentColor" transform="translate(80 780) scale(1 -1)"><path transform="translate(0 0)" d="M114 0V700H175L495 154H463L780 700H841V0H770V589H787L495 89H460L166 589H185V0Z"/><path transform="translate(870 0)" d="M114 0V700H594V636H188V64H609V0ZM180 324V387H550V324Z"/><path transform="translate(1500 0)" d="M114 0V700H399Q511 700 595.5 655.5Q680 611 727.0 532.0Q774 453 774 350Q774 247 727.0 168.0Q680 89 595.5 44.5Q511 0 399 0ZM188 64H395Q488 64 556.5 100.5Q625 137 663.0 201.5Q701 266 701 350Q701 435 663.0 499.0Q625 563 556.5 599.5Q488 636 395 636H188Z"/><path transform="translate(2300 0)" d="M2 0 L322 700 L395 700 L715 0 L637 0 L343 657 L373 657 L79 0 Z"/><path transform="translate(3040 0)" d="M114 0V700H376Q509 700 585.5 636.5Q662 573 662 460Q662 386 627.5 332.5Q593 279 529.0 250.5Q465 222 376 222H155L188 256V0ZM592 0 412 254H492L673 0ZM188 250 155 285H374Q479 285 533.5 331.0Q588 377 588 460Q588 544 533.5 590.0Q479 636 374 636H155L188 671Z"/><path transform="translate(3740 0)" d="M420 -6Q341 -6 273.5 20.5Q206 47 156.5 95.5Q107 144 79.5 208.5Q52 273 52 350Q52 427 79.5 491.5Q107 556 156.5 604.5Q206 653 273.0 679.5Q340 706 420 706Q499 706 566.0 679.5Q633 653 682.5 605.0Q732 557 759.5 492.0Q787 427 787 350Q787 273 759.5 208.0Q732 143 682.5 95.0Q633 47 566.0 20.5Q499 -6 420 -6ZM420 60Q483 60 536.5 81.5Q590 103 629.5 142.5Q669 182 691.0 234.5Q713 287 713 350Q713 413 691.0 465.5Q669 518 629.5 557.5Q590 597 536.5 618.5Q483 640 420 640Q357 640 303.0 618.5Q249 597 209.5 557.5Q170 518 147.5 465.5Q125 413 125 350Q125 288 147.5 235.0Q170 182 209.5 142.5Q249 103 303.0 81.5Q357 60 420 60Z"/></g></symbol>
     <!-- UI icons -->
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-arrow-ne" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </svg>
 
@@ -233,25 +235,67 @@
   <!-- ================= HERO V3 (V2's stage and products, laid out after the px push reference) ================= -->
   <div data-version="hero:v3">
 
-    <!-- SECTION:header--plain START · styles: components/header.css · scripts: main.js (header) -->
-    <header class="site-header site-header--plain site-header--compact" data-header>
+    <!-- SECTION:header--menu START · styles: components/header.css, components/menu.css · scripts: main.js (header, menu)
+         After the client's hims and Superpower references (2026-11-20): logo left; Get Started and a menu button right.
+         The six links live in a sheet that slides in from the right (native <dialog>: focus stays inside, Esc closes).
+         Links: Home scroll links and page links as in content/home.md. [LINK NEEDED] Get Started destination. -->
+    <header class="site-header site-header--plain site-header--compact site-header--menu" data-header>
       <div class="site-header__bar">
         <a class="logo" href="#top" aria-label="MEDARO, back to top"><svg aria-hidden="true"><use href="#wordmark"/></svg></a>
-        <nav class="site-header__links" aria-label="Main">
-          <a href="#weight-loss">Weight Loss</a>
-          <a href="#mens-health">Men's Health</a>
-          <a href="#womens-health">Women's Health</a>
-          <a href="#supplements">Supplement</a>
-          <a href="#how-it-works">How Medaro Works</a>
-          <a href="about.html">About Us</a>
-        </nav>
         <div class="site-header__actions">
-          <a class="btn btn--outline btn--pill" href="contact.html">Contact</a>
           <a class="btn btn--dark btn--pill" href="#how-it-works">Get Started</a>
+          <button class="menu-button" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="site-menu" data-menu-open>
+            <span class="visually-hidden">Open menu</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16"/></svg>
+          </button>
         </div>
       </div>
     </header>
-    <!-- SECTION:header--plain END -->
+
+    <dialog class="menu" id="site-menu" aria-labelledby="site-menu-title" data-menu>
+      <div class="menu__scrim" data-menu-close></div>
+      <div class="menu__panel">
+        <div class="menu__top">
+          <h2 class="menu__title" id="site-menu-title">Menu</h2>
+          <button class="menu__close" type="button" data-menu-close>
+            <span class="visually-hidden">Close menu</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+
+        <nav class="menu__nav" aria-labelledby="site-menu-explore">
+          <p class="menu__label" id="site-menu-explore">Explore</p>
+          <ul class="menu__list">
+            <li style="--i:0"><a class="menu__link" href="#weight-loss" data-menu-close>Weight Loss<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+            <li style="--i:1"><a class="menu__link" href="#mens-health" data-menu-close>Men's Health<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+            <li style="--i:2"><span class="menu__link menu__link--soon" aria-disabled="true">Women's Health <span class="menu__tag">Coming soon</span></span></li>
+            <li style="--i:3"><a class="menu__link" href="#supplements" data-menu-close>Supplement<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+            <li style="--i:4"><a class="menu__link" href="#how-it-works" data-menu-close>How Medaro Works<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+            <li style="--i:5"><a class="menu__link" href="about.html">About Us<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          </ul>
+        </nav>
+
+        <!-- Featured card, after hims' "Ready to lose weight? Start here": the client's Weight Loss heading
+             (content/home.md), linking to the Weight Loss landing page as their "Learn more" does. -->
+        <a class="menu__feature" href="weight-loss.html" style="--i:6">
+          <span class="menu__feature-text">
+            <span class="menu__feature-label">Weight Loss</span>
+            <span class="menu__feature-title">Real Medical Care. A Better Way to Lose Weight.</span>
+          </span>
+          <span class="menu__feature-media" aria-hidden="true">
+            <img class="menu__feature-tab menu__feature-tab--white" src="assets/images/products/tablet-white.webp" alt="" width="669" height="662">
+            <img class="menu__feature-tab menu__feature-tab--oval" src="assets/images/products/tablet-oval-lime.webp" alt="" width="900" height="620">
+          </span>
+          <span class="menu__feature-go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
+        </a>
+
+        <div class="menu__foot" style="--i:7">
+          <a class="btn btn--outline btn--pill" href="contact.html">Contact</a>
+          <a class="btn btn--dark btn--pill" href="#how-it-works" data-menu-close>Get Started</a>
+        </div>
+      </div>
+    </dialog>
+    <!-- SECTION:header--menu END -->
 
     <main id="main-v3">
       <!-- SECTION:home/hero--v3 START · styles: sections/home/hero--v3.css, components/product.css, components/promo-card.css · assets: assets/images/products/ (stage-plate.webp, pen-glp1.webp, pen-glp1-capped.webp, tablet-white.webp, tablet-oval-lime.webp), assets/images/standin-supplement.svg

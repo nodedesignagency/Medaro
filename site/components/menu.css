@@ -1,0 +1,229 @@
+/* ==========================================================================
+   Component: menu sheet
+   The desktop menu behind the header's menu button, after the client's hims
+   and Superpower references (2026-11-20) and Mobbin (Quartz, Klaviyo): a
+   sheet slides in from the right over a dimmed page. One column of large
+   links with arrows, a featured card, Contact and Get Started at the foot.
+   Built on <dialog> (showModal): focus stays inside, the page behind is
+   inert, Esc closes. main.js adds .is-open after opening and removes it
+   before closing, so the sheet and scrim animate both ways.
+   Geometry: floats 8px from the screen edges, radius 18 like the hero stage,
+   460px wide. Paper surface, ink type. Reduced motion: fades only.
+   ========================================================================== */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  overflow: hidden;
+}
+.menu::backdrop { background: transparent; } /* the scrim below animates instead */
+
+.menu__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 27, 17, 0.42);
+  opacity: 0;
+  transition: opacity 320ms var(--ease-out);
+}
+
+.menu__panel {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  width: min(460px, 100% - 16px);
+  padding: 20px 28px 28px;
+  overflow-y: auto;
+  border-radius: 18px;
+  background: var(--color-bg);
+  box-shadow: 0 1px 2px rgba(20, 24, 14, 0.06), 0 24px 64px -12px rgba(20, 24, 14, 0.32);
+  transform: translateX(calc(100% + 16px));
+  transition: transform 420ms var(--ease-out);
+  overscroll-behavior: contain;
+}
+
+.menu.is-open .menu__scrim { opacity: 1; }
+.menu.is-open .menu__panel { transform: none; }
+
+/* ---------- Top row ---------- */
+.menu__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+}
+.menu__title {
+  font-size: 22px;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.02em;
+}
+.menu__close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.menu__close:hover { background: color-mix(in srgb, var(--color-surface) 82%, var(--color-ink) 10%); }
+.menu__close:active { transform: scale(0.96); }
+.menu__close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+
+/* ---------- Links ---------- */
+.menu__nav { margin: 28px 0 24px; }
+.menu__label {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #56662f; /* olive, as the promo card label: 5.3:1 on paper */
+}
+.menu__list { list-style: none; margin: 0 -14px; padding: 0; }
+.menu__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  font-size: 28px;
+  font-weight: var(--weight-regular);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.menu__arrow {
+  width: 22px;
+  height: 22px;
+  margin-left: auto;
+  color: var(--color-text-muted);
+  transition: transform var(--dur-base) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+a.menu__link:hover { background: var(--color-surface); }
+a.menu__link:hover .menu__arrow { transform: translateX(3px); color: var(--color-ink); }
+.menu__link--soon { color: var(--color-text-muted); cursor: default; }
+.menu__tag {
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--color-ink);
+}
+
+/* ---------- Featured card ---------- */
+.menu__feature {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 132px;
+  align-items: end;
+  gap: 12px;
+  min-height: 164px;
+  margin-top: auto; /* sits at the foot of the list, above the buttons */
+  padding: 20px 20px 22px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--color-deep);
+  color: var(--color-on-dark);
+  text-decoration: none;
+}
+.menu__feature-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.menu__feature-title {
+  display: block;
+  max-width: 13em;
+  font-size: 20px;
+  font-weight: var(--weight-medium);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.menu__feature-media { position: relative; align-self: stretch; }
+.menu__feature-tab { position: absolute; height: auto; transition: transform var(--dur-slow) var(--ease-out); }
+.menu__feature-tab--white { width: 64px; left: -6px; top: 34px; } /* clear of the arrow button, its lettering clear of the oval */
+.menu__feature-tab--oval { width: 92px; right: -6px; bottom: -4px; }
+.menu__feature:hover .menu__feature-tab--white { transform: translate(-2px, -3px) rotate(-6deg); }
+.menu__feature:hover .menu__feature-tab--oval { transform: translate(2px, -2px) rotate(5deg); }
+.menu__feature-go {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  z-index: 1;
+}
+.menu__feature-go svg { width: 15px; height: 15px; transition: transform var(--dur-base) var(--ease-out); }
+.menu__feature:hover .menu__feature-go svg { transform: translate(1px, -1px); }
+
+/* ---------- Foot ---------- */
+.menu__foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* ---------- Entrance: rows rise in, one after another ---------- */
+.menu__list > li,
+.menu__feature,
+.menu__foot {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 360ms var(--ease-out), transform 420ms var(--ease-out);
+  transition-delay: calc(120ms + var(--i, 0) * 32ms);
+}
+.menu.is-open .menu__list > li,
+.menu.is-open .menu__feature,
+.menu.is-open .menu__foot { opacity: 1; transform: none; }
+/* closing: everything leaves together, no stagger */
+.menu:not(.is-open) .menu__list > li,
+.menu:not(.is-open) .menu__feature,
+.menu:not(.is-open) .menu__foot { transition-delay: 0ms; transition-duration: 160ms; }
+
+/* Keyboard focus */
+.menu a:focus-visible,
+.menu button:focus-visible,
+.menu-button:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+.menu__feature:focus-visible { outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .menu__panel { transform: none; opacity: 0; transition: opacity 200ms linear; }
+  .menu.is-open .menu__panel { opacity: 1; }
+  .menu__list > li, .menu__feature, .menu__foot { transform: none; transition-delay: 0ms; }
+}
