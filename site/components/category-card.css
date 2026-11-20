@@ -2,10 +2,12 @@
    Component: category card
    One care category as a card (client, 2026-11-20, after hims' category
    cards): the name on the left in ink, one colour (the user: "I dont want
-   text colourful i want like ours"), its MEDARO product floating on the card
-   over a soft shadow, the round arrow on the right. The card's finish is the promo card's (--paper, the user's pick):
-   paper, radius 12, no shadow, a 40px round arrow on mist that turns lime
-   on hover.
+   text colourful i want like ours") with a bare ↗ arrow right after it (no
+   circle), and its product at the right end of the card over a soft
+   shadow, standing still (user, 2026-11-20: "lets add arrow where i marked
+   without circle just arrow … on right we will see the product … there
+   wont be any updown animation"). The card's finish is the promo card's
+   (--paper, the user's pick): paper, radius 12, no shadow.
    First use: the three care categories in the Home hero (bottom right).
    Variants: --weight, --mens, --womens (the product and its placement).
    Framer: one component, a variant per care line (name, product).
@@ -20,11 +22,11 @@
   display: grid;
   /* the name never wraps or runs under the product: on the narrowest
      desktops (about 1200) the product column gives way instead */
-  grid-template-columns: minmax(max-content, 1fr) minmax(0, 112px) 40px;
+  grid-template-columns: minmax(max-content, 1fr) minmax(0, 112px);
   align-items: center;
   column-gap: 12px;
   height: 80px;
-  padding: 0 20px 0 24px;
+  padding: 0 12px 0 24px;
   border-radius: 12px;
   background: var(--color-bg);
   color: var(--color-ink);
@@ -40,7 +42,22 @@
   white-space: nowrap;
 }
 
-/* the product, floating over its shadow */
+/* the arrow right after the name: the MEDARO arrow turned up-right, bare, ink; it steps out on hover */
+.category-card__arrow {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-left: 6px;
+  vertical-align: -1px;
+  color: currentColor;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.category-card:hover .category-card__arrow { transform: translate(2px, -2px); }
+@media (prefers-reduced-motion: reduce) {
+  .category-card__arrow { transition: none; }
+}
+
+/* the product at the right end, still, over its shadow */
 .category-card__media {
   position: relative;
   align-self: stretch;
@@ -55,12 +72,10 @@
   margin-left: calc(var(--cc-shadow-w, 60px) / -2);
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(52, 59, 41, 0.4), transparent);
-  animation: category-card-shadow var(--cc-dur, 6s) ease-in-out var(--cc-delay, 0s) infinite;
 }
 .category-card__float {
   position: absolute;
-  inset: 8px 0 14px; /* products stay 6px+ inside the card at the top of the bob */
-  animation: category-card-float var(--cc-dur, 6s) ease-in-out var(--cc-delay, 0s) infinite;
+  inset: 8px 0 14px; /* products stay 6px+ inside the card */
 }
 /* (doubled class: beats .pack's position in product.css, which loads later) */
 .category-card .category-card__obj {
@@ -73,32 +88,12 @@
   transform: translate(-50%, -50%) rotate(var(--cc-obj-r, 0deg));
 }
 
-/* the arrow, as on the promo card */
-.category-card__go {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--color-surface);
-  color: var(--color-ink);
-  transition: background-color var(--dur-fast) var(--ease-out);
-}
-.category-card__go svg {
-  width: 16px;
-  height: 16px; /* the MEDARO arrow (assets/icons/arrow.svg) */
-  transition: transform var(--dur-base) var(--ease-out);
-}
-.category-card:hover .category-card__go { background: var(--color-accent); }
-.category-card:hover .category-card__go svg { transform: translateX(2px); }
-
 /* ---------- The three lines ---------- */
 /* Weight Loss: the client's Tirzepatide vial, a little tilted */
 .category-card--weight {
   --cc-obj-h: 52px;
   --cc-obj-r: 8deg;
   --cc-shadow-w: 42px;
-  --cc-delay: -1.5s;
 }
 /* Men's Health: the dusty blue pillow tablet, MEDARO debossed, a little tilted like hims' (user, 2026-11-20:
    "i dont like that bottle in mens lets add a tablet … different color that looks like image 2") */
@@ -106,30 +101,12 @@
   --cc-obj-h: 50px;
   --cc-obj-r: -9deg;
   --cc-shadow-w: 54px;
-  --cc-dur: 6.8s;
-  --cc-delay: -3.8s;
 }
 /* Women's Health: the oval MEDARO tablet (as in the Women's Health section) */
 .category-card--womens {
   --cc-obj-h: 40px;
   --cc-obj-r: -6deg;
   --cc-shadow-w: 52px;
-  --cc-dur: 5.6s;
-  --cc-delay: -0.6s;
-}
-
-/* a slow bob; the shadow narrows and fades as the product rises */
-@keyframes category-card-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-@keyframes category-card-shadow {
-  0%, 100% { transform: scaleX(1); opacity: 1; }
-  50% { transform: scaleX(0.86); opacity: 0.7; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .category-card__float,
-  .category-card__media::after { animation: none; }
 }
 
 /* a card with no product: no shadow either */
