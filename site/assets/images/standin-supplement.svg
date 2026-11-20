@@ -1,22 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
   <!-- STAND-IN for the supplement product shot in the hero card, not final art.
        Brief: a MEDARO supplement bottle with a few capsules on a matte dark
-       grey background, dull and low-key, no bright highlights (user,
+       olive-grey background, dull and low-key, no bright highlights (user,
        2026-11-20: "make this background greyish", "I want it to be dull look
-       not light look", "make more darkish"), soft light from the top left.
-       Square. -->
+       not light look", "make more darkish", "make it green tint but in dull
+       look"), soft light from the top left. Square. -->
   <defs>
     <radialGradient id="bg" cx="0.3" cy="0.2" r="0.95">
-      <stop offset="0" stop-color="#5f605b"/>
-      <stop offset="0.55" stop-color="#4f504b"/>
-      <stop offset="1" stop-color="#3c3d39"/>
+      <stop offset="0" stop-color="#5c6150"/>
+      <stop offset="0.55" stop-color="#4b5041"/>
+      <stop offset="1" stop-color="#393d31"/>
     </radialGradient>
     <linearGradient id="body" x1="0" x2="1">
-      <stop offset="0" stop-color="#8e9087"/>
-      <stop offset="0.18" stop-color="#b9bab3"/>
-      <stop offset="0.42" stop-color="#c8c9c2"/>
-      <stop offset="0.75" stop-color="#afb0a8"/>
-      <stop offset="1" stop-color="#83867b"/>
+      <stop offset="0" stop-color="#8b9080"/>
+      <stop offset="0.18" stop-color="#b6baab"/>
+      <stop offset="0.42" stop-color="#c5c9ba"/>
+      <stop offset="0.75" stop-color="#acb0a0"/>
+      <stop offset="1" stop-color="#808573"/>
     </linearGradient>
     <linearGradient id="cap" x1="0" x2="1">
       <stop offset="0" stop-color="#2a3020"/>
@@ -35,8 +35,8 @@
       <stop offset="1" stop-color="#4c5636"/>
     </linearGradient>
     <linearGradient id="capsB" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#c9cac2"/>
-      <stop offset="1" stop-color="#9fa197"/>
+      <stop offset="0" stop-color="#c6cabb"/>
+      <stop offset="1" stop-color="#9ca191"/>
     </linearGradient>
     <filter id="blur6"><feGaussianBlur stdDeviation="6"/></filter>
   </defs>
