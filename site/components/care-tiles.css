@@ -1,0 +1,148 @@
+/* ==========================================================================
+   Component: care tiles
+   The Home care-line sections (Men's Health, Women's Health): a big centred
+   headline, then two rows of square tiles, photos and MEDARO renders
+   alternating with text tiles (the line's five care points), running off
+   both screen edges and sliding sideways in opposite directions as you
+   scroll (main.js, data-drift); paragraph and CTA centred below.
+   After the user's "When we can help" reference (2026-11-19).
+   Each section recolours the page while it holds the middle of the screen
+   (data-scene on the section; the scene's tokens live in its own
+   stylesheet, sections/home/<line>.css).
+   Framer: one component, a variant per care line.
+   ========================================================================== */
+
+.care {
+  --care-pad: clamp(112px, 10vw, 192px);
+  --care-gap: 8px;
+  /* square tiles, ~a quarter of the screen like the reference; stop growing
+     with the frame (1888 wide) */
+  --care-tile: min(24.5cqw, 462px);
+  container-type: inline-size;
+  overflow-x: clip;
+  padding: var(--care-pad) 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  /* the nav link lands with the eyebrow 48px under the nav bar */
+  scroll-margin-top: calc(var(--edge) + 56px + 48px - var(--header-h) - var(--care-pad));
+}
+
+.care__frame {
+  width: min(100% - 2 * var(--edge), var(--frame-max));
+  margin-inline: auto;
+  text-align: center;
+}
+
+.care__eyebrow {
+  margin-bottom: 28px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.care__title {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 7.2vw, 140px);
+  font-weight: var(--weight-medium);
+  line-height: 0.95;
+  letter-spacing: -0.048em;
+}
+
+.care__lede {
+  max-width: 30em;
+  margin: clamp(28px, 2.2vw, 40px) auto 0;
+  font-size: clamp(18px, 1.4vw, 22px);
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  text-wrap: balance;
+}
+
+.care__label {
+  margin: clamp(64px, 5.6vw, 104px) 0 20px;
+  font-size: 15px;
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Tiles ---------- */
+.care__rows {
+  display: grid;
+  gap: var(--care-gap);
+}
+.care__row {
+  display: flex;
+  gap: var(--care-gap);
+  width: max-content;
+  will-change: transform;
+}
+.care__tile {
+  flex: none;
+  width: var(--care-tile);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 12px; /* the nav bar's radius */
+  background: var(--color-surface);
+}
+.care__tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.care__tile--text {
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  text-align: center;
+  font-size: clamp(28px, 2.6vw, 50px);
+  font-weight: var(--weight-medium);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+/* Product tiles: a MEDARO macro render on the tile colour, lit from above */
+.care__tile--product {
+  background:
+    radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--color-surface) 82%, #fff 10%) 0%, transparent 62%),
+    var(--color-surface);
+}
+.care__tile--product img {
+  object-fit: contain;
+  padding: 16%;
+  filter: drop-shadow(0 24px 28px rgba(0, 0, 0, 0.35));
+}
+
+/* ---------- Paragraph and CTA ---------- */
+.care__foot {
+  margin-top: clamp(64px, 5.6vw, 104px);
+}
+.care__foot p {
+  max-width: 38em;
+  margin-inline: auto;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  text-wrap: balance; /* centred: even lines, no lone "you first." */
+}
+.care__foot .btn { margin-top: 32px; }
+.care__nowrap { white-space: nowrap; } /* keeps hyphenated words like "well-being" on one line */
+
+/* Not live yet (Women's Health): the client's "Coming Soon" in place of the
+   CTA. Text, not a link, so it takes the button's size but no fill, no arrow
+   and no hover; lime stays for things you can press. */
+.care__foot .care__soon {
+  display: inline-flex;
+  align-items: center;
+  max-width: none;
+  height: 48px;
+  margin-top: 32px;
+  padding: 0 22px;
+  border-radius: var(--radius-s);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 30%, transparent);
+  color: var(--color-ink);
+  font-size: 15px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+}
