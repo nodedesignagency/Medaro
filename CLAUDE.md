@@ -9,6 +9,7 @@ Read `DESIGN.md` before designing anything. It holds the design system, the sect
 - **Phase 1 is HTML**: fast static drafts in `/site` so we can review and change things quickly.
 - **Phase 2 is Framer**, through the Framer MCP, only once `main` holds approved pages and the user has created the Framer file and says "move to Framer". Never touch Framer before that.
 - **Page by page, section by section.** Mostly one page at a time, but any session may work on any page. Show each section before moving on. For key sections (heroes, the first fold of each landing page) offer 2–3 versions.
+- **Alignment:** every section sits on the frame (`--frame-side`, see `DESIGN.md` → Space, layout, shape): content edges line up with the nav bar's edges, and nothing stretches past 1888px. Check edges by measuring rendered pixels, not by eye.
 - **Desktop only in the HTML phase.** Don't build or check tablet or phone layouts until Framer. Before handing anything over, check it in a browser at 1440 wide (and at 1280 and 1920 to make sure the desktop range holds); fix overflow, overlaps and broken wraps. Also check at 2x pixel density: the user reviews on a Retina Mac.
 - Use skills when they help (list below). Load `anthropic-skills:frontend-design` before starting a new section's visual direction.
 
@@ -34,7 +35,7 @@ Every message that follows a push ends with the exact command and the commit the
 cd ~/Desktop/medaro-preview && ./preview.sh <branch>
 ```
 
-`preview.sh` fetches, switches to the branch, pulls (fast-forward only) and opens `site/index.html`. Other pages or review switches: `./preview.sh <branch> weight-loss.html`, `./preview.sh <branch> "index.html?hero=b"`. With no branch it opens `main`. The user's local clone is `~/Desktop/medaro-preview`; the first time only:
+`preview.sh` fetches, switches to the branch, pulls (fast-forward only) and opens `site/index.html`. Other pages or review switches: `./preview.sh <branch> weight-loss.html`, `./preview.sh <branch> "index.html?hero=v2"`. With no branch it opens `main`. The user's local clone is `~/Desktop/medaro-preview`; the first time only:
 
 ```bash
 git clone https://github.com/nodedesignagency/Medaro.git ~/Desktop/medaro-preview
@@ -48,12 +49,13 @@ git clone https://github.com/nodedesignagency/Medaro.git ~/Desktop/medaro-previe
 - `site/sections/<page>/<name>.css`: one stylesheet per section (e.g. `sections/home/hero.css`). Asset paths inside start with `../../assets/`.
 - `site/main.js`: small shared JS (header, scroll links, FAQ, version switcher).
 - `site/assets/logo/`: the client's official wordmark. `wordmark.svg` is cropped tight to the letters (black), `wordmark-white.svg` for dark backgrounds, `medaro-logo-original.svg` and `.jpg` exactly as delivered. Pages inline it from the sprite as `#wordmark` (`currentColor`). **Use these, never typeset "MEDARO" for the logo.**
+- `site/assets/icons/`: the user's icons as delivered (`arrow.svg`, 2026-11-20: the one arrow used everywhere). Pages use them from the sprite in `currentColor` (`#i-arrow-right`, `#i-arrow-ne`), never another arrow shape.
 - `site/assets/images/`: photography and renders, compressed (WebP/AVIF, ≤300 KB each, hero ≤500 KB).
 - `site/versions/<name>/`: frozen snapshots the user asked to keep for comparison. Never edit them and never promote them to `main`; open with `./preview.sh <branch> versions/<name>/index.html`.
 - `content/`: the client's copy as Markdown, word for word: `home.md`, `about.md`, `weight-loss.md`, `mens-health.md`. Originals in `content/source/` (`medaro-copy.pdf` and `legal/*.pdf`, 11 legal documents).
 - `review/`: screenshots and videos for review. Git-ignored; send them to the user, don't commit them.
 
-**Versions inside one branch:** when offering versions of a section, give each its own block and stylesheet (`SECTION:home/hero--a`, `sections/home/hero--a.css`, same for `--b`) and mark the wrapper `data-version="hero:a"`. `main.js` shows one at a time, chosen with `?hero=b`, and adds a small review switcher in the corner (hidden with `?review=0`). The switcher is review-only and never goes to Framer.
+**Versions inside one branch:** when offering versions of a section, give each its own block and stylesheet (`SECTION:home/hero--v1`, `sections/home/hero--v1.css`, same for `--v2`) and mark the wrapper `data-version="hero:v1"`. `main.js` shows one at a time, chosen with `?hero=v2`, and adds a small review switcher in the corner (hidden with `?review=0`). The switcher is review-only and never goes to Framer. If a version needs its own header, put the header inside the same wrapper.
 
 Use the same class names everywhere (BEM-ish: `.hero__title`, `.btn--primary`). Reusable parts (header, footer, buttons, steps, FAQ, CTA band, disclaimer, cards) must be built the way Framer will need them: one structure, variants by modifier, no page-specific hacks.
 
@@ -61,18 +63,20 @@ Use the same class names everywhere (BEM-ish: `.hero__title`, `.btn--primary`). 
 
 | Page | File | Copy | Nav |
 |---|---|---|---|
-| Home | `index.html` | `content/home.md` | Full header. Weight Loss · Men's Health · Women's Health · Supplement · How Medaro Works **scroll** to sections on Home (like home.medvi.org). About Us · Contact Support **open pages**. |
+| Home | `index.html` | `content/home.md` | Full header, **the approved menu header** (2026-11-20): **logo left · Get Started + round menu button right, no login**; the six links, Contact and Get Started live in the menu sheet. Weight Loss · Men's Health · Women's Health · Supplement · How Medaro Works **scroll** to sections on Home (like home.medvi.org). About Us and Contact **open pages** (Contact goes to the Contact Support page). |
 | About Us | `about.html` | `content/about.md` | Full header |
 | Contact Support | `contact.html` | **[COPY NEEDED]** | Full header |
 | Weight Loss landing | `weight-loss.html` | `content/weight-loss.md` | **No links to Home or any other page.** Logo is not a link. Every CTA goes to the Weight Loss intake form. |
 | Men's Health landing | `mens-health.html` | `content/mens-health.md` | **No links to Home or any other page.** Every CTA goes to the Men's Health (ED) intake form. |
 | Legal (11) | `legal/<slug>.html` | `content/source/legal/*.pdf` | Footer links. Docs have placeholders like `[BRAND_NAME]`, `[EFFECTIVE_DATE]`: keep them visible until the client fills them. |
 
-Women's Health shows **Coming Soon** (no link). Intake form URLs, the Supplements link and the hero CTA are unknown: use `#intake-weight-loss`, `#intake-mens-health`, `#supplements-link` and mark `[LINK NEEDED]`.
+Women's Health has no page: every Women's Health link scrolls to the `#womens-health` section on Home, whose CTA is the client's **[Coming Soon]** (client, 2026-11-20). Intake form URLs, the Supplements link and the hero CTA are unknown: use `#intake-weight-loss`, `#intake-mens-health`, `#supplements-link` and mark `[LINK NEEDED]`.
 
 ## Copy and compliance (telehealth: this matters)
 
-- Use the client's copy from `content/` word for word. You may change case and layout, not words. If a design needs shorter copy, propose the cut to the user; never edit silently. Missing copy: a short placeholder marked `[COPY NEEDED]`. No lorem ipsum.
+- **Read the copy brief before designing a section.** The four care lines (Weight Loss, Men's Health, Women's Health, Supplement) live in the header nav only, never in the hero, except where the user asks for something specific (the approved hero has the supplement promo card and the client's Weight Loss / Men's Health / Women's Health category rows, both at the user's request).
+- **When the user gives a reference, follow it closely**; don't invent extra devices. The first round of heroes was rejected as "AI slop" (see `DESIGN.md` → Rejected).
+- Hero copy is ours to write (the user said so); everywhere else, use the client's copy from `content/` word for word. You may change case and layout, not words. If a design needs shorter copy, propose the cut to the user; never edit silently. Missing copy: a short placeholder marked `[COPY NEEDED]`. No lorem ipsum.
 - **Never remove or soften a qualifier or disclaimer** ("when medically appropriate", "if prescribed", "has not been demonstrated", "not FDA-approved", "results vary"). Disclaimers stay visible near the claims they qualify, not only in the footer.
 - **Never invent** numbers, prices, pounds lost, percentages, patient counts, ratings, reviews, testimonials, doctor names or credentials, "as seen in" logos, or certification badges. Placeholders only, marked `[DATA NEEDED]`.
 - Quad 4 is a proposed compounded formulation: never call it FDA-approved, never imply speed or duration claims the copy explicitly denies.
@@ -84,7 +88,7 @@ Women's Health shows **Coming Soon** (no link). Intake form URLs, the Supplement
 - Intake form URLs (weight loss, men's health) and the Supplements link.
 - Contact Support page copy (email, phone, hours, form?).
 - Landing-page footer: may it link to Privacy / Terms? (Ad platforms and state laws usually require it, even when the page has no other links.)
-- Photography and product renders: we will need to create a few images; the user will decide how with us when we get there.
+- Photography and product renders: **images are made after the user confirms a design** (user, 2026-11-19). Until then use stand-ins (`assets/images/standin-*.svg`, or UI built in code) and write the photo brief in `data-brief`.
 - Body/UI typeface: the logo is Montserrat; is there a brand palette or font beyond the logo?
 
 ## Skills and tools
@@ -116,3 +120,9 @@ See `DESIGN.md`. Breakpoints match Framer: desktop ≥1200, tablet 810–1199, p
 ## Checking pages in the container
 
 Chromium and Playwright are pre-installed. Serve `site/` with `python3 -m http.server`, screenshot at 1440 (deviceScaleFactor 2 for anything the user sees; 1280 and 1920 for your own range check), and send screenshots from `review/`. For WebGL, launch Chromium with `--use-angle=swiftshader --enable-unsafe-swiftshader --ignore-gpu-blocklist`.
+
+Network: launch Chromium with `proxy: { server: process.env.HTTPS_PROXY, bypass: '<-loopback>,localhost,127.0.0.1' }` so Google Fonts load and localhost isn't sent to the proxy (it returns a 405 page otherwise). The same launch can screenshot reference sites the user shares; save them to `review/inspo/`. Sites behind a bot check (nekohealth.com) won't load: ask the user for screenshots instead of working around it.
+
+Product imagery: follow "MEDARO product imagery" in `DESIGN.md` → Direction. **Magnific makes the 3D product, code makes the branding.** One render per object (never one scene for everything), each object whole in its frame (never cropped), pens upright and tilted in CSS, rendered **blank** (no text, logos or numbers; debossed tablets are the only exception). Cut out with background removal (3 credits); each object floats on its own. **All label text and branding is SVG in code**, clean but structured with one strong colour block, after the user's Superpower, Face Formula and Immortals references (hairlines along the label, product name, a solid colour tab with the dose, small MEDARO mark + Rx only, one use line: `DESIGN.md` → Direction, rule 6), printed with multiply and clipped with an SVG clipPath. **Every word must be readable in the hero** (nothing under about 6.5px on screen at 1440): cut what would be smaller. Never a big wordmark, tiny text, hairline "fields", slogans or invented small print, and never a CSS `mask-image` with an image (it vanishes when the page is opened from disk). Check pages from `file://` as well as from the server: that is how the user previews.
+
+Images: Magnific (Freepik) is connected on a paid plan. Stock downloads and generations cost credits (a free-licence stock photo is 40), so ask the user before spending any.

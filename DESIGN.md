@@ -1,6 +1,6 @@
 # MEDARO design system
 
-The single source of truth for how MEDARO looks and behaves. Every branch reads it before designing and updates it in the same push when the user approves, rejects or prefers something. Values marked *provisional* may change until the Home hero is approved; **token names are fixed now** so parallel branches stay compatible.
+The single source of truth for how MEDARO looks and behaves. Every branch reads it before designing and updates it in the same push when the user approves, rejects or prefers something. Values marked *provisional* may change until the Home hero is approved; **token names are fixed** so parallel branches stay compatible.
 
 ---
 
@@ -8,72 +8,94 @@ The single source of truth for how MEDARO looks and behaves. Every branch reads 
 
 - **Name:** MEDARO, always in capitals (the client writes it that way in body copy too).
 - **Tagline:** Made for Better Health.
-- **Logo:** wordmark only, no symbol. Montserrat Regular, uppercase, tight optical spacing, **the A has no crossbar** (reads as Λ). Black on light, white on dark. Files in `site/assets/logo/`; in pages use the sprite `<svg><use href="#wordmark"/></svg>` (viewBox `194 74 4413 712`, ratio ≈ 6.2 : 1).
-  - Minimum width: 88px on screen.
+- **Logo:** wordmark only, no symbol. Montserrat Regular, uppercase, tight optical spacing, **the A has no crossbar** (reads as Λ). Ink on light, paper/white on dark. Files in `site/assets/logo/`; in pages use the sprite `<svg><use href="#wordmark"/></svg>` (viewBox `194 74 4413 712`, ratio ≈ 6.2 : 1).
+  - Header size: 20px tall (≈124px wide). Minimum width: 88px on screen.
   - Clear space: at least the height of the letters on every side.
-  - Never typeset it, stretch it, outline it, add effects or recolour it outside ink/white.
-- **Favicon:** none yet (no symbol). *[Pending: the M or the Λ as a monogram? Ask before making one.]*
+  - Never typeset it, stretch it, outline it, add effects or recolour it outside ink/paper.
+- **Favicon:** none yet (no symbol). *[Pending: the Λ as a monogram? Ask before making one.]*
 
-## 2. Direction
+## 2. Direction *(the Home hero is approved, 2026-11-20: it sets the look for the sections below)*
 
-*Pending: the user is sending inspiration sites. Write the agreed direction here in a few lines once the Home hero is approved.*
-
-Starting point (to test against the inspiration, not decided):
-- Category: direct-to-consumer telehealth (weight loss, men's and women's health, supplements). The client points at home.medvi.org for the scroll navigation on Home.
-- The site has to do two jobs: **trust** (licensed providers, clear process, honest qualifiers) and **ease** (one obvious next step on every screen).
-- The logo is quiet, geometric and thin. The design should give it room, not compete with it.
+- **Follow the user's references closely.** When the user names a reference for a section, build that layout faithfully and make it ours through copy, colour, imagery and finish. Don't add devices the reference doesn't have.
+- **Two jobs:** trust (licensed providers, a clear process, honest qualifiers) and ease (one obvious next step on every screen).
+- **Feel:** calm, premium, botanical. The client's olive greens, lime only on buttons. Big confident grotesk headlines, short copy, generous space, real photography doing the emotional work.
+- **The four care lines (Weight Loss, Men's Health, Women's Health, Supplement) live in the header nav only.** They never appear as cards, lists, tabs or strips in the hero (user, 2026-11-19). Exceptions the user asked for: one supplement promo card (bottom left of the approved hero), and the client's three care categories as CTA rows (bottom right, 2026-11-20).
+- **Hero copy is ours to write** (user: "we have freedom there"). Everywhere else, use the client's copy word for word.
+- **MEDARO product imagery (user, 2026-11-19, after several rejected rounds). Magnific makes the 3D object; code makes the branding.**
+  1. **One object per render.** Each product (pen, capped pen, tablet, vial…) is its own Nano Banana 2.1 render at 4K, never one scene with everything in it ("generate all one by one … all will be different and will have different motion"). Each object gets its own layer and its own float (different period, drift, tilt and phase).
+  2. **Whole object, nothing cropped.** The object sits complete in its frame with empty backdrop all round ("it getting cut from above"). Pens and other long objects are rendered **upright and side-on**, then tilted in CSS; this also keeps the label straight for the code.
+  3. **Blank.** Ask for no text, letters, numbers, logos or marks on pens, vials, boxes or labels: a plain matte white label sleeve. **The one exception is the debossed tablets**, which Magnific does well with the wordmark as a reference (the user: "keep the tablets they look good").
+  4. Same look across the set: references are the user's image (realism, part-for-part detail) plus our earlier render (materials, light). Render on the stage backdrop with the stage light (dark olive, warm key light from the upper right), then cut out with background removal (3 credits) and trim. Reuse the stage plate; don't regenerate it.
+  5. **Labels in code.** SVG drawn in the product image's own pixel coordinates, laid over the image with `mix-blend-mode: multiply` (the render's shading and paper show through) and clipped to the label sleeve with an SVG `clipPath` inset 1.5px from the silhouette; on dark labels add a soft `screen` sheen on the lit side. Text runs along a pen's axis. **Never use a CSS `mask-image` with an image file:** browsers block it when the page is opened from disk (the user's `preview.sh` opens `file://`) and the whole label vanishes. Check every change from `file://` too, not only from a local server.
+  6. **Label content: clean, structured, one strong colour block, every word readable** (the user's pick, after the Superpower blood tube and test kits, Face Formula serum and Immortals vials; Mobbin). Shared by every MEDARO pack: two **hairlines** running the length of the label; the **product name** (medium) in the band between them; a **solid colour tab** in that band carrying the dose (olive tab with lime text on white labels, lime tab with olive text on olive labels); the **MEDARO mark** (small) and `Rx only` on the row above; one use line ("Injection · Single-dose pen") on the row below. **Minimum text size: 20 units in the pack image's pixels, about 6.5px on screen at 1440**; anything that would be smaller is cut, not shrunk (the user: "small texts and stuff … makes it feel like its ai"). Nothing where another object hides it. No Lot/Exp fields, mono micro-caps, big wordmark, slogans or invented small print.
 
 ## 3. Tokens
 
 Defined in `site/styles.css`. These become Framer colour and text styles in Phase 2.
 
-### Colour *(provisional)*
+### Colour
 
-| Token | Value | Use |
+Raw colours sit in palette blocks (`--p-*`) at the top of `styles.css`; everything else uses the semantic tokens, so a palette swap recolours the whole site. **Palette A is the client's** (shared on a call, 2026-11-19). The user promised the client **2–3 colour options** once the first version is done: add them as `:root[data-palette="b"]`, `"c"`, list them in `<html data-palettes="a,b,c">`, and review with `?palette=b`.
+
+| Palette token | A (client) | Role |
 |---|---|---|
-| `--color-ink` | `#0e0f0f` | Headlines, logo, primary button |
-| `--color-text` | `#1f2121` | Body text |
-| `--color-text-muted` | `#5a5f5e` | Secondary text, captions (≥4.5:1 on `--color-bg`) |
-| `--color-bg` | `#ffffff` | Page |
-| `--color-surface` | `#f5f5f3` | Alternate sections, cards on white |
-| `--color-line` | `rgba(14, 15, 15, 0.12)` | Hairlines, borders |
-| `--color-accent` | *TBD* | One brand accent, chosen with the hero |
-| `--color-on-dark` | `#f7f7f5` | Text on dark sections |
-| `--color-wl` / `--color-mh` / `--color-wh` / `--color-sp` | *TBD* | Optional per-line tints (Weight Loss, Men's, Women's, Supplements) |
+| `--p-ink` | `#343B29` Dark Olive Green | Headlines, text, logo |
+| `--p-ink-soft` | `#5E6551` (derived) | Secondary text (5.6:1 on paper) |
+| `--p-accent` | `#D5E5AD` Soft Nude Lime | Buttons and hover fills ("not the light green") |
+| `--p-accent-hover` | `#C8DB98` (derived) | Button hover |
+| `--p-sage` | `#A8AF98` Dusty Olive | Surfaces, image tone. **Never text on it except ink** (paper on sage is 2:1) |
+| `--p-paper` | `#F4F5EF` (derived) | Page background |
+| `--p-mist` | `#E7EADF` (derived) | Cards, alternate sections |
+| `--p-deep` | `#262B1E` (derived) | Dark sections and cards |
 
-### Type *(provisional)*
+Semantic tokens: `--color-ink`, `--color-text`, `--color-text-muted`, `--color-bg`, `--color-surface`, `--color-line`, `--color-accent`, `--color-accent-hover`, `--color-on-accent` (text on lime, stays dark in every scene; added 2026-11-19), `--color-sage`, `--color-deep`, `--color-on-dark`, `--color-on-dark-muted`, and per-line tints `--color-wl` (sage), `--color-mh` (deep), `--color-wh` (mist), `--color-sp` (lime).
 
-- `--font-display`: Montserrat for now (matches the logo). `--font-body`: Montserrat for now. Both may change with the direction.
-- Scale (desktop / phone): hero 72/44, h2 48/32, h3 28/22, lede 20/18, body 17/16, small 14, caps 12 (tracking 0.12em). The HTML only uses the desktop sizes; the phone sizes are a starting point for the Framer breakpoints.
+**Scenes** (2026-11-19): a section can recolour the whole page while it holds the middle of the screen: `data-scene="<name>"` on the section, `:root[data-scene="<name>"] { --color-bg … }` in its stylesheet. The six page tokens (bg, surface, ink, text, text-muted, line) are registered with `@property`, so the page fades in 700ms (instant under reduced motion). First use: Men's Health in blue. Framer: page background and text colours driven by scroll (section in view).
+
+Contrast: ink on paper ≈ 10:1, ink on lime ≈ 8.6:1, ink on sage ≈ 5.2:1, paper on deep ≈ 13:1.
+
+### Type
+
+- **Host Grotesk** for everything (Google Fonts, available in Framer). V1 headlines Medium 500 with tight tracking (−0.048em), like avenn; V2 headlines Regular 400 (−0.035em), like Superpower. Text Regular 400, buttons and nav 400–500.
+- **Montserrat** is the logo only, never set in text.
+- Desktop sizes: V1 hero 88–140 (7.2vw), V2 hero 62, lede 16–20, body 17, nav 14–15. Phone starting points for Framer: hero 48, h2 34, h3 24, lede 18, body 16.
 - Line length for body copy: 60–72 characters.
 
 ### Space, layout, shape
 
 - Spacing on a 4px base: `--space-1` (4) … `--space-11` (160).
-- Container max 1440px, gutter 40px desktop / 20px phone, 12-column grid, 24px gap.
-- Radius: `--radius-s` 8, `--radius-m` 16, `--radius-l` 24, `--radius-pill` 999.
-- Motion: `--ease-out` cubic-bezier(0.22, 1, 0.36, 1), `--dur-fast` 160ms, `--dur-base` 240ms, `--dur-slow` 480ms. Every animation has a reduced-motion fallback.
+- **The frame (user, 2026-11-19, after avenn):** `--edge` 16px, `--frame-max` 1888px, `--frame-side` = max(16px, (100% − 1888px) / 2). The glass nav sits on the frame edges and **hero content shares exactly those edges**: left blocks start where the nav bar starts, right blocks end where it ends. 32px between the nav bar and the first content row, 16px from the bottom. Big headlines use `text-box: trim-both cap alphabetic` and small optical offsets so the letters themselves (not their line boxes) sit on the edges; checked by measuring the rendered pixels at 1280, 1440 and 1920. Past 1888px (zooming out, big screens) the frame stops growing and centres; full-bleed photos still fill the screen.
+- Container max 1520px, gutter 40px, 12-column grid, 24px gap. Header 84px.
+- Radius: `--radius-s` 8 (V1 buttons, nav icon), `--radius-m` 16, `--radius-l` 28, `--radius-pill` 999 (V2 buttons). V1 nav bar 10, V2 hero frame 18.
+- Motion: `--ease-out` cubic-bezier(0.22, 1, 0.36, 1), `--dur-fast` 160ms, `--dur-base` 260ms, `--dur-slow` 560ms. Every animation has a reduced-motion fallback.
 
 ### Breakpoints (match Framer)
 
 Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
 
-**HTML phase is desktop only** (review at 1440, 2x). Tablet and phone are designed and built in Framer during the transfer, section by section, and shown to the user there.
+**HTML phase is desktop only** (review at 1440, 2x). The first screen must fit a laptop browser window (about 1440×790) as well as 1440×900 and 1920×1080. Tablet and phone are designed and built in Framer during the transfer, section by section, and shown to the user there.
 
 ## 4. Components (built Framer-ready)
 
 | Component | Variants | Used on | Status |
 |---|---|---|---|
-| Header | `full` (Home, About, Contact: scroll links + page links) · `landing` (logo only + one CTA, no links out) | all | not started |
-| Footer | `full` · `landing` (legal links only, pending client answer) | all | not started |
-| Button | `primary` · `secondary` · `ghost` · with arrow | all | not started |
-| Eyebrow | the small label above headings | all | not started |
-| Check list | the "Your care, made simple" style bullet lists | Home, landings | not started |
-| Steps | 01 / 02 / 03 process | Home, both landings | not started |
+| Header | One structure (user, 2026-11-19): **logo left · six links centred** (Weight Loss, Men's Health, Women's Health, Supplement, How Medaro Works, About Us) **· "Contact" secondary button + Get Started right. No login.** Secondary on glass = `.btn--glass` (white 14%), on the page = `.btn--outline`. **V1 (locked): `--glass` + `--smoke`**: bar 56px tall, inset 16px (on the frame), radius 12, padding 0 8 0 22, links 14px at 88% white 24px apart, Contact + lime Get Started 40px radius 8, 8px apart; smoke glass = rgb(19,19,19) ~58%, slightly darker at the top, no light edge (measured from the user's Dolomites glass-card reference). Turns light past the photo. **V2: `--plain`** on the page background, 88px tall; logo and CTA sit on the content inset (frame edge + 48). **V3: `--plain --compact --menu`** (client, 2026-11-20: "change the navigation menu like the others I showed", hims and Superpower): logo left; Get Started (dark pill, 44px) and a round 44px menu button (mist, two-line icon) right; the six links move into the menu sheet. 70px tall (user: "nav looks so big heightwise … reduce it by 16-20px"), Contact and Get Started 44px tall ("make button on nav 4px smaller"); `landing` (logo + one CTA, no links out) not started | all | **V3 approved** (2026-11-20, with the hero) · V1, V2 retired |
+| Menu sheet | `components/menu.css` + `main.js` (menu), after the client's hims/Superpower references and Mobbin (Quartz, Klaviyo): native `<dialog>` opened as a modal from the header's menu button. Paper sheet floating 8px from the screen edges, radius 18 like the stage, 460px wide, slides in from the right (420ms ease-out) over a 42% olive scrim. "Menu" + round close **on a hairline** (user, 2026-11-20); labels ("Explore", "Top treatments") **neutral grey #6b6b68, 11px caps** ("grey not greenish … little more smaller"); the six links at 28px with arrows (Women's Health scrolls to its Home section, like the hero row); **"Top treatments" row after hims** (user: replaces the dark featured card): light mist cards 168×196, Rx badge (white circle), product centred (the hero's pens with their code labels, tilted; the oval tablet; the white tablet), name at the foot; the row scrolls sideways to the sheet's edge with the next card peeking. Cards: Semaglutide, Tirzepatide → `weight-loss.html`, Quad 4 → `mens-health.html`, Supplements → `#supplements` `[LINK NEEDED]` treatment pages. Contact + Get Started at the foot. Rows rise in with a 32ms stagger; closing is quick and together. Esc, scrim, × and in-page links close it; focus stays inside and returns to the menu button; the page doesn't scroll behind it. Reduced motion: fades only. | Home | approved |
+| Footer | `full` · `landing` (legal links only, pending client answer). Links use `.link-roll` | all | not started |
+| Button | `primary` (lime) · `dark` (ink); sizes `--s` 40, default 48, `--l` 54; `--pill` for V2. **Every lime CTA uses `--arrow`** (user, 2026-11-19, after the Verdant "Try now" button): label tile + square arrow tile (the user's arrow, `#i-arrow-right`) joined by a narrow neck, leaving a round-ended notch top and bottom (5px wide, 9px deep at 48; 4×8 at 40; 5×10 at 54; inner corners 3px). Same colours as before; hover darkens the lime and nudges the arrow 3px. Other buttons (Contact, dark, outline) stay plain | all | exploring |
+| Text link | `.link-underline` | all | exploring |
+| Rolling link | `.link-roll` (styles.css + main.js): on hover every letter slides up and an identical copy rolls in from below, left to right (280ms per letter, 16ms apart, ease-in-out), rolling back on leave; after the user's hover recording (2026-11-20). Text split into letters with the font's kerning measured and kept (words keep their exact width); the word stays whole for screen readers. **On every nav link in every hero version, on every branch (V1 and V2 header links, the V3 menu links), and every footer link when the footer is built** (user, 2026-11-20). Links in a closed menu or hidden version are split when they first appear; icons inside a link stay; a link's size never changes (checked by pixels, within 1px). Reduced motion: no roll. Framer: a link component with two stacked text layers and a staggered per-letter hover | all | exploring |
+| Stand-in image | `.media-brief` + `assets/images/standin-*.svg`; `?briefs=on` shows the photo brief | all | exploring |
+| Promo card | `components/promo-card.css`, **`--paper` (locked)**: light card, ink title, olive label `#56662F`, no shadow; radius 12 like the nav, 8px inset and 8px image radius like the nav buttons; 104px image left, caps label, two-line title, 40px round ↗ 8px from the corner | Home hero | approved |
+| Floating product | `components/product.css` (Home hero): `.product` objects with their image ratio, stacking and own float (`--dur --delay --fx --fy --fr`); each hero places them with `--x --y --h --r` inside its own scene box (a size container). Pen labels are `.product__print` SVG in the markup (ids prefixed per place, e.g. `hero-sleeve-pen`, `menu-sleeve-pen`, so no two own the same clipPath). | Home hero, menu | approved |
+| Stage light | `components/stage-light.js` + `.css` (Home hero): the studio light drawn live in WebGL instead of the photo plate (user, 2026-11-20: the plate "looks super blurry and not high quality … recreate it in code like a shader animation … sun rays … more alive"). **The light comes through a narrow opening** just past the stage's top-right corner and **fans out** down-left over the products (user, 2026-11-20: "make it more like it is coming from narrow source then it widens … dont need to be point source but narrow"): opening half-width 0.07 of the stage height, widening 0.22 per unit travelled (about 12° each side), axis 142.7°, crisp edges at the opening softening as it spreads, brightest at the opening; the sentence and rows sit in the shadow under it. Colour response **fitted to the plate** (per-channel curves: olive shadows, warm sage-cream light). Over it: **sun shafts** with darker gaps fanning out from the opening, sliding sideways and flowing outward, the edges frayed by the rays, slow haze, a 3.5% breathe, a soft highlight shoulder (peaks stay warm cream, never grey), fine grain at 24 fps and a dither (no banding at 2x). Look: **`dust`** (shafts + fine dust motes, glinting only in the lit shafts), the default the user approved; set on the canvas as `data-light="dust"`. The component keeps two more looks, `rays` (crisper, stronger, no dust) and `soft` (softer, more haze, slower), which are not on the page. Intro: the canvas fades in over the plate as the same smooth beam, then the rays come in over 2.4s. The plate stays underneath as the fallback (no WebGL/JS, context loss). Runs only while on screen and the tab is visible; drawing buffer capped at 5.2M px and drops a step on slow GPUs. Reduced motion: one still frame. Text contrast on the brightest moving shaft (1280–1920): sentence 5.5:1+, rows 10:1+, headline 4.0:1+ (large text, AA needs 3:1). Framer: a code component with the same shader | Home hero | approved |
+| Arrow icon | **The user's arrow, everywhere** (2026-11-20, `assets/icons/arrow.svg`): sprite `#i-arrow-right` (16×16, `fill: currentColor`, so it takes our colours) and `#i-arrow-ne` (the same glyph turned −45°, promo card). Sizes: 16px in the hero category circles, 20px in the menu, 16px in the promo card, 18px in the lime `--arrow` buttons' tile. No other arrow shapes | all | exploring |
+| Care tiles | `components/care-tiles.css` (`.care`, `--mens`, `--womens`): centred eyebrow, headline, lede, label; two rows of square tiles (photo / text / MEDARO render) running off both edges and drifting with scroll; paragraph and CTA (or `.care__soon` when the line isn't live). Each line's scene colours live in its own section stylesheet. Framer: one component, a variant per care line | Home | exploring |
+| Check list | the "Your care, made simple" style bullet lists. **Home Weight Loss: columns** (hairline on top, 24px line icon from the sprite, title), after Good Life | Home, landings | exploring |
+| Steps | `components/steps.css` + main.js (steps): pinned stage, number / card / text, one step at a time, changed by scroll: odometer number, cards stacking like a deck as you scroll (after a stacking-cards recording), text slide-and-fade (after Givingli). All steps stay in the page as an ordered list for screen readers. Card colours via `--steps-card` / `--steps-card-ink`. Framer: one component, a variant per step, scroll-triggered | Home, both landings | exploring |
 | FAQ | accordion | both landings | not started |
 | Disclaimer | medical disclaimer block | Home, landings | not started |
 | CTA band | closing call to action | both landings, About | not started |
-| Treatment card | one per line (Weight Loss, Men's, Women's, Supplements) | Home | not started |
 
 ## 5. Section status
 
@@ -83,13 +105,13 @@ Status: `exploring` (on a branch) · `approved` (on `main`) · `rejected`. Add a
 
 | Section | Status | Branch | Notes |
 |---|---|---|---|
-| header | — | | |
-| hero | — | | Next up. Waiting for inspiration. |
-| weight-loss | — | | |
-| mens-health | — | | |
-| womens-health | — | | Coming Soon |
+| header | **approved** (2026-11-20, with the hero) | `main` | Hero V3's header: `--plain --compact --menu` (70px, logo left, Get Started dark pill + round menu button right) and the menu sheet (Components → Header, Menu sheet). The V1 glass bar with six centred links is retired. Sticky, on the page colour, so it follows the scene colours (blue, pink, sage) below the hero. |
+| hero | **approved** (2026-11-20) | `main` (from `claude/ecstatic-keller-co5pta`, via `claude/ecstatic-franklin-ul1zra`) | **Hero V3, confirmed by the user (2026-11-20: "use the hero v3 it is confirmed")**; promoted as `home/hero` (`sections/home/hero.css`, classes `.hero__*`), with the `--menu` header and the menu sheet. V1 (avenn photo) and V2 (Superpower stage) are retired; they stay in the history of `claude/upbeat-lamport-vxbm8d`, `claude/fervent-dijkstra-p3ftuc` and `claude/ecstatic-keller-co5pta`. Built as V3 (2026-11-19) on V2's stage, plate and products, laid out after the px push reference: "Made for Better Health." in one line running exactly inset to inset across the top (font size = (stage width − 96) / 9.861, Host Grotesk 400, −0.035em), no hairline under it (user: "remove the bottom line"); compact 70px header and a stage that fills the rest of the screen exactly (no page scroll, up to 1080 tall); the four products floating in the centre (V2's arrangement, box sized by the room between the headline row and the foot); bottom left the V1 supplement promo card (paper) on its own; **bottom right the client's sentence "Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need." (14px, user 2026-11-20; 390px wide) above the three care categories as CTA rows** (client, 2026-11-20; placement by the user; after Arcovia and TrueBody): hairlines between rows, 24px labels, an arrow in a 40px circle filled with 10% white, no outline (user, 2026-11-20), lime on hover; Weight Loss → `weight-loss.html`, Men's Health → `mens-health.html`, Women's Health → `#womens-health`, scrolling to the Home section that shows the client's [Coming Soon] (client, 2026-11-20: "when they click on women health it should scroll down to women health coming soon"; no tag on the row); the last hairline sits on the bottom inset, level with the card's foot. A radial falloff in the scrim fades the beam behind the right column so every word keeps WCAG AA on its brightest pixel (measured 5.5:1+ at 1280–1920). **Backdrop light is live** (2026-11-20): the stage light component replaces the blurry plate with animated sun shafts (see Components → Stage light), look `dust`. Products clear the type by 41px+ at 1280–1920. The pens' small label lines are hidden here (they'd be ~5px). |
+| weight-loss | exploring | `claude/ecstatic-franklin-ul1zra` | **After the user's Good Life video (2026-11-19)**, measured and scaled to our frame. One 5-column grid (12px gaps) runs through the section; copy, the third column and the disclaimer text share one line (40%). Intro: product set left, running off the screen edge (stand-in `standin-weight-loss.svg`, anchored right so the boxes reach the edge at any width; real photo after approval); right: eyebrow, "Real Medical Care. / A Better Way / to Lose Weight." (4.7vw, cap height level with the tallest bottle), hairline, paragraph, Learn more (lime arrow). Then "More Than Weight Loss. A Healthier Way Forward." with the client's sentence on the 40% line, the 5 care points as columns (hairline, 24px line icon, title; no descriptions in the client copy), the two follow-on blocks (portal, ongoing care) as two mist cards (our proposal, not in the reference), the medical disclaimer at the foot. Waiting on the user's changes. |
+| mens-health | exploring | `claude/ecstatic-franklin-ul1zra` | **After the user's "When we can help" reference (2026-11-19).** The whole page fades to blue while this section holds the middle of the screen (`data-scene="mens"`, user: "the color of the background will change to blue when this section will open"), back to paper when it leaves. Two blues to compare: `?blue=a` deep slate `#1D2A3A` (tiles `#283A4F`, default) and `?blue=b` denim `#24425F` (tiles `#2E5072`). Centred eyebrow, "Better Care for Men / Who Want More." (hero V1 type, 7.2vw), the lede; then two rows of square tiles (24.5% of the screen, max 462, 8px gaps, radius 12) running off both edges and sliding in opposite directions with scroll (a quarter screen of travel; row 1 on the frame edge halfway, row 2 half a tile over). Text tiles = the 5 "Care that focuses on what matters" points, all tiles separate with open 8px gaps (**the first build, which the user chose to keep, 2026-11-20**): row 1 man photo, Sexual Health & Confidence, round tablet, Hormonal Health; row 2 Energy & Vitality, couple, Performance & Well-Being, stride, Fast, Discreet Delivery, capsule. Photos fill their tile edge to edge. Photo tiles are stand-ins cropped from the hero photo; product tiles use the MEDARO round tablet and capsule renders. Paragraph and Explore Men's Health (lime arrow) centred below. |
+| womens-health | exploring | `claude/ecstatic-franklin-ul1zra` | **Same layout as Men's Health** (user, 2026-11-20: "make its color pink when we scroll … similar layout as mens health"), built on the shared `components/care-tiles.css`. The page fades from Men's blue to pink while this section holds the middle of the screen (`data-scene="womens"`). Two pinks: `?pink=a` blush `#EFD9D8` (tiles `#E6C6C7`, plum text `#3A2127`, default) and `?pink=b` rose `#7E3650` (tiles `#8F4560`, paper text). "Better Care for Every / Chapter of Womanhood.", lede, the 5 "Care that supports what matters" points as text tiles; row 1 woman photo, Hormonal Health & Balance, oval tablet, Healthy Weight Management; row 2 Energy & Well-Being, stride, Menopause & Midlife Wellness, face, Fast, Discreet Delivery, vial. Paragraph, then the client's **Coming Soon** as outlined text (button size, no fill, no arrow, not a link). Photo stand-ins cropped from the hero photo (the woman runner). |
 | supplements | — | | |
-| how-it-works | — | | |
+| how-it-works | exploring | `claude/ecstatic-franklin-ul1zra` | **After the user's Givingli reference (2026-11-20)**, built as the shared Steps component. Centred eyebrow + "Better Health Starts / in Three Simple Steps.", then a stage that pins while you scroll (70svh per step): big number left (odometer roll 01→02→03), a card in the middle (a third of the screen, 1.62:1, radius 16) holding **one image, no text** (user, 2026-11-20), title and the client's text right (the "Step 0X of 03" label was removed by the user). **Cards stack like a deck** (user, 2026-11-20, after a stacking-cards recording): between steps the next card rises from below the screen at scroll speed and lands on the previous one; each covered card steps back (up 22px, 5% smaller, 22% darker per card on top) so its top edge peeks out. Scroll room per step: a pause of 35% of the screen plus the rise. Halfway up, the number rolls and the text changes (line by line, 60/110/160ms); reverse on the way up; reduced motion: cards jump. Page turns **sage** (client's Dusty Olive) with dark olive cards while the section holds the screen (`data-scene="steps"`; `?hiw=b` dark olive with paper cards). Card images are stand-ins until the photos are made: 1 the couple from the hero photo, 2 the MEDARO tablets and capsule on the dark olive stage, 3 the MEDARO boxes and vial (briefs in `data-brief`: person doing the assessment at home; a provider's hands and laptop, no lab coat or name; a discreet MEDARO box at the door). Get Started (lime arrow) below. `[LINK NEEDED]` |
 | footer | — | | |
 
 ### About (`about.html`) · Contact (`contact.html`) · Weight Loss (`weight-loss.html`) · Men's Health (`mens-health.html`) · Legal
@@ -104,18 +126,114 @@ Write what the user said, in their words where possible, with the date.
 
 - 2026-11-19: Desktop only in HTML. Confirmed sections move to `main`; when the user says "move to Framer", the responsive versions are built in Framer during the transfer.
 - 2026-11-19: `main` created from the setup (docs, copy, logo, Home placeholder). No sections on it yet.
-- 2026-11-19: A few images will need to be created; how is still to be decided with the user.
+- 2026-11-19: A few images will need to be created; how is still to be decided with the user. Until then image slots show a soft palette wash and a one-line brief (hide briefs with `?briefs=off`).
+- 2026-11-19: Client palette shared on a call: button `#D5E5AD` Soft Nude Lime ("not the light green"), text `#343B29` Dark Olive Green, `#A8AF98` Dusty Olive. The user told the client we'd explore 2–3 colour options after the first version.
 
 ### Likes
 
-- *(none yet)*
+- 2026-11-20: **Hero approved**: "use the hero v3 it is confirmed" (in `claude/ecstatic-franklin-ul1zra`). Hero V3 with its `--menu` header, menu sheet and live stage light (look `dust`) moved to `main` as `home/hero`; on this branch it replaces V1 and V2 above the Weight Loss section. The four care lines now reach the hero through V3's category rows and the menu, as the user placed them.
+
+- 2026-11-19: **V1 locked**: hero V1 with the smoke nav, the run photo and the paper card ("for v1 we are using these"). Other navs (tinted, vision, dark), photos (stretch, peak stand-in) and cards (specs, frost, olive glass) removed from the page.
+- 2026-11-19: Product renders must feel "sexy premium" like Good Life's tumbling debossed tablets, Good Life vials, hims' debossed tablet and printed capsule, and the floating pens: macro, tactile, dramatic light.
+- 2026-11-19: V2 gets the floating-supplement idea (from the user's floating-pens reference), in our branding. References: Good Life box set, besea floating sachets, Bionoss green packaging; Seed jars on Mobbin.
+
+- 2026-11-19: Hero references to build from: **avenn** (V1) and **Superpower** (V2). More references coming.
+- 2026-11-19: Nav: "left we should have logo, center all the nav links … and on right CTA". Keep the current tinted bar as one option; explore glass looks (references: Atlas menu, liquid-glass sliders, Cosmos, Analogue, Fuser).
+- 2026-11-19: "tinted is still far better than all … dont change size and corner radius, tinted one has best stuff". Tinted's geometry is fixed; explorations change the material only.
+- 2026-11-19: Add a secondary button before the CTA, named "Contact" (not "Contact Support"); it replaces Contact Support in the centre links. Smoke and dark had a "weird border": removed the white hairline on dark glass.
+- 2026-11-19: "those gaps feel uneven … see how nav and text etc is aligning properly [in avenn]": hero content now sits on the nav bar's edges (the frame). "when i do cmd - everything is stretching": max width 1888px, centred. Supplement card takes the nav's 12px radius.
+- 2026-11-19: Hero photo: the user wants real-looking people (Nano Banana), a man and a woman, stretching or running, in our olive/sage palette, after their references (blue-sky low-angle runners, motion-blur runners, arms-overhead stretch, calm meditation). Picked concepts: run together low angle, morning stretch on a hill, golden-hour motion blur; generated the first two (cap: 2 images). **Brief for any new hero photo:** wide frame with the people smaller (about half the frame height), standing left of centre, feet around 85% down; deep tone top-left for the headline; top-right clear for the card; dark ground across the bottom fifth; no text or logos.
+- 2026-11-19: Promo card: "i like paper version but dont like shadow" → paper is the default, shadow removed. Asked for a version with the SPECS card's UI and one with its colour and frost → `--specs` and `--frost`.
+- 2026-11-20: Link hover: "make the links hover animation like this for footer which we will make later on and nav bar" (recording of a per-letter roll on "Home"). Built as `.link-roll`, on all nav links now; footer links get it when the footer is built. Then "change this to all hero versions in all branch … only the links animation": pushed to `claude/ecstatic-keller-co5pta`, `claude/fervent-dijkstra-p3ftuc` and `claude/upbeat-lamport-vxbm8d` (V1, V2 header links; V3 menu links). `main` untouched (nothing approved).
+- 2026-11-20: How Medaro Works: "here instead of these we will have image inside the card no text here" and "also remove [STEP 01 OF 03]". Cards are one image each; the step label is gone.
+- 2026-11-20: How Medaro Works cards: "for the middle card animation make it something like this" (screen recording of stacking cards). The card fade is replaced by a scroll-driven stack: each next card rises from below onto the previous ones, which peek out above.
+- 2026-11-20: How Medaro Works: "with this kind of structure for the points … heading and sub heading also like our own style. I want to change the image serial and text when we scroll to other points it should be smooth animation style". Built as the pinned Steps component; sage scene (our take on the reference's red).
+- 2026-11-20: Women's Health: "now lets make womens health section make its color pink when we scroll … it will have similar layout as mens health". Built on a shared care-tiles component (Men's Health moved onto it, pixel-identical); two pinks to compare (blush, rose).
+- 2026-11-20: Men's Health: "i want this version this is the first bro" (screenshot of the first build). Back to the first build exactly: separate tiles, open gaps, original order, full photos. The linked pairs (notched join), the fading circle and the cut-outs were all tried and dropped. Lesson: when the user says "the first version", restore the first build as a whole, not only the last thing changed.
+- 2026-11-19 (misread): Men's Health photos: "lets keep the first version we have made for this". I restored only the photos and kept the linked pairs; the user meant the whole first build.
+- 2026-11-19 (dropped): Men's Health photos: "instead of mask fade lets make images like this with no background" (the tablet tile). The fading circle is replaced: people are cut-outs on the tile colour like the renders. Brief for the real photos: shoot or generate so the background can be removed cleanly (plain backdrop, whole figure or waist-up).
+- 2026-11-19 (dropped): Men's Health photos: "show these images inside a circular mask which fades". Photo tiles now fade out in a centred circle on the tile colour; stand-ins re-cropped with the subject centred.
+- 2026-11-19 (dropped): Men's Health tiles: "I want this linking style for the cards here. related image and text will get linked like this" (the arrow button's join). Each care point and its image are now one notched pair.
+- 2026-11-19: Men's Health: "for men heath i am thinking about this layout with blue background the color of the backgrounf will change to blue when this section will open". Built with the whole page fading to blue; two blues offered (deep slate, denim).
+- 2026-11-19: Second section (Weight Loss) after the Good Life video: "make it first then i will decide what we should change". Built with my recommended choices: eyebrow kept, 5 columns with titles only (no invented descriptions), portal and aftercare blocks as two cards, disclaimer in the section.
+- 2026-11-19: Lime CTA buttons: "lets make the layout like that with arrow, we dont have to change color … just ui structure wise" (Verdant reference). All `#D5E5AD` buttons (V1 nav and hero, V2 hero) are now the arrow build; colours unchanged. This replaces "no arrows" for lime CTAs only.
+- 2026-11-19: Fill V1's empty top-right. Two ideas from the user: (1) a short supplement promo card like their reference card, built now; (2) a 3D supplement floating up and down, like a floating-pens-and-pills reference. **Build (2) only when the user asks.**
+
+- 2026-11-20: Hero V3 gets the client's "three clickable links or categories: Weight Loss, Men's Health, and Women's Health" (an agreed exception to "care lines live in the nav only"). The user placed them: the categories take the bottom right "like a cta" (after Arcovia's hairline rows and TrueBody's list), the client's sentence sits above them, the supplement card stays bottom left. Women's Health has no page: the row and the menu link scroll to the Home Women's Health section, which carries the client's [Coming Soon] (client, 2026-11-20).
+- 2026-11-20: Hero V3's backdrop: "looks super blurry and not high quality"; "recreate it in code like a shader animation or something where that sun rays coming gets a animation and overall looks more alive" → the stage light shader (Components → Stage light), three looks to pick from.
+- 2026-11-20: Stage light: "make it more like it is coming from narrow source then it widens make it feel like that. dont need to be point source but narrow" → the beam now starts at a narrow opening at the top-right corner and fans out; the old near-parallel band (fitted to the plate) is gone.
+- 2026-11-20: The user's arrow (`assets/icons/arrow.svg`): "lets use that arrow everywhere with our colors" → one sprite glyph in `currentColor` for every arrow (→ and ↗).
+- 2026-11-20, client feedback: "I prefer V2" (their V2 is our hero **V3**, the user confirmed with a screenshot). "Change the navigation menu like the others I showed" (hims and Superpower desktop menus behind a hamburger) → the V3 header now has the menu sheet. Next: "three clickable links or categories: Weight Loss, Men's Health, and Women's Health" in the hero, each to its page (after the menu).
+- 2026-11-19: Hero stages must fill the screen without the page scrolling ("its cutting because we are able to scroll"): stage height = 100svh − header − 16px bottom edge. V2 and V3 both overflowed by 8px (stage was 100svh − 96 under an 88px header + 16px edge); fixed in both.
+- 2026-11-19: "replace our rounded green one with this so it looks like different style of pills": the oval lime tablet from the macro-set render replaces the round lime one. Reusing a whole object from an earlier render (cut out, 3 credits) is fine when it is complete and untouched by others.
+- 2026-11-19: Pens rendered one by one, blank, with real moulded detail (ridged cap, inspection window, clear dose window, ridged olive knob, clip): "what you made product mockup wise is better than before". Tablets kept exactly as they were.
 
 ### Rejected
 
-- *(none yet)*
+- 2026-11-20: The compressed photo plate as the light source on the V3 stage: "super blurry and not high quality". Lesson: light and gradients on a stage are drawn in code (WebGL), fitted to the approved image, with grain and dither; photos are for objects and people.
+
+- 2026-11-19, round 1 heroes A/B/C, called "full AI slop" by the user. What to avoid from now on:
+  - Putting the care lines in the hero (index list, cards, frosted strip). They stay in the nav.
+  - Not reading the copy brief before designing.
+  - Invented devices the references don't have: mono uppercase labels everywhere, a custom chevron on every button and row, "coming soon" pills, hover-swapping image frames.
+  - Blurry gradient-blob placeholders with caption boxes stamped on them.
+- 2026-11-19, round 2: the small "■ LICENSED MEDICAL PROVIDERS" tag in V1 ("remove that"), and the login icon in the nav ("why there is login i dont need that").
+- 2026-11-19, nav round 1: the **frosted** (milky glass bar, dark CTA) and **liquid** (glass capsule with a bouncy sliding highlight, glowing gradient lime CTA, gradient rim) navs: "slop". Lesson: no glows, no gradient rims, no springy effects; match the reference's values and stay restrained.
+- 2026-11-19, nav round 2: **smoke** (radius 22, 64px tall, hover patches) and **panel** (radius 3, corner brackets, mono chip): rejected, mainly for changing tinted's size and radius. Lesson: when the user likes something, vary only what they asked about, and take values from the reference by measuring it, not by eye.
+
+- 2026-11-19: Packaging render (frosted jar, lime carton, olive sachet, small capsules; flat even light on light grey, pasted onto the dark stage): "looks cheap as ai gen images". Lesson: no generic cartons; macro scale, real materials, hard light, rendered on the stage colour.
+- 2026-11-19: Composited V2 scenes, all rejected: the floating jar/carton/sachet set, the macro tablets + vial + capsule cluster, the labelled vial + Quad 4 bottle with HTML labels, the blurred "bokeh" tablets, the ticker ("remove that bottom marquee"), and a hims-style canister (not what was asked). The user: "gave exact thing what i wanted and you are making it worse and worse". Lesson: when the user gives an exact reference, recreate THAT image (uploaded as the reference), in one coherent render; scale, light and composition come from the reference, only branding changes. Capsules: never ("capsule is worst").
+- 2026-11-19: Macro set with AI-printed labels (vial with only "MEDARO" on it): "ours still looks ai … they have proper branding and stuff, we need that". The debossed tablet passed. Lesson: containers need designed labels with real hierarchy, composited as HTML over blank-label renders.
+
+- 2026-11-19: Everything generated in Magnific, branding included (pens with AI-printed MEDARO/GLP-1 bands). The user: make the 3D in Magnific, do the text "by code", "write in md files too so this does not happen again". Then the single-image scene with the front pen cut off at the top, and one image for all objects ("generate all one by one"). Rules now in Direction → MEDARO product imagery.
+- 2026-11-19, code labels, three rounds: (1) lime stripe and panel, "MEDARO GLP-1", "Weight management", tiny compressed small print: "ai looking shit … make it like real product, see their copy"; (2) minimal name + use lines with a mid-size wordmark: "also not good, see 5 images i sent … copy it"; (3) hims-style giant wordmark along the label: "those medaro branding is the culprit … bad as hell"; (4) Zepbound-style label with a strength pill, "injection" and a use line: "better but not what i need … clean, minimal, real life like medicine package". (5) Good Life minimal (name, dose line, Rx only, small mark): "bland looking with no energy" next to Superpower, Immortals, Wegovy, Zepbound. (6) Superpower-style structure (hairlines, colour tab, Rx only, use line, Lot/Exp fields): "way way better", but the small texts "make it feel like its ai"; (7) Wegovy-style colour sleeve with a white window and dose chip: "na bro this is worse, before one was way better, use that base". Lesson: keep the structured base, cut every word that can't be read in the hero (Direction → rule 6). Also: the CSS image mask made every label vanish on the user's machine (file://).
+
+### Copy flags to raise with the user
+
+- The nav says "Supplement" (client's word); the section copy says "Supplements". We use "Supplement" in nav and hero rows for now. Suggest "Supplements".
+- The hero has no CTA in the brief. We use "Get Started" (the client's label elsewhere) and scroll to How Medaro Works until told otherwise. `[LINK NEEDED]`
+- The header adds a Get Started button (not in the brief's nav list). `[LINK NEEDED]`
+- Women's Health lede: the client writes "Personalized Care for Every Stage of Life." in title case; set in sentence case like the Men's lede (case change only). The CTA "Coming Soon" is shown as outlined text, not a link and not lime (lime stays for things you can press).
+- How Medaro Works: the section's Get Started goes to `#get-started-link` until the brief's "Home Page" destination is confirmed.
+- The brief's "Contact Support" nav item is now the "Contact" button (user's call). The page can keep the title "Contact Support".
+- V2 pack labels use only copy words: vial "GLP-1 / Weight management / Rx only / Prescribed only when medically appropriate"; bottle "Quad 4 / Sublingual formulation / Sildenafil · Vardenafil · Tadalafil · Apomorphine / Rx only / Dissolves under the tongue". Doses and NDC numbers left out: `[DATA NEEDED]` from the client if they want them on the labels.
+- **Menu "Top treatments" (Home V3):** card names Semaglutide, Tirzepatide (molecules the client's weight-loss copy names), Quad 4 (the client's Men's Health product), Supplements. Confirm with the client which treatments to feature; Quad 4 is a proposed compounded formulation, never shown as FDA-approved.
+- **Pen labels (Home V2):** "Semaglutide" and "Tirzepatide" (the two molecules the client's weight-loss copy names), a dose, "Rx only", "Injection · Single-dose pen", the MEDARO mark. **Doses are stand-ins** (each molecule's standard starting strength: semaglutide 0.25 mg/0.5 mL, tirzepatide 2.5 mg/0.5 mL) so the labels read like real ones: `[DATA NEEDED]`, confirm with the client what they dispense (and whether these are compounded, which the disclaimer must then cover). No NDC numbers. If the client prefers no molecule names, fall back to the same layout without them.
+- V1 promo card copy: label "Supplements", title "Better support for your everyday health." (client's line). Links to the Supplement section until the "Explore Supplements" URL exists. `[LINK NEEDED]`
+- V2 facts: "24/7, from home" comes from the client's "24/7 Convenient online consultations". Avoid "100% online": the FAQ says some states need a live visit.
 
 ## 7. Inspiration
 
-| Site | What to take from it | Shared |
+| Site | What to take from it | Shared by |
 |---|---|---|
-| home.medvi.org | Home navigation that scrolls to each treatment section (client's request) | client brief |
+| home.medvi.org | Home navigation that scrolls to each treatment section | client brief |
+| forhers.com | Entry cards per treatment right under a short headline; lime-on-green accents; disclaimers set close to claims | client |
+| hims.com | Same system as Hers: tiles per condition, short headlines with one coloured phrase | client |
+| immortals.com | Soft gradient surfaces, rounded cards, two big entry cards in the hero, product shots on clean backgrounds | client |
+| goodlifemeds.com | Full-bleed lifestyle photo hero, big light grotesk headlines, mono uppercase labels, sage and warm neutrals, product cards with "Get started / Learn more" | user (liked) |
+| superpower.com | **Hero V2.** Quiet header with centred logo; dark rounded stage; product scene (tube + phone app) lit from above; three facts with hairline dividers; ticker along the bottom | user (liked) |
+| avenn (screenshot) | **Hero V1.** Full-bleed photo, frosted nav bar inside it, headline split top-left / bottom-right, sentence + CTA bottom left | user |
+| Atlas menu, liquid-glass sliders (screenshots) | Nav surfaces, round 1 (results rejected) | user |
+| Dolomites glass cards (screenshot) | **Nav `--smoke` glass**: measured rgb(19,19,19) at ~58%, darker at the top | user |
+| visionOS Notes and "Jupiter from Amalthea" windows (screenshots) | **Nav `--vision` glass**: measured rgb(66,66,66) at ~60%, heavy blur, desaturated, soft rim | user |
+| "Signal strength" panel (screenshot) | **Nav `--dark` glass**: measured rgb(22,22,22) at ~76% | user |
+| "Making Rama unmistakable" project card (screenshot) | **Promo card**: rounded card, square image left, coloured caps label, bold two-line title, round arrow button top-right | user |
+| Runner and stretch photos (screenshots: arms-overhead stretch, meditation with glass chips, two blurred sprinters, golden-hour runner, low-angle runner on blue sky) | **Hero V1 photo style**: real people, outdoor, low angles against open sky, motion blur, film grain, natural light | user |
+| SPECS hero (screenshot) | **Promo card `--specs` / `--frost`**: square charcoal frosted card, flush product image, white title, grey second line, small chevron | user |
+| Floating GLP-1 pens and pills render (screenshot) | **V2's floating supplements**: products drifting in the light at different angles. Built with our own MEDARO packs, never the branded pens shown | user |
+| hims testosterone vials, Zepbound pen and vial (screenshots) | **Pack labels**: product name, strength chip, small print, big vertical wordmark, coloured flip cap, brushed collar; front-on, hard key light | user |
+| Good Life tablets and vials, hims tablet/capsule/vial row (screenshots) | **Product render quality bar**: macro tablets with debossed logos and powder texture, metal-capped vials, printed capsules, hard shadows | user |
+| Good Life box set, besea floating sachets, Bionoss shelf (screenshots) | **Packaging direction**: premium matte boxes and jars, sachets floating, a deep-green range | user |
+| Seed (Mobbin) | **Packaging direction**: deep olive and frosted glass jars with dark lids, minimal wordmark | Mobbin |
+| Cosmos, Analogue Agency, Fuser (Mobbin) | **Nav surfaces.** Dark glass pill of links between a free-standing logo and a glowing CTA (Cosmos); light frosted bars (Analogue, Fuser) | Mobbin |
+| Verdant (Plainthing Studio shot) | **Lime CTA `--arrow`**: "Try now" label tile + square → tile joined by a notched neck; same notch on the "01 · Why choose us" chip | user |
+| Good Life Home, second section (screen recording) | **Home Weight Loss**: product stack bleeding off the left on a light backdrop; 3-line headline from the middle column line, hairline, short paragraph, button; below, a 2-line heading and 4 hairline-topped columns (icon, title, description). Measured at 1709 wide: headline 80px (4.7vw), columns 12px apart | user |
+| Lipedema Guru "When we can help" (screenshot) | **Home Men's Health**: huge centred headline, then rows of square tiles (photo / text alternating, radius ~12, 8px gaps) running off both edges, the second row offset. The user adds: the page background turns blue when the section opens | user |
+| Givingli "Select a Gift" (screenshot) | **Steps / How Medaro Works**: big step number left, a dark card in the middle, "STEP 01 OF 03", title and text right, on a strong colour; one step at a time, changing on scroll | user |
+| Wegovy pen fan, hims testosterone vial (screenshots) | Colour sleeve + white window + dose chip: tried, the user preferred the structured Superpower base | user |
+| Superpower blood tube and test kits, Face Formula serum (Mobbin), Immortals pen/bottle/vials (screenshots) | **Pack labels (current)**: hairline fields, a solid accent tab beside the product name, spaced-caps brand line, outlined name box; clean but never bland | user |
+| Good Life NAD+/GLP-1 vials, hims GLP-1 vial (screenshots, Mobbin) | Minimal pack: product name, small brand mark. Too bland on its own for MEDARO | user, Mobbin |
+| Arcovia hero rows, TrueBody hero (user screenshots) | **V3 care categories**: hairline rows with a label and an arrow, on the right of the hero, under the headline | user |
+| hims and Superpower desktop menus (client screenshots), Quartz, Klaviyo (Mobbin) | **Menu sheet**: hamburger in the bar, a sheet from the right over a dimmed page, large links with arrows, one featured card | client, Mobbin |
+| px push (screenshot) | **Hero V3 layout**: one huge line across the top on hairlines, a 3D object floating in the centre, a thumbnail card bottom left, a short paragraph bottom right | user |
+| nekohealth.com | *Couldn't load (bot check). Waiting for screenshots.* | user (liked) |

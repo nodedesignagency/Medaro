@@ -1,0 +1,82 @@
+/* ==========================================================================
+   Component: promo card
+   A small clickable card, after the user's reference (image left, small
+   coloured label, two-line title, round arrow button top-right). First use:
+   the supplement card in the top-right of hero V1.
+   Finish: --paper, the user's pick (2026-11-19): light card, ink title,
+   olive label, no shadow. (Olive glass, SPECS and charcoal frost versions
+   were compared and dropped; see DESIGN.md.)
+   Geometry matches the nav (user, 2026-11-19): radius 12 like the bar, 8px
+   inset like the nav's buttons, image radius 8 like the nav's buttons,
+   104px image, 40px round button 8px from the corner. The label line stops
+   short of the button; the title runs full width underneath it.
+   ========================================================================== */
+
+.promo-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  align-items: center;
+  gap: 18px;
+  width: 384px;
+  padding: 8px 16px 8px 8px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+
+.promo-card__img {
+  width: 104px;
+  height: 104px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.promo-card__label {
+  display: block;
+  padding-right: 48px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.promo-card__title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 20px;
+  font-weight: var(--weight-medium);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.promo-card__go {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.promo-card__go svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.promo-card:hover .promo-card__go { background: var(--color-accent); color: var(--color-ink); }
+.promo-card:hover .promo-card__go svg { transform: translate(1px, -1px); }
+
+/* Paper: light card like the reference */
+.promo-card--paper {
+  color: var(--color-ink);
+  background: var(--color-bg);
+}
+.promo-card--paper .promo-card__label { color: #56662f; } /* olive, 5.3:1 on paper */
+.promo-card--paper .promo-card__go { background: var(--color-surface); color: var(--color-ink); }
