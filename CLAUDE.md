@@ -69,7 +69,7 @@ Use the same class names everywhere (BEM-ish: `.hero__title`, `.btn--primary`). 
 | Men's Health landing | `mens-health.html` | `content/mens-health.md` | **No links to Home or any other page.** Every CTA goes to the Men's Health (ED) intake form. |
 | Legal (11) | `legal/<slug>.html` | `content/source/legal/*.pdf` | Footer links. Docs have placeholders like `[BRAND_NAME]`, `[EFFECTIVE_DATE]`: keep them visible until the client fills them. |
 
-Women's Health shows **Coming Soon** (no link). Intake form URLs, the Supplements link and the hero CTA are unknown: use `#intake-weight-loss`, `#intake-mens-health`, `#supplements-link` and mark `[LINK NEEDED]`.
+Women's Health has no page: every Women's Health link scrolls to the `#womens-health` section on Home, whose CTA is the client's **[Coming Soon]** (client, 2026-11-20). Intake form URLs, the Supplements link and the hero CTA are unknown: use `#intake-weight-loss`, `#intake-mens-health`, `#supplements-link` and mark `[LINK NEEDED]`.
 
 ## Copy and compliance (telehealth: this matters)
 

@@ -123,17 +123,7 @@
 }
 a.menu__link:hover { background: var(--color-surface); }
 a.menu__link:hover .menu__arrow { transform: translateX(3px); color: var(--color-ink); }
-.menu__link--soon { color: var(--color-text-muted); cursor: default; }
-.menu__tag {
-  padding: 5px 10px;
-  border-radius: var(--radius-pill);
-  background: var(--color-surface);
-  font-size: 12px;
-  font-weight: var(--weight-medium);
-  line-height: 1;
-  letter-spacing: 0;
-  color: var(--color-ink);
-}
+
 
 /* ---------- Top treatments ----------
    After hims' menu: light cards in a row that scrolls sideways and runs to

@@ -111,17 +111,7 @@
 a.hero-v3__cat:hover .hero-v3__cat-go { background: var(--color-accent); box-shadow: none; color: var(--color-ink); }
 a.hero-v3__cat:hover .hero-v3__cat-go svg { transform: translateX(2px); }
 a.hero-v3__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 4px; }
-.hero-v3__cat--soon { color: rgba(255, 255, 255, 0.68); cursor: default; }
-.hero-v3__cat-tag {
-  padding: 6px 10px;
-  border-radius: var(--radius-pill);
-  background: rgba(244, 245, 239, 0.14);
-  font-size: 12px;
-  font-weight: var(--weight-medium);
-  line-height: 1;
-  letter-spacing: 0;
-  color: rgba(255, 255, 255, 0.86);
-}
+
 
 /* ---------- Backdrop ---------- */
 /* the studio plate covers the stage like object-fit: cover, anchored right */
