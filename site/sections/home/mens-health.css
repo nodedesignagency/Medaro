@@ -10,8 +10,7 @@
    styles.css fades them. Two blues to compare: ?blue=a (deep slate, default)
    and ?blue=b (denim).
    Copy: content/home.md → Men's Health, word for word. The five "Care that
-   focuses on what matters" points are the text tiles, each linked to its
-   image as one notched piece (see Pairs).
+   focuses on what matters" points are the text tiles.
    ========================================================================== */
 
 :root {
@@ -121,64 +120,6 @@
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
-/* ---------- Pairs: each care point linked to its image ----------
-   (user, 2026-11-19: "related image and text will get linked like this")
-   The same join as the lime arrow button: one piece, two halves, a
-   round-ended notch cut in from the top and the bottom where they meet,
-   the neck between the notches left whole. Proportions from the button:
-   notch as wide as the grid gap (8), 18% of the height deep, 4px rounded
-   mouth, round bottom. Pairs keep the grid: two tiles plus one gap wide.
-   The notches are a mask: eight small shapes XOR'd out of a full layer. */
-.mh__pair {
-  --nw: var(--mh-gap);                                  /* notch width */
-  --nr: 4px;                                            /* rounded mouth */
-  --nd: round(calc(var(--mh-tile) * 0.18), 1px);        /* notch depth */
-  --nh: calc(var(--nd) - var(--nw) / 2);                /* straight part */
-  --fx: calc(var(--nw) / 2 + var(--nr) / 2);            /* mouth offset */
-  --cut-l: radial-gradient(circle var(--nr) at 0 100%, #0000 calc(100% - 0.5px), #000);
-  --cut-r: radial-gradient(circle var(--nr) at 100% 100%, #0000 calc(100% - 0.5px), #000);
-  --cut-lb: radial-gradient(circle var(--nr) at 0 0, #0000 calc(100% - 0.5px), #000);
-  --cut-rb: radial-gradient(circle var(--nr) at 100% 0, #0000 calc(100% - 0.5px), #000);
-  --u-t: radial-gradient(circle calc(var(--nw) / 2) at 50% 0, #000 calc(100% - 0.5px), #0000);
-  --u-b: radial-gradient(circle calc(var(--nw) / 2) at 50% 100%, #000 calc(100% - 0.5px), #0000);
-  --solid: linear-gradient(#000 0 0);
-  display: flex;
-  flex: none;
-  width: calc(2 * var(--mh-tile) + var(--mh-gap));
-  height: var(--mh-tile);
-  overflow: hidden;
-  border-radius: 12px;
-  -webkit-mask:
-    var(--solid) 50% 0 / var(--nw) var(--nh) no-repeat,
-    var(--u-t) 50% var(--nh) / var(--nw) calc(var(--nw) / 2) no-repeat,
-    var(--cut-l) calc(50% - var(--fx)) 0 / var(--nr) var(--nr) no-repeat,
-    var(--cut-r) calc(50% + var(--fx)) 0 / var(--nr) var(--nr) no-repeat,
-    var(--solid) 50% 100% / var(--nw) var(--nh) no-repeat,
-    var(--u-b) 50% calc(100% - var(--nh)) / var(--nw) calc(var(--nw) / 2) no-repeat,
-    var(--cut-lb) calc(50% - var(--fx)) 100% / var(--nr) var(--nr) no-repeat,
-    var(--cut-rb) calc(50% + var(--fx)) 100% / var(--nr) var(--nr) no-repeat,
-    var(--solid);
-  -webkit-mask-composite: xor;
-  mask:
-    var(--solid) 50% 0 / var(--nw) var(--nh) no-repeat,
-    var(--u-t) 50% var(--nh) / var(--nw) calc(var(--nw) / 2) no-repeat,
-    var(--cut-l) calc(50% - var(--fx)) 0 / var(--nr) var(--nr) no-repeat,
-    var(--cut-r) calc(50% + var(--fx)) 0 / var(--nr) var(--nr) no-repeat,
-    var(--solid) 50% 100% / var(--nw) var(--nh) no-repeat,
-    var(--u-b) 50% calc(100% - var(--nh)) / var(--nw) calc(var(--nw) / 2) no-repeat,
-    var(--cut-lb) calc(50% - var(--fx)) 100% / var(--nr) var(--nr) no-repeat,
-    var(--cut-rb) calc(50% + var(--fx)) 100% / var(--nr) var(--nr) no-repeat,
-    var(--solid);
-  mask-composite: exclude;
-}
-/* each half runs to the middle of the neck */
-.mh__pair > .mh__tile {
-  width: calc(var(--mh-tile) + var(--mh-gap) / 2);
-  height: 100%;
-  aspect-ratio: auto;
-  border-radius: 0;
-}
-
 /* Product tiles: a MEDARO macro render on the tile colour, lit from above */
 .mh__tile--product {
   background:
