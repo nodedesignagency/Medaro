@@ -75,9 +75,9 @@
    "Made for" to the top of "Better Health.", centred on the stage; with the
    Multidose vial gone it is narrower (0.62), so it can be that tall without
    reaching "for". The bottles stop just short of "Better Health.". The oval
-   tablet has a box of its own over "er" of "Better" (where the letters are
-   short, at 63.5% of the content width at every size), dipping a little into
-   their tops. Both draw above the headline (z-index 2). */
+   tablet has a box of its own above "er" of "Better" (63.5% of the content
+   width at every size), clear of the letters: nothing overlaps the headline
+   now ("just remove overlapping now"). */
 .hero--v4 .hero__frame {
   --content-w: calc(100cqw - 2 * var(--hero-inset));
   --fs: calc(var(--content-w) / 9.861);          /* the headline's font size */
@@ -98,14 +98,14 @@
 .hero--v4 .hero__scene--cluster .product--vial-a       { --h: 58%; --x: 29%; --y: 64%; --r: 10deg; }
 .hero--v4 .hero__scene--cluster .product--tablet-white { --h: 17%; --x: 80%; --y: 21%; --r: 0deg; }
 
-/* the oval tablet over "er": 0.4 of the headline size tall, its bottom 6% of
-   the font size into the tops of the short letters */
+/* the oval tablet above "er": 0.4 of the headline size tall, 12px clear of
+   the letters (user, 2026-11-20: "just remove overlapping now") */
 .hero--v4 .hero__scene--oval {
   --oval-h: calc(var(--fs) * 0.4);
   --spill: 0px;
   --scene-ratio: 900 / 620;
   left: calc(var(--hero-inset) + var(--content-w) * 0.6351 - var(--oval-h) * 900 / 620 / 2);
-  top: calc(var(--line-b-t) + var(--fs) * 0.064 - var(--oval-h) / 2);
+  top: calc(var(--line-b-t) - 12px - var(--oval-h)); /* no overlap (user, 2026-11-20: "just remove overlapping now") */
   height: var(--oval-h);
   transform: none;
   z-index: 2;
