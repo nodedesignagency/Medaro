@@ -170,6 +170,14 @@ a.hero__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border
 .hero .product--tablet-white { --h: 23%; --x: 75%; --y: 19%; --r: 0deg; }
 .hero .product--tablet-oval  { --h: 19%; --x: 29%; --y: 59%; --r: 0deg; }
 
+/* The client's packs (2026-11-20): the Quad 4 bottle and the Tirzepatide vial
+   take the pens' place (?products=pens shows the approved pens); the tablets
+   move round them */
+.hero .product--bottle       { --h: 90%; --x: 60%; --y: 50%; --r: -10deg; }
+.hero .product--vial         { --h: 50%; --x: 31%; --y: 64%; --r: 8deg; }
+.hero:has([data-version="products:packs"]:not([hidden])) .product--tablet-white { --h: 21%; --x: 78%; --y: 21%; }
+.hero:has([data-version="products:packs"]:not([hidden])) .product--tablet-oval  { --h: 18%; --x: 21%; --y: 25%; }
+
 /* The pens are smaller here than in V2 (about 530px tall at 1440×900), so the
    20-unit label lines (Rx only, use line) would fall under ~6.5px on screen:
    cut them, don't shrink them (DESIGN.md → Direction, rule 6). */

@@ -46,6 +46,15 @@
 }
 /* a soft highlight on dark print, where multiply can't lighten */
 .product__sheen { mix-blend-mode: screen; }
+/* light print straight on dark glass (the Quad 4 bottle): screen lightens */
+.product__print--glass { mix-blend-mode: screen; }
+
+/* A pack anywhere else (menu, cards), sized by its height:
+   <span class="pack pack--vial"><img …><svg class="product__print" …><use href="#print-vial"/></svg></span> */
+.pack { position: relative; display: block; aspect-ratio: var(--ar); }
+.pack > img { display: block; width: 100%; height: 100%; }
+.pack--bottle { --ar: 439 / 2200; }
+.pack--vial { --ar: 466 / 1100; }
 .product__print { font-family: var(--font-body); }
 /* every word on a pack is readable in the hero: nothing under 20 units in
    the pen image's pixels (about 6.5px on screen at 1440) */
@@ -59,6 +68,9 @@
 .product--pen          { --ar: 299 / 2200; --z: 2; --dur: 7.5s; --delay: -1s;   --fx: 0.3cqh;  --fy: -1.8cqh; --fr: 0.9deg; }
 .product--tablet-white { --ar: 669 / 662;  --z: 3; --dur: 6.2s; --delay: -2.4s; --fx: 0.6cqh;  --fy: -2.4cqh; --fr: 7deg; }
 .product--tablet-oval  { --ar: 900 / 620;  --z: 3; --dur: 7s;   --delay: -4.6s; --fx: -0.5cqh; --fy: -2cqh;   --fr: -6deg; }
+/* the client's packs (2026-11-20): Quad 4 bottle and Tirzepatide vial */
+.product--bottle       { --ar: 439 / 2200; --z: 2; --dur: 8.2s; --delay: -2s;   --fx: 0.3cqh;  --fy: -1.8cqh; --fr: 1deg; }
+.product--vial         { --ar: 466 / 1100; --z: 3; --dur: 6.8s; --delay: -4s;   --fx: -0.4cqh; --fy: -2.2cqh; --fr: -2deg; }
 
 /* rests where it is placed, drifts and settles */
 @keyframes product-float {

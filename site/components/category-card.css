@@ -62,7 +62,8 @@
   inset: 8px 0 14px; /* products stay 6px+ inside the card at the top of the bob */
   animation: category-card-float var(--cc-dur, 6s) ease-in-out var(--cc-delay, 0s) infinite;
 }
-.category-card__obj {
+/* (doubled class: beats .pack's position in product.css, which loads later) */
+.category-card .category-card__obj {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -92,24 +93,26 @@
 .category-card:hover .category-card__go svg { transform: translateX(2px); }
 
 /* ---------- The three lines ---------- */
-/* Weight Loss: the white GLP-1 pen, lying almost flat, cap up to the right */
+/* Weight Loss: the client's Tirzepatide vial, a little tilted */
 .category-card--weight {
-  --cc-obj-h: 106px;
-  --cc-obj-r: 68deg;
-  --cc-shadow-w: 78px;
+  --cc-obj-h: 52px;
+  --cc-obj-r: 8deg;
+  --cc-shadow-w: 42px;
   --cc-delay: -1.5s;
 }
-/* Men's Health: the round MEDARO tablet (as in the Men's Health section) */
+/* Men's Health: the client's Quad 4 bottle, lying almost flat like hims' objects */
 .category-card--mens {
-  --cc-obj-h: 52px;
-  --cc-shadow-w: 48px;
+  --cc-obj-h: 98px;
+  --cc-obj-r: 64deg;
+  --cc-shadow-w: 80px;
   --cc-dur: 6.8s;
   --cc-delay: -3.8s;
 }
-/* Women's Health: the MEDARO vial (as in the Women's Health section) */
+/* Women's Health: the oval MEDARO tablet (as in the Women's Health section) */
 .category-card--womens {
-  --cc-obj-h: 56px;
-  --cc-shadow-w: 44px;
+  --cc-obj-h: 40px;
+  --cc-obj-r: -6deg;
+  --cc-shadow-w: 52px;
   --cc-dur: 5.6s;
   --cc-delay: -0.6s;
 }
