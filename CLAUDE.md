@@ -53,6 +53,7 @@ git clone https://github.com/nodedesignagency/Medaro.git ~/Desktop/medaro-previe
 - `site/assets/images/`: photography and renders, compressed (WebP/AVIF, ≤300 KB each, hero ≤500 KB).
 - `site/versions/<name>/`: frozen snapshots the user asked to keep for comparison. Never edit them and never promote them to `main`; open with `./preview.sh <branch> versions/<name>/index.html`.
 - `tools/pack-print.py`: makes the print on the packs (`site/assets/images/products/print-*.svg`), wrapped onto the renders. Edit and run it (`python3 tools/pack-print.py`; needs `pip install fonttools brotli uharfbuzz`), never hand-edit its SVGs.
+- `tools/unmix-glass.py`: makes clear glass in a cut-out see-through again by taking out the flat colour it was rendered on (render glass on one plain colour, never a gradient: `DESIGN.md` → Direction, rule 7).
 - `content/`: the client's copy as Markdown, word for word: `home.md`, `about.md`, `weight-loss.md`, `mens-health.md`. Originals in `content/source/` (`medaro-copy.pdf` and `legal/*.pdf`, 11 legal documents).
 - `review/`: screenshots and videos for review. Git-ignored; send them to the user, don't commit them.
 

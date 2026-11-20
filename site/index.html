@@ -112,7 +112,7 @@
             <a class="treat-card" href="mens-health.html">
               <span class="treat-card__rx">Rx</span>
               <span class="treat-card__media" aria-hidden="true">
-                <span class="pack pack--ampoule treat-card__pack treat-card__pack--ampoule"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print" src="assets/images/products/print-ampoule-quad4.svg" alt="" width="406" height="2200"></span>
+                <span class="pack pack--ampoule treat-card__pack treat-card__pack--ampoule"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print" src="assets/images/products/print-ampoule-quad4-ink.svg" alt="" width="406" height="2200"></span>
               </span>
               <span class="treat-card__name">Quad 4</span>
             </a>
@@ -144,7 +144,7 @@
   <!-- SECTION:header--menu END -->
 
   <main id="main">
-    <!-- SECTION:home/hero START · styles: sections/home/hero.css, components/product.css, components/promo-card.css, components/category-card.css, components/stage-light.css · scripts: components/stage-light.js · assets: assets/images/products/ (stage-plate.webp, vial-tirzepatide.webp, ampoule-quad4.webp, tablet-white.webp, tablet-oval-lime.webp, print-vial-microdose.svg, print-vial-multidose.svg, print-ampoule-quad4.svg, sheen-vial.svg), assets/images/standin-supplement.svg · tools: tools/pack-print.py
+    <!-- SECTION:home/hero START · styles: sections/home/hero.css, components/product.css, components/promo-card.css, components/category-card.css, components/stage-light.css · scripts: components/stage-light.js · assets: assets/images/products/ (stage-plate.webp, vial-tirzepatide.webp, ampoule-quad4.webp, tablet-white.webp, tablet-oval-lime.webp, print-vial-microdose.svg, print-vial-multidose.svg, print-ampoule-quad4.svg, print-ampoule-quad4-ink.svg, sheen-vial.svg), assets/images/standin-supplement.svg · tools: tools/pack-print.py
          Layout after the user's px push reference: one big line across the top, the client's packs floating in
          the centre, the supplement promo card bottom left, the client's sentence and the care cards bottom right.
          Copy: the client's Home intro (content/home.md), word for word. -->
@@ -191,7 +191,7 @@
                 <li>
                   <a class="category-card category-card--mens" href="mens-health.html">
                     <span class="category-card__name">Men's Health</span>
-                    <span class="category-card__media" aria-hidden="true"><span class="category-card__float"><span class="pack pack--ampoule category-card__obj"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print" src="assets/images/products/print-ampoule-quad4.svg" alt="" width="406" height="2200"></span></span></span>
+                    <span class="category-card__media" aria-hidden="true"><span class="category-card__float"><span class="pack pack--ampoule category-card__obj"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print" src="assets/images/products/print-ampoule-quad4-ink.svg" alt="" width="406" height="2200"></span></span></span>
                     <span class="category-card__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
                   </a>
                 </li>
@@ -230,15 +230,17 @@
              competitor's bottle is gone), and the two MEDARO tablets back (user: "lets add tablet back"). Blank
              renders, print wrapped on in code (tools/pack-print.py), our label system. No pens.
              The ampoule is about the vial's size (user: "i dont want that big bottle to be way bigger than others").
-             The ampoule is clear glass with a vivid lime liquid, rendered on one plain colour (user: "use simple
-             plain color", "make the green brighter"), the stage's deep olive; the same image on the cards and menu.
+             The ampoule is clear glass with a colourless liquid like the vials (user: "lets make bottle tone like
+             that like transparent"), rendered on one plain colour, the stage's deep olive, then that colour taken out of the glass so the
+             stage shows through it. Print: paper white screened onto the glass here; on the light cards and menu
+             the same print in dark ink (print-ampoule-quad4-ink.svg), where white would vanish.
              Two arrangements for review (?products=float|trio):
              float (default): the pens' composition (approved hero), the ampoule leaning across the beam, the
                Microdose vial in front of it, the Multidose vial further back, the tablets round them;
              trio: the range side by side, labels to camera, the tablets above. -->
         <div class="hero__scene" aria-hidden="true">
           <div class="hero__set hero__set--float" data-version="products:float">
-            <div class="product product--ampoule"><div class="product__float"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print" src="assets/images/products/print-ampoule-quad4.svg" alt="" width="406" height="2200"></div></div>
+            <div class="product product--ampoule"><div class="product__float"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print product__print--glass" src="assets/images/products/print-ampoule-quad4.svg" alt="" width="406" height="2200"></div></div>
             <div class="product product--vial product--vial-a"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
             <div class="product product--vial product--vial-b"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-multidose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
             <div class="product product--tablet-white"><div class="product__float"><img src="assets/images/products/tablet-white.webp" alt="" width="669" height="662"></div></div>
@@ -246,7 +248,7 @@
           </div>
           <div class="hero__set hero__set--trio" data-version="products:trio">
             <div class="product product--vial product--vial-a"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
-            <div class="product product--ampoule"><div class="product__float"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print" src="assets/images/products/print-ampoule-quad4.svg" alt="" width="406" height="2200"></div></div>
+            <div class="product product--ampoule"><div class="product__float"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print product__print--glass" src="assets/images/products/print-ampoule-quad4.svg" alt="" width="406" height="2200"></div></div>
             <div class="product product--vial product--vial-b"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-multidose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
             <div class="product product--tablet-white"><div class="product__float"><img src="assets/images/products/tablet-white.webp" alt="" width="669" height="662"></div></div>
             <div class="product product--tablet-oval"><div class="product__float"><img src="assets/images/products/tablet-oval-lime.webp" alt="" width="900" height="620"></div></div>

@@ -313,38 +313,45 @@ def vial_sheen():
 
 
 # ---------------------------------------------------------- the ampoule ----
-# assets/images/products/ampoule-quad4.webp (and -light), 406×2200: a blank
-# clear glass ampoule with a light sage-lime liquid (Nano Banana 2.1,
-# 2026-11-20, after the user's ampoule references), rendered on one plain
-# flat colour: deep olive for the stage, paper for light surfaces. Body x 6–399 (centre 202.5, R 197) from the
+# assets/images/products/ampoule-quad4.webp, 406×2200: a blank clear glass
+# ampoule with a clear, colourless liquid, like the vials' glass (Nano Banana
+# 2.1, 2026-11-20, after the user's ampoule references), rendered on one
+# plain flat colour, the stage's deep olive. Body x 6–399 (centre 202.5, R 197) from the
 # shoulder at y 980 to the base at 2194; the liquid starts at y 1060.
 AMPOULE = Cylinder(cx=202.5, r=197, eye=1100, k=0.03)
 
 
-def ampoule():
+def ampoule(ink=False):
     """Quad 4 (Men's Health) as a glass ampoule, after the user's references (Rising, SNP, Dr.Melaxin,
     Avon): print straight on the glass, running along the axis. Words: the client's own copy only
     (content/mens-health.md): Quad 4 · Sildenafil · Vardenafil · Tadalafil · Apomorphine · Sublingual ·
     Rx only. Nothing from the competitor's bottle (user, 2026-11-20: "that is competitor details i dont
     want"). Layout: the pen-label system, along the axis: two hairlines the length of the print, the name
-    in the band between them, one solid ink tab at the band's end (Sublingual, knocked out to the glass),
-    Rx only in the lane on one side, the ingredients in the lane on the other. Dark olive ink, multiplied
-    onto the light glass."""
+    in the band between them, one solid tab at the band's end (Sublingual, knocked out to the glass),
+    Rx only in the lane on one side, the ingredients in the lane on the other.
+    Colour: paper white, screened onto the clear glass like the Rising and SNP prints (the ampoule is clear
+    and colourless like the vials, user: "lets make bottle tone like that like transparent"); faded a
+    little towards the shadow side so it sits in the light.
+    ink=True: the same print in dark olive ink, multiplied, for the light cards and the menu, where the clear
+    glass shows the paper behind it and white print would vanish."""
     p = Print(AMPOULE)
+    PAPER_ = INK if ink else PAPER
+    KNOCK = "#fff" if ink else "#000"   # what a knocked-out letter is drawn in: invisible under each blend
     top, foot = 1150, 2118          # the print's length down the axis
     band_l, band_r = -62, 64        # the hairlines: the name band between them
-    p.segment((band_l, top), (band_l, foot), 2.6, INK, 0.7)
-    p.segment((band_r, top), (band_r, foot), 2.6, INK, 0.7)
+    p.segment((band_l, top), (band_l, foot), 2.6, PAPER_, 0.6)
+    p.segment((band_r, top), (band_r, foot), 2.6, PAPER_, 0.6)
     # the name, along the band (cap height spans the band's middle)
-    p.text("Quad 4", -40, top + 34, 124, 500, INK, tracking=-0.02, along=True)
-    # the solid tab at the band's foot end, its word knocked out
+    p.text("Quad 4", -40, top + 34, 124, 500, PAPER_, tracking=-0.02, along=True)
+    # the solid tab at the band's foot end, its word knocked out (black adds nothing under screen)
     tab_top = 1924
-    p.rect(band_l, tab_top, band_r, foot, INK, 0.94)
-    p.text("Sublingual", -11, tab_top + 26, 32, 500, "#fff", along=True)
+    p.rect(band_l, tab_top, band_r, foot, PAPER_, 0.92)
+    p.text("Sublingual", -11, tab_top + 26, 32, 500, KNOCK, along=True)
     # the lanes either side
-    p.text("Rx only", band_r + 16, top + 4, 31, 500, INK, along=True)
-    p.text("Sildenafil · Vardenafil · Tadalafil · Apomorphine", band_l - 40, top + 4, 30, 500, INK, along=True)
-    return p.svg(406, 2200, "Quad 4 ampoule: print on glass")
+    p.text("Rx only", band_r + 16, top + 4, 31, 500, PAPER_, along=True)
+    p.text("Sildenafil · Vardenafil · Tadalafil · Apomorphine", band_l - 40, top + 4, 30, 500, PAPER_, along=True)
+    fade = None if ink else [(0, 0.72), (0.2, 0.86), (0.42, 0.97), (0.55, 1), (0.9, 1), (1, 0.9)]
+    return p.svg(406, 2200, "Quad 4 ampoule: print on glass" + (" (ink)" if ink else ""), fade=fade)
 
 
 if __name__ == "__main__":
@@ -352,6 +359,7 @@ if __name__ == "__main__":
         "print-vial-microdose.svg": vial("Microdose"),
         "print-vial-multidose.svg": vial("Multidose"),
         "print-ampoule-quad4.svg": ampoule(),
+        "print-ampoule-quad4-ink.svg": ampoule(ink=True),
         "sheen-vial.svg": vial_sheen(),
     }
     for name, data in files.items():
