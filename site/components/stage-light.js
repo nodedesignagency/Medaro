@@ -6,11 +6,13 @@
    dust catching the light. Fine grain and dithering keep it crisp, with no
    banding, at 2x.
 
-   Geometry and colour are fitted to the original plate
-   (assets/images/products/stage-plate.webp), so the products sit in the
-   same light. The plate stays underneath as the fallback (no WebGL, no JS);
-   the canvas fades in over it, starting as the same smooth beam, then the
-   rays come in.
+   The light comes through a narrow opening just past the stage's top-right
+   corner and fans out down-left over the products (user, 2026-11-20: "coming
+   from narrow source then it widens"): OPEN_* and SPREAD in the shader. The
+   colour response is fitted to the original plate
+   (assets/images/products/stage-plate.webp). The plate stays underneath as
+   the fallback (no WebGL, no JS); the canvas fades in over it, then the rays
+   come in.
 
    Markup: <canvas class="stage-light" data-stage-light data-light="dust">
    inside the box the plate covers. Looks (review: ?light=dust|rays|soft):
@@ -49,6 +51,15 @@ uniform float uDust;
 uniform float uSharp;   /* 0 soft … 1 crisp shaft edges */
 uniform float uGrain;
 uniform float uFrame;   /* grain seed, steps at 24 fps */
+
+/* the opening the light comes through (plate space, x from the right edge)
+   and how the beam spreads from it */
+#define OPEN_X 0.04
+#define OPEN_Y -0.10
+#define OPEN_W 0.07
+#define SPREAD 0.22
+#define OPEN_ANG 2.49
+#define OPEN_I 1.1
 
 float hash12(vec2 p) {
   vec3 p3 = fract(vec3(p.xyx) * 0.1031);
@@ -95,17 +106,23 @@ void main() {
   vec2 p = vec2(uv.x * asp, 1.0 - uv.y);   /* plate space: y down, height 1 */
   float t = uTime;
 
-  /* ---- the beam, fitted to the plate: source beyond the top right ---- */
-  vec2 d = p - vec2(asp + 2.49, -1.40);
-  float r = length(d);
-  float da = atan(d.y, d.x) - 2.545;
-  da += 0.004 * sin(t * 0.17) + 0.003 * sin(t * 0.29 + 1.3); /* the sun drifts a hair */
+  /* ---- the beam: light through a narrow opening just past the top-right
+     corner (user, 2026-11-20: "coming from narrow source then it widens …
+     dont need to be point source but narrow"), fanning out down-left over
+     the products ---- */
+  float ang = OPEN_ANG + 0.006 * sin(t * 0.17) + 0.004 * sin(t * 0.29 + 1.3); /* the light drifts a hair */
+  vec2 ax = vec2(cos(ang), sin(ang));       /* along the beam, down-left (y is down) */
+  vec2 nx = vec2(ax.y, -ax.x);              /* across it, toward the upper left */
+  vec2 q = p - vec2(asp + OPEN_X, OPEN_Y);  /* from the opening */
+  float s = max(dot(q, ax), 0.0);           /* distance along the beam */
+  float hw = OPEN_W + SPREAD * s;           /* half-width: narrow at the opening, widening */
+  float u = dot(q, nx) / hw;                /* across, -1 … 1 inside the beam */
 
-  /* sun rays: broad shafts with darker gaps (noise across the beam,
-     stretched along it), sliding sideways and flowing out from the source,
-     over a faint fine streak */
-  float across = da * 48.0;
-  float along = log(r) * 2.2;
+  /* sun rays: shafts with darker gaps that fan out from the opening (noise
+     across the beam in its own width, stretched along it), sliding sideways
+     and flowing outward, over a faint fine streak */
+  float across = u * 5.0;
+  float along = s * 1.6;
   float s1 = noise(vec2(across + t * 0.075, along * 0.6 - t * 0.06));
   float s2 = noise(vec2(across * 2.1 - t * 0.05 + 5.0, along * 0.9 - t * 0.075));
   float soft = mix(0.30, 0.17, uSharp);                  /* half-width of a shaft's edge */
@@ -113,13 +130,15 @@ void main() {
   float fine = noise(vec2(across * 6.0 + t * 0.03, along * 2.0 - t * 0.1));
   float ray = shafts * 0.85 + fine * 0.15;              /* 0 … 1 */
 
-  /* the rays fray the beam's edges: light leaks out along a few of them */
-  float edge = da + (ray - 0.5) * 0.045 * uRays * uIntro;
-  float w = edge > 0.0 ? 0.118 : 0.082;
-  float k = edge > 0.0 ? 4.6 : 3.25;
-  float prof = exp(-pow(abs(edge) / w, k));
-  float att = exp(-0.6403 * r);
-  float beam = 4.987 * prof * att;
+  /* the rays fray the beam's edges: light leaks out along a few of them.
+     Edges are crisp near the opening and soften as the beam spreads */
+  float edge = u + (ray - 0.5) * 0.36 * uRays * uIntro;
+  float side = edge > 0.0 ? 1.0 : 0.86;
+  float k = mix(5.0, 2.8, clamp(s / 1.8, 0.0, 1.0));
+  float prof = exp(-pow(abs(edge) / side, k));
+  /* brightest at the opening; thins out as it spreads and travels */
+  float att = exp(-0.38 * s) * pow(OPEN_W / hw, 0.42);
+  float beam = OPEN_I * prof * att + 0.05 * exp(-1.6 * abs(u)) * att; /* + a little scatter around it */
 
   float rays = mix(1.0, 0.5 + 1.0 * ray, uRays * uIntro);
   float haze = mix(1.0, 0.72 + 0.56 * fbm(p * 1.7 + vec2(-t * 0.022, t * 0.015)), uHaze * uIntro);
@@ -130,7 +149,7 @@ void main() {
   /* dust: only visible where the light catches it */
   if (uDust > 0.0) {
     float motes = dust(p, 26.0, 0.16, t, 1.0) + 0.8 * dust(p, 15.0, 0.08, t * 0.8, 7.0);
-    L += motes * uDust * uIntro * prof * att * (0.25 + ray) * 3.6; /* brighter in the shafts, faint in the gaps */
+    L += motes * uDust * uIntro * prof * att * (0.25 + ray) * 2.6; /* brighter in the shafts, faint in the gaps */
   }
 
   /* a soft shoulder keeps the brightest shafts at the plate's own peak
