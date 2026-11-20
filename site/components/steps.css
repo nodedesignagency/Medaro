@@ -112,23 +112,34 @@
 }
 .steps__item:not([data-state="active"]) { pointer-events: none; }
 
-.steps__card,
 .steps__text > * {
   transition:
     opacity calc(var(--steps-dur) * 0.6) var(--steps-ease),
     transform var(--steps-dur) var(--steps-ease),
     filter calc(var(--steps-dur) * 0.6) var(--steps-ease);
 }
-/* waiting below (scrolling down brings it up) / passed above */
-.steps__item[data-state="after"] .steps__card { opacity: 0; transform: translateY(48px) scale(0.96); filter: blur(6px); }
-.steps__item[data-state="before"] .steps__card { opacity: 0; transform: translateY(-48px) scale(0.96); filter: blur(6px); }
+/* text: waiting below (scrolling down brings it up) / passed above */
 .steps__item[data-state="after"] .steps__text > * { opacity: 0; transform: translateY(28px); filter: blur(4px); }
 .steps__item[data-state="before"] .steps__text > * { opacity: 0; transform: translateY(-28px); filter: blur(4px); }
-/* the incoming step: card first, then the text, line by line */
-.steps__item[data-state="active"] .steps__card { transition-delay: 60ms; }
-.steps__item[data-state="active"] .steps__text > :nth-child(1) { transition-delay: 140ms; }
-.steps__item[data-state="active"] .steps__text > :nth-child(2) { transition-delay: 190ms; }
-.steps__item[data-state="active"] .steps__text > :nth-child(3) { transition-delay: 240ms; }
+/* the incoming step's text, line by line */
+.steps__item[data-state="active"] .steps__text > :nth-child(1) { transition-delay: 60ms; }
+.steps__item[data-state="active"] .steps__text > :nth-child(2) { transition-delay: 110ms; }
+.steps__item[data-state="active"] .steps__text > :nth-child(3) { transition-delay: 160ms; }
+
+/* Cards stack like a deck (user, 2026-11-20, after a stacking-cards
+   recording): driven by the scroll, not by a timer. Each next card rises
+   from below the screen (--rise 0 → 1, set by main.js) and lands on top of
+   the one before; every card already covered steps back a little (--depth:
+   how many cards lie on it) so its top edge peeks out above: up 22px,
+   5% smaller, darker. Reduced motion: main.js sets --rise to 0 or 1 only. */
+.steps__card {
+  transform-origin: 50% 0;
+  transform:
+    translateY(calc((1 - var(--rise, 1)) * var(--steps-enter, 100svh) - var(--depth, 0) * 22px))
+    scale(calc(1 - var(--depth, 0) * 0.05));
+  filter: brightness(calc(1 - var(--depth, 0) * 0.22));
+  will-change: transform;
+}
 
 /* ---------- Text ---------- */
 .steps__text {

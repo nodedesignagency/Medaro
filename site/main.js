@@ -77,16 +77,32 @@
 
 /* ---------- Steps: one step at a time while the stage is pinned ----------
    [data-steps] holds a [data-steps-track] (the scroll room) and its steps
-   [data-step]. The scroll position inside the track picks the step; each
-   step gets data-state before / active / after (CSS animates the change)
-   and the section gets --step (0, 1, 2) for the rolling number. */
+   [data-step], each with a .steps__card. Scroll inside the track: a pause on
+   each step, and between steps the next card rises from below the screen
+   onto the stack, moving with the scroll (--rise on the card, --depth on
+   the cards it covers). Halfway up, the step changes: data-state before /
+   active / after on each step (CSS animates the text) and --step on the
+   section (the rolling number). Reduced motion: cards jump, no rise. */
 (function steps() {
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
   document.querySelectorAll('section[data-steps]').forEach((root) => {
     const track = root.querySelector('[data-steps-track]');
     const items = Array.from(root.querySelectorAll('[data-step]'));
-    if (!track || !items.length) return;
-    let current = -1;
-    const set = (i) => {
+    const cards = items.map((el) => el.querySelector('.steps__card'));
+    if (!track || !items.length || cards.some((c) => !c)) return;
+    const n = items.length;
+    let dwell = 0, rise = 0, current = -1;
+
+    // Room to scroll: a pause per step plus one card-rise between steps.
+    // A card rises from just below the screen to its place, as far as you scroll.
+    const measure = () => {
+      const vh = window.innerHeight;
+      rise = Math.max(240, vh - cards[0].offsetTop + 32);
+      dwell = vh * 0.35;
+      track.style.height = `${vh + n * dwell + (n - 1) * rise}px`;
+      root.style.setProperty('--steps-enter', `${rise}px`);
+    };
+    const setActive = (i) => {
       if (i === current) return;
       current = i;
       root.style.setProperty('--step', i);
@@ -99,14 +115,29 @@
     const update = () => {
       queued = false;
       const r = track.getBoundingClientRect();
-      const range = r.height - window.innerHeight;
-      const p = range > 0 ? Math.min(1, Math.max(0, -r.top / range)) : 0;
-      set(Math.min(items.length - 1, Math.floor(p * items.length)));
+      const range = n * dwell + (n - 1) * rise;
+      const y = Math.min(range, Math.max(0, -r.top));
+      const t = [1];
+      for (let k = 1; k < n; k++) {
+        const startK = k * dwell + (k - 1) * rise;
+        let v = Math.min(1, Math.max(0, (y - startK) / rise));
+        if (still.matches) v = v >= 0.5 ? 1 : 0;
+        t.push(v);
+      }
+      let depth = 0;
+      for (let k = n - 1; k >= 0; k--) {
+        cards[k].style.setProperty('--rise', t[k].toFixed(4));
+        cards[k].style.setProperty('--depth', depth.toFixed(4));
+        depth += t[k] * (k > 0 ? 1 : 0);
+      }
+      setActive(t.reduce((a, v, k) => (k > 0 && v >= 0.5 ? k : a), 0));
     };
     const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+    measure();
     update();
     window.addEventListener('scroll', queue, { passive: true });
-    window.addEventListener('resize', queue);
+    window.addEventListener('resize', () => { measure(); queue(); });
+    still.addEventListener('change', queue);
   });
 })();
 
