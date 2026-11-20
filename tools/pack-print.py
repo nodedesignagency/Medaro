@@ -341,6 +341,8 @@ def ampoule(ink=False):
     band_l, band_r = -62, 64        # the hairlines: the name band between them
     p.segment((band_l, top), (band_l, foot), 2.6, PAPER_, 0.6)
     p.segment((band_r, top), (band_r, foot), 2.6, PAPER_, 0.6)
+    # a line across the top of the band, closing it like the tab closes the foot (user, 2026-11-20)
+    p.segment((band_l - 1.3, top), (band_r + 1.3, top), 2.6, PAPER_, 0.6)
     # the name, along the band (cap height spans the band's middle)
     p.text("Quad 4", -40, top + 34, 124, 500, PAPER_, tracking=-0.02, along=True)
     # the solid tab at the band's foot end, its word knocked out (black adds nothing under screen)
