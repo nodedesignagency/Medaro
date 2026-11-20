@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="components/header.css">
   <link rel="stylesheet" href="components/promo-card.css">
   <link rel="stylesheet" href="components/category-card.css">
+  <link rel="stylesheet" href="components/category-tile.css">
   <link rel="stylesheet" href="components/menu.css">
   <link rel="stylesheet" href="components/product.css">
   <link rel="stylesheet" href="components/stage-light.css">
@@ -22,6 +23,7 @@
   <link rel="stylesheet" href="components/steps.css">
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
   <link rel="stylesheet" href="sections/home/hero.css">
+  <link rel="stylesheet" href="sections/home/hero--v4.css">
   <link rel="stylesheet" href="sections/home/weight-loss.css">
   <link rel="stylesheet" href="sections/home/mens-health.css">
   <link rel="stylesheet" href="sections/home/womens-health.css">
@@ -144,6 +146,85 @@
   <!-- SECTION:header--menu END -->
 
   <main id="main">
+    <!-- SECTION:home/hero--v4 START · styles: sections/home/hero.css (the stage, shared with the approved hero), sections/home/hero--v4.css, components/category-tile.css, components/product.css, components/stage-light.css · scripts: components/stage-light.js · assets: assets/images/products/ (stage-plate.webp, vial-tirzepatide.webp, bottle-quad4.webp, print-vial-microdose.svg, print-vial-multidose.svg, print-bottle-4play.svg, sheen-vial.svg)
+         V4 (user, 2026-11-20): the approved stage with a new arrangement. The client's sentence moves up under the
+         headline (left inset); the supplement card is removed; the three care categories run in one row along the
+         foot as large white cards after hims' category cards, the arrow in a tab flush in the top-right corner (the
+         user's "Still need clarity?" card). The client's packs float side by side in the room between.
+         Copy: headline and sentence from content/home.md, word for word. Cards: the name, then the client's own
+         heading for that line (content/home.md, case changed only), then a call to action (hero copy, ours). -->
+    <div data-version="hero:v4">
+    <section class="hero hero--v4" aria-labelledby="hero-v4-title">
+      <div class="hero__frame">
+
+        <div class="hero__head">
+          <h1 class="hero__title" id="hero-v4-title">Made for Better Health.</h1>
+        </div>
+
+        <p class="hero__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
+
+        <!-- The three care categories (client, 2026-11-20): Weight Loss and Men's Health open their pages; Women's
+             Health scrolls to its Home section, which shows the client's [Coming Soon]. -->
+        <nav class="hero__tiles" aria-label="Care">
+          <ul class="category-tiles">
+            <li>
+              <a class="category-tile category-tile--weight" href="weight-loss.html">
+                <span class="category-tile__text">
+                  <span class="category-tile__name">Weight Loss</span>
+                  <span class="category-tile__line">A better way to lose weight.</span>
+                </span>
+                <span class="category-tile__cta">Learn more</span>
+                <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><span class="pack pack--vial category-tile__obj"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></span></span></span>
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
+              </a>
+            </li>
+            <li>
+              <a class="category-tile category-tile--mens" href="mens-health.html">
+                <span class="category-tile__text">
+                  <span class="category-tile__name">Men's Health</span>
+                  <span class="category-tile__line">Better care for men who want more.</span>
+                </span>
+                <span class="category-tile__cta">Learn more</span>
+                <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><span class="pack pack--bottle category-tile__obj"><img src="assets/images/products/bottle-quad4.webp" alt="" width="439" height="2200"><img class="product__print product__print--glass" src="assets/images/products/print-bottle-4play.svg" alt="" width="439" height="2200"></span></span></span>
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
+              </a>
+            </li>
+            <li>
+              <a class="category-tile category-tile--womens" href="#womens-health">
+                <span class="category-tile__text">
+                  <span class="category-tile__name">Women's Health</span>
+                  <span class="category-tile__line">Better care for every chapter of womanhood.</span>
+                </span>
+                <span class="category-tile__cta">Coming soon</span>
+                <!-- no product: Women's Health has none yet, and tablets are out (client: "we do not make the drugs") -->
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Backdrop: the same live studio light as the approved hero -->
+        <div class="hero__media" aria-hidden="true">
+          <img class="hero__plate" src="assets/images/products/stage-plate.webp" alt="" width="3840" height="2143">
+          <canvas class="stage-light" data-stage-light data-light="dust"></canvas>
+          <div class="hero__scrim"></div>
+        </div>
+
+        <!-- Products: the client's packs side by side (the trio), labels to camera -->
+        <div class="hero__scene" aria-hidden="true">
+          <div class="hero__set hero__set--trio">
+            <div class="product product--vial product--vial-a"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
+            <div class="product product--bottle"><div class="product__float"><img src="assets/images/products/bottle-quad4.webp" alt="" width="439" height="2200"><img class="product__print product__print--glass" src="assets/images/products/print-bottle-4play.svg" alt="" width="439" height="2200"></div></div>
+            <div class="product product--vial product--vial-b"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-multidose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+    <!-- SECTION:home/hero--v4 END -->
+
+    <!-- Approved hero (V3, on main). Compare with ?hero=v3. -->
+    <div data-version="hero:v3">
     <!-- SECTION:home/hero START · styles: sections/home/hero.css, components/product.css, components/promo-card.css, components/category-card.css, components/stage-light.css · scripts: components/stage-light.js · assets: assets/images/products/ (stage-plate.webp, vial-tirzepatide.webp, bottle-quad4.webp, print-vial-microdose.svg, print-vial-multidose.svg, print-bottle-4play.svg, sheen-vial.svg), assets/images/standin-supplement.svg · tools: tools/pack-print.py
          Layout after the user's px push reference: one big line across the top, the client's packs floating in
          the centre, the supplement promo card bottom left, the client's sentence and the care cards bottom right.
@@ -249,6 +330,7 @@
       </div>
     </section>
     <!-- SECTION:home/hero END -->
+    </div>
 
   <!-- SECTION:home/weight-loss START · styles: sections/home/weight-loss.css · assets: assets/images/standin-weight-loss.svg · icons: sprite #i-vial #i-stethoscope #i-plan #i-chat #i-box, #i-arrow-right
        Layout after the user's Good Life reference (video, 2026-11-19). Copy: content/home.md → Weight Loss, word for word. -->

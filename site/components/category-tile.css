@@ -1,0 +1,145 @@
+/* ==========================================================================
+   Component: category tile
+   One care category as a large white card, laid out after hims' category
+   cards (user, 2026-11-20): the name top left with a short line under it,
+   a call to action bottom left, the line's product large on the right and
+   cut off by the card's edge. The arrow sits in a square tab flush in the
+   top-right corner, after the user's "Still need clarity?" card: the tab
+   fills the corner, only its outer corner follows the card's radius.
+   Text in one colour family (ink, ink-soft): the user, "I dont want text
+   colourful i want like ours".
+   First use: the three care categories in one row along the foot of Home
+   hero V4.
+   Variants: --weight, --mens, --womens (the product and its placement).
+   Framer: one component, a variant per care line (name, line, CTA, product).
+   ========================================================================== */
+
+.category-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.category-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: var(--tile-h, 176px);
+  padding: 22px 24px 20px;
+  overflow: hidden; /* the product runs off the card's edge */
+  border-radius: 12px;
+  background: #fff; /* pure white (user, 2026-11-20) */
+  color: var(--color-ink);
+  text-decoration: none;
+  isolation: isolate;
+}
+
+/* ---------- Text: name and line top left, CTA bottom left ---------- */
+.category-tile__text {
+  display: grid;
+  gap: 8px;
+  max-width: 58%; /* clear of the product */
+}
+.category-tile__name {
+  font-size: 28px;
+  font-weight: var(--weight-regular);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+.category-tile__line {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  text-wrap: balance;
+}
+.category-tile__cta {
+  font-size: 14px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: -0.005em;
+}
+
+/* ---------- The product, large on the right, cut off by the card ---------- */
+.category-tile__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.category-tile__float {
+  position: absolute;
+  inset: 0;
+  animation: category-tile-float var(--ct-dur, 6.4s) ease-in-out var(--ct-delay, 0s) infinite;
+}
+/* (doubled class: beats .pack's position in product.css, which loads later) */
+.category-tile .category-tile__obj {
+  position: absolute;
+  left: var(--ct-x);
+  top: var(--ct-y);
+  width: auto;
+  max-width: none;
+  height: var(--ct-h);
+  transform: translate(-50%, -50%) rotate(var(--ct-r, 0deg));
+  filter: drop-shadow(0 14px 16px rgba(52, 59, 41, 0.22)) drop-shadow(0 3px 4px rgba(52, 59, 41, 0.14));
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.category-tile:hover .category-tile__obj {
+  transform: translate(-50%, calc(-50% - 4px)) rotate(calc(var(--ct-r, 0deg) + var(--ct-hover-r, 2deg)));
+}
+
+/* ---------- The arrow: a square tab flush in the top-right corner ---------- */
+.category-tile__go {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.category-tile__go svg {
+  width: 16px;
+  height: 16px; /* the MEDARO arrow, turned 45° (assets/icons/arrow.svg) */
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.category-tile:hover .category-tile__go { background: var(--color-accent); }
+.category-tile:hover .category-tile__go svg { transform: translate(1px, -1px); }
+
+/* ---------- The three lines ---------- */
+/* Weight Loss: the client's Tirzepatide Microdose vial, large, cap and label in view, its foot cut off by the card */
+.category-tile--weight {
+  --ct-h: 122%;
+  --ct-x: 74%;
+  --ct-y: 73%;
+  --ct-r: 9deg;
+  --ct-delay: -1.5s;
+}
+/* Men's Health: the client's 4PLAY bottle lying across the card, like hims' pen */
+.category-tile--mens {
+  --ct-h: 150%;
+  --ct-x: 70%;
+  --ct-y: 60%;
+  --ct-r: 66deg;
+  --ct-hover-r: -2deg;
+  --ct-dur: 7.2s;
+  --ct-delay: -3.8s;
+}
+/* Women's Health: no product yet (Coming Soon; tablets are out, DESIGN.md → Direction rule 8) */
+
+/* a slow bob */
+@keyframes category-tile-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .category-tile__float { animation: none; }
+  .category-tile .category-tile__obj { transition: none; }
+}
