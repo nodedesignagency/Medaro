@@ -22,10 +22,11 @@
   display: grid;
   /* the name never wraps or runs under the product: on the narrowest
      desktops (about 1200) the product column gives way instead */
-  /* the product's column is as wide as the product itself, so its right edge
-     sits 24px in, matching the name's 24px on the left (user, 2026-11-20:
-     "visually it should match the padding we have on text on left") */
-  grid-template-columns: minmax(max-content, 1fr) var(--cc-media-w, 56px);
+  /* one product column for every card, so the three products share a centre
+     line (user, 2026-11-20: "all center visually"); 56px is the widest product
+     (the oval tablet), whose right edge then sits 24px in, matching the name's
+     24px on the left */
+  grid-template-columns: minmax(max-content, 1fr) 56px;
   align-items: center;
   column-gap: 12px;
   height: 80px;
@@ -60,7 +61,8 @@
   .category-card__arrow { transition: none; }
 }
 
-/* the product at the right end, still, over its shadow */
+/* the product at the right end, still, its visual centre on the card's
+   middle, over a soft shadow just below it */
 .category-card__media {
   position: relative;
   align-self: stretch;
@@ -69,7 +71,7 @@
   content: "";
   position: absolute;
   left: 50%;
-  bottom: 7px;
+  top: calc(50% + var(--cc-shadow-y, 24px));
   width: var(--cc-shadow-w, 60px);
   height: 6px;
   margin-left: calc(var(--cc-shadow-w, 60px) / -2);
@@ -78,7 +80,7 @@
 }
 .category-card__float {
   position: absolute;
-  inset: 8px 0 14px; /* products stay 6px+ inside the card */
+  inset: 0;
 }
 /* (doubled class: beats .pack's position in product.css, which loads later) */
 .category-card .category-card__obj {
@@ -91,28 +93,32 @@
   transform: translate(-50%, -50%) rotate(var(--cc-obj-r, 0deg));
 }
 
-/* ---------- The three lines ---------- */
+/* ---------- The three lines ----------
+   Sized to look the same size (user, 2026-11-20: "make them all look same size
+   visually"): about the same visible area (about 38–40px square each), so the
+   slim vial is taller and the chunky square tablet smaller. --cc-shadow-y puts
+   each shadow 3px below its product's lowest point. */
 /* Weight Loss: the client's Tirzepatide vial, a little tilted */
 .category-card--weight {
-  --cc-media-w: 30px;
-  --cc-obj-h: 52px;
+  --cc-obj-h: 56px;
   --cc-obj-r: 8deg;
-  --cc-shadow-w: 42px;
+  --cc-shadow-w: 32px;
+  --cc-shadow-y: 31px;
 }
 /* Men's Health: the dusty blue pillow tablet, MEDARO debossed, a little tilted like hims' (user, 2026-11-20:
    "i dont like that bottle in mens lets add a tablet … different color that looks like image 2") */
 .category-card--mens {
-  --cc-media-w: 56px;
-  --cc-obj-h: 50px;
+  --cc-obj-h: 40px;
   --cc-obj-r: -9deg;
-  --cc-shadow-w: 54px;
+  --cc-shadow-w: 42px;
+  --cc-shadow-y: 25px;
 }
 /* Women's Health: the oval MEDARO tablet (as in the Women's Health section) */
 .category-card--womens {
-  --cc-media-w: 62px;
-  --cc-obj-h: 40px;
+  --cc-obj-h: 36px;
   --cc-obj-r: -6deg;
-  --cc-shadow-w: 52px;
+  --cc-shadow-w: 48px;
+  --cc-shadow-y: 23px;
 }
 
 /* a card with no product: no shadow either */
