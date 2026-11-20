@@ -18,6 +18,55 @@
   window.addEventListener('version-change', update);
 })();
 
+/* ---------- Rolling links (.link-roll) ----------
+   Splits each link's text into letters for the hover roll (styles.css).
+   Kerning is measured on the unsplit text and put back as a margin on each
+   letter (in em, so it holds at any size). The word stays readable to
+   screen readers in a visually hidden span; the letters are aria-hidden. */
+(function rollLinks() {
+  const links = Array.from(document.querySelectorAll('.link-roll'));
+  if (!links.length) return;
+  const split = () => links.forEach((el) => {
+    if (el.dataset.rolled || !el.getClientRects().length) return; // hidden (another version): split when shown
+    const node = el.firstChild;
+    const text = el.textContent;
+    if (!node || node.nodeType !== 3 || !text.trim()) return;
+    // measure each letter's kerned position before splitting
+    const range = document.createRange();
+    const xs = [];
+    for (let i = 0; i <= text.length; i++) {
+      range.setStart(node, Math.min(i, text.length - 1));
+      range.setEnd(node, Math.min(i + 1, text.length));
+      const r = range.getBoundingClientRect();
+      xs.push(i < text.length ? r.left : r.right);
+    }
+    const size = parseFloat(getComputedStyle(el).fontSize) || 16;
+    const sr = document.createElement('span');
+    sr.className = 'visually-hidden';
+    sr.textContent = text;
+    const vis = document.createElement('span');
+    vis.className = 'link-roll__text';
+    vis.setAttribute('aria-hidden', 'true');
+    const chars = Array.from(text).map((ch, i) => {
+      const c = document.createElement('span');
+      c.className = 'link-roll__c';
+      c.style.setProperty('--i', i);
+      c.textContent = ch;
+      vis.appendChild(c);
+      return c;
+    });
+    el.textContent = '';
+    el.append(sr, vis);
+    chars.forEach((c, i) => {
+      const kern = (xs[i + 1] - xs[i]) - c.getBoundingClientRect().width;
+      if (Math.abs(kern) > 0.05) c.style.marginRight = `${(kern / size).toFixed(4)}em`;
+    });
+    el.dataset.rolled = '1';
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(split); else split();
+  window.addEventListener('version-change', () => requestAnimationFrame(split));
+})();
+
 /* ---------- Scenes: the page changes colour for a section ----------
    A section with data-scene="<name>" sets data-scene on <html> while it
    crosses the middle of the screen; the section's CSS redefines the colour
