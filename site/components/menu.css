@@ -2,8 +2,9 @@
    Component: menu sheet
    The desktop menu behind the header's menu button, after the client's hims
    and Superpower references (2026-11-20) and Mobbin (Quartz, Klaviyo): a
-   sheet slides in from the right over a dimmed page. One column of large
-   links with arrows, a featured card, Contact and Get Started at the foot.
+   sheet slides in from the right over a dimmed page. "Menu" on a hairline,
+   one column of large links with arrows, a "Top treatments" row of product
+   cards (after hims), Contact and Get Started at the foot.
    Built on <dialog> (showModal): focus stays inside, the page behind is
    inert, Esc closes. main.js adds .is-open after opening and removes it
    before closing, so the sheet and scrim animate both ways.
@@ -62,6 +63,8 @@
   align-items: center;
   justify-content: space-between;
   min-height: 44px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-line); /* user: "one border line below menu" */
 }
 .menu__title {
   font-size: 22px;
@@ -86,22 +89,22 @@
 .menu__close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
 
 /* ---------- Links ---------- */
-.menu__nav { margin: 28px 0 24px; }
+.menu__nav { margin: 24px 0 28px; }
 .menu__label {
   margin-bottom: 8px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: var(--weight-medium);
   line-height: 1;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #56662f; /* olive, as the promo card label: 5.3:1 on paper */
+  color: #6b6b68; /* neutral grey (user: "grey not greenish"), 5.1:1 on paper */
 }
 .menu__list { list-style: none; margin: 0 -14px; padding: 0; }
 .menu__link {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 11px 14px;
+  padding: 9px 14px;
   border-radius: 12px;
   font-size: 28px;
   font-weight: var(--weight-regular);
@@ -132,61 +135,82 @@ a.menu__link:hover .menu__arrow { transform: translateX(3px); color: var(--color
   color: var(--color-ink);
 }
 
-/* ---------- Featured card ---------- */
-.menu__feature {
+/* ---------- Top treatments ----------
+   After hims' menu: light cards in a row that scrolls sideways and runs to
+   the sheet's edge (the next card peeks). Rx badge top left, the product in
+   the middle, the name at the foot. */
+.menu__treat { margin-top: auto; } /* sits at the foot of the sheet, above the buttons */
+.treat-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 168px;
+  gap: 10px;
+  margin: 0 -28px;
+  padding: 4px 28px 6px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 28px;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.treat-row::-webkit-scrollbar { display: none; }
+.treat-row > li { scroll-snap-align: start; }
+
+.treat-card {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 132px;
-  align-items: end;
-  gap: 12px;
-  min-height: 164px;
-  margin-top: auto; /* sits at the foot of the list, above the buttons */
-  padding: 20px 20px 22px;
-  overflow: hidden;
+  grid-template-rows: 1fr auto;
+  height: 196px;
+  padding: 12px 14px 14px;
   border-radius: 14px;
-  background: var(--color-deep);
-  color: var(--color-on-dark);
+  background: var(--color-surface);
+  color: var(--color-ink);
   text-decoration: none;
+  overflow: hidden;
+  transition: background-color var(--dur-fast) var(--ease-out);
 }
-.menu__feature-label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 12px;
-  font-weight: var(--weight-medium);
-  line-height: 1;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-}
-.menu__feature-title {
-  display: block;
-  max-width: 13em;
-  font-size: 20px;
-  font-weight: var(--weight-medium);
-  line-height: 1.15;
-  letter-spacing: -0.015em;
-}
-.menu__feature-media { position: relative; align-self: stretch; }
-.menu__feature-tab { position: absolute; height: auto; transition: transform var(--dur-slow) var(--ease-out); }
-.menu__feature-tab--white { width: 64px; left: -6px; top: 34px; } /* clear of the arrow button, its lettering clear of the oval */
-.menu__feature-tab--oval { width: 92px; right: -6px; bottom: -4px; }
-.menu__feature:hover .menu__feature-tab--white { transform: translate(-2px, -3px) rotate(-6deg); }
-.menu__feature:hover .menu__feature-tab--oval { transform: translate(2px, -2px) rotate(5deg); }
-.menu__feature-go {
+.treat-card:hover { background: color-mix(in srgb, var(--color-surface) 88%, var(--color-ink) 6%); }
+.treat-card__rx {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 10px;
+  left: 10px;
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: var(--color-accent);
-  color: var(--color-ink);
-  z-index: 1;
+  background: #fff;
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.01em;
 }
-.menu__feature-go svg { width: 15px; height: 15px; transition: transform var(--dur-base) var(--ease-out); }
-.menu__feature:hover .menu__feature-go svg { transform: translate(1px, -1px); }
+.treat-card__name {
+  font-size: 15px;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.01em;
+}
+.treat-card__media {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.treat-card__media > * { transition: transform var(--dur-slow) var(--ease-out); }
+.treat-card:hover .treat-card__media > * { transform: translateY(-3px) rotate(var(--hover-r, 0deg)); }
+
+/* pens: the hero's renders with their code labels, tilted like hims' card */
+.treat-card__pen {
+  position: relative;
+  display: block;
+  height: 118px;
+  rotate: -24deg;
+}
+.treat-card__pen--glp1 { aspect-ratio: 299 / 2200; }
+.treat-card__pen--capped { aspect-ratio: 307 / 2284; rotate: 24deg; }
+.treat-card__pen img { display: block; width: 100%; height: 100%; }
+.treat-card .print-meta { display: none; } /* too small to read at this size */
+.treat-card__tab { width: 88px; height: auto; }
+.treat-card__tab--white { width: 74px; }
 
 /* ---------- Foot ---------- */
 .menu__foot {
@@ -198,7 +222,7 @@ a.menu__link:hover .menu__arrow { transform: translateX(3px); color: var(--color
 
 /* ---------- Entrance: rows rise in, one after another ---------- */
 .menu__list > li,
-.menu__feature,
+.menu__treat,
 .menu__foot {
   opacity: 0;
   transform: translateY(10px);
@@ -206,11 +230,11 @@ a.menu__link:hover .menu__arrow { transform: translateX(3px); color: var(--color
   transition-delay: calc(120ms + var(--i, 0) * 32ms);
 }
 .menu.is-open .menu__list > li,
-.menu.is-open .menu__feature,
+.menu.is-open .menu__treat,
 .menu.is-open .menu__foot { opacity: 1; transform: none; }
 /* closing: everything leaves together, no stagger */
 .menu:not(.is-open) .menu__list > li,
-.menu:not(.is-open) .menu__feature,
+.menu:not(.is-open) .menu__treat,
 .menu:not(.is-open) .menu__foot { transition-delay: 0ms; transition-duration: 160ms; }
 
 /* Keyboard focus */
@@ -220,10 +244,11 @@ a.menu__link:hover .menu__arrow { transform: translateX(3px); color: var(--color
   outline: 2px solid var(--color-ink);
   outline-offset: 2px;
 }
-.menu__feature:focus-visible { outline-offset: 3px; }
+.treat-card:focus-visible { outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
   .menu__panel { transform: none; opacity: 0; transition: opacity 200ms linear; }
   .menu.is-open .menu__panel { opacity: 1; }
-  .menu__list > li, .menu__feature, .menu__foot { transform: none; transition-delay: 0ms; }
+  .menu__list > li, .menu__treat, .menu__foot { transform: none; transition-delay: 0ms; }
+  .treat-card:hover .treat-card__media > * { transform: none; }
 }

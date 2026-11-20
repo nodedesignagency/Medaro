@@ -275,19 +275,88 @@
           </ul>
         </nav>
 
-        <!-- Featured card, after hims' "Ready to lose weight? Start here": the client's Weight Loss heading
-             (content/home.md), linking to the Weight Loss landing page as their "Learn more" does. -->
-        <a class="menu__feature" href="weight-loss.html" style="--i:6">
-          <span class="menu__feature-text">
-            <span class="menu__feature-label">Weight Loss</span>
-            <span class="menu__feature-title">Real Medical Care. A Better Way to Lose Weight.</span>
-          </span>
-          <span class="menu__feature-media" aria-hidden="true">
-            <img class="menu__feature-tab menu__feature-tab--white" src="assets/images/products/tablet-white.webp" alt="" width="669" height="662">
-            <img class="menu__feature-tab menu__feature-tab--oval" src="assets/images/products/tablet-oval-lime.webp" alt="" width="900" height="620">
-          </span>
-          <span class="menu__feature-go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
-        </a>
+        <!-- Top treatments, after hims' menu: a row of product cards (Rx badge, product, name) that scrolls
+             sideways. Products are the hero's renders, the pens with their code labels (small lines hidden).
+             Names: the molecules and Quad 4 from the client's copy. [LINK NEEDED] treatment pages; for now the
+             landing pages and the Supplement section. -->
+        <section class="menu__treat" aria-labelledby="site-menu-treat" style="--i:6">
+          <p class="menu__label" id="site-menu-treat">Top treatments</p>
+          <ul class="treat-row">
+            <li>
+              <a class="treat-card" href="weight-loss.html">
+                <span class="treat-card__rx">Rx</span>
+                <span class="treat-card__media" aria-hidden="true">
+                  <span class="treat-card__pen treat-card__pen--glp1">
+                    <img src="assets/images/products/pen-glp1.webp" alt="" width="299" height="2200">
+                    <svg class="product__print" viewBox="0 0 299 2200">
+                  <defs><clipPath id="menu-sleeve-pen"><rect x="13.2" y="980.1" width="272" height="677.1" rx="3"/></clipPath></defs>
+                  <g clip-path="url(#menu-sleeve-pen)">
+                    <rect x="113.20" y="1410.1" width="72" height="247.1" fill="#343B29"/>
+                    <rect x="184.50" y="980.1" width="1.4" height="677.1" fill="#343B29" fill-opacity="0.4"/>
+                    <rect x="112.50" y="980.1" width="1.4" height="677.1" fill="#343B29" fill-opacity="0.4"/>
+                    <text class="print-dose" transform="translate(141.50 1436.1) rotate(90)" fill="#D5E5AD">0.25 mg/0.5 mL</text>
+                    <text class="print-name" transform="translate(135.90 1014.1) rotate(90)" fill="#343B29">Semaglutide</text>
+                    <g transform="translate(223.76 1014.1) rotate(90) scale(1 0.889)" color="#343B29"><use href="#wordmark" width="161.1" height="26"/></g>
+                    <text class="print-meta" transform="translate(205.20 1623.2) rotate(90) scale(1 0.889)" text-anchor="end" fill="#5E6551">Rx only</text>
+                    <text class="print-meta" transform="translate(79.20 1014.1) rotate(90) scale(1 0.889)" fill="#5E6551">Injection · Single-dose pen</text>
+                  </g>
+                </svg>
+                  </span>
+                </span>
+                <span class="treat-card__name">Semaglutide</span>
+              </a>
+            </li>
+            <li>
+              <a class="treat-card" href="weight-loss.html">
+                <span class="treat-card__rx">Rx</span>
+                <span class="treat-card__media" aria-hidden="true">
+                  <span class="treat-card__pen treat-card__pen--capped">
+                    <img src="assets/images/products/pen-glp1-capped.webp" alt="" width="307" height="2284">
+                    <svg class="product__print" viewBox="0 0 307 2284">
+                  <defs><clipPath id="menu-sleeve-capped"><rect x="10" y="1067.4" width="245.3" height="749.4" rx="3"/></clipPath></defs>
+                  <g clip-path="url(#menu-sleeve-capped)">
+                    <rect x="8.5" y="1067.4" width="248.3" height="749.4" fill="#343B29"/>
+                    <rect x="100.65" y="1067.4" width="64" height="250.0" fill="#D5E5AD"/>
+                    <rect x="163.95" y="1067.4" width="1.4" height="749.4" fill="#F4F5EF" fill-opacity="0.4"/>
+                    <rect x="99.95" y="1067.4" width="1.4" height="749.4" fill="#F4F5EF" fill-opacity="0.4"/>
+                    <text class="print-dose" transform="translate(124.95 1093.4) rotate(90)" fill="#343B29">2.5 mg/0.5 mL</text>
+                    <text class="print-name" transform="translate(119.35 1343.4) rotate(90)" fill="#F4F5EF">Tirzepatide</text>
+                    <g transform="translate(203.09 1343.4) rotate(90) scale(1 0.88)" color="#F4F5EF"><use href="#wordmark" width="161.1" height="26"/></g>
+                    <text class="print-meta" transform="translate(184.65 1101.4) rotate(90) scale(1 0.88)" fill="#D9DCCF">Rx only</text>
+                    <text class="print-meta" transform="translate(66.65 1343.4) rotate(90) scale(1 0.88)" fill="#D9DCCF">Injection · Single-dose pen</text>
+                  </g>
+                </svg>
+                    <svg class="product__sheen" viewBox="0 0 307 2284">
+                  <defs>
+                    <linearGradient id="menu-sheen-capped" x1="8.5" x2="256.8" gradientUnits="userSpaceOnUse">
+                      <stop offset="0.5" stop-color="#fff" stop-opacity="0"/>
+                      <stop offset="0.74" stop-color="#fff" stop-opacity="0.13"/>
+                      <stop offset="0.84" stop-color="#fff" stop-opacity="0.07"/>
+                      <stop offset="0.97" stop-color="#fff" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <rect x="10" y="1067.4" width="245.3" height="749.4" fill="url(#menu-sheen-capped)"/>
+                </svg>
+                  </span>
+                </span>
+                <span class="treat-card__name">Tirzepatide</span>
+              </a>
+            </li>
+            <li>
+              <a class="treat-card" href="mens-health.html">
+                <span class="treat-card__rx">Rx</span>
+                <span class="treat-card__media" aria-hidden="true"><img class="treat-card__tab treat-card__tab--oval" src="assets/images/products/tablet-oval-lime.webp" alt="" width="900" height="620"></span>
+                <span class="treat-card__name">Quad 4</span>
+              </a>
+            </li>
+            <li>
+              <a class="treat-card" href="#supplements" data-menu-close>
+                <span class="treat-card__media" aria-hidden="true"><img class="treat-card__tab treat-card__tab--white" src="assets/images/products/tablet-white.webp" alt="" width="669" height="662"></span>
+                <span class="treat-card__name">Supplements</span>
+              </a>
+            </li>
+          </ul>
+        </section>
 
         <div class="menu__foot" style="--i:7">
           <a class="btn btn--outline btn--pill" href="contact.html">Contact</a>
