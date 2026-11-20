@@ -75,6 +75,7 @@ Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
 | Footer | `full` · `landing` (legal links only, pending client answer) | all | not started |
 | Button | `primary` (lime) · `dark` (ink); sizes `--s` 40, default 48, `--l` 54; `--pill` for V2. No arrows | all | exploring |
 | Text link | `.link-underline` | all | exploring |
+| Rolling link | `.link-roll` (styles.css + main.js): on hover every letter slides up and an identical copy rolls in from below, left to right (280ms per letter, 16ms apart), rolling back on leave; after the user's hover recording (2026-11-20, from `claude/ecstatic-franklin-ul1zra`). Text split into letters with the font's kerning kept; the word stays whole for screen readers. **On every nav link in every hero version (header links, and the V3 menu links), and on the footer links when the footer is built.** Reduced motion: no roll. Framer: a link component with two stacked text layers and a staggered per-letter hover | all | exploring |
 | Stand-in image | `.media-brief` + `assets/images/standin-*.svg`; `?briefs=on` shows the photo brief | all | exploring |
 | Promo card | `components/promo-card.css`, **`--paper` (locked)**: light card, ink title, olive label `#56662F`, no shadow; radius 12 like the nav, 8px inset and 8px image radius like the nav buttons; 104px image left, caps label, two-line title, 40px round ↗ 8px from the corner | Home V1 | locked |
 | Product photo | V2: `.hero-v2__media` covers the stage like object-fit: cover (width max(100cqw, 179.17cqh), anchored right, slides right on narrower stages so the copy stays clear), holding the backdrop plate, a left scrim for the copy, and the products cut-out floating on a 7s loop (−1.6cqh, −0.6°), still under reduced motion. The stage background is the plate's left edge under the scrim, so no strip ever shows | Home V2 | exploring |
@@ -117,6 +118,8 @@ Write what the user said, in their words where possible, with the date.
 - 2026-11-19: Client palette shared on a call: button `#D5E5AD` Soft Nude Lime ("not the light green"), text `#343B29` Dark Olive Green, `#A8AF98` Dusty Olive. The user told the client we'd explore 2–3 colour options after the first version.
 
 ### Likes
+
+- 2026-11-20: Link hover: "make the links hover animation like this for footer … and nav bar", then "change this to all hero versions in all branch … only the links animation". `.link-roll` added on every branch to all nav links (V1 and V2 header links, V3 menu links); footer links get it when the footer is built.
 
 - 2026-11-19: **V1 locked**: hero V1 with the smoke nav, the run photo and the paper card ("for v1 we are using these"). Other navs (tinted, vision, dark), photos (stretch, peak stand-in) and cards (specs, frost, olive glass) removed from the page.
 - 2026-11-19: Product renders must feel "sexy premium" like Good Life's tumbling debossed tablets, Good Life vials, hims' debossed tablet and printed capsule, and the floating pens: macro, tactile, dramatic light.
