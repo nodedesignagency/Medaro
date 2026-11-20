@@ -147,8 +147,9 @@
 
   <main id="main">
     <!-- SECTION:home/hero--v4 START · styles: sections/home/hero.css (the stage, shared with the approved hero), sections/home/hero--v4.css, components/category-tile.css, components/product.css, components/stage-light.css · scripts: components/stage-light.js · assets: assets/images/products/ (stage-plate.webp, vial-tirzepatide.webp, ampoule-quad4.webp, tablet-white.webp, tablet-oval-lime.webp, tablet-square-blue.webp, print-vial-microdose.svg, print-vial-multidose.svg, print-ampoule-quad4.svg, sheen-vial.svg), assets/images/supplements/tablet-oval.webp
-         V4 (user, 2026-11-20): the approved stage with a new arrangement. The client's sentence moves up under the
-         headline (left inset); the supplement card is removed; the three care categories run in one row along the
+         V4 (user, 2026-11-20): the approved stage with a new arrangement. The headline splits: "Made for" top left,
+         "Better Health." bottom right above the cards (user, 2026-11-20: "lets transfer better health below"); one
+         h1, two lines. The client's sentence moves up under "Made for" (left inset); the supplement card is removed; the three care categories run in one row along the
          foot as large white cards after hims' category cards, with the round arrow bottom left in place of a
          "Learn more" line (user, 2026-11-20). The client's packs float side by side in the room between.
          Copy: headline and sentence from content/home.md, word for word. Cards: the name, then the client's own
@@ -161,7 +162,7 @@
       <div class="hero__frame">
 
         <div class="hero__head">
-          <h1 class="hero__title" id="hero-v4-title">Made for Better Health.</h1>
+          <h1 class="hero__title hero__title--split" id="hero-v4-title"><span class="hero__title-line hero__title-line--a">Made for</span> <span class="hero__title-line hero__title-line--b">Better Health.</span></h1>
         </div>
 
         <p class="hero__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
@@ -210,22 +211,22 @@
           <div class="hero__scrim"></div>
         </div>
 
-        <!-- Products, larger, overlapping the headline for depth (user, 2026-11-20: "can we increase their size …
-             how about also making them overlapping with h1 for depth? use mobbin for such designs"; after Superpower's
-             hoodie hero and Creative Intelligence's camera, Mobbin): two layers with the same box, one behind the
-             headline (the white tablet tucked under its letters) and one in front (the ampoule rising across the
-             letters, its clear glass letting them show through; the vials; the oval tablet). -->
-        <div class="hero__scene hero__scene--back" aria-hidden="true">
-          <div class="hero__set hero__set--trio">
-            <div class="product product--tablet-white"><div class="product__float"><img src="assets/images/products/tablet-white.webp" alt="" width="669" height="662"></div></div>
-          </div>
-        </div>
-        <div class="hero__scene hero__scene--front" aria-hidden="true">
-          <div class="hero__set hero__set--trio">
-            <div class="product product--vial product--vial-a"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
+        <!-- Products: the float arrangement of the V3 hero (user, 2026-11-20: "lets use images like image 3 no
+             overlapping for now"): the ampoule leaning across the beam, the Microdose vial in front of its lower half,
+             the Multidose vial further back, the two tablets; clear of both headline lines. Two boxes that follow the
+             free room: the band above "Better Health." (ampoule, Multidose vial, tablets) and the pocket left of
+             "Better" under the sentence (the Microdose vial, large and in front). -->
+        <div class="hero__scene hero__scene--band" aria-hidden="true">
+          <div class="hero__set hero__set--float">
             <div class="product product--ampoule"><div class="product__float"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print product__print--glass" src="assets/images/products/print-ampoule-quad4.svg" alt="" width="406" height="2200"></div></div>
             <div class="product product--vial product--vial-b"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-multidose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
+            <div class="product product--tablet-white"><div class="product__float"><img src="assets/images/products/tablet-white.webp" alt="" width="669" height="662"></div></div>
             <div class="product product--tablet-oval"><div class="product__float"><img src="assets/images/products/tablet-oval-lime.webp" alt="" width="900" height="620"></div></div>
+          </div>
+        </div>
+        <div class="hero__scene hero__scene--pocket" aria-hidden="true">
+          <div class="hero__set hero__set--float">
+            <div class="product product--vial product--vial-a"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
           </div>
         </div>
       </div>

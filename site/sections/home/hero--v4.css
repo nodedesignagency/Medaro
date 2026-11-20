@@ -44,30 +44,62 @@
     linear-gradient(0deg, rgba(22, 26, 16, 0.5) 0%, rgba(22, 26, 16, 0) 32%);
 }
 
-/* ---------- Products: larger, overlapping the headline for depth ----------
-   User, 2026-11-20: "center floating stuff can we increase their size looks so
-   small, how about also making them overlapping with h1 for depth? use mobbin
-   for such designs" (Superpower's hoodie hero, Creative Intelligence's camera:
-   the object crosses the big headline). The box now starts inside the
-   headline's letters (40% down the cap height) and runs to 20px above the
-   cards: about 30% taller than before. Two layers share it:
-   --back sits behind the headline (z -1: the white tablet tucked under the
-   letters), --front in front of it (z 2: the ampoule rising across the
-   letters, the vials, the oval tablet). Neither catches the pointer. */
-.hero--v4 .hero__scene {
-  --cap: calc((100cqw - 2 * var(--hero-inset)) / 9.861 * 0.7);
-  --scene-t: calc(44px + var(--cap) * 0.4);
-  --scene-ratio: 1;
-  --spill: 0px;
-  top: var(--scene-t);
-  height: calc(var(--tiles-t) - 20px - var(--scene-t));
-  pointer-events: none;
+/* ---------- The headline, split ----------
+   "Made for" top left, "Better Health." bottom right, just above the cards
+   (user, 2026-11-20: "lets transfer better health below i want to see that").
+   One h1; each line is placed on the stage at the headline's size (the one-line
+   size of the approved hero), its letters trimmed to cap height and baseline. */
+.hero--v4 .hero__head { position: static; }
+.hero--v4 .hero__title--split { position: static; }
+.hero--v4 .hero__title-line {
+  position: absolute;
+  line-height: 1;
+  white-space: nowrap;
+  text-box: trim-both cap alphabetic;
 }
-.hero--v4 .hero__scene--back { z-index: -1; }
-.hero--v4 .hero__scene--front { z-index: 2; }
+.hero--v4 .hero__title-line--a { top: 44px; left: var(--hero-inset); }
+.hero--v4 .hero__title-line--b {
+  right: var(--hero-inset);
+  bottom: calc(100cqh - var(--tiles-t) + 32px); /* 32px above the cards */
+}
 
-.hero--v4 .hero__set--trio .product--ampoule      { --h: 98%; --x: 50%; --y: 51%; --r: -4deg; }
-.hero--v4 .hero__set--trio .product--vial-a       { --h: 52%; --x: 21%; --y: 67%; --r: 6deg; }
-.hero--v4 .hero__set--trio .product--vial-b       { --h: 48%; --x: 79%; --y: 68%; --r: -6deg; }
-.hero--v4 .hero__set--trio .product--tablet-white { --h: 15%; --x: 27%; --y: 13%; --r: 0deg; }
-.hero--v4 .hero__set--trio .product--tablet-oval  { --h: 13%; --x: 74%; --y: 12%; --r: 0deg; }
+/* ---------- Products: the V3 float arrangement, along the free diagonal ----------
+   User, 2026-11-20: "lets use images like image 3 no overlapping for now".
+   With the headline split, the free room is a diagonal band from bottom left
+   (beside "Better Health.") to top right (beside "Made for"). The headline
+   scales with the stage's width, the room with its height, so the products sit
+   in two boxes that follow the room exactly:
+   - the band: from 24px under "Made for" to 24px above "Better Health.", from
+     the sentence's right side to the right inset (the ampoule leaning, the
+     Multidose vial further back, the tablets);
+   - the pocket: left of "Better" (which starts at 42% of the content width at
+     every size) and under the sentence, down to 24px above the cards (the
+     Microdose vial, large and in front). */
+.hero--v4 .hero__frame {
+  --cap: calc((100cqw - 2 * var(--hero-inset)) / 9.861 * 0.7);
+  --line-b-t: calc(var(--tiles-t) - 32px - var(--cap)); /* top of "Better Health." */
+  --content-w: calc(100cqw - 2 * var(--hero-inset));
+}
+.hero--v4 .hero__scene {
+  --spill: 0px;
+  width: auto;
+  aspect-ratio: auto;
+  transform: none;
+}
+.hero--v4 .hero__scene--band {
+  left: calc(var(--hero-inset) + var(--content-w) * 0.33);
+  right: var(--hero-inset);
+  top: calc(var(--head-b) + 24px);
+  height: calc(var(--line-b-t) - 24px - var(--head-b) - 24px);
+}
+.hero--v4 .hero__scene--pocket {
+  left: var(--hero-inset);
+  width: calc(var(--content-w) * 0.42 - 24px);
+  top: calc(var(--head-b) + 36px + 64px + 24px); /* under the sentence (three lines) */
+  height: calc(var(--tiles-t) - 24px - var(--head-b) - 36px - 64px - 24px);
+}
+.hero--v4 .hero__scene--band .product--ampoule      { --h: 100%; --x: 32%; --y: 50%; --r: -14deg; }
+.hero--v4 .hero__scene--band .product--vial-b       { --h: 56%;  --x: 72%; --y: 36%; --r: -18deg; }
+.hero--v4 .hero__scene--band .product--tablet-white { --h: 21%;  --x: 12%; --y: 26%; --r: 0deg; }
+.hero--v4 .hero__scene--band .product--tablet-oval  { --h: 19%;  --x: 49%; --y: 78%; --r: 0deg; }
+.hero--v4 .hero__scene--pocket .product--vial-a     { --h: 88%;  --x: 80%; --y: 52%; --r: 10deg; }
