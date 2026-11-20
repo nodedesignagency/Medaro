@@ -3,7 +3,8 @@
    One care category as a large white card, laid out after hims' category
    cards (user, 2026-11-20): the name top left with a short line under it,
    the round arrow bottom left (no "Learn more": the user, 2026-11-20), the
-   line's product large on the right and cut off by the card's edge, standing
+   line's product large on the right and cut off by the card's edge, no
+   shadow (user, 2026-11-20: "i dont like shadows you are using"), standing
    still (no bob: the user on the category cards, 2026-11-20, "there wont be
    any updown animation"); it lifts a little on hover.
    Text in one colour family (ink, ink-soft): the user, "I dont want text
@@ -78,7 +79,6 @@
   max-width: none;
   height: var(--ct-h);
   transform: translate(-50%, -50%) rotate(var(--ct-r, 0deg));
-  filter: drop-shadow(0 14px 16px rgba(52, 59, 41, 0.22)) drop-shadow(0 3px 4px rgba(52, 59, 41, 0.14));
   transition: transform var(--dur-slow) var(--ease-out);
 }
 .category-tile:hover .category-tile__obj {
