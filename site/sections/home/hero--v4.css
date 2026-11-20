@@ -63,33 +63,51 @@
   bottom: calc(100cqh - var(--tiles-t) + 32px); /* 32px above the cards */
 }
 
-/* ---------- Products: the V3 cluster, top right ----------
-   User, 2026-11-20: "lets use images like image 3 no overlapping for now", then
-   "what you are doing spreading these … it should stay like this on top right".
-   The V3 float arrangement as one cluster, unchanged inside (same box shape
-   and the same positions as hero.css), centred on the stage both ways in the
-   room between "Made for" and the cards, drawn above "Better Health.". */
+/* ---------- Products: one cluster, centred, above the headline ----------
+   User, 2026-11-20, in order: "lets use images like image 3 no overlapping",
+   "it should stay like this on top right", "make the cluster centered", "i
+   want centered like visually centered … the images should be high z index
+   than that of text", "middle ground so we can still read better properly
+   yet it feels like it overlapping … lets not overlap the bottle … overlap
+   only tablet", "lets remove this 2nd bottle too so we can make cluster
+   bigger".
+   The cluster (ampoule, Microdose vial, white tablet) runs from the top of
+   "Made for" to the top of "Better Health.", centred on the stage; with the
+   Multidose vial gone it is narrower (0.62), so it can be that tall without
+   reaching "for". The bottles stop just short of "Better Health.". The oval
+   tablet has a box of its own over "er" of "Better" (where the letters are
+   short, at 63.5% of the content width at every size), dipping a little into
+   their tops. Both draw above the headline (z-index 2). */
 .hero--v4 .hero__frame {
-  --cap: calc((100cqw - 2 * var(--hero-inset)) / 9.861 * 0.7);
+  --content-w: calc(100cqw - 2 * var(--hero-inset));
+  --fs: calc(var(--content-w) / 9.861);          /* the headline's font size */
+  --cap: calc(var(--fs) * 0.7);
   --line-b-t: calc(var(--tiles-t) - 32px - var(--cap)); /* top of "Better Health." */
 }
 .hero--v4 .hero__scene--cluster {
   --spill: 0px;
-  --scene-ratio: 0.78; /* the V3 box */
-  /* centred on the stage (user, 2026-11-20: "make the cluster centered now i want to see") */
+  --scene-ratio: 0.62;
   left: 50%;
   right: auto;
   transform: translateX(-50%);
-  /* visually centred in the room between "Made for" and the cards, so it runs
-     over "Better Health." and sits above it (user, 2026-11-20: "i want centered
-     like visually centered … i know we will see overlapping of bottle with below
-     text its fine … the images should be high z index than that of text") */
-  top: calc(var(--head-b) + 24px);
-  height: calc(var(--tiles-t) - 24px - var(--head-b) - 24px);
+  top: 44px;
+  height: calc(var(--line-b-t) - 44px);
   z-index: 2;
 }
-.hero--v4 .hero__scene--cluster .product--ampoule      { --h: 84.6%; --x: 58%; --y: 49%;   --r: -14deg; }
-.hero--v4 .hero__scene--cluster .product--vial-a       { --h: 54%;   --x: 32%; --y: 66%;   --r: 10deg; }
-.hero--v4 .hero__scene--cluster .product--vial-b       { --h: 32.4%; --x: 77%; --y: 16.5%; --r: -18deg; }
-.hero--v4 .hero__scene--cluster .product--tablet-white { --h: 17%;   --x: 20%; --y: 22%;   --r: 0deg; }
-.hero--v4 .hero__scene--cluster .product--tablet-oval  { --h: 14%;   --x: 80%; --y: 64%;   --r: 0deg; }
+.hero--v4 .hero__scene--cluster .product--ampoule      { --h: 92%; --x: 56%; --y: 48%; --r: -14deg; }
+.hero--v4 .hero__scene--cluster .product--vial-a       { --h: 58%; --x: 29%; --y: 64%; --r: 10deg; }
+.hero--v4 .hero__scene--cluster .product--tablet-white { --h: 17%; --x: 80%; --y: 21%; --r: 0deg; }
+
+/* the oval tablet over "er": 0.4 of the headline size tall, its bottom 6% of
+   the font size into the tops of the short letters */
+.hero--v4 .hero__scene--oval {
+  --oval-h: calc(var(--fs) * 0.4);
+  --spill: 0px;
+  --scene-ratio: 900 / 620;
+  left: calc(var(--hero-inset) + var(--content-w) * 0.6351 - var(--oval-h) * 900 / 620 / 2);
+  top: calc(var(--line-b-t) + var(--fs) * 0.064 - var(--oval-h) / 2);
+  height: var(--oval-h);
+  transform: none;
+  z-index: 2;
+}
+.hero--v4 .hero__scene--oval .product--tablet-oval { --h: 100%; --x: 50%; --y: 50%; --r: 0deg; }
