@@ -67,8 +67,8 @@
    User, 2026-11-20: "lets use images like image 3 no overlapping for now", then
    "what you are doing spreading these … it should stay like this on top right".
    The V3 float arrangement as one cluster, unchanged inside (same box shape
-   and the same positions as hero.css): from the top of "Made for" to 24px
-   above "Better Health.", centred on the stage (it was on the right inset). */
+   and the same positions as hero.css), centred on the stage both ways in the
+   room between "Made for" and the cards, drawn above "Better Health.". */
 .hero--v4 .hero__frame {
   --cap: calc((100cqw - 2 * var(--hero-inset)) / 9.861 * 0.7);
   --line-b-t: calc(var(--tiles-t) - 32px - var(--cap)); /* top of "Better Health." */
@@ -80,8 +80,13 @@
   left: 50%;
   right: auto;
   transform: translateX(-50%);
-  top: 44px;
-  height: calc(var(--line-b-t) - 24px - 44px);
+  /* visually centred in the room between "Made for" and the cards, so it runs
+     over "Better Health." and sits above it (user, 2026-11-20: "i want centered
+     like visually centered … i know we will see overlapping of bottle with below
+     text its fine … the images should be high z index than that of text") */
+  top: calc(var(--head-b) + 24px);
+  height: calc(var(--tiles-t) - 24px - var(--head-b) - 24px);
+  z-index: 2;
 }
 .hero--v4 .hero__scene--cluster .product--ampoule      { --h: 84.6%; --x: 58%; --y: 49%;   --r: -14deg; }
 .hero--v4 .hero__scene--cluster .product--vial-a       { --h: 54%;   --x: 32%; --y: 66%;   --r: 10deg; }
