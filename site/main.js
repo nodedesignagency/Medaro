@@ -65,6 +65,71 @@
   });
 })();
 
+/* ---------- Rolling links (.link-roll) ----------
+   Splits each link's text into letters for the hover roll (styles.css).
+   Only the link's text is split; icons inside it (a menu arrow) stay as
+   they are. Kerning is measured on the unsplit text and put back as a
+   margin on each letter (in em, so it holds at any size). The word stays
+   readable to screen readers in a visually hidden span; the letters are
+   aria-hidden. Links that aren't on screen yet (a closed menu, another hero
+   version) are split the first time they become visible. */
+(function rollLinks() {
+  const links = Array.from(document.querySelectorAll('.link-roll'));
+  if (!links.length) return;
+  const split = (el) => {
+    if (el.dataset.rolled || !el.getClientRects().length) return false;
+    const node = Array.from(el.childNodes).find((n) => n.nodeType === 3 && n.textContent.trim());
+    if (!node) return false;
+    const text = node.textContent.replace(/^\s+|\s+$/g, '');
+    const lead = node.textContent.length - node.textContent.replace(/^\s+/, '').length;
+    // measure each letter's kerned position before splitting
+    const range = document.createRange();
+    const xs = [];
+    for (let i = 0; i <= text.length; i++) {
+      const k = lead + Math.min(i, text.length - 1);
+      range.setStart(node, k);
+      range.setEnd(node, k + 1);
+      const r = range.getBoundingClientRect();
+      xs.push(i < text.length ? r.left : r.right);
+    }
+    const scale = el.offsetWidth ? el.getBoundingClientRect().width / el.offsetWidth : 1; // a sliding or scaling menu
+    const size = parseFloat(getComputedStyle(el).fontSize) || 16;
+    const sr = document.createElement('span');
+    sr.className = 'visually-hidden';
+    sr.textContent = text;
+    const vis = document.createElement('span');
+    vis.className = 'link-roll__text';
+    vis.setAttribute('aria-hidden', 'true');
+    const chars = Array.from(text).map((ch, i) => {
+      const c = document.createElement('span');
+      c.className = 'link-roll__c';
+      c.style.setProperty('--i', i);
+      c.textContent = ch;
+      vis.appendChild(c);
+      return c;
+    });
+    // the roll's clip box is 1.25em tall; where the link's own line is tighter
+    // (big menu links), pull it in with a negative margin so nothing moves
+    const lh = parseFloat(getComputedStyle(el).lineHeight);
+    if (lh && lh < size * 1.25) vis.style.marginBlock = `${((lh / size - 1.25) / 2).toFixed(4)}em`;
+    node.replaceWith(sr, vis);
+    chars.forEach((c, i) => {
+      const kern = ((xs[i + 1] - xs[i]) - c.getBoundingClientRect().width) / (scale || 1);
+      if (Math.abs(kern) > 0.05) c.style.marginRight = `${(kern / size).toFixed(4)}em`;
+    });
+    el.dataset.rolled = '1';
+    return true;
+  };
+  const start = () => {
+    if (!('IntersectionObserver' in window)) { links.forEach(split); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting && split(e.target)) io.unobserve(e.target); });
+    });
+    links.forEach((el) => { if (!split(el)) io.observe(el); });
+  };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
+})();
+
 /* ---------- Review-only: versions and palettes ----------
    Sections offered in several versions are marked data-version="<slot>:<id>",
    e.g. data-version="hero:a" and data-version="hero:b". One per slot is shown,
