@@ -1,15 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
   <!-- STAND-IN for the supplement product shot in the hero card, not final art.
-       Brief: a MEDARO supplement bottle with a few capsules on a matte dark
-       olive-grey background, dull and low-key, no bright highlights (user,
-       2026-11-20: "make this background greyish", "I want it to be dull look
-       not light look", "make more darkish", "make it green tint but in dull
-       look"), soft light from the top left. Square. -->
+       Brief: a MEDARO supplement bottle with a few capsules on the hero's
+       dark olive stage backdrop (#1B2017, with a faint warm lift top left),
+       dull and low-key, no bright highlights (user, 2026-11-20: "make this
+       background greyish", "dull look not light look", "more darkish",
+       "green tint but in dull look", "make the background feel like the hero
+       background"), soft light from the top left. Square. -->
   <defs>
     <radialGradient id="bg" cx="0.3" cy="0.2" r="0.95">
-      <stop offset="0" stop-color="#5c6150"/>
-      <stop offset="0.55" stop-color="#4b5041"/>
-      <stop offset="1" stop-color="#393d31"/>
+      <stop offset="0" stop-color="#2e3425"/>
+      <stop offset="0.55" stop-color="#1f2419"/>
+      <stop offset="1" stop-color="#171b11"/>
     </radialGradient>
     <linearGradient id="body" x1="0" x2="1">
       <stop offset="0" stop-color="#8b9080"/>
@@ -19,10 +20,10 @@
       <stop offset="1" stop-color="#808573"/>
     </linearGradient>
     <linearGradient id="cap" x1="0" x2="1">
-      <stop offset="0" stop-color="#2a3020"/>
-      <stop offset="0.3" stop-color="#4b5538"/>
-      <stop offset="0.5" stop-color="#5c6845"/>
-      <stop offset="1" stop-color="#232919"/>
+      <stop offset="0" stop-color="#3d4630"/>
+      <stop offset="0.3" stop-color="#5a6643"/>
+      <stop offset="0.5" stop-color="#6b7850"/>
+      <stop offset="1" stop-color="#363e2a"/>
     </linearGradient>
     <linearGradient id="label" x1="0" x2="1">
       <stop offset="0" stop-color="#b9c98f"/>
@@ -44,7 +45,7 @@
   <rect width="240" height="240" fill="url(#bg)"/>
 
   <!-- shadow -->
-  <ellipse cx="124" cy="206" rx="70" ry="10" fill="#1a1d14" opacity="0.55" filter="url(#blur6)"/>
+  <ellipse cx="124" cy="206" rx="70" ry="10" fill="#0c0e08" opacity="0.7" filter="url(#blur6)"/>
 
   <!-- bottle -->
   <rect x="86" y="44" width="68" height="26" rx="5" fill="url(#cap)"/>
