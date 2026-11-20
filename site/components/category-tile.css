@@ -2,16 +2,14 @@
    Component: category tile
    One care category as a large white card, laid out after hims' category
    cards (user, 2026-11-20): the name top left with a short line under it,
-   a call to action bottom left, the line's product large on the right and
-   cut off by the card's edge. The arrow sits in a square tab flush in the
-   top-right corner, after the user's "Still need clarity?" card: the tab
-   fills the corner, only its outer corner follows the card's radius.
+   the round arrow bottom left (no "Learn more": the user, 2026-11-20), the
+   line's product large on the right and cut off by the card's edge.
    Text in one colour family (ink, ink-soft): the user, "I dont want text
    colourful i want like ours".
    First use: the three care categories in one row along the foot of Home
    hero V4.
    Variants: --weight, --mens, --womens (the product and its placement).
-   Framer: one component, a variant per care line (name, line, CTA, product).
+   Framer: one component, a variant per care line (name, line, product).
    ========================================================================== */
 
 .category-tiles {
@@ -29,7 +27,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: var(--tile-h, 176px);
-  padding: 22px 24px 20px;
+  padding: 22px 24px 24px;
   overflow: hidden; /* the product runs off the card's edge */
   border-radius: 12px;
   background: #fff; /* pure white (user, 2026-11-20) */
@@ -38,7 +36,7 @@
   isolation: isolate;
 }
 
-/* ---------- Text: name and line top left, CTA bottom left ---------- */
+/* ---------- Text: name and line top left ---------- */
 .category-tile__text {
   display: grid;
   gap: 8px;
@@ -56,12 +54,6 @@
   line-height: 1.4;
   color: var(--color-text-muted);
   text-wrap: balance;
-}
-.category-tile__cta {
-  font-size: 14px;
-  font-weight: var(--weight-medium);
-  line-height: 1;
-  letter-spacing: -0.005em;
 }
 
 /* ---------- The product, large on the right, cut off by the card ---------- */
@@ -92,26 +84,26 @@
   transform: translate(-50%, calc(-50% - 4px)) rotate(calc(var(--ct-r, 0deg) + var(--ct-hover-r, 2deg)));
 }
 
-/* ---------- The arrow: a square tab flush in the top-right corner ---------- */
+/* ---------- The arrow: the round one, bottom left ----------
+   In place of a "Learn more" line (user, 2026-11-20: "i dont want learn more text instead replace that with
+   arrow"), the 40px round arrow of the promo and category cards: mist, lime on hover. */
 .category-tile__go {
-  position: absolute;
-  top: 0;
-  right: 0;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   background: var(--color-surface);
   color: var(--color-ink);
   transition: background-color var(--dur-fast) var(--ease-out);
 }
 .category-tile__go svg {
   width: 16px;
-  height: 16px; /* the MEDARO arrow, turned 45° (assets/icons/arrow.svg) */
+  height: 16px; /* the MEDARO arrow (assets/icons/arrow.svg) */
   transition: transform var(--dur-base) var(--ease-out);
 }
 .category-tile:hover .category-tile__go { background: var(--color-accent); }
-.category-tile:hover .category-tile__go svg { transform: translate(1px, -1px); }
+.category-tile:hover .category-tile__go svg { transform: translateX(2px); }
 
 /* ---------- The three lines ---------- */
 /* Weight Loss: the client's Tirzepatide Microdose vial, large, cap and label in view, its foot cut off by the card */

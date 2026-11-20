@@ -149,10 +149,10 @@
     <!-- SECTION:home/hero--v4 START · styles: sections/home/hero.css (the stage, shared with the approved hero), sections/home/hero--v4.css, components/category-tile.css, components/product.css, components/stage-light.css · scripts: components/stage-light.js · assets: assets/images/products/ (stage-plate.webp, vial-tirzepatide.webp, bottle-quad4.webp, print-vial-microdose.svg, print-vial-multidose.svg, print-bottle-4play.svg, sheen-vial.svg)
          V4 (user, 2026-11-20): the approved stage with a new arrangement. The client's sentence moves up under the
          headline (left inset); the supplement card is removed; the three care categories run in one row along the
-         foot as large white cards after hims' category cards, the arrow in a tab flush in the top-right corner (the
-         user's "Still need clarity?" card). The client's packs float side by side in the room between.
+         foot as large white cards after hims' category cards, with the round arrow bottom left in place of a
+         "Learn more" line (user, 2026-11-20). The client's packs float side by side in the room between.
          Copy: headline and sentence from content/home.md, word for word. Cards: the name, then the client's own
-         heading for that line (content/home.md, case changed only), then a call to action (hero copy, ours). -->
+         heading for that line (content/home.md, case changed only), then the arrow. -->
     <div data-version="hero:v4">
     <section class="hero hero--v4" aria-labelledby="hero-v4-title">
       <div class="hero__frame">
@@ -173,9 +173,8 @@
                   <span class="category-tile__name">Weight Loss</span>
                   <span class="category-tile__line">A better way to lose weight.</span>
                 </span>
-                <span class="category-tile__cta">Learn more</span>
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
                 <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><span class="pack pack--vial category-tile__obj"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></span></span></span>
-                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
               </a>
             </li>
             <li>
@@ -184,9 +183,8 @@
                   <span class="category-tile__name">Men's Health</span>
                   <span class="category-tile__line">Better care for men who want more.</span>
                 </span>
-                <span class="category-tile__cta">Learn more</span>
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
                 <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><span class="pack pack--bottle category-tile__obj"><img src="assets/images/products/bottle-quad4.webp" alt="" width="439" height="2200"><img class="product__print product__print--glass" src="assets/images/products/print-bottle-4play.svg" alt="" width="439" height="2200"></span></span></span>
-                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
               </a>
             </li>
             <li>
@@ -195,9 +193,8 @@
                   <span class="category-tile__name">Women's Health</span>
                   <span class="category-tile__line">Better care for every chapter of womanhood.</span>
                 </span>
-                <span class="category-tile__cta">Coming soon</span>
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
                 <!-- no product: Women's Health has none yet, and tablets are out (client: "we do not make the drugs") -->
-                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
               </a>
             </li>
           </ul>
