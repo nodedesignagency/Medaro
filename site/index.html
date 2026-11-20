@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-palettes="a" data-options="blue:a,b;pink:a,b">
+<html lang="en" data-palettes="a" data-options="blue:a,b;pink:a,b;hiw:a,b">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -15,12 +15,14 @@
   <link rel="stylesheet" href="components/header.css">
   <link rel="stylesheet" href="components/promo-card.css">
   <link rel="stylesheet" href="components/care-tiles.css">
+  <link rel="stylesheet" href="components/steps.css">
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
   <link rel="stylesheet" href="sections/home/hero--v1.css">
   <link rel="stylesheet" href="sections/home/hero--v2.css">
   <link rel="stylesheet" href="sections/home/weight-loss.css">
   <link rel="stylesheet" href="sections/home/mens-health.css">
   <link rel="stylesheet" href="sections/home/womens-health.css">
+  <link rel="stylesheet" href="sections/home/how-it-works.css">
 </head>
 <body id="top">
 
@@ -31,6 +33,7 @@
     <!-- UI icons -->
     <symbol id="i-arrow-ne" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <!-- Line icons, 24px, 1.5 stroke (Weight Loss care points) -->
     <symbol id="i-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
     <symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.75 3.25H5a1 1 0 0 0-1 1V9a4.5 4.5 0 0 0 9 0V4.25a1 1 0 0 0-1-1h-.75"/><path d="M8.5 13.5v1.75a4.5 4.5 0 0 0 9 0V13"/><circle cx="17.5" cy="11" r="2"/></g></symbol>
@@ -327,6 +330,74 @@
     </div>
   </section>
   <!-- SECTION:home/womens-health END -->
+
+  <!-- SECTION:home/how-it-works START · styles: components/steps.css, sections/home/how-it-works.css · scripts: main.js (steps, scenes) · assets: assets/images/supplements/vial.webp
+       After the user's Givingli reference (2026-11-20): the stage pins while you scroll; number, card and text change step by
+       step with a smooth roll / slide. The page turns sage while this section holds the middle of the screen (data-scene).
+       Copy: content/home.md → How Medaro Works, word for word. The words inside the cards are our illustration UI (review).
+       [LINK NEEDED] Get Started destination (brief says "Home Page"). -->
+  <section class="steps steps--home" id="how-it-works" aria-labelledby="hiw-title" data-scene="steps" data-steps>
+    <div class="steps__head">
+      <p class="steps__eyebrow">How Medaro Works</p>
+      <h2 class="steps__title" id="hiw-title">Better Health Starts<br>in Three Simple Steps.</h2>
+    </div>
+
+    <div class="steps__track" data-steps-track>
+      <div class="steps__stage">
+        <div class="steps__inner">
+          <div class="steps__num" aria-hidden="true"><span>0</span><span class="steps__digits"><span>1</span><span>2</span><span>3</span></span></div>
+
+          <ol class="steps__list">
+            <li class="steps__item" data-step data-state="active" aria-current="step">
+              <div class="steps__card" aria-hidden="true">
+                <div class="steps__card-top"><span>Health assessment</span><span>Online</span></div>
+                <div>
+                  <p class="steps__card-big">What can we help with?</p>
+                  <div class="steps__chips"><span>Weight Loss</span><span>Men's Health</span><span>Supplement</span></div>
+                </div>
+                <div class="steps__card-foot"><span class="logo" aria-hidden="true"><svg><use href="#wordmark"/></svg></span><span>Continue <svg class="steps__ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></span></div>
+              </div>
+              <div class="steps__text">
+                <p class="steps__count">Step 01 of 03</p>
+                <h3>Tell Us About Yourself</h3>
+                <p>Complete a quick online health assessment to help us understand your medical history, needs, and treatment goals.</p>
+              </div>
+            </li>
+            <li class="steps__item" data-step data-state="after">
+              <div class="steps__card" aria-hidden="true">
+                <div class="steps__card-top"><span>Provider review</span><span class="steps__status">In review</span></div>
+                <p class="steps__card-big">With a licensed provider</p>
+                <div class="steps__card-foot"><span class="logo" aria-hidden="true"><svg><use href="#wordmark"/></svg></span><span><svg class="steps__ico" aria-hidden="true"><use href="#i-check"/></svg> If medically appropriate</span></div>
+              </div>
+              <div class="steps__text">
+                <p class="steps__count">Step 02 of 03</p>
+                <h3>Get Expert Medical Guidance</h3>
+                <p>A licensed medical provider reviews your information and determines the most appropriate treatment options for you. If medically appropriate, a prescription may be issued.</p>
+              </div>
+            </li>
+            <li class="steps__item" data-step data-state="after">
+              <div class="steps__card" aria-hidden="true">
+                <div class="steps__card-top"><span>Licensed pharmacy</span><span>Discreet delivery</span></div>
+                <p class="steps__card-big">To your door</p>
+                <img class="steps__card-img" src="assets/images/supplements/vial.webp" alt="" width="900" height="1184" loading="lazy">
+                <div class="steps__card-foot"><span class="logo" aria-hidden="true"><svg><use href="#wordmark"/></svg></span><span>If prescribed</span></div>
+              </div>
+              <div class="steps__text">
+                <p class="steps__count">Step 03 of 03</p>
+                <h3>Get Your Treatment Delivered</h3>
+                <p>If prescribed, your medication can be shipped discreetly to your door through a licensed pharmacy, so you can begin your treatment plan with confidence.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps__foot">
+      <a class="btn btn--primary btn--arrow" href="#get-started-link"><span class="btn__label">Get Started</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+    </div>
+  </section>
+  <!-- SECTION:home/how-it-works END -->
 
   <script src="main.js" defer></script>
 </body>

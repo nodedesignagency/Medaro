@@ -75,6 +75,41 @@
   still.addEventListener('change', queue);
 })();
 
+/* ---------- Steps: one step at a time while the stage is pinned ----------
+   [data-steps] holds a [data-steps-track] (the scroll room) and its steps
+   [data-step]. The scroll position inside the track picks the step; each
+   step gets data-state before / active / after (CSS animates the change)
+   and the section gets --step (0, 1, 2) for the rolling number. */
+(function steps() {
+  document.querySelectorAll('section[data-steps]').forEach((root) => {
+    const track = root.querySelector('[data-steps-track]');
+    const items = Array.from(root.querySelectorAll('[data-step]'));
+    if (!track || !items.length) return;
+    let current = -1;
+    const set = (i) => {
+      if (i === current) return;
+      current = i;
+      root.style.setProperty('--step', i);
+      items.forEach((el, k) => {
+        el.dataset.state = k < i ? 'before' : k > i ? 'after' : 'active';
+        if (k === i) el.setAttribute('aria-current', 'step'); else el.removeAttribute('aria-current');
+      });
+    };
+    let queued = false;
+    const update = () => {
+      queued = false;
+      const r = track.getBoundingClientRect();
+      const range = r.height - window.innerHeight;
+      const p = range > 0 ? Math.min(1, Math.max(0, -r.top / range)) : 0;
+      set(Math.min(items.length - 1, Math.floor(p * items.length)));
+    };
+    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+    update();
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+  });
+})();
+
 /* ---------- Review-only: versions and palettes ----------
    Sections offered in several versions are marked data-version="<slot>:<id>",
    e.g. data-version="hero:a" and data-version="hero:b". One per slot is shown,

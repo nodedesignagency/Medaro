@@ -1,0 +1,256 @@
+/* ==========================================================================
+   Component: steps (01 / 02 / 03)
+   After the user's Givingli reference (2026-11-20): one step on screen at a
+   time, pinned while you scroll: the big step number on the left, a card in
+   the middle, "Step 01 of 03", title and text on the right. Scrolling moves
+   to the next step: the number rolls like an odometer, the card slides and
+   fades into the next, the text follows a beat later; scrolling back plays
+   it in reverse. main.js (steps) sets data-state on each step and --step on
+   the section from the scroll position inside .steps__track.
+   All three steps stay in the page as an ordered list, so screen readers
+   read them in order; under reduced motion they switch instantly.
+   Used on Home (#how-it-works); planned for both landing pages.
+   Framer: one component with a variant per step, switched by scroll.
+   ========================================================================== */
+
+.steps {
+  --steps-pad: clamp(112px, 10vw, 192px);
+  --steps-scroll: 70svh;                       /* scroll per step */
+  --steps-card-w: clamp(440px, 33.4vw, 640px);  /* the reference: a third of the screen */
+  --steps-gap: clamp(48px, 5.5vw, 104px);
+  --steps-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --steps-dur: 700ms;
+  /* empty space above (and below) the card inside the pinned stage, so the
+     stage can be pulled up under the heading and the CTA pulled in */
+  --steps-slack: calc((100svh - var(--edge) - 56px - var(--steps-card-w) / 1.62) / 2);
+  padding: var(--steps-pad) 0 clamp(96px, 8vw, 160px);
+  color: var(--color-ink);
+}
+
+/* ---------- Section heading (scrolls away before the stage pins) ---------- */
+.steps__head {
+  width: min(100% - 2 * var(--edge), var(--frame-max));
+  margin-inline: auto;
+  text-align: center;
+}
+.steps__eyebrow {
+  margin-bottom: 28px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.steps__title {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 7.2vw, 140px);
+  font-weight: var(--weight-medium);
+  line-height: 0.95;
+  letter-spacing: -0.048em;
+}
+
+/* ---------- Pinned stage ---------- */
+.steps__track {
+  position: relative;
+  height: calc(100svh + 2 * var(--steps-scroll));
+  /* card sits ~112px under the heading, not a half screen */
+  margin-top: calc(clamp(80px, 7.8vw, 136px) - var(--edge) - 56px - var(--steps-slack));
+}
+.steps__stage {
+  position: sticky;
+  top: 0;
+  display: grid;
+  place-items: center;
+  height: 100svh;
+  padding-top: calc(var(--edge) + 56px); /* clear of the nav bar */
+}
+.steps__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--steps-card-w) minmax(0, 1fr);
+  column-gap: var(--steps-gap);
+  align-items: center;
+  width: min(100% - 2 * var(--edge), var(--frame-max));
+}
+
+/* The number: "0" stays, the second digit rolls (odometer) */
+.steps__num {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  display: flex;
+  height: 1em;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: clamp(120px, 9.4vw, 184px);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+.steps__digits {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(calc(var(--step, 0) * -1em));
+  transition: transform var(--steps-dur) var(--steps-ease);
+}
+.steps__digits > span { height: 1em; }
+
+/* Steps: stacked in the same cells (subgrid), one shown at a time */
+.steps__list {
+  grid-column: 2 / 4;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+.steps__item {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: center;
+}
+.steps__item:not([data-state="active"]) { pointer-events: none; }
+
+.steps__card,
+.steps__text > * {
+  transition:
+    opacity calc(var(--steps-dur) * 0.6) var(--steps-ease),
+    transform var(--steps-dur) var(--steps-ease),
+    filter calc(var(--steps-dur) * 0.6) var(--steps-ease);
+}
+/* waiting below (scrolling down brings it up) / passed above */
+.steps__item[data-state="after"] .steps__card { opacity: 0; transform: translateY(48px) scale(0.96); filter: blur(6px); }
+.steps__item[data-state="before"] .steps__card { opacity: 0; transform: translateY(-48px) scale(0.96); filter: blur(6px); }
+.steps__item[data-state="after"] .steps__text > * { opacity: 0; transform: translateY(28px); filter: blur(4px); }
+.steps__item[data-state="before"] .steps__text > * { opacity: 0; transform: translateY(-28px); filter: blur(4px); }
+/* the incoming step: card first, then the text, line by line */
+.steps__item[data-state="active"] .steps__card { transition-delay: 60ms; }
+.steps__item[data-state="active"] .steps__text > :nth-child(1) { transition-delay: 140ms; }
+.steps__item[data-state="active"] .steps__text > :nth-child(2) { transition-delay: 190ms; }
+.steps__item[data-state="active"] .steps__text > :nth-child(3) { transition-delay: 240ms; }
+
+/* ---------- Text ---------- */
+.steps__text {
+  grid-column: 2;
+  max-width: 23em;
+}
+.steps__count {
+  margin-bottom: 18px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.steps__text h3 {
+  font-size: clamp(36px, 3.2vw, 60px);
+  font-weight: var(--weight-medium);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.steps__text p:last-child {
+  margin-top: 22px;
+  font-size: clamp(16px, 1.2vw, 19px);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+/* ---------- The card (illustration of the step, built in code) ---------- */
+.steps__card {
+  --card-pad: clamp(24px, 2.2vw, 40px);
+  grid-column: 1;
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  aspect-ratio: 1.62;
+  padding: var(--card-pad);
+  overflow: hidden;
+  border-radius: var(--radius-m);
+  background: var(--steps-card, var(--p-deep));
+  color: var(--steps-card-ink, var(--p-paper));
+  box-shadow: 0 2px 4px rgba(20, 24, 14, 0.12), 0 32px 64px -24px rgba(20, 24, 14, 0.5);
+}
+.steps__card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.steps__card-top > :last-child { opacity: 0.72; }
+.steps__card-big {
+  align-self: start;
+  max-width: 11em;
+  margin-top: clamp(16px, 1.6vw, 28px);
+  font-size: clamp(30px, 2.7vw, 50px);
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+.steps__card-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 14px;
+  line-height: 1.2;
+}
+.steps__card-foot .logo { color: inherit; font-size: 15px; }
+.steps__card-foot > :last-child { display: inline-flex; align-items: center; gap: 8px; opacity: 0.8; }
+.steps__card-foot svg.steps__ico { width: 16px; height: 16px; }
+
+/* card 1: options */
+.steps__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.steps__chips span {
+  padding: 8px 12px;
+  border-radius: var(--radius-s);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 34%, transparent);
+  font-size: 13px;
+  line-height: 1;
+}
+.steps__chips span:first-child { background: var(--steps-card-ink, var(--p-paper)); color: var(--steps-card, var(--p-deep)); box-shadow: none; }
+
+/* card 2: status with a soft pulse */
+.steps__status { display: inline-flex; align-items: center; gap: 8px; }
+.steps__status::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--p-accent);
+  animation: steps-pulse 1.8s var(--ease-in-out) infinite;
+}
+@keyframes steps-pulse { 50% { opacity: 0.35; } }
+
+/* card 3: product render inside the card, between the top labels and the
+   footer so it never covers them */
+.steps__card-img {
+  position: absolute;
+  top: 24%;
+  right: 9%;
+  height: 54%;
+  width: auto;
+  filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.45));
+  pointer-events: none;
+}
+
+/* ---------- CTA ---------- */
+.steps__foot {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: calc(clamp(64px, 5.6vw, 104px) - var(--steps-slack));
+}
