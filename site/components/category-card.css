@@ -22,11 +22,14 @@
   display: grid;
   /* the name never wraps or runs under the product: on the narrowest
      desktops (about 1200) the product column gives way instead */
-  grid-template-columns: minmax(max-content, 1fr) minmax(0, 112px);
+  /* the product's column is as wide as the product itself, so its right edge
+     sits 24px in, matching the name's 24px on the left (user, 2026-11-20:
+     "visually it should match the padding we have on text on left") */
+  grid-template-columns: minmax(max-content, 1fr) var(--cc-media-w, 56px);
   align-items: center;
   column-gap: 12px;
   height: 80px;
-  padding: 0 12px 0 24px;
+  padding: 0 24px;
   border-radius: 12px;
   background: var(--color-bg);
   color: var(--color-ink);
@@ -91,6 +94,7 @@
 /* ---------- The three lines ---------- */
 /* Weight Loss: the client's Tirzepatide vial, a little tilted */
 .category-card--weight {
+  --cc-media-w: 30px;
   --cc-obj-h: 52px;
   --cc-obj-r: 8deg;
   --cc-shadow-w: 42px;
@@ -98,12 +102,14 @@
 /* Men's Health: the dusty blue pillow tablet, MEDARO debossed, a little tilted like hims' (user, 2026-11-20:
    "i dont like that bottle in mens lets add a tablet … different color that looks like image 2") */
 .category-card--mens {
+  --cc-media-w: 56px;
   --cc-obj-h: 50px;
   --cc-obj-r: -9deg;
   --cc-shadow-w: 54px;
 }
 /* Women's Health: the oval MEDARO tablet (as in the Women's Health section) */
 .category-card--womens {
+  --cc-media-w: 62px;
   --cc-obj-h: 40px;
   --cc-obj-r: -6deg;
   --cc-shadow-w: 52px;
