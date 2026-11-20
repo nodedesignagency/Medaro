@@ -15,9 +15,10 @@
 .care {
   --care-pad: clamp(112px, 10vw, 192px);
   --care-gap: 8px;
-  /* square tiles, ~a quarter of the screen like the reference; stop growing
-     with the frame (1888 wide) */
-  --care-tile: min(24.5cqw, 462px);
+  /* square tiles, a fifth of the screen (user, 2026-11-20: "make these
+     cards 20% smaller overall"; were a quarter, like the reference); stop
+     growing with the frame (1888 wide) */
+  --care-tile: min(19.6cqw, 370px);
   container-type: inline-size;
   overflow-x: clip;
   padding: var(--care-pad) 0;
@@ -94,9 +95,9 @@
 .care__tile--text {
   display: grid;
   place-items: center;
-  padding: 28px;
+  padding: 22px;
   text-align: center;
-  font-size: clamp(28px, 2.6vw, 50px);
+  font-size: clamp(22px, 2.08vw, 40px); /* 80% of the first build, with the tiles */
   font-weight: var(--weight-medium);
   line-height: 1.06;
   letter-spacing: -0.03em;
@@ -111,7 +112,7 @@
 .care__tile--product img {
   object-fit: contain;
   padding: 16%;
-  filter: drop-shadow(0 24px 28px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0 19px 22px rgba(0, 0, 0, 0.35));
 }
 
 /* ---------- Paragraph and CTA ---------- */
