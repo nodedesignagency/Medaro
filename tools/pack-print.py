@@ -313,10 +313,10 @@ def vial_sheen():
 
 
 # ---------------------------------------------------------- the ampoule ----
-# assets/images/products/ampoule-quad4.webp, 406×2200: a blank frosted glass
-# ampoule in light sage-lime (Nano Banana 2.1, 2026-11-20, after the user's
-# ampoule references; frosted so the backdrop never shows through and the
-# print reads on it, user: "text is not visible at all"). Body x 6–399 (centre 202.5, R 197) from the
+# assets/images/products/ampoule-quad4.webp (and -light), 406×2200: a blank
+# clear glass ampoule with a light sage-lime liquid (Nano Banana 2.1,
+# 2026-11-20, after the user's ampoule references), rendered on one plain
+# flat colour: deep olive for the stage, paper for light surfaces. Body x 6–399 (centre 202.5, R 197) from the
 # shoulder at y 980 to the base at 2194; the liquid starts at y 1060.
 AMPOULE = Cylinder(cx=202.5, r=197, eye=1100, k=0.03)
 
