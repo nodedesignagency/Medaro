@@ -162,23 +162,26 @@ a.hero__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border
   transform: translateX(-50%);
   z-index: -1;
   container-type: size;
+  /* how far the box reaches past the gap between the card and the sentence on each side (about 27px at
+     1280, nothing from about 1440): the side packs move in by that much, so they keep clear of the type */
+  --spill: max(0px, (var(--sh) * var(--scene-ratio) - var(--gap)) / 2);
 }
+/* registered, so it is worked out here (cqw against the stage), not again inside the scene */
+@property --spill { syntax: '<length>'; inherits: true; initial-value: 0px; }
 
-/* Same arrangement as V2, centred */
-.hero .product--pen-capped   { --h: 86%; --x: 42%; --y: 55%; --r: -34deg; }
-.hero .product--pen          { --h: 94%; --x: 60%; --y: 49%; --r: -14deg; }
-.hero .product--tablet-white { --h: 23%; --x: 75%; --y: 19%; --r: 0deg; }
-.hero .product--tablet-oval  { --h: 19%; --x: 29%; --y: 59%; --r: 0deg; }
+/* The client's packs (2026-11-20). Two arrangements, one set each
+   (?products=float|trio); the set fills the scene box. */
+.hero__set { position: absolute; inset: 0; }
 
-/* The client's packs (2026-11-20): the Quad 4 bottle and the Tirzepatide vial
-   take the pens' place (?products=pens shows the approved pens); the tablets
-   move round them */
-.hero .product--bottle       { --h: 90%; --x: 60%; --y: 50%; --r: -10deg; }
-.hero .product--vial         { --h: 50%; --x: 31%; --y: 64%; --r: 8deg; }
-.hero:has([data-version="products:packs"]:not([hidden])) .product--tablet-white { --h: 21%; --x: 78%; --y: 21%; }
-.hero:has([data-version="products:packs"]:not([hidden])) .product--tablet-oval  { --h: 18%; --x: 21%; --y: 25%; }
+/* float (default): the approved pens' composition with the client's packs.
+   The bottle takes the front pen's place, leaning across the beam; the
+   Microdose vial floats in front of its lower half, where the oval tablet was;
+   the Multidose vial further back, top right, where the white tablet was. */
+.hero__set--float .product--bottle { --h: 96%; --x: 58%; --y: 50%; --r: -14deg; }
+.hero__set--float .product--vial-a { --h: 47%; --x: 33%; --y: 65%; --r: 11deg; }
+.hero__set--float .product--vial-b { --h: 28%; --x: calc(77% - var(--spill)); --y: 15%; --r: -19deg; }
 
-/* The pens are smaller here than in V2 (about 530px tall at 1440×900), so the
-   20-unit label lines (Rx only, use line) would fall under ~6.5px on screen:
-   cut them, don't shrink them (DESIGN.md → Direction, rule 6). */
-.hero .print-meta { display: none; }
+/* trio: the range side by side, labels to camera, each on its own float */
+.hero__set--trio .product--bottle { --h: 94%; --x: 50%; --y: 49%; --r: -3deg; }
+.hero__set--trio .product--vial-a { --h: 43%; --x: calc(22% + var(--spill)); --y: 57%; --r: 5deg; }
+.hero__set--trio .product--vial-b { --h: 40%; --x: calc(78% - var(--spill)); --y: 59%; --r: -6deg; }

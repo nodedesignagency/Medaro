@@ -1,13 +1,14 @@
 /* ==========================================================================
    Component: floating product
-   One MEDARO product (pen, capped pen, tablet…) as its own cut-out render,
-   floating on its own loop. Used by Home hero V2 and V3; each section places
-   the objects with --x --y (centre, % of its scene box), --h (height, %) and
-   --r (tilt), inside a box that is a size container (cqh units for drift).
-   Pens are rendered blank and upright; their labels are SVG in the markup
-   (.product__print), drawn in the pen image's own pixels, printed with
-   multiply and clipped with an SVG clipPath. See DESIGN.md → Direction,
-   "MEDARO product imagery".
+   One pack (the client's Tirzepatide vial, their 4PLAY bottle) as its own
+   cut-out render, floating on its own loop. Each section places the objects
+   with --x --y (centre, % of its scene box), --h (height, %) and --r (tilt),
+   inside a box that is a size container (cqh units for drift).
+   Packs are rendered blank and upright; their print is an SVG file in the
+   render's own pixels (tools/pack-print.py), already wrapped onto the
+   cylinder, laid over the render as an <img>: multiply on a paper label,
+   screen on glass, plus a satin sheen (screen) on the vial's dark label.
+   See DESIGN.md → Direction, "MEDARO product imagery".
    ========================================================================== */
 
 .product {
@@ -32,10 +33,9 @@
   height: 100%;
 }
 
-/* Pen labels: SVG in the pen image's own pixels, printed onto the blank
-   sleeve. Multiply lets the render's shading and paper texture through; an
-   SVG clipPath keeps the print on the sleeve. (Not a CSS mask-image: those
-   are blocked when the page is opened from disk and the label vanishes.) */
+/* Print: an SVG image in the render's own pixels, laid exactly over it.
+   Multiply lets the render's paper shading through; the print is clipped to
+   the label inside the SVG. (Never a CSS mask-image: blocked from file://.) */
 .product__print,
 .product__sheen {
   position: absolute;
@@ -44,33 +44,23 @@
   height: 100%;
   mix-blend-mode: multiply;
 }
-/* a soft highlight on dark print, where multiply can't lighten */
+/* a satin highlight on a dark label, where multiply can't lighten */
 .product__sheen { mix-blend-mode: screen; }
-/* light print straight on dark glass (the Quad 4 bottle): screen lightens */
+/* light print straight on dark glass (the 4PLAY bottle): screen lightens */
 .product__print--glass { mix-blend-mode: screen; }
 
 /* A pack anywhere else (menu, cards), sized by its height:
-   <span class="pack pack--vial"><img …><svg class="product__print" …><use href="#print-vial"/></svg></span> */
+   <span class="pack pack--vial"><img render><img class="product__print" print-….svg><img class="product__sheen" sheen-vial.svg></span> */
 .pack { position: relative; display: block; aspect-ratio: var(--ar); }
 .pack > img { display: block; width: 100%; height: 100%; }
 .pack--bottle { --ar: 439 / 2200; }
 .pack--vial { --ar: 466 / 1100; }
-.product__print { font-family: var(--font-body); }
-/* every word on a pack is readable in the hero: nothing under 20 units in
-   the pen image's pixels (about 6.5px on screen at 1440) */
-.print-name { font-size: 38px; font-weight: var(--weight-medium); letter-spacing: -0.015em; }
-.print-dose { font-size: 22px; font-weight: var(--weight-medium); letter-spacing: -0.01em; }
-.print-meta { font-size: 20px; font-weight: var(--weight-regular); letter-spacing: 0; }
-
 /* The objects: image ratio, stacking, and a float of their own (different
    period, drift, tilt and phase, so they never move in step). */
-.product--pen-capped   { --ar: 307 / 2284; --z: 1; --dur: 9.5s; --delay: -3s;   --fx: -0.4cqh; --fy: -1.4cqh; --fr: -1.2deg; }
-.product--pen          { --ar: 299 / 2200; --z: 2; --dur: 7.5s; --delay: -1s;   --fx: 0.3cqh;  --fy: -1.8cqh; --fr: 0.9deg; }
-.product--tablet-white { --ar: 669 / 662;  --z: 3; --dur: 6.2s; --delay: -2.4s; --fx: 0.6cqh;  --fy: -2.4cqh; --fr: 7deg; }
-.product--tablet-oval  { --ar: 900 / 620;  --z: 3; --dur: 7s;   --delay: -4.6s; --fx: -0.5cqh; --fy: -2cqh;   --fr: -6deg; }
-/* the client's packs (2026-11-20): Quad 4 bottle and Tirzepatide vial */
+/* the client's packs (2026-11-20): the 4PLAY bottle and the two Tirzepatide vials */
 .product--bottle       { --ar: 439 / 2200; --z: 2; --dur: 8.2s; --delay: -2s;   --fx: 0.3cqh;  --fy: -1.8cqh; --fr: 1deg; }
 .product--vial         { --ar: 466 / 1100; --z: 3; --dur: 6.8s; --delay: -4s;   --fx: -0.4cqh; --fy: -2.2cqh; --fr: -2deg; }
+.product--vial-b       { --z: 1; --dur: 7.6s; --delay: -0.6s; --fx: 0.5cqh; --fy: -1.6cqh; --fr: 2.4deg; }
 
 /* rests where it is placed, drifts and settles */
 @keyframes product-float {

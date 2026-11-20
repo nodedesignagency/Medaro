@@ -130,3 +130,6 @@
   .category-card__float,
   .category-card__media::after { animation: none; }
 }
+
+/* a card with no product yet (Women's Health): no shadow either */
+.category-card__media:empty::after { display: none; }

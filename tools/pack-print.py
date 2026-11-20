@@ -1,0 +1,367 @@
+#!/usr/bin/env python3
+"""
+MEDARO pack print: the labels on the client's packs, drawn as vector art and
+wrapped onto the blank renders the way real print sits on a cylinder.
+
+    python3 tools/pack-print.py            # writes site/assets/images/products/print-*.svg
+
+Why: a flat label laid over a round vial reads as a sticker ("cheap way to add
+the copy and frame", the user, 2026-11-20). Here every word, hairline and tab
+is set flat in Host Grotesk (shaped with HarfBuzz, so kerning is the font's),
+then each outline point is projected onto the render's cylinder:
+
+    theta = u / R                      u = arc length from the front centre
+    x'    = cx + R * sin(theta)        letters crowd together towards the sides
+    y'    = ys + k * (ys - eye) * cos(theta)
+                                       the camera's perspective: lines below eye
+                                       level sag in the middle, lines above arch,
+                                       measured from the blank label's own edges
+
+The output SVGs share the render's pixel grid (viewBox = render size) and sit
+over it as <img>, so they work from file:// and in Framer. Text is outlines:
+no font needed to display them.
+
+Words: the client's, as written on their packs (2026-11-20). Layout: ours, the
+pen-label system (DESIGN.md → Direction, rule 6): hairlines, the name in medium,
+one solid colour block.
+
+Needs: pip install fonttools brotli uharfbuzz. The font (Host Grotesk, OFL) is
+downloaded once into tools/.cache/.
+"""
+import math
+import os
+import urllib.request
+
+import uharfbuzz as hb
+from fontTools.pens.filterPen import FilterPen
+from fontTools.pens.svgPathPen import SVGPathPen
+from fontTools.pens.transformPen import TransformPen
+from fontTools.ttLib import TTFont
+from fontTools.varLib import instancer
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT = os.path.join(ROOT, "site", "assets", "images", "products")
+CACHE = os.path.join(ROOT, "tools", ".cache")
+FONT_URL = "https://fonts.gstatic.com/s/hostgrotesk/v5/co3BmWBnlCJ3U42vbbfdwMjZpFjm.woff2"
+
+# Brand colours (site/styles.css, palette A)
+INK = "#343B29"     # Dark Olive Green: the label body
+LIME = "#D5E5AD"    # Soft Nude Lime
+PAPER = "#F4F5EF"
+
+
+# ---------------------------------------------------------------- fonts ----
+_fonts = {}
+
+
+def font(weight):
+    """Host Grotesk at a fixed weight: (HarfBuzz font, fontTools glyph set, upem)."""
+    if weight in _fonts:
+        return _fonts[weight]
+    os.makedirs(CACHE, exist_ok=True)
+    var = os.path.join(CACHE, "host-grotesk-var.ttf")
+    if not os.path.exists(var):
+        woff2 = os.path.join(CACHE, "host-grotesk-latin.woff2")
+        urllib.request.urlretrieve(FONT_URL, woff2)
+        f = TTFont(woff2)
+        f.flavor = None
+        f.save(var)
+    path = os.path.join(CACHE, f"host-grotesk-{weight}.ttf")
+    if not os.path.exists(path):
+        instancer.instantiateVariableFont(TTFont(var), {"wght": weight}).save(path)
+    tt = TTFont(path)
+    blob = hb.Blob.from_file_path(path)
+    hbfont = hb.Font(hb.Face(blob))
+    _fonts[weight] = (hbfont, tt.getGlyphSet(), tt["head"].unitsPerEm, tt)
+    return _fonts[weight]
+
+
+def shape(text, weight, size, tracking=0.0):
+    """Glyphs and pen positions for one line, in label units. tracking in em."""
+    hbfont, glyphset, upem, tt = font(weight)
+    buf = hb.Buffer()
+    buf.add_str(text)
+    buf.guess_segment_properties()
+    hb.shape(hbfont, buf, {"kern": True, "liga": True})
+    s = size / upem
+    order = tt.getGlyphOrder()
+    glyphs, x = [], 0.0
+    for info, pos in zip(buf.glyph_infos, buf.glyph_positions):
+        glyphs.append((order[info.codepoint], x + pos.x_offset * s, pos.y_offset * s))
+        x += pos.x_advance * s + tracking * size
+    width = x - tracking * size  # no tracking after the last letter
+    return glyphs, width, s, glyphset
+
+
+# ----------------------------------------------------------- the wrap ----
+class Cylinder:
+    """A vertical cylinder seen from the front, as in the render."""
+
+    def __init__(self, cx, r, eye, k):
+        self.cx, self.r, self.eye, self.k = cx, r, eye, k
+
+    def __call__(self, pt):
+        u, yf = pt
+        th = u / self.r
+        ys = (yf + self.k * self.eye) / (1 + self.k)  # the line's height at the silhouette
+        return (self.cx + self.r * math.sin(th), ys + self.k * (ys - self.eye) * math.cos(th))
+
+
+class WarpPen(FilterPen):
+    """Projects every point; long straight segments are split so they bend."""
+
+    def __init__(self, out, warp, step=4.0):
+        super().__init__(out)
+        self.warp, self.step, self.cur, self.start = warp, step, None, None
+
+    def moveTo(self, p):
+        self.cur = self.start = p
+        self._outPen.moveTo(self.warp(p))
+
+    def lineTo(self, p):
+        (x0, y0), (x1, y1) = self.cur, p
+        n = max(1, int(math.hypot(x1 - x0, y1 - y0) / self.step))
+        for i in range(1, n + 1):
+            t = i / n
+            self._outPen.lineTo(self.warp((x0 + (x1 - x0) * t, y0 + (y1 - y0) * t)))
+        self.cur = p
+
+    def qCurveTo(self, *pts):
+        self._outPen.qCurveTo(*[None if q is None else self.warp(q) for q in pts])
+        self.cur = pts[-1] if pts[-1] is not None else self.cur
+
+    def curveTo(self, *pts):
+        self._outPen.curveTo(*[self.warp(q) for q in pts])
+        self.cur = pts[-1]
+
+    def closePath(self):
+        if self.cur is not None and self.start is not None and self.cur != self.start:
+            self.lineTo(self.start)
+        self._outPen.closePath()
+        self.cur = None
+
+    def endPath(self):
+        self._outPen.endPath()
+        self.cur = None
+
+
+def fmt(v):
+    return f"{v:.1f}".rstrip("0").rstrip(".")
+
+
+class Print:
+    """One pack's print. Shapes are given flat: u from the front centre, y as seen at the front."""
+
+    def __init__(self, cyl):
+        self.cyl = cyl
+        self.layers = []  # (fill, opacity, path data)
+
+    def _pen(self):
+        svg = SVGPathPen(None, ntos=fmt)
+        return svg, WarpPen(svg, self.cyl)
+
+    def rect(self, u0, y0, u1, y1, fill, opacity=1.0):
+        svg, pen = self._pen()
+        pen.moveTo((u0, y0))
+        pen.lineTo((u1, y0))
+        pen.lineTo((u1, y1))
+        pen.lineTo((u0, y1))
+        pen.closePath()
+        self.layers.append((fill, opacity, svg.getCommands()))
+
+    def line(self, u0, u1, y, w, fill, opacity=1.0):
+        self.rect(u0, y - w / 2, u1, y + w / 2, fill, opacity)
+
+    def segment(self, a, b, w, fill, opacity=1.0):
+        """A straight stroke of width w from a to b (flat coords), square ends."""
+        (x0, y0), (x1, y1) = a, b
+        d = math.hypot(x1 - x0, y1 - y0)
+        nx, ny = -(y1 - y0) / d * w / 2, (x1 - x0) / d * w / 2
+        svg, pen = self._pen()
+        pen.moveTo((x0 + nx, y0 + ny))
+        pen.lineTo((x1 + nx, y1 + ny))
+        pen.lineTo((x1 - nx, y1 - ny))
+        pen.lineTo((x0 - nx, y0 - ny))
+        pen.closePath()
+        self.layers.append((fill, opacity, svg.getCommands()))
+
+    def text(self, s, u, y, size, weight=400, fill=LIME, anchor="start", tracking=0.0, opacity=1.0):
+        """One line of text; returns its flat width."""
+        glyphs, width, scale, glyphset = shape(s, weight, size, tracking)
+        if anchor == "middle":
+            u -= width / 2
+        elif anchor == "end":
+            u -= width
+        svg, pen = self._pen()
+        for name, gx, gy in glyphs:
+            tp = TransformPen(pen, (scale, 0, 0, -scale, u + gx, y - gy))
+            glyphset[name].draw(tp)
+        self.layers.append((fill, opacity, svg.getCommands()))
+        return width
+
+    def body_path(self, u0, y0, u1, y1):
+        """The path data of a flat rectangle once wrapped (used to clip shading to the label)."""
+        svg, pen = self._pen()
+        pen.moveTo((u0, y0))
+        pen.lineTo((u1, y0))
+        pen.lineTo((u1, y1))
+        pen.lineTo((u0, y1))
+        pen.closePath()
+        return svg.getCommands()
+
+    def band_path(self, y0, y1, x_min, x_max, n=96):
+        """A band right round the cylinder from y0 to y1 (front heights): its top and bottom edges follow
+        the perspective arcs, and its ends run out to x_min / x_max past the silhouette, so no sliver of
+        blank paper shows at the sides."""
+        r = self.cyl.r
+        top = [self.cyl((-r * math.pi / 2 + r * math.pi * i / n, y0)) for i in range(n + 1)]
+        bot = [self.cyl((-r * math.pi / 2 + r * math.pi * i / n, y1)) for i in range(n + 1)]
+        pts = [(x_min, top[0][1])] + top + [(x_max, top[-1][1]), (x_max, bot[-1][1])] + bot[::-1] + [(x_min, bot[0][1])]
+        return "M" + "L".join(f"{fmt(x)} {fmt(y)}" for x, y in pts) + "Z"
+
+    def band(self, y0, y1, fill, x_min, x_max, opacity=1.0):
+        self.layers.append((fill, opacity, self.band_path(y0, y1, x_min, x_max)))
+
+    def svg(self, w, h, title, shade=None, clip=None, shade_clip=None, fade=None):
+        """shade: (stops) for a horizontal black overlay that darkens the print towards the cylinder's sides,
+        clipped to shade_clip (path data) when given, so it never touches the glass around a label.
+        fade: (stops) for a horizontal opacity mask on the print instead, for print that is screened onto
+        glass: black shading would show as a box where the render is transparent."""
+        out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">',
+               f"<title>{title}</title>"]
+        defs = []
+        if shade:
+            stops = "".join(f'<stop offset="{o}" stop-color="#000" stop-opacity="{a}"/>' for o, a in shade)
+            defs.append(f'<linearGradient id="shade" x1="0" x2="{w}" y1="0" y2="0" gradientUnits="userSpaceOnUse">{stops}</linearGradient>')
+        if clip:
+            defs.append(f'<clipPath id="clip"><path d="{clip}"/></clipPath>')
+        if shade_clip:
+            defs.append(f'<clipPath id="shade-clip"><path d="{shade_clip}"/></clipPath>')
+        if fade:
+            stops = "".join(f'<stop offset="{o}" stop-color="#fff" stop-opacity="{a}"/>' for o, a in fade)
+            defs.append(f'<linearGradient id="fade-g" x1="0" x2="{w}" y1="0" y2="0" gradientUnits="userSpaceOnUse">{stops}</linearGradient>'
+                        f'<mask id="fade" maskUnits="userSpaceOnUse" x="0" y="0" width="{w}" height="{h}"><rect width="{w}" height="{h}" fill="url(#fade-g)"/></mask>')
+        if defs:
+            out.append("<defs>" + "".join(defs) + "</defs>")
+        attrs = (' clip-path="url(#clip)"' if clip else "") + (' mask="url(#fade)"' if fade else "")
+        out.append(f"<g{attrs}>")
+        for fill, op, d in self.layers:
+            o = f' fill-opacity="{op}"' if op < 1 else ""
+            out.append(f'<path fill="{fill}"{o} d="{d}"/>')
+        if shade:
+            sc = ' clip-path="url(#shade-clip)"' if shade_clip else ""
+            out.append(f'<rect width="{w}" height="{h}" fill="url(#shade)"{sc}/>')
+        out.append("</g></svg>")
+        return "\n".join(out) + "\n"
+
+
+# ------------------------------------------------------------- the vial ----
+# assets/images/products/vial-tirzepatide.webp, 466×1100: a blank white paper
+# label on a clear vial, lime flip cap. Label silhouette x 4–461 (centre 232.5,
+# R 228.5), front y 398–995; its edges arc by 8px at the top and 27px at the
+# bottom, which puts the camera's eye level at y 551 (k 0.0641).
+VIAL = Cylinder(cx=232.5, r=228.5, eye=551, k=0.0641)
+VIAL_TOP, VIAL_BOT = 398, 995
+VIAL_X = (3.5, 462.5)  # the label runs right to the silhouette (paper is opaque to x 4–461, half-covered at 462)
+VIAL_TOP, VIAL_BOT = VIAL_TOP - 1.5, VIAL_BOT + 1  # cover the paper's bright cut edge
+
+
+def vial(variant):
+    """The client's MEDARO Tirzepatide vial mock-up, word for word: Injection · Compounded ·
+    Tirzepatide · <variant> Vial · RX ONLY. Body in the brand's olive (client: "change the Color
+    of the body to the brand Color"). Our layout, the pens' recipe turned across the vial: the row
+    above (RX ONLY), hairline, the name band (Compounded in lime over Tirzepatide), hairline, the use
+    line (Injection), and the variant on one solid lime block across the foot, a third of the label
+    like the pens' dose tab. Even 50-unit steps between rows."""
+    p = Print(VIAL)
+    L = -152  # content edge, flat (−0.67 rad: still face-on); hairlines run right round
+    edge = math.pi / 2 * VIAL.r
+    p.band(VIAL_TOP, VIAL_BOT, INK, *VIAL_X)
+    p.text("RX ONLY", L, 465, 25, 500, PAPER, tracking=0.12, opacity=0.82)
+    p.line(-edge, edge, 503, 2.2, PAPER, 0.36)
+    p.text("Compounded", L - 1, 583, 40, 400, LIME)
+    p.text("Tirzepatide", L - 3, 661, 72, 500, PAPER, tracking=-0.02)
+    p.line(-edge, edge, 707, 2.2, PAPER, 0.36)
+    p.text("Injection", L, 777, 29, 400, PAPER, opacity=0.82)
+    p.band(823, VIAL_BOT, LIME, *VIAL_X)
+    p.text(f"{variant} Vial", L, 925, 38, 500, INK, tracking=-0.015)
+    # the paper's own shading carries the light (the print multiplies onto it); deepen the far sides a little
+    shade = [(0, 0.34), (0.1, 0.12), (0.24, 0), (0.9, 0), (1, 0.1)]
+    body = p.band_path(VIAL_TOP, VIAL_BOT, *VIAL_X)
+    return p.svg(466, 1100, f"Compounded Tirzepatide, {variant} Vial: label print", shade=shade, shade_clip=body)
+
+
+def vial_sheen():
+    """A satin highlight on the label where the key light (from the right) glances off it,
+    laid over the print with screen. Same for every vial label."""
+    p = Print(VIAL)
+    body = p.band_path(VIAL_TOP, VIAL_BOT, *VIAL_X)
+    stops = [(0, 0), (0.62, 0), (0.76, 0.07), (0.835, 0.17), (0.875, 0.2), (0.92, 0.1), (0.97, 0.03), (1, 0)]
+    g = "".join(f'<stop offset="{o}" stop-color="#fff" stop-opacity="{a}"/>' for o, a in stops)
+    # a faint cool rim on the shadow side, where the backdrop reflects
+    r = "".join(f'<stop offset="{o}" stop-color="#e8eedb" stop-opacity="{a}"/>' for o, a in [(0, 0.08), (0.05, 0.03), (0.12, 0)])
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 466 1100" width="466" height="1100">'
+            f'<title>Vial label: satin highlight</title><defs>'
+            f'<linearGradient id="s" x1="0" x2="466" gradientUnits="userSpaceOnUse">{g}</linearGradient>'
+            f'<linearGradient id="r" x1="0" x2="466" gradientUnits="userSpaceOnUse">{r}</linearGradient>'
+            f'<clipPath id="c"><path d="{body}"/></clipPath></defs>'
+            f'<g clip-path="url(#c)"><rect width="466" height="1100" fill="url(#s)"/><rect width="466" height="1100" fill="url(#r)"/></g></svg>\n')
+
+
+# ----------------------------------------------------------- the bottle ----
+# assets/images/products/bottle-quad4.webp, 439×2200: blank olive glass, long
+# neck, crown cap. Body x 7–431 (centre 219, R 212) from y 950 to 2150. Print
+# goes straight on the glass in lime (screen), like the client's reference.
+BOTTLE = Cylinder(cx=219, r=212, eye=1400, k=0.026)
+
+
+def bottle():
+    """The client's bottle (their reference, 2026-11-20), its words kept and CoreAge Rx removed:
+    the 4PLAY mark (P L / A Y set in the quarters of a line-drawn 4) · Apomorphine · Sildenafil ·
+    Tadalafil · Vardenafil · Sublingual Medication · 1 dose | Use as directed · 60ml · Rx Only.
+    Our layout: the mark drawn in hairlines and set in Host Grotesk, hairlines between the blocks,
+    and one solid lime tab (Sublingual Medication, knocked out to the glass)."""
+    p = Print(BOTTLE)
+    # The mark: a 4 in hairlines (diagonal, crossbar, stem) with P L above the bar, A Y below.
+    stem_u, top, bar, foot = 0, 1150, 1332, 1448
+    left, right = -122, 112
+    w = 4.2
+    p.segment((stem_u, top), (left, bar), w, LIME)
+    p.segment((left - w * 0.6, bar), (right, bar), w, LIME)
+    p.segment((stem_u, top - w * 0.4), (stem_u, foot), w, LIME)
+    size, gap = 86, 15
+    p.text("P", stem_u - gap, bar - gap - 2, size, 400, LIME, anchor="end")
+    p.text("L", stem_u + gap, bar - gap - 2, size, 400, LIME)
+    cap = 0.7 * size
+    p.text("A", stem_u - gap, bar + gap + cap + 4, size, 400, LIME, anchor="end")
+    p.text("Y", stem_u + gap, bar + gap + cap + 4, size, 400, LIME)
+    # ingredients between hairlines
+    p.line(-118, 118, 1500, 2.4, LIME, 0.6)
+    for i, word in enumerate(("Apomorphine", "Sildenafil", "Tadalafil", "Vardenafil")):
+        p.text(word, 0, 1566 + i * 47, 37, 400, LIME, anchor="middle")
+    p.line(-118, 118, 1752, 2.4, LIME, 0.6)
+    # the solid tab: knocked out, so the glass shows through the letters
+    tw = p.text("Sublingual Medication", 0, -100, 27, 500, LIME, anchor="middle")  # measure
+    p.layers.pop()
+    p.rect(-tw / 2 - 16, 1786, tw / 2 + 16, 1834, LIME)
+    p.text("Sublingual Medication", 0, 1819, 27, 500, "#000", anchor="middle")
+    p.text("1 dose | Use as directed", 0, 1882, 27, 400, LIME, anchor="middle")
+    # the foot
+    p.text("60ml", -150, 2078, 25, 400, LIME, opacity=0.9)
+    p.text("Rx Only", 150, 2078, 25, 400, LIME, anchor="end", opacity=0.9)
+    # the glass catches the key light on the right: the print fades a little towards the left side
+    fade = [(0, 0.38), (0.16, 0.66), (0.36, 0.92), (0.55, 1), (0.88, 1), (1, 0.7)]
+    return p.svg(439, 2200, "4PLAY bottle: print on glass", fade=fade)
+
+
+if __name__ == "__main__":
+    files = {
+        "print-vial-microdose.svg": vial("Microdose"),
+        "print-vial-multidose.svg": vial("Multidose"),
+        "print-bottle-4play.svg": bottle(),
+        "sheen-vial.svg": vial_sheen(),
+    }
+    for name, data in files.items():
+        with open(os.path.join(OUT, name), "w") as f:
+            f.write(data)
+        print(f"{name}: {len(data) // 1024} KB")
