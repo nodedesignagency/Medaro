@@ -179,15 +179,15 @@ a.hero__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border
    than others"); the Microdose vial floats in front of its lower half; the
    Multidose vial further back, top right; the two tablets back where they
    were (user: "lets add tablet back"). */
-.hero__set--float .product--ampoule      { --h: 66%; --x: 57%; --y: 44%; --r: -16deg; }
-.hero__set--float .product--vial-a       { --h: 46%; --x: 38%; --y: 67%; --r: 10deg; }
-.hero__set--float .product--vial-b       { --h: 28%; --x: calc(80% - var(--spill)); --y: 17%; --r: -19deg; }
-.hero__set--float .product--tablet-white { --h: 17%; --x: calc(22% + var(--spill)); --y: 26%; --r: 0deg; }
-.hero__set--float .product--tablet-oval  { --h: 14%; --x: calc(78% - var(--spill)); --y: 58%; --r: 0deg; }
+.hero__set--float .product--ampoule      { --h: 94%; --x: 58%; --y: 49%; --r: -14deg; }
+.hero__set--float .product--vial-a       { --h: 60%; --x: calc(32% + var(--spill)); --y: 66%; --r: 10deg; }
+.hero__set--float .product--vial-b       { --h: 36%; --x: calc(77% - 1.6 * var(--spill)); --y: 16.5%; --r: -18deg; }
+.hero__set--float .product--tablet-white { --h: 17%; --x: calc(20% + var(--spill)); --y: 22%; --r: 0deg; }
+.hero__set--float .product--tablet-oval  { --h: 14%; --x: calc(80% - var(--spill)); --y: 64%; --r: 0deg; }
 
 /* trio: the range side by side, labels to camera, the tablets above */
-.hero__set--trio .product--ampoule      { --h: 68%; --x: 50%; --y: 52%; --r: -3deg; }
-.hero__set--trio .product--vial-a       { --h: 43%; --x: calc(21% + var(--spill)); --y: 62%; --r: 5deg; }
-.hero__set--trio .product--vial-b       { --h: 40%; --x: calc(79% - var(--spill)); --y: 64%; --r: -6deg; }
-.hero__set--trio .product--tablet-white { --h: 15%; --x: calc(27% + var(--spill)); --y: 20%; --r: 0deg; }
-.hero__set--trio .product--tablet-oval  { --h: 13%; --x: calc(74% - var(--spill)); --y: 24%; --r: 0deg; }
+.hero__set--trio .product--ampoule      { --h: 94%; --x: 50%; --y: 50%; --r: -3deg; }
+.hero__set--trio .product--vial-a       { --h: 54%; --x: calc(22% + 1.6 * var(--spill)); --y: 60%; --r: 5deg; }
+.hero__set--trio .product--vial-b       { --h: 50%; --x: calc(76% - 1.6 * var(--spill)); --y: 57%; --r: -6deg; }
+.hero__set--trio .product--tablet-white { --h: 15%; --x: calc(22% + var(--spill)); --y: 22%; --r: 0deg; }
+.hero__set--trio .product--tablet-oval  { --h: 13%; --x: calc(78% - var(--spill)); --y: 26%; --r: 0deg; }
