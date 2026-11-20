@@ -313,9 +313,10 @@ def vial_sheen():
 
 
 # ---------------------------------------------------------- the ampoule ----
-# assets/images/products/ampoule-quad4.webp, 406×2200: a blank glass ampoule,
-# light sage-lime glass and liquid (Nano Banana 2.1, 2026-11-20, after the
-# user's ampoule references). Body x 6–399 (centre 202.5, R 197) from the
+# assets/images/products/ampoule-quad4.webp, 406×2200: a blank frosted glass
+# ampoule in light sage-lime (Nano Banana 2.1, 2026-11-20, after the user's
+# ampoule references; frosted so the backdrop never shows through and the
+# print reads on it, user: "text is not visible at all"). Body x 6–399 (centre 202.5, R 197) from the
 # shoulder at y 980 to the base at 2194; the liquid starts at y 1060.
 AMPOULE = Cylinder(cx=202.5, r=197, eye=1100, k=0.03)
 
@@ -332,8 +333,8 @@ def ampoule():
     p = Print(AMPOULE)
     top, foot = 1150, 2118          # the print's length down the axis
     band_l, band_r = -62, 64        # the hairlines: the name band between them
-    p.segment((band_l, top), (band_l, foot), 2.2, INK, 0.55)
-    p.segment((band_r, top), (band_r, foot), 2.2, INK, 0.55)
+    p.segment((band_l, top), (band_l, foot), 2.6, INK, 0.7)
+    p.segment((band_r, top), (band_r, foot), 2.6, INK, 0.7)
     # the name, along the band (cap height spans the band's middle)
     p.text("Quad 4", -40, top + 34, 124, 500, INK, tracking=-0.02, along=True)
     # the solid tab at the band's foot end, its word knocked out
@@ -341,8 +342,8 @@ def ampoule():
     p.rect(band_l, tab_top, band_r, foot, INK, 0.94)
     p.text("Sublingual", -11, tab_top + 26, 32, 500, "#fff", along=True)
     # the lanes either side
-    p.text("Rx only", band_r + 18, top + 4, 27, 500, INK, opacity=0.9, along=True)
-    p.text("Sildenafil · Vardenafil · Tadalafil · Apomorphine", band_l - 38, top + 4, 26, 400, INK, opacity=0.9, along=True)
+    p.text("Rx only", band_r + 16, top + 4, 31, 500, INK, along=True)
+    p.text("Sildenafil · Vardenafil · Tadalafil · Apomorphine", band_l - 40, top + 4, 30, 500, INK, along=True)
     return p.svg(406, 2200, "Quad 4 ampoule: print on glass")
 
 
