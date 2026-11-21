@@ -55,9 +55,9 @@
   text-box: trim-both cap alphabetic; /* cap top sits level with the labels' */
 }
 
-/* Badges: the client's LegitScript placeholder and their HIPAA badge, two
-   80px tiles, radius 8 like the buttons. Placeholders until the real
-   artwork arrives ([DATA NEEDED]). */
+/* Badges: the client's LegitScript placeholder (an 80px dashed tile, radius
+   8 like the buttons, until the real badge arrives: [DATA NEEDED]) and
+   their HIPAA badge image. */
 .site-footer__badges {
   display: flex;
   gap: 12px;
@@ -92,11 +92,16 @@
   color: #666663;
 }
 .site-footer__badge-tag { color: #56662f; letter-spacing: 0.12em; } /* the promo card's olive label */
-.site-footer__badge-name {
-  font-size: 20px;
-  font-weight: var(--weight-medium);
-  line-height: 1;
-  letter-spacing: -0.01em;
+/* the client's HIPAA badge, recoloured to our ink (white glow removed),
+   free-standing like theirs, centred on the LegitScript tile */
+.site-footer__badge--hipaa {
+  width: auto;
+  padding: 0 0 0 12px;
+  box-shadow: none;
+}
+.site-footer__badge--hipaa img {
+  width: auto;
+  height: 64px; /* 148px wide: "COMPLIANT" stays readable */
 }
 
 .site-footer__cols {
@@ -123,6 +128,13 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
+/* Legal: two columns of three, read left column then right (user,
+   2026-11-21: "make this legal in two columns 3 3 points") */
+.site-footer__list--split {
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+  column-gap: 48px;
 }
 .site-footer__list a {
   display: inline-block;

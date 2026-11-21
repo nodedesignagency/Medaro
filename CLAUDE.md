@@ -50,6 +50,7 @@ git clone https://github.com/nodedesignagency/Medaro.git ~/Desktop/medaro-previe
 - `site/main.js`: small shared JS (header, scroll links, FAQ, version switcher).
 - `site/assets/logo/`: the client's official wordmark. `wordmark.svg` is cropped tight to the letters (black), `wordmark-white.svg` for dark backgrounds, `medaro-logo-original.svg` and `.jpg` exactly as delivered. Pages inline it from the sprite as `#wordmark` (`currentColor`). **Use these, never typeset "MEDARO" for the logo.**
 - `site/assets/icons/`: the user's icons as delivered (`arrow.svg`, 2026-11-20: the one arrow used everywhere). Pages use them from the sprite in `currentColor` (`#i-arrow-right`, `#i-arrow-ne`), never another arrow shape.
+- `site/assets/badges/`: trust badges the client supplies (`hipaa-compliant.png` in our ink, `-original.png` as delivered). Never make one up: a missing badge stays a marked placeholder.
 - `site/assets/images/`: photography and renders, compressed (WebP/AVIF, ≤300 KB each, hero ≤500 KB).
 - `site/versions/<name>/`: frozen snapshots the user asked to keep for comparison. Never edit them and never promote them to `main`; open with `./preview.sh <branch> versions/<name>/index.html`.
 - `tools/pack-print.py`: makes the print on the packs (`site/assets/images/products/print-*.svg`), wrapped onto the renders. Edit and run it (`python3 tools/pack-print.py`; needs `pip install fonttools brotli uharfbuzz`), never hand-edit its SVGs.

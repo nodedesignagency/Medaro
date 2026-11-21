@@ -207,13 +207,13 @@
 
   </main>
 
-  <!-- SECTION:footer--full START · styles: components/footer.css, components/product.css · scripts: main.js (rolling links) · assets: assets/images/products/ (vial-tirzepatide.webp, print-vial-microdose.svg, sheen-vial.svg, ampoule-quad4.webp, print-ampoule-quad4-ink.svg)
+  <!-- SECTION:footer--full START · styles: components/footer.css, components/product.css · scripts: main.js (rolling links) · assets: assets/images/products/ (vial-tirzepatide.webp, print-vial-microdose.svg, sheen-vial.svg, ampoule-quad4.webp, print-ampoule-quad4-ink.svg), assets/badges/hipaa-compliant.png
        Design after the user's Ethical Life footer (2026-11-21): brand line top left, link columns top right, the MEDARO
        wordmark across the foot behind the products ("i want our logo back of the suplement pic"), lime glow; mist panel
        on the frame, radius 18. Content: the client's footer (content/footer.md, word for word; user, 2026-11-21: "make
        this footer according to this content and instead of tablets use bottles"). Products: the hero's two bottles, the
        Microdose Tirzepatide vial and the Quad 4 ampoule (dark print on light grounds, as in the menu).
-       [DATA NEEDED] LegitScript badge (placeholder in the client's copy) and the client's HIPAA badge artwork.
+       [DATA NEEDED] LegitScript badge (a placeholder in the client's copy).
        Legal pages (legal/<slug>.html) not built yet. -->
   <footer class="site-footer site-footer--full">
     <div class="site-footer__frame">
@@ -226,10 +226,10 @@
               <span class="site-footer__badge-tag">Placeholder</span>
               <span class="site-footer__badge-text">Official LegitScript badge – placeholder only</span>
             </li>
-            <!-- The client's HIPAA badge (a caduceus image in their copy), set in type until they send the artwork -->
+            <!-- The client's HIPAA badge (user, 2026-11-21), recoloured to our ink: assets/badges/hipaa-compliant.png
+                 (original as delivered: hipaa-compliant-original.png) -->
             <li class="site-footer__badge site-footer__badge--hipaa">
-              <span class="site-footer__badge-name">HIPAA</span>
-              <span class="site-footer__badge-text">Compliant</span>
+              <img src="assets/badges/hipaa-compliant.png" alt="HIPAA Compliant" width="523" height="282">
             </li>
           </ul>
         </div>
@@ -253,7 +253,7 @@
 
           <nav class="site-footer__col" aria-labelledby="footer-legal">
             <p class="site-footer__label" id="footer-legal">Legal</p>
-            <ul class="site-footer__list">
+            <ul class="site-footer__list site-footer__list--split">
               <li><a class="link-roll" href="legal/terms-of-use.html">Terms of Use</a></li>
               <li><a class="link-roll" href="legal/privacy-policy.html">Privacy Policy</a></li>
               <li><a class="link-roll" href="legal/notice-of-privacy-practices.html">HIPAA Notice of Privacy Practices</a></li>
