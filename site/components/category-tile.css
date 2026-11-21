@@ -114,22 +114,27 @@
   --ct-y: 73%;
   --ct-r: 9deg;
 }
-/* Men's Health: the dusty blue pillow tablet (as on the V3 card, user 2026-11-20: "lets add a tablet"), large,
-   tilted, running off the card's right edge a little */
-.category-tile--mens {
-  --ct-h: 74%;
-  --ct-x: 80%;
-  --ct-y: 50%; /* centred on the card's height (user, 2026-11-20) */
-  --ct-r: -12deg;
-  --ct-hover-r: -2deg;
+/* Men's and Women's Health: a person, chest up, cut out, the card cropping them at the foot (client, 2026-11-21:
+   "remove the blue pills from [ Men's Health ] and put an A.I men photo there and do the same for women healths";
+   the user's references: hims-style cut-outs that fade out towards the bottom). Head near the top of the card,
+   the face on the right, the shoulders fading into the white card. Two of each for review: ?man=a|b, ?woman=a|b. */
+.category-tile .category-tile__obj--person {
+  -webkit-mask-image: linear-gradient(180deg, #000 58%, rgba(0, 0, 0, 0) 96%);
+  mask-image: linear-gradient(180deg, #000 58%, rgba(0, 0, 0, 0) 96%); /* a gradient, not an image file: works from file:// */
 }
-/* Women's Health: the oval MEDARO tablet (as on the V3 card) */
+.category-tile--mens,
 .category-tile--womens {
-  --ct-h: 60%;
-  --ct-x: 79%;
-  --ct-y: 50%; /* centred on the card's height (user, 2026-11-20) */
-  --ct-r: -10deg;
+  --ct-h: 122%;
+  --ct-x: 80%;
+  --ct-y: 66%;
+  --ct-r: 0deg;
+  --ct-hover-r: 0deg;
 }
+.category-tile__person--b { display: none; }
+:root[data-man="b"] .category-tile--mens .category-tile__person--a,
+:root[data-woman="b"] .category-tile--womens .category-tile__person--a { display: none; }
+:root[data-man="b"] .category-tile--mens .category-tile__person--b,
+:root[data-woman="b"] .category-tile--womens .category-tile__person--b { display: block; }
 
 @media (prefers-reduced-motion: reduce) {
   .category-tile .category-tile__obj { transition: none; }
