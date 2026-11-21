@@ -46,8 +46,6 @@
     <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.75"/><circle cx="12" cy="12" r="1.1"/></g></symbol>
     <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.75v2M12 19.25v2M2.75 12h2M19.25 12h2M5.46 5.46l1.41 1.41M17.13 17.13l1.41 1.41M5.46 18.54l1.41-1.41M17.13 6.87l1.41-1.41"/></g></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.75" cy="10.75" r="6.5"/><path d="m15.5 15.5 5 5"/></g></symbol>
-    <symbol id="i-heart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.1a4.3 4.3 0 0 1 7.5 2.7C19.5 15.4 12 20 12 20Z"/></g></symbol>
-    <symbol id="i-sprout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8.5"/><path d="M12 12.5C12 8.4 9.3 6 5 6c0 4.1 2.7 6.5 7 6.5Z"/><path d="M12 10.5c0-3.6 2.6-6.25 7-6.25 0 3.6-2.6 6.25-7 6.25Z"/></g></symbol>
     <!-- Weight Loss care-point icons (24px line icons, currentColor) -->
     <symbol id="i-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
     <symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.75 3.25H5a1 1 0 0 0-1 1V9a4.5 4.5 0 0 0 9 0V4.25a1 1 0 0 0-1-1h-.75"/><path d="M8.5 13.5v1.75a4.5 4.5 0 0 0 9 0V13"/><circle cx="17.5" cy="11" r="2"/></g></symbol>
@@ -440,7 +438,7 @@
   <!-- SECTION:home/supplements END -->
   </div>
   <div data-version="supplements:v3">
-  <!-- SECTION:home/supplements--v3 START · styles: sections/home/supplements--v3.css · scripts: main.js (reveal) · assets: assets/images/hero-run.webp, assets/images/products/tablet-white-blank.webp, tablet-oval-lime-blank.webp, assets/images/supplements/tablet-round.webp
+  <!-- SECTION:home/supplements--v3 START · styles: sections/home/supplements--v3.css · scripts: main.js (reveal) · assets: assets/images/hero-run.webp, assets/icons/supplement-heart.webp, supplement-sprout.webp
        Version 3, to compare with V1 (?supplements=v3); V2 was scrapped by the user (2026-11-21). After the user's
        "Everything you need to stay aligned — in one place." reference and their round 2: left, the chip, heading, the
        client's two statements as hairline rows with their paragraphs, the closing line and the CTA; right, a photo with
@@ -457,15 +455,16 @@
              space between so that it looks and fits image height") -->
         <div class="sp-v3__lower">
         <!-- The client's two statements as two equal cards with an icon (user, 2026-11-21: the rows looked "too plain and
-             uneven"; after Intercom's two-up cards and Slash's icon rows on Mobbin) -->
+             uneven"; after Intercom's two-up cards and Slash's icon rows on Mobbin). Icons: Magnific, in the style of the
+             user's gradient icon sheet, our greens, cut out; no frame (user, 2026-11-21). -->
         <div class="sp-v3__points">
           <div class="sp-v3__point">
-            <span class="sp-v3__point-icon" aria-hidden="true"><svg><use href="#i-heart"/></svg></span>
+            <img class="sp-v3__point-icon" src="assets/icons/supplement-heart.webp" alt="" width="512" height="512">
             <h3>Better support for your everyday health.</h3>
             <p>Thoughtfully formulated supplements with quality ingredients, designed to support your wellness goals and help you feel your best every day.</p>
           </div>
           <div class="sp-v3__point">
-            <span class="sp-v3__point-icon" aria-hidden="true"><svg><use href="#i-sprout"/></svg></span>
+            <img class="sp-v3__point-icon" src="assets/icons/supplement-sprout.webp" alt="" width="512" height="512">
             <h3>Better wellness starts with better choices.</h3>
             <p>Thoughtfully selected ingredients and purposeful formulations to complement your daily routine and support your health goals.</p>
           </div>

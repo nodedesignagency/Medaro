@@ -76,16 +76,16 @@
   border-radius: 12px;
   background: var(--color-surface);
 }
+/* the icon: an illustrated icon on the card itself, no frame (user,
+   2026-11-21: "generate 2 icons … we will remove whole frame … similar to
+   image 1 style"; Magnific, after their gradient icon sheet, our greens) */
 .sp-v3__point-icon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: var(--p-ink);
-  color: var(--p-paper);
+  display: block;
+  width: clamp(60px, 4.8vw, 92px);
+  height: auto;
+  aspect-ratio: 1;
+  margin: -4px 0 0 -4px; /* the art's own margin back onto the text line */
 }
-.sp-v3__point-icon svg { width: 22px; height: 22px; }
 .sp-v3__point h3 {
   margin-top: clamp(28px, 2.6vw, 48px);
   font-size: clamp(20px, 1.5vw, 28px);
