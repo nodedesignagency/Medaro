@@ -29,6 +29,11 @@
   --color-line: color-mix(in srgb, var(--p-paper) 18%, transparent);
 }
 
-/* Chip text: bright sky blue, 8.2:1 on the slate, 5.9:1 on ?blue=b (user,
-   2026-11-21: "change color of text") */
+/* Chip text, with the heading (user, 2026-11-21: "at first should be normal
+   color as it is like for the heading … it should change to blue … when we
+   scroll and background color change"): the heading's colour on paper, then
+   bright sky blue once the page turns blue (8.2:1 on the slate, 5.9:1 on
+   ?blue=b), fading with the background (styles.css → .chip). */
 .care--mens { --color-chip: #8cc8ff; }
+.care--mens .chip { color: var(--color-ink); }
+:root[data-scene="mens"] .care--mens .chip { color: var(--color-chip); }

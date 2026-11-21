@@ -30,7 +30,12 @@
   --color-line: color-mix(in srgb, var(--wh-ink) 18%, transparent);
 }
 
-/* Chip text: raspberry, the most vivid that reads on the blush (4.6:1);
-   a bright pink on ?pink=b (5:1) (user, 2026-11-21: "change color of text") */
+/* Chip text, with the heading (user, 2026-11-21: "it should change to …
+   pink color when we scroll and background color change"): the heading's
+   colour until the page turns pink (light while it is still Men's blue),
+   then raspberry, the most vivid that reads on the blush (4.6:1); bright
+   pink on ?pink=b (5:1). Fades with the background (styles.css → .chip). */
 .care--womens { --color-chip: #bb1b50; }
 :root[data-pink="b"] .care--womens { --color-chip: #ffb3c8; }
+.care--womens .chip { color: var(--color-ink); }
+:root[data-scene="womens"] .care--womens .chip { color: var(--color-chip); }

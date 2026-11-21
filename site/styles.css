@@ -49,7 +49,9 @@
   --color-on-accent: var(--p-ink); /* text on lime buttons: stays dark in every scene */
   --color-on-dark-muted: color-mix(in srgb, var(--p-paper) 72%, transparent);
   /* Chips (section eyebrows): a bright text colour, set per section; this
-     default is a leaf green for paper (Weight Loss), 4.7:1 */
+     default is a leaf green for paper (Weight Loss), 4.7:1. In Men's and
+     Women's Health the chip takes it only once the page has changed colour
+     (styles.css → .chip) */
   --color-chip: #367d12;
   /* Per-line tints: Weight Loss, Men's, Women's, Supplements */
   --color-wl: var(--p-sage);
@@ -345,8 +347,14 @@ button { font: inherit; color: inherit; }
    then, of a filled pill, "change color of text not add frame"). No frame,
    no fill. Each colour is the most vivid of its hue that still reads at this
    size (WCAG AA, 4.5:1 for 12px text), so on light and mid backgrounds it is
-   deep rather than neon. --color-chip is set on each section (not the
-   scene), so the chip has its colour before the page fades to the scene.
+   deep rather than neon. --color-chip is set on each section.
+   In Men's and Women's Health the chip changes with the page, like the
+   heading (user, 2026-11-21: "at first should be normal color … it should
+   change to blue or pink color when we scroll and background color
+   change"): until the section's scene arrives it is the heading's colour
+   (--color-ink: olive on paper, light while the page is Men's blue), then
+   it fades to the section's colour with the background (the section's own
+   CSS: :root[data-scene="mens"] .care--mens .chip).
    The text is trimmed to its capitals: the box is the cap height.
    Markup: <p class="chip"><span>Text</span></p>
    Sections add their own margin and alignment (centred: margin-inline auto).
@@ -356,6 +364,7 @@ button { font: inherit; color: inherit; }
   align-items: center;
   width: fit-content;
   color: var(--color-chip);
+  transition: color 700ms var(--ease-in-out); /* in step with the scene fade; reduced motion: instant */
   font-size: var(--fs-chip);
   font-weight: var(--weight-medium);
   line-height: 1;
