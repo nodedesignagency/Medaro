@@ -119,8 +119,9 @@
 }
 
 /* ---------- Right: the photo with the glass card ----------
-   The photo covers the panel; stand-in: the runners photo from the first
-   hero (the real supplement photo comes after approval, data-brief). The
+   The photo covers the panel: three Magnific options to pick from (a man
+   and a woman shot from below against a sage sky, or a grid of blank
+   olive supplement boxes), after the user's mood images (2026-11-21). The
    card sits in the middle of the photo (user, 2026-11-21: "make it center
    to the image as we will be changing the image"). */
 .sp-v3__panel {
@@ -133,7 +134,7 @@
   padding: clamp(20px, 2vw, 36px);
   overflow: hidden;
   border-radius: var(--radius-m);
-  background: #6f7663; /* the photo's sky while it loads */
+  background: #9db5a6; /* the photos' sage sky while they load */
   color: #fff;
   isolation: isolate;
 }
@@ -144,8 +145,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 70% 50%; /* the two runners, a little right of centre */
+  object-position: 50% 30%;
 }
+/* review: one of the three generated options at a time (?spimg=man|woman|product) */
+.sp-v3__photo[data-spimg] { display: none; }
+:root:not([data-spimg]) .sp-v3__photo[data-spimg="man"],
+:root[data-spimg="man"] .sp-v3__photo[data-spimg="man"],
+:root[data-spimg="woman"] .sp-v3__photo[data-spimg="woman"],
+:root[data-spimg="product"] .sp-v3__photo[data-spimg="product"] { display: block; }
 
 /* One glass card holding the five details, after the user's list card
    (2026-11-21: "on right lets do like this no tablet good simple icons"):
