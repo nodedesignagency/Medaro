@@ -12,9 +12,14 @@
      title, a white check circle right);
    - "i dont need that text": the panel's label is off the page (it still
      names the list for screen readers).
-   Alive: the cards rise in one after another when the panel comes into
-   view (main.js, data-reveal), the tablets float gently in their tiles, a
-   card lifts on hover. Reduced motion: all still.
+   Round 3 (2026-11-21): the right becomes one glass card with five rows
+   (a white line icon in a tile, the name, a grey second line; "no tablet
+   good simple icons"), and the two statements on the left become two
+   equal mist cards with an icon ("too plain and uneven"), the CTA with the
+   closing line beside it.
+   Alive: the card rises in and its rows follow one after another when the
+   panel comes into view (main.js, data-reveal); a row lights on hover.
+   Reduced motion: all still.
    Light page like the reference (no scene: paper between Women's pink and
    How Medaro Works' sage). Content on the header's logo line.
    Copy: content/home.md → Supplement, word for word ("Support" in lower
@@ -48,34 +53,58 @@
   text-wrap: balance;
 }
 
-.sp-v3__rows {
-  margin-top: clamp(40px, 3.6vw, 64px);
-  border-top: 1px solid var(--color-line);
+/* The client's two statements as two equal cards with an icon (user,
+   2026-11-21: the rows looked "too plain and uneven"; after Intercom's
+   two-up cards and Slash's icon rows on Mobbin): mist cards, radius 12 like
+   our other cards, an ink icon tile, the title and the paragraph. */
+.sp-v3__points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(36px, 3.2vw, 56px);
 }
-.sp-v3__row {
-  padding: clamp(20px, 1.7vw, 30px) 0 clamp(22px, 1.9vw, 34px);
-  border-bottom: 1px solid var(--color-line);
+.sp-v3__point {
+  padding: clamp(20px, 1.8vw, 32px);
+  border-radius: 12px;
+  background: var(--color-surface);
 }
-.sp-v3__row h3 {
-  font-size: clamp(24px, 1.9vw, 36px);
+.sp-v3__point-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--p-ink);
+  color: var(--p-paper);
+}
+.sp-v3__point-icon svg { width: 22px; height: 22px; }
+.sp-v3__point h3 {
+  margin-top: clamp(28px, 2.6vw, 48px);
+  font-size: clamp(20px, 1.5vw, 28px);
   font-weight: var(--weight-regular);
-  line-height: 1.12;
-  letter-spacing: -0.025em;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
-.sp-v3__row p {
-  max-width: 36em;
-  margin-top: 12px;
-  font-size: clamp(15px, 1.05vw, 17px);
+.sp-v3__point p {
+  margin-top: 10px;
+  font-size: 15px;
   line-height: 1.55;
   color: var(--color-text-muted);
   text-wrap: pretty;
 }
-.sp-v3__foot { padding-top: clamp(32px, 2.8vw, 48px); }
+
+/* the CTA with the client's closing line beside it */
+.sp-v3__foot {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: clamp(28px, 2.4vw, 40px);
+}
+.sp-v3__nowrap { white-space: nowrap; }
 .sp-v3__note {
-  max-width: 30em;
-  margin-bottom: 20px;
-  font-size: 15px;
+  max-width: 24em;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--color-text-muted);
 }
@@ -108,89 +137,72 @@
   object-position: 70% 50%; /* the two runners, a little right of centre */
 }
 
-.sp-v3__cards {
-  display: grid;
-  gap: 8px;
+/* One glass card holding the five details, after the user's list card
+   (2026-11-21: "on right lets do like this no tablet good simple icons"):
+   warm dark frosted glass, radius 16; each row an icon tile (a lighter pane
+   of the glass, a white line icon), the name and a grey second line. */
+.sp-v3__card {
   width: min(100%, 440px);
+  padding: 10px;
+  border-radius: 16px;
+  background: rgba(44, 38, 32, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 16px 36px -18px rgba(16, 18, 12, 0.6);
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+}
+.sp-v3__list {
+  display: grid;
+  gap: 2px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-/* frosted glass after the user's image 3: the photo shows through, blurred,
-   a faint light edge, radius 14; it lifts on hover */
-.sp-v3__card {
+.sp-v3__item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 8px 14px 8px 8px;
-  border-radius: 14px;
-  background: rgba(46, 42, 34, 0.38);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12), 0 12px 28px -16px rgba(16, 18, 12, 0.55);
-  backdrop-filter: blur(20px) saturate(1.25);
-  -webkit-backdrop-filter: blur(20px) saturate(1.25);
-  transition: transform var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+  gap: 16px;
+  padding: 6px 12px 6px 6px;
+  border-radius: 10px;
+  transition: background-color var(--dur-base) var(--ease-out), opacity 640ms var(--ease-out), transform 640ms var(--ease-out);
 }
-.sp-v3__card:hover { transform: translateY(-3px); background: rgba(46, 42, 34, 0.48); }
-
-/* the image tile: a lighter pane of the same glass with a tablet in it */
-.sp-v3__thumb {
+.sp-v3__item:hover { background: rgba(255, 255, 255, 0.06); }
+.sp-v3__item-icon {
   flex: none;
   display: grid;
   place-items: center;
-  width: clamp(44px, 3.3vw, 64px); /* the stack stays under the runners' faces: 330px at 1280, 350 at 1440 */
+  width: clamp(40px, 3vw, 52px);
   aspect-ratio: 1;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.14);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
-.sp-v3__thumb img {
-  width: 78%;
-  height: 78%;
-  object-fit: contain;
-  rotate: var(--r, 0deg);
-  animation: sp-v3-float var(--d, 6s) ease-in-out var(--delay, 0s) infinite;
-}
-.sp-v3__name {
-  flex: 1;
-  font-size: clamp(16px, 1.2vw, 21px);
-  font-weight: var(--weight-regular);
+.sp-v3__item-icon svg { width: 46%; height: 46%; }
+.sp-v3__item-text { display: grid; gap: 2px; }
+.sp-v3__item-name {
+  font-size: clamp(16px, 1.2vw, 20px);
+  font-weight: var(--weight-medium);
   line-height: 1.2;
   letter-spacing: -0.01em;
+  color: #fff;
 }
-/* the white check circle, top right in the reference; centred here, one line */
-.sp-v3__check {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #fff;
-  color: var(--p-ink);
-}
-.sp-v3__check svg { width: 14px; height: 14px; }
-
-.sp-v3__cards > li:nth-child(1) .sp-v3__thumb img { --r: 8deg;   --d: 6.2s; --delay: -1s; }
-.sp-v3__cards > li:nth-child(2) .sp-v3__thumb img { --r: -18deg; --d: 7s;   --delay: -3s; }
-.sp-v3__cards > li:nth-child(3) .sp-v3__thumb img { --r: 0deg;   --d: 6.6s; --delay: -2s; }
-.sp-v3__cards > li:nth-child(4) .sp-v3__thumb img { --r: -26deg; --d: 7.4s; --delay: -4.5s; }
-.sp-v3__cards > li:nth-child(5) .sp-v3__thumb img { --r: 20deg;  --d: 6.8s; --delay: -0.5s; }
-
-@keyframes sp-v3-float {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -6%; }
+.sp-v3__item-line {
+  font-size: clamp(13px, 0.95vw, 15px);
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.62);
 }
 
 /* rise in, one after another, when the panel comes into view (main.js adds
-   .is-in): the list item rises, the card inside it lifts on hover */
-.sp-v3__cards > li { transition: opacity 640ms var(--ease-out), transform 640ms var(--ease-out); transition-delay: calc(var(--i, 0) * 70ms); }
-.sp-v3__cards > li:nth-child(2) { --i: 1; }
-.sp-v3__cards > li:nth-child(3) { --i: 2; }
-.sp-v3__cards > li:nth-child(4) { --i: 3; }
-.sp-v3__cards > li:nth-child(5) { --i: 4; }
-.sp-v3__panel[data-reveal]:not(.is-in) .sp-v3__cards > li { opacity: 0; transform: translateY(18px); }
+   .is-in): the card fades up, then its rows, 60ms apart */
+.sp-v3__card { transition: opacity 640ms var(--ease-out), transform 640ms var(--ease-out); }
+.sp-v3__item:nth-child(1) { transition-delay: 0ms, 120ms, 120ms; }
+.sp-v3__item:nth-child(2) { transition-delay: 0ms, 180ms, 180ms; }
+.sp-v3__item:nth-child(3) { transition-delay: 0ms, 240ms, 240ms; }
+.sp-v3__item:nth-child(4) { transition-delay: 0ms, 300ms, 300ms; }
+.sp-v3__item:nth-child(5) { transition-delay: 0ms, 360ms, 360ms; }
+.sp-v3__panel[data-reveal]:not(.is-in) .sp-v3__card { opacity: 0; transform: translateY(20px); }
+.sp-v3__panel[data-reveal]:not(.is-in) .sp-v3__item { opacity: 0; transform: translateY(10px); }
 
 @media (prefers-reduced-motion: reduce) {
-  .sp-v3__thumb img { animation: none; }
-  .sp-v3__panel[data-reveal]:not(.is-in) .sp-v3__cards > li { opacity: 1; transform: none; }
+  .sp-v3__panel[data-reveal]:not(.is-in) .sp-v3__card,
+  .sp-v3__panel[data-reveal]:not(.is-in) .sp-v3__item { opacity: 1; transform: none; }
 }
