@@ -1,7 +1,8 @@
 /* ==========================================================================
    Component: footer (--full)
    Design after the user's Ethical Life footer (2026-11-21): the brand line
-   top left, link columns top right, a lime glow behind the product. The
+   top left, link columns top right; no glow behind the product (user,
+   2026-11-21: "remove glow from behind"). The
    user's change: "i want our logo back of the suplement pic": the giant
    MEDARO wordmark runs inset to inset across the foot, in green, the
    Tirzepatide vial large and centred in front of it.
@@ -27,7 +28,7 @@
 .site-footer__frame {
   --ft-inset: 48px;
   position: relative;
-  overflow: hidden; /* the glow and the vial run off the panel's foot */
+  overflow: hidden; /* the vial runs off the panel's foot */
   padding: 52px var(--ft-inset) var(--ft-inset);
   border-radius: 18px;
   background: var(--color-surface);
@@ -192,19 +193,6 @@
   height: auto;
   aspect-ratio: 4413 / 712;
   color: #a0b079;
-}
-
-/* the reference's glow: soft nude lime, centred on the vial, clipped by the panel */
-.site-footer__glow {
-  position: absolute;
-  left: 50%;
-  top: 58%;
-  z-index: 0;
-  width: 62cqw;
-  aspect-ratio: 1.45;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(closest-side, #cadf95 0%, rgba(207, 226, 160, 0.78) 34%, rgba(213, 229, 173, 0.34) 66%, rgba(213, 229, 173, 0) 100%);
-  pointer-events: none;
 }
 
 /* The Tirzepatide vial alone, large and centred on the wordmark, in front of
