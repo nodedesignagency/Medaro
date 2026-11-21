@@ -188,18 +188,12 @@ a.menu__link:hover .menu__arrow { transform: translateX(3px); color: var(--color
 .treat-card__media > * { transition: transform var(--dur-slow) var(--ease-out); }
 .treat-card:hover .treat-card__media > * { transform: translateY(-3px) rotate(var(--hover-r, 0deg)); }
 
-/* pens: the hero's renders with their code labels, tilted like hims' card */
-.treat-card__pen {
-  position: relative;
-  display: block;
-  height: 118px;
-  rotate: -24deg;
-}
-.treat-card__pen--glp1 { aspect-ratio: 299 / 2200; }
-.treat-card__pen--capped { aspect-ratio: 307 / 2284; rotate: 24deg; }
-.treat-card__pen img { display: block; width: 100%; height: 100%; }
-.treat-card .print-meta { display: none; } /* too small to read at this size */
 .treat-card__tab { width: 88px; height: auto; }
+/* the client's packs (2026-11-20): the Tirzepatide vials upright, a little tilted each way, the Quad 4 ampoule
+   leaning like the hero's */
+.treat-card__pack--vial { height: 112px; rotate: 8deg; }
+.treat-card__pack--vial-b { rotate: -7deg; }
+.treat-card__pack--ampoule { height: 136px; rotate: -16deg; }
 .treat-card__tab--white { width: 74px; }
 
 /* ---------- Foot ---------- */
