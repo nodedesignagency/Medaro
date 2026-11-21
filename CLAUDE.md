@@ -50,11 +50,12 @@ git clone https://github.com/nodedesignagency/Medaro.git ~/Desktop/medaro-previe
 - `site/main.js`: small shared JS (header, scroll links, FAQ, version switcher).
 - `site/assets/logo/`: the client's official wordmark. `wordmark.svg` is cropped tight to the letters (black), `wordmark-white.svg` for dark backgrounds, `medaro-logo-original.svg` and `.jpg` exactly as delivered. Pages inline it from the sprite as `#wordmark` (`currentColor`). **Use these, never typeset "MEDARO" for the logo.**
 - `site/assets/icons/`: the user's icons as delivered (`arrow.svg`, 2026-11-20: the one arrow used everywhere). Pages use them from the sprite in `currentColor` (`#i-arrow-right`, `#i-arrow-ne`), never another arrow shape.
+- `site/assets/badges/`: trust badges the client supplies (`hipaa-compliant.png` in our ink, `-original.png` as delivered). Never make one up: a missing badge stays a marked placeholder.
 - `site/assets/images/`: photography and renders, compressed (WebP/AVIF, ≤300 KB each, hero ≤500 KB).
 - `site/versions/<name>/`: frozen snapshots the user asked to keep for comparison. Never edit them and never promote them to `main`; open with `./preview.sh <branch> versions/<name>/index.html`.
 - `tools/pack-print.py`: makes the print on the packs (`site/assets/images/products/print-*.svg`), wrapped onto the renders. Edit and run it (`python3 tools/pack-print.py`; needs `pip install fonttools brotli uharfbuzz`), never hand-edit its SVGs.
 - `tools/unmix-glass.py`: makes clear glass in a cut-out see-through again by taking out the flat colour it was rendered on (render glass on one plain colour, never a gradient: `DESIGN.md` → Direction, rule 7).
-- `content/`: the client's copy as Markdown, word for word: `home.md`, `about.md`, `weight-loss.md`, `mens-health.md`. Originals in `content/source/` (`medaro-copy.pdf` and `legal/*.pdf`, 11 legal documents).
+- `content/`: the client's copy as Markdown, word for word: `home.md`, `about.md`, `weight-loss.md`, `mens-health.md`, `footer.md` (from the client's footer screenshot, `content/source/footer-content.webp`). Originals in `content/source/` (`medaro-copy.pdf` and `legal/*.pdf`, 11 legal documents).
 - `review/`: screenshots and videos for review. Git-ignored; send them to the user, don't commit them.
 
 **Versions inside one branch:** when offering versions of a section, give each its own block and stylesheet (`SECTION:home/hero--v1`, `sections/home/hero--v1.css`, same for `--v2`) and mark the wrapper `data-version="hero:v1"`. `main.js` shows one at a time, chosen with `?hero=v2`, and adds a small review switcher in the corner (hidden with `?review=0`). The switcher is review-only and never goes to Framer. If a version needs its own header, put the header inside the same wrapper.
