@@ -41,7 +41,16 @@
 }
 
 /* ---------- Left: chip, heading, the two statements, CTA ---------- */
-.sp-v3__side { align-self: start; }
+/* The left column fills the photo's height: heading at the top, the cards
+   and CTA at the foot, the room between them (user, 2026-11-21: "push
+   bottom part down so it remains down, use space between so that it looks
+   and fits image height") */
+.sp-v3__side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(40px, 3.6vw, 64px); /* never closer than this */
+}
 .sp-v3 .chip { margin-bottom: 24px; } /* leaf green on paper (styles.css default) */
 .sp-v3__title {
   max-width: 13em;
@@ -61,7 +70,6 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin-top: clamp(36px, 3.2vw, 56px);
 }
 .sp-v3__point {
   padding: clamp(20px, 1.8vw, 32px);
@@ -94,10 +102,11 @@
   text-wrap: pretty;
 }
 
-/* the CTA with the client's closing line beside it */
+/* the CTA with the client's closing line beside it, both on the photo's
+   bottom line */
 .sp-v3__foot {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 24px;
   margin-top: clamp(28px, 2.4vw, 40px);
 }
@@ -109,15 +118,16 @@
   color: var(--color-text-muted);
 }
 
-/* ---------- Right: the photo with the glass cards ----------
+/* ---------- Right: the photo with the glass card ----------
    The photo covers the panel; stand-in: the runners photo from the first
    hero (the real supplement photo comes after approval, data-brief). The
-   cards sit in the lower part so the faces stay clear. */
+   card sits in the middle of the photo (user, 2026-11-21: "make it center
+   to the image as we will be changing the image"). */
 .sp-v3__panel {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   min-height: clamp(560px, 48vw, 900px);
   padding: clamp(20px, 2vw, 36px);
