@@ -1,12 +1,18 @@
 /* ==========================================================================
-   Home · hero (approved: hero V3, user 2026-11-20)
-   The same dark rounded stage, studio plate and four floating products as
-   V2, arranged like the user's px push reference: one big line across the
-   top that runs edge to edge, the products floating in the
-   centre (where px push has its 3D logo); bottom left the supplement promo
-   card; bottom right the client's sentence above the three care categories
-   as CTA rows (client, 2026-11-20; after Arcovia and TrueBody).
-   Copy: content/home.md, word for word.
+   Home · hero (approved: hero V4, user 2026-11-21: "this one is perfect push
+   to main"; from claude/compassionate-gates-h0ymfe)
+   The dark rounded stage and live studio light of the earlier hero, laid out
+   anew:
+   - the headline split in two: "Made for" top left, "Better Health." bottom
+     right just above the cards (one h1, two lines at the one-line size);
+   - the client's sentence under "Made for", on the left inset;
+   - the products as one cluster, centred: the Quad 4 ampoule, the Microdose
+     Tirzepatide vial in front, the white tablet top right, the oval tablet at
+     the vial's lower left; the pills blank (client, 2026-11-21); nothing
+     overlaps the headline;
+   - the three care categories in one row along the foot, as large white
+     cards after hims' (components/category-tile.css).
+   Copy: content/home.md, word for word (the headline is ours).
    Frame: the stage sits on the frame edge (16px, max 1888px, centred); the
    header's logo and CTA line up with the content inset (48px) inside it.
    Header: components/header.css, --plain --compact (70px). Products: components/product.css.
@@ -18,10 +24,14 @@
 }
 
 .hero__frame {
-  /* bottom of the headline row: top gap + cap height + gap to the hairline */
   --lede-w: min(390px, 31cqw); /* 390 wraps into three near-full lines and a short last one */
-  --cats-w: min(420px, 32cqw);
-  --head-b: calc(44px + (100cqw - 2 * var(--hero-inset)) * 0.0716);
+  --content-w: calc(100cqw - 2 * var(--hero-inset));
+  --fs: calc(var(--content-w) / 9.861);                  /* the headline's size: "Made for Better Health." runs inset to inset */
+  --cap: calc(var(--fs) * 0.7);                          /* its cap height */
+  --head-b: calc(44px + var(--content-w) * 0.0716);      /* the foot of "Made for" */
+  --tile-h: clamp(160px, 21cqh, 208px);                  /* the card row: a fifth of the stage, 160–208px */
+  --tiles-t: calc(100cqh - var(--hero-inset) - var(--tile-h)); /* top of the card row */
+  --line-b-t: calc(var(--tiles-t) - 32px - var(--cap)); /* top of "Better Health." */
   position: relative;
   height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* compact header 70 + bottom edge 16: fills the screen (up to 1080 tall), never scrolls */
   overflow: hidden;
@@ -32,86 +42,50 @@
   isolation: isolate;
 }
 
-/* ---------- Headline row ---------- */
-/* One line, sized to run exactly from inset to inset at every width
-   ("Made for Better Health." is 9.86em wide at this tracking). No hairline
-   under it (the user: "remove the bottom line below the h1"). */
-.hero__head {
-  position: absolute;
-  top: 44px;
-  left: var(--hero-inset);
-  right: var(--hero-inset);
-}
+/* ---------- The headline, split ----------
+   "Made for" top left, "Better Health." bottom right, 32px above the cards
+   (user, 2026-11-20: "lets transfer better health below"). One h1; each line
+   is placed on the stage at the one-line size, its letters trimmed to cap
+   height and baseline so they sit on the insets. */
 .hero__title {
   font-family: var(--font-display);
-  font-size: calc((100cqw - 2 * var(--hero-inset)) / 9.861);
+  font-size: var(--fs);
   font-weight: var(--weight-regular);
-  line-height: 1;
   letter-spacing: -0.035em;
+}
+.hero__title-line {
+  position: absolute;
+  line-height: 1;
   white-space: nowrap;
   text-box: trim-both cap alphabetic; /* box = cap top to baseline */
 }
-
-/* ---------- Foot, left: the supplement card ---------- */
-.hero__card {
-  position: absolute;
-  left: var(--hero-inset);
-  bottom: var(--hero-inset);
-}
-
-/* ---------- Foot, right: the sentence, then the care categories ---------- */
-.hero__side {
-  position: absolute;
+.hero__title-line--a { top: 44px; left: var(--hero-inset); }
+.hero__title-line--b {
   right: var(--hero-inset);
-  bottom: var(--hero-inset);
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  width: var(--cats-w);
+  bottom: calc(100cqh - var(--tiles-t) + 32px);
 }
+
+/* ---------- The sentence, under "Made for" on the left inset ---------- */
 .hero__lede {
+  position: absolute;
+  top: calc(var(--head-b) + 36px);
+  left: var(--hero-inset);
   width: var(--lede-w);
-  font-size: 14px; /* user, 2026-11-20 (was 18, then 12) */
+  margin: 0;
+  font-size: 14px; /* user, 2026-11-20 */
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.88);
   text-wrap: pretty;
 }
 
-/* ---------- Foot, right: the care categories ----------
-   CTA rows after the user's Arcovia reference: hairlines between rows, a
-   large label, an arrow in a 10% white circle that turns lime on hover. The last line
-   sits on the bottom inset, level with the card's foot. */
-.hero__cats { width: 100%; }
-.hero__cats ul { list-style: none; margin: 0; padding: 0; }
-.hero__cats li { border-top: 1px solid rgba(244, 245, 239, 0.24); }
-.hero__cats li:last-child { border-bottom: 1px solid rgba(244, 245, 239, 0.24); }
-.hero__cat {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 64px;
-  font-size: 24px;
-  font-weight: var(--weight-regular);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: #fff;
-  text-decoration: none;
+/* ---------- The care categories, one row along the foot ---------- */
+.hero__tiles {
+  position: absolute;
+  left: var(--hero-inset);
+  right: var(--hero-inset);
+  bottom: var(--hero-inset);
 }
-.hero__cat-go {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  margin-left: auto;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1); /* user: a 10% white fill, no outline */
-  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
-}
-.hero__cat-go svg { width: 16px; height: 16px; /* the MEDARO arrow (assets/icons/arrow.svg) */ transition: transform var(--dur-base) var(--ease-out); }
-a.hero__cat:hover .hero__cat-go { background: var(--color-accent); color: var(--color-ink); }
-a.hero__cat:hover .hero__cat-go svg { transform: translateX(2px); }
-a.hero__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 4px; }
-
+.hero .category-tile:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
 /* ---------- Backdrop ---------- */
 /* the studio plate covers the stage like object-fit: cover, anchored right */
@@ -130,44 +104,37 @@ a.hero__cat:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border
   height: 100%;
 }
 /* shade where the type sits: the headline across the top (the beam is
-   brightest top right), the sentence bottom right */
+   brightest top right), deeper on the left behind the sentence */
 .hero__scrim {
   position: absolute;
   inset: 0;
   background:
-    /* the sentence and the rows sit where the beam is brightest: fade it out
-       behind them so the type keeps WCAG AA (4.5:1) on the brightest pixel */
-    radial-gradient(44% 78% at 84% 76%, rgba(22, 26, 16, 0.78) 0%, rgba(22, 26, 16, 0.68) 48%, rgba(22, 26, 16, 0) 100%),
-    linear-gradient(180deg, rgba(22, 26, 16, 0.62) 0%, rgba(22, 26, 16, 0.3) 22%, rgba(22, 26, 16, 0) 40%),
-    linear-gradient(0deg, rgba(22, 26, 16, 0.55) 0%, rgba(22, 26, 16, 0) 30%);
+    radial-gradient(38% 30% at 14% 30%, rgba(22, 26, 16, 0.6) 0%, rgba(22, 26, 16, 0) 100%),
+    linear-gradient(180deg, rgba(22, 26, 16, 0.62) 0%, rgba(22, 26, 16, 0.3) 24%, rgba(22, 26, 16, 0) 42%),
+    linear-gradient(0deg, rgba(22, 26, 16, 0.5) 0%, rgba(22, 26, 16, 0) 32%);
 }
 
-/* ---------- Products ---------- */
-/* A box centred between the headline row and the foot, as tall as that room
-   allows but no wider than the gap between the card and the sentence, so
-   every object stays whole and clear of the type. */
+/* ---------- Products: one cluster, centred ----------
+   From the top of "Made for" to the top of "Better Health.", centred on the
+   stage, narrow enough (0.62) to keep clear of "for"; the bottles stop just
+   short of "Better Health."; drawn above the type (z-index 2) though nothing
+   overlaps it. The box is a size container: objects are placed in % of it. */
 .hero__scene {
-  --scene-ratio: 0.78;
-  --avail: calc(100cqh - var(--head-b) - 24px - 56px);
-  --gap: calc(100cqw - 2 * var(--hero-inset) - 384px - var(--cats-w) - 2 * 24px);
-  --sh: min(var(--avail), var(--gap) * 1.5); /* the card and sentence only fill the foot, so the box may be wider than the gap above them */
+  --scene-ratio: 0.62;
   position: absolute;
   left: 50%;
-  top: calc(var(--head-b) + 56px + (var(--avail) - var(--sh)) / 2);
-  height: var(--sh);
+  top: 44px;
+  height: calc(var(--line-b-t) - 44px);
   aspect-ratio: var(--scene-ratio);
   transform: translateX(-50%);
-  z-index: -1;
+  z-index: 2;
   container-type: size;
+  pointer-events: none;
 }
+.hero__set { position: absolute; inset: 0; }
 
-/* Same arrangement as V2, centred */
-.hero .product--pen-capped   { --h: 86%; --x: 42%; --y: 55%; --r: -34deg; }
-.hero .product--pen          { --h: 94%; --x: 60%; --y: 49%; --r: -14deg; }
-.hero .product--tablet-white { --h: 23%; --x: 75%; --y: 19%; --r: 0deg; }
-.hero .product--tablet-oval  { --h: 19%; --x: 29%; --y: 59%; --r: 0deg; }
-
-/* The pens are smaller here than in V2 (about 530px tall at 1440×900), so the
-   20-unit label lines (Rx only, use line) would fall under ~6.5px on screen:
-   cut them, don't shrink them (DESIGN.md → Direction, rule 6). */
-.hero .print-meta { display: none; }
+.hero .product--ampoule      { --h: 92%; --x: 56%; --y: 48%; --r: -14deg; }
+.hero .product--vial         { --h: 58%; --x: 29%; --y: 64%; --r: 10deg; }
+.hero .product--tablet-white { --h: 17%; --x: 80%; --y: 21%; --r: 0deg; }
+/* the oval tablet at the vial's lower left, just over its edge (user, 2026-11-20: "place here that tablet") */
+.hero .product--tablet-oval  { --h: 13%; --x: -2%; --y: 75%; --r: 0deg; }

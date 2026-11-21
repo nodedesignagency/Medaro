@@ -52,6 +52,8 @@ git clone https://github.com/nodedesignagency/Medaro.git ~/Desktop/medaro-previe
 - `site/assets/icons/`: the user's icons as delivered (`arrow.svg`, 2026-11-20: the one arrow used everywhere). Pages use them from the sprite in `currentColor` (`#i-arrow-right`, `#i-arrow-ne`), never another arrow shape.
 - `site/assets/images/`: photography and renders, compressed (WebP/AVIF, ≤300 KB each, hero ≤500 KB).
 - `site/versions/<name>/`: frozen snapshots the user asked to keep for comparison. Never edit them and never promote them to `main`; open with `./preview.sh <branch> versions/<name>/index.html`.
+- `tools/pack-print.py`: makes the print on the packs (`site/assets/images/products/print-*.svg`), wrapped onto the renders. Edit and run it (`python3 tools/pack-print.py`; needs `pip install fonttools brotli uharfbuzz`), never hand-edit its SVGs.
+- `tools/unmix-glass.py`: makes clear glass in a cut-out see-through again by taking out the flat colour it was rendered on (render glass on one plain colour, never a gradient: `DESIGN.md` → Direction, rule 7).
 - `content/`: the client's copy as Markdown, word for word: `home.md`, `about.md`, `weight-loss.md`, `mens-health.md`. Originals in `content/source/` (`medaro-copy.pdf` and `legal/*.pdf`, 11 legal documents).
 - `review/`: screenshots and videos for review. Git-ignored; send them to the user, don't commit them.
 
@@ -81,6 +83,7 @@ Women's Health has no page: every Women's Health link scrolls to the `#womens-he
 - **Never invent** numbers, prices, pounds lost, percentages, patient counts, ratings, reviews, testimonials, doctor names or credentials, "as seen in" logos, or certification badges. Placeholders only, marked `[DATA NEEDED]`.
 - Quad 4 is a proposed compounded formulation: never call it FDA-approved, never imply speed or duration claims the copy explicitly denies.
 - Imagery: no before/after bodies, no scales or measuring tapes as "results", no branded drug packaging (Ozempic, Wegovy, Mounjaro, Zepbound, Viagra, Cialis are trademarks), no lab coats implying a real MEDARO doctor unless the client supplies the person. Generic vials, sublingual tablets, plain unbranded packaging and lifestyle photography are fine.
+- **MEDARO does not make the drugs** (client, 2026-11-20). Never put the MEDARO wordmark on vials, ampoules or bottles, and keep the floating pills in the hero blank (client, 2026-11-21: "remove medaro name from the pills on the wallpaper"), never reuse a competitor's pack design or words, and keep label words to the client's copy (`DESIGN.md` → Direction, rules 7–8). Labels come from `tools/pack-print.py`.
 - Accessibility is part of compliance for a health site: WCAG 2.2 AA contrast, keyboard focus, semantic headings, `prefers-reduced-motion` respected.
 
 ## Open questions (ask the user, then move the answer into the right section)

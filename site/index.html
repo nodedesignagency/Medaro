@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="styles.css">
   <!-- Components (shared across pages) -->
   <link rel="stylesheet" href="components/header.css">
-  <link rel="stylesheet" href="components/promo-card.css">
+  <link rel="stylesheet" href="components/category-tile.css">
   <link rel="stylesheet" href="components/menu.css">
   <link rel="stylesheet" href="components/product.css">
   <link rel="stylesheet" href="components/stage-light.css">
@@ -35,7 +35,7 @@
 
   <a class="visually-hidden" href="#main">Skip to content</a>
 
-  <!-- ================= HERO (approved: hero V3, user 2026-11-20) ================= -->
+  <!-- ================= HERO (approved: hero V4, user 2026-11-21) ================= -->
   <!-- SECTION:header--menu START · styles: components/header.css, components/menu.css · scripts: main.js (header, menu)
        After the client's hims and Superpower references (2026-11-20): logo left; Get Started and a menu button right.
        The six links live in a sheet that slides in from the right (native <dialog>: focus stays inside, Esc closes).
@@ -168,127 +168,74 @@
   <!-- SECTION:header--menu END -->
 
   <main id="main">
-    <!-- SECTION:home/hero START · styles: sections/home/hero.css, components/product.css, components/promo-card.css, components/stage-light.css · scripts: components/stage-light.js · assets: assets/images/products/ (stage-plate.webp, pen-glp1.webp, pen-glp1-capped.webp, tablet-white.webp, tablet-oval-lime.webp), assets/images/standin-supplement.svg
-         Layout after the user's px push reference: one big line across the top on a hairline, the products
-         floating in the centre, the supplement promo card bottom left, the client's sentence bottom right.
-         Copy: the client's Home intro (content/home.md), word for word. -->
+    <!-- SECTION:home/hero START · styles: sections/home/hero.css, components/category-tile.css, components/product.css, components/stage-light.css · scripts: components/stage-light.js · assets: assets/images/products/ (stage-plate.webp, vial-tirzepatide.webp, ampoule-quad4.webp, tablet-white-blank.webp, tablet-oval-lime-blank.webp, print-vial-microdose.svg, print-ampoule-quad4.svg, sheen-vial.svg), assets/images/people/ (man-a.webp, woman-a.webp) · tools: tools/pack-print.py, tools/unmix-glass.py
+         Approved: hero V4 (user, 2026-11-21: "this one is perfect push to main"; from claude/compassionate-gates-h0ymfe).
+         The headline in two lines ("Made for" top left, "Better Health." bottom right above the cards), the client's
+         sentence under it, the products as one centred cluster (the Quad 4 ampoule, the Microdose Tirzepatide vial, two
+         blank tablets: client, 2026-11-21, no MEDARO on the pills), and the three care categories as white cards along
+         the foot (Men's and Women's Health with AI portraits, client 2026-11-21). Nothing overlaps the headline.
+         Copy: the headline is ours; the sentence and the card lines are the client's (content/home.md), word for word. -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__frame">
 
         <div class="hero__head">
-          <h1 class="hero__title" id="hero-title">Made for Better Health.</h1>
+          <h1 class="hero__title" id="hero-title"><span class="hero__title-line hero__title-line--a">Made for</span> <span class="hero__title-line hero__title-line--b">Better Health.</span></h1>
         </div>
 
-        <!-- Foot, left: the supplement card -->
-        <!-- Supplement promo card (component: components/promo-card.css), the same one as V1. Finish: paper.
-             Image is a stand-in: MEDARO supplement bottle, square. [LINK NEEDED] "Explore Supplements". -->
-        <a class="promo-card promo-card--paper hero__card" href="#supplements">
-          <img class="promo-card__img media-brief" src="assets/images/standin-supplement.svg" alt="" width="240" height="240">
-          <span class="promo-card__text">
-            <span class="promo-card__label">Supplements</span>
-            <span class="promo-card__title">Better support for your everyday health.</span>
-          </span>
-          <span class="promo-card__go" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span>
-        </a>
+        <p class="hero__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
 
-        <!-- Foot, right: the client's sentence, then the three care categories (client, 2026-11-20: "three clickable
-             links … Weight Loss, Men's Health, and Women's Health … each should direct visitors to its respective
-             page"), as CTA rows after the user's Arcovia and TrueBody references. Women's Health has no page: it
-             scrolls to the Women's Health section on Home, which shows the client's [Coming Soon] (client, 2026-11-20). -->
-        <div class="hero__side">
-          <p class="hero__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
-          <nav class="hero__cats" aria-label="Care">
-            <ul>
-              <li><a class="hero__cat" href="weight-loss.html">Weight Loss<span class="hero__cat-go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></li>
-              <li><a class="hero__cat" href="mens-health.html">Men's Health<span class="hero__cat-go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></li>
-              <li><a class="hero__cat" href="#womens-health">Women's Health<span class="hero__cat-go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></li>
-            </ul>
-          </nav>
-        </div>
+        <!-- The three care categories (client, 2026-11-20): Weight Loss and Men's Health open their pages; Women's
+             Health scrolls to its Home section, which shows the client's [Coming Soon]. -->
+        <nav class="hero__tiles" aria-label="Care">
+          <ul class="category-tiles">
+            <li>
+              <a class="category-tile category-tile--weight" href="weight-loss.html">
+                <span class="category-tile__text">
+                  <span class="category-tile__name">Weight Loss</span>
+                  <span class="category-tile__line">A better way to lose weight.</span>
+                </span>
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+                <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><span class="pack pack--vial category-tile__obj"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></span></span></span>
+              </a>
+            </li>
+            <li>
+              <a class="category-tile category-tile--mens" href="mens-health.html">
+                <span class="category-tile__text">
+                  <span class="category-tile__name">Men's Health</span>
+                  <span class="category-tile__line">Better care for men who want more.</span>
+                </span>
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+                <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj category-tile__obj--person" src="assets/images/people/man-a.webp" alt="" width="1000" height="1017" data-brief="AI-generated stand-in (Nano Banana 2.1): man portrait, chest up, olive/sage/cream clothes, warm side light, plain background removed"></span></span>
+              </a>
+            </li>
+            <li>
+              <a class="category-tile category-tile--womens" href="#womens-health">
+                <span class="category-tile__text">
+                  <span class="category-tile__name">Women's Health</span>
+                  <span class="category-tile__line">Better care for every chapter of womanhood.</span>
+                </span>
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+                <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj category-tile__obj--person" src="assets/images/people/woman-a.webp" alt="" width="1000" height="1017" data-brief="AI-generated stand-in (Nano Banana 2.1): woman portrait, chest up, olive/sage/cream clothes, warm side light, plain background removed"></span></span>
+              </a>
+            </li>
+          </ul>
+        </nav>
 
-        <!-- Backdrop: the studio light, drawn live over the V2 plate -->
+        <!-- Backdrop: the same live studio light as the approved hero -->
         <div class="hero__media" aria-hidden="true">
           <img class="hero__plate" src="assets/images/products/stage-plate.webp" alt="" width="3840" height="2143">
-          <!-- The same light, live (components/stage-light.js): sun rays drifting through the beam. The plate above is
-               the fallback. Look: dust (the default the user approved). -->
           <canvas class="stage-light" data-stage-light data-light="dust"></canvas>
           <div class="hero__scrim"></div>
         </div>
 
-        <!-- Products: the same four objects and labels as V2 (components/product.css), centred -->
+        <!-- Products: one cluster, centred: the Quad 4 ampoule, the Microdose vial in front, the white tablet top right,
+             the oval tablet at the vial's lower left. Pills blank (client, 2026-11-21). -->
         <div class="hero__scene" aria-hidden="true">
-
-          <div class="product product--pen-capped">
-            <div class="product__float">
-              <img src="assets/images/products/pen-glp1-capped.webp" alt="" width="307" height="2284">
-              <svg class="product__print" viewBox="0 0 307 2284">
-                <!-- Label after the Superpower tube and kits, Face Formula serum and Immortals vials: olive sleeve; two
-                     hairlines along the label; a solid lime tab with the dose at the cap end, the product name after
-                     it; Rx only above the tab, MEDARO mark above the name (the label's far end hides behind the white
-                     pen, so nothing sits there), one use line below. Every word readable in the hero (no text
-                     under 20 units here, about 6.5px on screen at 1440): the user, "small texts … feel like its ai".
-                     Text runs along the pen; rows off the axis are squeezed by the cylinder (scale 1 k).
-                     Sleeve x 8.5–256.8, y 1067.4–1816.8; axis x 132.65.
-                     [DATA NEEDED] dose: 2.5 mg/0.5 mL is tirzepatide's standard starting strength, a stand-in. -->
-                <defs><clipPath id="hero-sleeve-capped"><rect x="10" y="1067.4" width="245.3" height="749.4" rx="3"/></clipPath></defs>
-                <g clip-path="url(#hero-sleeve-capped)">
-                  <rect x="8.5" y="1067.4" width="248.3" height="749.4" fill="#343B29"/>
-                  <rect x="100.65" y="1067.4" width="64" height="250.0" fill="#D5E5AD"/>
-                  <rect x="163.95" y="1067.4" width="1.4" height="749.4" fill="#F4F5EF" fill-opacity="0.4"/>
-                  <rect x="99.95" y="1067.4" width="1.4" height="749.4" fill="#F4F5EF" fill-opacity="0.4"/>
-                  <text class="print-dose" transform="translate(124.95 1093.4) rotate(90)" fill="#343B29">2.5 mg/0.5 mL</text>
-                  <text class="print-name" transform="translate(119.35 1343.4) rotate(90)" fill="#F4F5EF">Tirzepatide</text>
-                  <g transform="translate(203.09 1343.4) rotate(90) scale(1 0.88)" color="#F4F5EF"><use href="#wordmark" width="161.1" height="26"/></g>
-                  <text class="print-meta" transform="translate(184.65 1101.4) rotate(90) scale(1 0.88)" fill="#D9DCCF">Rx only</text>
-                  <text class="print-meta" transform="translate(66.65 1343.4) rotate(90) scale(1 0.88)" fill="#D9DCCF">Injection · Single-dose pen</text>
-                </g>
-              </svg>
-              <!-- the dark sleeve catches the key light: a soft highlight band on its lit side -->
-              <svg class="product__sheen" viewBox="0 0 307 2284">
-                <defs>
-                  <linearGradient id="hero-sheen-capped" x1="8.5" x2="256.8" gradientUnits="userSpaceOnUse">
-                    <stop offset="0.5" stop-color="#fff" stop-opacity="0"/>
-                    <stop offset="0.74" stop-color="#fff" stop-opacity="0.13"/>
-                    <stop offset="0.84" stop-color="#fff" stop-opacity="0.07"/>
-                    <stop offset="0.97" stop-color="#fff" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <rect x="10" y="1067.4" width="245.3" height="749.4" fill="url(#hero-sheen-capped)"/>
-              </svg>
-            </div>
-          </div>
-
-          <div class="product product--pen">
-            <div class="product__float">
-              <img src="assets/images/products/pen-glp1.webp" alt="" width="299" height="2200">
-              <svg class="product__print" viewBox="0 0 299 2200">
-                <!-- Label after the Superpower tube and kits, Face Formula serum and Wegovy pen: white sleeve; two
-                     hairlines along the label; the product name, then a solid olive tab with the dose in lime running
-                     to the end; MEDARO mark and Rx only above, one use line below. Every word readable in the hero.
-                     Sleeve x 11.7–286.7, y 980.1–1657.2; axis x 149.2.
-                     [DATA NEEDED] dose: 0.25 mg/0.5 mL is semaglutide's standard starting strength, a stand-in. -->
-                <defs><clipPath id="hero-sleeve-pen"><rect x="13.2" y="980.1" width="272" height="677.1" rx="3"/></clipPath></defs>
-                <g clip-path="url(#hero-sleeve-pen)">
-                  <rect x="113.20" y="1410.1" width="72" height="247.1" fill="#343B29"/>
-                  <rect x="184.50" y="980.1" width="1.4" height="677.1" fill="#343B29" fill-opacity="0.4"/>
-                  <rect x="112.50" y="980.1" width="1.4" height="677.1" fill="#343B29" fill-opacity="0.4"/>
-                  <text class="print-dose" transform="translate(141.50 1436.1) rotate(90)" fill="#D5E5AD">0.25 mg/0.5 mL</text>
-                  <text class="print-name" transform="translate(135.90 1014.1) rotate(90)" fill="#343B29">Semaglutide</text>
-                  <g transform="translate(223.76 1014.1) rotate(90) scale(1 0.889)" color="#343B29"><use href="#wordmark" width="161.1" height="26"/></g>
-                  <text class="print-meta" transform="translate(205.20 1623.2) rotate(90) scale(1 0.889)" text-anchor="end" fill="#5E6551">Rx only</text>
-                  <text class="print-meta" transform="translate(79.20 1014.1) rotate(90) scale(1 0.889)" fill="#5E6551">Injection · Single-dose pen</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-
-          <!-- oval lime tablet, cut out of the earlier "macro set" render (the user's pick, a different pill style) -->
-          <div class="product product--tablet-oval">
-            <div class="product__float"><img src="assets/images/products/tablet-oval-lime.webp" alt="" width="900" height="620"></div>
-          </div>
-
-          <div class="product product--tablet-white">
-            <div class="product__float"><img src="assets/images/products/tablet-white.webp" alt="" width="669" height="662"></div>
+          <div class="hero__set">
+            <div class="product product--ampoule"><div class="product__float"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print product__print--glass" src="assets/images/products/print-ampoule-quad4.svg" alt="" width="406" height="2200"></div></div>
+            <div class="product product--vial"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
+            <div class="product product--tablet-white"><div class="product__float"><img src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665"></div></div>
+            <div class="product product--tablet-oval"><div class="product__float"><img src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617"></div></div>
           </div>
         </div>
       </div>

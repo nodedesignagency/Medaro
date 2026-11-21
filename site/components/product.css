@@ -46,6 +46,19 @@
 }
 /* a soft highlight on dark print, where multiply can't lighten */
 .product__sheen { mix-blend-mode: screen; }
+/* light print straight on glass (the Quad 4 ampoule): screen lightens */
+.product__print--glass { mix-blend-mode: screen; }
+
+/* The packs (hero, 2026-11-21): blank renders with their print as an SVG
+   image in the render's own pixels (tools/pack-print.py), wrapped onto the
+   cylinder; laid over the render as <img>: multiply on the vial's label,
+   screen on the ampoule's clear glass, a satin sheen on the vial.
+   A pack anywhere else (cards), sized by its height:
+   <span class="pack pack--vial"><img render><img class="product__print" print-….svg><img class="product__sheen" sheen-vial.svg></span> */
+.pack { position: relative; display: block; aspect-ratio: var(--ar); }
+.pack > img { display: block; width: 100%; height: 100%; }
+.pack--ampoule { --ar: 406 / 2200; }
+.pack--vial { --ar: 466 / 1100; }
 .product__print { font-family: var(--font-body); }
 /* every word on a pack is readable in the hero: nothing under 20 units in
    the pen image's pixels (about 6.5px on screen at 1440) */
@@ -58,6 +71,9 @@
 .product--pen-capped   { --ar: 307 / 2284; --z: 1; --dur: 9.5s; --delay: -3s;   --fx: -0.4cqh; --fy: -1.4cqh; --fr: -1.2deg; }
 .product--pen          { --ar: 299 / 2200; --z: 2; --dur: 7.5s; --delay: -1s;   --fx: 0.3cqh;  --fy: -1.8cqh; --fr: 0.9deg; }
 .product--tablet-white { --ar: 669 / 662;  --z: 3; --dur: 6.2s; --delay: -2.4s; --fx: 0.6cqh;  --fy: -2.4cqh; --fr: 7deg; }
+/* the packs: the Quad 4 ampoule and the Tirzepatide vial (hero, 2026-11-21) */
+.product--ampoule      { --ar: 406 / 2200; --z: 2; --dur: 8.2s; --delay: -2s;   --fx: 0.3cqh;  --fy: -1.8cqh; --fr: 1deg; }
+.product--vial         { --ar: 466 / 1100; --z: 3; --dur: 6.8s; --delay: -4s;   --fx: -0.4cqh; --fy: -2.2cqh; --fr: -2deg; }
 .product--tablet-oval  { --ar: 900 / 620;  --z: 3; --dur: 7s;   --delay: -4.6s; --fx: -0.5cqh; --fy: -2cqh;   --fr: -6deg; }
 
 /* rests where it is placed, drifts and settles */
