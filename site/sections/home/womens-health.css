@@ -29,3 +29,11 @@
   --color-text-muted: color-mix(in srgb, var(--wh-ink) 76%, var(--wh-pink));
   --color-line: color-mix(in srgb, var(--wh-ink) 18%, transparent);
 }
+
+/* Chip: a bright rose on the blush, plum text 6.2:1 (user, 2026-11-21:
+   "a bright chip color will make it pop"); on ?pink=b a light pink, 9.9:1 */
+.care--womens {
+  --color-chip: #f08aa6;
+  --color-on-chip: #3a2127;
+}
+:root[data-pink="b"] .care--womens { --color-chip: #ffc4d3; }

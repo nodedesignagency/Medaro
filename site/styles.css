@@ -48,6 +48,10 @@
   --color-on-dark: var(--p-paper);
   --color-on-accent: var(--p-ink); /* text on lime buttons: stays dark in every scene */
   --color-on-dark-muted: color-mix(in srgb, var(--p-paper) 72%, transparent);
+  /* Chips (section eyebrows): bright fill + text, set per section; this
+     default is the brand's pack tab, olive with lime (Weight Loss, paper) */
+  --color-chip: var(--p-ink);
+  --color-on-chip: var(--p-accent);
   /* Per-line tints: Weight Loss, Men's, Women's, Supplements */
   --color-wl: var(--p-sage);
   --color-mh: var(--p-deep);
@@ -335,44 +339,37 @@ button { font: inherit; color: inherit; }
 }
 .link-underline:hover { text-underline-offset: 6px; }
 
-/* ---------- Chip: the section eyebrow between two fading lines ----------
+/* ---------- Chip: the section eyebrow as a bright pill ----------
    Every section eyebrow (user, 2026-11-21: "we will have … everywhere where
-   we have chips"). Regular-weight capitals, one colour, the text trimmed to
-   its capitals so the box is exactly the cap height (0.7 × --fs-chip).
-   A short 1px line on each side (user, 2026-11-21, replacing the "[01]"
-   numbers): the left one fades in from 0% at its outer end to full at the
-   text, the right one the reverse; the whole line at 50% ("looks bit
-   bright"), so it runs 0% → 50% ink.
+   we have chips"), now a filled pill in a bright colour picked for the
+   section's background (user, 2026-11-21: "add color to chips … multiple
+   colors as per bg color just a bright chip color will make it pop"; the
+   fading side lines before it: "i dont like this"). A fill, not coloured
+   text: at 12px, bright text would fail AA on the light and mid scenes;
+   dark text on a bright fill passes (6.2:1 and up).
+   Colours come from --color-chip (fill) and --color-on-chip (text), set on
+   each section (not on the scene, so a chip already has its colour before
+   the page fades to that section's scene). The text is trimmed to its
+   capitals, so the pill is cap height + 2 × 0.62em = 1.94 × --fs-chip
+   (23.7px at 1440) with the capitals optically centred.
    Markup: <p class="chip"><span>Text</span></p>
-   Sections add their own margin and alignment (centred: justify-content;
-   on a column line: .chip--hang keeps the text on the line and hangs the
-   left line outside it).
-   Framer: a stack of line · text · line, a variant per alignment. */
+   Sections add their own margin and alignment (centred: margin-inline auto).
+   Framer: a text component in a pill frame, a colour variant per section. */
 .chip {
-  --chip-line: 2.6em;   /* 32px at 1440 */
-  --chip-gap: 0.8em;    /* with the glyphs' side bearings: about 1.3 cap heights of air */
   display: flex;
   align-items: center;
-  gap: var(--chip-gap);
-  color: var(--color-ink);
+  width: fit-content;
+  padding: 0.62em 0.95em;
+  border-radius: var(--radius-pill);
+  background: var(--color-chip);
+  color: var(--color-on-chip);
   font-size: var(--fs-chip);
-  font-weight: var(--weight-regular);
+  font-weight: var(--weight-medium);
   line-height: 1;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 .chip > span { text-box: trim-both cap alphabetic; }
-.chip::before,
-.chip::after {
-  content: "";
-  flex: none;
-  width: var(--chip-line);
-  height: 1px;
-  background: linear-gradient(to right, transparent, currentColor);
-  opacity: 0.5; /* the whole line at half strength, gradient kept: 0% → 50% (user, 2026-11-21: "looks bit bright") */
-}
-.chip::after { background: linear-gradient(to left, transparent, currentColor); }
-.chip--hang { margin-left: calc(-1 * (var(--chip-line) + var(--chip-gap))); }
 
 /* ---------- Stand-in images ----------
    Photos are added after the user confirms a design. Until then image slots

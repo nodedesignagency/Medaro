@@ -34,10 +34,10 @@
   text-align: center;
 }
 
-/* The eyebrow is the shared chip (styles.css → .chip), centred */
+/* The eyebrow is the shared chip (styles.css → .chip), centred; each line
+   sets its colours in its own stylesheet */
 .care__eyebrow {
-  justify-content: center;
-  margin-bottom: 28px;
+  margin: 0 auto 28px;
 }
 
 .care__title {
