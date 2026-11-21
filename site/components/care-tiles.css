@@ -1,7 +1,7 @@
 /* ==========================================================================
    Component: care tiles
-   The Home care-line sections (Men's Health, Women's Health): a big centred
-   headline, then two rows of square tiles, photos and MEDARO renders
+   The Home care-line sections (Men's Health, Women's Health): the numbered
+   chip, a big centred headline, then two rows of square tiles, photos and MEDARO renders
    alternating with text tiles (the line's five care points), running off
    both screen edges and sliding sideways in opposite directions as you
    scroll (main.js, data-drift); paragraph and CTA centred below.
@@ -34,28 +34,11 @@
   text-align: center;
 }
 
-/* The eyebrow chip, after the user's "[01] TEXT COMES HERE" reference
-   (2026-11-21): the section's number in brackets, then the eyebrow in
-   regular-weight capitals, one colour, no wide tracking. **One size for
-   both** (user, 2026-11-21: the bigger text after the number was "too
-   big … use same size as number"): 12.24px at 1440, the number's size
-   before. Both trimmed to their capitals and centred on each other.
-   The number is decoration (aria-hidden); the order follows Home:
-   Weight Loss 01, Men's Health 02, Women's Health 03. */
+/* The eyebrow is the shared numbered chip (styles.css → .chip), centred */
 .care__eyebrow {
-  display: flex;
   justify-content: center;
-  align-items: center; /* the two cap boxes (trimmed below) */
-  gap: 0.6em; /* with the glyphs' side bearings: an ink gap of about one cap height */
-  margin-bottom: 32px;
-  color: var(--color-ink);
-  font-size: clamp(11px, 0.85vw, 15px);
-  font-weight: var(--weight-regular);
-  line-height: 1;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  margin-bottom: 28px;
 }
-.care__eyebrow > span { text-box: trim-both cap alphabetic; }
 
 .care__title {
   font-family: var(--font-display);
@@ -74,19 +57,13 @@
   text-wrap: balance;
 }
 
-/* Without the label (Men's Health, user 2026-11-21) the lede ends the
-   frame and keeps the label's space above the tiles */
-.care__lede:last-child { margin-bottom: clamp(64px, 5.6vw, 104px); }
-.care__label {
-  margin: clamp(64px, 5.6vw, 104px) 0 20px;
-  font-size: 15px;
-  font-weight: var(--weight-medium);
-  color: var(--color-text-muted);
-}
-
 /* ---------- Tiles ---------- */
+/* No label over the tiles (user, 2026-11-21: removed in Men's and Women's
+   Health); the client's label still names the list for screen readers
+   (aria-label). The tiles keep the label's old space under the lede. */
 .care__rows {
   display: grid;
+  margin-top: clamp(64px, 5.6vw, 104px);
   gap: var(--care-gap);
 }
 .care__row {

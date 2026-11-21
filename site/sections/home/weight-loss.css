@@ -61,20 +61,15 @@
   grid-column: 3 / 6;
   align-self: start;
   /* headline cap height level with the top of the tallest bottle, as in the
-     reference: bottle top = 104/640 of the image width; minus the eyebrow
-     (13 + 28) and the headline's half-leading above the caps (≈0.16em) */
-  padding-top: max(0px, calc(var(--wl-span2) * 104 / 640 - 41px - 0.16 * var(--wl-title-fs)));
+     reference: bottle top = 104/640 of the image width; minus the chip (its
+     cap height, 0.7 × --fs-chip, + 28) and the headline's half-leading above
+     the caps (≈0.16em) */
+  padding-top: max(0px, calc(var(--wl-span2) * 104 / 640 - 0.7 * var(--fs-chip) - 28px - 0.16 * var(--wl-title-fs)));
 }
 
-.wl__eyebrow {
-  margin-bottom: 28px;
-  color: #56662f; /* olive, 5.3:1 on paper (same as the promo card label) */
-  font-size: 13px;
-  font-weight: var(--weight-medium);
-  line-height: 1;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
+/* The eyebrow is the shared numbered chip (styles.css → .chip), on the
+   column line; ink like every chip (was olive caps) */
+.wl__eyebrow { margin-bottom: 28px; }
 
 .wl__title {
   font-family: var(--font-display);

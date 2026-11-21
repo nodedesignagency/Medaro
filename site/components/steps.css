@@ -33,14 +33,10 @@
   margin-inline: auto;
   text-align: center;
 }
+/* The eyebrow is the shared numbered chip (styles.css → .chip), centred */
 .steps__eyebrow {
+  justify-content: center;
   margin-bottom: 28px;
-  color: var(--color-text-muted);
-  font-size: 13px;
-  font-weight: var(--weight-medium);
-  line-height: 1;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 .steps__title {
   font-family: var(--font-display);

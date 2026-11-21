@@ -68,6 +68,7 @@
   --fs-lede: 20px;   --lh-lede: 1.45;
   --fs-body: 17px;   --lh-body: 1.55;
   --fs-small: 14px;  --lh-small: 1.45;
+  --fs-chip: clamp(11px, 0.85vw, 15px); /* section chips: 12.24px at 1440 */
 
   /* Spacing: 4px base */
   --space-1: 4px;
@@ -333,6 +334,31 @@ button { font: inherit; color: inherit; }
   transition: text-underline-offset var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
 }
 .link-underline:hover { text-underline-offset: 6px; }
+
+/* ---------- Chip: the numbered section eyebrow ----------
+   Every section eyebrow (user, 2026-11-21: "we will have 01 02 everywhere
+   where we have chips"), after the user's "[01] TEXT COMES HERE" reference:
+   the section's number in brackets, then the eyebrow, regular-weight
+   capitals, one size (user: "use same size as number"), one colour. Both
+   parts are trimmed to their capitals and centred on each other, so the box
+   is exactly the cap height (0.7 × --fs-chip). Numbers follow the page's
+   order (Home: Weight Loss 01, Men's Health 02, Women's Health 03, How Medaro
+   Works 04). The number is decoration: aria-hidden.
+   Markup: <p class="chip"><span class="chip__num" aria-hidden="true">[01]</span><span>Text</span></p>
+   Sections add their own margin and alignment (centred: justify-content).
+   Framer: a text component with two text layers, a variant per alignment. */
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 0.6em; /* with the glyphs' side bearings: about one cap height of ink */
+  color: var(--color-ink);
+  font-size: var(--fs-chip);
+  font-weight: var(--weight-regular);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.chip > span { text-box: trim-both cap alphabetic; }
 
 /* ---------- Stand-in images ----------
    Photos are added after the user confirms a design. Until then image slots
