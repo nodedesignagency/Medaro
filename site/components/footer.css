@@ -3,8 +3,8 @@
    Design after the user's Ethical Life footer (2026-11-21): the brand line
    top left, link columns top right, a lime glow behind the product. The
    user's change: "i want our logo back of the suplement pic": the giant
-   MEDARO wordmark runs inset to inset across the foot, in white (the
-   reference's white type on a light ground), the products in front of it.
+   MEDARO wordmark runs inset to inset across the foot, in green, the
+   Tirzepatide vial large and centred in front of it.
    Content: the client's footer (content/footer.md, word for word; user,
    2026-11-21: "make this footer according to this content and instead of
    tablets use bottles"): badges under the brand line, Shop / Support /
@@ -12,12 +12,12 @@
    In our style: a mist panel on the frame like the hero stage (frame edges,
    16px from the bottom, radius 18, content on the 48px inset that the
    header's logo shares), Host Grotesk, the menu's grey caps labels, ink
-   links with the rolling hover (.link-roll), the hero's two bottles
+   links with the rolling hover (.link-roll), the hero's Tirzepatide vial
    floating (components/product.css).
    Variants: --full (Home, About, Contact, legal). --landing (logo, legal
    links only, no links out) not built yet.
-   Framer: one component; the wordmark is the logo SVG, the products are
-   images with the float as a loop.
+   Framer: one component; the wordmark is the logo SVG, the vial is its
+   images (render, print, sheen) with the float as a loop.
    ========================================================================== */
 
 .site-footer {
@@ -27,7 +27,7 @@
 .site-footer__frame {
   --ft-inset: 48px;
   position: relative;
-  overflow: hidden; /* the glow and the bottles run off the panel's foot */
+  overflow: hidden; /* the glow and the vial run off the panel's foot */
   padding: 52px var(--ft-inset) var(--ft-inset);
   border-radius: 18px;
   background: var(--color-surface);
@@ -172,15 +172,18 @@
 }
 .site-footer__fine a:hover { text-decoration-color: var(--color-ink); }
 
-/* ---------- The wordmark, with the bottles in front ---------- */
+/* ---------- The wordmark, with the vial in front ---------- */
 .site-footer__brand {
   position: relative;
-  /* room for the bottles above the letters: their tips reach 0.67 of the
-     wordmark's height above it (the wordmark is 16.1cqw tall), plus 56px */
-  margin-top: calc(10.8cqw + 56px);
+  /* room for the vial above the letters: its cap reaches 0.38 of the
+     wordmark's height above it (the wordmark is 16.1cqw tall), plus 88px */
+  margin-top: calc(6.1cqw + 88px);
 }
 
-/* the official wordmark from the sprite, inset to inset, white on the mist */
+/* the official wordmark from the sprite, inset to inset, in green (user,
+   2026-11-21: "make the text green"): halfway between the vial's moss
+   (#6B7A45) and the client's lime (#D5E5AD), so it reads green and the
+   vial's moss label still stands clear in front of it */
 .site-footer__mark {
   position: relative;
   z-index: 1;
@@ -188,10 +191,10 @@
   width: 100%;
   height: auto;
   aspect-ratio: 4413 / 712;
-  color: #fff;
+  color: #a0b079;
 }
 
-/* the reference's glow: soft nude lime, centred on the bottles, clipped by the panel */
+/* the reference's glow: soft nude lime, centred on the vial, clipped by the panel */
 .site-footer__glow {
   position: absolute;
   left: 50%;
@@ -204,22 +207,22 @@
   pointer-events: none;
 }
 
-/* The bottles, centred on the wordmark and in front of it, crossing as in
-   the hero (ampoule behind, vial in front), the vial's foot running off the
-   panel like the reference's bottle. The box is a size container: products
-   are placed in % of it (components/product.css). */
+/* The Tirzepatide vial alone, large and centred on the wordmark, in front of
+   it (user, 2026-11-21: "only use the tirzepatide bottle … a bit bigger and
+   centered"), tilted as in the hero, its foot just running off the panel
+   like the reference's bottle. The box is a size container: the vial is
+   placed in % of it (components/product.css). */
 .site-footer__scene {
   position: absolute;
   left: 50%;
   top: 50%;
   z-index: 2;
-  height: 220%;
+  height: 176%;
   aspect-ratio: 0.62;
-  transform: translate(-50%, -54%);
+  transform: translate(-50%, -50%);
   container-type: size;
   pointer-events: none;
 }
-.site-footer .product--ampoule { --h: 92%; --x: 58%; --y: 47%; --r: -14deg; }
-.site-footer .product--vial    { --h: 58%; --x: 31%; --y: 64%; --r: 10deg; }
+.site-footer .product--vial { --h: 100%; --x: 50%; --y: 50%; --r: 8deg; }
 
 .site-footer a:focus-visible { outline-offset: 4px; }
