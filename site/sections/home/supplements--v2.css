@@ -1,0 +1,137 @@
+/* ==========================================================================
+   Home · Supplement, version 2 (?supplements=v2), to compare with the
+   approved V1 (sections/home/supplements.css)
+   After the user's "No bloat. No grit." product-spotlight reference
+   (2026-11-21): a large rounded image on the left, the copy on the right.
+   The user's brief: "the left image gets sticky and the two para points
+   should come then the differences points should come in the style of the
+   hero points we have made with small images and it will be scrollable".
+   - left: the image, sticky under the header while the right column scrolls;
+   - right: chip, two-tone headline, the client's closing sentence; the two
+     blocks as a row of two points between hairlines (the reference's
+     "5 g | 100 mg" row); the list's label; the five details as hero-style
+     white tiles with a small product (components/category-tile.css,
+     --point); the lime arrow CTA.
+   Same scene as V1 (data-scene="supplements": the page turns deep olive;
+   tokens in supplements.css, move them here if V2 is picked). Content
+   edges on the header's logo line (frame edge + 48).
+   Copy: content/home.md → Supplement, word for word ("Support" in lower
+   case). [LINK NEEDED] Explore Supplements.
+   ========================================================================== */
+
+.sp-v2 {
+  --sp-pad: clamp(112px, 10vw, 192px);
+  --sp-sticky-top: calc(70px + 32px); /* under the compact header, 32px clear */
+  padding: var(--sp-pad) calc(var(--frame-side) + 48px);
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+.sp-v2__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(48px, 6vw, 112px);
+  align-items: start;
+  max-width: calc(var(--frame-max) - 96px);
+  margin-inline: auto;
+}
+
+/* ---------- Left: the sticky image ----------
+   Square like the reference, never taller than the screen under the
+   header. Stand-in: the hero's studio plate with the blank tablets. */
+.sp-v2__media {
+  position: sticky;
+  top: var(--sp-sticky-top);
+  width: 100%;
+  aspect-ratio: 1;
+  max-height: calc(100svh - var(--sp-sticky-top) - 32px);
+  overflow: hidden;
+  border-radius: var(--radius-m);
+  background: #171b11; /* the plate's own tone */
+  isolation: isolate;
+}
+.sp-v2__plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% 50%;
+}
+.sp-v2__scene {
+  position: absolute;
+  inset: 0;
+  container-type: size;
+  pointer-events: none;
+}
+.sp-v2 .product--tablet-white { --h: 30%; --x: 62%; --y: 36%; --r: 8deg; --z: 1; }
+.sp-v2 .product--tablet-oval  { --h: 25%; --x: 42%; --y: 60%; --r: -10deg; --z: 2; }
+
+/* ---------- Right: the copy, scrolling past the image ---------- */
+.sp-v2__copy { padding-top: 8px; }
+
+/* chip: the heading's colour until the page turns olive, then lime (as V1) */
+.sp-v2 { --color-chip: var(--p-accent); }
+.sp-v2 .chip { color: var(--color-ink); margin-bottom: 28px; }
+:root[data-scene="supplements"] .sp-v2 .chip { color: var(--color-chip); }
+
+.sp-v2__title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.4vw, 64px);
+  font-weight: var(--weight-regular);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.sp-v2__title-b { color: var(--color-text-muted); transition: color 700ms var(--ease-in-out); }
+
+.sp-v2__lede {
+  max-width: 32em;
+  margin-top: 24px;
+  font-size: clamp(16px, 1.2vw, 19px);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* the two blocks: the reference's two-figure row, hairlines above and below
+   and one between */
+.sp-v2__pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(36px, 3.2vw, 56px);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+.sp-v2__pair > div { padding: 24px 28px 28px 0; }
+.sp-v2__pair > div + div { padding: 24px 0 28px 28px; border-left: 1px solid var(--color-line); }
+.sp-v2__pair h3 {
+  font-size: clamp(20px, 1.5vw, 26px);
+  font-weight: var(--weight-regular);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.sp-v2__pair p {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+/* the details: hero-style white tiles, one per row */
+.sp-v2__label {
+  margin: clamp(40px, 3.6vw, 64px) 0 16px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+.sp-v2__points { grid-template-columns: minmax(0, 1fr); }
+/* each tile's tablet: a different object or angle, cut off by the card's right edge */
+.sp-v2__points > :nth-child(1) { --ct-h: 104%; --ct-x: 88%; --ct-y: 56%; --ct-r: 10deg; }
+.sp-v2__points > :nth-child(2) { --ct-h: 84%;  --ct-x: 86%; --ct-y: 60%; --ct-r: -14deg; }
+.sp-v2__points > :nth-child(3) { --ct-h: 100%; --ct-x: 88%; --ct-y: 58%; --ct-r: 0deg; }
+.sp-v2__points > :nth-child(4) { --ct-h: 104%; --ct-x: 89%; --ct-y: 52%; --ct-r: -24deg; }
+.sp-v2__points > :nth-child(5) { --ct-h: 84%;  --ct-x: 86%; --ct-y: 56%; --ct-r: 18deg; }
+
+.sp-v2__cta { margin-top: clamp(36px, 3.2vw, 56px); }

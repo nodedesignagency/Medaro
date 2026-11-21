@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="sections/home/mens-health.css">
   <link rel="stylesheet" href="sections/home/womens-health.css">
   <link rel="stylesheet" href="sections/home/supplements.css">
+  <link rel="stylesheet" href="sections/home/supplements--v2.css">
   <link rel="stylesheet" href="sections/home/how-it-works.css">
 </head>
 <body id="top">
@@ -379,6 +380,8 @@
   </section>
   <!-- SECTION:home/womens-health END -->
 
+  <!-- Supplement: two versions to compare (review switcher, ?supplements=v1|v2). V1 is the one on main. -->
+  <div data-version="supplements:v1">
   <!-- SECTION:home/supplements START · styles: sections/home/supplements.css, components/product.css · scripts: main.js (scenes) · assets: assets/images/products/stage-plate.webp, tablet-white-blank.webp, tablet-oval-lime-blank.webp
        Layout after the user's "Autonomous fleet operations" reference (2026-11-21), in our style: chip, two-tone headline and
        sentence top left; one large rounded image top right; two blocks and the CTA bottom left; the five details as cards
@@ -427,6 +430,72 @@
     </div>
   </section>
   <!-- SECTION:home/supplements END -->
+  </div>
+  <div data-version="supplements:v2">
+  <!-- SECTION:home/supplements--v2 START · styles: sections/home/supplements--v2.css (scene tokens in sections/home/supplements.css), components/category-tile.css (--point), components/product.css · scripts: main.js (scenes) · assets: assets/images/products/stage-plate.webp, tablet-white-blank.webp, tablet-oval-lime-blank.webp, assets/images/supplements/tablet-round.webp
+       Version 2, to compare with V1 (?supplements=v2). After the user's "No bloat. No grit." product-spotlight reference
+       (2026-11-21): the image on the left stays put (sticky) while the copy on the right scrolls: chip, headline, sentence,
+       the two blocks as a row of two points, then the five details as hero-style tiles with small images, then the CTA.
+       Stand-in images until the photos are made (no MEDARO on pills or bottles). Copy: content/home.md → Supplement, word
+       for word. If picked, it becomes home/supplements (id "supplements"). [LINK NEEDED] Explore Supplements. -->
+  <section class="sp-v2" id="supplements-v2" aria-labelledby="sp-v2-title" data-scene="supplements">
+    <div class="sp-v2__grid">
+
+      <figure class="sp-v2__media media-brief" data-brief="Photo, square: a person at home with the MEDARO supplements (a plain jar, no drug names and no MEDARO on the bottle), warm natural light; or the supplement range in the hero's studio light" aria-hidden="true">
+        <img class="sp-v2__plate" src="assets/images/products/stage-plate.webp" alt="" width="3840" height="2143" loading="lazy">
+        <div class="sp-v2__scene">
+          <div class="product product--tablet-white"><div class="product__float"><img src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy"></div></div>
+          <div class="product product--tablet-oval"><div class="product__float"><img src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy"></div></div>
+        </div>
+      </figure>
+
+      <div class="sp-v2__copy">
+        <p class="sp-v2__eyebrow chip"><span>More Than Just Supplement</span></p>
+        <h2 class="sp-v2__title" id="sp-v2-title"><span class="sp-v2__title-a">Supplements designed to support better health</span> <span class="sp-v2__title-b">and lasting wellness</span></h2>
+        <p class="sp-v2__lede">Formulated supplements designed to support your body's needs and overall well-being.</p>
+
+        <div class="sp-v2__pair">
+          <div>
+            <h3>Better support for your everyday health.</h3>
+            <p>Thoughtfully formulated supplements with quality ingredients, designed to support your wellness goals and help you feel your best every day.</p>
+          </div>
+          <div>
+            <h3>Better wellness starts with better choices.</h3>
+            <p>Thoughtfully selected ingredients and purposeful formulations to complement your daily routine and support your health goals.</p>
+          </div>
+        </div>
+
+        <p class="sp-v2__label" id="sp-v2-details">The difference is in the details:</p>
+        <ul class="category-tiles sp-v2__points" aria-labelledby="sp-v2-details">
+          <li class="category-tile category-tile--point">
+            <span class="category-tile__text"><span class="category-tile__name">Quality Ingredients</span></span>
+            <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy"></span></span>
+          </li>
+          <li class="category-tile category-tile--point">
+            <span class="category-tile__text"><span class="category-tile__name">Transparent Formulations</span></span>
+            <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy"></span></span>
+          </li>
+          <li class="category-tile category-tile--point">
+            <span class="category-tile__text"><span class="category-tile__name">Targeted Nutritional Support</span></span>
+            <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/supplements/tablet-round.webp" alt="" width="760" height="770" loading="lazy"></span></span>
+          </li>
+          <li class="category-tile category-tile--point">
+            <span class="category-tile__text"><span class="category-tile__name">Everyday Wellness</span></span>
+            <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy"></span></span>
+          </li>
+          <li class="category-tile category-tile--point">
+            <span class="category-tile__text"><span class="category-tile__name">Thoughtful Ingredient Selection</span></span>
+            <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy"></span></span>
+          </li>
+        </ul>
+
+        <a class="btn btn--primary btn--arrow sp-v2__cta" href="#supplements-link"><span class="btn__label">Explore Supplements</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+      </div>
+
+    </div>
+  </section>
+  <!-- SECTION:home/supplements--v2 END -->
+  </div>
 
   <!-- SECTION:home/how-it-works START · styles: components/steps.css, sections/home/how-it-works.css · scripts: main.js (steps, scenes) · assets: assets/images/standin-step-*.webp
        After the user's Givingli reference (2026-11-20): the stage pins while you scroll; number, card and text change step by
