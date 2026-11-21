@@ -34,14 +34,30 @@
   text-align: center;
 }
 
+/* The eyebrow chip, after the user's "[01] TEXT COMES HERE" reference
+   (2026-11-21): the section's number in brackets, smaller (0.68 of the
+   text) and centred on the capitals, then the eyebrow in regular-weight
+   capitals, one colour, no wide tracking. Measured on the reference:
+   digits 46px / capitals 68px, centres level, ink gap 48px.
+   The number is decoration (aria-hidden); the order follows Home:
+   Weight Loss 01, Men's Health 02, Women's Health 03. */
 .care__eyebrow {
-  margin-bottom: 28px;
-  color: var(--color-text-muted);
-  font-size: 13px;
-  font-weight: var(--weight-medium);
+  display: flex;
+  justify-content: center;
+  align-items: center; /* the two cap boxes (trimmed below), so the digits centre on the capitals */
+  gap: 0.34em; /* with the glyphs' side bearings: an ink gap of 0.7 cap heights, like the reference */
+  margin-bottom: 32px;
+  color: var(--color-ink);
+  font-size: clamp(16px, 1.25vw, 22px);
+  font-weight: var(--weight-regular);
   line-height: 1;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
+}
+.care__eyebrow > span { text-box: trim-both cap alphabetic; }
+.care__num {
+  font-size: 0.68em;
+  letter-spacing: 0.02em;
 }
 
 .care__title {
@@ -61,6 +77,9 @@
   text-wrap: balance;
 }
 
+/* Without the label (Men's Health, user 2026-11-21) the lede ends the
+   frame and keeps the label's space above the tiles */
+.care__lede:last-child { margin-bottom: clamp(64px, 5.6vw, 104px); }
 .care__label {
   margin: clamp(64px, 5.6vw, 104px) 0 20px;
   font-size: 15px;

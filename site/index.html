@@ -410,13 +410,13 @@
        only the first set is read by screen readers. -->
   <section class="care care--mens" id="mens-health" aria-labelledby="mh-title" data-scene="mens">
     <div class="care__frame">
-      <p class="care__eyebrow">Men's Health. On Your Terms.</p>
+      <p class="care__eyebrow"><span class="care__num" aria-hidden="true">[02]</span><span>Men's Health. On Your Terms.</span></p>
       <h2 class="care__title" id="mh-title">Better Care for Men<br>Who Want More.</h2>
       <p class="care__lede">Personalized care to help you feel your best and perform with confidence.</p>
-      <p class="care__label" id="mh-care">Care that focuses on what matters</p>
     </div>
 
-    <div class="care__rows" role="list" aria-labelledby="mh-care">
+    <!-- The client's "Care that focuses on what matters" label is off the page (user, 2026-11-21) but still names the list for screen readers. -->
+    <div class="care__rows" role="list" aria-label="Care that focuses on what matters">
       <div class="care__row" data-drift="-1">
             <div class="care__tile care__tile--photo media-brief" data-brief="Man in his forties outdoors, relaxed and confident, soft daylight, olive and blue tones; real, not posed" aria-hidden="true"><img src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" loading="lazy"></div>
             <div class="care__tile care__tile--text" role="listitem">Sexual Health &amp; Confidence</div>
@@ -461,7 +461,7 @@
        (data-brief). Each row repeats its tiles so it covers any width; only the first set is read by screen readers. -->
   <section class="care care--womens" id="womens-health" aria-labelledby="wh-title" data-scene="womens">
     <div class="care__frame">
-      <p class="care__eyebrow">Women's Health. On Your Terms.</p>
+      <p class="care__eyebrow"><span class="care__num" aria-hidden="true">[03]</span><span>Women's Health. On Your Terms.</span></p>
       <h2 class="care__title" id="wh-title">Better Care for Every<br>Chapter of Womanhood.</h2>
       <p class="care__lede">Personalized care for every stage of life.</p>
       <p class="care__label" id="wh-care">Care that supports what matters</p>
