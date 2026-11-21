@@ -81,10 +81,10 @@
    image 1 style"; Magnific, after their gradient icon sheet, our greens) */
 .sp-v3__point-icon {
   display: block;
-  width: clamp(60px, 4.8vw, 92px);
+  width: clamp(30px, 2.4vw, 46px); /* half the first size (user, 2026-11-21: "too big make it half") */
   height: auto;
   aspect-ratio: 1;
-  margin: -4px 0 0 -4px; /* the art's own margin back onto the text line */
+  margin: -2px 0 0 -2px; /* the art's own margin back onto the text line */
 }
 .sp-v3__point h3 {
   margin-top: clamp(28px, 2.6vw, 48px);
