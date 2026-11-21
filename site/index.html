@@ -334,11 +334,11 @@
   </section>
   <!-- SECTION:home/mens-health END -->
 
-  <!-- SECTION:home/womens-health START · styles: components/care-tiles.css, sections/home/womens-health.css · scripts: main.js (scenes, drift) · assets: assets/images/standin-wh-*.webp, assets/images/supplements/tablet-oval.webp, assets/images/products/vial-tirzepatide.webp (plain, unlabelled: no MEDARO on vials, client 2026-11-20)
+  <!-- SECTION:home/womens-health START · styles: components/care-tiles.css, sections/home/womens-health.css · scripts: main.js (scenes, drift) · assets: assets/images/womens/ (wh-balance, wh-stretch, wh-friends, wh-midlife, wh-delivery .webp)
        Same layout as Men's Health (user, 2026-11-20). The page turns pink while this section holds the middle of the screen
        (data-scene). Copy: content/home.md → Women's Health, word for word (lede set in sentence case). Not live: "Coming Soon"
-       is text, not a link. Photos are stand-ins cropped from the hero photo; real ones are made after the design is approved
-       (data-brief). Each row repeats its tiles so it covers any width; only the first set is read by screen readers. -->
+       is text, not a link. Photos: five AI-generated shots in the section's pink world, a different woman in each, no products
+       (user, 2026-11-21). Each row repeats its tiles so it covers any width; only the first set is read by screen readers. -->
   <section class="care care--womens" id="womens-health" aria-labelledby="wh-title" data-scene="womens">
     <div class="care__frame">
       <p class="care__eyebrow chip"><span>Women's Health. On Your Terms.</span></p>
@@ -349,32 +349,32 @@
     <!-- The client's "Care that supports what matters" label is off the page (user, 2026-11-21) but still names the list for screen readers. -->
     <div class="care__rows" role="list" aria-label="Care that supports what matters">
       <div class="care__row" data-drift="-1">
-            <div class="care__tile care__tile--photo media-brief" data-brief="Woman in her forties outdoors, calm and confident, soft daylight; real, not posed" aria-hidden="true"><img src="assets/images/standin-wh-woman.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-balance.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, early 40s, standing side-bend stretch, eyes closed, braid, dusty-rose sky"></div>
             <div class="care__tile care__tile--text" role="listitem">Hormonal Health &amp; Balance</div>
-            <div class="care__tile care__tile--product" aria-hidden="true"><img src="assets/images/supplements/tablet-oval.webp" alt="" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-stretch.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, mid-40s, seated arm stretch on a mat by the sea, rose sunset"></div>
             <div class="care__tile care__tile--text" role="listitem">Healthy Weight Management</div>
-            <div class="care__tile care__tile--photo media-brief" data-brief="Close crop of a woman walking or running outdoors, morning light" aria-hidden="true"><img src="assets/images/standin-wh-stride.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-friends.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): two women, early 30s, laughing with rolled yoga mats by a blush plaster wall"></div>
             <div class="care__tile care__tile--text" role="listitem">Energy &amp; Well-Being</div>
-            <div class="care__tile care__tile--photo media-brief" data-brief="Woman in her forties outdoors, calm and confident, soft daylight; real, not posed" aria-hidden="true"><img src="assets/images/standin-wh-woman.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-balance.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, early 40s, standing side-bend stretch, eyes closed, braid, dusty-rose sky"></div>
             <div class="care__tile care__tile--text" aria-hidden="true">Hormonal Health &amp; Balance</div>
-            <div class="care__tile care__tile--product" aria-hidden="true"><img src="assets/images/supplements/tablet-oval.webp" alt="" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-stretch.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, mid-40s, seated arm stretch on a mat by the sea, rose sunset"></div>
             <div class="care__tile care__tile--text" aria-hidden="true">Healthy Weight Management</div>
-            <div class="care__tile care__tile--photo media-brief" data-brief="Close crop of a woman walking or running outdoors, morning light" aria-hidden="true"><img src="assets/images/standin-wh-stride.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-friends.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): two women, early 30s, laughing with rolled yoga mats by a blush plaster wall"></div>
             <div class="care__tile care__tile--text" aria-hidden="true">Energy &amp; Well-Being</div>
       </div>
       <div class="care__row" data-drift="1" data-phase="0.5">
             <div class="care__tile care__tile--text" role="listitem">Menopause &amp; Midlife Wellness</div>
-            <div class="care__tile care__tile--photo media-brief" data-brief="Close portrait of a woman at ease, natural light; real, not posed" aria-hidden="true"><img src="assets/images/standin-wh-face.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-midlife.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, mid-50s, silver-streaked hair, glass of water, sunlit blush kitchen"></div>
             <div class="care__tile care__tile--text" role="listitem">Fast, Discreet Delivery</div>
-            <div class="care__tile care__tile--product" aria-hidden="true"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-delivery.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): hands holding a plain unbranded blush box at a rose front door"></div>
             <div class="care__tile care__tile--text" aria-hidden="true">Menopause &amp; Midlife Wellness</div>
-            <div class="care__tile care__tile--photo media-brief" data-brief="Close portrait of a woman at ease, natural light; real, not posed" aria-hidden="true"><img src="assets/images/standin-wh-face.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-midlife.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, mid-50s, silver-streaked hair, glass of water, sunlit blush kitchen"></div>
             <div class="care__tile care__tile--text" aria-hidden="true">Fast, Discreet Delivery</div>
-            <div class="care__tile care__tile--product" aria-hidden="true"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-delivery.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): hands holding a plain unbranded blush box at a rose front door"></div>
             <div class="care__tile care__tile--text" aria-hidden="true">Menopause &amp; Midlife Wellness</div>
-            <div class="care__tile care__tile--photo media-brief" data-brief="Close portrait of a woman at ease, natural light; real, not posed" aria-hidden="true"><img src="assets/images/standin-wh-face.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-midlife.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, mid-50s, silver-streaked hair, glass of water, sunlit blush kitchen"></div>
             <div class="care__tile care__tile--text" aria-hidden="true">Fast, Discreet Delivery</div>
-            <div class="care__tile care__tile--product" aria-hidden="true"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100" loading="lazy"></div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-delivery.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): hands holding a plain unbranded blush box at a rose front door"></div>
       </div>
     </div>
 
