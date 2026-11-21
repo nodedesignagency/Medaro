@@ -57,7 +57,8 @@
 
 /* Badges: the client's LegitScript placeholder (an 80px dashed tile, radius
    8 like the buttons, until the real badge arrives: [DATA NEEDED]) and
-   their HIPAA badge image. */
+   their HIPAA badge image. Always under the brand line, at every width
+   (user, 2026-11-21: "make it top bottom only again"). */
 .site-footer__badges {
   display: flex;
   gap: 12px;
@@ -102,21 +103,6 @@
 .site-footer__badge--hipaa img {
   width: auto;
   height: 64px; /* 148px wide: "COMPLIANT" stays readable */
-}
-
-/* Wide screens: the badges beside the brand line, their foot on its
-   baseline (user, 2026-11-21: "left right for wide screen then top bottom
-   for smaller width"). From a 1680px panel (1584px inside its 48px insets;
-   screens 1712px and up), where they keep at least 96px clear of the link
-   columns; they fit from about 1640. Narrower: under the brand line. */
-@container (min-width: 1584px) {
-  .site-footer__brandline {
-    display: flex;
-    align-items: flex-end;
-    gap: 56px;
-  }
-  .site-footer__brandline > * { flex-shrink: 0; }
-  .site-footer__badges { margin-top: 0; }
 }
 
 .site-footer__cols {
