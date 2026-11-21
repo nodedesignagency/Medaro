@@ -253,6 +253,23 @@
   });
 })();
 
+/* ---------- Reveal: things that arrive when they come into view ----------
+   [data-reveal] gets .is-in the first time a quarter of it is on screen;
+   its CSS decides what arriving looks like (Supplement V3: the pills rise
+   in one after another). No IntersectionObserver or reduced motion: shown
+   at once. */
+(function reveal() {
+  const els = Array.from(document.querySelectorAll('[data-reveal]'));
+  if (!els.length) return;
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (still || !('IntersectionObserver' in window)) { els.forEach((el) => el.classList.add('is-in')); return; }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting && !e.target.closest('[hidden]')) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { threshold: 0.25 });
+  els.forEach((el) => io.observe(el));
+  window.addEventListener('version-change', () => els.forEach((el) => { if (!el.classList.contains('is-in')) { io.unobserve(el); io.observe(el); } }));
+})();
+
 /* ---------- Review-only: versions and palettes ----------
    Sections offered in several versions are marked data-version="<slot>:<id>",
    e.g. data-version="hero:a" and data-version="hero:b". One per slot is shown,

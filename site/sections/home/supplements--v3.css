@@ -1,0 +1,191 @@
+/* ==========================================================================
+   Home · Supplement, version 3 (?supplements=v3), to compare with the
+   approved V1 (sections/home/supplements.css). V2 was scrapped by the user.
+   After the user's "Everything you need to stay aligned — in one place."
+   reference (2026-11-21: "i like the layout … is there a way we adjust
+   content … bring it to life like image 1 layout"), with Intercom's
+   hairline list and Seed's glass benefit cards (Mobbin) as support:
+   - top left: the chip and a big headline, alone, lots of room under it;
+   - bottom left: the client's two statements as rows on hairlines (their
+     "Five Practices. One App." rows), each with its paragraph in small
+     muted type; then the client's closing line and the CTA, where the
+     reference has "Ready to make it a daily practice?" and its app badges;
+   - bottom right: a rounded panel in a gradient of our greens (the
+     reference's tan-to-brown), holding the list's label and the five
+     details as stacked glass pills, each with a small tablet in its circle
+     (the reference's practices with their icons).
+   Alive: the pills rise in one after another when the panel comes into
+   view (main.js, data-reveal), the tablets float gently in their circles,
+   a pill lifts on hover. Reduced motion: all still.
+   Light page like the reference (no scene: the page is paper between
+   Women's pink and How Medaro Works' sage). Content on the header's logo
+   line (frame edge + 48).
+   Copy: content/home.md → Supplement, word for word ("Support" in lower
+   case); placement changed, no words. [LINK NEEDED] Explore Supplements.
+   ========================================================================== */
+
+.sp-v3 {
+  --sp-pad: clamp(112px, 10vw, 192px);
+  padding: var(--sp-pad) calc(var(--frame-side) + 48px);
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+.sp-v3__frame {
+  max-width: calc(var(--frame-max) - 96px);
+  margin-inline: auto;
+}
+
+/* ---------- Head ---------- */
+.sp-v3 .chip { margin-bottom: 28px; } /* leaf green on paper (styles.css default) */
+.sp-v3__title {
+  max-width: 13.5em;
+  font-family: var(--font-display);
+  font-size: clamp(48px, 4.4vw, 84px);
+  font-weight: var(--weight-regular);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+/* ---------- Body: rows left, panel right ---------- */
+.sp-v3__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(20px, 1.6vw, 32px); /* close, like the reference */
+  margin-top: clamp(88px, 9vw, 176px);
+}
+
+.sp-v3__side { align-self: start; }
+.sp-v3__rows { border-top: 1px solid var(--color-line); }
+.sp-v3__row {
+  padding: clamp(24px, 2vw, 36px) 0 clamp(26px, 2.2vw, 40px);
+  border-bottom: 1px solid var(--color-line);
+}
+.sp-v3__row h3 {
+  font-size: clamp(30px, 2.5vw, 48px);
+  font-weight: var(--weight-regular);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.sp-v3__row p {
+  max-width: 36em;
+  margin-top: 14px;
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+.sp-v3__foot { padding-top: clamp(44px, 4vw, 72px); } /* right after the rows, like the reference's badges */
+.sp-v3__note {
+  max-width: 30em;
+  margin-bottom: 20px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* ---------- The panel ----------
+   Our greens from light to deep, top to bottom (sage → moss → ink), with a
+   soft light at the top like the hero's beam. */
+.sp-v3__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: clamp(560px, 46vw, 860px);
+  padding: clamp(40px, 4vw, 72px) 24px;
+  overflow: hidden;
+  border-radius: var(--radius-m);
+  background:
+    radial-gradient(70% 45% at 50% 0%, rgba(244, 245, 239, 0.32) 0%, rgba(244, 245, 239, 0) 100%),
+    linear-gradient(180deg, #a8af98 0%, #7d8a5a 38%, #4b5536 72%, #2f3525 100%);
+  color: var(--p-paper);
+  isolation: isolate;
+}
+.sp-v3__label {
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244, 245, 239, 0.86);
+}
+
+.sp-v3__pills {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 476px); /* the longest name on one line */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* a glass pill on the gradient, like the reference's; it lifts on hover */
+.sp-v3__pill {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: clamp(76px, 5.8vw, 104px);
+  padding: 12px 28px 12px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(38, 43, 30, 0.26);
+  box-shadow: inset 0 0 0 1px rgba(244, 245, 239, 0.14), 0 10px 24px -14px rgba(20, 24, 14, 0.5);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  transition: transform var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+}
+.sp-v3__pill:hover { transform: translateY(-3px); background: rgba(38, 43, 30, 0.36); }
+
+/* the icon: a small round window with a tablet floating in it */
+.sp-v3__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(52px, 3.9vw, 68px);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, #4d5838 0%, #262b1e 100%);
+  box-shadow: inset 0 0 0 1px rgba(244, 245, 239, 0.18);
+}
+.sp-v3__icon img {
+  width: 86%;
+  height: 86%;
+  object-fit: contain;
+  rotate: var(--r, 0deg);
+  animation: sp-v3-float var(--d, 6s) ease-in-out var(--delay, 0s) infinite;
+}
+.sp-v3__pill-name {
+  font-size: clamp(15px, 1.12vw, 19px);
+  font-weight: var(--weight-medium);
+  line-height: 1.2;
+  letter-spacing: 0.035em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+.sp-v3__pills > li:nth-child(1) .sp-v3__icon img { --r: 8deg;   --d: 6.2s; --delay: -1s; }
+.sp-v3__pills > li:nth-child(2) .sp-v3__icon img { --r: -18deg; --d: 7s;   --delay: -3s; }
+.sp-v3__pills > li:nth-child(3) .sp-v3__icon img { --r: 0deg;   --d: 6.6s; --delay: -2s; }
+.sp-v3__pills > li:nth-child(4) .sp-v3__icon img { --r: -26deg; --d: 7.4s; --delay: -4.5s; }
+.sp-v3__pills > li:nth-child(5) .sp-v3__icon img { --r: 20deg;  --d: 6.8s; --delay: -0.5s; }
+
+@keyframes sp-v3-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -6%; }
+}
+
+/* rise in, one after another, when the panel comes into view (main.js adds
+   .is-in): the list item rises, the pill inside it lifts on hover */
+.sp-v3__pills > li { transition: opacity 640ms var(--ease-out), transform 640ms var(--ease-out); transition-delay: calc(var(--i, 0) * 70ms); }
+.sp-v3__pills > li:nth-child(2) { --i: 1; }
+.sp-v3__pills > li:nth-child(3) { --i: 2; }
+.sp-v3__pills > li:nth-child(4) { --i: 3; }
+.sp-v3__pills > li:nth-child(5) { --i: 4; }
+.sp-v3__panel[data-reveal]:not(.is-in) .sp-v3__pills > li { opacity: 0; transform: translateY(18px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-v3__icon img { animation: none; }
+  .sp-v3__panel[data-reveal]:not(.is-in) .sp-v3__pills > li { opacity: 1; transform: none; }
+}

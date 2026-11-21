@@ -133,30 +133,3 @@
 @media (prefers-reduced-motion: reduce) {
   .category-tile .category-tile__obj { transition: none; }
 }
-
-/* ---------- Variant: point (not a link) ----------
-   The same white card for a point rather than a destination (first use:
-   Home Supplement V2, the five "difference is in the details" points, user
-   2026-11-21: "in the style of the hero points we have made with small
-   images"). No arrow, no hover; the name may take two lines; the product
-   small on the right, cut off by the card like the hero's. White with the
-   raw ink by default (stays dark inside a scene that turns --color-ink
-   light); a section can tint it with --tile-bg and --tile-ink. Markup: a <li> (or <div>) with __text > __name and
-   __media > __float > img.__obj; placement per card with --ct-x --ct-y
-   --ct-h --ct-r. */
-.category-tile--point {
-  justify-content: center;
-  height: var(--tile-h, 116px);
-  background: var(--tile-bg, #fff);   /* a section may tint it (Supplement V2: moss) */
-  color: var(--tile-ink, var(--p-ink));
-}
-.category-tile--point .category-tile__text { max-width: 64%; }
-.category-tile--point .category-tile__name {
-  font-size: clamp(24px, 1.75vw, 30px); /* 24px+: large text, so light names on a mid tint pass AA */
-  white-space: normal;
-  text-wrap: balance;
-}
-.category-tile--point .category-tile__obj,
-.category-tile--point:hover .category-tile__obj {
-  transform: translate(-50%, -50%) rotate(var(--ct-r, 0deg));
-}
