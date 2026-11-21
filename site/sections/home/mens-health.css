@@ -29,6 +29,10 @@
   --color-line: color-mix(in srgb, var(--p-paper) 18%, transparent);
 }
 
-/* Chip text: bright sky blue, 8.2:1 on the slate, 5.9:1 on ?blue=b (user,
-   2026-11-21: "change color of text") */
-.care--mens { --color-chip: #8cc8ff; }
+/* Chip text, in step with the heading (user, 2026-11-21: "these color
+   should change after scroll like the heading"): a deep blue of the same hue
+   on paper (4.9:1; the sky blue was 1.6:1 there), bright sky blue once the
+   page is blue (8.2:1 on the slate, 5.9:1 on ?blue=b). The page is dark
+   here, so every chip on screen takes its bright colour (styles.css → .chip). */
+.care--mens { --color-chip: #006acc; --color-chip-on-dark: #8cc8ff; }
+:root[data-scene="mens"] .chip { color: var(--color-chip-on-dark, var(--color-chip)); }

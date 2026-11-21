@@ -48,8 +48,10 @@
   --color-on-dark: var(--p-paper);
   --color-on-accent: var(--p-ink); /* text on lime buttons: stays dark in every scene */
   --color-on-dark-muted: color-mix(in srgb, var(--p-paper) 72%, transparent);
-  /* Chips (section eyebrows): a bright text colour, set per section; this
-     default is a leaf green for paper (Weight Loss), 4.7:1 */
+  /* Chips (section eyebrows): a bright text colour, set per section, in two
+     strengths: --color-chip for light pages (paper, blush, sage) and
+     --color-chip-on-dark for dark ones (Men's Health blue). This default is a
+     leaf green for paper (Weight Loss), 4.7:1 */
   --color-chip: #367d12;
   /* Per-line tints: Weight Loss, Men's, Women's, Supplements */
   --color-wl: var(--p-sage);
@@ -345,8 +347,15 @@ button { font: inherit; color: inherit; }
    then, of a filled pill, "change color of text not add frame"). No frame,
    no fill. Each colour is the most vivid of its hue that still reads at this
    size (WCAG AA, 4.5:1 for 12px text), so on light and mid backgrounds it is
-   deep rather than neon. --color-chip is set on each section (not the
-   scene), so the chip has its colour before the page fades to the scene.
+   deep rather than neon. Each section sets two strengths of its colour:
+   --color-chip (deep, for a light page) and --color-chip-on-dark (bright,
+   for a dark one). The chip follows the page's background, like the
+   heading (user, 2026-11-21: "these color should change after scroll like
+   the heading"): a dark scene switches every chip on screen to its bright
+   colour (the scene's own CSS: :root[data-scene="mens"] .chip), and the
+   colour fades over the scene's 700ms. So Men's Health's chip is a deep
+   blue on paper before the page turns blue, and Women's Health's chip is
+   bright pink while the page is still Men's blue.
    The text is trimmed to its capitals: the box is the cap height.
    Markup: <p class="chip"><span>Text</span></p>
    Sections add their own margin and alignment (centred: margin-inline auto).
@@ -356,6 +365,7 @@ button { font: inherit; color: inherit; }
   align-items: center;
   width: fit-content;
   color: var(--color-chip);
+  transition: color 700ms var(--ease-in-out); /* in step with the scene fade; reduced motion: instant */
   font-size: var(--fs-chip);
   font-weight: var(--weight-medium);
   line-height: 1;

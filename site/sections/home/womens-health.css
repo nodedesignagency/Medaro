@@ -30,7 +30,9 @@
   --color-line: color-mix(in srgb, var(--wh-ink) 18%, transparent);
 }
 
-/* Chip text: raspberry, the most vivid that reads on the blush (4.6:1);
-   a bright pink on ?pink=b (5:1) (user, 2026-11-21: "change color of text") */
-.care--womens { --color-chip: #bb1b50; }
-:root[data-pink="b"] .care--womens { --color-chip: #ffb3c8; }
+/* Chip text: raspberry, the most vivid that reads on the blush (4.6:1) and
+   on paper (5.7:1); bright pink on a dark page (styles.css → .chip): while
+   the page is still Men's blue (8.7:1 on the slate) and on ?pink=b (5:1).
+   It changes with the page, like the heading (user, 2026-11-21). */
+.care--womens { --color-chip: #bb1b50; --color-chip-on-dark: #ffb3c8; }
+:root[data-scene="womens"][data-pink="b"] .chip { color: var(--color-chip-on-dark, var(--color-chip)); }
