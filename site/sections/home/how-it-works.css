@@ -37,8 +37,7 @@
 }
 
 /* Chip text: rust, the warm counter-colour to the sage, as vivid as reads
-   at this size (4.6:1; 9.6:1 on paper); butter yellow on a dark page
-   (?hiw=b's dark olive, 10:1). It changes with the page, like the heading
-   (styles.css → .chip). */
-.steps--home { --color-chip: #702810; --color-chip-on-dark: #f2d65c; }
-:root[data-scene="steps"][data-hiw="b"] .chip { color: var(--color-chip-on-dark, var(--color-chip)); }
+   at this size (4.6:1); butter yellow on ?hiw=b's dark olive (10:1)
+   (user, 2026-11-21: "change color of text") */
+.steps--home { --color-chip: #702810; }
+:root[data-hiw="b"] .steps--home { --color-chip: #f2d65c; }
