@@ -173,12 +173,42 @@
 }
 .site-footer__fine a:hover { text-decoration-color: var(--color-ink); }
 
+/* ---------- Bottom bar: copyright and motto between two hairlines ----------
+   Just above the wordmark (user, 2026-11-21: "above medaro text make two
+   lines and between those lines put this text"), laid out like their UGC
+   reference: copyright left, the client's three words right. The lines are
+   the disclaimers' hairline (user: "lines should be like what you made
+   here"). The vial's cap stands in front of the bar. */
+.site-footer__bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  margin-top: 64px;
+  padding: 18px 0;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  font-size: 13px;
+  line-height: 1.25;
+}
+.site-footer__copy { color: var(--color-ink); }
+/* the client's words in caps; our olive label colour, like the promo card's */
+.site-footer__motto {
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #56662f;
+}
+
 /* ---------- The wordmark, with the vial in front ---------- */
 .site-footer__brand {
   position: relative;
-  /* room for the vial above the letters: its cap reaches 0.38 of the
-     wordmark's height above it (the wordmark is 16.1cqw tall), plus 88px */
-  margin-top: calc(6.1cqw + 88px);
+  /* under the bar; the vial's cap (0.38 of the wordmark's height above it)
+     rises through the bar and still clears the small print by 50px+ */
+  margin-top: 56px;
 }
 
 /* the official wordmark from the sprite, inset to inset, in our ink: the

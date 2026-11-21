@@ -35,6 +35,13 @@ Source: `content/source/footer-content.webp` (the client's footer content, share
 - California Privacy Notice
 - SMS Terms and Conditions
 
+## Bottom bar
+
+Source: `content/source/footer-bottom-bar.png` (shared by the user on 2026-11-21).
+
+- © 2026 MEDARO. All rights reserved.
+- MEASURED · PRESCRIBED · DELIVERED
+
 ## Disclaimers
 
 [company_legal_name] operates as a marketplace platform connecting patients with independently licensed healthcare providers who deliver care through the [company_legal_name] Patient Portal. [company_legal_name] does not dispense medication or provide medical services directly; all clinical decisions rest solely with independent providers. Payment does not guarantee that a prescription will be written or that medication will be dispensed. Any prescription issued reflects only the professional judgment of the healthcare provider.
