@@ -51,11 +51,11 @@
    shadows baked in). 1378×2028; the visible subject runs from x 56 (the
    stand's back foot) to x 1314 (his elbow) and from y 20 (the mirror's top)
    to y 1918 (his heels), the rest is transparent shadow room.
-   Sized from the two columns: foot on the frame line, the subject 88% of the
-   two columns wide (user, 2026-11-21: "make this image smaller"), so its
+   Sized from the two columns: foot on the frame line, the subject 76% of the
+   two columns wide (user, 2026-11-21: "make this image smaller", then "make smaller"), so its
    elbow stops short of the second column's edge. */
 .wl__intro {
-  --wl-cut-scale: 0.88;
+  --wl-cut-scale: 0.76;
   --wl-cut-w: calc(var(--wl-span2) * var(--wl-cut-scale) * 1378 / 1258);
   --wl-cut-h: calc(var(--wl-cut-w) * 2028 / 1378);
   /* the copy sits this far right of the third column line (user, 2026-11-21:
