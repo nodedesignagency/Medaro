@@ -340,8 +340,9 @@ button { font: inherit; color: inherit; }
    we have chips"). Regular-weight capitals, one colour, the text trimmed to
    its capitals so the box is exactly the cap height (0.7 × --fs-chip).
    A short 1px line on each side (user, 2026-11-21, replacing the "[01]"
-   numbers): the left one fades in from 0% at its outer end to 100% at the
-   text, the right one the reverse, so both are solid next to the words.
+   numbers): the left one fades in from 0% at its outer end to full at the
+   text, the right one the reverse; the whole line at 50% ("looks bit
+   bright"), so it runs 0% → 50% ink.
    Markup: <p class="chip"><span>Text</span></p>
    Sections add their own margin and alignment (centred: justify-content;
    on a column line: .chip--hang keeps the text on the line and hangs the
@@ -368,6 +369,7 @@ button { font: inherit; color: inherit; }
   width: var(--chip-line);
   height: 1px;
   background: linear-gradient(to right, transparent, currentColor);
+  opacity: 0.5; /* the whole line at half strength, gradient kept: 0% → 50% (user, 2026-11-21: "looks bit bright") */
 }
 .chip::after { background: linear-gradient(to left, transparent, currentColor); }
 .chip--hang { margin-left: calc(-1 * (var(--chip-line) + var(--chip-gap))); }
