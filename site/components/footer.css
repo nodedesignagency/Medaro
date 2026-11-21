@@ -135,25 +135,21 @@
 }
 
 /* ---------- The client's disclaimers, under a hairline ----------
-   In columns so the lines stay readable instead of running the full width;
-   each paragraph stays whole. */
+   One column, top to bottom, inset to inset, as in the client's footer
+   (user, 2026-11-21: "dont make 3 columns make it up to down"). */
 .site-footer__fine {
   position: relative;
   z-index: 3;
   margin-top: 64px;
   padding-top: 36px;
   border-top: 1px solid var(--color-line);
-  columns: 400px 3; /* three columns from 1440 up (about 60–90 characters a line), two below */
-  column-gap: 64px;
   font-size: 13px;
   line-height: 1.55;
   color: var(--color-text-muted); /* 5:1 on mist */
 }
-.site-footer__fine p {
-  margin: 0 0 14px;
-  break-inside: avoid;
-}
+.site-footer__fine p + p { margin-top: 14px; }
 .site-footer__fine a {
+  white-space: nowrap; /* the email and phone never break */
   color: var(--color-ink);
   text-decoration: underline;
   text-decoration-thickness: 1px;
