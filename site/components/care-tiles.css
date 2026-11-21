@@ -35,30 +35,27 @@
 }
 
 /* The eyebrow chip, after the user's "[01] TEXT COMES HERE" reference
-   (2026-11-21): the section's number in brackets, smaller (0.68 of the
-   text) and centred on the capitals, then the eyebrow in regular-weight
-   capitals, one colour, no wide tracking. Measured on the reference:
-   digits 46px / capitals 68px, centres level, ink gap 48px.
+   (2026-11-21): the section's number in brackets, then the eyebrow in
+   regular-weight capitals, one colour, no wide tracking. **One size for
+   both** (user, 2026-11-21: the bigger text after the number was "too
+   big … use same size as number"): 12.24px at 1440, the number's size
+   before. Both trimmed to their capitals and centred on each other.
    The number is decoration (aria-hidden); the order follows Home:
    Weight Loss 01, Men's Health 02, Women's Health 03. */
 .care__eyebrow {
   display: flex;
   justify-content: center;
-  align-items: center; /* the two cap boxes (trimmed below), so the digits centre on the capitals */
-  gap: 0.34em; /* with the glyphs' side bearings: an ink gap of 0.7 cap heights, like the reference */
+  align-items: center; /* the two cap boxes (trimmed below) */
+  gap: 0.6em; /* with the glyphs' side bearings: an ink gap of about one cap height */
   margin-bottom: 32px;
   color: var(--color-ink);
-  font-size: clamp(16px, 1.25vw, 22px);
+  font-size: clamp(11px, 0.85vw, 15px);
   font-weight: var(--weight-regular);
   line-height: 1;
-  letter-spacing: 0;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 .care__eyebrow > span { text-box: trim-both cap alphabetic; }
-.care__num {
-  font-size: 0.68em;
-  letter-spacing: 0.02em;
-}
 
 .care__title {
   font-family: var(--font-display);
