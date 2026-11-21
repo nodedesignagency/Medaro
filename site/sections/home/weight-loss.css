@@ -61,14 +61,14 @@
   grid-column: 3 / 6;
   align-self: start;
   /* headline cap height level with the top of the tallest bottle, as in the
-     reference: bottle top = 104/640 of the image width; minus the chip (the
-     pill: 1.94 × --fs-chip, + 28) and the headline's half-leading above the
+     reference: bottle top = 104/640 of the image width; minus the chip (its
+     cap height, 0.7 × --fs-chip, + 28) and the headline's half-leading above the
      caps (≈0.16em) */
-  padding-top: max(0px, calc(var(--wl-span2) * 104 / 640 - 1.94 * var(--fs-chip) - 28px - 0.16 * var(--wl-title-fs)));
+  padding-top: max(0px, calc(var(--wl-span2) * 104 / 640 - 0.7 * var(--fs-chip) - 28px - 0.16 * var(--wl-title-fs)));
 }
 
-/* The eyebrow is the shared chip (styles.css → .chip), its pill on the
-   column line; colours: the default, the brand's olive tab with lime text */
+/* The eyebrow is the shared chip (styles.css → .chip), on the column line,
+   in the default chip colour: leaf green #367d12 (4.7:1 on paper) */
 .wl__eyebrow { margin-bottom: 28px; }
 
 .wl__title {

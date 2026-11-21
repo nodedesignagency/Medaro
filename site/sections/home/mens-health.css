@@ -29,9 +29,6 @@
   --color-line: color-mix(in srgb, var(--p-paper) 18%, transparent);
 }
 
-/* Chip: bright sky blue with the slate's own blue as text, 9:1 (user,
-   2026-11-21: "a bright chip color will make it pop"); also on ?blue=b */
-.care--mens {
-  --color-chip: #9fd0ff;
-  --color-on-chip: #1d2a3a;
-}
+/* Chip text: bright sky blue, 8.2:1 on the slate, 5.9:1 on ?blue=b (user,
+   2026-11-21: "change color of text") */
+.care--mens { --color-chip: #8cc8ff; }

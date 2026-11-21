@@ -36,9 +36,8 @@
   --steps-card: var(--hw-card); /* behind the image while it loads */
 }
 
-/* Chip: butter yellow with olive ink, 8.9:1, warm against the sage (user,
-   2026-11-21: "a bright chip color will make it pop"); also on ?hiw=b */
-.steps--home {
-  --color-chip: #f4e27c;
-  --color-on-chip: var(--p-ink);
-}
+/* Chip text: rust, the warm counter-colour to the sage, as vivid as reads
+   at this size (4.6:1); butter yellow on ?hiw=b's dark olive (10:1)
+   (user, 2026-11-21: "change color of text") */
+.steps--home { --color-chip: #702810; }
+:root[data-hiw="b"] .steps--home { --color-chip: #f2d65c; }
