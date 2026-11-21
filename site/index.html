@@ -40,6 +40,8 @@
          i-arrow-ne is the same arrow turned 45° (promo card). -->
     <symbol id="i-arrow-right" viewBox="0 0 16 16"><path fill="currentColor" d="M9.04045 13.5006C9.05132 13.5116 9.38447 13.5951 9.78072 13.6861C10.177 13.7772 10.5056 13.8378 10.5108 13.8209C10.5161 13.8039 10.5571 13.5289 10.6019 13.2096C10.692 12.5686 10.9101 11.82 11.1431 11.3519C11.8694 9.893 13.1726 8.92699 14.7532 8.67591L15.1557 8.61196V7.96748V7.32295L14.7909 7.26174C12.4008 6.86077 10.8426 5.07371 10.5511 2.39938C10.5321 2.22474 10.5094 2.08191 10.5006 2.08191C10.42 2.08191 9.08438 2.40379 9.05912 2.42929C9.04085 2.44773 9.05444 2.61144 9.08936 2.79303C9.47585 4.80384 10.5825 6.44009 12.0186 7.12424L12.363 7.28836L5.2793 7.30121L0.800003 7.30937V8.6137L5.29082 8.62187L12.3578 8.63477L11.923 8.85512C10.7947 9.42671 9.90149 10.5479 9.37547 12.0529C9.22557 12.4817 8.99939 13.4592 9.04045 13.5006Z"/></symbol>
     <symbol id="i-arrow-ne" viewBox="0 0 16 16"><path fill="currentColor" transform="rotate(-45 7.98 7.96)" d="M9.04045 13.5006C9.05132 13.5116 9.38447 13.5951 9.78072 13.6861C10.177 13.7772 10.5056 13.8378 10.5108 13.8209C10.5161 13.8039 10.5571 13.5289 10.6019 13.2096C10.692 12.5686 10.9101 11.82 11.1431 11.3519C11.8694 9.893 13.1726 8.92699 14.7532 8.67591L15.1557 8.61196V7.96748V7.32295L14.7909 7.26174C12.4008 6.86077 10.8426 5.07371 10.5511 2.39938C10.5321 2.22474 10.5094 2.08191 10.5006 2.08191C10.42 2.08191 9.08438 2.40379 9.05912 2.42929C9.04085 2.44773 9.05444 2.61144 9.08936 2.79303C9.47585 4.80384 10.5825 6.44009 12.0186 7.12424L12.363 7.28836L5.2793 7.30121L0.800003 7.30937V8.6137L5.29082 8.62187L12.3578 8.63477L11.923 8.85512C10.7947 9.42671 9.90149 10.5479 9.37547 12.0529C9.22557 12.4817 8.99939 13.4592 9.04045 13.5006Z"/></symbol>
+    <!-- Check (Supplement V3 cards, after the user's glass card reference) -->
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.4 6.6 11.4 12.5 4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <!-- Weight Loss care-point icons (24px line icons, currentColor) -->
     <symbol id="i-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
     <symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.75 3.25H5a1 1 0 0 0-1 1V9a4.5 4.5 0 0 0 9 0V4.25a1 1 0 0 0-1-1h-.75"/><path d="M8.5 13.5v1.75a4.5 4.5 0 0 0 9 0V13"/><circle cx="17.5" cy="11" r="2"/></g></symbol>
@@ -432,48 +434,45 @@
   <!-- SECTION:home/supplements END -->
   </div>
   <div data-version="supplements:v3">
-  <!-- SECTION:home/supplements--v3 START · styles: sections/home/supplements--v3.css · scripts: main.js (reveal) · assets: assets/images/products/tablet-white-blank.webp, tablet-oval-lime-blank.webp, assets/images/supplements/tablet-round.webp
+  <!-- SECTION:home/supplements--v3 START · styles: sections/home/supplements--v3.css · scripts: main.js (reveal) · assets: assets/images/hero-run.webp, assets/images/products/tablet-white-blank.webp, tablet-oval-lime-blank.webp, assets/images/supplements/tablet-round.webp
        Version 3, to compare with V1 (?supplements=v3); V2 was scrapped by the user (2026-11-21). After the user's
-       "Everything you need to stay aligned — in one place." reference, with Intercom's hairline list and Seed's glass
-       benefit cards (Mobbin): headline alone at the top; the client's two statements as hairline rows with their
-       paragraphs, the closing line and the CTA on the left; the five details as glass pills on a panel in our greens on
-       the right. Copy: content/home.md → Supplement, word for word; placement changed, no words. Stand-in tablets (blank)
+       "Everything you need to stay aligned — in one place." reference and their round 2: left, the chip, heading, the
+       client's two statements as hairline rows with their paragraphs, the closing line and the CTA; right, a photo with
+       the five details as frosted glass cards (after their "Appointment confirmed" card). Copy: content/home.md → Supplement, word for word; placement changed, no words. Stand-in tablets (blank)
        in the pills' circles. If picked, it becomes home/supplements (id "supplements"). [LINK NEEDED] Explore Supplements. -->
   <section class="sp-v3" id="supplements-v3" aria-labelledby="sp-v3-title">
     <div class="sp-v3__frame">
-      <div class="sp-v3__head">
+      <div class="sp-v3__side">
         <p class="sp-v3__eyebrow chip"><span>More Than Just Supplement</span></p>
         <h2 class="sp-v3__title" id="sp-v3-title">Supplements designed to support better health and lasting wellness</h2>
+        <div class="sp-v3__rows">
+          <div class="sp-v3__row">
+            <h3>Better support for your everyday health.</h3>
+            <p>Thoughtfully formulated supplements with quality ingredients, designed to support your wellness goals and help you feel your best every day.</p>
+          </div>
+          <div class="sp-v3__row">
+            <h3>Better wellness starts with better choices.</h3>
+            <p>Thoughtfully selected ingredients and purposeful formulations to complement your daily routine and support your health goals.</p>
+          </div>
+        </div>
+        <div class="sp-v3__foot">
+          <p class="sp-v3__note">Formulated supplements designed to support your body's needs and overall well-being.</p>
+          <a class="btn btn--primary btn--arrow" href="#supplements-link"><span class="btn__label">Explore Supplements</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+        </div>
       </div>
 
-      <div class="sp-v3__body">
-        <div class="sp-v3__side">
-          <div class="sp-v3__rows">
-            <div class="sp-v3__row">
-              <h3>Better support for your everyday health.</h3>
-              <p>Thoughtfully formulated supplements with quality ingredients, designed to support your wellness goals and help you feel your best every day.</p>
-            </div>
-            <div class="sp-v3__row">
-              <h3>Better wellness starts with better choices.</h3>
-              <p>Thoughtfully selected ingredients and purposeful formulations to complement your daily routine and support your health goals.</p>
-            </div>
-          </div>
-          <div class="sp-v3__foot">
-            <p class="sp-v3__note">Formulated supplements designed to support your body's needs and overall well-being.</p>
-            <a class="btn btn--primary btn--arrow" href="#supplements-link"><span class="btn__label">Explore Supplements</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
-          </div>
-        </div>
-
-        <div class="sp-v3__panel" data-reveal>
-          <p class="sp-v3__label" id="sp-v3-details">The difference is in the details</p>
-          <ul class="sp-v3__pills" aria-labelledby="sp-v3-details">
-            <li><div class="sp-v3__pill"><span class="sp-v3__icon" aria-hidden="true"><img src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy"></span><span class="sp-v3__pill-name">Quality Ingredients</span></div></li>
-            <li><div class="sp-v3__pill"><span class="sp-v3__icon" aria-hidden="true"><img src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy"></span><span class="sp-v3__pill-name">Transparent Formulations</span></div></li>
-            <li><div class="sp-v3__pill"><span class="sp-v3__icon" aria-hidden="true"><img src="assets/images/supplements/tablet-round.webp" alt="" width="760" height="770" loading="lazy"></span><span class="sp-v3__pill-name">Targeted Nutritional Support</span></div></li>
-            <li><div class="sp-v3__pill"><span class="sp-v3__icon" aria-hidden="true"><img src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy"></span><span class="sp-v3__pill-name">Everyday Wellness</span></div></li>
-            <li><div class="sp-v3__pill"><span class="sp-v3__icon" aria-hidden="true"><img src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy"></span><span class="sp-v3__pill-name">Thoughtful Ingredient Selection</span></div></li>
-          </ul>
-        </div>
+      <!-- Stand-in photo: the runners from the first hero; brief in data-brief. The five details as glass cards over it,
+           after the user's "Appointment confirmed" card. The list's label is off the page (user: "i dont need that text"). -->
+      <div class="sp-v3__panel media-brief" data-reveal data-brief="Photo, portrait: everyday wellness with the MEDARO supplements: a person outdoors or at home in warm natural light, our olive and sage tones; plain supplement jar, no drug names and no MEDARO on the bottle">
+        <img class="sp-v3__photo" src="assets/images/hero-run.webp" alt="" width="3840" height="2143" loading="lazy">
+        <p class="visually-hidden" id="sp-v3-details">The difference is in the details:</p>
+        <ul class="sp-v3__cards" aria-labelledby="sp-v3-details">
+            <li><div class="sp-v3__card"><span class="sp-v3__thumb" aria-hidden="true"><img src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy"></span><span class="sp-v3__name">Quality Ingredients</span><span class="sp-v3__check" aria-hidden="true"><svg><use href="#i-check"/></svg></span></div></li>
+            <li><div class="sp-v3__card"><span class="sp-v3__thumb" aria-hidden="true"><img src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy"></span><span class="sp-v3__name">Transparent Formulations</span><span class="sp-v3__check" aria-hidden="true"><svg><use href="#i-check"/></svg></span></div></li>
+            <li><div class="sp-v3__card"><span class="sp-v3__thumb" aria-hidden="true"><img src="assets/images/supplements/tablet-round.webp" alt="" width="760" height="770" loading="lazy"></span><span class="sp-v3__name">Targeted Nutritional Support</span><span class="sp-v3__check" aria-hidden="true"><svg><use href="#i-check"/></svg></span></div></li>
+            <li><div class="sp-v3__card"><span class="sp-v3__thumb" aria-hidden="true"><img src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy"></span><span class="sp-v3__name">Everyday Wellness</span><span class="sp-v3__check" aria-hidden="true"><svg><use href="#i-check"/></svg></span></div></li>
+            <li><div class="sp-v3__card"><span class="sp-v3__thumb" aria-hidden="true"><img src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy"></span><span class="sp-v3__name">Thoughtful Ingredient Selection</span><span class="sp-v3__check" aria-hidden="true"><svg><use href="#i-check"/></svg></span></div></li>
+        </ul>
       </div>
     </div>
   </section>
