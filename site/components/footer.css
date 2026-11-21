@@ -4,7 +4,7 @@
    top left, link columns top right; no glow behind the product (user,
    2026-11-21: "remove glow from behind"). The
    user's change: "i want our logo back of the suplement pic": the giant
-   MEDARO wordmark runs inset to inset across the foot, in green, the
+   MEDARO wordmark runs inset to inset across the foot, in ink, the
    Tirzepatide vial large and centred in front of it.
    Content: the client's footer (content/footer.md, word for word; user,
    2026-11-21: "make this footer according to this content and instead of
@@ -181,10 +181,9 @@
   margin-top: calc(6.1cqw + 88px);
 }
 
-/* the official wordmark from the sprite, inset to inset, in green (user,
-   2026-11-21: "make the text green"): halfway between the vial's moss
-   (#6B7A45) and the client's lime (#D5E5AD), so it reads green and the
-   vial's moss label still stands clear in front of it */
+/* the official wordmark from the sprite, inset to inset, in our ink: the
+   client's Dark Olive Green #343B29 (user, 2026-11-21, picked from five
+   greens: "i want this second one color of text") */
 .site-footer__mark {
   position: relative;
   z-index: 1;
@@ -192,7 +191,7 @@
   width: 100%;
   height: auto;
   aspect-ratio: 4413 / 712;
-  color: #a0b079;
+  color: var(--color-ink);
 }
 
 /* The Tirzepatide vial alone, large and centred on the wordmark, in front of
