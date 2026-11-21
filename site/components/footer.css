@@ -1,0 +1,168 @@
+/* ==========================================================================
+   Component: footer (--full)
+   After the user's "Ethical Life" footer reference (2026-11-21): the brand
+   line top left, link columns top right, a bottom bar with the copyright left
+   and legal links right, a lime glow behind the product. The user's change:
+   "i want our logo back of the suplement pic": the giant MEDARO wordmark
+   runs inset to inset across the foot, in white (the reference's white type
+   on a light ground), and the supplement image floats in front of it.
+   In our style: a mist panel on the frame like the hero stage (frame edges,
+   16px from the bottom, radius 18, content on the 48px inset that the
+   header's logo shares), Host Grotesk, the menu's grey caps labels, ink
+   links with the rolling hover (.link-roll), the hero's floating tablets
+   (components/product.css).
+   Product: a stand-in until a supplement render is made (data-brief).
+   Variants: --full (Home, About, Contact, legal). --landing (logo, legal
+   links only, no links out) not built yet.
+   Framer: one component; the wordmark is the logo SVG, the products are
+   images with the float as a loop.
+   ========================================================================== */
+
+.site-footer {
+  padding: 0 var(--frame-side) var(--edge);
+}
+
+.site-footer__frame {
+  --ft-inset: 48px;
+  position: relative;
+  overflow: hidden; /* the glow fades out past the panel's edge */
+  padding: 52px var(--ft-inset) 0;
+  border-radius: 18px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  container-type: inline-size;
+  isolation: isolate;
+}
+
+/* ---------- Top: the brand line left, the link columns right ---------- */
+.site-footer__top {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+.site-footer__tagline {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 3.6cqw, 68px);
+  font-weight: var(--weight-regular);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-box: trim-both cap alphabetic; /* cap top sits level with the labels' */
+}
+
+.site-footer__cols {
+  display: flex;
+  gap: clamp(48px, 5cqw, 96px);
+}
+
+/* the menu's label (user, 2026-11-20: "grey not greenish … little more smaller"),
+   one step darker so it holds 4.7:1 on the mist panel */
+.site-footer__label {
+  margin-bottom: 22px;
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #666663;
+  text-box: trim-both cap alphabetic;
+}
+
+.site-footer__list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site-footer__list a,
+.site-footer__note {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
+.site-footer__list a {
+  color: var(--color-ink);
+  text-decoration: none;
+}
+/* contact details: plain text until the client fills them in */
+.site-footer__note { color: var(--color-text-muted); }
+
+/* ---------- The wordmark, with the supplement in front ---------- */
+.site-footer__brand {
+  position: relative;
+  margin-top: clamp(96px, 9cqw, 160px);
+}
+
+/* the official wordmark from the sprite, inset to inset, white on the mist */
+.site-footer__mark {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4413 / 712;
+  color: #fff;
+}
+
+/* the reference's glow: soft nude lime, centred on the product, clipped by the panel */
+.site-footer__glow {
+  position: absolute;
+  left: 50%;
+  top: 62%;
+  z-index: 0;
+  width: 62cqw;
+  aspect-ratio: 1.45;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, #cadf95 0%, rgba(207, 226, 160, 0.78) 34%, rgba(213, 229, 173, 0.34) 66%, rgba(213, 229, 173, 0) 100%);
+  pointer-events: none;
+}
+
+/* The supplement, centred on the wordmark and in front of it. The box is a
+   size container: products are placed in % of it (components/product.css). */
+.site-footer__scene {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  z-index: 2;
+  height: 170%;
+  aspect-ratio: 1.4;
+  transform: translate(-50%, -50%);
+  container-type: size;
+  pointer-events: none;
+}
+.site-footer .product--tablet-white { --h: 44%; --x: 69%; --y: 31%; --r: 10deg; --z: 1; }
+.site-footer .product--tablet-oval  { --h: 50%; --x: 37%; --y: 62%; --r: -12deg; --z: 2; }
+
+/* ---------- Bottom bar ---------- */
+.site-footer__bar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  padding: 28px 0 30px;
+  font-size: 13px;
+  line-height: 1.25;
+}
+.site-footer__copy { color: var(--color-ink); }
+.site-footer__legal {
+  display: flex;
+  gap: 36px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site-footer__legal a {
+  color: var(--color-ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-footer a:focus-visible { outline-offset: 4px; }
