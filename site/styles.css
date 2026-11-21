@@ -22,6 +22,16 @@
   --p-deep: #262b1e;       /* derived: dark sections, from the ink */
 }
 
+/* ---------- Animatable colour tokens ----------
+   Registered so a scene (a section that recolours the page, e.g. Men's
+   Health in blue: :root[data-scene="mens"]) fades every colour at once. */
+@property --color-bg { syntax: "<color>"; inherits: true; initial-value: #f4f5ef; }
+@property --color-surface { syntax: "<color>"; inherits: true; initial-value: #e7eadf; }
+@property --color-ink { syntax: "<color>"; inherits: true; initial-value: #343b29; }
+@property --color-text { syntax: "<color>"; inherits: true; initial-value: #343b29; }
+@property --color-text-muted { syntax: "<color>"; inherits: true; initial-value: #5e6551; }
+@property --color-line { syntax: "<color>"; inherits: true; initial-value: transparent; }
+
 /* ---------- Tokens ---------- */
 :root {
   /* Colour (semantic) */
@@ -36,7 +46,11 @@
   --color-sage: var(--p-sage);
   --color-deep: var(--p-deep);
   --color-on-dark: var(--p-paper);
+  --color-on-accent: var(--p-ink); /* text on lime buttons: stays dark in every scene */
   --color-on-dark-muted: color-mix(in srgb, var(--p-paper) 72%, transparent);
+  /* Chips (section eyebrows): a bright text colour, set per section; this
+     default is a leaf green for paper (Weight Loss), 4.7:1 */
+  --color-chip: #367d12;
   /* Per-line tints: Weight Loss, Men's, Women's, Supplements */
   --color-wl: var(--p-sage);
   --color-mh: var(--p-deep);
@@ -57,6 +71,7 @@
   --fs-lede: 20px;   --lh-lede: 1.45;
   --fs-body: 17px;   --lh-body: 1.55;
   --fs-small: 14px;  --lh-small: 1.45;
+  --fs-chip: clamp(11px, 0.85vw, 15px); /* section chips: 12.24px at 1440 */
 
   /* Spacing: 4px base */
   --space-1: 4px;
@@ -102,6 +117,13 @@
   --dur-slow: 560ms;
 }
 
+/* Scene changes fade the whole page (reduced motion: instant, see below) */
+:root {
+  transition: --color-bg 700ms var(--ease-in-out), --color-surface 700ms var(--ease-in-out),
+    --color-ink 700ms var(--ease-in-out), --color-text 700ms var(--ease-in-out),
+    --color-text-muted 700ms var(--ease-in-out), --color-line 700ms var(--ease-in-out);
+}
+
 /* ---------- Base ---------- */
 *,
 *::before,
@@ -128,6 +150,7 @@ body {
 }
 
 [hidden] { display: none !important; } /* version switcher: hidden always wins over component display rules */
+[data-version] { display: contents; } /* review wrappers draw no box, so V2's sticky header stays stuck past its hero */
 h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 img, svg, video { display: block; max-width: 100%; }
@@ -197,11 +220,86 @@ button { font: inherit; color: inherit; }
 .btn--s { --btn-h: 40px; padding: 0 16px; font-size: 14px; }
 .btn--l { --btn-h: 54px; padding: 0 28px; font-size: 16px; }
 
-.btn--primary { background: var(--color-accent); color: var(--color-ink); }
-.btn--primary:hover { background: var(--color-accent-hover); }
+/* Fills go through --btn-bg so the arrow variant's pieces share one colour */
+.btn--primary { --btn-bg: var(--color-accent); background: var(--btn-bg); color: var(--color-on-accent); }
+.btn--primary:hover { --btn-bg: var(--color-accent-hover); }
 
-.btn--dark { background: var(--color-ink); color: var(--color-on-dark); }
-.btn--dark:hover { background: var(--color-deep); }
+.btn--dark { --btn-bg: var(--p-ink); background: var(--btn-bg); color: var(--color-on-dark); } /* raw ink: a scene that turns --color-ink light keeps this button dark */
+.btn--dark:hover { --btn-bg: var(--color-deep); }
+
+/* Arrow button (user, 2026-11-19, after the Verdant "Try now" reference):
+   a label tile and a square arrow tile, joined by a narrow neck, so the join
+   reads as a small round-ended notch at the top and the bottom. Used on
+   every lime CTA. Same colours as the plain button; only the build changes.
+     <a class="btn btn--primary btn--arrow">
+       <span class="btn__label">Get Started</span>
+       <span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+     </a>
+   Measured on the reference: notch ≈ 11% of the height wide, ≈ 19% deep,
+   rounded mouth and round bottom; arrow tile square.
+   Framer: Button component, variant "Arrow": two frames in a stack (gap =
+   notch width) plus the neck as an absolute frame behind them. */
+.btn--arrow {
+  --notch-w: 5px;   /* gap between the tiles */
+  --notch-d: 9px;   /* how far the notch cuts in, top and bottom */
+  --notch-r: 3px;   /* rounded mouth: the tiles' inner corners */
+  --btn-r: var(--radius-s);
+  position: relative;
+  isolation: isolate;
+  gap: var(--notch-w);
+  padding: 0;
+  border-radius: var(--btn-r);
+  background: none;
+}
+.btn--arrow .btn__label,
+.btn--arrow .btn__icon,
+.btn--arrow::before {
+  background-color: var(--btn-bg);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.btn--arrow .btn__label {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 22px;
+  border-radius: var(--btn-r) var(--notch-r) var(--notch-r) var(--btn-r);
+}
+.btn--arrow .btn__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--btn-h);
+  height: 100%;
+  border-radius: var(--notch-r) var(--btn-r) var(--btn-r) var(--notch-r);
+}
+.btn--arrow .btn__icon svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.btn--arrow:hover .btn__icon svg { transform: translateX(3px); }
+/* The neck: fills the gap between the notches, round-ended where they stop.
+   1px wider than the gap on each side so no seam shows between the pieces. */
+.btn--arrow::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: calc(var(--notch-d) - var(--notch-w) / 2);
+  bottom: calc(var(--notch-d) - var(--notch-w) / 2);
+  right: calc(var(--btn-h) - 1px);
+  width: calc(var(--notch-w) + 2px);
+  --cut: radial-gradient(circle calc(var(--notch-w) / 2) at 50% 0, #0000 calc(100% - 0.5px), #000);
+  --cut-b: radial-gradient(circle calc(var(--notch-w) / 2) at 50% 100%, #0000 calc(100% - 0.5px), #000);
+  -webkit-mask: var(--cut) top / 100% 51% no-repeat, var(--cut-b) bottom / 100% 51% no-repeat;
+  mask: var(--cut) top / 100% 51% no-repeat, var(--cut-b) bottom / 100% 51% no-repeat;
+}
+.btn--arrow.btn--s { --notch-w: 4px; --notch-d: 8px; padding: 0; }
+.btn--arrow.btn--s .btn__label { padding: 0 16px; }
+.btn--arrow.btn--s .btn__icon svg { width: 16px; height: 16px; }
+.btn--arrow.btn--l { --notch-w: 5px; --notch-d: 10px; padding: 0; }
+.btn--arrow.btn--l .btn__label { padding: 0 26px; }
+.btn--arrow.btn--l .btn__icon svg { width: 20px; height: 20px; }
+.btn--arrow.btn--pill { --btn-r: calc(var(--btn-h) / 2); } /* exact half height: a 999px radius would scale the small inner corners away */
 
 .btn--outline { background: transparent; color: var(--color-ink); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 24%, transparent); }
 .btn--outline:hover { box-shadow: inset 0 0 0 1px var(--color-ink); }
@@ -239,6 +337,32 @@ button { font: inherit; color: inherit; }
   transition: text-underline-offset var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
 }
 .link-underline:hover { text-underline-offset: 6px; }
+
+/* ---------- Chip: the section eyebrow in a bright colour ----------
+   Every section eyebrow (user, 2026-11-21: "we will have … everywhere where
+   we have chips"): capitals in a bright colour picked for the section's
+   background (user: "add color to chips … multiple colors as per bg color";
+   then, of a filled pill, "change color of text not add frame"). No frame,
+   no fill. Each colour is the most vivid of its hue that still reads at this
+   size (WCAG AA, 4.5:1 for 12px text), so on light and mid backgrounds it is
+   deep rather than neon. --color-chip is set on each section (not the
+   scene), so the chip has its colour before the page fades to the scene.
+   The text is trimmed to its capitals: the box is the cap height.
+   Markup: <p class="chip"><span>Text</span></p>
+   Sections add their own margin and alignment (centred: margin-inline auto).
+   Framer: a text style, a colour per section. */
+.chip {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  color: var(--color-chip);
+  font-size: var(--fs-chip);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.chip > span { text-box: trim-both cap alphabetic; }
 
 /* ---------- Stand-in images ----------
    Photos are added after the user confirms a design. Until then image slots

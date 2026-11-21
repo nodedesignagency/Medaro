@@ -1,0 +1,34 @@
+/* ==========================================================================
+   Home · Men's Health (#mens-health), the third section
+   Layout: components/care-tiles.css (shared with Women's Health), after the
+   user's "When we can help" reference (2026-11-19). This file holds only
+   the Men's Health scene.
+   The page turns blue while this section holds the middle of the screen
+   (user: "the color of the background will change to blue when this section
+   will open"): data-scene="mens" swaps the colour tokens below and
+   styles.css fades them. Two blues to compare: ?blue=a (deep slate, default)
+   and ?blue=b (denim).
+   Copy: content/home.md → Men's Health, word for word. The five "Care that
+   focuses on what matters" points are the text tiles.
+   ========================================================================== */
+
+:root {
+  --mh-blue: #1d2a3a;      /* a: deep slate blue */
+  --mh-blue-tile: #283a4f;
+}
+:root[data-blue="b"] {
+  --mh-blue: #24425f;      /* b: denim */
+  --mh-blue-tile: #2e5072;
+}
+:root[data-scene="mens"] {
+  --color-bg: var(--mh-blue);
+  --color-surface: var(--mh-blue-tile);
+  --color-ink: var(--p-paper);
+  --color-text: var(--p-paper);
+  --color-text-muted: color-mix(in srgb, var(--p-paper) 74%, var(--mh-blue));
+  --color-line: color-mix(in srgb, var(--p-paper) 18%, transparent);
+}
+
+/* Chip text: bright sky blue, 8.2:1 on the slate, 5.9:1 on ?blue=b (user,
+   2026-11-21: "change color of text") */
+.care--mens { --color-chip: #8cc8ff; }
