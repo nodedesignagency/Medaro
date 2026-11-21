@@ -7,11 +7,10 @@
    should come then the differences points should come in the style of the
    hero points we have made with small images and it will be scrollable".
    - left: the image, sticky under the header while the right column scrolls;
-   - right: chip, two-tone headline, the client's closing sentence; the two
-     blocks as a row of two points between hairlines (the reference's
-     "5 g | 100 mg" row); the list's label; the five details as hero-style
-     white tiles with a small product (components/category-tile.css,
-     --point); the lime arrow CTA.
+   - right: chip, two-tone headline, the client's closing sentence; the
+     client's two blocks one after the other, the second holding its five
+     details as hero-style tiles in moss green with a small product
+     (components/category-tile.css, --point); the lime arrow CTA.
    Same scene as V1 (data-scene="supplements": the page turns deep olive;
    tokens in supplements.css, move them here if V2 is picked). Content
    edges on the header's logo line (frame edge + 48).
@@ -93,40 +92,43 @@
   color: var(--color-text-muted);
 }
 
-/* the two blocks: the reference's two-figure row, hairlines above and below
-   and one between */
-.sp-v2__pair {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: clamp(36px, 3.2vw, 56px);
-  border-top: 1px solid var(--color-line);
-  border-bottom: 1px solid var(--color-line);
-}
-.sp-v2__pair > div { padding: 24px 28px 28px 0; }
-.sp-v2__pair > div + div { padding: 24px 0 28px 28px; border-left: 1px solid var(--color-line); }
-.sp-v2__pair h3 {
-  font-size: clamp(20px, 1.5vw, 26px);
+/* The client's two blocks, one after the other, no frame (user, 2026-11-21:
+   "i don't like this rectangle thing"); the five details sit inside the
+   second block, under its text ("these points are part of the marked
+   text"), as in the client's copy. */
+.sp-v2__blocks { margin-top: clamp(40px, 3.6vw, 64px); }
+.sp-v2__block + .sp-v2__block { margin-top: clamp(40px, 3.6vw, 64px); }
+.sp-v2__block h3 {
+  font-size: clamp(22px, 1.65vw, 30px);
   font-weight: var(--weight-regular);
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+  line-height: 1.18;
+  letter-spacing: -0.018em;
   text-wrap: balance;
 }
-.sp-v2__pair p {
+.sp-v2__block > p {
+  max-width: 34em;
   margin-top: 12px;
-  font-size: 15px;
+  font-size: clamp(15px, 1.1vw, 18px);
   line-height: 1.55;
   color: var(--color-text-muted);
   text-wrap: pretty;
 }
-
-/* the details: hero-style white tiles, one per row */
-.sp-v2__label {
-  margin: clamp(40px, 3.6vw, 64px) 0 16px;
+.sp-v2__block > .sp-v2__label {
+  margin-top: clamp(28px, 2.4vw, 40px);
+  margin-bottom: 14px;
   font-size: 15px;
   line-height: 1.45;
-  color: var(--color-text-muted);
 }
-.sp-v2__points { grid-template-columns: minmax(0, 1fr); }
+
+/* the details: hero-style tiles in our moss green (user, 2026-11-21: "i dont
+   want it to be white … something in green type color which matches ours"):
+   the vial labels' moss #6B7A45, 3.1:1 against the olive page; paper names,
+   4.3:1, large text (24px and up), one per row */
+.sp-v2__points {
+  --tile-bg: #6b7a45;
+  --tile-ink: var(--p-paper);
+  grid-template-columns: minmax(0, 1fr);
+}
 /* each tile's tablet: a different object or angle, cut off by the card's right edge */
 .sp-v2__points > :nth-child(1) { --ct-h: 104%; --ct-x: 88%; --ct-y: 56%; --ct-r: 10deg; }
 .sp-v2__points > :nth-child(2) { --ct-h: 84%;  --ct-x: 86%; --ct-y: 60%; --ct-r: -14deg; }

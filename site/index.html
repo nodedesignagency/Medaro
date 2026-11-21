@@ -435,7 +435,8 @@
   <!-- SECTION:home/supplements--v2 START · styles: sections/home/supplements--v2.css (scene tokens in sections/home/supplements.css), components/category-tile.css (--point), components/product.css · scripts: main.js (scenes) · assets: assets/images/products/stage-plate.webp, tablet-white-blank.webp, tablet-oval-lime-blank.webp, assets/images/supplements/tablet-round.webp
        Version 2, to compare with V1 (?supplements=v2). After the user's "No bloat. No grit." product-spotlight reference
        (2026-11-21): the image on the left stays put (sticky) while the copy on the right scrolls: chip, headline, sentence,
-       the two blocks as a row of two points, then the five details as hero-style tiles with small images, then the CTA.
+       the client's two blocks one after the other, the second with its five details as hero-style tiles in moss green with
+       small images (user, 2026-11-21), then the CTA.
        Stand-in images until the photos are made (no MEDARO on pills or bottles). Copy: content/home.md → Supplement, word
        for word. If picked, it becomes home/supplements (id "supplements"). [LINK NEEDED] Explore Supplements. -->
   <section class="sp-v2" id="supplements-v2" aria-labelledby="sp-v2-title" data-scene="supplements">
@@ -454,40 +455,41 @@
         <h2 class="sp-v2__title" id="sp-v2-title"><span class="sp-v2__title-a">Supplements designed to support better health</span> <span class="sp-v2__title-b">and lasting wellness</span></h2>
         <p class="sp-v2__lede">Formulated supplements designed to support your body's needs and overall well-being.</p>
 
-        <div class="sp-v2__pair">
-          <div>
+        <!-- The client's two blocks, one after the other; the five details belong to the second (user, 2026-11-21:
+             "these points are part of the marked text"). No hairline box ("i don't like this rectangle thing"). -->
+        <div class="sp-v2__blocks">
+          <div class="sp-v2__block">
             <h3>Better support for your everyday health.</h3>
             <p>Thoughtfully formulated supplements with quality ingredients, designed to support your wellness goals and help you feel your best every day.</p>
           </div>
-          <div>
+          <div class="sp-v2__block">
             <h3>Better wellness starts with better choices.</h3>
             <p>Thoughtfully selected ingredients and purposeful formulations to complement your daily routine and support your health goals.</p>
+            <p class="sp-v2__label" id="sp-v2-details">The difference is in the details:</p>
+          <ul class="category-tiles sp-v2__points" aria-labelledby="sp-v2-details">
+            <li class="category-tile category-tile--point">
+              <span class="category-tile__text"><span class="category-tile__name">Quality Ingredients</span></span>
+              <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy"></span></span>
+            </li>
+            <li class="category-tile category-tile--point">
+              <span class="category-tile__text"><span class="category-tile__name">Transparent Formulations</span></span>
+              <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy"></span></span>
+            </li>
+            <li class="category-tile category-tile--point">
+              <span class="category-tile__text"><span class="category-tile__name">Targeted Nutritional Support</span></span>
+              <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/supplements/tablet-round.webp" alt="" width="760" height="770" loading="lazy"></span></span>
+            </li>
+            <li class="category-tile category-tile--point">
+              <span class="category-tile__text"><span class="category-tile__name">Everyday Wellness</span></span>
+              <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy"></span></span>
+            </li>
+            <li class="category-tile category-tile--point">
+              <span class="category-tile__text"><span class="category-tile__name">Thoughtful Ingredient Selection</span></span>
+              <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy"></span></span>
+            </li>
+          </ul>
           </div>
         </div>
-
-        <p class="sp-v2__label" id="sp-v2-details">The difference is in the details:</p>
-        <ul class="category-tiles sp-v2__points" aria-labelledby="sp-v2-details">
-          <li class="category-tile category-tile--point">
-            <span class="category-tile__text"><span class="category-tile__name">Quality Ingredients</span></span>
-            <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy"></span></span>
-          </li>
-          <li class="category-tile category-tile--point">
-            <span class="category-tile__text"><span class="category-tile__name">Transparent Formulations</span></span>
-            <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy"></span></span>
-          </li>
-          <li class="category-tile category-tile--point">
-            <span class="category-tile__text"><span class="category-tile__name">Targeted Nutritional Support</span></span>
-            <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/supplements/tablet-round.webp" alt="" width="760" height="770" loading="lazy"></span></span>
-          </li>
-          <li class="category-tile category-tile--point">
-            <span class="category-tile__text"><span class="category-tile__name">Everyday Wellness</span></span>
-            <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy"></span></span>
-          </li>
-          <li class="category-tile category-tile--point">
-            <span class="category-tile__text"><span class="category-tile__name">Thoughtful Ingredient Selection</span></span>
-            <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy"></span></span>
-          </li>
-        </ul>
 
         <a class="btn btn--primary btn--arrow sp-v2__cta" href="#supplements-link"><span class="btn__label">Explore Supplements</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
       </div>
