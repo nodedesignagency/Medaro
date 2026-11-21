@@ -67,8 +67,9 @@
   padding-top: max(0px, calc(var(--wl-span2) * 104 / 640 - 0.7 * var(--fs-chip) - 28px - 0.16 * var(--wl-title-fs)));
 }
 
-/* The eyebrow is the shared numbered chip (styles.css → .chip), on the
-   column line; ink like every chip (was olive caps) */
+/* The eyebrow is the shared chip (styles.css → .chip), hung (--hang): its
+   text on the column line, the left line out in the gutter; ink like every
+   chip (was olive caps) */
 .wl__eyebrow { margin-bottom: 28px; }
 
 .wl__title {

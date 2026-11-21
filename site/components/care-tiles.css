@@ -34,7 +34,7 @@
   text-align: center;
 }
 
-/* The eyebrow is the shared numbered chip (styles.css → .chip), centred */
+/* The eyebrow is the shared chip (styles.css → .chip), centred */
 .care__eyebrow {
   justify-content: center;
   margin-bottom: 28px;
@@ -132,6 +132,8 @@
    1440, 34px tall. Not a link, no hover. After Teachable's and Snowflake's
    status tags and Rox's "● Available". */
 .care__foot .care__soon {
+  display: flex;
+  align-items: center;
   justify-content: center;
   gap: 0.72em;
   width: fit-content;
@@ -144,7 +146,10 @@
   font-size: clamp(13px, 0.98vw, 17px);
   font-weight: var(--weight-medium);
   line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
+.care__soon > span:last-child { text-box: trim-both cap alphabetic; }
 .care__dot {
   position: relative;
   flex: none;
