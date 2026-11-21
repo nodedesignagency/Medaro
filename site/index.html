@@ -207,74 +207,83 @@
 
   </main>
 
-  <!-- SECTION:footer--full START · styles: components/footer.css, components/product.css · scripts: main.js (rolling links) · assets: assets/images/products/tablet-white-blank.webp, tablet-oval-lime-blank.webp
-       After the user's "Ethical Life" footer reference (2026-11-21): brand line top left, link columns top right,
-       bottom bar with the copyright and legal links. The user's change: the MEDARO wordmark sits behind the
-       supplement image ("i want our logo back of the suplement pic"). Our style: mist panel on the frame, radius 18.
-       Links: Explore = the menu's six links; legal = the 11 client documents (content/source/legal/), pages not built yet.
-       Contact details are the legal documents' own placeholders until the client fills them. [COPY NEEDED] -->
+  <!-- SECTION:footer--full START · styles: components/footer.css, components/product.css · scripts: main.js (rolling links) · assets: assets/images/products/ (vial-tirzepatide.webp, print-vial-microdose.svg, sheen-vial.svg, ampoule-quad4.webp, print-ampoule-quad4-ink.svg)
+       Design after the user's Ethical Life footer (2026-11-21): brand line top left, link columns top right, the MEDARO
+       wordmark across the foot behind the products ("i want our logo back of the suplement pic"), lime glow; mist panel
+       on the frame, radius 18. Content: the client's footer (content/footer.md, word for word; user, 2026-11-21: "make
+       this footer according to this content and instead of tablets use bottles"). Products: the hero's two bottles, the
+       Microdose Tirzepatide vial and the Quad 4 ampoule (dark print on light grounds, as in the menu).
+       [DATA NEEDED] LegitScript badge (placeholder in the client's copy) and the client's HIPAA badge artwork.
+       Legal pages (legal/<slug>.html) not built yet. -->
   <footer class="site-footer site-footer--full">
     <div class="site-footer__frame">
 
       <div class="site-footer__top">
-        <p class="site-footer__tagline">Made for<br>Better Health.</p>
+        <div class="site-footer__brandline">
+          <p class="site-footer__tagline">Made for<br>Better Health.</p>
+          <ul class="site-footer__badges">
+            <li class="site-footer__badge site-footer__badge--placeholder">
+              <span class="site-footer__badge-tag">Placeholder</span>
+              <span class="site-footer__badge-text">Official LegitScript badge – placeholder only</span>
+            </li>
+            <!-- The client's HIPAA badge (a caduceus image in their copy), set in type until they send the artwork -->
+            <li class="site-footer__badge site-footer__badge--hipaa">
+              <span class="site-footer__badge-name">HIPAA</span>
+              <span class="site-footer__badge-text">Compliant</span>
+            </li>
+          </ul>
+        </div>
 
         <div class="site-footer__cols">
-          <nav class="site-footer__col" aria-labelledby="footer-explore">
-            <p class="site-footer__label" id="footer-explore">Explore</p>
+          <nav class="site-footer__col" aria-labelledby="footer-shop">
+            <p class="site-footer__label" id="footer-shop">Shop</p>
             <ul class="site-footer__list">
-              <li><a class="link-roll" href="#weight-loss">Weight Loss</a></li>
-              <li><a class="link-roll" href="#mens-health">Men's Health</a></li>
+              <li><a class="link-roll" href="mens-health.html">Men's Health</a></li>
               <li><a class="link-roll" href="#womens-health">Women's Health</a></li>
-              <li><a class="link-roll" href="#supplements">Supplement</a></li>
-              <li><a class="link-roll" href="#how-it-works">How Medaro Works</a></li>
-              <li><a class="link-roll" href="about.html">About Us</a></li>
             </ul>
           </nav>
 
           <nav class="site-footer__col" aria-labelledby="footer-support">
             <p class="site-footer__label" id="footer-support">Support</p>
             <ul class="site-footer__list">
-              <li><a class="link-roll" href="contact.html">Contact Support</a></li>
-              <li><a class="link-roll" href="legal/frequently-asked-questions.html">FAQ</a></li>
-              <li><span class="site-footer__note">[BRAND_SUPPORT_EMAIL]</span></li>
-              <li><span class="site-footer__note">[BRAND_PHONE]</span></li>
+              <li><a class="link-roll" href="contact.html">Contact Us</a></li>
+              <li><a class="link-roll" href="legal/frequently-asked-questions.html">FAQs</a></li>
             </ul>
           </nav>
 
           <nav class="site-footer__col" aria-labelledby="footer-legal">
             <p class="site-footer__label" id="footer-legal">Legal</p>
             <ul class="site-footer__list">
-              <li><a class="link-roll" href="legal/consumer-health-data-privacy-policy.html">Consumer Health Data Privacy Policy</a></li>
-              <li><a class="link-roll" href="legal/notice-of-privacy-practices.html">Notice of Privacy Practices</a></li>
-              <li><a class="link-roll" href="legal/telehealth-informed-consent.html">Telehealth Informed Consent</a></li>
-              <li><a class="link-roll" href="legal/cancellation-and-refund-policy.html">Cancellation and Refund Policy</a></li>
-              <li><a class="link-roll" href="legal/subscription-and-auto-renewal-terms.html">Subscription and Auto-Renewal Terms</a></li>
-              <li><a class="link-roll" href="legal/sms-and-mobile-terms.html">SMS and Mobile Terms</a></li>
-              <li><a class="link-roll" href="legal/california-privacy-disclosures.html">California Privacy Disclosures</a></li>
+              <li><a class="link-roll" href="legal/terms-of-use.html">Terms of Use</a></li>
+              <li><a class="link-roll" href="legal/privacy-policy.html">Privacy Policy</a></li>
+              <li><a class="link-roll" href="legal/notice-of-privacy-practices.html">HIPAA Notice of Privacy Practices</a></li>
+              <li><a class="link-roll" href="legal/cancellation-and-refund-policy.html">Returns &amp; Refund Policy</a></li>
+              <li><a class="link-roll" href="legal/california-privacy-disclosures.html">California Privacy Notice</a></li>
+              <li><a class="link-roll" href="legal/sms-and-mobile-terms.html">SMS Terms and Conditions</a></li>
             </ul>
           </nav>
         </div>
       </div>
 
-      <!-- The wordmark behind the supplement. Stand-in: the hero's two blank tablets (no MEDARO on pills: client,
-           2026-11-21) until a supplement render is made. -->
+      <!-- The client's disclaimers, word for word (content/footer.md). [company_legal_name] stays visible until the client fills it. -->
+      <div class="site-footer__fine">
+        <p>[company_legal_name] operates as a marketplace platform connecting patients with independently licensed healthcare providers who deliver care through the [company_legal_name] Patient Portal. [company_legal_name] does not dispense medication or provide medical services directly; all clinical decisions rest solely with independent providers. Payment does not guarantee that a prescription will be written or that medication will be dispensed. Any prescription issued reflects only the professional judgment of the healthcare provider.</p>
+        <p>Where we operate: [company_legal_name] services are available only to patients physically located in U.S. states where our affiliated providers are licensed. Availability varies by state, by treatment, and over time, and some products are not offered in every state. Eligibility is confirmed during intake, and if care cannot be offered in your state you will not be charged. Email <a href="mailto:support@mymedaro.com">support@mymedaro.com</a> to confirm availability where you live.</p>
+        <p>Prescription products: medications shown on this site require a valid prescription from a licensed provider following an evaluation. Pricing reflects the cost of the medication and associated clinical services when prescribed; it is not an offer to sell a prescription medication and does not guarantee approval.</p>
+        <p>Subscriptions: multi-month plans are billed as described at checkout and renew automatically until cancelled. You may cancel at any time before your next renewal by emailing <a href="mailto:support@mymedaro.com">support@mymedaro.com</a> or calling <a href="tel:+17789036742">+1 778 903 6742</a>. See our Terms of Service and Returns &amp; Refunds policy.</p>
+        <p>The information on this site is provided for general informational purposes only and is not a substitute for individualized medical advice, diagnosis, or treatment. Always consult your licensed healthcare provider about any medical concerns. This platform advertises healthcare services, not any specific prescription medication.</p>
+        <p>Disclaimer: FDA-approved brand-name medications, including Wegovy® and Ozempic®, are made and distributed solely by Novo Nordisk®. Mounjaro® and Zepbound® are made and distributed solely by Eli Lilly and Company®. MEDARO is not affiliated with, endorsed by, or sponsored by any of these companies or their products.</p>
+        <p>Compounded medications are not reviewed or approved by the U.S. Food and Drug Administration (FDA) for safety or efficacy. They are, however, prepared by licensed compounding pharmacies in accordance with Section 503A of the Federal Food, Drug, and Cosmetic Act, which permits compounding based on a valid patient-specific prescription from a licensed healthcare provider.</p>
+      </div>
+
+      <!-- The wordmark behind the bottles: the hero's Quad 4 ampoule and Microdose vial, crossing as in the hero -->
       <div class="site-footer__brand" aria-hidden="true">
         <div class="site-footer__glow"></div>
         <svg class="site-footer__mark"><use href="#wordmark"/></svg>
-        <div class="site-footer__scene" data-brief="Supplement render to come: one MEDARO supplement bottle or jar, upright, whole, soft studio light on a plain colour, cut out">
-          <div class="product product--tablet-white"><div class="product__float"><img src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665"></div></div>
-          <div class="product product--tablet-oval"><div class="product__float"><img src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617"></div></div>
+        <div class="site-footer__scene">
+          <div class="product product--ampoule"><div class="product__float"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print" src="assets/images/products/print-ampoule-quad4-ink.svg" alt="" width="406" height="2200"></div></div>
+          <div class="product product--vial"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
         </div>
-      </div>
-
-      <div class="site-footer__bar">
-        <p class="site-footer__copy">© 2026 MEDARO</p>
-        <ul class="site-footer__legal">
-          <li><a class="link-roll" href="legal/privacy-policy.html">Privacy Policy</a></li>
-          <li><a class="link-roll" href="legal/terms-and-conditions.html">Terms and Conditions</a></li>
-          <li><a class="link-roll" href="legal/terms-of-use.html">Terms of Use</a></li>
-        </ul>
       </div>
 
     </div>

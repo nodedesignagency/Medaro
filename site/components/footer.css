@@ -1,17 +1,19 @@
 /* ==========================================================================
    Component: footer (--full)
-   After the user's "Ethical Life" footer reference (2026-11-21): the brand
-   line top left, link columns top right, a bottom bar with the copyright left
-   and legal links right, a lime glow behind the product. The user's change:
-   "i want our logo back of the suplement pic": the giant MEDARO wordmark
-   runs inset to inset across the foot, in white (the reference's white type
-   on a light ground), and the supplement image floats in front of it.
+   Design after the user's Ethical Life footer (2026-11-21): the brand line
+   top left, link columns top right, a lime glow behind the product. The
+   user's change: "i want our logo back of the suplement pic": the giant
+   MEDARO wordmark runs inset to inset across the foot, in white (the
+   reference's white type on a light ground), the products in front of it.
+   Content: the client's footer (content/footer.md, word for word; user,
+   2026-11-21: "make this footer according to this content and instead of
+   tablets use bottles"): badges under the brand line, Shop / Support /
+   Legal, and their seven disclaimers under a hairline.
    In our style: a mist panel on the frame like the hero stage (frame edges,
    16px from the bottom, radius 18, content on the 48px inset that the
    header's logo shares), Host Grotesk, the menu's grey caps labels, ink
-   links with the rolling hover (.link-roll), the hero's floating tablets
-   (components/product.css).
-   Product: a stand-in until a supplement render is made (data-brief).
+   links with the rolling hover (.link-roll), the hero's two bottles
+   floating (components/product.css).
    Variants: --full (Home, About, Contact, legal). --landing (logo, legal
    links only, no links out) not built yet.
    Framer: one component; the wordmark is the logo SVG, the products are
@@ -25,8 +27,8 @@
 .site-footer__frame {
   --ft-inset: 48px;
   position: relative;
-  overflow: hidden; /* the glow fades out past the panel's edge */
-  padding: 52px var(--ft-inset) 0;
+  overflow: hidden; /* the glow and the bottles run off the panel's foot */
+  padding: 52px var(--ft-inset) var(--ft-inset);
   border-radius: 18px;
   background: var(--color-surface);
   color: var(--color-ink);
@@ -34,7 +36,7 @@
   isolation: isolate;
 }
 
-/* ---------- Top: the brand line left, the link columns right ---------- */
+/* ---------- Top: brand line and badges left, link columns right ---------- */
 .site-footer__top {
   position: relative;
   z-index: 3;
@@ -53,9 +55,53 @@
   text-box: trim-both cap alphabetic; /* cap top sits level with the labels' */
 }
 
+/* Badges: the client's LegitScript placeholder and their HIPAA badge, two
+   80px tiles, radius 8 like the buttons. Placeholders until the real
+   artwork arrives ([DATA NEEDED]). */
+.site-footer__badges {
+  display: flex;
+  gap: 12px;
+  margin: 44px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.site-footer__badge {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 6px;
+  width: 80px;
+  height: 80px;
+  padding: 8px;
+  border-radius: var(--radius-s);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 22%, transparent);
+  text-align: center;
+}
+.site-footer__badge--placeholder {
+  box-shadow: none;
+  outline: 1px dashed color-mix(in srgb, var(--color-ink) 40%, transparent);
+  outline-offset: -1px;
+}
+.site-footer__badge-tag,
+.site-footer__badge-text {
+  font-size: 9px;
+  font-weight: var(--weight-medium);
+  line-height: 1.25;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #666663;
+}
+.site-footer__badge-tag { color: #56662f; letter-spacing: 0.12em; } /* the promo card's olive label */
+.site-footer__badge-name {
+  font-size: 20px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
 .site-footer__cols {
   display: flex;
-  gap: clamp(48px, 5cqw, 96px);
+  gap: clamp(64px, 6cqw, 120px);
 }
 
 /* the menu's label (user, 2026-11-20: "grey not greenish … little more smaller"),
@@ -78,25 +124,51 @@
   padding: 0;
   list-style: none;
 }
-.site-footer__list a,
-.site-footer__note {
+.site-footer__list a {
   display: inline-block;
   font-size: 16px;
   line-height: 1.25;
   letter-spacing: -0.005em;
   white-space: nowrap;
-}
-.site-footer__list a {
   color: var(--color-ink);
   text-decoration: none;
 }
-/* contact details: plain text until the client fills them in */
-.site-footer__note { color: var(--color-text-muted); }
 
-/* ---------- The wordmark, with the supplement in front ---------- */
+/* ---------- The client's disclaimers, under a hairline ----------
+   In columns so the lines stay readable instead of running the full width;
+   each paragraph stays whole. */
+.site-footer__fine {
+  position: relative;
+  z-index: 3;
+  margin-top: 64px;
+  padding-top: 36px;
+  border-top: 1px solid var(--color-line);
+  columns: 400px 3; /* three columns from 1440 up (about 60–90 characters a line), two below */
+  column-gap: 64px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-text-muted); /* 5:1 on mist */
+}
+.site-footer__fine p {
+  margin: 0 0 14px;
+  break-inside: avoid;
+}
+.site-footer__fine a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--color-ink) 40%, transparent);
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
+}
+.site-footer__fine a:hover { text-decoration-color: var(--color-ink); }
+
+/* ---------- The wordmark, with the bottles in front ---------- */
 .site-footer__brand {
   position: relative;
-  margin-top: clamp(96px, 9cqw, 160px);
+  /* room for the bottles above the letters: their tips reach 0.67 of the
+     wordmark's height above it (the wordmark is 16.1cqw tall), plus 56px */
+  margin-top: calc(10.8cqw + 56px);
 }
 
 /* the official wordmark from the sprite, inset to inset, white on the mist */
@@ -110,11 +182,11 @@
   color: #fff;
 }
 
-/* the reference's glow: soft nude lime, centred on the product, clipped by the panel */
+/* the reference's glow: soft nude lime, centred on the bottles, clipped by the panel */
 .site-footer__glow {
   position: absolute;
   left: 50%;
-  top: 62%;
+  top: 58%;
   z-index: 0;
   width: 62cqw;
   aspect-ratio: 1.45;
@@ -123,46 +195,22 @@
   pointer-events: none;
 }
 
-/* The supplement, centred on the wordmark and in front of it. The box is a
-   size container: products are placed in % of it (components/product.css). */
+/* The bottles, centred on the wordmark and in front of it, crossing as in
+   the hero (ampoule behind, vial in front), the vial's foot running off the
+   panel like the reference's bottle. The box is a size container: products
+   are placed in % of it (components/product.css). */
 .site-footer__scene {
   position: absolute;
   left: 50%;
-  top: 47%;
+  top: 50%;
   z-index: 2;
-  height: 170%;
-  aspect-ratio: 1.4;
-  transform: translate(-50%, -50%);
+  height: 220%;
+  aspect-ratio: 0.62;
+  transform: translate(-50%, -54%);
   container-type: size;
   pointer-events: none;
 }
-.site-footer .product--tablet-white { --h: 44%; --x: 69%; --y: 31%; --r: 10deg; --z: 1; }
-.site-footer .product--tablet-oval  { --h: 50%; --x: 37%; --y: 62%; --r: -12deg; --z: 2; }
-
-/* ---------- Bottom bar ---------- */
-.site-footer__bar {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 32px;
-  padding: 28px 0 30px;
-  font-size: 13px;
-  line-height: 1.25;
-}
-.site-footer__copy { color: var(--color-ink); }
-.site-footer__legal {
-  display: flex;
-  gap: 36px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.site-footer__legal a {
-  color: var(--color-ink);
-  text-decoration: none;
-  white-space: nowrap;
-}
+.site-footer .product--ampoule { --h: 92%; --x: 58%; --y: 47%; --r: -14deg; }
+.site-footer .product--vial    { --h: 58%; --x: 31%; --y: 64%; --r: 10deg; }
 
 .site-footer a:focus-visible { outline-offset: 4px; }
