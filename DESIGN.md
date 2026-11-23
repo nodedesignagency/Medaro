@@ -115,6 +115,7 @@ Write what the user said, in their words where possible, with the date.
 - 2026-11-19: Desktop only in HTML. Confirmed sections move to `main`; when the user says "move to Framer", the responsive versions are built in Framer during the transfer.
 - 2026-11-19: `main` created from the setup (docs, copy, logo, Home placeholder). No sections on it yet.
 - 2026-11-19: A few images will need to be created; how is still to be decided with the user. Until then image slots show a soft palette wash and a one-line brief (hide briefs with `?briefs=off`).
+- 2026-11-23: Framer footer: the big MEDARO wordmark looked stretched on the user's iPhone (Safari). Cause: the floating vial was an in-flow child of the 6.2:1 aspect-ratio frame with a % height (176%); Safari let that child grow the frame to the vial's height (55 → 97px at 342 wide) and the SVG stretched with it. Fix: the vial is now `position: absolute`, centred (50% / 50%), same size and rotation. **Rule for Framer:** anything that floats over an aspect-ratio frame is absolutely positioned, never an in-flow child with a % height. Check on iPhone Safari, not only the Framer canvas (Chrome).
 - 2026-11-19: Client palette shared on a call: button `#D5E5AD` Soft Nude Lime ("not the light green"), text `#343B29` Dark Olive Green, `#A8AF98` Dusty Olive. The user told the client we'd explore 2–3 colour options after the first version.
 
 ### Likes
