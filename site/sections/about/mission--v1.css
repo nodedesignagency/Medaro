@@ -102,7 +102,7 @@
 
 /* ---------- One paragraph ---------- */
 .mission-v1__text {
-  max-width: 600px;
+  max-width: 760px; /* three lines (user, 2026-11-23: "make it 3 liners") */
   margin: clamp(64px, 6vw, 104px) auto 0;
   padding-inline: 24px;
   font-size: var(--fs-body);
