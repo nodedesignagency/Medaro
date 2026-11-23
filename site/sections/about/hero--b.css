@@ -6,11 +6,11 @@
    bottom scrim under it. The people on the right stay clear of both.
    ========================================================================== */
 .about-hero--b .about-hero__lede {
-  max-width: min(600px, 42vw); /* one line at 1440, two balanced lines at 1280, clear of the runners */
+  max-width: min(600px, 42vw); /* two balanced lines, clear of the runners */
   margin: 4px 0 0;
   text-wrap: balance;
-  font-size: 20px;
-  line-height: 1.45;
+  font-size: 24px; /* user, 2026-11-23: "increase text size here by 4-6px" (was 20) */
+  line-height: 1.35;
   letter-spacing: -0.005em;
   color: var(--p-paper);
 }
