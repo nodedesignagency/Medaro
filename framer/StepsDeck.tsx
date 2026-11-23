@@ -44,7 +44,7 @@ const IMAGES = [
     // 2026-11-23: AI photos (Magnific, Nano Banana 2.1), one woman through the three steps; step 3's box print is code (tools/box-print.py)
     "https://framerusercontent.com/images/e3RfqDPwjc9Qj1GWcb4qSB5HQX4.webp",
     "https://framerusercontent.com/images/wvGRnztHeaFUKGzmlcdeu2B21s.webp",
-    "https://framerusercontent.com/images/6W3xTCAbFqWljUD7H3W9zK08k.webp",
+    "https://framerusercontent.com/images/Rz0WnrgE522prDTpE8urMUWfVI.webp",
 ]
 const DEFAULT_STEPS: Step[] = [
     { title: "Tell Us About Yourself", text: "Complete a quick online health assessment to help us understand your medical history, needs, and treatment goals." },
