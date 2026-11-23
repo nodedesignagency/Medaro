@@ -23,7 +23,16 @@
   --wl-frame: min(100cqw - 2 * var(--edge), var(--frame-max));
   --wl-span2: calc((var(--wl-frame) - 4 * var(--wl-gap)) * 2 / 5 + var(--wl-gap)); /* two columns */
   --wl-title-fs: clamp(56px, 4.7vw, 92px);
+  /* the partition (user, 2026-11-23, after Good Life's hero): its front edge
+     runs this far below the copy at the left, drops 6.5% of the screen width
+     to the right (Good Life's slope, ≈3.7°), and the lit floor under it fades
+     back to the page over the band */
+  --wl-edge-gap: clamp(40px, 4vw, 72px);
+  --wl-slant: 6.5cqw;
+  --wl-band: clamp(120px, 11vw, 200px);
   container-type: inline-size;
+  isolation: isolate; /* its own stack: the partition (z-index −1) paints over
+     this background and under every block of the section */
   overflow-x: clip; /* the cut-out's transparent margin may pass the screen edge */
   padding: var(--wl-pad-top) 0 clamp(96px, 8vw, 160px);
   background: var(--color-bg);
@@ -54,12 +63,15 @@
    Sized by the copy (user, 2026-11-21: "make it similar height of the para",
    after "make this image smaller" and "make smaller"; 2026-11-23: "the image
    height and right side content should look same height"): the mirror's top
-   corner level with the top of the chip (the copy's top; the chip is trimmed
-   to its capitals), his heels level with the foot of the Learn more button,
-   the stand's foot on the frame line. The image's transparent room above the
-   mirror (20 of 2028) and below the heels (110, the shadows) is left out of
-   the match. */
+   level with the top of the chip (the copy's top; the chip is trimmed to its
+   capitals), his heels level with the foot of the Learn more button, the
+   stand's foot on the frame line. "The mirror's top" is the image's visual
+   top, y 44: the middle of the mirror's sloping top edge (21 → 69) and the
+   top of his head (44), so the mirror's near corner rises just above the chip
+   (user, 2026-11-23: "just a bit more"). The transparent room below the heels
+   (110 of 2028, the shadows) is left out of the match. */
 .wl__intro {
+  position: relative; /* the partition's box; it paints in .wl's own stack */
   /* the copy sits this far right of the third column line (user, 2026-11-21:
      "the gap is very less … so text move to right"): about 45px at 1440 */
   --wl-copy-shift: calc(var(--wl-span2) * 0.08);
@@ -73,9 +85,9 @@
 .wl__photo {
   position: absolute;
   left: 0;
-  /* subject height (1898 of 2028, mirror top to heels) = the row (the copy) */
-  height: calc(100% * 2028 / 1898);
-  top: calc(100% * -20 / 1898);
+  /* subject height (1874 of 2028, visual top to heels) = the row (the copy) */
+  height: calc(100% * 2028 / 1874);
+  top: calc(100% * -44 / 1874);
   width: auto;
   max-width: none;
   /* the transparent room left of the stand's foot (56 of 1378) hangs past
@@ -87,6 +99,42 @@
   grid-column: 3 / 6;
   align-self: start;
   padding-left: var(--wl-copy-shift);
+}
+
+/* The partition (user, 2026-11-23: "it has slanted partition can we have real
+   life look partition like that … we are going to keep that image of guy
+   looking in mirror instead of those products sitting"), after Good Life's
+   hero photo, measured from it: a lit surface that darkens toward its front
+   edge, the edge sloping down to the right and soft (≈5px), then a lighter
+   floor that fades back to the page. Here in our client's Dusty Olive mixed
+   into the page colour (so it follows the scene colours), drawn as one
+   gradient whose lines run parallel to the edge: 183.72deg is the slope of
+   --wl-slant (6.5% of the width), so the edge is a straight line at
+   100% − slant − band along the gradient. Full bleed, from the section's top
+   to the end of the floor band; the man and the mirror stand on it. */
+.wl__backdrop {
+  --wl-edge: calc(100% - var(--wl-slant) - var(--wl-band));
+  --wl-surface-mid: color-mix(in srgb, var(--color-bg) 89%, var(--p-sage));
+  --wl-surface-edge: color-mix(in srgb, var(--color-bg) 70%, var(--p-sage));
+  --wl-floor: color-mix(in srgb, var(--color-bg) 85%, var(--p-sage));
+  position: absolute;
+  z-index: -1;
+  top: calc(-1 * var(--wl-pad-top));
+  bottom: calc(-1 * (var(--wl-edge-gap) + var(--wl-slant) + var(--wl-band)));
+  left: calc((100% - 100cqw) / 2);
+  width: 100cqw;
+  pointer-events: none;
+  background:
+    /* soft key light from the upper right */
+    radial-gradient(ellipse 46% 58% at 84% 14%, color-mix(in srgb, #fff 46%, transparent), transparent 72%),
+    linear-gradient(183.72deg,
+      var(--color-bg) 0,
+      var(--color-bg) calc(var(--wl-edge) * 0.12),
+      var(--wl-surface-mid) calc(var(--wl-edge) * 0.62),
+      var(--wl-surface-edge) calc(var(--wl-edge) - 2px),
+      var(--wl-floor) calc(var(--wl-edge) + 3px),
+      color-mix(in srgb, var(--color-bg) 94%, var(--p-sage)) calc(var(--wl-edge) + var(--wl-band) * 0.35),
+      var(--color-bg) calc(var(--wl-edge) + var(--wl-band)));
 }
 
 /* The eyebrow is the shared chip (styles.css → .chip), on the column line,
@@ -118,7 +166,9 @@
 
 /* ---------- More than weight loss ---------- */
 .wl__more {
-  margin-top: clamp(48px, 4.4vw, 80px);
+  /* clear the partition's edge where the lead starts (the third column line,
+     40% across, where the edge has dropped 0.4 × slant) */
+  margin-top: calc(var(--wl-edge-gap) + var(--wl-slant) * 0.42 + clamp(48px, 4.4vw, 80px));
   align-items: end;
 }
 .wl__subtitle {
