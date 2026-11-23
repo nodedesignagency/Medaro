@@ -12,6 +12,9 @@
    No light edge: on dark glass a white hairline reads as an outline.
    Turns light once the photo has scrolled away (is-solid).
    On the page background (V2): --plain.
+   With a menu sheet (V3, the client's hims/Superpower references,
+   2026-11-20): --menu. Logo left; Get Started and a round menu button right;
+   the six links move into components/menu.css.
    ========================================================================== */
 
 .site-header { z-index: 50; }
@@ -106,6 +109,9 @@
   color: var(--color-ink);
 }
 .site-header--plain .logo { font-size: 21px; }
+/* Compact (Home V3, user 2026-11-19: "nav looks so big heightwise"): 18px shorter */
+.site-header--plain.site-header--compact .site-header__bar { height: 70px; }
+.site-header--compact .site-header__actions .btn { --btn-h: 44px; } /* 4px shorter than the default 48 (user, 2026-11-19) */
 .site-header--plain .site-header__links { gap: 28px; }
 .site-header--plain .site-header__links a { font-size: 15px; }
 .site-header--plain .site-header__links a:hover { opacity: 0.6; }
@@ -117,12 +123,38 @@
   .site-header--plain .site-header__links a { font-size: 14px; }
 }
 
+/* ---------- With a menu sheet (V3) ---------- */
+.site-header--menu .site-header__bar { grid-template-columns: 1fr auto; }
+
+.menu-button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.menu-button:hover { background: color-mix(in srgb, var(--color-surface) 82%, var(--color-ink) 10%); }
+.menu-button:active { transform: scale(0.96); }
+.menu-button svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
 /* ---------- Landing pages (weight-loss.html, mens-health.html) ----------
-   Client rule: paid-traffic pages link nowhere but their intake form. Same
-   bar as Home V1 (--glass + --smoke geometry), with the logo as plain text
-   (not a link) and one CTA. No centre links, no Contact. */
+   The approved header (--plain --compact: 70px, on the page colour, logo
+   and CTA on the 48px content inset), minus everything that links out:
+   client rule, paid-traffic pages link only to their intake form. So the
+   logo is plain (not a link), there is no menu button (the menu sheet is
+   all links), and Get Started goes to the intake. (User, 2026-11-23: "we
+   wont have any links but we have to follow that".) */
 .site-header--landing .site-header__bar { grid-template-columns: 1fr auto; }
-/* On a light hero (paper, sage) the smoke glass reads as flat grey: the
-   landing bar takes the same dark look as an opaque deep olive instead,
-   so the lime CTA keeps its contrast. */
-.site-header--deep .site-header__bar { background: var(--p-deep); }

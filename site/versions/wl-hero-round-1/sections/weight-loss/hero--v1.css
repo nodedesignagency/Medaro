@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Weight Loss · hero V1 (the hims split, after Savor)
+   hims' bones: headline left, one sentence and the CTA right, pictures
+   along the foot of the first screen. Made ours with Savor's strip: four
+   photos of different heights standing on the bottom edge (people and
+   product alternating), on paper that warms into mist towards the foot.
+   Headline: the client's two sentences; the problem ("Weight Loss Is
+   Hard.") in muted olive, the answer in ink.
+   Frame: every edge sits on the nav bar's edges (16px, max 1888px);
+   32px under the bar, 16px from the bottom.
+   Header: components/header.css, --glass --smoke --landing.
+   ========================================================================== */
+
+.wl-hero-v1 {
+  --wl-muted: #7d856c; /* problem line: 3.5:1 on paper, large text only */
+  display: flex;
+  flex-direction: column;
+  height: max(700px, 100svh); /* definite, so the strip's photos can size in % */
+  padding: calc(var(--edge) + 56px + 32px) var(--frame-side) var(--edge);
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg) 38%, var(--p-mist) 100%);
+  color: var(--color-ink);
+}
+
+/* ---------- Copy: headline left, sentence + CTA right ---------- */
+.wl-hero-v1__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 440px;
+  grid-template-rows: auto auto;
+  column-gap: var(--space-8);
+  row-gap: 20px;
+}
+.wl-hero-v1__eyebrow {
+  grid-column: 1 / -1;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--color-text-muted);
+}
+.wl-hero-v1__title {
+  font-family: var(--font-display);
+  font-size: clamp(60px, 5vw, 96px);
+  font-weight: var(--weight-regular);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-box: trim-both cap alphabetic; /* box = cap top to baseline, so the intro lines up with the letters */
+  margin-left: -0.042em; /* pull the W's side bearing back onto the edge (measured: W on 16px at 1280–1920) */
+}
+.wl-hero-v1__lead { color: var(--wl-muted); }
+
+.wl-hero-v1__intro {
+  align-self: start; /* its first line's cap top level with the headline's (both trimmed to cap height) */
+}
+.wl-hero-v1__intro p {
+  font-size: 20px;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  text-box: trim-start cap alphabetic;
+}
+.wl-hero-v1__intro .btn { margin-top: 28px; }
+
+/* ---------- Strip: four photos standing on the bottom edge ---------- */
+.wl-hero-v1__strip {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-4);
+  min-height: 320px;
+  margin-top: var(--space-8);
+}
+.wl-hero-v1__tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--p-sage);
+  animation: wl-hero-v1-in 900ms var(--ease-out) both;
+}
+.wl-hero-v1__tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* widths and heights: people tall, product shorter, never a steady rise or fall (no chart, no implied results) */
+.wl-hero-v1__tile--a { flex: 5 1 0; height: 100%; animation-delay: 60ms; }
+.wl-hero-v1__tile--a img { object-position: 54% 40%; }
+.wl-hero-v1__tile--b { flex: 4 1 0; height: 72%; background: #1b2014; animation-delay: 120ms; }
+.wl-hero-v1__tile--b img { object-position: 46% 50%; }
+.wl-hero-v1__tile--c { flex: 4 1 0; height: 88%; animation-delay: 180ms; }
+.wl-hero-v1__tile--c img { object-position: 62% 50%; }
+.wl-hero-v1__tile--d {
+  flex: 3 1 0;
+  height: 58%;
+  display: grid;
+  place-items: center;
+  background: var(--p-sage);
+  animation-delay: 240ms;
+}
+.wl-hero-v1__tile--d img {
+  width: 74%;
+  height: auto;
+  object-fit: contain;
+  transform: rotate(-14deg);
+  filter: drop-shadow(0 18px 22px rgba(38, 43, 30, 0.35));
+}
+
+@keyframes wl-hero-v1-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}

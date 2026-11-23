@@ -1,103 +1,139 @@
 /* ==========================================================================
-   Weight Loss · hero V2 (the hims split, after Seed)
-   hims' bones on Seed's dark green: headline left, one sentence and the
-   CTA right, a row of three cards across the foot of the first screen.
-   Cards: product (pens on dark olive) · people (the wider middle card) ·
-   one debossed tablet on a lighter olive panel, like Seed's product cards.
-   Full-bleed deep olive; content on the frame (16px, max 1888px);
-   32px under the bar, 16px from the bottom.
-   Header: components/header.css, --glass --smoke --landing.
+   Weight Loss · hero V2 (after the user's hims weight-loss reference, made ours)
+   hims: copy on the left; on the right, two columns of photos cut off by the
+   top and bottom of the screen. Changed so it reads as MEDARO, not hims
+   (user, 2026-11-23: "change few things … it will look same otherwise"):
+   - a mist stage on the frame, like Home's hero, holds both halves;
+   - three columns, drifting slowly, the middle one the other way (paused
+     on hover; still with reduced motion);
+   - photos alternate with product tiles on palette colours (the approved
+     Tirzepatide vial, the blank tablets), after Retool's photo-and-colour
+     grid on Mobbin;
+   - no check list (it is section 2) and no small print.
+   Headline: the client's two sentences; the answer in olive green, like
+   hims' coloured second line. Copy and CTA on the 48px inset (the logo's
+   line); the wall ends on the right inset (the header button's edge).
+   Header: components/header.css, --plain --compact --landing.
    ========================================================================== */
 
-.wl-hero-v2 {
-  display: flex;
-  flex-direction: column;
-  height: max(700px, 100svh);
-  padding: calc(var(--edge) + 56px + 32px) var(--frame-side) var(--edge);
-  background: linear-gradient(180deg, var(--p-deep) 0%, #2c3223 100%);
-  color: var(--color-on-dark);
+.wlh2 {
+  padding: 0 var(--frame-side) var(--edge);
+}
+
+.wlh2__stage {
+  --inset: 48px;
+  position: relative;
+  height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px);
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--p-mist);
+  color: var(--color-ink);
+  container-type: size;
 }
 
 /* ---------- Copy ---------- */
-.wl-hero-v2__top {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 440px;
-  grid-template-rows: auto auto;
-  column-gap: var(--space-8);
-  row-gap: 20px;
+.wlh2__copy {
+  position: absolute;
+  left: var(--inset);
+  top: 50%;
+  width: min(760px, 42cqw);
+  transform: translateY(-50%);
 }
-.wl-hero-v2__eyebrow {
-  grid-column: 1 / -1;
-  font-size: 16px;
-  line-height: 1;
-  color: var(--color-on-dark-muted);
-}
-.wl-hero-v2__title {
+.wlh2__chip { --color-chip: #2f6b10; } /* leaf green, deep enough for 12px on mist (5.3:1) */
+.wlh2__title {
+  margin-top: 22px;
   font-family: var(--font-display);
-  font-size: clamp(60px, 5vw, 96px);
+  font-size: clamp(44px, 3.6vw, 68px);
   font-weight: var(--weight-regular);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  text-box: trim-both cap alphabetic;
-  margin-left: -0.042em; /* pull the W's side bearing back onto the edge (measured: W on 16px at 1280–1920) */
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  margin-left: -0.035em; /* the W's side bearing: ink on the logo's line (64px at 1440), measured */
 }
-.wl-hero-v2__lead { color: color-mix(in srgb, var(--p-paper) 52%, transparent); } /* ~5:1 on deep */
+.wlh2__accent { color: #4f6f25; } /* olive green, 5:1 on mist */
+.wlh2__lede {
+  max-width: 30em;
+  margin-top: 22px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+.wlh2__cta { margin-top: 32px; }
 
-.wl-hero-v2__intro {
-  align-self: start; /* its first line's cap top level with the headline's (both trimmed to cap height) */
-}
-.wl-hero-v2__intro p {
-  font-size: 20px;
-  line-height: 1.45;
-  letter-spacing: -0.005em;
-  color: color-mix(in srgb, var(--p-paper) 84%, transparent);
-  text-box: trim-start cap alphabetic;
-}
-.wl-hero-v2__intro .btn { margin-top: 28px; }
-
-/* ---------- Cards ---------- */
-.wl-hero-v2__cards {
-  flex: 1 1 auto;
+/* ---------- The wall: three drifting columns ---------- */
+.wlh2__wall {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: var(--inset);
+  width: min(46cqw, 820px);
   display: grid;
-  grid-template-columns: 1fr 1.32fr 1fr;
-  gap: var(--space-4);
-  min-height: 320px;
-  margin-top: var(--space-8);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  overflow: hidden;
 }
-.wl-hero-v2__card {
+.wlh2__col { overflow: hidden; }
+.wlh2__track {
+  display: flex;
+  flex-direction: column;
+  animation: wlh2-up var(--dur, 64s) linear var(--delay, 0s) infinite;
+  will-change: transform;
+}
+.wlh2__group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 12px; /* same gap across the seam between the two copies */
+}
+.wlh2__col--a .wlh2__track { --dur: 64s; --delay: -6s; }
+.wlh2__col--b .wlh2__track { --dur: 76s; --delay: -30s; animation-name: wlh2-down; }
+.wlh2__col--c .wlh2__track { --dur: 58s; --delay: -40s; }
+.wlh2__wall:hover .wlh2__track { animation-play-state: paused; }
+@keyframes wlh2-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+@keyframes wlh2-down {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wlh2__track { animation: none; }
+}
+
+/* ---------- Tiles ---------- */
+.wlh2__tile {
   position: relative;
+  aspect-ratio: var(--ar, 4 / 5);
   overflow: hidden;
   border-radius: 12px;
-  background: #1b2014;
-  animation: wl-hero-v2-in 900ms var(--ease-out) both;
+  background: var(--p-sage);
 }
-.wl-hero-v2__card img {
+.wlh2__tile > img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 46% 50%;
 }
-.wl-hero-v2__card:nth-child(2) { animation-delay: 90ms; }
-.wl-hero-v2__card:nth-child(3) { animation-delay: 180ms; }
-.wl-hero-v2__card--photo img { object-position: 54% 42%; }
+/* portraits are cut-outs: the tile colour is their backdrop */
+.wlh2__tile--portrait > img { object-position: 50% 0%; }
+.wlh2__tile--sage { background: var(--p-sage); }
+.wlh2__tile--paper { background: var(--p-paper); }
+.wlh2__tile--mist { background: #d9ddcf; }
+.wlh2__tile--lime { background: var(--p-accent); }
+.wlh2__tile--deep { background: radial-gradient(90% 70% at 70% 20%, #3a4230 0%, var(--p-deep) 70%); }
 
-/* Seed-style panel: one lighter olive with the tablet in a soft beam */
-.wl-hero-v2__card--panel {
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(120% 90% at 70% 18%, rgba(213, 229, 173, 0.16) 0%, rgba(213, 229, 173, 0) 60%),
-    #3a4230;
-}
-.wl-hero-v2__card--panel img {
-  width: 62%;
-  height: auto;
-  object-fit: contain;
-  transform: rotate(-14deg);
-  filter: drop-shadow(0 22px 26px rgba(10, 12, 7, 0.5));
-}
-
-@keyframes wl-hero-v2-in {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: none; }
+/* product tiles: blank tablets and the vial, floating on the colour */
+.wlh2__tile--product > img,
+.wlh2__tile--product > .pack { position: absolute; }
+.wlh2__tile--product > .wlh2__pill { height: auto; object-fit: contain; filter: drop-shadow(0 14px 16px rgba(38, 43, 30, 0.28)); }
+.wlh2__tile--product > .wlh2__pill--white { width: 44%; left: 12%; top: 16%; transform: rotate(-12deg); }
+.wlh2__tile--product > .wlh2__pill--oval { width: 58%; right: 8%; bottom: 14%; transform: rotate(16deg); }
+.wlh2__tile--product > .wlh2__pill--solo { width: 66%; left: 17%; top: 26%; transform: rotate(-16deg); filter: drop-shadow(0 18px 20px rgba(0, 0, 0, 0.45)); }
+.wlh2__vial {
+  height: 82%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(8deg);
+  filter: drop-shadow(0 16px 18px rgba(38, 43, 30, 0.25));
 }

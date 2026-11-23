@@ -1,86 +1,122 @@
 /* ==========================================================================
-   Weight Loss · hero V3 (the hims split on sage, after Loom)
-   hims' bones and warm wash, in the Weight Loss tint: light sage at the
-   top deepening to Dusty Olive at the foot. Headline left, one sentence and
-   the CTA right; below, Loom's two large cards instead of a row of three:
-   people (wide) and product.
-   Content on the frame (16px, max 1888px); 32px under the bar, 16px from
-   the bottom. Header: components/header.css, --glass --smoke --landing.
+   Weight Loss · hero V3 (after the user's Mahadeva careers reference,
+   "Grow With Mahadeva": nodedesignagency/Mahadeva → GrowWithUs + PhotoFan)
+   Centred: chip, the headline, seven square prints overlapping in a shallow
+   arc, the sentence and the CTA. Ported from the template's numbers:
+   - each print overlaps the next by a sixth of its width;
+   - the arc, left to right: turned −7, −5, −3, 0, 3, 5, 7°, hanging 10,
+     4.5, 1.5, 0, 1.5, 4.5, 10% of a print lower ("prints laid down
+     slightly askew", not a dealt hand);
+   - a 2px ring of the page colour around each print, so overlaps read as
+     stacked prints;
+   - the entrance (hero--v3.js sets data-fan): the pile starts 1200px below
+     turned −40° at 1.2×, rises and unwinds to −14° (0.4s), settles upright
+     at 1× (1s) while the prints open into the arc (1s), all on the
+     template's ease (0.44, 0, 0.56, 1). Without JS or with reduced motion
+     the fan simply rests open.
+   Sizes: prints 12.6vw (168–240px; the template's 184 at 1460), so the fan
+   is six prints wide. On the page colour, filling the screen under the
+   70px header.
    ========================================================================== */
 
-.wl-hero-v3 {
-  --wl-muted: #6a725b; /* problem line: ~3.9:1 on the light sage, large text only */
+.wlh3 {
+  --ease-fan: cubic-bezier(0.44, 0, 0.56, 1);
+  --card: clamp(168px, 12.6vw, 240px);
   display: flex;
   flex-direction: column;
-  height: max(700px, 100svh);
-  padding: calc(var(--edge) + 56px + 32px) var(--frame-side) var(--edge);
-  background: linear-gradient(180deg, #e9ebe1 0%, #dfe2d5 30%, #b9bfaa 100%);
+  align-items: center;
+  justify-content: center;
+  min-height: max(680px, calc(100svh - 70px));
+  padding: 24px var(--frame-side) 56px;
+  overflow: clip; /* catches the outer prints' lean and the pile's rise */
+  text-align: center;
   color: var(--color-ink);
 }
 
-/* ---------- Copy ---------- */
-.wl-hero-v3__top {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 440px;
-  grid-template-rows: auto auto;
-  column-gap: var(--space-8);
-  row-gap: 20px;
-}
-.wl-hero-v3__eyebrow {
-  grid-column: 1 / -1;
-  font-size: 16px;
-  line-height: 1;
-  color: var(--color-text-muted);
-}
-.wl-hero-v3__title {
+.wlh3__chip { --color-chip: #367d12; margin-inline: auto; }
+.wlh3__title {
+  margin-top: 22px;
   font-family: var(--font-display);
-  font-size: clamp(60px, 5vw, 96px);
+  font-size: clamp(48px, min(4.3vw, 8.4svh), 84px);
   font-weight: var(--weight-regular);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  text-box: trim-both cap alphabetic;
-  margin-left: -0.042em; /* pull the W's side bearing back onto the edge (measured: W on 16px at 1280–1920) */
+  line-height: 1.04;
+  letter-spacing: -0.035em;
 }
-.wl-hero-v3__lead { color: var(--wl-muted); }
 
-.wl-hero-v3__intro {
-  align-self: start; /* its first line's cap top level with the headline's (both trimmed to cap height) */
+/* ---------- The fan ---------- */
+.wlh3__band { margin-top: clamp(40px, 6svh, 80px); }
+.wlh3__fan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(0) rotate(0deg) scale(1);
+  transition: transform var(--fan-dur, 0ms) var(--ease-fan);
 }
-.wl-hero-v3__intro p {
-  font-size: 20px;
-  line-height: 1.45;
-  letter-spacing: -0.005em;
-  text-box: trim-start cap alphabetic;
+.wlh3__frame {
+  flex: none;
+  width: var(--card);
+  margin-left: calc(var(--card) / -6);
+  transform: translateX(0) translateY(var(--drop)) rotate(var(--rot));
+  transition: transform var(--frame-dur, 0ms) var(--ease-fan);
 }
-.wl-hero-v3__intro .btn { margin-top: 28px; }
+.wlh3__frame:first-child { margin-left: 0; }
 
-/* ---------- Two large cards ---------- */
-.wl-hero-v3__cards {
-  flex: 1 1 auto;
-  display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: var(--space-4);
-  min-height: 320px;
-  margin-top: var(--space-8);
-}
-.wl-hero-v3__card {
+.wlh3__print {
   position: relative;
+  aspect-ratio: 1;
   overflow: hidden;
-  border-radius: 12px;
-  background: #1b2014;
-  animation: wl-hero-v3-in 900ms var(--ease-out) both;
+  background: var(--p-sage);
+  box-shadow: 0 0 0 2px var(--color-bg);
 }
-.wl-hero-v3__card + .wl-hero-v3__card { animation-delay: 90ms; }
-.wl-hero-v3__card img {
+.wlh3__print > img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 46% 50%;
 }
-.wl-hero-v3__card--wide { background: var(--p-sage); }
-.wl-hero-v3__card--wide img { object-position: 50% 38%; }
+.wlh3__print--portrait > img { object-position: 50% 0%; }
+.wlh3__print--sage { background: var(--p-sage); }
+.wlh3__print--mist { background: var(--p-mist); }
+.wlh3__print--lime { background: var(--p-accent); }
+.wlh3__print--product > img,
+.wlh3__print--product > .pack { position: absolute; }
+.wlh3__print--product > .wlh3__pill { height: auto; object-fit: contain; filter: drop-shadow(0 12px 14px rgba(38, 43, 30, 0.28)); }
+.wlh3__print--product > .wlh3__pill--white { width: 44%; left: 12%; top: 14%; transform: rotate(-12deg); }
+.wlh3__print--product > .wlh3__pill--oval { width: 58%; right: 8%; bottom: 14%; transform: rotate(16deg); }
+.wlh3__vial {
+  height: 84%;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%) rotate(8deg);
+  filter: drop-shadow(0 14px 16px rgba(38, 43, 30, 0.25));
+}
 
-@keyframes wl-hero-v3-in {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: none; }
+/* The entrance (template: Out → In → Scale Down → Expand) */
+.wlh3__fan[data-fan="out"] {
+  transform: translateY(1200px) rotate(-40deg) scale(1.2);
+  transition: none;
 }
+.wlh3__fan[data-fan="piled"] {
+  --fan-dur: 400ms;
+  transform: translateY(0) rotate(-14deg) scale(1.2);
+}
+.wlh3__fan[data-fan="settled"],
+.wlh3__fan[data-fan="open"] { --fan-dur: 1000ms; }
+.wlh3__fan[data-fan="out"] .wlh3__frame,
+.wlh3__fan[data-fan="piled"] .wlh3__frame,
+.wlh3__fan[data-fan="settled"] .wlh3__frame {
+  transform: translateX(calc(var(--step) * 500% / 6)) translateY(0) rotate(var(--rot)); /* back onto the middle print */
+}
+.wlh3__fan[data-fan="out"] .wlh3__frame { transition: none; }
+.wlh3__fan[data-fan="open"] .wlh3__frame { --frame-dur: 1000ms; }
+
+/* ---------- Sentence and CTA ---------- */
+.wlh3__foot { margin-top: clamp(40px, 6svh, 80px); }
+.wlh3__lede {
+  max-width: 34em;
+  margin-inline: auto;
+  font-size: 18px;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+.wlh3__foot .btn { margin-top: 28px; }

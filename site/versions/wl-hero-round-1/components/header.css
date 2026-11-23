@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Component: header
+   One structure everywhere (user, 2026-11-19): logo left · six links
+   centred · a secondary "Contact" button and the Get Started CTA right.
+   No login. Weight Loss, Men's Health, Women's Health, Supplement, How
+   Medaro Works scroll on Home; About Us and Contact open pages.
+
+   Over the hero photo (V1): --glass geometry (56px bar, radius 12, inset
+   16, padding 0 8 0 22, 40px buttons radius 8) with the --smoke surface,
+   the user's pick (2026-11-19): near-black rgb(19,19,19) at ~58%, a little
+   darker at the top, measured from their Dolomites glass-card reference.
+   No light edge: on dark glass a white hairline reads as an outline.
+   Turns light once the photo has scrolled away (is-solid).
+   On the page background (V2): --plain.
+   ========================================================================== */
+
+.site-header { z-index: 50; }
+
+.site-header__bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+.site-header__bar > .logo { justify-self: start; }
+.site-header__actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-header__links {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.site-header__links a {
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  font-weight: var(--weight-regular);
+  letter-spacing: -0.003em;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+/* ---------- Over the photo: shared ---------- */
+.site-header--glass {
+  position: fixed;
+  top: var(--edge);
+  left: var(--frame-side);
+  right: var(--frame-side);
+}
+.site-header--glass .site-header__bar {
+  height: 56px;
+  padding: 0 8px 0 22px;
+  border-radius: 12px;
+  color: #fff;
+  transition: background-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+}
+.site-header--glass .logo { color: inherit; font-size: 17px; }
+.site-header--glass .site-header__links a { opacity: 0.88; }
+.site-header--glass .site-header__links a:hover { opacity: 1; }
+
+/* Secondary button on the glass: a lighter pane of the same glass */
+.site-header--glass .btn--glass {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+.site-header--glass .btn--glass:hover { background: rgba(255, 255, 255, 0.22); }
+.site-header--glass.is-solid .btn--glass { background: var(--color-surface); color: var(--color-ink); }
+.site-header--glass.is-solid .btn--glass:hover { background: color-mix(in srgb, var(--color-surface) 80%, var(--color-ink) 8%); }
+
+/* Past the photo: light bar, ink type (all treatments) */
+.site-header--glass.is-solid .site-header__bar {
+  background: color-mix(in srgb, var(--color-bg) 86%, transparent);
+  box-shadow: inset 0 0 0 1px var(--color-line), 0 8px 24px -12px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--color-ink);
+}
+
+/* ---------- Smoke surface: Dolomites glass cards ---------- */
+.site-header--smoke .site-header__bar {
+  background: linear-gradient(180deg, rgba(19, 19, 19, 0.62) 0%, rgba(19, 19, 19, 0.54) 100%);
+  box-shadow: none;
+  backdrop-filter: blur(32px) saturate(0.9);
+  -webkit-backdrop-filter: blur(32px) saturate(0.9);
+}
+
+/* ---------- On the page background (V2) ---------- */
+.site-header--plain {
+  position: sticky;
+  top: 0;
+  background: var(--color-bg);
+  transition: box-shadow var(--dur-base) var(--ease-out);
+}
+.site-header--plain.is-scrolled { box-shadow: 0 1px 0 var(--color-line); }
+.site-header--plain .site-header__bar {
+  height: 88px;
+  /* logo and CTA line up with the V2 content inset: frame edge + 48 */
+  padding-inline: calc(var(--frame-side) + 48px);
+  color: var(--color-ink);
+}
+.site-header--plain .logo { font-size: 21px; }
+.site-header--plain .site-header__links { gap: 28px; }
+.site-header--plain .site-header__links a { font-size: 15px; }
+.site-header--plain .site-header__links a:hover { opacity: 0.6; }
+
+/* Narrower desktops (1200–1359): tighten so the links keep clear of logo and CTA */
+@media (max-width: 1359px) {
+  .site-header__links { gap: 20px; }
+  .site-header--plain .site-header__links { gap: 20px; }
+  .site-header--plain .site-header__links a { font-size: 14px; }
+}
+
+/* ---------- Landing pages (weight-loss.html, mens-health.html) ----------
+   Client rule: paid-traffic pages link nowhere but their intake form. Same
+   bar as Home V1 (--glass + --smoke geometry), with the logo as plain text
+   (not a link) and one CTA. No centre links, no Contact. */
+.site-header--landing .site-header__bar { grid-template-columns: 1fr auto; }
+/* On a light hero (paper, sage) the smoke glass reads as flat grey: the
+   landing bar takes the same dark look as an opaque deep olive instead,
+   so the lime CTA keeps its contrast. */
+.site-header--deep .site-header__bar { background: var(--p-deep); }
