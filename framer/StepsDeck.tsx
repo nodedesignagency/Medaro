@@ -11,8 +11,10 @@ import { addPropertyControls, ControlType, RenderTarget } from "framer"
  * the text changes line by line (60/120ms, slide 28px and fade with a 4px blur).
  * Scroll room: 35% of the screen per step plus the rise. Reduced motion: cards
  * and text switch at once.
- * Tablet and phone (not designed in the HTML): the same deck in one column,
- * number above the card, text below.
+ * Tablet and phone (user, 2026-11-23: "should not have the scroll animation it will be
+ * static sections like image 1"): no pinning, no scroll; each step is the number top
+ * left in a light grey ("01", not "/01"), the card beside it on the right, then the
+ * title and the text, after the user's numbered-steps reference.
  */
 
 type ImageValue = string | { src?: string; srcSet?: string; alt?: string } | null | undefined
@@ -109,7 +111,7 @@ export default function StepsDeck(props: Props) {
 
     // The scroll: the same maths as main.js → steps
     React.useEffect(() => {
-        if (isCanvas) return
+        if (isCanvas || !wide) return
         const root = rootRef.current
         const track = trackRef.current
         const stage = stageRef.current
@@ -200,6 +202,48 @@ export default function StepsDeck(props: Props) {
                 ? "none"
                 : `opacity ${DUR * 0.6}ms ${EASE} ${delay}ms, transform ${DUR}ms ${EASE} ${delay}ms, filter ${DUR * 0.6}ms ${EASE} ${delay}ms`,
         }
+    }
+
+    // Tablet and phone: static steps, no scroll animation
+    if (!wide) {
+        return (
+            <div ref={rootRef} style={{ ...style, position: "relative", width: "100%", fontFamily: font, fontSize: 17, marginTop: topGap, marginBottom: bottomGap }}>
+                <ol style={{ display: "flex", flexDirection: "column", gap: phone ? 56 : 72, margin: 0, padding: phone ? "0 24px" : "0 48px", listStyle: "none" }}>
+                    {steps.map((s, k) => (
+                        <li key={k} style={{ display: "flex", flexDirection: "column" }}>
+                            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
+                                <span
+                                    aria-hidden="true"
+                                    style={{ fontSize: phone ? 32 : 40, fontWeight: 500, lineHeight: 1, letterSpacing: "-0.04em", fontVariantNumeric: "tabular-nums", color: ink, opacity: 0.4 }}
+                                >
+                                    {String(k + 1).padStart(2, "0")}
+                                </span>
+                                <div
+                                    aria-hidden="true"
+                                    style={{
+                                        flex: "none",
+                                        width: phone ? "72%" : "64%",
+                                        aspectRatio: "1.62",
+                                        overflow: "hidden",
+                                        borderRadius: 16,
+                                        background: cardColor,
+                                        boxShadow: "0 2px 4px rgba(20, 24, 14, 0.12), 0 32px 64px -24px rgba(20, 24, 14, 0.5)",
+                                    }}
+                                >
+                                    <img src={srcOf(s.image, k)} alt="" draggable={false} style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }} />
+                                </div>
+                            </div>
+                            <h3 style={{ margin: "28px 0 0", fontSize: h3Size, fontWeight: 500, lineHeight: 1.02, letterSpacing: "-0.035em", textWrap: "balance", color: ink } as React.CSSProperties}>
+                                {s.title}
+                            </h3>
+                            <p style={{ margin: "16px 0 0", fontSize: pSize, lineHeight: 1.5, color: muted, textWrap: "pretty" } as React.CSSProperties}>
+                                {s.text}
+                            </p>
+                        </li>
+                    ))}
+                </ol>
+            </div>
+        )
     }
 
     return (
