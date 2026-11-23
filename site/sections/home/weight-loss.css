@@ -295,7 +295,7 @@
    shadows; the left edge fades into the card. The copy keeps the left 58%. */
 .wl__card {
   --wl-media: 0.42; /* card 2's image: its share of the card's width */
-  --wl-card-h: clamp(280px, 22vw, 420px); /* card 1's image height (the hand) */
+  --wl-card-h: clamp(300px, 24vw, 440px); /* card 1's image height (the hand) */
   position: relative;
   overflow: hidden;
   display: flex;
@@ -341,15 +341,19 @@
   padding-right: calc(var(--wl-card-h) * 1010 / 1175 + 24px);
 }
 /* The phone's screen (user: "inside the phone ui you made is complete ai slop
-   … lets use bg like image 3 hero and have similar type of cards"): the Home
-   hero in miniature, built in code: the stage light plate, the wordmark
-   centred, the tagline, and the hero's three category cards with their own
-   imagery (the Microdose vial with its printed label, the man, the woman).
+   … lets use bg like image 3 hero and have similar type of cards", then "i
+   dont want same … use something different with different images too" and
+   "i dont like the big space … make cards sizes bigger like by adding body
+   texts"): built in code: the hero's stage light plate, the wordmark centred,
+   the tagline, and three cards in the hero cards' style but their own: the
+   portal's parts named from the card's copy, each with a line from it, and
+   their own objects (the client's Tirzepatide Multidose vial laid diagonally;
+   a sprout in a stone pot; a soft lime speech bubble; Magnific, cut out).
    Measured from the render along the phone's axes: the screen inside the
    black bezel is 421 × 908 with its centre at (612.6, 565.4) of 1010×1175,
    turned 10.29° anticlockwise, a true rectangle (no perspective); drawn 3px
    larger each way to tuck under the bezel. Sized in the screen's own units
-   (cqw): every word at least 6.8cqw, about 7.8px at 1440, 7px at 1280. */
+   (cqw): every word at least 6cqw, about 7.5px at 1440, 6.7px at 1280. */
 .wl__screen {
   position: absolute;
   left: 60.653%;
@@ -385,14 +389,14 @@
   display: block;
   width: 42cqw;
   aspect-ratio: 4413 / 712;
-  margin: 16cqw auto 0;
+  margin: 11cqw auto 0;
   overflow: visible;
   color: var(--p-paper);
 }
 .wl__app-tag {
   position: relative;
   z-index: 1;
-  margin-top: 10cqw;
+  margin-top: 6cqw;
   text-align: center;
   font-family: var(--font-display);
   font-size: 11.5cqw;
@@ -401,41 +405,51 @@
   letter-spacing: -0.035em;
   color: var(--p-paper);
 }
+/* the cards follow the tagline, no gap of empty stage between */
 .wl__app-cards {
-  position: absolute;
+  position: relative;
   z-index: 1;
-  left: 5cqw;
-  right: 5cqw;
-  bottom: 6cqw;
   display: grid;
   gap: 2.6cqw;
+  margin: 6.5cqw 5cqw 0;
 }
 .wl__app-card {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 37cqw;
-  padding: 4.4cqw 4.8cqw 4.8cqw;
+  height: 51cqw; /* three lines of the longest card's text and the arrow */
+  padding: 4.2cqw 4.8cqw 4.4cqw;
   overflow: hidden;
   border-radius: 3.6cqw;
   background: #fff;
   color: var(--color-ink);
 }
-.wl__app-name {
+.wl__app-text {
   position: relative;
   z-index: 1;
+  display: grid;
+  gap: 1.6cqw;
+  max-width: 54cqw;
+  white-space: normal;
+}
+.wl__app-name {
   font-size: 7cqw;
   line-height: 1.05;
   letter-spacing: -0.025em;
+}
+.wl__app-line {
+  font-size: 6cqw;
+  line-height: 1.2;
+  color: var(--color-text-muted);
 }
 .wl__app-go {
   position: relative;
   z-index: 1;
   display: grid;
   place-items: center;
-  width: 10cqw;
-  height: 10cqw;
+  width: 9cqw;
+  height: 9cqw;
   border-radius: 50%;
   background: var(--color-surface);
 }
@@ -444,9 +458,8 @@
   height: 4cqw;
   color: var(--color-ink);
 }
-/* placed like the hero's tiles (components/category-tile.css): the vial large
-   and turned, cut off by the card; the people chest up on the right, fading
-   into the white */
+/* each object on the right, large and cut off by the card's edge, as the
+   hero's tiles place theirs */
 .wl__app-obj {
   position: absolute;
   left: var(--ct-x);
@@ -456,14 +469,9 @@
   height: var(--ct-h);
   transform: translate(-50%, -50%) rotate(var(--ct-r, 0deg));
 }
-.wl__app-card--weight { --ct-h: 122%; --ct-x: 76%; --ct-y: 73%; --ct-r: 9deg; }
-.wl__app-card--mens,
-.wl__app-card--womens { --ct-h: 122%; --ct-x: 80%; --ct-y: 66%; }
-.wl__app-card--mens .wl__app-obj,
-.wl__app-card--womens .wl__app-obj {
-  -webkit-mask-image: linear-gradient(180deg, #000 58%, rgba(0, 0, 0, 0) 96%);
-  mask-image: linear-gradient(180deg, #000 58%, rgba(0, 0, 0, 0) 96%);
-}
+.wl__app-card--treatment { --ct-h: 150%; --ct-x: 84%; --ct-y: 62%; --ct-r: 38deg; } /* the vial laid across the corner */
+.wl__app-card--progress  { --ct-h: 104%; --ct-x: 84%; --ct-y: 66%; --ct-r: 0deg; }
+.wl__app-card--team      { --ct-h: 92%;  --ct-x: 90%; --ct-y: 58%; --ct-r: -6deg; }
 .wl__card > h3 {
   max-width: 13em;
   font-size: clamp(26px, 2.1vw, 36px);
