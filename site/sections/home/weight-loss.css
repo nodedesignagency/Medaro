@@ -281,29 +281,112 @@
 
 /* ---------- Follow-on blocks (our proposal) ---------- */
 .wl__cards {
+  container-type: inline-size; /* the cards' media are sized from it */
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--wl-gap);
   margin-top: clamp(80px, 6.7vw, 128px);
 }
+/* Each card carries an image on its right (user, 2026-11-23, picked from our
+   proposals: 1A the portal phone floating over the stone platform, 2A a video
+   check-in at home; Magnific Nano Banana 2.1, the platform crop as the stone
+   reference). Both shot on the card colour (#E7EADF, corrected to within one
+   level), cropped to 1400×1273, so they sit on the card with their own
+   shadows; the left edge fades into the card. The copy keeps the left 58%. */
 .wl__card {
+  --wl-media: 0.42; /* the image's share of the card's width */
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 48px;
-  min-height: clamp(260px, 20vw, 340px);
-  padding: 32px;
+  /* at least the image's height (its width / 1.0998), so it is never cut */
+  min-height: max(clamp(260px, 20vw, 340px), calc((100cqw - var(--wl-gap)) / 2 * var(--wl-media) / 1.0998));
+  padding: 32px calc(100% * var(--wl-media) + 24px) 32px 32px;
   border-radius: 12px; /* the nav bar's radius */
   background: var(--color-surface);
 }
-.wl__card h3 {
+.wl__card-media {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: calc(100% * var(--wl-media));
+  aspect-ratio: 1400 / 1273;
+  container-type: size; /* the phone's screen is sized from it */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 30%);
+  mask-image: linear-gradient(to right, transparent, #000 30%);
+}
+.wl__card-media > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* The portal on the phone (card 1): measured from the render along the
+   phone's axes, the screen inside the 20px black bezel is 415 × 902 with its
+   centre at (698.8, 570.9) of 1400×1273, turned 15.39° clockwise; drawn 3px
+   larger each way so it tucks under the bezel's inner edge.
+   Built in code so it stays sharp and holds no invented data: the wordmark,
+   "Your care" and three rows labelled from the card's own copy (treatment
+   information, progress, care team) with the section's icons. Text at least
+   2.8cqw (7.3px at 1280). */
+.wl__screen {
+  white-space: nowrap; /* a phone screen: one line per label at every width */
+  position: absolute;
+  left: 49.914%;
+  top: 44.847%;
+  width: 30.071%;  /* 421 / 1400 */
+  height: 71.328%; /* 908 / 1273 */
+  transform: translate(-50%, -50%) rotate(15.39deg);
+  border-radius: 3.4cqw;
+  overflow: hidden;
+  padding: 6.5cqw 2.6cqw 2.6cqw;
+  background: linear-gradient(180deg, #fbfcf8, var(--p-paper));
+  color: var(--color-ink);
+}
+.wl__screen-logo {
+  display: block;
+  overflow: visible;
+  width: 13cqw;
+  aspect-ratio: 4413 / 712;
+  color: var(--color-ink);
+}
+.wl__screen-title {
+  margin-top: 5cqw;
+  font-family: var(--font-display);
+  font-size: 5.2cqw;
+  font-weight: var(--weight-medium);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.wl__screen-rows {
+  display: grid;
+  gap: 1.6cqw;
+  margin-top: 3.2cqw;
+}
+.wl__screen-rows li {
+  display: flex;
+  align-items: center;
+  gap: 1.6cqw;
+  padding: 1.8cqw 2cqw;
+  border-radius: 1.8cqw;
+  background: var(--p-mist);
+  font-size: 2.8cqw;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+}
+.wl__screen-rows img {
+  width: 5cqw;
+  height: 5cqw;
+}
+.wl__card > h3 {
   max-width: 13em;
   font-size: clamp(26px, 2.1vw, 36px);
   font-weight: var(--weight-medium);
   line-height: 1.1;
   letter-spacing: -0.025em;
 }
-.wl__card p {
+.wl__card > p {
   text-wrap: pretty;
   max-width: 30rem;
   font-size: 16px;

@@ -224,7 +224,7 @@
     </section>
     <!-- SECTION:home/hero END -->
 
-  <!-- SECTION:home/weight-loss START · styles: sections/home/weight-loss.css · assets: assets/images/weight-loss/mirror.webp, assets/icons/wl-vial.webp, wl-stethoscope.webp, wl-plan.webp, wl-chat.webp, wl-box.webp · icons: sprite #i-arrow-right
+  <!-- SECTION:home/weight-loss START · styles: sections/home/weight-loss.css · assets: assets/images/weight-loss/mirror.webp, assets/icons/wl-vial.webp, wl-stethoscope.webp, wl-plan.webp, wl-chat.webp, wl-box.webp, assets/images/weight-loss/card-portal.webp, card-checkin.webp · icons: sprite #wordmark, #i-arrow-right
        Layout after the user's Good Life reference (video, 2026-11-19). Copy: content/home.md → Weight Loss, word for word. -->
   <section class="wl" id="weight-loss" aria-labelledby="wl-title">
     <div class="wl__frame">
@@ -266,15 +266,32 @@
         </ul>
       </div>
 
-      <!-- Not in the reference: our proposal for the two follow-on blocks. -->
+      <!-- Not in the reference: our proposal for the two follow-on blocks. Images (user, 2026-11-23, picked 1A and 2A):
+           the portal phone floating over the stone platform, its screen built in code; a video check-in at home. -->
       <div class="wl__cards">
         <article class="wl__card">
           <h3>Your Health. One Place.<br>Total Clarity.</h3>
           <p>Stay connected to your care without the complications. Access your treatment information, track your progress, and stay in touch with your care team—all through one convenient patient portal.</p>
+          <div class="wl__card-media" aria-hidden="true">
+            <img src="assets/images/weight-loss/card-portal.webp" alt="" width="1400" height="1273" loading="lazy">
+            <!-- The portal on the phone's screen: code, not baked into the image. Labels from the card's copy ([COPY NEEDED] to confirm). -->
+            <div class="wl__screen">
+              <svg class="wl__screen-logo"><use href="#wordmark"/></svg>
+              <p class="wl__screen-title">Your care</p>
+              <ul class="wl__screen-rows">
+                <li><img src="assets/icons/wl-vial.webp" alt="" width="512" height="512" loading="lazy">Treatment</li>
+                <li><img src="assets/icons/wl-plan.webp" alt="" width="512" height="512" loading="lazy">Progress</li>
+                <li><img src="assets/icons/wl-chat.webp" alt="" width="512" height="512" loading="lazy">Care team</li>
+              </ul>
+            </div>
+          </div>
         </article>
         <article class="wl__card">
           <h3>Your Care Doesn't End<br>at the Prescription.</h3>
           <p>Getting treatment is just the beginning. Stay connected with your care team for medical guidance, follow-ups, and support throughout your treatment journey.</p>
+          <div class="wl__card-media" aria-hidden="true">
+            <img src="assets/images/weight-loss/card-checkin.webp" alt="" width="1400" height="1273" loading="lazy">
+          </div>
         </article>
       </div>
 
