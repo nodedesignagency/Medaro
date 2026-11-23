@@ -11,6 +11,10 @@ import { addPropertyControls, ControlType, RenderTarget } from "framer"
  * the text changes line by line (60/120ms, slide 28px and fade with a 4px blur).
  * Scroll room: 35% of the screen per step plus the rise. Reduced motion: cards
  * and text switch at once.
+ * The CTA (the "CTA" slot, desktop only) rides up with the last card and lands
+ * bottomGap under it, so the third card and the button arrive together (user,
+ * 2026-11-23: "club 3rd image card and cta so it feels like both comes together").
+ * On tablet and phone the slot isn't shown: the page's own Foot holds the CTA.
  * Tablet and phone (user, 2026-11-23: "should not have the scroll animation it will be
  * static sections like image 1"): no pinning, no scroll; each step is the number top
  * left in a light grey ("01", not "/01"), the card beside it on the right, then the
@@ -30,6 +34,7 @@ interface Props {
     cardColor?: string
     fontFamily?: string
     headerOffset?: number
+    cta?: React.ReactNode
     style?: React.CSSProperties
 }
 
@@ -59,7 +64,7 @@ const useIsoLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect
  * @framerSupportedLayoutHeight auto
  */
 export default function StepsDeck(props: Props) {
-    const { steps: stepsProp, ink = "#262B1E", muted = "#343B29", cardColor = "#262B1E", fontFamily = "Host Grotesk", headerOffset = 72, style } = props
+    const { steps: stepsProp, ink = "#262B1E", muted = "#343B29", cardColor = "#262B1E", fontFamily = "Host Grotesk", headerOffset = 72, cta, style } = props
     const steps = stepsProp && stepsProp.length ? stepsProp : DEFAULT_STEPS
     const n = steps.length
     // Live (Preview and the published site): the scroll deck. Canvas, thumbnails, screenshots: step 1, still.
@@ -71,6 +76,7 @@ export default function StepsDeck(props: Props) {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const cellRef = React.useRef<HTMLDivElement>(null)
     const cardRefs = React.useRef<Array<HTMLDivElement | null>>([])
+    const ctaRef = React.useRef<HTMLDivElement>(null)
     const [vw, setVw] = React.useState(1440)
     const [still, setStill] = React.useState(false)
     const [active, setActive] = React.useState(0)
@@ -136,7 +142,10 @@ export default function StepsDeck(props: Props) {
             const top = wide ? cR.top : iR.top
             const bottom = wide ? cR.bottom : iR.bottom
             root.style.marginTop = `${(topGap - (top - sR.top)).toFixed(1)}px`
-            root.style.marginBottom = `${(bottomGap - (sR.bottom - bottom)).toFixed(1)}px`
+            // with the CTA in the deck, what follows sits right under the CTA instead
+            const ctaEl = ctaRef.current
+            const end = ctaEl ? bottom + bottomGap + ctaEl.offsetHeight : bottom
+            root.style.marginBottom = `${((ctaEl ? 0 : bottomGap) - (sR.bottom - end)).toFixed(1)}px`
         }
         const update = () => {
             queued = false
@@ -159,6 +168,8 @@ export default function StepsDeck(props: Props) {
                 }
                 depth += t[k] * (k > 0 ? 1 : 0)
             }
+            // the CTA moves with the last card
+            if (ctaRef.current) ctaRef.current.style.transform = `translateY(${((1 - t[n - 1]) * rise).toFixed(2)}px)`
             const a = t.reduce((acc, v, k) => (k > 0 && v >= 0.5 ? k : acc), 0)
             if (a !== current) {
                 current = a
@@ -258,7 +269,7 @@ export default function StepsDeck(props: Props) {
                         display: "grid",
                         placeItems: "center",
                         paddingTop: isCanvas ? 40 : headerOffset,
-                        paddingBottom: isCanvas ? 40 : 0,
+                        paddingBottom: isCanvas ? 40 + (cta ? bottomGap + 48 : 0) : 0,
                         boxSizing: "border-box",
                     }}
                 >
@@ -299,11 +310,12 @@ export default function StepsDeck(props: Props) {
                                 ))}
                             </span>
                         </div>
-                        {/* The cards, stacked in one cell */}
-                        <div ref={cellRef} aria-hidden="true" style={{ gridColumn: wide ? 2 : 1, gridRow: wide ? 1 : 2, display: "grid", width: cardW }}>
+                        {/* The cards, stacked in one cell (decorative), and the CTA under them */}
+                        <div ref={cellRef} style={{ position: "relative", gridColumn: wide ? 2 : 1, gridRow: wide ? 1 : 2, display: "grid", width: cardW }}>
                             {steps.map((s, k) => (
                                 <div
                                     key={k}
+                                    aria-hidden="true"
                                     ref={(el) => {
                                         cardRefs.current[k] = el
                                     }}
@@ -326,6 +338,24 @@ export default function StepsDeck(props: Props) {
                                     <img src={srcOf(s.image, k)} alt="" draggable={false} style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }} />
                                 </div>
                             ))}
+                            {cta ? (
+                                <div
+                                    ref={ctaRef}
+                                    style={{
+                                        position: "absolute",
+                                        left: 0,
+                                        right: 0,
+                                        top: `calc(100% + ${bottomGap}px)`,
+                                        zIndex: n + 1,
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        transform: isCanvas || n < 2 ? "none" : "translateY(100svh)",
+                                        willChange: "transform",
+                                    }}
+                                >
+                                    {cta}
+                                </div>
+                            ) : null}
                         </div>
                         {/* The text: all steps stay in the page as an ordered list for screen readers */}
                         <ol
@@ -381,4 +411,5 @@ addPropertyControls(StepsDeck, {
     cardColor: { type: ControlType.Color, title: "Card", defaultValue: "#262B1E" },
     fontFamily: { type: ControlType.String, title: "Font", defaultValue: "Host Grotesk" },
     headerOffset: { type: ControlType.Number, title: "Header", defaultValue: 72, min: 0, max: 200, unit: "px" },
+    cta: { type: ControlType.ComponentInstance, title: "CTA" },
 })
