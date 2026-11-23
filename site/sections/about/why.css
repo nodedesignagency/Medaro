@@ -4,13 +4,19 @@
    a tall coloured card on the left (chip, big headline, a line summing up the
    points) beside a stack of light cards on the right, one per point, each a
    big numeral, a small caps label, a title and one line.
-   Ours: the card is the Home stage's olive studio light (stage-plate.webp,
-   darkened under the text), our chip in lime; the right cards are mist like
-   the Supplement cards. The client's four points are the labels, word for
+   Ours: a deep olive card with a quiet pattern behind the words (round 2,
+   user: "on left i dont like that as its been repetitive everywhere … see
+   mobbin lets use something else"; the studio light was the Home stage's),
+   our chip in lime; the right cards are mist like the Supplement cards. The client's four points are the labels, word for
    word; titles and lines are rewritten in plain words (user: "there is lot
    of ai jargon we will rephrase content"), proposal in DESIGN.md.
-   Review option ?why=numbers|icons: the reference's numerals, or the
-   section's illustrated icons (assets/icons/about/) in their place.
+   Three points, not four (round 2, user: "do we need 4 points or 3 would
+   work?"): online care and discreet delivery share the third card.
+   Review option ?whycard=contour|dots|rings, the card's pattern, after Mobbin:
+   contour = topographic hairlines (Linear's sweeping curves), dots = a fading
+   dot grid (Figma's panels), rings = two overlapping circles, the overlap
+   hatched (Linear "Practices"): you and your provider. SVGs from
+   tools/about-patterns.py.
    ========================================================================== */
 
 .why {
@@ -34,16 +40,29 @@
   flex-direction: column;
   padding: clamp(40px, 3.4vw, 64px);
   border-radius: 16px;
-  background: #262b1e url("../../assets/images/products/stage-plate.webp") 62% 50% / cover no-repeat;
+  background: linear-gradient(165deg, #30372a 0%, var(--p-deep) 52%, #1f2318 100%);
   color: var(--p-paper);
 }
-.why__card::before { /* deepens the beam where the words sit; the light still folds through */
-  content: "";
+.why__pattern {
+  display: none;
   position: absolute;
   inset: 0;
   z-index: -1;
-  background:
-    linear-gradient(180deg, rgba(22, 26, 16, 0.62) 0%, rgba(22, 26, 16, 0.38) 55%, rgba(22, 26, 16, 0.18) 100%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+:root[data-whycard="contour"] .why__pattern--contour,
+:root[data-whycard="dots"] .why__pattern--dots,
+:root[data-whycard="rings"] .why__pattern--rings { display: block; }
+.why__pattern--rings { object-position: 50% 100%; } /* the rings sit on the card's foot, below the words */
+.why__pattern--dots {
+  background-image: radial-gradient(circle, rgba(213, 229, 173, 0.34) 1.3px, transparent 1.8px);
+  background-size: 20px 20px;
+  background-position: 10px 10px;
+  -webkit-mask-image: radial-gradient(130% 85% at 100% 100%, #000 12%, transparent 72%);
+  mask-image: radial-gradient(130% 85% at 100% 100%, #000 12%, transparent 72%); /* a gradient, not an image: fine from file:// */
 }
 .why .chip { --color-chip: var(--p-accent); margin: 0 0 32px; }
 .why__title {
@@ -89,9 +108,6 @@
   font-variant-numeric: tabular-nums;
   color: #56662f; /* olive label, 5.2:1 on mist */
 }
-.why-point__icon { display: none; width: clamp(56px, 4.4vw, 80px); height: auto; margin-top: 2px; }
-:root[data-why="icons"] .why-point__num { display: none; }
-:root[data-why="icons"] .why-point__icon { display: block; }
 
 .why-point__label {
   margin: 0 0 12px;
