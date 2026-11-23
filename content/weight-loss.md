@@ -14,6 +14,8 @@ Eyebrow: DOCTOR-GUIDED WEIGHT LOSS
 
 Discover a simpler approach to weight loss with personalized medical guidance and GLP-1 treatment options designed around your goals.
 
+*Layout (user, 2026-11-23): the hero is the eyebrow, headline, sentence and Get Started. "A Smarter Way to Lose Weight." and its list below are their own section, straight after the hero. Words unchanged.*
+
 #### A Smarter Way to Lose Weight.
 
 - Personalized weight-loss plans designed around your goals.

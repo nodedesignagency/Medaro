@@ -1,0 +1,86 @@
+/* ==========================================================================
+   Weight Loss · hero V3 (the hims split on sage, after Loom)
+   hims' bones and warm wash, in the Weight Loss tint: light sage at the
+   top deepening to Dusty Olive at the foot. Headline left, one sentence and
+   the CTA right; below, Loom's two large cards instead of a row of three:
+   people (wide) and product.
+   Content on the frame (16px, max 1888px); 32px under the bar, 16px from
+   the bottom. Header: components/header.css, --glass --smoke --landing.
+   ========================================================================== */
+
+.wl-hero-v3 {
+  --wl-muted: #6a725b; /* problem line: ~3.9:1 on the light sage, large text only */
+  display: flex;
+  flex-direction: column;
+  height: max(700px, 100svh);
+  padding: calc(var(--edge) + 56px + 32px) var(--frame-side) var(--edge);
+  background: linear-gradient(180deg, #e9ebe1 0%, #dfe2d5 30%, #b9bfaa 100%);
+  color: var(--color-ink);
+}
+
+/* ---------- Copy ---------- */
+.wl-hero-v3__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 440px;
+  grid-template-rows: auto auto;
+  column-gap: var(--space-8);
+  row-gap: 20px;
+}
+.wl-hero-v3__eyebrow {
+  grid-column: 1 / -1;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--color-text-muted);
+}
+.wl-hero-v3__title {
+  font-family: var(--font-display);
+  font-size: clamp(60px, 5vw, 96px);
+  font-weight: var(--weight-regular);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-box: trim-both cap alphabetic;
+  margin-left: -0.042em; /* pull the W's side bearing back onto the edge (measured: W on 16px at 1280–1920) */
+}
+.wl-hero-v3__lead { color: var(--wl-muted); }
+
+.wl-hero-v3__intro {
+  align-self: start; /* its first line's cap top level with the headline's (both trimmed to cap height) */
+}
+.wl-hero-v3__intro p {
+  font-size: 20px;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  text-box: trim-start cap alphabetic;
+}
+.wl-hero-v3__intro .btn { margin-top: 28px; }
+
+/* ---------- Two large cards ---------- */
+.wl-hero-v3__cards {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: var(--space-4);
+  min-height: 320px;
+  margin-top: var(--space-8);
+}
+.wl-hero-v3__card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #1b2014;
+  animation: wl-hero-v3-in 900ms var(--ease-out) both;
+}
+.wl-hero-v3__card + .wl-hero-v3__card { animation-delay: 90ms; }
+.wl-hero-v3__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 46% 50%;
+}
+.wl-hero-v3__card--wide { background: var(--p-sage); }
+.wl-hero-v3__card--wide img { object-position: 50% 38%; }
+
+@keyframes wl-hero-v3-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}

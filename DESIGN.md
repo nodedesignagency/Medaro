@@ -71,7 +71,7 @@ Desktop ≥1200 · Tablet 810–1199 · Phone ≤809.
 
 | Component | Variants | Used on | Status |
 |---|---|---|---|
-| Header | One structure (user, 2026-11-19): **logo left · six links centred** (Weight Loss, Men's Health, Women's Health, Supplement, How Medaro Works, About Us) **· "Contact" secondary button + Get Started right. No login.** Secondary on glass = `.btn--glass` (white 14%), on the page = `.btn--outline`. **V1 (locked): `--glass` + `--smoke`**: bar 56px tall, inset 16px (on the frame), radius 12, padding 0 8 0 22, links 14px at 88% white 24px apart, Contact + lime Get Started 40px radius 8, 8px apart; smoke glass = rgb(19,19,19) ~58%, slightly darker at the top, no light edge (measured from the user's Dolomites glass-card reference). Turns light past the photo. **V2: `--plain`** on the page background; logo and CTA sit on the V2 content inset (frame edge + 48). `landing` (logo + one CTA, no links out) not started | all | V1 locked, V2 exploring |
+| Header | One structure (user, 2026-11-19): **logo left · six links centred** (Weight Loss, Men's Health, Women's Health, Supplement, How Medaro Works, About Us) **· "Contact" secondary button + Get Started right. No login.** Secondary on glass = `.btn--glass` (white 14%), on the page = `.btn--outline`. **V1 (locked): `--glass` + `--smoke`**: bar 56px tall, inset 16px (on the frame), radius 12, padding 0 8 0 22, links 14px at 88% white 24px apart, Contact + lime Get Started 40px radius 8, 8px apart; smoke glass = rgb(19,19,19) ~58%, slightly darker at the top, no light edge (measured from the user's Dolomites glass-card reference). Turns light past the photo. **V2: `--plain`** on the page background; logo and CTA sit on the V2 content inset (frame edge + 48). **`--landing`** (weight-loss.html, exploring): the same bar, the logo as plain text (not a link) and one Get Started to the intake, no other links (client rule). Surface: smoke on a dark hero; **`--deep`** (opaque deep olive) on a light hero, where smoke glass reads as flat grey and the lime CTA would wash out | all | V1 locked, V2 exploring, landing exploring |
 | Footer | `full` · `landing` (legal links only, pending client answer) | all | not started |
 | Button | `primary` (lime) · `dark` (ink); sizes `--s` 40, default 48, `--l` 54; `--pill` for V2. No arrows | all | exploring |
 | Text link | `.link-underline` | all | exploring |
@@ -102,7 +102,15 @@ Status: `exploring` (on a branch) · `approved` (on `main`) · `rejected`. Add a
 | how-it-works | — | | |
 | footer | — | | |
 
-### About (`about.html`) · Contact (`contact.html`) · Weight Loss (`weight-loss.html`) · Men's Health (`mens-health.html`) · Legal
+### Weight Loss landing (`weight-loss.html`)
+
+| Section | Status | Branch | Notes |
+|---|---|---|---|
+| header | exploring | `claude/serene-bardeen-hqmuk8` | `--landing`: logo (not a link) + Get Started → `#intake-weight-loss` `[LINK NEEDED]`. Deep olive bar on V1/V3, smoke on V2. |
+| hero | exploring | `claude/serene-bardeen-hqmuk8` | Three versions (`?hero=v1|v2|v3`), all on the hims weight-loss hero's bones (headline left; sentence + CTA right, cap tops level; pictures across the foot of the first screen) and pushed away from it with a Mobbin reference each. Client copy word for word: eyebrow (sentence case), the two-sentence headline with "Weight Loss Is Hard." in muted olive and the answer in ink, the sentence, Get Started. **V1 after Savor**: paper warming to mist, four photos of different heights standing on the bottom edge (people and product alternate; never a steady rise or fall, so nothing reads as a chart). **V2 after Seed**: full-bleed deep olive, three cards (pens · people, wider · debossed tablet on a lighter olive panel). **V3 after Loom**: light sage deepening to Dusty Olive (our answer to hims' tan wash), two large cards (people wide · pens); ink CTA because lime disappears on light sage. Images are stand-ins from earlier renders (stretch and run photos, the GLP-1 pens, the debossed tablet); briefs in `data-brief`. Headline W on 16px, intro cap top level with the headline's, checked at 1280, 1440 (790 and 900 tall) and 1920. |
+| smarter-way | next | | "A Smarter Way to Lose Weight." and its six points: its own section right after the hero (user, 2026-11-23). Every qualifier stays word for word. |
+
+### About (`about.html`) · Contact (`contact.html`) · Men's Health (`mens-health.html`) · Legal
 
 Not started.
 
@@ -119,6 +127,8 @@ Write what the user said, in their words where possible, with the date.
 
 ### Likes
 
+- 2026-11-23: Weight Loss hero: "i like the ui of hero here [hims weight loss: headline left, sentence + CTA right, a row of image cards below] … however it will look copy if we use that", so alternatives from Mobbin that keep "a hint of this as base": V1 after Savor, V2 after Seed, V3 after Loom. The hims device of a pill breaking out of the card stays out, as do result chips (hims' "↓ 32 lbs*": never, no invented numbers).
+- 2026-11-23: The client's hero brief puts "A Smarter Way to Lose Weight." and six bullets inside the hero. User: "the highlighted part should be separate section after hero". Agreed: the hero keeps eyebrow, headline, sentence and Get Started; the list becomes section 2.
 - 2026-11-20: Link hover: "make the links hover animation like this for footer … and nav bar", then "change this to all hero versions in all branch … only the links animation". `.link-roll` added on every branch to all nav links (V1 and V2 header links, V3 menu links); footer links get it when the footer is built.
 
 - 2026-11-19: **V1 locked**: hero V1 with the smoke nav, the run photo and the paper card ("for v1 we are using these"). Other navs (tinted, vision, dark), photos (stretch, peak stand-in) and cards (specs, frost, olive glass) removed from the page.
@@ -151,6 +161,8 @@ Write what the user said, in their words where possible, with the date.
 
 ### Copy flags to raise with the user
 
+- Weight Loss hero: the eyebrow "DOCTOR-GUIDED WEIGHT LOSS" is set in sentence case ("Doctor-guided weight loss"), quiet, not as a caps label. Headline keeps the client's title case.
+- Weight Loss stand-in imagery shows MEDARO-branded GLP-1 pens. MEDARO doesn't make the medication (a licensed pharmacy fills it), so confirm with the client whether branded pens are acceptable before the final renders; plain unbranded pens are the safe default.
 - The nav says "Supplement" (client's word); the section copy says "Supplements". We use "Supplement" in nav and hero rows for now. Suggest "Supplements".
 - The hero has no CTA in the brief. We use "Get Started" (the client's label elsewhere) and scroll to How Medaro Works until told otherwise. `[LINK NEEDED]`
 - The header adds a Get Started button (not in the brief's nav list). `[LINK NEEDED]`
@@ -168,6 +180,10 @@ Write what the user said, in their words where possible, with the date.
 | hims.com | Same system as Hers: tiles per condition, short headlines with one coloured phrase | client |
 | immortals.com | Soft gradient surfaces, rounded cards, two big entry cards in the hero, product shots on clean backgrounds | client |
 | goodlifemeds.com | Full-bleed lifestyle photo hero, big light grotesk headlines, mono uppercase labels, sage and warm neutrals, product cards with "Get started / Learn more" | user (liked) |
+| hims.com weight loss hero (screenshot) | **Weight Loss hero base**: warm wash from white to tan, headline left, sentence + white pill CTA right, three big rounded cards across the foot (product · person · product). Not copied: the pill breaking out of the card, the result chip | user (liked) |
+| Savor (Mobbin) | **Weight Loss hero V1**: split headline/CTA, photos of different heights along the bottom | Mobbin |
+| Seed hero "Whole body health starts in the gut" (Mobbin) | **Weight Loss hero V2**: deep green, headline left, sentence right, a row of lighter-green product cards | Mobbin |
+| Loom shop (Mobbin) | **Weight Loss hero V3**: big headline over two large rounded image cards | Mobbin |
 | superpower.com | **Hero V2.** Quiet header with centred logo; dark rounded stage; product scene (tube + phone app) lit from above; three facts with hairline dividers; ticker along the bottom | user (liked) |
 | avenn (screenshot) | **Hero V1.** Full-bleed photo, frosted nav bar inside it, headline split top-left / bottom-right, sentence + CTA bottom left | user |
 | Atlas menu, liquid-glass sliders (screenshots) | Nav surfaces, round 1 (results rejected) | user |

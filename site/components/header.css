@@ -116,3 +116,13 @@
   .site-header--plain .site-header__links { gap: 20px; }
   .site-header--plain .site-header__links a { font-size: 14px; }
 }
+
+/* ---------- Landing pages (weight-loss.html, mens-health.html) ----------
+   Client rule: paid-traffic pages link nowhere but their intake form. Same
+   bar as Home V1 (--glass + --smoke geometry), with the logo as plain text
+   (not a link) and one CTA. No centre links, no Contact. */
+.site-header--landing .site-header__bar { grid-template-columns: 1fr auto; }
+/* On a light hero (paper, sage) the smoke glass reads as flat grey: the
+   landing bar takes the same dark look as an opaque deep olive instead,
+   so the lime CTA keeps its contrast. */
+.site-header--deep .site-header__bar { background: var(--p-deep); }
