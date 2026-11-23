@@ -71,9 +71,13 @@
    Sized by the copy (user: "make it similar height of the para", "the image
    height and right side content should look same height", "just a bit
    more"): the visual top level with the top of the chip (the copy's top, the
-   chip trimmed to its capitals), the platform's front top edge level with the
-   foot of the Learn more button; the stand's foot on the frame line; the
-   platform stands behind the partition: .wl__floor hides it below the edge. */
+   chip trimmed to its capitals), the platform's front top edge 12px above the
+   foot of the Learn more button (user, 2026-11-23: "can we move the platform
+   up by 8-16px rn looks too down"; the top stays on the chip, so the figure
+   is 12px shorter than the copy); the stand's foot on the frame line; the
+   platform stands behind the partition: .wl__floor hides it below the edge.
+   The platform's right end face is carried straight down in the image so its
+   foot never shows above the floor (user: "there is this black thingy"). */
 .wl__intro {
   position: relative; /* the partition's box; it paints in .wl's own stack */
   /* the copy sits this far right of the third column line (user, 2026-11-21:
@@ -89,9 +93,10 @@
 .wl__photo {
   position: absolute;
   left: 0;
-  /* visual top to the platform's front top edge (1740 of 2166) = the row */
-  height: calc(100% * 2026 / 1740);
-  top: calc(100% * -48 / 1740);
+  /* visual top to the platform's front top edge (1740 of 2026) = the row
+     less 12px */
+  height: calc((100% - 12px) * 2026 / 1740);
+  top: calc((100% - 12px) * -48 / 1740);
   width: auto;
   max-width: none;
   /* the stand's foot (x 1903 of 3240) on the frame line; the platform runs
@@ -124,13 +129,14 @@
 .wl__backdrop,
 .wl__floor {
   /* where the edge meets the left screen edge, measured from the foot of the
-     copy (the row, 100% here). In the image the edge passes (3090, 1806):
-     18px below the platform's front top edge (y 1788, level with the button's
-     foot), which clears his lowest toe (needs ≥ 1789.7 there) by about 4px at
-     1440. That point is 18/1740 of the row below the button's foot and
-     16px + 1187/1740 of the row from the left; the edge drops 0.065px per px,
-     so at the left it is (0.065 × 1187 − 18) / 1740 of the row + 1.04px higher. */
-  --wl-edge-gap: calc(-1.04px - 100% * 0.033997);
+     copy (the row, 100% here). In the image the edge passes (3090, 1806),
+     18px below the platform's front top edge (y 1788), which clears his
+     lowest toe (needs ≥ 1789.7 there) by about 4px at 1440. With the image
+     scaled to R = row − 12px over 1740px, that point is 1758/1740 × R below
+     the copy's top, i.e. 0.010345 × row − 12.124px below the button's foot,
+     and 16px + 1187/1740 × R from the left; the edge drops 0.065px per px, so
+     at the left it is −0.033997 × row − 12.632px from the button's foot. */
+  --wl-edge-gap: calc(-12.632px - 100% * 0.033997);
   --wl-edge: calc(100% - var(--wl-slant) - var(--wl-band));
   /* subtle, like Good Life (user, 2026-11-23: "bg color change that is very
      noticible … in good life its subtle"): the page colour behind the copy,
