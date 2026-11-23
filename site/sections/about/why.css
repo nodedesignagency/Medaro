@@ -38,8 +38,12 @@
   --color-line: rgba(38, 43, 30, 0.16);
 }
 
+/* Round 5 (user: "lets add a straight border above this section so there is
+   no overlap", after their Daily Wellness reference): a full-width hairline
+   marks where the section starts, the content well below it */
 .why {
-  padding: 0 calc(var(--frame-side) + 48px) clamp(120px, 10vw, 192px);
+  padding: clamp(72px, 6.5vw, 112px) calc(var(--frame-side) + 48px) clamp(120px, 10vw, 192px);
+  border-top: 1px solid var(--color-line);
 }
 
 .why__grid {

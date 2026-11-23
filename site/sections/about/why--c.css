@@ -1,0 +1,84 @@
+/* ==========================================================================
+   About · Why MEDARO · C "Frame" (exploring, 2026-11-23)
+   The user: "another version here we will have same big frame thing like
+   footer okay but bg would be a image like image 3 [Daily Wellness] … remove
+   the left image … instead of vertical placement of 01 02 03 it will be
+   horizontal". A frame on the frame edges (16px, radius 18, max 1888) like
+   the footer and the heroes, a light airy photo filling it; the chip, the
+   heading and the summary top left on the stage inset (44/48); the three
+   points as a row of light cards along the frame's foot, 8px apart and 16px
+   from its edges, like the reference's product cards.
+   Photo: stand-in (hero V1's stretch photo), zoomed 18% from its top-left
+   corner so the people sit right of the words; brief in data-brief.
+   ========================================================================== */
+
+.why--c {
+  padding: var(--edge) var(--frame-side) clamp(96px, 8vw, 144px);
+}
+
+.why__frame {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-width: var(--frame-max);
+  height: clamp(720px, calc(100svh - 70px - 2 * var(--edge)), 1000px); /* one screen under the header */
+  margin: 0 auto;
+  padding: 44px 48px var(--edge);
+  border-radius: 18px;
+  background: #cdd6c6; /* the photo's sky while it loads */
+}
+.why__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 35%;
+  transform: scale(1.18);
+  transform-origin: 0 0;
+}
+.why__frame::before { /* lifts the sky a touch behind the words */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(70% 60% at 0% 0%, rgba(244, 245, 239, 0.42) 0%, rgba(244, 245, 239, 0) 70%);
+  pointer-events: none;
+}
+
+.why--c .chip { --color-chip: #2e6b12; margin: 0 0 28px; color: var(--color-ink); }
+:root[data-scene="why"] .why--c .chip { color: var(--color-chip); }
+.why--c .why__title {
+  max-width: 8.6em; /* three lines, clear of the people */
+  font-size: clamp(52px, 4.6vw, 88px); /* 66 at 1440 */
+  line-height: 1;
+  letter-spacing: -0.045em;
+  color: #262b1e;
+}
+.why--c .why__summary {
+  max-width: 420px;
+  margin-top: 28px;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #343b29;
+}
+
+.why--c .why__points {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: auto -32px 0; /* the cards sit 16px from the frame's edges */
+}
+.why--c .why-point {
+  grid-template-columns: 1fr;
+  align-content: start; /* the spare height stays at the foot, so the titles line up across the cards */
+  row-gap: clamp(28px, 2.6vw, 48px);
+  padding: clamp(24px, 2vw, 32px) clamp(24px, 2.2vw, 36px) clamp(28px, 2.4vw, 40px);
+  border-radius: 12px;
+  background: #fafbf7; /* off-white on the photo, like the reference's cards */
+}
+.why--c .why-point__num { font-size: clamp(52px, 4.2vw, 80px); } /* 60 at 1440 */
+.why--c .why-point__title { text-wrap: balance; }
+.why--c .why-point__text { color: #4f5942; }

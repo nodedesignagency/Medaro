@@ -11,14 +11,16 @@
 .why--b .why__head {
   max-width: 1792px;
   margin: 0 auto clamp(40px, 4vw, 72px);
+  text-align: center; /* round 5, user: "lets make this heading part centered" */
 }
 /* The chip goes with the page, like Men's and Women's Health: the heading's
    colour until the green arrives, then deep leaf green (Framer's Steps Chip,
    5.3:1 on the light green), fading with the background */
-.why--b .chip { --color-chip: #2e6b12; margin: 0 0 28px; color: var(--color-ink); } /* on the chip itself: why.css sets A's lime there */
+.why--b .chip { --color-chip: #2e6b12; margin: 0 auto 28px; color: var(--color-ink); } /* on the chip itself: why.css sets A's lime there */
 :root[data-scene="why"] .why--b .chip { color: var(--color-chip); }
 .why--b .why__title {
   max-width: 15em;
+  margin-inline: auto;
   font-size: clamp(44px, 4vw, 76px); /* 58 at 1440 */
   line-height: 1.02;
   letter-spacing: -0.04em;
@@ -26,7 +28,7 @@
 }
 .why--b .why__summary {
   max-width: 560px;
-  margin-top: 24px;
+  margin: 24px auto 0;
   font-size: 18px;
   line-height: 1.5;
   color: var(--color-text-muted);
