@@ -41,9 +41,10 @@ interface Props {
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"
 const DUR = 700
 const IMAGES = [
-    "https://framerusercontent.com/images/YPEb3bZ1majy3MIqhQtpxAwm8.webp",
-    "https://framerusercontent.com/images/rbDROCsH1yyr9ILkbzoi3o.webp",
-    "https://framerusercontent.com/images/WQKhI26hJ8dti3MOpV00qtEcls.webp",
+    // 2026-11-23: AI photos (Magnific, Nano Banana 2.1), one woman through the three steps; step 3's box print is code (tools/box-print.py)
+    "https://framerusercontent.com/images/e3RfqDPwjc9Qj1GWcb4qSB5HQX4.webp",
+    "https://framerusercontent.com/images/wvGRnztHeaFUKGzmlcdeu2B21s.webp",
+    "https://framerusercontent.com/images/DxLPFEHcM4tHmVMAYjDZWReJiqo.webp",
 ]
 const DEFAULT_STEPS: Step[] = [
     { title: "Tell Us About Yourself", text: "Complete a quick online health assessment to help us understand your medical history, needs, and treatment goals." },
