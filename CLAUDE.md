@@ -116,6 +116,7 @@ See `DESIGN.md`. Breakpoints match Framer: desktop ≥1200, tablet 810–1199, p
 ## Phase 2 (Framer) rules, only once the user says "move to Framer"
 
 - Work only in the Framer project the user names. Never touch their other Framer projects.
+- **Animations match the HTML exactly** (user, 2026-11-23: "dont ever do whatever you want i want same animations and stuff … i dont care if it takes more coding"): same values, timings and behaviour as the approved HTML (scroll scenes, drift, decks, reveals, hovers). If Framer can't do it natively, write a code component or override (sources kept in `framer/`); never substitute a different effect. Ask before any deviation.
 - Order: text and colour styles from the tokens first, then components (header, footer, buttons, steps, FAQ, CTA band, disclaimer, cards), then pages, section by section from `main` only.
 - **Responsive happens here.** For every component and section, build the tablet (810–1199) and phone (≤809) breakpoints as it is transferred, using the phone type scale in `DESIGN.md`. Show the user the phone and tablet versions before moving to the next section.
 - Home nav scroll links become section anchors; landing pages get the minimal header with no links out.
