@@ -73,7 +73,7 @@
    more"): the visual top level with the top of the chip (the copy's top, the
    chip trimmed to its capitals), the platform's front top edge level with the
    foot of the Learn more button; the stand's foot on the frame line; the
-   platform's front face hangs below, under the partition's edge. */
+   platform stands behind the partition: .wl__floor hides it below the edge. */
 .wl__intro {
   position: relative; /* the partition's box; it paints in .wl's own stack */
   /* the copy sits this far right of the third column line (user, 2026-11-21:
@@ -115,16 +115,22 @@
    gradient whose lines run parallel to the edge: 183.72deg is the slope of
    --wl-slant (6.5% of the width), so the edge is a straight line at
    100% − slant − band along the gradient. Full bleed, from the section's top
-   to the end of the floor band; the man and the mirror stand on it. */
-.wl__backdrop {
+   to the end of the floor band.
+   Two layers with the same box and gradient: .wl__backdrop behind the
+   figure, and .wl__floor in front of it, masked to below the edge, so the
+   platform stands BEHIND the partition (user, 2026-11-23: "that platform will
+   look behind partition not above like right now"): the floor hides its
+   front face and the front of its top, the edge running just under his feet. */
+.wl__backdrop,
+.wl__floor {
   /* where the edge meets the left screen edge, measured from the foot of the
-     copy (the row, 100% here). The edge runs through the platform's front
-     TOP right corner (user, 2026-11-23: "what i wanted was that partition
-     comes above that platform right now you made below that"), which sits
-     level with the button's foot, 16px + 1187/1740 of the row from the left;
-     the edge drops 0.065px per px, so at the left it is 0.065 × that higher.
-     The platform's front face stands below the edge, on the floor. */
-  --wl-edge-gap: calc(-1.04px - 100% * 0.044342);
+     copy (the row, 100% here). In the image the edge passes (3090, 1806):
+     18px below the platform's front top edge (y 1788, level with the button's
+     foot), which clears his lowest toe (needs ≥ 1789.7 there) by about 4px at
+     1440. That point is 18/1740 of the row below the button's foot and
+     16px + 1187/1740 of the row from the left; the edge drops 0.065px per px,
+     so at the left it is (0.065 × 1187 − 18) / 1740 of the row + 1.04px higher. */
+  --wl-edge-gap: calc(-1.04px - 100% * 0.033997);
   --wl-edge: calc(100% - var(--wl-slant) - var(--wl-band));
   /* subtle, like Good Life (user, 2026-11-23: "bg color change that is very
      noticible … in good life its subtle"): the page colour behind the copy,
@@ -132,14 +138,7 @@
   --wl-surface-mid: color-mix(in srgb, var(--color-bg) 96%, var(--p-sage));
   --wl-surface-edge: color-mix(in srgb, var(--color-bg) 80%, var(--p-sage));
   --wl-floor: color-mix(in srgb, var(--color-bg) 89%, var(--p-sage));
-  position: absolute;
-  z-index: -1;
-  top: calc(-1 * var(--wl-pad-top));
-  bottom: calc(-1 * (var(--wl-edge-gap) + var(--wl-slant) + var(--wl-band)));
-  left: calc((100% - 100cqw) / 2);
-  width: 100cqw;
-  pointer-events: none;
-  background:
+  --wl-surface:
     /* soft key light from the upper right */
     radial-gradient(ellipse 46% 58% at 84% 14%, color-mix(in srgb, #fff 46%, transparent), transparent 72%),
     linear-gradient(183.72deg,
@@ -150,6 +149,32 @@
       var(--wl-floor) calc(var(--wl-edge) + 3px),
       color-mix(in srgb, var(--color-bg) 95%, var(--p-sage)) calc(var(--wl-edge) + var(--wl-band) * 0.35),
       var(--color-bg) calc(var(--wl-edge) + var(--wl-band)));
+  position: absolute;
+  top: calc(-1 * var(--wl-pad-top));
+  bottom: calc(-1 * (var(--wl-edge-gap) + var(--wl-slant) + var(--wl-band)));
+  left: calc((100% - 100cqw) / 2);
+  width: 100cqw;
+  pointer-events: none;
+}
+.wl__backdrop {
+  z-index: -1;
+  background:
+    /* the glow above the edge (user, 2026-11-23, of Good Life's warm glow:
+       "we have subtle glow lets add that in our too greenish would be good"):
+       the client's Soft Nude Lime, strongest on the edge 70% across and
+       fading up and left; .wl__floor covers it below the edge */
+    radial-gradient(ellipse 58% 62% at 70% calc(100% - var(--wl-band) - var(--wl-slant) * 0.3),
+      color-mix(in srgb, var(--p-accent) 52%, transparent) 0,
+      color-mix(in srgb, var(--p-accent) 20%, transparent) 46%,
+      transparent 100%),
+    var(--wl-surface);
+}
+/* in front of the figure (after it in the page), under the next block
+   (.wl__more is positioned so it paints over this) */
+.wl__floor {
+  background: var(--wl-surface);
+  -webkit-mask-image: linear-gradient(183.72deg, transparent calc(var(--wl-edge) - 1px), #000 calc(var(--wl-edge) + 4px));
+  mask-image: linear-gradient(183.72deg, transparent calc(var(--wl-edge) - 1px), #000 calc(var(--wl-edge) + 4px));
 }
 
 /* The eyebrow is the shared chip (styles.css → .chip), on the column line,
@@ -181,9 +206,11 @@
 
 /* ---------- More than weight loss ---------- */
 .wl__more {
-  /* clear the platform's foot (≈ 4.6% of the width below the copy) and the
-     partition's edge where the lead starts (40% across: 0.16 × slant lower) */
-  margin-top: calc(4.6cqw + var(--wl-slant) * 0.16 + clamp(48px, 4vw, 72px));
+  /* over the partition's floor (.wl__floor is positioned, so this is too) */
+  position: relative;
+  /* clear the partition's edge where the lead starts (40% across, about
+     0.25 × slant below the button's foot) */
+  margin-top: calc(var(--wl-slant) * 0.25 + clamp(56px, 5vw, 96px));
   align-items: end;
 }
 .wl__subtitle {
