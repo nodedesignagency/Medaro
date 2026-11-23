@@ -1,0 +1,245 @@
+/* ==========================================================================
+   Component: footer (--full)
+   Design after the user's Ethical Life footer (2026-11-21): the brand line
+   top left, link columns top right; no glow behind the product (user,
+   2026-11-21: "remove glow from behind"). The
+   user's change: "i want our logo back of the suplement pic": the giant
+   MEDARO wordmark runs inset to inset across the foot, in ink, the
+   Tirzepatide vial large and centred in front of it.
+   Content: the client's footer (content/footer.md, word for word; user,
+   2026-11-21: "make this footer according to this content and instead of
+   tablets use bottles"): badges under the brand line, Shop / Support /
+   Legal, and their seven disclaimers under a hairline.
+   In our style: a mist panel on the frame like the hero stage (frame edges,
+   16px from the bottom, radius 18, content on the 48px inset that the
+   header's logo shares), Host Grotesk, the menu's grey caps labels, ink
+   links with the rolling hover (.link-roll), the hero's Tirzepatide vial
+   floating (components/product.css).
+   Variants: --full (Home, About, Contact, legal). --landing (logo, legal
+   links only, no links out) not built yet.
+   Framer: one component; the wordmark is the logo SVG, the vial is its
+   images (render, print, sheen) with the float as a loop.
+   ========================================================================== */
+
+.site-footer {
+  padding: 0 var(--frame-side) var(--edge);
+}
+
+.site-footer__frame {
+  --ft-inset: 48px;
+  position: relative;
+  overflow: hidden; /* the vial runs off the panel's foot */
+  padding: 52px var(--ft-inset) var(--ft-inset);
+  border-radius: 18px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  container-type: inline-size;
+  isolation: isolate;
+}
+
+/* ---------- Top: brand line and badges left, link columns right ---------- */
+.site-footer__top {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+.site-footer__tagline {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 3.6cqw, 68px);
+  font-weight: var(--weight-regular);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-box: trim-both cap alphabetic; /* cap top sits level with the labels' */
+}
+
+/* Badges: the client's LegitScript placeholder (an 80px dashed tile, radius
+   8 like the buttons, until the real badge arrives: [DATA NEEDED]) and
+   their HIPAA badge image. Always under the brand line, at every width
+   (user, 2026-11-21: "make it top bottom only again"). */
+.site-footer__badges {
+  display: flex;
+  gap: 12px;
+  margin: 44px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.site-footer__badge {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 6px;
+  width: 80px;
+  height: 80px;
+  padding: 8px;
+  border-radius: var(--radius-s);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 22%, transparent);
+  text-align: center;
+}
+.site-footer__badge--placeholder {
+  box-shadow: none;
+  outline: 1px dashed color-mix(in srgb, var(--color-ink) 40%, transparent);
+  outline-offset: -1px;
+}
+.site-footer__badge-tag,
+.site-footer__badge-text {
+  font-size: 9px;
+  font-weight: var(--weight-medium);
+  line-height: 1.25;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #666663;
+}
+.site-footer__badge-tag { color: #56662f; letter-spacing: 0.12em; } /* the promo card's olive label */
+/* the client's HIPAA badge, recoloured to our ink (white glow removed),
+   free-standing like theirs, centred on the LegitScript tile */
+.site-footer__badge--hipaa {
+  width: auto;
+  padding: 0 0 0 12px;
+  box-shadow: none;
+}
+.site-footer__badge--hipaa img {
+  width: auto;
+  height: 64px; /* 148px wide: "COMPLIANT" stays readable */
+}
+
+.site-footer__cols {
+  display: flex;
+  gap: clamp(64px, 6cqw, 120px);
+}
+
+/* the menu's label (user, 2026-11-20: "grey not greenish … little more smaller"),
+   one step darker so it holds 4.7:1 on the mist panel */
+.site-footer__label {
+  margin-bottom: 22px;
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #666663;
+  text-box: trim-both cap alphabetic;
+}
+
+.site-footer__list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* Legal: two columns of three, read left column then right (user,
+   2026-11-21: "make this legal in two columns 3 3 points") */
+.site-footer__list--split {
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+  column-gap: 48px;
+}
+.site-footer__list a {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+/* ---------- The client's disclaimers, under a hairline ----------
+   One column, top to bottom, inset to inset, as in the client's footer
+   (user, 2026-11-21: "dont make 3 columns make it up to down"). */
+.site-footer__fine {
+  position: relative;
+  z-index: 3;
+  margin-top: 64px;
+  padding-top: 36px;
+  border-top: 1px solid var(--color-line);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-text-muted); /* 5:1 on mist */
+}
+.site-footer__fine p + p { margin-top: 14px; }
+.site-footer__fine a {
+  white-space: nowrap; /* the email and phone never break */
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--color-ink) 40%, transparent);
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
+}
+.site-footer__fine a:hover { text-decoration-color: var(--color-ink); }
+
+/* ---------- Bottom bar: copyright and motto between two hairlines ----------
+   Just above the wordmark (user, 2026-11-21: "above medaro text make two
+   lines and between those lines put this text"), laid out like their UGC
+   reference: copyright left, the client's three words right. The lines are
+   the disclaimers' hairline (user: "lines should be like what you made
+   here"). The vial's cap stands in front of the bar. */
+.site-footer__bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  margin-top: 64px;
+  padding: 18px 0;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  font-size: 13px;
+  line-height: 1.25;
+}
+.site-footer__copy { color: var(--color-ink); }
+/* the client's words in caps; our olive label colour, like the promo card's */
+.site-footer__motto {
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #56662f;
+}
+
+/* ---------- The wordmark, with the vial in front ---------- */
+.site-footer__brand {
+  position: relative;
+  /* under the bar; the vial's cap (0.38 of the wordmark's height above it)
+     rises through the bar and still clears the small print by 50px+ */
+  margin-top: 56px;
+}
+
+/* the official wordmark from the sprite, inset to inset, in our ink: the
+   client's Dark Olive Green #343B29 (user, 2026-11-21, picked from five
+   greens: "i want this second one color of text") */
+.site-footer__mark {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4413 / 712;
+  color: var(--color-ink);
+}
+
+/* The Tirzepatide vial alone, large and centred on the wordmark, in front of
+   it (user, 2026-11-21: "only use the tirzepatide bottle … a bit bigger and
+   centered"), tilted as in the hero, its foot just running off the panel
+   like the reference's bottle. The box is a size container: the vial is
+   placed in % of it (components/product.css). */
+.site-footer__scene {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  height: 176%;
+  aspect-ratio: 0.62;
+  transform: translate(-50%, -50%);
+  container-type: size;
+  pointer-events: none;
+}
+.site-footer .product--vial { --h: 100%; --x: 50%; --y: 50%; --r: 8deg; }
+
+.site-footer a:focus-visible { outline-offset: 4px; }
