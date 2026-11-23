@@ -24,10 +24,9 @@
   --wl-span2: calc((var(--wl-frame) - 4 * var(--wl-gap)) * 2 / 5 + var(--wl-gap)); /* two columns */
   --wl-title-fs: clamp(56px, 4.7vw, 92px);
   /* the partition (user, 2026-11-23, after Good Life's hero): its front edge
-     runs this far below the copy at the left, drops 6.5% of the screen width
-     to the right (Good Life's slope, ≈3.7°), and the lit floor under it fades
-     back to the page over the band */
-  --wl-edge-gap: clamp(40px, 4vw, 72px);
+     drops 6.5% of the screen width to the right (Good Life's slope, ≈3.7°)
+     and passes through the platform's front bottom corner (.wl__backdrop);
+     the lit floor under it fades back to the page over the band */
   --wl-slant: 6.5cqw;
   --wl-band: clamp(120px, 11vw, 200px);
   container-type: inline-size;
@@ -53,23 +52,27 @@
 }
 
 /* ---------- Intro ---------- */
-/* The mirror cut-out (user, 2026-11-21: "dont make background it should be
-   without it"): a heavyset man and his slim reflection in a tall frosted
-   mirror, staged like their mirror reference, the glass finished after their
-   Neka reference (Magnific Nano Banana 2.1, background removed, contact
-   shadows baked in). 1378×2028; the visible subject runs from x 56 (the
-   stand's back foot) to x 1314 (his elbow) and from y 20 (the mirror's top)
-   to y 1918 (his heels), the rest is transparent shadow room.
-   Sized by the copy (user, 2026-11-21: "make it similar height of the para",
-   after "make this image smaller" and "make smaller"; 2026-11-23: "the image
-   height and right side content should look same height"): the mirror's top
-   level with the top of the chip (the copy's top; the chip is trimmed to its
-   capitals), his heels level with the foot of the Learn more button, the
-   stand's foot on the frame line. "The mirror's top" is the image's visual
-   top, y 44: the middle of the mirror's sloping top edge (21 → 69) and the
-   top of his head (44), so the mirror's near corner rises just above the chip
-   (user, 2026-11-23: "just a bit more"). The transparent room below the heels
-   (110 of 2028, the shadows) is left out of the match. */
+/* The mirror cut-out on its platform (user, 2026-11-21 → 11-23): a heavyset
+   man and his slim reflection in a tall frosted mirror, staged like their
+   mirror reference, the glass finished after their Neka reference, no
+   backdrop; standing on a plain stone platform (user, 2026-11-23: "in good
+   life it looks like those products are sitting on platform … generate a
+   platform"), added in Magnific under the same render, cut out by its
+   measured outline, its faces lifted 22% toward the paper, run 1600px further
+   left (rows averaged, cross-faded, grained) so it reaches the screen edge,
+   with a soft shadow baked under it.
+   assets/images/weight-loss/mirror.webp, 3343×2166. Measured in it:
+     y 48    visual top: the middle of the mirror's sloping top edge, his head
+     y 1788  the platform's front top edge
+     y 2021  the platform's foot (front face bottom)
+     x 1903  the mirror stand's back foot
+     x 3090  the platform's front right corner
+   Sized by the copy (user: "make it similar height of the para", "the image
+   height and right side content should look same height", "just a bit
+   more"): the visual top level with the top of the chip (the copy's top, the
+   chip trimmed to its capitals), the platform's front top edge level with the
+   foot of the Learn more button; the stand's foot on the frame line; the
+   platform's front face hangs below, down to the partition's edge. */
 .wl__intro {
   position: relative; /* the partition's box; it paints in .wl's own stack */
   /* the copy sits this far right of the third column line (user, 2026-11-21:
@@ -85,14 +88,14 @@
 .wl__photo {
   position: absolute;
   left: 0;
-  /* subject height (1874 of 2028, visual top to heels) = the row (the copy) */
-  height: calc(100% * 2028 / 1874);
-  top: calc(100% * -44 / 1874);
+  /* visual top to the platform's front top edge (1740 of 2166) = the row */
+  height: calc(100% * 2166 / 1740);
+  top: calc(100% * -48 / 1740);
   width: auto;
   max-width: none;
-  /* the transparent room left of the stand's foot (56 of 1378) hangs past
-     the frame line, clipped by .wl */
-  transform: translateX(-4.064%);
+  /* the stand's foot (x 1903 of 3343) on the frame line; the platform runs
+     on past the screen edge, clipped by .wl */
+  transform: translateX(-56.925%);
 }
 
 .wl__copy {
@@ -113,10 +116,19 @@
    100% − slant − band along the gradient. Full bleed, from the section's top
    to the end of the floor band; the man and the mirror stand on it. */
 .wl__backdrop {
+  /* the edge at the left screen edge, below the copy (the row, 100% here):
+     the platform's foot is 233/1740 of the row below the button's foot; the
+     edge passes its front right corner, about 24% across the screen
+     (16 + 1187/1740 × row from the left), so at the left it sits
+     0.24 × slant higher. Good Life's boxes stand on their edge the same way. */
+  --wl-edge-gap: calc(100% * 233 / 1740 - var(--wl-slant) * 0.24);
   --wl-edge: calc(100% - var(--wl-slant) - var(--wl-band));
-  --wl-surface-mid: color-mix(in srgb, var(--color-bg) 89%, var(--p-sage));
-  --wl-surface-edge: color-mix(in srgb, var(--color-bg) 70%, var(--p-sage));
-  --wl-floor: color-mix(in srgb, var(--color-bg) 85%, var(--p-sage));
+  /* subtle, like Good Life (user, 2026-11-23: "bg color change that is very
+     noticible … in good life its subtle"): the page colour behind the copy,
+     the Dusty Olive building only toward the edge */
+  --wl-surface-mid: color-mix(in srgb, var(--color-bg) 96%, var(--p-sage));
+  --wl-surface-edge: color-mix(in srgb, var(--color-bg) 80%, var(--p-sage));
+  --wl-floor: color-mix(in srgb, var(--color-bg) 89%, var(--p-sage));
   position: absolute;
   z-index: -1;
   top: calc(-1 * var(--wl-pad-top));
@@ -129,11 +141,11 @@
     radial-gradient(ellipse 46% 58% at 84% 14%, color-mix(in srgb, #fff 46%, transparent), transparent 72%),
     linear-gradient(183.72deg,
       var(--color-bg) 0,
-      var(--color-bg) calc(var(--wl-edge) * 0.12),
-      var(--wl-surface-mid) calc(var(--wl-edge) * 0.62),
+      var(--color-bg) calc(var(--wl-edge) * 0.32),
+      var(--wl-surface-mid) calc(var(--wl-edge) * 0.74),
       var(--wl-surface-edge) calc(var(--wl-edge) - 2px),
       var(--wl-floor) calc(var(--wl-edge) + 3px),
-      color-mix(in srgb, var(--color-bg) 94%, var(--p-sage)) calc(var(--wl-edge) + var(--wl-band) * 0.35),
+      color-mix(in srgb, var(--color-bg) 95%, var(--p-sage)) calc(var(--wl-edge) + var(--wl-band) * 0.35),
       var(--color-bg) calc(var(--wl-edge) + var(--wl-band)));
 }
 
@@ -166,9 +178,9 @@
 
 /* ---------- More than weight loss ---------- */
 .wl__more {
-  /* clear the partition's edge where the lead starts (the third column line,
-     40% across, where the edge has dropped 0.4 × slant) */
-  margin-top: calc(var(--wl-edge-gap) + var(--wl-slant) * 0.42 + clamp(48px, 4.4vw, 80px));
+  /* clear the platform's foot (≈ 4.6% of the width below the copy) and the
+     partition's edge where the lead starts (40% across: 0.16 × slant lower) */
+  margin-top: calc(4.6cqw + var(--wl-slant) * 0.16 + clamp(48px, 4vw, 72px));
   align-items: end;
 }
 .wl__subtitle {
