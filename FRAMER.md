@@ -58,6 +58,7 @@ Uploaded to the Framer project (source files on `main` unless noted):
 
 - 2026-11-23: `mh-man`, `mh-couple`, `mh-stride` (the Men's Health stand-ins `standin-mh-*.webp`), `tablet-round.webp`, `capsule.webp`, the five `wh-*.webp`, `sp-woman.webp`, `supplement-heart.webp`, `supplement-sprout.webp`, `step-1/2/3.webp` (`standin-step-*.webp`), `hipaa-compliant.png`. The footer reuses the hero's flattened `vial-tirzepatide.webp`.
 
+- 2026-11-23 (later): `mh-breath`, `mh-delivery`, `wh-midlife-v2`, `wh-delivery-v2` replace `mh-rest`, `mh-stands`, `wh-midlife`, `wh-delivery` (user: "ai slop"). **Women's tablet and phone tiles carry their own image override** (the Ticker rows), so a Women's photo change must be made on the desktop tile and on its tablet and phone copies; Men's tablet and phone inherit.
 - 2026-11-23: `mh-stretch`, `mh-squat`, `mh-rest`, `mh-drink`, `mh-stands` (`site/assets/images/mens/`, the Men's Health tile photos, on `claude/gallant-fermi-rlrmol`): the 12 Men's Health Care Tiles that held `mh-man`, `mh-couple`, `mh-stride`, `tablet-round` and `capsule` are now the Photo variant with these (the Men Product and Men Capsule variants are unused but kept). Tablet and phone inherit.
 
 - `stage-plate.webp`, `tablet-white-blank.webp`, `tablet-oval-lime-blank.webp` as they are.
