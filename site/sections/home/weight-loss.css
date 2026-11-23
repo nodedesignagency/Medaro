@@ -75,7 +75,8 @@
    foot of the Learn more button (user, 2026-11-23: "can we move the platform
    up by 8-16px rn looks too down"; the top stays on the chip, so the figure
    is 12px shorter than the copy); the stand's foot on the frame line; the
-   platform stands behind the partition: .wl__floor hides it below the edge.
+   platform stands behind the partition: .wl__floor hides its foot, the edge
+   crossing its front face 200px below the top.
    The platform's right end face is carried straight down in the image so its
    foot never shows above the floor (user: "there is this black thingy"). */
 .wl__intro {
@@ -129,14 +130,18 @@
 .wl__backdrop,
 .wl__floor {
   /* where the edge meets the left screen edge, measured from the foot of the
-     copy (the row, 100% here). In the image the edge passes (3090, 1806),
-     18px below the platform's front top edge (y 1788), which clears his
-     lowest toe (needs ≥ 1789.7 there) by about 4px at 1440. With the image
-     scaled to R = row − 12px over 1740px, that point is 1758/1740 × R below
-     the copy's top, i.e. 0.010345 × row − 12.124px below the button's foot,
-     and 16px + 1187/1740 × R from the left; the edge drops 0.065px per px, so
-     at the left it is −0.033997 × row − 12.632px from the button's foot. */
-  --wl-edge-gap: calc(-12.632px - 100% * 0.033997);
+     copy (the row, 100% here). In the image the edge passes (3090, 1988):
+     200px down the platform's front face from its top edge (y 1788), so the
+     platform's sides show like a pillar under its top, along its whole width
+     (user, 2026-11-23: "i want to see bottom part more … right now it is
+     ending at flat part … i want those pillar things that is showing"); its
+     foot (y 2021) stays behind the floor. With the image scaled to
+     R = row − 12px over 1740px, that point is 1940/1740 × R below the copy's
+     top, i.e. 0.114943 × row − 13.379px below the button's foot, and
+     16px + 1187/1740 × R from the left; the edge drops 0.065px per px, so at
+     the left it is 0.070601 × row − 13.887px below the button's foot. About
+     55px of the faces show at the corner at 1440, about 33px at the left edge. */
+  --wl-edge-gap: calc(100% * 0.070601 - 13.887px);
   --wl-edge: calc(100% - var(--wl-slant) - var(--wl-band));
   /* subtle, like Good Life (user, 2026-11-23: "bg color change that is very
      noticible … in good life its subtle"): the page colour behind the copy,
@@ -214,9 +219,9 @@
 .wl__more {
   /* over the partition's floor (.wl__floor is positioned, so this is too) */
   position: relative;
-  /* clear the partition's edge where the lead starts (40% across, about
-     0.25 × slant below the button's foot) */
-  margin-top: calc(var(--wl-slant) * 0.25 + clamp(56px, 5vw, 96px));
+  /* clear the partition's edge where the lead starts (40% across: about
+     0.11 × the copy's height + 0.25 × slant below the button's foot) */
+  margin-top: calc(var(--wl-slant) * 0.25 + 3.6cqw + clamp(56px, 5vw, 96px));
   align-items: end;
 }
 .wl__subtitle {
