@@ -23,7 +23,8 @@ const DEFAULT: Values = { bg: "#f4f5ef", surface: "#e7eadf", ink: "#343b29", mut
 const SCENES: Array<{ id: string; values: Values }> = [
     { id: "mens-health", values: { bg: "#1d2a3a", surface: "#283a4f", ink: "#f4f5ef", muted: "#bcc0c0", line: "rgba(244, 245, 239, 0.18)", chipMen: "#8cc8ff", chipWomen: "#f4f5ef", chipSteps: "#f4f5ef" } },
     { id: "womens-health", values: { bg: "#efd9d8", surface: "#e6c6c7", ink: "#3a2127", muted: "#654d51", line: "rgba(58, 33, 39, 0.18)", chipMen: "#3a2127", chipWomen: "#bb1b50", chipSteps: "#3a2127" } },
-    { id: "how-it-works", values: { bg: "#a8af98", surface: "#b9bfaa", ink: "#262b1e", muted: "#343b29", line: "rgba(38, 43, 30, 0.18)", chipMen: "#262b1e", chipWomen: "#262b1e", chipSteps: "#702810" } },
+    // Light green, built like the Women's blush (user, 2026-11-23: "light greenish color like our color theme"); was sage #a8af98 with a rust chip
+    { id: "how-it-works", values: { bg: "#e2ecd3", surface: "#d3e0bf", ink: "#262b1e", muted: "#4f5942", line: "rgba(38, 43, 30, 0.16)", chipMen: "#262b1e", chipWomen: "#262b1e", chipSteps: "#2e6b12" } },
 ]
 
 let users = 0
