@@ -17,14 +17,17 @@ const V = {
     chipMen: "--token-tC_SmF5VE",
     chipWomen: "--token-PWxc2SHSe",
     chipSteps: "--token-r73HWnpI9",
+    chipSupp: "--token-ApPi4EAVS",
 }
 type Values = Record<keyof typeof V, string>
-const DEFAULT: Values = { bg: "#f4f5ef", surface: "#e7eadf", ink: "#343b29", muted: "#5e6551", line: "rgba(52, 59, 41, 0.14)", chipMen: "#343b29", chipWomen: "#343b29", chipSteps: "#343b29" }
+const DEFAULT: Values = { bg: "#f4f5ef", surface: "#e7eadf", ink: "#343b29", muted: "#5e6551", line: "rgba(52, 59, 41, 0.14)", chipMen: "#343b29", chipWomen: "#343b29", chipSteps: "#343b29", chipSupp: "#343b29" }
 const SCENES: Array<{ id: string; values: Values }> = [
-    { id: "mens-health", values: { bg: "#1d2a3a", surface: "#283a4f", ink: "#f4f5ef", muted: "#bcc0c0", line: "rgba(244, 245, 239, 0.18)", chipMen: "#8cc8ff", chipWomen: "#f4f5ef", chipSteps: "#f4f5ef" } },
-    { id: "womens-health", values: { bg: "#efd9d8", surface: "#e6c6c7", ink: "#3a2127", muted: "#654d51", line: "rgba(58, 33, 39, 0.18)", chipMen: "#3a2127", chipWomen: "#bb1b50", chipSteps: "#3a2127" } },
+    { id: "mens-health", values: { bg: "#1d2a3a", surface: "#283a4f", ink: "#f4f5ef", muted: "#bcc0c0", line: "rgba(244, 245, 239, 0.18)", chipMen: "#8cc8ff", chipWomen: "#f4f5ef", chipSteps: "#f4f5ef", chipSupp: "#f4f5ef" } },
+    { id: "womens-health", values: { bg: "#efd9d8", surface: "#e6c6c7", ink: "#3a2127", muted: "#654d51", line: "rgba(58, 33, 39, 0.18)", chipMen: "#3a2127", chipWomen: "#bb1b50", chipSteps: "#3a2127", chipSupp: "#3a2127" } },
+    // Supplement: the page keeps its paper; only the chip changes, heading colour to leaf green #367d12, like the other chips (user, 2026-11-23)
+    { id: "supplements", values: { ...DEFAULT, chipSupp: "#367d12" } },
     // Light green, built like the Women's blush (user, 2026-11-23: "light greenish color like our color theme"); was sage #a8af98 with a rust chip
-    { id: "how-it-works", values: { bg: "#e2ecd3", surface: "#d3e0bf", ink: "#262b1e", muted: "#4f5942", line: "rgba(38, 43, 30, 0.16)", chipMen: "#262b1e", chipWomen: "#262b1e", chipSteps: "#2e6b12" } },
+    { id: "how-it-works", values: { bg: "#e2ecd3", surface: "#d3e0bf", ink: "#262b1e", muted: "#4f5942", line: "rgba(38, 43, 30, 0.16)", chipMen: "#262b1e", chipWomen: "#262b1e", chipSteps: "#2e6b12", chipSupp: "#262b1e" } },
 ]
 
 let users = 0
@@ -73,7 +76,7 @@ function startScenes() {
     }
 }
 
-/** On the scene sections (Men's Health, Women's Health, How Medaro Works). */
+/** On the scene sections (Men's Health, Women's Health, Supplement, How Medaro Works). */
 export function withScenes(Component: ComponentType<any>): ComponentType<any> {
     return forwardRef<any, any>(function ScenesOverride(props, ref) {
         useEffect(() => {
