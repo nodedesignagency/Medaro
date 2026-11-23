@@ -12,7 +12,9 @@ the 3D product, code makes the branding"):
 
   - the official wordmark (site/assets/logo/wordmark.svg) in ink, centred in the
     plain lower third, REOME-style;
-  - the client's tagline "Made for Better Health." small above it (Host Grotesk).
+  - the client's tagline "Made for Better Health." small below it (Host Grotesk)
+    (user, 2026-11-23: "make medaro 10% bigger and keep medaro first and then at
+    bottom ... made for better health").
 
 The flat print is HTML rendered to PNG with the pre-installed Playwright (node),
 warped onto the box face (its corners measured on the render, in its own pixels)
@@ -47,14 +49,14 @@ def face_html():
     svg = re.sub(r"<title>.*?</title>|<!--.*?-->", "", svg, flags=re.S)
     svg = svg.replace('fill="#000000"', f'fill="{INK}"').replace(
         'width="4413" height="712"', 'style="width:100%;height:auto;display:block"')
-    mw = W * 0.52
+    mw = W * 0.52 * 1.1   # 10% bigger (user, 2026-11-23)
     return f"""<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500&display=swap" rel="stylesheet">
 <style>html,body{{margin:0;background:transparent}}
 .face{{position:relative;width:{W}px;height:{H}px;overflow:hidden}}
-.tag{{position:absolute;left:0;right:0;top:{int(H*0.765)}px;text-align:center;font:500 {int(H*0.034)}px/1 "Host Grotesk",sans-serif;letter-spacing:0.01em;color:{INK}}}
-.mark{{position:absolute;left:{int((W-mw)/2)}px;width:{int(mw)}px;top:{int(H*0.815)}px}}
-</style></head><body><div class="face"><div class="tag">Made for Better Health.</div><div class="mark">{svg}</div></div></body></html>"""
+.tag{{position:absolute;left:0;right:0;top:{int(H*0.866)}px;text-align:center;font:500 {int(H*0.034)}px/1 "Host Grotesk",sans-serif;letter-spacing:0.01em;color:{INK}}}
+.mark{{position:absolute;left:{int((W-mw)/2)}px;width:{int(mw)}px;top:{int(H*0.772)}px}}
+</style></head><body><div class="face"><div class="mark">{svg}</div><div class="tag">Made for Better Health.</div></div></body></html>"""
 
 
 RENDER_JS = """
