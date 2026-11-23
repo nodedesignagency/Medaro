@@ -494,7 +494,7 @@
    put rightside disclaimer text in full width in same size"). The label is
    off the page; it still names the block for screen readers (aria-label). */
 .wl__disclaimer {
-  margin-top: 48px;
+  margin-top: 24px; /* half (user, 2026-11-23: "reduce gap by half"); was 48px */
 }
 .wl__disclaimer p {
   font-size: 13px;
