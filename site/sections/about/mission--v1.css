@@ -1,18 +1,23 @@
 /* ==========================================================================
-   About · Our Mission · V1 "Poster" (exploring, 2026-11-23)
-   After the user's Mahadeva (one huge centred statement under a small label)
-   and EuroBridge (small pictures set inside the line of type; a row of
-   circles, photos and coloured icon discs, running off both edges; two quiet
-   lines under it) references.
+   About · Our Mission · V1 "Poster" (exploring; the user's pick, 2026-11-23)
+   After the user's Mahadeva (one huge centred statement under a small label),
+   EuroBridge (pictures set inside the line; a row of circles running off both
+   edges) and Ragnarok (icons sitting inside the line of type) references.
    - the chip, centred;
-   - the client's heading at poster size, one phrase per line, with two image
-     pills set between the words; they open up (the words part to make room)
-     when the heading comes into view (main.js → reveal);
-   - a row of circles, edge to edge: people (the care sections' photos) and
-     discs in our palette with an icon, drifting sideways with the scroll
-     (main.js → drift, like the care tiles);
-   - the client's two sentences, centred, under the row.
-   Copy: content/about.md → Our Mission, word for word.
+   - the heading at poster size, one phrase per line, sentence case, with two
+     of our illustrated icons set bare between the words (no pill, no
+     background: user, 2026-11-23, "just use icon and that too without bg");
+     they grow in, slightly turned, as the heading comes into view and the
+     words part to make room (main.js → reveal);
+   - a row of circles, edge to edge: the care sections' people photos and
+     icon discs, all icon discs in mist like the Supplement cards (user:
+     "make them same light color like supplement 2 cards bg"), drifting
+     sideways with the scroll (main.js → drift, like the care tiles);
+   - one paragraph under the row, in the quiet body style (user: "i only want
+     one para … like bottom one not above one like dark one").
+   Copy: rewritten for a more premium read at the user's request (2026-11-23,
+   "think and update content so that it looks premium"), from the client's
+   Our Mission copy; flagged in DESIGN.md → Copy flags.
    ========================================================================== */
 
 .mission-v1 {
@@ -39,38 +44,32 @@
 }
 .mission-v1__line { display: block; }
 
-/* ---------- Pills: pictures inside the line ----------
-   A real space sits on each side of a pill (screen readers and copy-paste
-   read "Better Care."); while the pill is shut its negative margins pull the
-   two spaces together into one. On reveal it opens to 1.56em and the words
-   part around it. */
-.pill {
+/* ---------- Icons inside the line ----------
+   A real space sits on each side of an icon (screen readers and copy-paste
+   read "Better care."); while the icon is shut its negative margins pull the
+   two spaces together into one. On reveal its box opens to 0.92em, the words
+   part, and the icon grows from a quarter size, turning to its resting tilt. */
+.mission-v1__icon {
   display: inline-block;
-  position: relative;
   width: 0;
-  height: 0.72em;
+  height: 0.92em;
   margin-inline: -0.13em;
-  border-radius: var(--radius-pill);
-  overflow: hidden;
-  vertical-align: baseline;
-  background: var(--p-mist);
-  transition: width 1000ms var(--ease-out), margin 1000ms var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 140ms + 120ms);
+  vertical-align: -0.12em; /* optical centre on the lower-case line */
+  transition: width 900ms var(--ease-out), margin 900ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 160ms + 120ms);
 }
-.pill img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
+.mission-v1__icon img {
+  display: block;
+  width: 0.92em;
   height: 100%;
-  object-fit: cover;
-  transform: scale(1.25);
-  transition: transform 1400ms var(--ease-out);
+  object-fit: contain;
+  transform: scale(0.25) rotate(calc(var(--tilt, 0deg) - 24deg));
+  opacity: 0;
+  transition: transform 900ms var(--ease-out), opacity 400ms var(--ease-out);
   transition-delay: inherit;
 }
-.pill--icon { background: var(--p-accent); }
-.pill--icon img { inset: 12% 0; height: 76%; object-fit: contain; }
-.is-in .pill { width: 1.56em; margin-inline: -0.05em; }
-.is-in .pill img { transform: none; }
+.is-in .mission-v1__icon { width: 0.92em; margin-inline: 0.02em; }
+.is-in .mission-v1__icon img { transform: rotate(var(--tilt, 0deg)); opacity: 1; }
 
 /* ---------- The row of circles ---------- */
 .mission-v1__orbs {
@@ -94,34 +93,18 @@
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
-  background: var(--p-mist);
+  background: var(--color-surface); /* mist, the Supplement cards' colour */
   color: var(--color-ink);
 }
 .orb img { width: 100%; height: 100%; object-fit: cover; }
-.orb svg { width: 34%; height: 34%; }
-.orb .orb__art { width: 50%; height: 50%; object-fit: contain; }
-.orb--lime { background: var(--p-accent); }
-.orb--sage { background: var(--p-sage); }
-.orb--mist { background: var(--p-mist); }
-.orb--deep { background: var(--p-deep); color: var(--p-accent); }
+.orb svg { width: 32%; height: 32%; }
+.orb .orb__art { width: 48%; height: 48%; object-fit: contain; }
 
-/* ---------- The two sentences ---------- */
+/* ---------- One paragraph ---------- */
 .mission-v1__text {
-  max-width: 640px;
+  max-width: 600px;
   margin: clamp(64px, 6vw, 104px) auto 0;
   padding-inline: 24px;
-}
-.mission-v1__lede {
-  margin: 0;
-  font-size: 22px;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
-  color: var(--color-ink);
-  text-wrap: balance;
-}
-.mission-v1__note {
-  margin: 16px auto 0;
-  max-width: 560px;
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   color: var(--color-text-muted);
@@ -129,5 +112,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pill, .pill img { transition: none; }
+  .mission-v1__icon, .mission-v1__icon img { transition: none; }
 }
