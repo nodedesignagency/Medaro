@@ -294,7 +294,8 @@
    level), cropped to 1400×1273, so they sit on the card with their own
    shadows; the left edge fades into the card. The copy keeps the left 58%. */
 .wl__card {
-  --wl-media: 0.42; /* the image's share of the card's width */
+  --wl-media: 0.42; /* card 2's image: its share of the card's width */
+  --wl-card-h: clamp(280px, 22vw, 420px); /* card 1's image height (the hand) */
   position: relative;
   overflow: hidden;
   display: flex;
@@ -302,7 +303,7 @@
   justify-content: space-between;
   gap: 48px;
   /* at least the image's height (its width / 1.0998), so it is never cut */
-  min-height: max(clamp(260px, 20vw, 340px), calc((100cqw - var(--wl-gap)) / 2 * var(--wl-media) / 1.0998));
+  min-height: max(var(--wl-card-h), calc((100cqw - var(--wl-gap)) / 2 * var(--wl-media) / 1.0998));
   padding: 32px calc(100% * var(--wl-media) + 24px) 32px 32px;
   border-radius: 12px; /* the nav bar's radius */
   background: var(--color-surface);
@@ -322,62 +323,146 @@
   width: 100%;
   height: 100%;
 }
-/* The portal on the phone (card 1): measured from the render along the
-   phone's axes, the screen inside the 20px black bezel is 415 × 902 with its
-   centre at (698.8, 570.9) of 1400×1273, turned 15.39° clockwise; drawn 3px
-   larger each way so it tucks under the bezel's inner edge.
-   Built in code so it stays sharp and holds no invented data: the wordmark,
-   "Your care" and three rows labelled from the card's own copy (treatment
-   information, progress, care team) with the section's icons. Text at least
-   2.8cqw (7.3px at 1280). */
+/* Card 1: a hand holding the phone (user, 2026-11-23: "lets do hand holding the
+   phone", after Hims' "Free, online consultations" card; the floating phone
+   was rejected). Shot on the card colour (Magnific Nano Banana 2.1, corrected
+   to within one level of #E7EADF), cropped close to the phone, 1010×1175.
+   Sized from the card's height, not its width, so the phone is large enough
+   for its screen to read: the screen is about 115px wide at 1440. */
+.wl__card-media--hand {
+  width: auto;
+  height: var(--wl-card-h);
+  aspect-ratio: 1010 / 1175;
+  /* the phone starts 30% in, so the fade stays clear of it */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 24%);
+  mask-image: linear-gradient(to right, transparent, #000 24%);
+}
+.wl__card:has(.wl__card-media--hand) {
+  padding-right: calc(var(--wl-card-h) * 1010 / 1175 + 24px);
+}
+/* The phone's screen (user: "inside the phone ui you made is complete ai slop
+   … lets use bg like image 3 hero and have similar type of cards"): the Home
+   hero in miniature, built in code: the stage light plate, the wordmark
+   centred, the tagline, and the hero's three category cards with their own
+   imagery (the Microdose vial with its printed label, the man, the woman).
+   Measured from the render along the phone's axes: the screen inside the
+   black bezel is 421 × 908 with its centre at (612.6, 565.4) of 1010×1175,
+   turned 10.29° anticlockwise, a true rectangle (no perspective); drawn 3px
+   larger each way to tuck under the bezel. Sized in the screen's own units
+   (cqw): every word at least 6.8cqw, about 7.8px at 1440, 7px at 1280. */
 .wl__screen {
-  white-space: nowrap; /* a phone screen: one line per label at every width */
   position: absolute;
-  left: 49.914%;
-  top: 44.847%;
-  width: 30.071%;  /* 421 / 1400 */
-  height: 71.328%; /* 908 / 1273 */
-  transform: translate(-50%, -50%) rotate(15.39deg);
-  border-radius: 3.4cqw;
+  left: 60.653%;
+  top: 48.119%;
+  width: 42.277%;  /* 427 / 1010 */
+  height: 77.787%; /* 914 / 1175 */
+  transform: translate(-50%, -50%) rotate(-10.29deg);
+  border-radius: 4.6cqw; /* of the image */
   overflow: hidden;
-  padding: 6.5cqw 2.6cqw 2.6cqw;
-  background: linear-gradient(180deg, #fbfcf8, var(--p-paper));
-  color: var(--color-ink);
+  container-type: size;
+  white-space: nowrap;
+  background: #1c2116;
+  color: var(--p-paper);
 }
-.wl__screen-logo {
+.wl__app-plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 82% 30%; /* the beam crossing from the top right, as in the hero */
+}
+.wl__screen::after { /* a little depth at the top and foot, as the hero's stage has */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 24, 15, 0.45), transparent 32%, transparent 62%, rgba(20, 24, 15, 0.35));
+  pointer-events: none;
+}
+.wl__app-logo {
+  position: relative;
+  z-index: 1;
   display: block;
-  overflow: visible;
-  width: 13cqw;
+  width: 42cqw;
   aspect-ratio: 4413 / 712;
-  color: var(--color-ink);
+  margin: 16cqw auto 0;
+  overflow: visible;
+  color: var(--p-paper);
 }
-.wl__screen-title {
-  margin-top: 5cqw;
+.wl__app-tag {
+  position: relative;
+  z-index: 1;
+  margin-top: 10cqw;
+  text-align: center;
   font-family: var(--font-display);
-  font-size: 5.2cqw;
-  font-weight: var(--weight-medium);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-.wl__screen-rows {
-  display: grid;
-  gap: 1.6cqw;
-  margin-top: 3.2cqw;
-}
-.wl__screen-rows li {
-  display: flex;
-  align-items: center;
-  gap: 1.6cqw;
-  padding: 1.8cqw 2cqw;
-  border-radius: 1.8cqw;
-  background: var(--p-mist);
-  font-size: 2.8cqw;
+  font-size: 11.5cqw;
   font-weight: var(--weight-medium);
   line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--p-paper);
 }
-.wl__screen-rows img {
-  width: 5cqw;
-  height: 5cqw;
+.wl__app-cards {
+  position: absolute;
+  z-index: 1;
+  left: 5cqw;
+  right: 5cqw;
+  bottom: 6cqw;
+  display: grid;
+  gap: 2.6cqw;
+}
+.wl__app-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 37cqw;
+  padding: 4.4cqw 4.8cqw 4.8cqw;
+  overflow: hidden;
+  border-radius: 3.6cqw;
+  background: #fff;
+  color: var(--color-ink);
+}
+.wl__app-name {
+  position: relative;
+  z-index: 1;
+  font-size: 7cqw;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+.wl__app-go {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 10cqw;
+  height: 10cqw;
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+.wl__app-go svg {
+  width: 4cqw;
+  height: 4cqw;
+  color: var(--color-ink);
+}
+/* placed like the hero's tiles (components/category-tile.css): the vial large
+   and turned, cut off by the card; the people chest up on the right, fading
+   into the white */
+.wl__app-obj {
+  position: absolute;
+  left: var(--ct-x);
+  top: var(--ct-y);
+  width: auto;
+  max-width: none;
+  height: var(--ct-h);
+  transform: translate(-50%, -50%) rotate(var(--ct-r, 0deg));
+}
+.wl__app-card--weight { --ct-h: 122%; --ct-x: 76%; --ct-y: 73%; --ct-r: 9deg; }
+.wl__app-card--mens,
+.wl__app-card--womens { --ct-h: 122%; --ct-x: 80%; --ct-y: 66%; }
+.wl__app-card--mens .wl__app-obj,
+.wl__app-card--womens .wl__app-obj {
+  -webkit-mask-image: linear-gradient(180deg, #000 58%, rgba(0, 0, 0, 0) 96%);
+  mask-image: linear-gradient(180deg, #000 58%, rgba(0, 0, 0, 0) 96%);
 }
 .wl__card > h3 {
   max-width: 13em;
