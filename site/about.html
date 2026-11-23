@@ -131,13 +131,13 @@
 
   <!-- SECTION:about/what-we-do START · styles: sections/about/what-we-do.css · scripts: main.js (reveal) · assets: assets/images/about/ (wwd-weight.webp, wwd-mens.webp, wwd-womens.webp)
        After the user's hims reference (2026-11-23), three cards instead of two. Copy: content/about.md → What We Do,
-       word for word ("What We Do" as the chip, the lead-in sentence as the headline). Photos: Magnific, 2026-11-23,
+       word for word ("What We Do" as the chip, the lead-in sentence as the headline, its colon removed by the user). Photos: Magnific, 2026-11-23,
        cut out over the row's gradient (drawn in code). -->
   <section class="wwd" id="what-we-do" aria-labelledby="wwd-title">
     <div class="wwd__frame">
       <header class="wwd__head">
         <p class="chip"><span>What We Do</span></p>
-        <h2 class="wwd__title" id="wwd-title">We focus on three essential areas of health:</h2>
+        <h2 class="wwd__title" id="wwd-title">We focus on three essential areas of health</h2>
       </header>
 
       <ul class="wwd__cards" data-reveal>
@@ -160,14 +160,13 @@
           </a>
         </li>
         <li>
-          <div class="wwd-card wwd-card--womens" style="--i:2">
+          <a class="wwd-card wwd-card--womens" href="index.html#womens-health" style="--i:2">
             <span class="wwd-card__text">
               <span class="wwd-card__name">Women's Health</span>
               <span class="wwd-card__line">Support for hormonal health, menopause, and overall well-being.</span>
-              <span class="wwd-card__soon"><span class="wwd-card__dot" aria-hidden="true"></span><span>Coming Soon</span></span>
             </span>
             <img class="wwd-card__person" src="assets/images/about/wwd-womens.webp" alt="" width="1072" height="1200" loading="lazy" decoding="async">
-          </div>
+          </a>
         </li>
       </ul>
     </div>
