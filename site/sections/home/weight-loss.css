@@ -59,9 +59,10 @@
    life it looks like those products are sitting on platform … generate a
    platform"), added in Magnific under the same render, cut out by its
    measured outline, its faces lifted 22% toward the paper, run 1600px further
-   left (rows averaged, cross-faded, grained) so it reaches the screen edge,
-   with a soft shadow baked under it.
-   assets/images/weight-loss/mirror.webp, 3343×2166. Measured in it:
+   left (rows averaged, cross-faded, grained) so it reaches the screen edge;
+   no shadow under it (user, 2026-11-23: "i dont like those shadows below the
+   platform").
+   assets/images/weight-loss/mirror.webp, 3240×2026. Measured in it:
      y 48    visual top: the middle of the mirror's sloping top edge, his head
      y 1788  the platform's front top edge
      y 2021  the platform's foot (front face bottom)
@@ -72,7 +73,7 @@
    more"): the visual top level with the top of the chip (the copy's top, the
    chip trimmed to its capitals), the platform's front top edge level with the
    foot of the Learn more button; the stand's foot on the frame line; the
-   platform's front face hangs below, down to the partition's edge. */
+   platform's front face hangs below, under the partition's edge. */
 .wl__intro {
   position: relative; /* the partition's box; it paints in .wl's own stack */
   /* the copy sits this far right of the third column line (user, 2026-11-21:
@@ -89,13 +90,13 @@
   position: absolute;
   left: 0;
   /* visual top to the platform's front top edge (1740 of 2166) = the row */
-  height: calc(100% * 2166 / 1740);
+  height: calc(100% * 2026 / 1740);
   top: calc(100% * -48 / 1740);
   width: auto;
   max-width: none;
-  /* the stand's foot (x 1903 of 3343) on the frame line; the platform runs
+  /* the stand's foot (x 1903 of 3240) on the frame line; the platform runs
      on past the screen edge, clipped by .wl */
-  transform: translateX(-56.925%);
+  transform: translateX(-58.735%);
 }
 
 .wl__copy {
@@ -116,12 +117,14 @@
    100% − slant − band along the gradient. Full bleed, from the section's top
    to the end of the floor band; the man and the mirror stand on it. */
 .wl__backdrop {
-  /* the edge at the left screen edge, below the copy (the row, 100% here):
-     the platform's foot is 233/1740 of the row below the button's foot; the
-     edge passes its front right corner, about 24% across the screen
-     (16 + 1187/1740 × row from the left), so at the left it sits
-     0.24 × slant higher. Good Life's boxes stand on their edge the same way. */
-  --wl-edge-gap: calc(100% * 233 / 1740 - var(--wl-slant) * 0.24);
+  /* where the edge meets the left screen edge, measured from the foot of the
+     copy (the row, 100% here). The edge runs through the platform's front
+     TOP right corner (user, 2026-11-23: "what i wanted was that partition
+     comes above that platform right now you made below that"), which sits
+     level with the button's foot, 16px + 1187/1740 of the row from the left;
+     the edge drops 0.065px per px, so at the left it is 0.065 × that higher.
+     The platform's front face stands below the edge, on the floor. */
+  --wl-edge-gap: calc(-1.04px - 100% * 0.044342);
   --wl-edge: calc(100% - var(--wl-slant) - var(--wl-band));
   /* subtle, like Good Life (user, 2026-11-23: "bg color change that is very
      noticible … in good life its subtle"): the page colour behind the copy,
