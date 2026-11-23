@@ -1,0 +1,229 @@
+/* ==========================================================================
+   About · What We Do
+   After the user's hims reference (2026-11-23: "Your health is personal. Now,
+   so is your care." over two photo cards), with three cards instead of two
+   (user: "in our case we will use 3 cards instead of 2"):
+   - a centred head: the chip, then the client's sentence as the big
+     two-line headline (the reference's statement);
+   - one row of equal photo cards on the header's logo line, the name top
+     left, a person rising from the card's foot on the right.
+   Signature: one gradient runs through the whole row, like the reference's
+   pair (mint into lavender across both cards), here through each care
+   line's own colour on Home: lime mist (Weight Loss) → sky (Men's Health)
+   → blush (Women's Health), with a mint and a lilac where the cards meet.
+   Drawn in code (crisp at 2x, editable in Framer as a fill); each card shows
+   its third of the same gradient (background-size 300% + the two gaps).
+   People: three new photos (Magnific, 2026-11-23), shot on a flat backdrop
+   in their card's colour and cut out, so their edges melt into the
+   gradient: assets/images/about/wwd-weight.webp, wwd-mens.webp,
+   wwd-womens.webp.
+   Text in our ink, not the reference's white: white on these pastels is
+   about 1.3:1 (ink is 8:1+ on every stop).
+   Weight Management and Men's Health link to their landing pages, like the
+   menu's treatment cards; Women's Health is not a link and carries the
+   Coming Soon tag (the approved status tag, Home → Women's Health).
+   Alive: the cards rise in one after another when the row comes into view
+   (main.js, data-reveal) and each person rises into the card a beat later;
+   on hover the person grows 2% from the card's foot. Reduced motion: still.
+   Copy: content/about.md → What We Do, word for word ("What We Do" is the
+   chip; the lead-in sentence is the headline).
+   Framer: the card is one component, a variant per care line (name, line,
+   photo, gradient position); the row's gradient becomes each variant's fill.
+   ========================================================================== */
+
+.wwd {
+  --wwd-pad: clamp(112px, 10vw, 192px);
+  --wwd-gap: 12px;
+  padding: var(--wwd-pad) calc(var(--frame-side) + 48px);
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+.wwd__frame {
+  max-width: calc(var(--frame-max) - 96px);
+  margin-inline: auto;
+}
+
+/* ---------- Head: chip and the headline, centred ---------- */
+.wwd__head {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+.wwd .chip { margin: 0 auto 28px; } /* leaf green on paper (styles.css default) */
+.wwd__title {
+  max-width: 14em;
+  font-family: var(--font-display);
+  font-size: clamp(48px, 4.6vw, 88px);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+/* ---------- The row ---------- */
+.wwd__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--wwd-gap);
+  margin: clamp(56px, 4.6vw, 88px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wwd-card {
+  /* the row's gradient: lime mist → mint → sky → lilac → blush. The card
+     midpoints (1/6, 1/2, 5/6) carry the colour each photo was shot on. */
+  --wwd-sweep: linear-gradient(90deg,
+    #ebf0d8 0%,
+    #e1e9c8 16.67%,
+    #d8e5d9 33.33%,
+    #d4e0eb 50%,
+    #e0dbe8 66.67%,
+    #efdbd7 83.33%,
+    #f4e3de 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 4 / 5;
+  height: 100%;
+  padding: clamp(24px, 2.1vw, 40px);
+  overflow: hidden; /* the person runs off the card's foot and right edge */
+  border-radius: var(--radius-m);
+  isolation: isolate;
+  color: var(--color-ink);
+  text-decoration: none;
+  background-color: #dfe4dc;
+  background-image:
+    radial-gradient(110% 60% at 0% 100%, rgb(255 255 255 / 0.42), rgb(255 255 255 / 0) 70%), /* soft light from the lower left, like the reference */
+    var(--wwd-sweep);
+  background-size: 100% 100%, calc(300% + 2 * var(--wwd-gap)) 100%;
+  background-position: 0 0, var(--wwd-at, 0%) 0;
+  background-repeat: no-repeat;
+}
+.wwd-card--weight { --wwd-at: 0%; }
+.wwd-card--mens { --wwd-at: 50%; }
+.wwd-card--womens { --wwd-at: 100%; }
+
+/* fine grain over the gradient, so it never bands at 2x (an inline SVG, so
+   it works from file://) */
+.wwd-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 1.2 -0.1'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ---------- Text: name and line, top left ---------- */
+.wwd-card__text {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: start;
+  gap: clamp(10px, 0.9vw, 16px);
+  max-width: 46%;
+}
+.wwd-card__name {
+  width: min-content; /* one word per line, like the reference's "Weight / loss" */
+  font-size: clamp(26px, 2.15vw, 42px);
+  font-weight: var(--weight-regular);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+.wwd-card__line {
+  font-size: clamp(14px, 1.04vw, 17px);
+  line-height: 1.45;
+  color: var(--color-text-muted); /* 5:1+ on every stop */
+  text-wrap: balance; /* no one-word last lines */
+}
+.wwd-card__keep { white-space: nowrap; } /* "weight-loss" never breaks at its hyphen */
+/* her curls spread wide: a narrower measure keeps the line clear of them and
+   breaks it as "Medically guided / weight-loss / treatment options." */
+.wwd-card--weight .wwd-card__line { max-width: 8.8em; }
+
+/* Coming Soon (Women's Health): the approved status tag (Home → Women's
+   Health: tonal, no border, radius 6, the pulsing dot), tinted for the
+   blush card. Not a link. */
+.wwd-card__soon {
+  display: flex;
+  align-items: center;
+  gap: 0.72em;
+  margin-top: 6px;
+  padding: 11px 13px 11px 12px;
+  border-radius: 6px;
+  background: color-mix(in srgb, #bb1b50 9%, transparent);
+  color: var(--color-ink);
+  font-size: clamp(12px, 0.9vw, 15px);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.wwd-card__soon > span:last-child { text-box: trim-both cap alphabetic; }
+.wwd-card__dot {
+  position: relative;
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.wwd-card__dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  animation: wwd-dot-pulse 2.4s var(--ease-out) infinite;
+}
+@keyframes wwd-dot-pulse {
+  0%   { transform: scale(1); opacity: 0.45; }
+  70%, 100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* ---------- The person: rising from the foot, right of centre ---------- */
+.wwd-card__person {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: var(--wwd-right, -10%);
+  height: var(--wwd-h, 80%);
+  width: auto;
+  max-width: none;
+  transform-origin: 50% 100%;
+  transition: transform 700ms var(--ease-out);
+}
+.wwd-card--weight { --wwd-right: -12%; --wwd-h: 80%; }
+.wwd-card--mens { --wwd-right: -16%; --wwd-h: 80%; }
+.wwd-card--womens { --wwd-right: -19%; --wwd-h: 80%; }
+/* Links: the person grows a little from the card's foot */
+a.wwd-card:hover .wwd-card__person { transform: scale(1.02); }
+a.wwd-card:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 3px; border-radius: var(--radius-m); }
+
+/* ---------- Rise in (main.js adds .is-in when the row is in view) ---------- */
+.wwd-card {
+  transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.wwd-card .wwd-card__person { transition-delay: 0ms; }
+.wwd__cards[data-reveal]:not(.is-in) .wwd-card { opacity: 0; transform: translateY(28px); }
+.wwd__cards[data-reveal]:not(.is-in) .wwd-card__person { transform: translateY(8%); }
+.wwd__cards[data-reveal].is-in .wwd-card__person {
+  transition: transform 1100ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 90ms + 140ms);
+}
+.wwd__cards[data-reveal].is-in a.wwd-card:hover .wwd-card__person {
+  transition: transform 700ms var(--ease-out);
+  transition-delay: 0ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wwd__cards[data-reveal]:not(.is-in) .wwd-card { opacity: 1; transform: none; }
+  .wwd__cards[data-reveal]:not(.is-in) .wwd-card__person { transform: none; }
+  .wwd-card__dot::after { animation: none; }
+}
