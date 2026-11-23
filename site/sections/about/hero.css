@@ -1,0 +1,83 @@
+/* ==========================================================================
+   About · hero (exploring; built first in Framer on 2026-11-23, mirrored here
+   so the sections below are reviewed in context: FRAMER.md → About page)
+   Home's stage (the frame edge, radius 18, inset 44/48) with a photo inside,
+   after the user's T3 "What to expect" reference: the photo fills the stage
+   under dark olive scrims; top left the chip, the H1 and the client's three
+   paragraphs. Copy: content/about.md → Hero, word for word, minus the eyebrow
+   "MADE FOR BETTER HEALTH." (the user crossed it out).
+   Photo: stand-in (hero V1's runners) until the real one is made.
+   ========================================================================== */
+
+.about-hero {
+  padding: 0 var(--frame-side) var(--edge);
+}
+
+.about-hero__stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* fills the screen under the 70px header, like Home's stage */
+  padding: 44px 48px 48px;
+  border-radius: 18px;
+  background: #171b11; /* the stage tone, under the photo while it loads */
+  color: var(--p-paper);
+}
+
+.about-hero__photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+}
+
+/* Two scrims in Home's scrim colour: dark on the left and along the top,
+   where the text sits; the people on the right stay clear */
+.about-hero__stage::before,
+.about-hero__stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.about-hero__stage::before {
+  background: linear-gradient(90deg, rgba(22, 26, 16, 0.78) 0%, rgba(22, 26, 16, 0.56) 34%, rgba(22, 26, 16, 0.16) 60%, rgba(22, 26, 16, 0) 78%);
+}
+.about-hero__stage::after {
+  background: linear-gradient(180deg, rgba(22, 26, 16, 0.5) 0%, rgba(22, 26, 16, 0) 46%);
+}
+
+.about-hero__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 52%;
+  max-width: 800px;
+}
+
+.about-hero .chip { --color-chip: var(--p-accent); margin: 0; } /* lime: the bright chip colour on a dark ground */
+
+.about-hero__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 56px; /* Framer: Page Title, 56 from 1200, 64 from 1600 */
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.038em;
+  text-wrap: balance;
+}
+@media (min-width: 1600px) { .about-hero__title { font-size: 64px; } }
+
+.about-hero__body {
+  max-width: 600px;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: rgba(244, 245, 239, 0.86);
+  text-wrap: pretty;
+}
+.about-hero__body p { margin: 0; }
+.about-hero__body p + p { margin-top: 20px; }

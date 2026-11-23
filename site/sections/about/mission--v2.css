@@ -1,0 +1,144 @@
+/* ==========================================================================
+   About · Our Mission · V2 "Statement + values" (exploring, 2026-11-23)
+   After the user's Mahadeva (one huge centred statement) and Granville
+   Energy (a wide rounded photo band; three values in columns split by
+   hairlines, each an icon, a one-word title and a short line; a small link;
+   a marquee of the line, alternating dark and grey, along the foot)
+   references.
+   - the chip, centred;
+   - the client's mission sentence as the statement; its words fill from
+     faint to ink as it scrolls through the screen (main.js → fill);
+   - the photo band (stand-in), easing in when it arrives (main.js → reveal);
+   - three columns titled with the sentence's own three words (Accessible,
+     Convenient, Personal), each line cut from the client's "We believe …"
+     sentence (the user allowed tweaks to this section's copy; flagged in
+     DESIGN.md);
+   - "How Medaro Works" ↓ (Home's section), a hairline and the client's
+     heading as a marquee, ink and sage in turn. Reduced motion: still.
+   ========================================================================== */
+
+.mission-v2 {
+  --inset: calc(var(--frame-side) + 48px);
+  padding: clamp(120px, 10vw, 192px) var(--inset) 0;
+  text-align: center;
+  overflow: clip;
+}
+
+.mission-v2 .chip { margin: 0 auto 36px; }
+
+.mission-v2__statement {
+  max-width: 16.4em;
+  margin: 0 auto;
+  font-family: var(--font-display);
+  font-size: clamp(44px, 4.9vw, 92px); /* 71 at 1440 */
+  font-weight: var(--weight-regular);
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+/* words, split by main.js → fill; lit as the statement scrolls up the screen */
+.mission-v2__statement .fill-w {
+  color: color-mix(in srgb, var(--color-ink) 22%, var(--color-bg));
+  transition: color 320ms linear;
+}
+.mission-v2__statement .fill-w.is-lit { color: var(--color-ink); }
+
+/* ---------- The photo band ---------- */
+.mission-v2__band {
+  height: clamp(200px, 19vw, 360px); /* 274 at 1440 */
+  margin: clamp(72px, 7vw, 120px) 0 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--p-sage);
+}
+.mission-v2__band img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 4%; /* the heads and raised arms stay in the band */
+  transform: scale(1.08);
+  transition: transform 1600ms var(--ease-out);
+}
+.mission-v2__band.is-in img { transform: none; }
+
+/* ---------- Three values ---------- */
+.mission-v2__values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: clamp(40px, 4vw, 64px) 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+.value {
+  padding: 8px 40px;
+  border-left: 1px solid var(--color-line);
+}
+.value:first-child { padding-left: 0; border-left: 0; }
+.value:last-child { padding-right: 0; }
+.value__icon { display: block; width: 24px; height: 24px; color: var(--color-ink); }
+.value__title {
+  margin: clamp(48px, 5vw, 88px) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 2.6vw, 48px); /* 37 at 1440 */
+  font-weight: var(--weight-regular);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+}
+.value__text {
+  max-width: 30ch;
+  margin: 14px 0 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+/* ---------- Link, hairline, marquee ---------- */
+.mission-v2__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: clamp(64px, 6vw, 96px);
+  font-size: 14px;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.mission-v2__more svg { width: 14px; height: 14px; transform: rotate(90deg); transition: transform var(--dur-base) var(--ease-out); }
+.mission-v2__more:hover svg { transform: rotate(90deg) translateX(3px); }
+
+.mission-v2__marquee {
+  margin: 28px calc(-1 * var(--inset)) 0;
+  padding: clamp(28px, 2.6vw, 44px) 0 clamp(48px, 4.4vw, 72px);
+  border-top: 1px solid var(--color-line);
+  overflow: hidden;
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: mission-marquee 60s linear infinite;
+}
+.marquee__group {
+  display: flex;
+  flex: none;
+  margin: 0;
+  gap: 0.3em;
+  padding-right: 0.3em;
+  font-family: var(--font-display);
+  font-size: clamp(64px, 7.4vw, 140px); /* 107 at 1440 */
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+  color: var(--color-ink);
+}
+.marquee__group span:nth-child(even) { color: var(--p-sage); }
+@keyframes mission-marquee { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+  .mission-v2__band img { transform: none; transition: none; }
+  .mission-v2__statement .fill-w { transition: none; }
+}

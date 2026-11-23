@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en" data-palettes="a">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>About MEDARO · Made for Better Health</title>
+  <meta name="description" content="At MEDARO, we're making it easier to access personalized medical care without the long waits, unnecessary complications, or inconvenience of traditional healthcare.">
+  <meta name="robots" content="noindex, nofollow"><!-- Draft: keep staging out of search -->
+  <meta name="theme-color" content="#f4f5ef">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Components -->
+  <link rel="stylesheet" href="components/header.css">
+  <link rel="stylesheet" href="components/menu.css">
+  <link rel="stylesheet" href="components/product.css">
+  <link rel="stylesheet" href="components/footer.css">
+  <!-- Sections -->
+  <link rel="stylesheet" href="sections/about/hero.css">
+  <link rel="stylesheet" href="sections/about/mission--v1.css">
+  <link rel="stylesheet" href="sections/about/mission--v2.css">
+</head>
+<body id="top">
+
+  <!-- Sprite: logo and icons. One source for header, menu and footer -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <!-- Official MEDARO wordmark (site/assets/logo/, from the client), cropped tight, currentColor -->
+    <symbol id="wordmark" viewBox="194 74 4413 712"><g fill="currentColor" transform="translate(80 780) scale(1 -1)"><path transform="translate(0 0)" d="M114 0V700H175L495 154H463L780 700H841V0H770V589H787L495 89H460L166 589H185V0Z"/><path transform="translate(870 0)" d="M114 0V700H594V636H188V64H609V0ZM180 324V387H550V324Z"/><path transform="translate(1500 0)" d="M114 0V700H399Q511 700 595.5 655.5Q680 611 727.0 532.0Q774 453 774 350Q774 247 727.0 168.0Q680 89 595.5 44.5Q511 0 399 0ZM188 64H395Q488 64 556.5 100.5Q625 137 663.0 201.5Q701 266 701 350Q701 435 663.0 499.0Q625 563 556.5 599.5Q488 636 395 636H188Z"/><path transform="translate(2300 0)" d="M2 0 L322 700 L395 700 L715 0 L637 0 L343 657 L373 657 L79 0 Z"/><path transform="translate(3040 0)" d="M114 0V700H376Q509 700 585.5 636.5Q662 573 662 460Q662 386 627.5 332.5Q593 279 529.0 250.5Q465 222 376 222H155L188 256V0ZM592 0 412 254H492L673 0ZM188 250 155 285H374Q479 285 533.5 331.0Q588 377 588 460Q588 544 533.5 590.0Q479 636 374 636H155L188 671Z"/><path transform="translate(3740 0)" d="M420 -6Q341 -6 273.5 20.5Q206 47 156.5 95.5Q107 144 79.5 208.5Q52 273 52 350Q52 427 79.5 491.5Q107 556 156.5 604.5Q206 653 273.0 679.5Q340 706 420 706Q499 706 566.0 679.5Q633 653 682.5 605.0Q732 557 759.5 492.0Q787 427 787 350Q787 273 759.5 208.0Q732 143 682.5 95.0Q633 47 566.0 20.5Q499 -6 420 -6ZM420 60Q483 60 536.5 81.5Q590 103 629.5 142.5Q669 182 691.0 234.5Q713 287 713 350Q713 413 691.0 465.5Q669 518 629.5 557.5Q590 597 536.5 618.5Q483 640 420 640Q357 640 303.0 618.5Q249 597 209.5 557.5Q170 518 147.5 465.5Q125 413 125 350Q125 288 147.5 235.0Q170 182 209.5 142.5Q249 103 303.0 81.5Q357 60 420 60Z"/></g></symbol>
+    <!-- UI icons -->
+    <!-- The MEDARO arrow (user, 2026-11-20; source: assets/icons/arrow.svg). One glyph for every arrow, in currentColor;
+         i-arrow-ne is the same arrow turned 45° (promo card). -->
+    <symbol id="i-arrow-right" viewBox="0 0 16 16"><path fill="currentColor" d="M9.04045 13.5006C9.05132 13.5116 9.38447 13.5951 9.78072 13.6861C10.177 13.7772 10.5056 13.8378 10.5108 13.8209C10.5161 13.8039 10.5571 13.5289 10.6019 13.2096C10.692 12.5686 10.9101 11.82 11.1431 11.3519C11.8694 9.893 13.1726 8.92699 14.7532 8.67591L15.1557 8.61196V7.96748V7.32295L14.7909 7.26174C12.4008 6.86077 10.8426 5.07371 10.5511 2.39938C10.5321 2.22474 10.5094 2.08191 10.5006 2.08191C10.42 2.08191 9.08438 2.40379 9.05912 2.42929C9.04085 2.44773 9.05444 2.61144 9.08936 2.79303C9.47585 4.80384 10.5825 6.44009 12.0186 7.12424L12.363 7.28836L5.2793 7.30121L0.800003 7.30937V8.6137L5.29082 8.62187L12.3578 8.63477L11.923 8.85512C10.7947 9.42671 9.90149 10.5479 9.37547 12.0529C9.22557 12.4817 8.99939 13.4592 9.04045 13.5006Z"/></symbol>
+    <symbol id="i-arrow-ne" viewBox="0 0 16 16"><path fill="currentColor" transform="rotate(-45 7.98 7.96)" d="M9.04045 13.5006C9.05132 13.5116 9.38447 13.5951 9.78072 13.6861C10.177 13.7772 10.5056 13.8378 10.5108 13.8209C10.5161 13.8039 10.5571 13.5289 10.6019 13.2096C10.692 12.5686 10.9101 11.82 11.1431 11.3519C11.8694 9.893 13.1726 8.92699 14.7532 8.67591L15.1557 8.61196V7.96748V7.32295L14.7909 7.26174C12.4008 6.86077 10.8426 5.07371 10.5511 2.39938C10.5321 2.22474 10.5094 2.08191 10.5006 2.08191C10.42 2.08191 9.08438 2.40379 9.05912 2.42929C9.04085 2.44773 9.05444 2.61144 9.08936 2.79303C9.47585 4.80384 10.5825 6.44009 12.0186 7.12424L12.363 7.28836L5.2793 7.30121L0.800003 7.30937V8.6137L5.29082 8.62187L12.3578 8.63477L11.923 8.85512C10.7947 9.42671 9.90149 10.5479 9.37547 12.0529C9.22557 12.4817 8.99939 13.4592 9.04045 13.5006Z"/></symbol>
+    <!-- Supplement V3 line icons (24px, 1.5 stroke, round: the Weight Loss icons' style) -->
+    <symbol id="i-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13.5 14-14 .2 8.6-5 14-12.5 14H5Z"/><path d="M5 19c3-4 6-6.5 10-8.5"/></g></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M10.5 3v6L5.2 18.2A1.9 1.9 0 0 0 6.9 21h10.2a1.9 1.9 0 0 0 1.7-2.8L13.5 9V3"/><path d="M7.6 15h8.8"/></g></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.75"/><circle cx="12" cy="12" r="1.1"/></g></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.75v2M12 19.25v2M2.75 12h2M19.25 12h2M5.46 5.46l1.41 1.41M17.13 17.13l1.41 1.41M5.46 18.54l1.41-1.41M17.13 6.87l1.41-1.41"/></g></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.75" cy="10.75" r="6.5"/><path d="m15.5 15.5 5 5"/></g></symbol>
+    <!-- Weight Loss care-point icons (24px line icons, currentColor) -->
+    <symbol id="i-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
+    <symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.75 3.25H5a1 1 0 0 0-1 1V9a4.5 4.5 0 0 0 9 0V4.25a1 1 0 0 0-1-1h-.75"/><path d="M8.5 13.5v1.75a4.5 4.5 0 0 0 9 0V13"/><circle cx="17.5" cy="11" r="2"/></g></symbol>
+    <symbol id="i-plan" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.75A2.75 2.75 0 0 1 6.75 4h10.5A2.75 2.75 0 0 1 20 6.75v7.5A2.75 2.75 0 0 1 17.25 17H10.5L6 20.5V17h0.75A2.75 2.75 0 0 1 4 14.25Z"/><path d="M8.5 9h7M8.5 12.5h4.5"/></g></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5Z"/><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9M7.75 5.25l8.5 4.5"/></g></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.25V12l3.25 2"/></g></symbol>
+  </svg>
+
+  <a class="visually-hidden" href="#main">Skip to content</a>
+
+  <!-- ================= HERO (approved: hero V4, user 2026-11-21) ================= -->
+  <!-- SECTION:header--menu START · styles: components/header.css, components/menu.css · scripts: main.js (header, menu)
+       After the client's hims and Superpower references (2026-11-20): logo left; Get Started and a menu button right.
+       The six links live in a sheet that slides in from the right (native <dialog>: focus stays inside, Esc closes).
+       Links: Home scroll links and page links as in content/home.md. [LINK NEEDED] Get Started destination. -->
+  <header class="site-header site-header--plain site-header--compact site-header--menu" data-header>
+    <div class="site-header__bar">
+      <a class="logo" href="index.html" aria-label="MEDARO, home"><svg aria-hidden="true"><use href="#wordmark"/></svg></a>
+      <div class="site-header__actions">
+        <a class="btn btn--dark btn--pill" href="index.html#how-it-works">Get Started</a>
+        <button class="menu-button" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="site-menu" data-menu-open>
+          <span class="visually-hidden">Open menu</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <dialog class="menu" id="site-menu" aria-labelledby="site-menu-title" data-menu>
+    <div class="menu__scrim" data-menu-close></div>
+    <div class="menu__panel">
+      <div class="menu__top">
+        <h2 class="menu__title" id="site-menu-title">Menu</h2>
+        <button class="menu__close" type="button" data-menu-close>
+          <span class="visually-hidden">Close menu</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+
+      <nav class="menu__nav" aria-labelledby="site-menu-explore">
+        <p class="menu__label" id="site-menu-explore">Explore</p>
+        <ul class="menu__list">
+          <li style="--i:0"><a class="menu__link link-roll" href="index.html#weight-loss" data-menu-close>Weight Loss<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li style="--i:1"><a class="menu__link link-roll" href="index.html#mens-health" data-menu-close>Men's Health<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li style="--i:2"><a class="menu__link link-roll" href="index.html#womens-health" data-menu-close>Women's Health<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li style="--i:3"><a class="menu__link link-roll" href="index.html#supplements" data-menu-close>Supplement<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li style="--i:4"><a class="menu__link link-roll" href="index.html#how-it-works" data-menu-close>How Medaro Works<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li style="--i:5"><a class="menu__link link-roll" href="about.html" aria-current="page">About Us<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        </ul>
+      </nav>
+
+      <!-- Top treatments, after hims' menu: a row of product cards (Rx badge, product, name) that scrolls
+           sideways. Products: the client's packs, as in the hero (client, 2026-11-20: "Put the bottle in the menu
+           also", now the Quad 4 ampoule; no pens: "we do not make the drugs"; the Supplements tablet blank, client 2026-11-21:
+           no MEDARO name on the pills). Names: the client's mock-up cards (Tirzepatide Microdose,
+           Tirzepatide Multidose) and Quad 4 (content/mens-health.md). [LINK NEEDED] treatment pages; for now the
+           landing pages and the Supplement section. -->
+      <section class="menu__treat" aria-labelledby="site-menu-treat" style="--i:6">
+        <p class="menu__label" id="site-menu-treat">Top treatments</p>
+        <ul class="treat-row">
+          <li>
+            <a class="treat-card" href="weight-loss.html">
+              <span class="treat-card__rx">Rx</span>
+              <span class="treat-card__media" aria-hidden="true">
+                <span class="pack pack--vial treat-card__pack treat-card__pack--vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></span>
+              </span>
+              <span class="treat-card__name">Tirzepatide Microdose</span>
+            </a>
+          </li>
+          <li>
+            <a class="treat-card" href="mens-health.html">
+              <span class="treat-card__rx">Rx</span>
+              <span class="treat-card__media" aria-hidden="true">
+                <span class="pack pack--ampoule treat-card__pack treat-card__pack--ampoule"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print" src="assets/images/products/print-ampoule-quad4-ink.svg" alt="" width="406" height="2200"></span>
+              </span>
+              <span class="treat-card__name">Quad 4</span>
+            </a>
+          </li>
+          <li>
+            <a class="treat-card" href="weight-loss.html">
+              <span class="treat-card__rx">Rx</span>
+              <span class="treat-card__media" aria-hidden="true">
+                <span class="pack pack--vial treat-card__pack treat-card__pack--vial treat-card__pack--vial-b"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-multidose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></span>
+              </span>
+              <span class="treat-card__name">Tirzepatide Multidose</span>
+            </a>
+          </li>
+          <li>
+            <a class="treat-card" href="index.html#supplements" data-menu-close>
+              <span class="treat-card__media" aria-hidden="true"><img class="treat-card__tab treat-card__tab--white" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665"></span>
+              <span class="treat-card__name">Supplements</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <div class="menu__foot" style="--i:7">
+        <a class="btn btn--outline btn--pill" href="contact.html">Contact</a>
+        <a class="btn btn--dark btn--pill" href="index.html#how-it-works" data-menu-close>Get Started</a>
+      </div>
+    </div>
+  </dialog>
+  <!-- SECTION:header--menu END -->
+
+  <main id="main">
+
+    <!-- SECTION:about/hero START · styles: sections/about/hero.css · assets: assets/images/about/about-hero-standin.webp
+         Built first in Framer (2026-11-23, FRAMER.md → About page), mirrored here for context. Home's stage with a photo
+         inside, after the user's T3 "What to expect" reference. Copy: content/about.md → Hero, word for word, minus the
+         eyebrow "MADE FOR BETTER HEALTH." (the user crossed it out). Photo: stand-in (hero V1's runners). -->
+    <section class="about-hero" aria-labelledby="about-title">
+      <div class="about-hero__stage">
+        <img class="about-hero__photo" src="assets/images/about/about-hero-standin.webp" alt=""
+             data-brief="A close, warm shot of a person at home holding a phone (screen blurred or turned away, no readable UI, no logos); shallow depth of field, olive and sage tones, film grain; deep tone on the left third for the text; 16:9 at 4K, the subject right of centre.">
+        <div class="about-hero__copy">
+          <p class="chip"><span>About MEDARO</span></p>
+          <h1 class="about-hero__title" id="about-title">Better Healthcare Begins With a Better Experience.</h1>
+          <div class="about-hero__body">
+            <p>Healthcare should be simple, accessible, and built around you.</p>
+            <p>At MEDARO, we’re making it easier to access personalized medical care without the long waits, unnecessary complications, or inconvenience of traditional healthcare.</p>
+            <p>Through modern technology and access to licensed medical providers, we connect you with treatment options designed around your individual health needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION:about/hero END -->
+
+    <!-- SECTION:about/mission--v1 START · styles: sections/about/mission--v1.css · scripts: main.js (reveal, drift) · assets: assets/images/womens/ (wh-midlife, wh-friends, wh-stretch, wh-balance .webp), assets/images/mens/ (mh-breath, mh-drink, mh-stretch .webp), assets/icons/supplement-heart.webp, supplement-sprout.webp · icons: sprite #i-stethoscope #i-chat #i-box #i-plan
+         V1 "Poster", after the user's Mahadeva and EuroBridge references (2026-11-23). Copy: content/about.md → Our Mission, word for word. -->
+    <div data-version="mission:v1">
+    <section class="mission-v1" id="mission" aria-labelledby="mission-v1-title">
+      <div class="mission-v1__head">
+        <p class="chip"><span>Our Mission</span></p>
+        <h2 class="mission-v1__title" id="mission-v1-title" data-reveal>
+          <span class="mission-v1__line">Better <span class="pill" style="--i:0" aria-hidden="true"><img src="assets/images/womens/wh-midlife.webp" alt=""></span> Care.</span>
+          <span class="mission-v1__line">Fewer Barriers.</span>
+          <span class="mission-v1__line">More <span class="pill pill--icon" style="--i:1" aria-hidden="true"><img src="assets/icons/supplement-sprout.webp" alt=""></span> Possibilities.</span>
+        </h2>
+      </div>
+      <div class="mission-v1__orbs" aria-hidden="true">
+        <ul class="mission-v1__row" data-drift="-1">
+          <li class="orb "><img src="assets/images/womens/wh-friends.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--lime"><img class="orb__art" src="assets/icons/supplement-heart.webp" alt="" loading="lazy"></li>
+          <li class="orb "><img src="assets/images/mens/mh-breath.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--deep"><svg aria-hidden="true"><use href="#i-stethoscope"/></svg></li>
+          <li class="orb "><img src="assets/images/womens/wh-stretch.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--sage"><svg aria-hidden="true"><use href="#i-chat"/></svg></li>
+          <li class="orb "><img src="assets/images/mens/mh-drink.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--mist"><img class="orb__art" src="assets/icons/supplement-sprout.webp" alt="" loading="lazy"></li>
+          <li class="orb "><img src="assets/images/womens/wh-balance.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--lime"><svg aria-hidden="true"><use href="#i-box"/></svg></li>
+          <li class="orb "><img src="assets/images/mens/mh-stretch.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--deep"><svg aria-hidden="true"><use href="#i-plan"/></svg></li>
+          <li class="orb "><img src="assets/images/womens/wh-friends.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--lime"><img class="orb__art" src="assets/icons/supplement-heart.webp" alt="" loading="lazy"></li>
+          <li class="orb "><img src="assets/images/mens/mh-breath.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--deep"><svg aria-hidden="true"><use href="#i-stethoscope"/></svg></li>
+          <li class="orb "><img src="assets/images/womens/wh-stretch.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--sage"><svg aria-hidden="true"><use href="#i-chat"/></svg></li>
+          <li class="orb "><img src="assets/images/mens/mh-drink.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--mist"><img class="orb__art" src="assets/icons/supplement-sprout.webp" alt="" loading="lazy"></li>
+          <li class="orb "><img src="assets/images/womens/wh-balance.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--lime"><svg aria-hidden="true"><use href="#i-box"/></svg></li>
+          <li class="orb "><img src="assets/images/mens/mh-stretch.webp" alt="" loading="lazy"></li>
+          <li class="orb orb--deep"><svg aria-hidden="true"><use href="#i-plan"/></svg></li>
+        </ul>
+      </div>
+      <div class="mission-v1__text">
+        <p class="mission-v1__lede">Our mission is simple: to make quality healthcare more accessible, convenient, and personal.</p>
+        <p class="mission-v1__note">We believe everyone deserves professional medical guidance, clear treatment options, and a healthcare experience that respects their time and privacy.</p>
+      </div>
+    </section>
+    </div>
+    <!-- SECTION:about/mission--v1 END -->
+
+    <!-- SECTION:about/mission--v2 START · styles: sections/about/mission--v2.css · scripts: main.js (fill, reveal) · assets: assets/images/about/mission-band-standin.webp · icons: sprite #i-stethoscope #i-clock #i-plan #i-arrow-right
+         V2 "Statement + values", after the user's Mahadeva and Granville Energy references (2026-11-23). Copy: content/about.md →
+         Our Mission; the three values' titles are the sentence's own words and their lines are cut from "We believe …"
+         (the user allowed tweaks here; proposal flagged in DESIGN.md). Photo: stand-in (hero V1's stretch photo). -->
+    <div data-version="mission:v2">
+    <section class="mission-v2" aria-labelledby="mission-v2-title">
+      <p class="chip"><span>Our Mission</span></p>
+      <h2 class="visually-hidden" id="mission-v2-title">Better Care. Fewer Barriers. More Possibilities.</h2>
+      <p class="mission-v2__statement" data-fill>Our mission is simple: to make quality healthcare more accessible, convenient, and personal.</p>
+      <figure class="mission-v2__band" data-reveal>
+        <img src="assets/images/about/mission-band-standin.webp" alt="" loading="lazy"
+             data-brief="A wide, calm everyday scene in our palette (people at home or outdoors, unposed), olive and sage tones, soft sun, film grain; reads as a thin band (about 5:1), no logos or text.">
+      </figure>
+      <ul class="mission-v2__values">
+        <li class="value">
+          <svg class="value__icon" aria-hidden="true"><use href="#i-stethoscope"/></svg>
+          <h3 class="value__title">Accessible</h3>
+          <p class="value__text">Everyone deserves professional medical guidance.</p>
+        </li>
+        <li class="value">
+          <svg class="value__icon" aria-hidden="true"><use href="#i-clock"/></svg>
+          <h3 class="value__title">Convenient</h3>
+          <p class="value__text">A healthcare experience that respects your time and privacy.</p>
+        </li>
+        <li class="value">
+          <svg class="value__icon" aria-hidden="true"><use href="#i-plan"/></svg>
+          <h3 class="value__title">Personal</h3>
+          <p class="value__text">Clear treatment options, designed around your individual health needs.</p>
+        </li>
+      </ul>
+      <a class="mission-v2__more" href="index.html#how-it-works">How Medaro Works <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <div class="mission-v2__marquee" aria-hidden="true">
+        <div class="marquee__track"><p class="marquee__group"><span>Better Care.</span><span>Fewer Barriers.</span><span>More Possibilities.</span><span>Better Care.</span><span>Fewer Barriers.</span><span>More Possibilities.</span></p><p class="marquee__group"><span>Better Care.</span><span>Fewer Barriers.</span><span>More Possibilities.</span><span>Better Care.</span><span>Fewer Barriers.</span><span>More Possibilities.</span></p></div>
+      </div>
+    </section>
+    </div>
+    <!-- SECTION:about/mission--v2 END -->
+
+  </main>
+
+  <!-- SECTION:footer--full START · styles: components/footer.css, components/product.css · scripts: main.js (rolling links) · assets: assets/images/products/ (vial-tirzepatide.webp, print-vial-microdose.svg, sheen-vial.svg), assets/badges/hipaa-compliant.png
+       Design after the user's Ethical Life footer (2026-11-21): brand line top left, link columns top right, the MEDARO
+       wordmark across the foot behind the products ("i want our logo back of the suplement pic"), no glow; mist panel
+       on the frame, radius 18. Content: the client's footer (content/footer.md, word for word; user, 2026-11-21: "make
+       this footer according to this content and instead of tablets use bottles"). Product: the hero's Microdose Tirzepatide
+       vial only, large and centred, in front of the wordmark in ink (user, 2026-11-21).
+       [DATA NEEDED] LegitScript badge (a placeholder in the client's copy).
+       Legal pages (legal/<slug>.html) not built yet. -->
+  <footer class="site-footer site-footer--full">
+    <div class="site-footer__frame">
+
+      <div class="site-footer__top">
+        <div class="site-footer__brandline">
+          <p class="site-footer__tagline">Made for<br>Better Health.</p>
+          <ul class="site-footer__badges">
+            <li class="site-footer__badge site-footer__badge--placeholder">
+              <span class="site-footer__badge-tag">Placeholder</span>
+              <span class="site-footer__badge-text">Official LegitScript badge – placeholder only</span>
+            </li>
+            <!-- The client's HIPAA badge (user, 2026-11-21), recoloured to our ink: assets/badges/hipaa-compliant.png
+                 (original as delivered: hipaa-compliant-original.png) -->
+            <li class="site-footer__badge site-footer__badge--hipaa">
+              <img src="assets/badges/hipaa-compliant.png" alt="HIPAA Compliant" width="523" height="282">
+            </li>
+          </ul>
+        </div>
+
+        <div class="site-footer__cols">
+          <nav class="site-footer__col" aria-labelledby="footer-shop">
+            <p class="site-footer__label" id="footer-shop">Shop</p>
+            <ul class="site-footer__list">
+              <li><a class="link-roll" href="mens-health.html">Men's Health</a></li>
+              <li><a class="link-roll" href="index.html#womens-health">Women's Health</a></li>
+            </ul>
+          </nav>
+
+          <nav class="site-footer__col" aria-labelledby="footer-support">
+            <p class="site-footer__label" id="footer-support">Support</p>
+            <ul class="site-footer__list">
+              <li><a class="link-roll" href="contact.html">Contact Us</a></li>
+              <li><a class="link-roll" href="legal/frequently-asked-questions.html">FAQs</a></li>
+            </ul>
+          </nav>
+
+          <nav class="site-footer__col" aria-labelledby="footer-legal">
+            <p class="site-footer__label" id="footer-legal">Legal</p>
+            <ul class="site-footer__list site-footer__list--split">
+              <li><a class="link-roll" href="legal/terms-of-use.html">Terms of Use</a></li>
+              <li><a class="link-roll" href="legal/privacy-policy.html">Privacy Policy</a></li>
+              <li><a class="link-roll" href="legal/notice-of-privacy-practices.html">HIPAA Notice of Privacy Practices</a></li>
+              <li><a class="link-roll" href="legal/cancellation-and-refund-policy.html">Returns &amp; Refund Policy</a></li>
+              <li><a class="link-roll" href="legal/california-privacy-disclosures.html">California Privacy Notice</a></li>
+              <li><a class="link-roll" href="legal/sms-and-mobile-terms.html">SMS Terms and Conditions</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <!-- The client's disclaimers, word for word (content/footer.md). Company name MEDARO and phone +1 559 236 8812 (client, 2026-11-23). -->
+      <div class="site-footer__fine">
+        <p>MEDARO operates as a marketplace platform connecting patients with independently licensed healthcare providers who deliver care through the MEDARO Patient Portal. MEDARO does not dispense medication or provide medical services directly; all clinical decisions rest solely with independent providers. Payment does not guarantee that a prescription will be written or that medication will be dispensed. Any prescription issued reflects only the professional judgment of the healthcare provider.</p>
+        <p>Where we operate: MEDARO services are available only to patients physically located in U.S. states where our affiliated providers are licensed. Availability varies by state, by treatment, and over time, and some products are not offered in every state. Eligibility is confirmed during intake, and if care cannot be offered in your state you will not be charged. Email <a href="mailto:support@mymedaro.com">support@mymedaro.com</a> to confirm availability where you live.</p>
+        <p>Prescription products: medications shown on this site require a valid prescription from a licensed provider following an evaluation. Pricing reflects the cost of the medication and associated clinical services when prescribed; it is not an offer to sell a prescription medication and does not guarantee approval.</p>
+        <p>Subscriptions: multi-month plans are billed as described at checkout and renew automatically until cancelled. You may cancel at any time before your next renewal by emailing <a href="mailto:support@mymedaro.com">support@mymedaro.com</a> or calling <a href="tel:+15592368812">+1 559 236 8812</a>. See our Terms of Service and Returns &amp; Refunds policy.</p>
+        <p>The information on this site is provided for general informational purposes only and is not a substitute for individualized medical advice, diagnosis, or treatment. Always consult your licensed healthcare provider about any medical concerns. This platform advertises healthcare services, not any specific prescription medication.</p>
+        <p>Disclaimer: FDA-approved brand-name medications, including Wegovy® and Ozempic®, are made and distributed solely by Novo Nordisk®. Mounjaro® and Zepbound® are made and distributed solely by Eli Lilly and Company®. MEDARO is not affiliated with, endorsed by, or sponsored by any of these companies or their products.</p>
+        <p>Compounded medications are not reviewed or approved by the U.S. Food and Drug Administration (FDA) for safety or efficacy. They are, however, prepared by licensed compounding pharmacies in accordance with Section 503A of the Federal Food, Drug, and Cosmetic Act, which permits compounding based on a valid patient-specific prescription from a licensed healthcare provider.</p>
+      </div>
+
+      <!-- Bottom bar between two hairlines, just above the wordmark (user, 2026-11-21, after their UGC reference;
+           the client's words, content/footer.md) -->
+      <div class="site-footer__bar">
+        <p class="site-footer__copy">© 2026 MEDARO. All rights reserved.</p>
+        <p class="site-footer__motto">Measured · Prescribed · Delivered</p>
+      </div>
+
+      <!-- The wordmark (ink) behind the Microdose Tirzepatide vial, large and centred (user, 2026-11-21) -->
+      <div class="site-footer__brand" aria-hidden="true">
+        <svg class="site-footer__mark"><use href="#wordmark"/></svg>
+        <div class="site-footer__scene">
+          <div class="product product--vial"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  <!-- SECTION:footer--full END -->
+
+  <script src="main.js" defer></script>
+</body>
+</html>

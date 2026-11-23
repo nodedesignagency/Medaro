@@ -270,6 +270,57 @@
   window.addEventListener('version-change', () => els.forEach((el) => { if (!el.classList.contains('is-in')) { io.unobserve(el); io.observe(el); } }));
 })();
 
+/* ---------- Fill: words that darken as they scroll up the screen ----------
+   [data-fill] is split into words (.fill-w, the spaces stay plain text, so it
+   reads and copies as before); as its top moves from 85% to 35% of the screen
+   height, the words light (.is-lit) in reading order and go faint again on
+   the way back. Its CSS sets the two colours (About → Our Mission V2).
+   Reduced motion: all lit. */
+(function fill() {
+  const els = Array.from(document.querySelectorAll('[data-fill]'));
+  if (!els.length) return;
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const sets = els.map((el) => {
+    const words = [];
+    const walk = (node) => {
+      Array.from(node.childNodes).forEach((n) => {
+        if (n.nodeType === 1) { walk(n); return; }
+        if (n.nodeType !== 3) return;
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span');
+          w.className = 'fill-w';
+          w.textContent = part;
+          frag.appendChild(w);
+          words.push(w);
+        });
+        n.replaceWith(frag);
+      });
+    };
+    walk(el);
+    return { el, words };
+  });
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const vh = window.innerHeight;
+    sets.forEach(({ el, words }) => {
+      if (el.closest('[hidden]')) return;
+      const p = still.matches ? 1 : (vh * 0.85 - el.getBoundingClientRect().top) / (vh * 0.5);
+      const lit = Math.round(Math.min(1, Math.max(0, p)) * words.length);
+      words.forEach((w, i) => w.classList.toggle('is-lit', i < lit));
+    });
+  };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+  update();
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  window.addEventListener('version-change', queue);
+  still.addEventListener('change', queue);
+})();
+
 /* ---------- Review-only: versions and palettes ----------
    Sections offered in several versions are marked data-version="<slot>:<id>",
    e.g. data-version="hero:a" and data-version="hero:b". One per slot is shown,
