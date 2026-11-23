@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="components/footer.css">
   <!-- Sections -->
   <link rel="stylesheet" href="sections/about/hero.css">
+  <link rel="stylesheet" href="sections/about/hero--a.css">
+  <link rel="stylesheet" href="sections/about/hero--b.css">
   <link rel="stylesheet" href="sections/about/mission--v1.css">
   <link rel="stylesheet" href="sections/about/mission--v2.css">
 </head>
@@ -145,25 +147,38 @@
 
   <main id="main">
 
-    <!-- SECTION:about/hero START · styles: sections/about/hero.css · assets: assets/images/about/about-hero-standin.webp
+    <!-- SECTION:about/hero START · styles: sections/about/hero.css, hero--a.css, hero--b.css (versions: ?hero=a|b) · assets: assets/images/about/about-hero-standin.webp
          Built first in Framer (2026-11-23, FRAMER.md → About page), mirrored here for context. Home's stage with a photo
          inside, after the user's T3 "What to expect" reference. Copy: content/about.md → Hero, word for word, minus the
          eyebrow "MADE FOR BETTER HEALTH." (the user crossed it out). Photo: stand-in (hero V1's runners). -->
-    <section class="about-hero" aria-labelledby="about-title">
+    <div data-version="hero:a">
+    <section class="about-hero about-hero--a" aria-labelledby="about-title-a">
       <div class="about-hero__stage">
         <img class="about-hero__photo" src="assets/images/about/about-hero-standin.webp" alt=""
              data-brief="A close, warm shot of a person at home holding a phone (screen blurred or turned away, no readable UI, no logos); shallow depth of field, olive and sage tones, film grain; deep tone on the left third for the text; 16:9 at 4K, the subject right of centre.">
         <div class="about-hero__copy">
           <p class="chip"><span>About MEDARO</span></p>
-          <h1 class="about-hero__title" id="about-title">Better Healthcare Begins With a Better Experience.</h1>
-          <div class="about-hero__body">
-            <p>Healthcare should be simple, accessible, and built around you.</p>
-            <p>At MEDARO, we’re making it easier to access personalized medical care without the long waits, unnecessary complications, or inconvenience of traditional healthcare.</p>
-            <p>Through modern technology and access to licensed medical providers, we connect you with treatment options designed around your individual health needs.</p>
-          </div>
+          <h1 class="about-hero__title" id="about-title-a">Better Healthcare Begins With a Better Experience.</h1>
+          <p class="about-hero__lede"><strong>Healthcare should be simple, accessible, and built around you.</strong> MEDARO connects you with licensed medical providers and personalized treatment options, without the long waits or complications of traditional care.</p>
         </div>
       </div>
     </section>
+    </div>
+    <div data-version="hero:b">
+    <section class="about-hero about-hero--b" aria-labelledby="about-title-b">
+      <div class="about-hero__stage">
+        <img class="about-hero__photo" src="assets/images/about/about-hero-standin.webp" alt=""
+             data-brief="A close, warm shot of a person at home holding a phone (screen blurred or turned away, no readable UI, no logos); shallow depth of field, olive and sage tones, film grain; deep tone on the left third for the text; 16:9 at 4K, the subject right of centre.">
+        <span class="about-hero__shade" aria-hidden="true"></span>
+        <div class="about-hero__copy">
+          <p class="chip"><span>About MEDARO</span></p>
+          <h1 class="about-hero__title" id="about-title-b">Better Healthcare Begins With a Better Experience.</h1>
+          <p class="about-hero__lede">Healthcare should be simple, accessible, and built around you.</p>
+        </div>
+        <p class="about-hero__foot">MEDARO connects you with licensed medical providers and treatment options designed around your individual health needs, without the long waits, unnecessary complications, or inconvenience of traditional healthcare.</p>
+      </div>
+    </section>
+    </div>
     <!-- SECTION:about/hero END -->
 
     <!-- SECTION:about/mission--v1 START · styles: sections/about/mission--v1.css · scripts: main.js (reveal, drift) · assets: assets/images/womens/ (wh-friends, wh-stretch, wh-balance .webp), assets/images/mens/ (mh-breath, mh-drink, mh-stretch .webp), assets/icons/about/ (heart-plus, sun-hill, stethoscope, clipboard, phone-heart, clock, padlock, house .webp; Magnific, 2026-11-23)
