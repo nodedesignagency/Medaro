@@ -52,14 +52,14 @@
    stand's back foot) to x 1314 (his elbow) and from y 20 (the mirror's top)
    to y 1918 (his heels), the rest is transparent shadow room.
    Sized by the copy (user, 2026-11-21: "make it similar height of the para",
-   after "make this image smaller" and "make smaller"): the mirror's top level
-   with the headline's cap height, his heels level with the foot of the
-   Learn more button, the stand's foot on the frame line. */
+   after "make this image smaller" and "make smaller"; 2026-11-23: "the image
+   height and right side content should look same height"): the mirror's top
+   corner level with the top of the chip (the copy's top; the chip is trimmed
+   to its capitals), his heels level with the foot of the Learn more button,
+   the stand's foot on the frame line. The image's transparent room above the
+   mirror (20 of 2028) and below the heels (110, the shadows) is left out of
+   the match. */
 .wl__intro {
-  /* from the copy's top to the headline's cap height: the chip (its cap
-     height, 0.7 × --fs-chip, + 28) and the headline's half-leading above the
-     caps (≈0.16em) */
-  --wl-cap-offset: calc(0.7 * var(--fs-chip) + 28px + 0.16 * var(--wl-title-fs));
   /* the copy sits this far right of the third column line (user, 2026-11-21:
      "the gap is very less … so text move to right"): about 45px at 1440 */
   --wl-copy-shift: calc(var(--wl-span2) * 0.08);
@@ -73,9 +73,9 @@
 .wl__photo {
   position: absolute;
   left: 0;
-  /* subject height (1898 of 2028) = the row less the cap offset */
-  height: calc((100% - var(--wl-cap-offset)) * 2028 / 1898);
-  top: calc(var(--wl-cap-offset) - (100% - var(--wl-cap-offset)) * 20 / 1898);
+  /* subject height (1898 of 2028, mirror top to heels) = the row (the copy) */
+  height: calc(100% * 2028 / 1898);
+  top: calc(100% * -20 / 1898);
   width: auto;
   max-width: none;
   /* the transparent room left of the stand's foot (56 of 1378) hangs past
