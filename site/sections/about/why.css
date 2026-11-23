@@ -16,12 +16,27 @@
    chips from those 3 cards"); each card is a numeral, a title and a line.
    Versions ?why=a|b: A = this card; B = the chip, heading and summary above
    the grid, left aligned, and a photo in the card's place (why--b.css).
+   Round 4, scene (user, 2026-11-23: "can we try light green color bg we have
+   in how medaro works section in framer … add the color changing animation as
+   well as change card color"): while the section holds the middle of the
+   screen the page fades to Framer's How Medaro Works light green
+   (data-scene="why"; main.js → scenes, styles.css fades the tokens, 700ms;
+   reduced motion: instant). The point cards take the green tile.
    Review option ?whycard=contour|dots|rings, the card's pattern, after Mobbin:
    contour = topographic hairlines (Linear's sweeping curves), dots = a fading
    dot grid (Figma's panels), rings = two overlapping circles, the overlap
    hatched (Linear "Practices"): you and your provider. SVGs from
    tools/about-patterns.py.
    ========================================================================== */
+
+:root[data-scene="why"] {
+  --color-bg: #e2ecd3;               /* light green, Framer's Steps Green */
+  --color-surface: #d3e0bf;          /* the cards: Steps Tile */
+  --color-ink: #262b1e;              /* deep olive, 11.9:1 */
+  --color-text: #262b1e;
+  --color-text-muted: #4f5942;       /* 6.0:1 on the green, 5.3:1 on the tiles */
+  --color-line: rgba(38, 43, 30, 0.16);
+}
 
 .why {
   padding: 0 calc(var(--frame-side) + 48px) clamp(120px, 10vw, 192px);
@@ -110,7 +125,7 @@
   line-height: 0.82;
   letter-spacing: -0.05em;
   font-variant-numeric: tabular-nums;
-  color: #56662f; /* olive label, 5.2:1 on mist */
+  color: #56662f; /* olive label: 5.2:1 on mist, 4.6:1 on the green tiles */
 }
 
 .why-point__title {

@@ -266,12 +266,12 @@
     </div>
     <!-- SECTION:about/mission--v2 END -->
 
-    <!-- SECTION:about/why START · styles: sections/about/why.css, why--b.css (versions: ?why=a|b) · assets: assets/images/about/why-contour.svg, why-rings.svg (tools/about-patterns.py), why-standin.webp · review option (A): ?whycard=contour|dots|rings
+    <!-- SECTION:about/why START · styles: sections/about/why.css, why--b.css (versions: ?why=a|b) · assets: assets/images/about/why-contour.svg, why-rings.svg (tools/about-patterns.py), why-standin.webp · review option (A): ?whycard=contour|dots|rings · scripts: main.js (scenes: the page turns light green)
          After the user's Daylight "Why partners choose Daylight" reference (2026-11-23). Copy: content/about.md → Why MEDARO; the
          heading is theirs (sentence case), the summary, titles and lines are rewritten in plain words at the user's request
          (DESIGN.md → Copy flags); the client's four points (labels) were taken off the cards at the user's request. -->
     <div data-version="why:a">
-    <section class="why why--a" id="why-medaro" aria-labelledby="why-title-a">
+    <section class="why why--a" data-scene="why" id="why-medaro" aria-labelledby="why-title-a">
       <div class="why__grid">
         <div class="why__card">
           <img class="why__pattern why__pattern--contour" src="assets/images/about/why-contour.svg" alt="">
@@ -308,7 +308,7 @@
     </section>
     </div>
     <div data-version="why:b">
-    <section class="why why--b" aria-labelledby="why-title-b">
+    <section class="why why--b" data-scene="why" aria-labelledby="why-title-b">
       <div class="why__head">
         <p class="chip"><span>Why MEDARO</span></p>
         <h2 class="why__title" id="why-title-b">Your health deserves more than a prescription.</h2>

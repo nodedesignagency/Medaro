@@ -12,7 +12,11 @@
   max-width: 1792px;
   margin: 0 auto clamp(40px, 4vw, 72px);
 }
-.why--b .chip { --color-chip: #367d12; margin: 0 0 28px; } /* leaf green on paper, the default chip */
+/* The chip goes with the page, like Men's and Women's Health: the heading's
+   colour until the green arrives, then deep leaf green (Framer's Steps Chip,
+   5.3:1 on the light green), fading with the background */
+.why--b .chip { --color-chip: #2e6b12; margin: 0 0 28px; color: var(--color-ink); } /* on the chip itself: why.css sets A's lime there */
+:root[data-scene="why"] .why--b .chip { color: var(--color-chip); }
 .why--b .why__title {
   max-width: 15em;
   font-size: clamp(44px, 4vw, 76px); /* 58 at 1440 */
