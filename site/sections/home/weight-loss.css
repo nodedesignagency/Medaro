@@ -488,21 +488,15 @@
   color: var(--color-text-muted);
 }
 
-/* ---------- Medical disclaimer: stays in the section, near the claims ---------- */
+/* ---------- Medical disclaimer: stays in the section, near the claims ----------
+   The text alone, the full width of the frame at the same size (user,
+   2026-11-23: "remove that [label] … also the border/frame above that, just
+   put rightside disclaimer text in full width in same size"). The label is
+   off the page; it still names the block for screen readers (aria-label). */
 .wl__disclaimer {
   margin-top: 48px;
-  padding-top: 20px;
-  border-top: 1px solid var(--color-line);
-}
-.wl__disclaimer h3 {
-  grid-column: 1 / 3;
-  font-size: 13px;
-  font-weight: var(--weight-medium);
-  line-height: 1.55;
 }
 .wl__disclaimer p {
-  grid-column: 3 / 6;
-  max-width: 68ch;
   font-size: 13px;
   line-height: 1.55;
   color: var(--color-text-muted);
