@@ -1,0 +1,120 @@
+/* ==========================================================================
+   About · Why MEDARO (exploring, 2026-11-23)
+   After the user's Daylight "Why partners choose Daylight" reference (Mobbin):
+   a tall coloured card on the left (chip, big headline, a line summing up the
+   points) beside a stack of light cards on the right, one per point, each a
+   big numeral, a small caps label, a title and one line.
+   Ours: the card is the Home stage's olive studio light (stage-plate.webp,
+   darkened under the text), our chip in lime; the right cards are mist like
+   the Supplement cards. The client's four points are the labels, word for
+   word; titles and lines are rewritten in plain words (user: "there is lot
+   of ai jargon we will rephrase content"), proposal in DESIGN.md.
+   Review option ?why=numbers|icons: the reference's numerals, or the
+   section's illustrated icons (assets/icons/about/) in their place.
+   ========================================================================== */
+
+.why {
+  padding: 0 calc(var(--frame-side) + 48px) clamp(120px, 10vw, 192px);
+}
+
+.why__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 37fr) minmax(0, 63fr); /* Daylight: 610 : 1030 */
+  gap: 12px;
+  max-width: 1792px;
+  margin: 0 auto;
+}
+
+/* ---------- The card ---------- */
+.why__card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(40px, 3.4vw, 64px);
+  border-radius: 16px;
+  background: #262b1e url("../../assets/images/products/stage-plate.webp") 62% 50% / cover no-repeat;
+  color: var(--p-paper);
+}
+.why__card::before { /* deepens the beam where the words sit; the light still folds through */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(22, 26, 16, 0.62) 0%, rgba(22, 26, 16, 0.38) 55%, rgba(22, 26, 16, 0.18) 100%);
+}
+.why .chip { --color-chip: var(--p-accent); margin: 0 0 32px; }
+.why__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(52px, 4.5vw, 84px); /* 65 at 1440 */
+  font-weight: var(--weight-regular);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+.why__summary {
+  max-width: 30ch;
+  margin: 32px 0 0;
+  font-size: 20px;
+  line-height: 1.45;
+  color: rgba(244, 245, 239, 0.88);
+  text-wrap: pretty;
+}
+
+/* ---------- The points ---------- */
+.why__points {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.why-point {
+  display: grid;
+  grid-template-columns: clamp(96px, 8.6vw, 156px) minmax(0, 1fr);
+  align-items: start;
+  padding: clamp(28px, 2.4vw, 44px) clamp(28px, 2.8vw, 52px);
+  border-radius: 16px;
+  background: var(--color-surface); /* mist, the Supplement cards */
+}
+.why-point__num {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 5.6vw, 104px); /* 81 at 1440 */
+  font-weight: var(--weight-regular);
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  color: #56662f; /* olive label, 5.2:1 on mist */
+}
+.why-point__icon { display: none; width: clamp(56px, 4.4vw, 80px); height: auto; margin-top: 2px; }
+:root[data-why="icons"] .why-point__num { display: none; }
+:root[data-why="icons"] .why-point__icon { display: block; }
+
+.why-point__label {
+  margin: 0 0 12px;
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #666663; /* the menu's neutral label grey, 4.7:1 on mist */
+}
+.why-point__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 1.8vw, 32px); /* 26 at 1440 */
+  font-weight: var(--weight-medium);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+.why-point__text {
+  max-width: 62ch;
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-palettes="a">
+<html lang="en" data-palettes="a" data-options="why:numbers,icons">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="sections/about/hero--b.css">
   <link rel="stylesheet" href="sections/about/mission--v1.css">
   <link rel="stylesheet" href="sections/about/mission--v2.css">
+  <link rel="stylesheet" href="sections/about/why.css">
 </head>
 <body id="top">
 
@@ -263,6 +264,59 @@
     </section>
     </div>
     <!-- SECTION:about/mission--v2 END -->
+
+    <!-- SECTION:about/why START · styles: sections/about/why.css · assets: assets/images/products/stage-plate.webp, assets/icons/about/ (stethoscope, clipboard, phone-heart, house .webp) · review option: ?why=numbers|icons
+         After the user's Daylight "Why partners choose Daylight" reference (2026-11-23). Copy: content/about.md → Why MEDARO; the
+         four labels are the client's points word for word, the heading is theirs (sentence case), the summary, titles and lines are
+         rewritten in plain words at the user's request ("there is lot of ai jargon"): DESIGN.md → Copy flags. -->
+    <section class="why" id="why-medaro" aria-labelledby="why-title">
+      <div class="why__grid">
+        <div class="why__card">
+          <p class="chip"><span>Why MEDARO</span></p>
+          <h2 class="why__title" id="why-title">Your health deserves more than a prescription.</h2>
+          <p class="why__summary">We’re building healthcare that puts people first. No unnecessary complications, just straightforward care designed around you.</p>
+        </div>
+        <ol class="why__points">
+          <li class="why-point">
+            <span class="why-point__num" aria-hidden="true">01</span>
+            <img class="why-point__icon" src="assets/icons/about/stethoscope.webp" alt="" loading="lazy">
+            <div>
+              <p class="why-point__label">Licensed Medical Providers</p>
+              <h3 class="why-point__title">A licensed provider reviews your intake</h3>
+              <p class="why-point__text">Your answers go to a licensed provider from an independent medical group, who decides whether treatment is right for you.</p>
+            </div>
+          </li>
+          <li class="why-point">
+            <span class="why-point__num" aria-hidden="true">02</span>
+            <img class="why-point__icon" src="assets/icons/about/clipboard.webp" alt="" loading="lazy">
+            <div>
+              <p class="why-point__label">Personalized Treatment Options</p>
+              <h3 class="why-point__title">Options built around you</h3>
+              <p class="why-point__text">When treatment is appropriate, your provider recommends options that fit your health and your goals.</p>
+            </div>
+          </li>
+          <li class="why-point">
+            <span class="why-point__num" aria-hidden="true">03</span>
+            <img class="why-point__icon" src="assets/icons/about/phone-heart.webp" alt="" loading="lazy">
+            <div>
+              <p class="why-point__label">Convenient Online Care</p>
+              <h3 class="why-point__title">Care on your schedule</h3>
+              <p class="why-point__text">Start online, from home, whenever it suits you, without the long waits of traditional care.</p>
+            </div>
+          </li>
+          <li class="why-point">
+            <span class="why-point__num" aria-hidden="true">04</span>
+            <img class="why-point__icon" src="assets/icons/about/house.webp" alt="" loading="lazy">
+            <div>
+              <p class="why-point__label">Discreet Medication Delivery</p>
+              <h3 class="why-point__title">Delivered to your door</h3>
+              <p class="why-point__text">If prescribed, a licensed pharmacy ships your medication discreetly, straight to your door.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+    <!-- SECTION:about/why END -->
 
   </main>
 
