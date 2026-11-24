@@ -2,8 +2,8 @@
    Home · Weight Loss (#weight-loss), the second section
    Layout after the user's Good Life reference (video, 2026-11-19), measured
    from it and scaled to our frame:
-   - Intro: the product set on the left, running off the screen edge; on the
-     right, starting on the third column line, eyebrow, a 3-line headline
+   - Intro: the mirror cut-out on the left (was the product set running off
+     the screen edge; replaced 2026-11-21); on the right, starting on the third column line, eyebrow, a 3-line headline
      (≈4.7vw), a hairline, the paragraph and the CTA.
    - Below: a 2-line heading, then the care points as columns with a hairline
      on top, a 24px icon and the title. The reference has 4 columns with
@@ -23,7 +23,16 @@
   --wl-frame: min(100cqw - 2 * var(--edge), var(--frame-max));
   --wl-span2: calc((var(--wl-frame) - 4 * var(--wl-gap)) * 2 / 5 + var(--wl-gap)); /* two columns */
   --wl-title-fs: clamp(56px, 4.7vw, 92px);
+  /* the partition (user, 2026-11-23, after Good Life's hero): its front edge
+     drops 6.5% of the screen width to the right (Good Life's slope, ≈3.7°)
+     and passes through the platform's front bottom corner (.wl__backdrop);
+     the lit floor under it fades back to the page over the band */
+  --wl-slant: 6.5cqw;
+  --wl-band: clamp(120px, 11vw, 200px);
   container-type: inline-size;
+  isolation: isolate; /* its own stack: the partition (z-index −1) paints over
+     this background and under every block of the section */
+  overflow-x: clip; /* the cut-out's transparent margin may pass the screen edge */
   padding: var(--wl-pad-top) 0 clamp(96px, 8vw, 160px);
   background: var(--color-bg);
   color: var(--color-ink);
@@ -43,28 +52,140 @@
 }
 
 /* ---------- Intro ---------- */
+/* The mirror cut-out on its platform (user, 2026-11-21 → 11-23): a heavyset
+   man and his slim reflection in a tall frosted mirror, staged like their
+   mirror reference, the glass finished after their Neka reference, no
+   backdrop; standing on a plain stone platform (user, 2026-11-23: "in good
+   life it looks like those products are sitting on platform … generate a
+   platform"), added in Magnific under the same render, cut out by its
+   measured outline, its faces lifted 22% toward the paper, run 1600px further
+   left (rows averaged, cross-faded, grained) so it reaches the screen edge;
+   no shadow under it (user, 2026-11-23: "i dont like those shadows below the
+   platform").
+   assets/images/weight-loss/mirror.webp, 3240×2026. Measured in it:
+     y 48    visual top: the middle of the mirror's sloping top edge, his head
+     y 1788  the platform's front top edge
+     y 2021  the platform's foot (front face bottom)
+     x 1903  the mirror stand's back foot
+     x 3090  the platform's front right corner
+   Sized by the copy (user: "make it similar height of the para", "the image
+   height and right side content should look same height", "just a bit
+   more"): the visual top level with the top of the chip (the copy's top, the
+   chip trimmed to its capitals), the platform's front top edge 12px above the
+   foot of the Learn more button (user, 2026-11-23: "can we move the platform
+   up by 8-16px rn looks too down"; the top stays on the chip, so the figure
+   is 12px shorter than the copy); the stand's foot on the frame line; the
+   platform stands behind the partition: .wl__floor hides its foot, the edge
+   crossing its front face 200px below the top.
+   The platform's right end face is carried straight down in the image so its
+   foot never shows above the floor (user: "there is this black thingy"). */
+.wl__intro {
+  position: relative; /* the partition's box; it paints in .wl's own stack */
+  /* the copy sits this far right of the third column line (user, 2026-11-21:
+     "the gap is very less … so text move to right"): about 45px at 1440 */
+  --wl-copy-shift: calc(var(--wl-span2) * 0.08);
+}
 .wl__stage {
   grid-column: 1 / 3;
-  /* run off the left screen edge, like the reference */
-  margin-left: calc((var(--wl-frame) - 100cqw) / 2);
-  align-self: start;
+  /* as tall as the copy (the row): the cut-out is placed out of flow inside */
+  align-self: stretch;
+  position: relative;
 }
-/* The image is sized by the frame (two columns wide, 640:900), so zooming out
-   doesn't blow it up; the stand-in is anchored right and its boxes carry on to
-   the screen edge (preserveAspectRatio xMaxYMin). */
-.wl__stage img {
-  width: 100%;
-  height: calc(var(--wl-span2) * 900 / 640);
+.wl__photo {
+  position: absolute;
+  left: 0;
+  /* visual top to the platform's front top edge (1740 of 2026) = the row
+     less 12px */
+  height: calc((100% - 12px) * 2026 / 1740);
+  top: calc((100% - 12px) * -48 / 1740);
+  width: auto;
+  max-width: none;
+  /* the stand's foot (x 1903 of 3240) on the frame line; the platform runs
+     on past the screen edge, clipped by .wl */
+  transform: translateX(-58.735%);
 }
 
 .wl__copy {
   grid-column: 3 / 6;
   align-self: start;
-  /* headline cap height level with the top of the tallest bottle, as in the
-     reference: bottle top = 104/640 of the image width; minus the chip (its
-     cap height, 0.7 × --fs-chip, + 28) and the headline's half-leading above the
-     caps (≈0.16em) */
-  padding-top: max(0px, calc(var(--wl-span2) * 104 / 640 - 0.7 * var(--fs-chip) - 28px - 0.16 * var(--wl-title-fs)));
+  padding-left: var(--wl-copy-shift);
+}
+
+/* The partition (user, 2026-11-23: "it has slanted partition can we have real
+   life look partition like that … we are going to keep that image of guy
+   looking in mirror instead of those products sitting"), after Good Life's
+   hero photo, measured from it: a lit surface that darkens toward its front
+   edge, the edge sloping down to the right and soft (≈5px), then a lighter
+   floor that fades back to the page. Here in our client's Dusty Olive mixed
+   into the page colour (so it follows the scene colours), drawn as one
+   gradient whose lines run parallel to the edge: 183.72deg is the slope of
+   --wl-slant (6.5% of the width), so the edge is a straight line at
+   100% − slant − band along the gradient. Full bleed, from the section's top
+   to the end of the floor band.
+   Two layers with the same box and gradient: .wl__backdrop behind the
+   figure, and .wl__floor in front of it, masked to below the edge, so the
+   platform stands BEHIND the partition (user, 2026-11-23: "that platform will
+   look behind partition not above like right now"): the floor hides its
+   front face and the front of its top, the edge running just under his feet. */
+.wl__backdrop,
+.wl__floor {
+  /* where the edge meets the left screen edge, measured from the foot of the
+     copy (the row, 100% here). In the image the edge passes (3090, 1988):
+     200px down the platform's front face from its top edge (y 1788), so the
+     platform's sides show like a pillar under its top, along its whole width
+     (user, 2026-11-23: "i want to see bottom part more … right now it is
+     ending at flat part … i want those pillar things that is showing"); its
+     foot (y 2021) stays behind the floor. With the image scaled to
+     R = row − 12px over 1740px, that point is 1940/1740 × R below the copy's
+     top, i.e. 0.114943 × row − 13.379px below the button's foot, and
+     16px + 1187/1740 × R from the left; the edge drops 0.065px per px, so at
+     the left it is 0.070601 × row − 13.887px below the button's foot. About
+     55px of the faces show at the corner at 1440, about 33px at the left edge. */
+  --wl-edge-gap: calc(100% * 0.070601 - 13.887px);
+  --wl-edge: calc(100% - var(--wl-slant) - var(--wl-band));
+  /* subtle, like Good Life (user, 2026-11-23: "bg color change that is very
+     noticible … in good life its subtle"): the page colour behind the copy,
+     the Dusty Olive building only toward the edge */
+  --wl-surface-mid: color-mix(in srgb, var(--color-bg) 96%, var(--p-sage));
+  --wl-surface-edge: color-mix(in srgb, var(--color-bg) 80%, var(--p-sage));
+  --wl-floor: color-mix(in srgb, var(--color-bg) 89%, var(--p-sage));
+  --wl-surface:
+    /* soft key light from the upper right */
+    radial-gradient(ellipse 46% 58% at 84% 14%, color-mix(in srgb, #fff 46%, transparent), transparent 72%),
+    linear-gradient(183.72deg,
+      var(--color-bg) 0,
+      var(--color-bg) calc(var(--wl-edge) * 0.32),
+      var(--wl-surface-mid) calc(var(--wl-edge) * 0.74),
+      var(--wl-surface-edge) calc(var(--wl-edge) - 2px),
+      var(--wl-floor) calc(var(--wl-edge) + 3px),
+      color-mix(in srgb, var(--color-bg) 95%, var(--p-sage)) calc(var(--wl-edge) + var(--wl-band) * 0.35),
+      var(--color-bg) calc(var(--wl-edge) + var(--wl-band)));
+  position: absolute;
+  top: calc(-1 * var(--wl-pad-top));
+  bottom: calc(-1 * (var(--wl-edge-gap) + var(--wl-slant) + var(--wl-band)));
+  left: calc((100% - 100cqw) / 2);
+  width: 100cqw;
+  pointer-events: none;
+}
+.wl__backdrop {
+  z-index: -1;
+  background:
+    /* the glow above the edge (user, 2026-11-23, of Good Life's warm glow:
+       "we have subtle glow lets add that in our too greenish would be good"):
+       the client's Soft Nude Lime, strongest on the edge 70% across and
+       fading up and left; .wl__floor covers it below the edge */
+    radial-gradient(ellipse 58% 62% at 70% calc(100% - var(--wl-band) - var(--wl-slant) * 0.3),
+      color-mix(in srgb, var(--p-accent) 52%, transparent) 0,
+      color-mix(in srgb, var(--p-accent) 20%, transparent) 46%,
+      transparent 100%),
+    var(--wl-surface);
+}
+/* in front of the figure (after it in the page), under the next block
+   (.wl__more is positioned so it paints over this) */
+.wl__floor {
+  background: var(--wl-surface);
+  -webkit-mask-image: linear-gradient(183.72deg, transparent calc(var(--wl-edge) - 1px), #000 calc(var(--wl-edge) + 4px));
+  mask-image: linear-gradient(183.72deg, transparent calc(var(--wl-edge) - 1px), #000 calc(var(--wl-edge) + 4px));
 }
 
 /* The eyebrow is the shared chip (styles.css → .chip), on the column line,
@@ -96,8 +217,12 @@
 
 /* ---------- More than weight loss ---------- */
 .wl__more {
-  margin-top: clamp(48px, 4.4vw, 80px);
-  align-items: end;
+  /* over the partition's floor (.wl__floor is positioned, so this is too) */
+  position: relative;
+  /* clear the partition's edge under the heading (it runs about 0.11 × the
+     copy's height + 0.2 × slant below the button's foot by the heading's
+     right end) */
+  margin-top: calc(var(--wl-slant) * 0.2 + 3.6cqw + clamp(48px, 4vw, 72px));
 }
 .wl__subtitle {
   grid-column: 1 / 3;
@@ -108,8 +233,11 @@
   letter-spacing: -0.03em;
   margin-left: -0.04em;
 }
+/* under the heading (user, 2026-11-23: "lets move that body text below
+   heading"); it sat on the third column line, level with the heading */
 .wl__lead {
-  grid-column: 3 / 5;
+  grid-column: 1 / 3;
+  margin-top: clamp(16px, 1.4vw, 24px);
   text-wrap: pretty;
   max-width: 26rem;
   font-size: 17px;
@@ -118,23 +246,28 @@
 }
 
 /* ---------- Your care, made simple: the columns ---------- */
+/* the label "Your care, made simple" is off the page (user, 2026-11-23:
+   "lets remove that text"); it still names the list for screen readers
+   (aria-label), as on the Men's and Women's Health tiles */
 .wl__care { margin-top: clamp(56px, 4.4vw, 80px); }
-.wl__label {
-  margin-bottom: 16px;
-  font-size: 15px;
-  font-weight: var(--weight-medium);
-  color: var(--color-text-muted);
-}
 .wl__cols > li {
   display: flex;
   flex-direction: column;
   padding-top: 16px;
   border-top: 1px solid color-mix(in srgb, var(--color-ink) 28%, transparent);
 }
+/* Illustrated icons like the Supplement cards' heart and sprout (user,
+   2026-11-23: "can we add icons like supplement section here too"; they were
+   24px line icons): made in Magnific as one sheet of five with the heart,
+   the sprout and the user's gradient icon sheet as references, cut out and
+   split, 512px squares with the art 468px; the Supplement icons' size */
 .wl__icon {
-  width: 24px;
-  height: 24px;
-  color: var(--color-ink);
+  --wl-icon: clamp(30px, 2.4vw, 46px);
+  display: block;
+  width: var(--wl-icon);
+  height: auto;
+  aspect-ratio: 1;
+  margin-left: calc(var(--wl-icon) * -22 / 512); /* the art's margin back onto the column line */
 }
 .wl__nowrap { white-space: nowrap; } /* keeps "GLP-1" on one line */
 .wl__point {
@@ -148,29 +281,206 @@
 
 /* ---------- Follow-on blocks (our proposal) ---------- */
 .wl__cards {
+  container-type: inline-size; /* the cards' media are sized from it */
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--wl-gap);
   margin-top: clamp(80px, 6.7vw, 128px);
 }
+/* Each card carries an image on its right (user, 2026-11-23, picked from our
+   proposals: 1A the portal phone floating over the stone platform, 2A a video
+   check-in at home; Magnific Nano Banana 2.1, the platform crop as the stone
+   reference). Both shot on the card colour (#E7EADF, corrected to within one
+   level), cropped to 1400×1273, so they sit on the card with their own
+   shadows; the left edge fades into the card. The copy keeps the left 58%. */
 .wl__card {
+  --wl-media: 0.42; /* card 2's image: its share of the card's width */
+  --wl-card-h: clamp(300px, 24vw, 440px); /* card 1's image height (the hand) */
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 48px;
-  min-height: clamp(260px, 20vw, 340px);
-  padding: 32px;
+  /* at least the image's height (its width / 1.0998), so it is never cut */
+  min-height: max(var(--wl-card-h), calc((100cqw - var(--wl-gap)) / 2 * var(--wl-media) / 1.0998));
+  padding: 32px calc(100% * var(--wl-media) + 24px) 32px 32px;
   border-radius: 12px; /* the nav bar's radius */
   background: var(--color-surface);
 }
-.wl__card h3 {
+.wl__card-media {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: calc(100% * var(--wl-media));
+  aspect-ratio: 1400 / 1273;
+  container-type: size; /* the phone's screen is sized from it */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 30%);
+  mask-image: linear-gradient(to right, transparent, #000 30%);
+}
+.wl__card-media > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* Card 1: a hand holding the phone (user, 2026-11-23: "lets do hand holding the
+   phone", after Hims' "Free, online consultations" card; the floating phone
+   was rejected). Shot on the card colour (Magnific Nano Banana 2.1, corrected
+   to within one level of #E7EADF), cropped close to the phone, 1010×1175.
+   Sized from the card's height, not its width, so the phone is large enough
+   for its screen to read: the screen is about 115px wide at 1440. */
+.wl__card-media--hand {
+  width: auto;
+  height: var(--wl-card-h);
+  aspect-ratio: 1010 / 1175;
+  /* the phone starts 30% in, so the fade stays clear of it */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 24%);
+  mask-image: linear-gradient(to right, transparent, #000 24%);
+}
+.wl__card:has(.wl__card-media--hand) {
+  padding-right: calc(var(--wl-card-h) * 1010 / 1175 + 24px);
+}
+/* The phone's screen (user: "inside the phone ui you made is complete ai slop
+   … lets use bg like image 3 hero and have similar type of cards", then "i
+   dont want same … use something different with different images too" and
+   "i dont like the big space … make cards sizes bigger like by adding body
+   texts"): built in code: the hero's stage light plate, the wordmark centred,
+   the tagline, and three cards in the hero cards' style but their own: the
+   portal's parts named from the card's copy, each with a line from it, and
+   their own objects (the client's Tirzepatide Multidose vial laid diagonally;
+   a sprout in a stone pot; a soft lime speech bubble; Magnific, cut out).
+   Measured from the render along the phone's axes: the screen inside the
+   black bezel is 421 × 908 with its centre at (612.6, 565.4) of 1010×1175,
+   turned 10.29° anticlockwise, a true rectangle (no perspective); drawn 3px
+   larger each way to tuck under the bezel. Sized in the screen's own units
+   (cqw): every word at least 6cqw, about 7.5px at 1440, 6.7px at 1280. */
+.wl__screen {
+  position: absolute;
+  left: 60.653%;
+  top: 48.119%;
+  width: 42.277%;  /* 427 / 1010 */
+  height: 77.787%; /* 914 / 1175 */
+  transform: translate(-50%, -50%) rotate(-10.29deg);
+  border-radius: 4.6cqw; /* of the image */
+  overflow: hidden;
+  container-type: size;
+  white-space: nowrap;
+  background: #1c2116;
+  color: var(--p-paper);
+}
+.wl__app-plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 82% 30%; /* the beam crossing from the top right, as in the hero */
+}
+.wl__screen::after { /* a little depth at the top and foot, as the hero's stage has */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 24, 15, 0.45), transparent 32%, transparent 62%, rgba(20, 24, 15, 0.35));
+  pointer-events: none;
+}
+.wl__app-logo {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 33.6cqw; /* 20% smaller (user, 2026-11-23); was 42cqw */
+  aspect-ratio: 4413 / 712;
+  margin: 11cqw auto 0;
+  overflow: visible;
+  color: var(--p-paper);
+}
+.wl__app-tag {
+  position: relative;
+  z-index: 1;
+  margin-top: 6cqw;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 11.5cqw;
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--p-paper);
+}
+/* the cards follow the tagline, no gap of empty stage between */
+.wl__app-cards {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 2.6cqw;
+  margin: 6.5cqw 5cqw 0;
+}
+.wl__app-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 51cqw; /* three lines of the longest card's text and the arrow */
+  padding: 4.2cqw 4.8cqw 4.4cqw;
+  overflow: hidden;
+  border-radius: 3.6cqw;
+  background: #fff;
+  color: var(--color-ink);
+}
+.wl__app-text {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.6cqw;
+  max-width: 54cqw;
+  white-space: normal;
+}
+.wl__app-name {
+  font-size: 7cqw;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+.wl__app-line {
+  font-size: 6cqw;
+  line-height: 1.2;
+  color: var(--color-text-muted);
+}
+.wl__app-go {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 9cqw;
+  height: 9cqw;
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+.wl__app-go svg {
+  width: 4cqw;
+  height: 4cqw;
+  color: var(--color-ink);
+}
+/* each object on the right, large and cut off by the card's edge, as the
+   hero's tiles place theirs */
+.wl__app-obj {
+  position: absolute;
+  left: var(--ct-x);
+  top: var(--ct-y);
+  width: auto;
+  max-width: none;
+  height: var(--ct-h);
+  transform: translate(-50%, -50%) rotate(var(--ct-r, 0deg));
+}
+/* 15% smaller than first set (user, 2026-11-23): 150 / 104 / 92% → */
+.wl__app-card--treatment { --ct-h: 127.5%; --ct-x: 84%; --ct-y: 62%; --ct-r: 38deg; } /* the vial laid across the corner */
+.wl__app-card--progress  { --ct-h: 88.4%;  --ct-x: 84%; --ct-y: 66%; --ct-r: 0deg; }
+.wl__app-card--team      { --ct-h: 78.2%;  --ct-x: 90%; --ct-y: 58%; --ct-r: -6deg; }
+.wl__card > h3 {
   max-width: 13em;
   font-size: clamp(26px, 2.1vw, 36px);
   font-weight: var(--weight-medium);
   line-height: 1.1;
   letter-spacing: -0.025em;
 }
-.wl__card p {
+.wl__card > p {
   text-wrap: pretty;
   max-width: 30rem;
   font-size: 16px;
@@ -178,21 +488,15 @@
   color: var(--color-text-muted);
 }
 
-/* ---------- Medical disclaimer: stays in the section, near the claims ---------- */
+/* ---------- Medical disclaimer: stays in the section, near the claims ----------
+   The text alone, the full width of the frame at the same size (user,
+   2026-11-23: "remove that [label] … also the border/frame above that, just
+   put rightside disclaimer text in full width in same size"). The label is
+   off the page; it still names the block for screen readers (aria-label). */
 .wl__disclaimer {
-  margin-top: 48px;
-  padding-top: 20px;
-  border-top: 1px solid var(--color-line);
-}
-.wl__disclaimer h3 {
-  grid-column: 1 / 3;
-  font-size: 13px;
-  font-weight: var(--weight-medium);
-  line-height: 1.55;
+  margin-top: 24px; /* half (user, 2026-11-23: "reduce gap by half"); was 48px */
 }
 .wl__disclaimer p {
-  grid-column: 3 / 6;
-  max-width: 68ch;
   font-size: 13px;
   line-height: 1.55;
   color: var(--color-text-muted);

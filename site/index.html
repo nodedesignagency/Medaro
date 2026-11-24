@@ -224,16 +224,23 @@
     </section>
     <!-- SECTION:home/hero END -->
 
-  <!-- SECTION:home/weight-loss START · styles: sections/home/weight-loss.css · assets: assets/images/standin-weight-loss.svg · icons: sprite #i-vial #i-stethoscope #i-plan #i-chat #i-box, #i-arrow-right
+  <!-- SECTION:home/weight-loss START · styles: sections/home/weight-loss.css · assets: assets/images/weight-loss/mirror.webp, assets/icons/wl-vial.webp, wl-stethoscope.webp, wl-plan.webp, wl-chat.webp, wl-box.webp, assets/images/weight-loss/card-portal.webp, card-checkin.webp, app-sprout.webp, app-bubble.webp, assets/images/products/ (stage-plate.webp, vial-tirzepatide.webp, print-vial-multidose.svg, sheen-vial.svg) · icons: sprite #wordmark, #i-arrow-right
        Layout after the user's Good Life reference (video, 2026-11-19). Copy: content/home.md → Weight Loss, word for word. -->
   <section class="wl" id="weight-loss" aria-labelledby="wl-title">
     <div class="wl__frame">
 
       <div class="wl__intro wl__grid">
-        <!-- Stand-in: the real photo is made after the design is approved (see data-brief). -->
-        <figure class="wl__stage media-brief" data-brief="Wide studio photo: MEDARO weight-loss set (two plain dark-olive boxes with the wordmark, frosted vial with olive cap and cream label, tablet bottle) on the left, running off the edge, soft light from the upper left on a paper backdrop; no drug names, doses or pens">
-          <img src="assets/images/standin-weight-loss.svg" alt="" width="640" height="900">
+        <!-- The partition's surface behind the figure and the copy (after Good Life's hero, user 2026-11-23): styles only. -->
+        <div class="wl__backdrop" aria-hidden="true"></div>
+        <!-- The mirror cut-out on its platform (user, 2026-11-21 → 11-23): a heavyset man and his slim reflection in a tall
+             frosted mirror, staged like their mirror reference, the glass finished after their Neka reference, standing on a
+             plain stone platform like Good Life's boxes (Magnific, cut out; DESIGN.md). A before/after image by the user's
+             choice: the client signs it off (DESIGN.md → Copy flags). -->
+        <figure class="wl__stage">
+          <img class="wl__photo" src="assets/images/weight-loss/mirror.webp" alt="" width="3240" height="2026">
         </figure>
+        <!-- The partition's floor, in front of the platform (styles only). -->
+        <div class="wl__floor" aria-hidden="true"></div>
         <div class="wl__copy">
           <p class="wl__eyebrow chip"><span>Medically guided weight management</span></p>
           <h2 class="wl__title" id="wl-title">Real Medical Care.<br>A Better Way<br>to Lose Weight.</h2>
@@ -250,31 +257,62 @@
       </div>
 
       <div class="wl__care">
-        <p class="wl__label" id="wl-care">Your care, made simple</p>
-        <ul class="wl__cols wl__grid" aria-labelledby="wl-care">
-          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-vial"/></svg><span class="wl__point">Personalized <span class="wl__nowrap">GLP-1</span> treatment options</span></li>
-          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-stethoscope"/></svg><span class="wl__point">Medical evaluation by licensed providers</span></li>
-          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-plan"/></svg><span class="wl__point">Treatment plans tailored to your health goals</span></li>
-          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-chat"/></svg><span class="wl__point">24/7 Convenient online consultations</span></li>
-          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-box"/></svg><span class="wl__point">Fast, Discreet Delivery to Your Door</span></li>
+        <ul class="wl__cols wl__grid" aria-label="Your care, made simple">
+          <li><img class="wl__icon" src="assets/icons/wl-vial.webp" alt="" width="512" height="512"><span class="wl__point">Personalized <span class="wl__nowrap">GLP-1</span> treatment options</span></li>
+          <li><img class="wl__icon" src="assets/icons/wl-stethoscope.webp" alt="" width="512" height="512"><span class="wl__point">Medical evaluation by licensed providers</span></li>
+          <li><img class="wl__icon" src="assets/icons/wl-plan.webp" alt="" width="512" height="512"><span class="wl__point">Treatment plans tailored to your health goals</span></li>
+          <li><img class="wl__icon" src="assets/icons/wl-chat.webp" alt="" width="512" height="512"><span class="wl__point">24/7 Convenient online consultations</span></li>
+          <li><img class="wl__icon" src="assets/icons/wl-box.webp" alt="" width="512" height="512"><span class="wl__point">Fast, Discreet Delivery to Your Door</span></li>
         </ul>
       </div>
 
-      <!-- Not in the reference: our proposal for the two follow-on blocks. -->
+      <!-- Not in the reference: our proposal for the two follow-on blocks. Images (user, 2026-11-23): a hand holding the phone
+           with the Home hero in miniature on its screen (code); a video check-in at home. -->
       <div class="wl__cards">
         <article class="wl__card">
           <h3>Your Health. One Place.<br>Total Clarity.</h3>
           <p>Stay connected to your care without the complications. Access your treatment information, track your progress, and stay in touch with your care team—all through one convenient patient portal.</p>
+          <div class="wl__card-media wl__card-media--hand" aria-hidden="true">
+            <img src="assets/images/weight-loss/card-portal.webp" alt="" width="1010" height="1175" loading="lazy">
+            <!-- The phone's screen, built in code (not baked into the image): the hero's stage light, the wordmark centred,
+                 the tagline, and three cards in the hero cards' style with their own content and images. -->
+            <div class="wl__screen">
+              <img class="wl__app-plate" src="assets/images/products/stage-plate.webp" alt="" width="3840" height="2143" loading="lazy">
+              <svg class="wl__app-logo"><use href="#wordmark"/></svg>
+              <p class="wl__app-tag">Made for<br>Better Health.</p>
+              <!-- The portal's three parts, in the hero cards' style but their own: names and lines from this card's copy
+                   ("Access your treatment information, track your progress, and stay in touch with your care team"). -->
+              <ul class="wl__app-cards">
+                <li class="wl__app-card wl__app-card--treatment">
+                  <span class="wl__app-text"><span class="wl__app-name">Treatment</span><span class="wl__app-line">Access your treatment information</span></span>
+                  <span class="wl__app-go"><svg><use href="#i-arrow-right"/></svg></span>
+                  <span class="pack pack--vial wl__app-obj"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100" loading="lazy"><img class="product__print" src="assets/images/products/print-vial-multidose.svg" alt="" width="466" height="1100" loading="lazy"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100" loading="lazy"></span>
+                </li>
+                <li class="wl__app-card wl__app-card--progress">
+                  <span class="wl__app-text"><span class="wl__app-name">Progress</span><span class="wl__app-line">Track your progress</span></span>
+                  <span class="wl__app-go"><svg><use href="#i-arrow-right"/></svg></span>
+                  <img class="wl__app-obj" src="assets/images/weight-loss/app-sprout.webp" alt="" width="708" height="900" loading="lazy">
+                </li>
+                <li class="wl__app-card wl__app-card--team">
+                  <span class="wl__app-text"><span class="wl__app-name">Care team</span><span class="wl__app-line">Stay in touch with your care team</span></span>
+                  <span class="wl__app-go"><svg><use href="#i-arrow-right"/></svg></span>
+                  <img class="wl__app-obj" src="assets/images/weight-loss/app-bubble.webp" alt="" width="865" height="900" loading="lazy">
+                </li>
+              </ul>
+            </div>
+          </div>
         </article>
         <article class="wl__card">
           <h3>Your Care Doesn't End<br>at the Prescription.</h3>
           <p>Getting treatment is just the beginning. Stay connected with your care team for medical guidance, follow-ups, and support throughout your treatment journey.</p>
+          <div class="wl__card-media" aria-hidden="true">
+            <img src="assets/images/weight-loss/card-checkin.webp" alt="" width="1400" height="1273" loading="lazy">
+          </div>
         </article>
       </div>
 
       <!-- Compliance: stays visible in this section, near the claims it qualifies. -->
-      <aside class="wl__disclaimer wl__grid" aria-labelledby="wl-disclaimer">
-        <h3 id="wl-disclaimer">Medical Disclaimer</h3>
+      <aside class="wl__disclaimer" aria-label="Medical Disclaimer">
         <p>Prescription medications are provided only when an independent licensed healthcare provider determines they are medically appropriate following a clinical evaluation. Compounded medications, when legally available and prescribed, are not FDA-approved. Services, provider access, support hours, and treatment availability may vary by state and program.</p>
       </aside>
 
