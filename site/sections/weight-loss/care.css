@@ -1,0 +1,141 @@
+/* ==========================================================================
+   Weight Loss · care (under hero V4)
+   The brief's "Care that puts you first", after the user's hims reference
+   ("Your membership comes with support"): copy on the left, vertically
+   centred against a tall rounded portrait on the right; a row of frosted
+   glass cards across the portrait's foot, the centre one whole, the next
+   and previous ones peeking at the panel's edges; they turn slowly.
+   Ours: chip, heading (Host Grotesk 400 like the hero), the client's
+   sentence, the five points with the hero's lime ticks, the dark pill CTA.
+   No lab coat (client rule) and no made-up stats on the glass: the cards
+   name the three things in the client's sentence.
+   Frame: copy on the 48px inset (the logo's line, 64px); the panel ends on
+   the frame's right edge, like the cards above. Panel radius 18, the hero
+   stage's.
+   ========================================================================== */
+
+.wlcare {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(44%, 820px);
+  column-gap: var(--space-8);
+  align-items: center;
+  padding: 0 var(--frame-side) var(--space-9);
+  color: var(--color-ink);
+}
+
+/* ---------- Copy ---------- */
+.wlcare__copy {
+  padding-left: var(--space-7); /* the hero's inset: the logo's line */
+  max-width: calc(560px + var(--space-7));
+}
+.wlcare__chip { --color-chip: #367d12; } /* leaf green on paper, 4.8:1 */
+.wlcare__title {
+  margin-top: 20px;
+  margin-left: -0.035em; /* the W's side bearing, like the hero's headline */
+  font-family: var(--font-display);
+  font-size: clamp(38px, 3.1vw, 60px);
+  font-weight: var(--weight-regular);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.wlcare__lede {
+  max-width: 30em;
+  margin-top: 18px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+.wlcare__points {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+.wlcare__points li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  column-gap: 12px;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.wlcare__tick {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--p-accent);
+  color: var(--p-ink);
+}
+.wlcare__tick svg { width: 14px; height: 14px; }
+.wlcare__cta { margin-top: 32px; }
+
+/* ---------- The portrait panel ---------- */
+.wlcare__panel {
+  position: relative;
+  height: clamp(640px, 54vw, 900px);
+  overflow: hidden;
+  border-radius: 18px;
+  /* deep olive with a soft light behind the head, so the warm-lit portrait stands out */
+  background:
+    radial-gradient(70% 55% at 46% 30%, rgba(213, 229, 173, 0.22) 0%, rgba(213, 229, 173, 0) 70%),
+    radial-gradient(120% 90% at 50% 0%, #4a5340 0%, #343b29 55%, var(--p-deep) 100%);
+  isolation: isolate;
+}
+.wlcare__person {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 124%;
+  height: auto;
+  transform: translateX(-52%);
+}
+
+/* ---------- Glass cards across the foot ---------- */
+.wlcare__glass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(28px, 3.2vw, 48px);
+  height: clamp(150px, 12vw, 200px);
+}
+.wlcare__card {
+  --x: -50%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+  height: 100%;
+  padding: 24px 26px;
+  border-radius: 28px;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.08) 100%), rgba(38, 43, 30, 0.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  backdrop-filter: blur(18px) saturate(1.15);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28), 0 18px 40px -18px rgba(10, 12, 7, 0.55);
+  transform: translateX(var(--x));
+  transition: transform 720ms var(--ease-out), opacity 720ms var(--ease-out);
+}
+/* without the script: health in the middle, goals right, treatment left */
+.wlcare__card:nth-child(1) { --x: -50%; }
+.wlcare__card:nth-child(2) { --x: 55%; }
+.wlcare__card:nth-child(3) { --x: -155%; }
+/* with it (care.js): positions by name; off-panel positions are invisible */
+.wlcare__card[data-pos="center"] { --x: -50%; opacity: 1; }
+.wlcare__card[data-pos="left"] { --x: -155%; opacity: 1; }
+.wlcare__card[data-pos="right"] { --x: 55%; opacity: 1; }
+.wlcare__card[data-pos="out-left"] { --x: -260%; opacity: 0; }
+.wlcare__card[data-pos="out-right"] { --x: 160%; opacity: 0; }
+
+.wlcare__icon { width: 30px; height: 30px; color: #fff; }
+.wlcare__card-title {
+  max-width: 13em;
+  font-size: 24px; /* large text; white on the glass measured 4.2:1 or more against the lightest pixel behind it (1280–1920; 3:1 needed) */
+  font-weight: var(--weight-medium);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
