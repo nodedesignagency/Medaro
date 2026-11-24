@@ -14,6 +14,7 @@
   <!-- Components (shared across pages) -->
   <link rel="stylesheet" href="components/header.css">
   <link rel="stylesheet" href="components/product.css">
+  <link rel="stylesheet" href="components/faq.css">
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
   <link rel="stylesheet" href="sections/weight-loss/hero--v1.css">
   <link rel="stylesheet" href="sections/weight-loss/hero--v2.css">
@@ -583,6 +584,57 @@
         </div>
       </section>
       <!-- SECTION:weight-loss/ongoing END -->
+
+      <!-- SECTION:weight-loss/faq START · styles: components/faq.css · scripts: components/faq.js · assets: assets/images/supplements/sp-woman.webp
+           The brief's FAQ, after the user's reference (2026-11-24, "make faq like this": "Your Answers To Popular Questions", the heading
+           top left with a tall photo under it, the questions as a plain list between hairlines with a thin plus, one opening at a time).
+           Copy: content/weight-loss.md → FAQ, word for word. Read with the PDF's layout: "FREQUENTLY ASKED QUESTIONS" is the section
+           label (the chip, like "ONGOING CARE"), "YOUR QUESTIONS, ANSWERED" the heading (title case), "Get the Clarity You Deserve."
+           the line under it. Every qualifier in the answers kept. Photo: stand-in (the Supplement set's woman, the hero's), brief in
+           data-brief. No CTA in the brief's FAQ. -->
+      <section class="faq" aria-labelledby="wlfaq-title">
+        <div class="faq__layout">
+          <div class="faq__head">
+            <p class="chip faq__chip"><span>Frequently asked questions</span></p>
+            <h2 class="faq__title" id="wlfaq-title">Your Questions,<br>Answered</h2>
+            <p class="faq__lede">Get the Clarity You Deserve.</p>
+          </div>
+          <div class="faq__media media-brief" aria-hidden="true" data-brief="One adult, calm, from the waist up, soft side light, a plain warm-neutral or sage backdrop; tall crop. Everyday clothes in our palette. No scales, no measuring tape, no before/after, no lab coat.">
+            <img src="assets/images/supplements/sp-woman.webp" alt="" width="1600" height="1778" loading="lazy">
+          </div>
+          <div class="faq__list">
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q1" aria-expanded="false" aria-controls="wlfaq-a1"><span>Do I need an in-person appointment?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a1" role="region" aria-labelledby="wlfaq-q1"><div class="faq__a-inner"><p>Many steps can take place online. Your provider will determine whether a virtual evaluation is appropriate or whether additional testing or an in-person assessment is necessary.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q2" aria-expanded="false" aria-controls="wlfaq-a2"><span>Is a prescription guaranteed?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a2" role="region" aria-labelledby="wlfaq-q2"><div class="faq__a-inner"><p>No. Prescriptions are issued only when a licensed healthcare provider determines that treatment is medically appropriate.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q3" aria-expanded="false" aria-controls="wlfaq-a3"><span>Does everyone qualify for GLP-1 treatment?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a3" role="region" aria-labelledby="wlfaq-q3"><div class="faq__a-inner"><p>No. Eligibility depends on individual medical factors, prescribing criteria, and treatment availability.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q4" aria-expanded="false" aria-controls="wlfaq-a4"><span>Will I lose weight quickly?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a4" role="region" aria-labelledby="wlfaq-q4"><div class="faq__a-inner"><p>Weight-loss results vary by person, medication, adherence, and other health factors. No specific amount or rate of weight loss can be guaranteed.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q5" aria-expanded="false" aria-controls="wlfaq-a5"><span>Can medication be delivered to my home?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a5" role="region" aria-labelledby="wlfaq-q5"><div class="faq__a-inner"><p>When available and prescribed, medications may be fulfilled through a licensed pharmacy offering home delivery.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q6" aria-expanded="false" aria-controls="wlfaq-a6"><span>What if GLP-1 treatment isn't right for me?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a6" role="region" aria-labelledby="wlfaq-q6"><div class="faq__a-inner"><p>Your provider may discuss alternative weight-management approaches depending on your individual health needs.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q7" aria-expanded="false" aria-controls="wlfaq-a7"><span>Are GLP-1 medications safe?</span><span class="faq__icon" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a7" role="region" aria-labelledby="wlfaq-q7"><div class="faq__a-inner"><p>FDA-approved GLP-1 medications have established prescribing information describing their benefits, risks, and approved uses. They can cause side effects and are not appropriate for everyone. A licensed healthcare provider should evaluate your medical history before treatment.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/faq END -->
     </div>
 
   </main>
@@ -592,5 +644,6 @@
   <script src="sections/weight-loss/care.js" defer></script>
   <script src="sections/weight-loss/steps.js" defer></script>
   <script src="sections/weight-loss/ongoing.js" defer></script>
+  <script src="components/faq.js" defer></script>
 </body>
 </html>
