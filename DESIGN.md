@@ -138,6 +138,7 @@ Write what the user said, in their words where possible, with the date.
 
 ### Process
 
+- 2026-11-24: **Home hero on phone, client feedback (Framer only)**: "keep this current one saved and make new one that client can check directly through our framer link … remove those bottles … made for better health will come together … those 3 cards will move up". In Framer's phone breakpoint the products are hidden, "Made for / Better Health." sits together at the top, the sentence and the three cards follow; the earlier phone layout is kept hidden so it can come back (`FRAMER.md` → Hero, Phone v2). Desktop, tablet and the HTML are unchanged.
 - 2026-11-24: **Home Weight Loss to Framer** ("this weightloss section the last pushed one … we have to move that to framer and also make responsive version of it as well btw this will come directly after hero"). The mirror version from `claude/vigilant-lovelace-6zmvbh` (last push: half the gap above the disclaimer) goes to Framer; `main` keeps the product stand-in version until the user says "move to main" (the push to `main` was held: the request named Framer only). In Framer it goes between the hero and Men's Health, with tablet and phone (`FRAMER.md` → Weight Loss).
 - 2026-11-19: Desktop only in HTML. Confirmed sections move to `main`; when the user says "move to Framer", the responsive versions are built in Framer during the transfer.
 - 2026-11-19: `main` created from the setup (docs, copy, logo, Home placeholder). No sections on it yet.
