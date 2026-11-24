@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="sections/weight-loss/steps.css">
   <link rel="stylesheet" href="sections/weight-loss/why.css">
   <link rel="stylesheet" href="sections/weight-loss/education.css">
+  <link rel="stylesheet" href="sections/weight-loss/ongoing.css">
 </head>
 <body>
   <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
@@ -50,6 +51,10 @@
     <symbol id="i-edu-clipboard" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
     <symbol id="i-edu-sprout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9.5"/><path d="M12 13.5c0-3.6-2.6-6.3-6.75-6.3 0 3.6 2.6 6.3 6.75 6.3Z"/><path d="M12 11.5c0-3.9 2.8-6.9 7.25-6.9 0 3.9-2.8 6.9-7.25 6.9Z"/><path d="M7.5 21h9"/></g></symbol>
     <symbol id="i-edu-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.75 4.75 5.6v5.65c0 4.55 3.05 8.3 7.25 9.95 4.2-1.65 7.25-5.4 7.25-9.95V5.6Z"/><path d="M12 8.25v4.75"/></g><circle cx="12" cy="16.1" r="0.85" fill="currentColor"/></symbol>
+    <!-- Ongoing care phone rows (stroke 1.5 on 24, like the care section's icons) -->
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12.5h3.75l2.5-6 4.5 11 2.5-5H21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 11.75a7.75 7.75 0 0 1-11.3 6.9L4 20l1.35-4.4A7.75 7.75 0 1 1 20 11.75Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7.5h9.5M18.5 7.5H20M4 16.5h3.5M12.5 16.5H20"/><circle cx="16" cy="7.5" r="2.25"/><circle cx="10" cy="16.5" r="2.25"/></g></symbol>
   </svg>
 
   <a class="visually-hidden" href="#main">Skip to content</a>
@@ -530,6 +535,54 @@
         </div>
       </section>
       <!-- SECTION:weight-loss/education END -->
+
+      <!-- SECTION:weight-loss/ongoing START · styles: sections/weight-loss/ongoing.css · scripts: sections/weight-loss/ongoing.js · icons: #i-stethoscope, #i-pulse, #i-chat, #i-sliders in the sprite
+           The brief's "Ongoing care", after hims' "Unlimited ongoing support" (Mobbin; the user, 2026-11-24: "make this section with the
+           help of mobbin"): a centred heading and one sentence, then a wide rounded stage with a phone rising from its foot, the screen
+           showing a message from the provider. Not copied: hims' two-tone heading, the doctor's name, photo and MD badge, the patient's
+           name and the message text (all invented for us). The phone carries only the client's words: "Follow-up care", "Your provider",
+           and the three things the follow-up sentence names. Beside the phone: the care block (left), the closing lines and the CTA (right).
+           Copy: content/weight-loss.md → Ongoing care, word for word (eyebrow as the chip; the heading in title case). The h3
+           repeats the steps section's (DESIGN.md → Copy flags). [LINK NEEDED] intake URL. Phone UI is a stand-in built in code. -->
+      <section class="wlong" aria-labelledby="wlong-title">
+        <header class="wlong__head">
+          <p class="chip wlong__chip"><span>Ongoing care</span></p>
+          <h2 class="wlong__title" id="wlong-title">Support Beyond<br>the First Step</h2>
+          <p class="wlong__lede">Weight management is an ongoing process, and your needs may change along the way.</p>
+        </header>
+
+        <div class="wlong__stage">
+          <div class="wlong__side">
+            <h3 class="wlong__care-title">Your Care Doesn't End With a Prescription.</h3>
+            <p>Follow-up care can help your provider evaluate your response to treatment, discuss side effects, and determine whether adjustments are appropriate.</p>
+          </div>
+
+          <!-- Decorative: a follow-up screen built in code; its words are the client's (the sentence on the left). -->
+          <div class="wlong__phone" aria-hidden="true">
+            <div class="wlong__screen">
+              <span class="wlong__island"></span>
+              <span class="wlong__time">9:41</span>
+              <div class="wlong__ui">
+                <svg class="wlong__logo"><use href="#wordmark"/></svg>
+                <div class="wlong__from"><span class="wlong__avatar"><svg><use href="#i-stethoscope"/></svg></span>Your provider</div>
+                <p class="wlong__screen-title">Follow-up care</p>
+                <div class="wlong__rows">
+                  <div class="wlong__row" style="--i: 0"><span class="wlong__row-icon"><svg><use href="#i-pulse"/></svg></span>Your response to treatment</div>
+                  <div class="wlong__row" style="--i: 1"><span class="wlong__row-icon"><svg><use href="#i-chat"/></svg></span>Side effects</div>
+                  <div class="wlong__row" style="--i: 2"><span class="wlong__row-icon"><svg><use href="#i-sliders"/></svg></span>Adjustments</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wlong__side wlong__side--end">
+            <p>Because the right treatment plan isn't just about getting started.</p>
+            <p class="wlong__close">It's about knowing how to move forward.</p>
+            <a class="btn btn--primary btn--pill btn--l wlong__cta" href="#intake-weight-loss">Start Your Assessment</a>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/ongoing END -->
     </div>
 
   </main>
@@ -538,5 +591,6 @@
   <script src="sections/weight-loss/hero--v3.js" defer></script>
   <script src="sections/weight-loss/care.js" defer></script>
   <script src="sections/weight-loss/steps.js" defer></script>
+  <script src="sections/weight-loss/ongoing.js" defer></script>
 </body>
 </html>
