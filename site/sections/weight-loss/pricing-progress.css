@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Weight Loss · pricing + progress (two cards, under hero V4)
+   The brief's "Pricing intro" and "Progress" blocks, after the user's
+   reference (2026-11-24: the two Weight Loss cards on another branch): two
+   equal mist cards, radius 12; a big heading top left, the paragraph (and,
+   on Progress, the client's CTA) at the foot; an image on the right on the
+   card colour.
+   Frame: the cards sit on the frame (16px, max 1888) 16px under the hero's
+   stage, 16px apart, so stage and cards read as one set. The copy uses the
+   hero's 48px inset: card 1's text starts on the logo's line (64px).
+   Images (stand-ins): card 1 the approved Tirzepatide vial with its print
+   and the two blank tablets (components/product.css), built in code; card 2
+   the running couple from the first Home photo, cut out above the grass
+   (card-progress.webp), standing on the card's foot.
+   ========================================================================== */
+
+.wlpp {
+  padding: 0 var(--frame-side) var(--space-9);
+}
+
+.wlpp__cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--edge);
+}
+
+.wlpp__card {
+  --media-w: 42%; /* the image's share of the card */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  min-height: clamp(420px, 32vw, 560px);
+  padding: 44px calc(var(--media-w) + 24px) 48px 48px;
+  border-radius: 12px; /* the nav bar's radius, like Home's cards */
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+.wlpp__card--people { --media-w: 44%; }
+
+.wlpp__title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 2.5vw, 46px);
+  font-weight: var(--weight-medium);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-box: trim-start cap alphabetic; /* cap top on the 44px inset, like the hero's chip */
+}
+.wlpp__body p {
+  max-width: 30rem;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+.wlpp__cta { margin-top: 24px; }
+.wlpp__nowrap { white-space: nowrap; } /* "GLP-1" never splits at its hyphen */
+
+/* ---------- Images, on the card's right ---------- */
+.wlpp__media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--media-w);
+}
+
+/* Card 1: the vial standing tilted, two blank tablets around it */
+.wlpp__vial {
+  position: absolute;
+  left: 54%;
+  top: 46%;
+  height: 60%;
+  transform: translate(-50%, -50%) rotate(8deg);
+  filter: drop-shadow(0 22px 22px rgba(38, 43, 30, 0.22));
+}
+.wlpp__pill {
+  position: absolute;
+  height: auto;
+  filter: drop-shadow(0 14px 14px rgba(38, 43, 30, 0.24));
+}
+.wlpp__pill--white { width: 21%; left: 4%; bottom: 13%; transform: rotate(-12deg); } /* at the vial's foot, left */
+.wlpp__pill--oval { width: 29%; right: 8%; bottom: 8%; transform: rotate(14deg); }  /* at the vial's foot, right */
+
+/* Card 2: the runners stand on the card's foot (their cut is the card's edge) */
+.wlpp__people {
+  position: absolute;
+  right: 4%;
+  bottom: 0;
+  width: 96%;
+  height: auto;
+}
