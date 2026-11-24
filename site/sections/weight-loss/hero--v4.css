@@ -2,9 +2,9 @@
    Weight Loss · hero V4 (round 3, user 2026-11-24: a new version, next to V1–V3)
    Round 2 V1's photo (one clear sage-teal sky, the couple, a dotted arc with
    lit points passing behind her) with the hims weight-loss hero's layout:
-   the copy on the left, vertically centred: chip, two-tone headline, the
-   sentence, then the client's "A Smarter Way to Lose Weight." with its six
-   points as a check list, and the CTA. A man and a woman stand back to back on the right (one Magnific render, 2026-11-24).
+   the copy on the left, vertically centred: chip, the headline (one colour, ink, 2026-11-24), the
+   sentence, then four points as a check list (the client's six merged, 2026-11-24),
+   and the CTA. A man and a woman stand back to back on the right (one Magnific render, 2026-11-24).
    Frame: Home's stage (frame edge 16px, max 1888, radius 18, fills the
    screen under the 70px header). Copy on the 48px inset, the logo's line.
    Photo: a 2:1 plate anchored to the stage's right edge, so the couple keeps
@@ -108,7 +108,6 @@
   line-height: 1.05;
   letter-spacing: -0.035em;
 }
-.wlh4__accent { color: #2f5a17; } /* hims colours its answer line; ours a deep leaf green */
 .wlh4__lede {
   max-width: 27em;
   margin-top: 18px;
