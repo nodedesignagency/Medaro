@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="sections/weight-loss/pricing-progress.css">
   <link rel="stylesheet" href="sections/weight-loss/care.css">
   <link rel="stylesheet" href="sections/weight-loss/difference.css">
+  <link rel="stylesheet" href="sections/weight-loss/steps.css">
 </head>
 <body>
   <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
@@ -42,6 +43,8 @@
     <symbol id="i-plan" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
     <symbol id="i-flask" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M10.5 3v6L5.2 18.2A1.9 1.9 0 0 0 6.9 21h10.2a1.9 1.9 0 0 0 1.7-2.8L13.5 9V3"/><path d="M7.6 15h8.8"/></g></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.75" cy="10.75" r="6.5"/><path d="m15.5 15.5 5 5"/></g></symbol>
+    <!-- The user's arrow (assets/icons/arrow.svg), for the lime --arrow CTA (steps) -->
+    <symbol id="i-arrow-right" viewBox="0 0 16 16"><path fill="currentColor" d="M9.04045 13.5006C9.05132 13.5116 9.38447 13.5951 9.78072 13.6861C10.177 13.7772 10.5056 13.8378 10.5108 13.8209C10.5161 13.8039 10.5571 13.5289 10.6019 13.2096C10.692 12.5686 10.9101 11.82 11.1431 11.3519C11.8694 9.893 13.1726 8.92699 14.7532 8.67591L15.1557 8.61196V7.96748V7.32295L14.7909 7.26174C12.4008 6.86077 10.8426 5.07371 10.5511 2.39938C10.5321 2.22474 10.5094 2.08191 10.5006 2.08191C10.42 2.08191 9.08438 2.40379 9.05912 2.42929C9.04085 2.44773 9.05444 2.61144 9.08936 2.79303C9.47585 4.80384 10.5825 6.44009 12.0186 7.12424L12.363 7.28836L5.2793 7.30121L0.800003 7.30937V8.6137L5.29082 8.62187L12.3578 8.63477L11.923 8.85512C10.7947 9.42671 9.90149 10.5479 9.37547 12.0529C9.22557 12.4817 8.99939 13.4592 9.04045 13.5006Z"/></symbol>
   </svg>
 
   <a class="visually-hidden" href="#main">Skip to content</a>
@@ -386,6 +389,68 @@
         </div>
       </section>
       <!-- SECTION:weight-loss/difference END -->
+
+      <!-- SECTION:weight-loss/steps START · styles: sections/weight-loss/steps.css · scripts: sections/weight-loss/steps.js · assets: assets/icons/step-1-assessment.webp, step-2-evaluation.webp, step-3-plan.webp, supplement-heart.webp (sources: tools/step-art/) · sprite: #i-arrow-right
+           The brief's "Three steps" after the user's "Our Process (04)" reference (2026-11-24: "make this section like this but i dont
+           want this style of icon it should be like ours … make it with sticky left and scroll right animation"): a dark panel, heading
+           and count top left, CTA bottom left; pastel cards on the right, one at a time, moving up through the panel as you scroll while
+           the left stays (the panel pins). Illustrations in our style (the Supplement section's heart and sprout), drawn in code
+           (tools/step-art/*.svg → WebP); the fourth card is the brief's "Your Care Doesn't End With a Prescription." with our heart.
+           Copy: content/weight-loss.md → Three steps, word for word (eyebrow as the chip; "01 —" shown as the card number). The small
+           print sits beside the CTA. [LINK NEEDED] intake URL. -->
+      <section class="wlsteps" aria-labelledby="wlsteps-title" data-wlsteps>
+        <div class="wlsteps__track" data-wlsteps-track>
+          <div class="wlsteps__panel" data-wlsteps-panel>
+            <div class="wlsteps__copy">
+              <p class="chip wlsteps__chip"><span>Simple from the start</span></p>
+              <h2 class="wlsteps__title" id="wlsteps-title">Three Steps Toward<br>Better Health.<span class="wlsteps__count" aria-hidden="true">(03)</span></h2>
+              <div class="wlsteps__foot">
+                <a class="btn btn--primary btn--arrow btn--pill btn--l" href="#intake-weight-loss"><span class="btn__label">Get Started</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+                <p class="wlsteps__note">Treatment and prescriptions are subject to clinical evaluation.</p>
+              </div>
+            </div>
+
+            <div class="wlsteps__deck">
+              <ol class="wlsteps__list">
+                <li class="wlsteps__card" data-wlsteps-card>
+                  <span class="wlsteps__num" aria-hidden="true">01</span>
+                  <img class="wlsteps__art" src="assets/icons/step-1-assessment.webp" alt="" width="768" height="768" loading="lazy">
+                  <div class="wlsteps__text">
+                    <h3 class="wlsteps__name">Tell Us About You</h3>
+                    <p>Complete an online health assessment covering your medical history, current health, and weight-management goals.</p>
+                  </div>
+                </li>
+                <li class="wlsteps__card" data-wlsteps-card>
+                  <span class="wlsteps__num" aria-hidden="true">02</span>
+                  <img class="wlsteps__art" src="assets/icons/step-2-evaluation.webp" alt="" width="768" height="768" loading="lazy">
+                  <div class="wlsteps__text">
+                    <h3 class="wlsteps__name">Get a Medical Evaluation</h3>
+                    <p>A licensed healthcare provider reviews your information and determines whether treatment is appropriate. Additional information, testing, or a consultation may be required.</p>
+                  </div>
+                </li>
+                <li class="wlsteps__card" data-wlsteps-card>
+                  <span class="wlsteps__num" aria-hidden="true">03</span>
+                  <img class="wlsteps__art" src="assets/icons/step-3-plan.webp" alt="" width="768" height="768" loading="lazy">
+                  <div class="wlsteps__text">
+                    <h3 class="wlsteps__name">Move Forward With Your Plan</h3>
+                    <p>If prescribed, medication may be fulfilled through a licensed pharmacy. Follow your provider's guidance as you begin and continue treatment.</p>
+                  </div>
+                </li>
+              </ol>
+              <!-- Not a step: the brief's follow-on block, as the deck's last card -->
+              <div class="wlsteps__card wlsteps__card--after" data-wlsteps-card>
+                <img class="wlsteps__art" src="assets/icons/supplement-heart.webp" alt="" width="512" height="512" loading="lazy">
+                <div class="wlsteps__text">
+                  <h3 class="wlsteps__name">Your Care Doesn't End With a Prescription.</h3>
+                  <p>Your weight-loss journey deserves more than a treatment plan. With ongoing medical guidance and personalized support, you can ask questions, discuss your progress, and receive care as your needs evolve.</p>
+                  <p class="wlsteps__close">Because better results start with better support.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/steps END -->
     </div>
 
   </main>
@@ -393,5 +458,6 @@
   <script src="main.js" defer></script>
   <script src="sections/weight-loss/hero--v3.js" defer></script>
   <script src="sections/weight-loss/care.js" defer></script>
+  <script src="sections/weight-loss/steps.js" defer></script>
 </body>
 </html>

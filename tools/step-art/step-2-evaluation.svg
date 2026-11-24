@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- 02 Get a Medical Evaluation: a stethoscope. Same style as step-1. -->
+  <defs>
+    <filter id="grain" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="7" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="matrix" values="2.2 0 0 0 -0.6  2.2 0 0 0 -0.6  2.2 0 0 0 -0.6  0 0 0 0 0.32" result="grey"/><feComposite in="grey" in2="SourceAlpha" operator="in" result="g"/><feBlend in="g" in2="SourceGraphic" mode="soft-light" result="b"/><feComposite in="b" in2="SourceAlpha" operator="in"/></filter>
+    <linearGradient id="lime" x1="0" y1="0" x2="0.7" y2="1"><stop offset="0" stop-color="#dcee96"/><stop offset="0.55" stop-color="#b3cb5c"/><stop offset="1" stop-color="#7f9a3c"/></linearGradient>
+    <linearGradient id="tube" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#9da682"/><stop offset="0.55" stop-color="#6b7650"/><stop offset="1" stop-color="#48522f"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c3c9ae"/><stop offset="1" stop-color="#7f896a"/></linearGradient>
+    <linearGradient id="tip" x1="0" y1="0" x2="0.6" y2="1"><stop offset="0" stop-color="#7f8a62"/><stop offset="1" stop-color="#3f4929"/></linearGradient>
+    <radialGradient id="diaphragm" cx="0.38" cy="0.32" r="0.75"><stop offset="0" stop-color="#fbf6e6"/><stop offset="1" stop-color="#e2d4aa"/></radialGradient>
+  </defs>
+  <g filter="url(#grain)">
+    <g transform="translate(-26 0)">
+      <path d="M120 92 V172 C120 236 152 272 200 280" fill="none" stroke="url(#metal)" stroke-width="22" stroke-linecap="round"/>
+      <path d="M280 92 V172 C280 236 248 272 200 280" fill="none" stroke="url(#metal)" stroke-width="22" stroke-linecap="round"/>
+      <path d="M200 280 V330 C200 428 240 472 300 472 C356 472 388 436 388 392 V374" fill="none" stroke="url(#tube)" stroke-width="34" stroke-linecap="round"/>
+      <circle cx="200" cy="282" r="21" fill="url(#tip)"/>
+      <rect x="96" y="44" width="48" height="60" rx="22" fill="url(#tip)"/>
+      <rect x="256" y="44" width="48" height="60" rx="22" fill="url(#tip)"/>
+      <rect x="370" y="336" width="36" height="46" rx="12" fill="url(#metal)"/>
+      <circle cx="388" cy="272" r="82" fill="url(#lime)"/>
+      <circle cx="388" cy="272" r="55" fill="url(#diaphragm)"/>
+      <circle cx="388" cy="272" r="14" fill="#c9d886"/>
+    </g>
+  </g>
+</svg>
