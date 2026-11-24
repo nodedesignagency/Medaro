@@ -392,11 +392,11 @@
            The brief's "Three steps", laid out after the user's "Our Process" reference (2026-11-24: "make this section like this but i
            dont want this style of icon it should be like ours … make it with sticky left and scroll right animation"): a panel with the
            chip and heading top left and the CTA bottom left; on the right one card per step. The panel pins while you scroll: the left
-           stays, the cards stack like How Medaro Works' deck. Round 2 (user: "it is not as per our design style", no 4th card, no "(3)",
+           stays, the cards turn on a wheel (round 3, after the user's "Built for every stage of growth" recording). Round 2 (user: "it is not as per our design style", no 4th card, no "(3)",
            "why cards are colliding … make scroll animation smooth"): this page's mist surface, white cards, dark pill CTA, no tilt.
            Illustrations in our style (the Supplement heart and sprout), drawn in code (tools/step-art/*.svg → WebP).
            Copy: content/weight-loss.md → Three steps, word for word (eyebrow as the chip; "01 —" shown as the card number). The small
-           print sits beside the CTA. "Your Care Doesn't End With a Prescription." is not in this section (DESIGN.md → Copy flags).
+           print sits beside the CTA. "Your Care Doesn't End With a Prescription." sits under the heading as text (round 3).
            [LINK NEEDED] intake URL. -->
       <section class="wlsteps" aria-labelledby="wlsteps-title" data-wlsteps>
         <div class="wlsteps__track" data-wlsteps-track>
@@ -404,6 +404,12 @@
             <div class="wlsteps__copy">
               <p class="chip wlsteps__chip"><span>Simple from the start</span></p>
               <h2 class="wlsteps__title" id="wlsteps-title">Three Steps Toward<br>Better Health.</h2>
+              <!-- The brief's follow-on block, as text (user, 2026-11-24: "bring it back but not in card") -->
+              <div class="wlsteps__care">
+                <h3 class="wlsteps__care-title">Your Care Doesn't End With a Prescription.</h3>
+                <p>Your weight-loss journey deserves more than a treatment plan. With ongoing medical guidance and personalized support, you can ask questions, discuss your progress, and receive care as your needs evolve.</p>
+                <p class="wlsteps__care-close">Because better results start with better support.</p>
+              </div>
               <div class="wlsteps__foot">
                 <a class="btn btn--dark btn--pill btn--l" href="#intake-weight-loss">Get Started</a>
                 <p class="wlsteps__note">Treatment and prescriptions are subject to clinical evaluation.</p>
