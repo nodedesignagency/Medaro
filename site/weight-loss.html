@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="sections/weight-loss/difference.css">
   <link rel="stylesheet" href="sections/weight-loss/steps.css">
   <link rel="stylesheet" href="sections/weight-loss/why.css">
+  <link rel="stylesheet" href="sections/weight-loss/education.css">
 </head>
 <body>
   <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
@@ -44,6 +45,11 @@
     <symbol id="i-plan" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
     <symbol id="i-flask" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M10.5 3v6L5.2 18.2A1.9 1.9 0 0 0 6.9 21h10.2a1.9 1.9 0 0 0 1.7-2.8L13.5 9V3"/><path d="M7.6 15h8.8"/></g></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.75" cy="10.75" r="6.5"/><path d="m15.5 15.5 5 5"/></g></symbol>
+    <!-- GLP-1 education cards: fine line icons like the reference's (stroke 1.2 on 24 → 1.6px at 32px) -->
+    <symbol id="i-edu-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
+    <symbol id="i-edu-clipboard" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
+    <symbol id="i-edu-sprout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9.5"/><path d="M12 13.5c0-3.6-2.6-6.3-6.75-6.3 0 3.6 2.6 6.3 6.75 6.3Z"/><path d="M12 11.5c0-3.9 2.8-6.9 7.25-6.9 0 3.9-2.8 6.9-7.25 6.9Z"/><path d="M7.5 21h9"/></g></symbol>
+    <symbol id="i-edu-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.75 4.75 5.6v5.65c0 4.55 3.05 8.3 7.25 9.95 4.2-1.65 7.25-5.4 7.25-9.95V5.6Z"/><path d="M12 8.25v4.75"/></g><circle cx="12" cy="16.1" r="0.85" fill="currentColor"/></symbol>
   </svg>
 
   <a class="visually-hidden" href="#main">Skip to content</a>
@@ -481,6 +487,49 @@
         </div>
       </section>
       <!-- SECTION:weight-loss/why END -->
+
+      <!-- SECTION:weight-loss/education START · styles: sections/weight-loss/education.css · icons: #i-edu-* in the sprite
+           The brief's "GLP-1 education", after the user's reference (2026-11-24, "make it like this": Seed's "DS-01 benefits" strip,
+           a pale band with the heading on the left and four light cards in a row, each a fine line icon over its words).
+           Ours: the page's mist band and paper cards; each card holds one question and its answer; the client's CTA sits under the
+           heading at the foot of the band (the reference has none). Icons: vial (the medications), clipboard (eligibility is a
+           provider's assessment), sprout (nutrition, activity, habits), shield with a mark (side effects and warnings; no tick: nothing
+           here is a promise of safety).
+           Copy: content/weight-loss.md → GLP-1 education, word for word (eyebrow as the chip; the heading in title case).
+           [LINK NEEDED] intake URL. -->
+      <section class="wledu" aria-labelledby="wledu-title">
+        <div class="wledu__band">
+          <div class="wledu__copy">
+            <p class="chip wledu__chip"><span>GLP-1 Education</span></p>
+            <h2 class="wledu__title" id="wledu-title">Understand<br>Your Options</h2>
+            <a class="btn btn--dark btn--pill wledu__cta" href="#intake-weight-loss">Explore Your Treatment Options</a>
+          </div>
+
+          <ul class="wledu__cards">
+            <li class="wledu__card">
+              <svg class="wledu__icon" aria-hidden="true"><use href="#i-edu-vial"/></svg>
+              <h3 class="wledu__q">What are <span class="wledu__nowrap">GLP-1</span> medications?</h3>
+              <p class="wledu__a"><span class="wledu__nowrap">GLP-1</span> medications work on pathways involved in appetite and blood-sugar regulation. Certain FDA-approved medications are used for chronic weight management in eligible patients.</p>
+            </li>
+            <li class="wledu__card">
+              <svg class="wledu__icon" aria-hidden="true"><use href="#i-edu-clipboard"/></svg>
+              <h3 class="wledu__q">How do I know if I'm eligible?</h3>
+              <p class="wledu__a">Eligibility depends on factors such as your weight, medical history, existing health conditions, current medications, and a provider's clinical assessment.</p>
+            </li>
+            <li class="wledu__card">
+              <svg class="wledu__icon" aria-hidden="true"><use href="#i-edu-sprout"/></svg>
+              <h3 class="wledu__q">Is medication enough on its own?</h3>
+              <p class="wledu__a">Prescription weight-loss treatment is generally intended to be combined with changes in nutrition, physical activity, and other healthy habits.</p>
+            </li>
+            <li class="wledu__card">
+              <svg class="wledu__icon" aria-hidden="true"><use href="#i-edu-shield"/></svg>
+              <h3 class="wledu__q">Are there risks?</h3>
+              <p class="wledu__a">Yes. <span class="wledu__nowrap">GLP-1</span> medications can cause side effects and carry important warnings. A healthcare provider should review potential benefits, risks, contraindications, and alternatives before prescribing.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/education END -->
     </div>
 
   </main>
