@@ -1,17 +1,18 @@
 /* ==========================================================================
    Weight Loss · GLP-1 education (under hero V4, after Why MEDARO)
    After the user's reference (2026-11-24, Seed's "DS-01 benefits" strip):
-   one pale band; the heading on the left; four light cards in a row on the
-   right, each with a fine line icon at the top and its words under it.
-   Ours: the band is the page's mist surface (the reference's band measured
-   rgb 237,239,225; mist is 231,234,223), the cards the page colour (theirs
-   245,246,237; paper is 244,245,239), radius 18 / 12 like the steps panel
-   and its cards. Left: the chip, the heading, and the client's CTA at the
-   foot (the reference has none; the steps panel puts its CTA the same way).
+   the heading on the left; four light cards in a row on the right, each
+   with a fine line icon at the top and its words under it.
+   Round 2 (user, 2026-11-24: "remove green from here and update the color
+   and all accordingly"): no band. The section sits on the page colour; the
+   cards are pure white like the steps cards and the hero's category tiles,
+   radius 12, 8px apart like the reference's; the chip takes the leaf green
+   used on the page colour (#367d12, as in care and difference).
+   Left: the chip, the heading, and the client's CTA at the foot (the
+   reference has none; the steps panel puts its CTA the same way).
    Each card: an icon, the question (medium, ink), the answer (muted).
-   Frame: the band spans the frame (16px edges, max 1888); the copy on the
-   48px inset (the logo's line); the cards 32px from the band's top, right
-   and bottom edges like the steps cards, 8px apart like the reference's.
+   Frame: the copy on the 48px inset (the logo's line), the cards end on the
+   48px inset on the right (the header CTA's line), so the row mirrors the header.
    Copy: content/weight-loss.md → GLP-1 education, word for word.
    Framer: a section with a stack (copy) and a row of four card instances.
    ========================================================================== */
@@ -21,13 +22,11 @@
   color: var(--color-ink);
 }
 
-.wledu__band {
+.wledu__layout {
   display: grid;
   grid-template-columns: minmax(264px, 20%) minmax(0, 1fr); /* never narrower than the CTA */
   column-gap: var(--space-7);
-  padding: 32px 32px 32px var(--space-7);
-  border-radius: 18px;
-  background: var(--color-surface);
+  padding-inline: var(--space-7); /* the logo's line on the left, the header CTA's on the right */
 }
 
 /* ---------- Left: chip and heading at the top, the CTA at the foot ---------- */
@@ -37,7 +36,7 @@
   align-items: flex-start;
   padding-block: 24px 0; /* the chip on the icons' line */
 }
-.wledu__chip { --color-chip: #2f6e0f; } /* leaf green a step deeper for the mist: 5.1:1 */
+.wledu__chip { --color-chip: #367d12; } /* leaf green on the page colour: 4.8:1 (as in care and difference) */
 .wledu__title {
   margin-top: 20px;
   margin-left: -0.03em; /* the U's side bearing: ink on the logo's line */
@@ -60,7 +59,7 @@
   flex-direction: column;
   padding: 24px 24px 28px;
   border-radius: 12px;
-  background: var(--color-bg);
+  background: #fff; /* pure white, like the steps cards and the category tiles */
 }
 .wledu__icon {
   width: 32px;
