@@ -1,34 +1,36 @@
 /* ==========================================================================
    Weight Loss · three steps (under hero V4)
-   After the user's "Our Process (04)" reference (2026-11-24): one dark
-   rounded panel; the heading top left with the count beside it, the CTA
-   bottom left; on the right, one tall pastel card at a time (big number
-   top left, illustration top right, title and text at the foot), the next
-   card's corner peeking in at the bottom right, the last one's at the top.
-   "Sticky left and scroll right" (user): the panel pins under the header
-   while you scroll; the left side stays, the cards travel up through the
-   right side like a conveyor, tilting a little as they come in and go out
-   (the reference's tilted peeks), holding a moment on each step.
-   Ours: deep olive panel, the lime chip and lime arrow CTA, our greens and
-   creams for the cards, and our illustration style instead of the
-   reference's isometric line drawings (user: "i dont want this style of
-   icon it should be like ours": the Supplement section's heart and
-   sprout, flat shapes with soft gradients and grain). The fourth card is
-   the brief's "Your Care Doesn't End With a Prescription." block, with our
-   heart: no number, it is not a step.
+   Layout after the user's "Our Process" reference (2026-11-24): one rounded
+   panel; chip and heading top left, the CTA bottom left; on the right one
+   card at a time (number top left, illustration top right, title and text
+   at the foot). "Sticky left and scroll right" (user): the panel pins under
+   the header while you scroll; the left side stays, the cards change on the
+   right.
+   In this page's own style (round 2, user: "it is not as per our design
+   style"): the panel is a mist surface like the pricing and progress cards
+   (`--color-surface`), the cards pure white like the hero's category tiles,
+   radius 12, the page's section heading (Host Grotesk 400), the leaf-green
+   chip, the dark pill CTA every section of this landing uses, our
+   illustrations (the Supplement heart and sprout's style). Only the three
+   steps; no count beside the heading.
+   Motion: the deck of the approved How Medaro Works (components/steps.css),
+   no tilt. Each next card rises from below the panel at scroll speed and
+   lands on the one before; the covered cards step back (up 16px, 4% smaller,
+   a shade darker), so their top edges peek out above. A pause on every card.
+   Reduced motion: the cards jump.
    Frame: the panel spans the frame (16px edges, max 1888), radius 18 like
    the hero stage; copy on the 48px inset (the logo's line).
-   steps.js adds .is-live (tall track, pinned panel, cards on the conveyor)
-   and sets --d on each card. Without the script: the panel scrolls
-   normally, the copy sticks on the left and the cards stack on the right.
+   steps.js adds .is-live (pinned panel, room to scroll) and sets --rise and
+   --depth on each card. Without it the panel scrolls normally, the copy
+   sticks on the left and the cards sit one under another on the right.
    Framer: a sticky section; the cards as one component with a variant per
-   step, moved by scroll.
+   step, scroll-driven like How Medaro Works.
    ========================================================================== */
 
 .wlsteps {
   container-type: inline-size; /* 100cqw = the frame's width, for the panel's size */
   padding: 0 var(--frame-side) var(--space-9);
-  color: var(--color-on-dark);
+  color: var(--color-ink);
 }
 
 .wlsteps__track {
@@ -38,7 +40,6 @@
   --card-ratio: 1.07;                                            /* the reference's card, a little wider than tall */
   --card-h: calc(var(--panel-h) - 2 * var(--inset));
   --card-w: calc(var(--card-h) * var(--card-ratio));
-  --range: 260svh;                                               /* scroll while pinned: a hold at each end, three moves */
 }
 
 /* ---------- The panel ---------- */
@@ -48,17 +49,17 @@
   column-gap: var(--space-7);
   overflow: clip; /* clips the cards without becoming a scroll box, so the fallback's sticky copy still sticks */
   border-radius: 18px;
-  background: var(--p-deep);
+  background: var(--color-surface);
   isolation: isolate;
 }
-.wlsteps.is-live .wlsteps__track { height: calc(var(--panel-h) + var(--range)); }
+.wlsteps.is-live .wlsteps__track { height: calc(var(--panel-h) + 200svh); } /* steps.js sets the exact room */
 .wlsteps.is-live .wlsteps__panel {
   position: sticky;
   top: calc(var(--header) + (100svh - var(--header) - var(--panel-h)) / 2); /* centred in the window under the header */
   height: var(--panel-h);
 }
 
-/* ---------- Left: heading, CTA ---------- */
+/* ---------- Left: chip, heading, CTA ---------- */
 .wlsteps__copy {
   display: flex;
   flex-direction: column;
@@ -71,26 +72,15 @@
   align-self: start;
   min-height: var(--panel-h);
 }
-.wlsteps__chip { --color-chip: var(--p-accent); } /* lime on deep olive, 11:1 */
+.wlsteps__chip { --color-chip: #2f6e0f; } /* leaf green a step deeper for the mist: 5.1:1 (#367d12 is 4.2 here) */
 .wlsteps__title {
-  margin-top: 24px;
+  margin-top: 20px;
   margin-left: -0.04em; /* the T's side bearing: letters on the logo's line */
   font-family: var(--font-display);
-  font-size: clamp(48px, 5vw, 96px);
+  font-size: clamp(40px, 3.6vw, 68px); /* the page's section heading (difference) */
   font-weight: var(--weight-regular);
-  line-height: 1.02;
+  line-height: 1.04;
   letter-spacing: -0.035em;
-  color: var(--p-paper);
-}
-/* The count beside the heading, like the reference's "(04)" */
-.wlsteps__count {
-  position: relative;
-  top: 0.12em;
-  margin-left: 0.12em;
-  vertical-align: top;
-  font-size: max(15px, 0.24em);
-  letter-spacing: 0;
-  color: var(--color-on-dark-muted);
 }
 .wlsteps__foot {
   display: flex;
@@ -104,7 +94,7 @@
   max-width: 17em;
   font-size: 14px;
   line-height: 1.45;
-  color: var(--color-on-dark-muted); /* 9:1 on the panel */
+  color: var(--color-text-muted); /* 5:1 on the mist */
 }
 
 /* ---------- Right: the deck ---------- */
@@ -112,66 +102,59 @@
   position: relative;
   width: calc(var(--card-w) + var(--inset));
 }
-.wlsteps:not(.is-live) .wlsteps__deck {
-  display: grid;
-  gap: var(--space-4);
-  padding: var(--inset) var(--inset) var(--inset) 0;
-}
+.wlsteps:not(.is-live) .wlsteps__deck { padding: var(--inset) var(--inset) var(--inset) 0; }
 .wlsteps:not(.is-live) .wlsteps__list { display: grid; gap: var(--space-4); }
 
 .wlsteps__card {
-  --card-bg: #e2eac6;
   position: relative;
   width: var(--card-w);
   aspect-ratio: var(--card-ratio);
   overflow: hidden;
-  border-radius: 16px;
-  background: var(--card-bg);
-  color: var(--p-ink);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--color-ink);
   container-type: inline-size;
 }
-/* Our greens and creams, in the reference's order of light pastels */
-.wlsteps__list > :nth-child(1) { --card-bg: #e2eac6; --d: 0; } /* pale lime */
-.wlsteps__list > :nth-child(2) { --card-bg: #ede7d6; --d: 1; } /* cream */
-.wlsteps__list > :nth-child(3) { --card-bg: #cdd4bd; --d: 2; } /* pale sage */
-.wlsteps__card--after { --card-bg: #eef0e6; --d: 3; }          /* paper mist */
-
-/* The conveyor: --d is the card's distance from the middle in cards (steps.js);
-   one card's height plus a gap per step, tilting 6° per step: coming in from
-   below it leans back (its top-right corner peeks first), going out above it
-   leans the other way (its bottom-right corner lingers at the top). */
 .wlsteps.is-live .wlsteps__card {
   position: absolute;
   top: var(--inset);
   right: var(--inset);
+  transform-origin: 50% 0;
   transform:
-    translateY(calc(var(--d) * (100% + 20px)))
-    rotate(calc(var(--d) * -6deg));
+    translateY(calc((1 - var(--rise, 1)) * var(--enter, 120%) - var(--depth, 0) * 16px))
+    scale(calc(1 - var(--depth, 0) * 0.04));
+  filter: brightness(calc(1 - var(--depth, 0) * 0.05));
+  /* a soft edge where a card lies over the one under it (white on white); only
+     cards that cover another, and only once they have left the panel's edge
+     (--shadow 0 → 1 over the first third of the rise, steps.js) */
+  box-shadow:
+    0 -1px 2px rgba(20, 24, 14, calc(0.06 * var(--shadow, 0))),
+    0 -10px 28px -14px rgba(20, 24, 14, calc(0.22 * var(--shadow, 0)));
   will-change: transform;
 }
+/* before the script measures: the first card in place, the others below the panel */
+.wlsteps.is-live .wlsteps__list > :not(:first-child) { --rise: 0; }
 
 .wlsteps__num {
   position: absolute;
   top: 6.5cqi;
   left: 6.5cqi;
   font-family: var(--font-display);
-  font-size: 15cqi;
-  font-weight: var(--weight-regular);
+  font-size: 12cqi;
+  font-weight: var(--weight-medium); /* How Medaro Works' numbers */
   line-height: 1;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.05em;
   font-variant-numeric: tabular-nums;
   text-box: trim-both cap alphabetic;
 }
 .wlsteps__art {
   position: absolute;
-  top: 2.5cqi;
-  right: 3cqi;
-  width: 45cqi;
+  top: 3cqi;
+  right: 3.5cqi;
+  width: 44cqi;
   height: auto;
   pointer-events: none;
 }
-.wlsteps__card--after .wlsteps__art { top: 6cqi; right: 7cqi; width: 34cqi; } /* the heart fills its square: smaller, so it weighs the same */
-
 .wlsteps__text {
   position: absolute;
   left: 6.5cqi;
@@ -181,7 +164,7 @@
 .wlsteps__name {
   max-width: 15em;
   font-family: var(--font-display);
-  font-size: 5.4cqi;
+  font-size: clamp(24px, 4.8cqi, 38px);
   font-weight: var(--weight-regular);
   line-height: 1.1;
   letter-spacing: -0.025em;
@@ -189,14 +172,9 @@
 }
 .wlsteps__text p {
   max-width: 31em;
-  margin-top: 2.2cqi;
-  font-size: clamp(15px, 2.9cqi, 19px);
+  margin-top: 12px;
+  font-size: clamp(15px, 2.7cqi, 18px);
   line-height: 1.5;
-  color: #4d543f; /* ink-soft, a step deeper so it passes on every card: 5.2:1 on the pale sage, 6.3–6.9:1 on the others */
+  color: var(--color-text-muted); /* 6.1:1 on white */
   text-wrap: pretty;
-}
-.wlsteps__text .wlsteps__close {
-  margin-top: 1.6cqi;
-  font-weight: var(--weight-medium);
-  color: var(--p-ink);
 }
