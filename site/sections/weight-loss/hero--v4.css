@@ -2,8 +2,8 @@
    Weight Loss · hero V4 (round 3, user 2026-11-24: a new version, next to V1–V3)
    Round 2 V1's photo (one clear sage-teal sky, the couple, a dotted arc with
    lit points passing behind her) with the hims weight-loss hero's layout:
-   the copy on the left, vertically centred: chip, the headline (one colour, ink, 2026-11-24), the
-   sentence, then four points as a check list (the client's six merged, 2026-11-24),
+   the copy on the left, vertically centred: chip, the headline (one colour, ink, 2026-11-24), then
+   four points (the sentence removed, 2026-11-24) as a check list (the client's six merged, 2026-11-24),
    and the CTA. A man and a woman stand back to back on the right (one Magnific render, 2026-11-24).
    Frame: Home's stage (frame edge 16px, max 1888, radius 18, fills the
    screen under the 70px header). Copy on the 48px inset, the logo's line.
@@ -108,19 +108,12 @@
   line-height: 1.05;
   letter-spacing: -0.035em;
 }
-.wlh4__lede {
-  max-width: 27em;
-  margin-top: 18px;
-  font-size: 18px;
-  line-height: 1.5;
-  text-wrap: pretty;
-}
 
 /* The six points ("A Smarter Way to Lose Weight." is their visually hidden heading) */
 .wlh4__points {
   display: grid;
   gap: clamp(7px, 1.2cqh, 11px);
-  margin-top: clamp(24px, 3.8cqh, 32px); /* the list's own heading is visually hidden (user, 2026-11-24: lighter hero) */
+  margin-top: clamp(28px, 4.4cqh, 40px); /* straight under the headline: no sentence, the list's heading visually hidden (user, 2026-11-24) */
 }
 .wlh4__points li {
   display: grid;
