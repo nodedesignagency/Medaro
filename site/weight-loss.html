@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="sections/weight-loss/hero--v4.css">
   <link rel="stylesheet" href="sections/weight-loss/pricing-progress.css">
   <link rel="stylesheet" href="sections/weight-loss/care.css">
+  <link rel="stylesheet" href="sections/weight-loss/difference.css">
 </head>
 <body>
   <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
@@ -37,6 +38,10 @@
     <symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.75 3.25H5a1 1 0 0 0-1 1V9a4.5 4.5 0 0 0 9 0V4.25a1 1 0 0 0-1-1h-.75"/><path d="M8.5 13.5v1.75a4.5 4.5 0 0 0 9 0V13"/><circle cx="17.5" cy="11" r="2"/></g></symbol>
     <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.75"/><circle cx="12" cy="12" r="1.1"/></g></symbol>
     <symbol id="i-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
+    <!-- Difference section badges (line icons from Home's sprite) -->
+    <symbol id="i-plan" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M10.5 3v6L5.2 18.2A1.9 1.9 0 0 0 6.9 21h10.2a1.9 1.9 0 0 0 1.7-2.8L13.5 9V3"/><path d="M7.6 15h8.8"/></g></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.75" cy="10.75" r="6.5"/><path d="m15.5 15.5 5 5"/></g></symbol>
   </svg>
 
   <a class="visually-hidden" href="#main">Skip to content</a>
@@ -307,6 +312,80 @@
         </div>
       </section>
       <!-- SECTION:weight-loss/care END -->
+
+      <!-- SECTION:weight-loss/difference START · styles: sections/weight-loss/difference.css, components/product.css · assets: assets/images/people/woman-a.webp, assets/images/products/stage-plate.webp, vial-tirzepatide.webp, print-vial-microdose.svg, sheen-vial.svg, tablet-white-blank.webp, tablet-oval-lime-blank.webp, assets/images/standin-mh-man.webp, assets/images/weight-loss/standin-stretch.webp
+           The brief's "The Medaro difference" and "Treatment that starts with you" after the user's Superpower "How it works"
+           reference (2026-11-24, "make this like it"): a centred heading and subline, then four image cards in a row, each with a
+           small badge top left and, on three, a frosted glass card of plain words over the photo; title and text under each.
+           Copy: content/weight-loss.md, word for word, re-arranged: header = the Medaro difference (eyebrow, heading, sentence);
+           cards = the treatment block. Cards 3 and 4 have no heading in the brief: their titles are cut from their own sentences
+           ("appetite and feelings of fullness", "FDA-approved prescription options"; DESIGN.md → Copy flags). The block's eyebrow
+           "Treatment that starts with you" is not shown (flagged). Badges are icons, not Superpower's 1–4: these are not steps.
+           Glass cards use only the copy's own words; no data, no results. [LINK NEEDED] intake URL. Images: stand-ins (data-brief). -->
+      <section class="wldiff" aria-labelledby="wldiff-title">
+        <header class="wldiff__head">
+          <p class="chip wldiff__chip"><span>The MEDARO difference</span></p>
+          <h2 class="wldiff__title" id="wldiff-title">Less Guesswork. More Direction.</h2>
+          <p class="wldiff__lede">MEDARO makes it easier to explore medically guided weight management, understand your options, and make informed decisions with qualified healthcare professionals.</p>
+        </header>
+
+        <ul class="wldiff__cards">
+          <li class="wldiff__card">
+            <div class="wldiff__media wldiff__media--sage media-brief" aria-hidden="true" data-brief="Portrait: an adult in a quiet, thoughtful moment, soft side light, sage backdrop, everyday clothes.">
+              <img class="wldiff__portrait" src="assets/images/people/woman-a.webp" alt="" width="1000" height="1020" loading="lazy">
+              <span class="wldiff__badge"><svg><use href="#i-plan"/></svg></span>
+              <div class="wldiff__glass">
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Medical history</span>
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Health goals</span>
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Clinical needs</span>
+              </div>
+            </div>
+            <h3 class="wldiff__card-title">The Right Approach Is a Personal One.</h3>
+            <p class="wldiff__card-text">Weight-loss treatment isn't the same for everyone. Your medical history, health goals, and clinical needs all help determine the best way forward.</p>
+          </li>
+          <li class="wldiff__card">
+            <div class="wldiff__media wldiff__media--plate media-brief" aria-hidden="true" data-brief="Product still life: the plain Tirzepatide vial and two blank tablets in the hero's studio light. No MEDARO on the pills.">
+              <img class="wldiff__plate" src="assets/images/products/stage-plate.webp" alt="" width="3840" height="2143" loading="lazy">
+              <span class="pack pack--vial wldiff__vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100" loading="lazy"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100" loading="lazy"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100" loading="lazy"></span>
+              <img class="wldiff__pill wldiff__pill--white" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy">
+              <img class="wldiff__pill wldiff__pill--oval" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy">
+              <span class="wldiff__badge"><svg><use href="#i-vial"/></svg></span>
+            </div>
+            <h3 class="wldiff__card-title">GLP-1 Weight-Loss Medications</h3>
+            <p class="wldiff__card-text">Medical treatment. Individualized decisions.</p>
+          </li>
+          <li class="wldiff__card">
+            <div class="wldiff__media media-brief" aria-hidden="true" data-brief="Lifestyle: an adult outdoors in warm light, relaxed and active, olive/cream palette. No food scales, no measuring tapes, no before/after.">
+              <img class="wldiff__photo" src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" loading="lazy" style="object-position: 50% 20%">
+              <span class="wldiff__badge"><svg><use href="#i-flask"/></svg></span>
+              <div class="wldiff__glass">
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Appetite</span>
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Feelings of fullness</span>
+              </div>
+            </div>
+            <h3 class="wldiff__card-title">Appetite and Feelings of Fullness</h3>
+            <p class="wldiff__card-text">GLP-1-based medications can help eligible adults manage weight by affecting appetite and feelings of fullness.</p>
+          </li>
+          <li class="wldiff__card">
+            <div class="wldiff__media media-brief" aria-hidden="true" data-brief="Lifestyle: two adults outdoors, calm and confident, sage sky, olive/cream palette. No before/after.">
+              <img class="wldiff__photo" src="assets/images/weight-loss/standin-stretch.webp" alt="" width="3840" height="2143" loading="lazy" style="object-position: 55% 40%">
+              <span class="wldiff__badge"><svg><use href="#i-search"/></svg></span>
+              <div class="wldiff__glass">
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Semaglutide-based treatments</span>
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Tirzepatide-based treatments</span>
+                <span class="wldiff__note">When available and clinically appropriate</span>
+              </div>
+            </div>
+            <h3 class="wldiff__card-title">FDA-Approved Prescription Options</h3>
+            <p class="wldiff__card-text">Explore FDA-approved prescription options, including semaglutide- and tirzepatide-based treatments, when available and clinically appropriate.</p>
+          </li>
+        </ul>
+
+        <div class="wldiff__actions">
+          <a class="btn btn--dark btn--pill btn--l" href="#intake-weight-loss">Explore GLP-1 Options</a>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/difference END -->
     </div>
 
   </main>

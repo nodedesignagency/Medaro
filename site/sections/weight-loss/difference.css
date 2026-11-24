@@ -1,0 +1,176 @@
+/* ==========================================================================
+   Weight Loss · the MEDARO difference (under hero V4)
+   After the user's Superpower "How it works" reference: a centred heading
+   and subline, then four square image cards in a row, each with a small
+   dark glass badge top left and, on three, a frosted glass card of plain
+   words over the photo; a title and a short text under each image.
+   Ours: chip, heading (Host Grotesk 400 like the hero), the client's
+   sentence; the badges carry icons, not numbers (these are not steps); the
+   glass rows use neutral dots, not ticks (nothing here is a result).
+   Frame: the cards span the frame (16px edges, max 1888) like the cards
+   and panel above; 16px apart; images radius 12.
+   ========================================================================== */
+
+.wldiff {
+  padding: var(--space-6) var(--frame-side) var(--space-9);
+  color: var(--color-ink);
+}
+
+/* ---------- Header ---------- */
+.wldiff__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.wldiff__chip { --color-chip: #367d12; }
+.wldiff__title {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.6vw, 68px);
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+.wldiff__lede {
+  max-width: 40em;
+  margin-top: 18px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: balance;
+}
+
+/* ---------- Cards ---------- */
+.wldiff__cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--edge);
+  margin-top: clamp(48px, 4.4vw, 80px);
+}
+.wldiff__media {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--p-sage);
+  container-type: inline-size;
+  isolation: isolate;
+}
+.wldiff__media--sage { background: radial-gradient(90% 80% at 50% 25%, #c3c9b4 0%, var(--p-sage) 60%, #8f977f 100%); }
+.wldiff__photo,
+.wldiff__plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+.wldiff__plate { object-position: 70% 50%; }
+.wldiff__portrait {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 104%;
+  height: auto;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+/* Card 2: the vial and the blank tablets in the hero's studio light */
+.wldiff__vial {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 66%;
+  transform: translate(-50%, -50%) rotate(8deg);
+  filter: drop-shadow(0 18px 20px rgba(0, 0, 0, 0.45));
+}
+.wldiff__pill {
+  position: absolute;
+  height: auto;
+  filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.45));
+}
+.wldiff__pill--white { width: 16%; left: 13%; top: 24%; transform: rotate(-12deg); }   /* left of the vial's shoulder */
+.wldiff__pill--oval { width: 22%; right: 10%; bottom: 17%; transform: rotate(16deg); } /* right of the vial's foot */
+
+/* The badge: a small dark glass square, top left (Superpower's number tile) */
+.wldiff__badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  color: #fff;
+  background: rgba(38, 43, 30, 0.45);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+.wldiff__badge svg { width: 18px; height: 18px; }
+
+/* The glass card of plain words over the photo */
+.wldiff__glass {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 7%;
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  color: #fff;
+  background: rgba(28, 32, 22, 0.58);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  backdrop-filter: blur(14px) saturate(1.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 14px 30px -16px rgba(0, 0, 0, 0.5);
+}
+.wldiff__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(13px, 4.6cqi, 17px);
+  font-weight: var(--weight-medium);
+  line-height: 1.3;
+}
+.wldiff__dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--p-accent);
+}
+.wldiff__note {
+  padding-left: 17px;
+  font-size: clamp(12.5px, 3.6cqi, 14px);
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.wldiff__card-title {
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-size: clamp(21px, 1.7vw, 28px);
+  font-weight: var(--weight-regular);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance; /* no lone last word ("One.") at wide screens */
+}
+.wldiff__card-text {
+  max-width: 30em;
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+.wldiff__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(40px, 3.6vw, 64px);
+}
