@@ -18,16 +18,19 @@
   <link rel="stylesheet" href="sections/weight-loss/hero--v1.css">
   <link rel="stylesheet" href="sections/weight-loss/hero--v2.css">
   <link rel="stylesheet" href="sections/weight-loss/hero--v3.css">
+  <link rel="stylesheet" href="sections/weight-loss/hero--v4.css">
 </head>
 <body>
   <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
        every CTA goes to the Weight Loss intake form. [LINK NEEDED] intake URL: #intake-weight-loss until we have it.
        Round 1 of the hero (three versions, rejected 2026-11-23) is frozen in versions/wl-hero-round-1/. -->
 
-  <!-- Sprite: logo -->
+  <!-- Sprite: logo and icons -->
   <svg class="sprite" aria-hidden="true" focusable="false">
     <!-- Official MEDARO wordmark (site/assets/logo/, from the client), cropped tight, currentColor -->
     <symbol id="wordmark" viewBox="194 74 4413 712"><g fill="currentColor" transform="translate(80 780) scale(1 -1)"><path transform="translate(0 0)" d="M114 0V700H175L495 154H463L780 700H841V0H770V589H787L495 89H460L166 589H185V0Z"/><path transform="translate(870 0)" d="M114 0V700H594V636H188V64H609V0ZM180 324V387H550V324Z"/><path transform="translate(1500 0)" d="M114 0V700H399Q511 700 595.5 655.5Q680 611 727.0 532.0Q774 453 774 350Q774 247 727.0 168.0Q680 89 595.5 44.5Q511 0 399 0ZM188 64H395Q488 64 556.5 100.5Q625 137 663.0 201.5Q701 266 701 350Q701 435 663.0 499.0Q625 563 556.5 599.5Q488 636 395 636H188Z"/><path transform="translate(2300 0)" d="M2 0 L322 700 L395 700 L715 0 L637 0 L343 657 L373 657 L79 0 Z"/><path transform="translate(3040 0)" d="M114 0V700H376Q509 700 585.5 636.5Q662 573 662 460Q662 386 627.5 332.5Q593 279 529.0 250.5Q465 222 376 222H155L188 256V0ZM592 0 412 254H492L673 0ZM188 250 155 285H374Q479 285 533.5 331.0Q588 377 588 460Q588 544 533.5 590.0Q479 636 374 636H155L188 671Z"/><path transform="translate(3740 0)" d="M420 -6Q341 -6 273.5 20.5Q206 47 156.5 95.5Q107 144 79.5 208.5Q52 273 52 350Q52 427 79.5 491.5Q107 556 156.5 604.5Q206 653 273.0 679.5Q340 706 420 706Q499 706 566.0 679.5Q633 653 682.5 605.0Q732 557 759.5 492.0Q787 427 787 350Q787 273 759.5 208.0Q732 143 682.5 95.0Q633 47 566.0 20.5Q499 -6 420 -6ZM420 60Q483 60 536.5 81.5Q590 103 629.5 142.5Q669 182 691.0 234.5Q713 287 713 350Q713 413 691.0 465.5Q669 518 629.5 557.5Q590 597 536.5 618.5Q483 640 420 640Q357 640 303.0 618.5Q249 597 209.5 557.5Q170 518 147.5 465.5Q125 413 125 350Q125 288 147.5 235.0Q170 182 209.5 142.5Q249 103 303.0 81.5Q357 60 420 60Z"/></g></symbol>
+    <!-- Check for V4's points (the project's check, from the Supplement V3 round 2 cards) -->
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.4 6.6 11.4 12.5 4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </svg>
 
   <a class="visually-hidden" href="#main">Skip to content</a>
@@ -183,6 +186,53 @@
         </div>
       </section>
       <!-- SECTION:weight-loss/hero--v3 END -->
+    </div>
+
+    <!-- ================= HERO V4 (V1's photo, the woman on the right; hims weight-loss layout with the points) ================= -->
+    <div data-version="hero:v4">
+      <!-- SECTION:weight-loss/hero--v4 START · styles: sections/weight-loss/hero--v4.css · assets: assets/images/weight-loss/v4-sky.webp, v4-woman.webp
+           V4, round 3 (user, 2026-11-24; "make it as new version not v1"): "I liked this version [round 2 V1: the sky photo, the woman, the dotted arc] but i want
+           this type of layout with points for the text [hims weight-loss hero: chip, two-tone headline, check points, CTA on the
+           left] … the girl will be at the right and text at the left. use content from the brief".
+           Copy: content/weight-loss.md, Section 1, all of it, word for word (eyebrow as the section chip, case only): headline,
+           sentence, "A Smarter Way to Lose Weight." and its six points, Get Started.
+           Photo (stand-in): the Supplement section's AI woman (wider 1600×1986 render from git history) at 1.5×, on the right;
+           the sky extended to the left in code (2:1 plate v4-sky.webp) and the woman cut out (v4-woman.webp, placed in % of the
+           plate) so the arc passes behind her. [LINK NEEDED] intake URL. -->
+      <section class="wlh4" aria-labelledby="wlh4-title">
+        <div class="wlh4__stage">
+          <div class="wlh4__media media-brief" aria-hidden="true" data-brief="One adult, low angle against a clear sage-teal sky, from the hips up, on the right third, calm and confident; cream top, olive bottoms; film grain. Open sky on the left for the copy. No before/after.">
+            <img class="wlh4__sky" src="assets/images/weight-loss/v4-sky.webp" alt="" width="3600" height="1800">
+            <svg class="wlh4__arc" viewBox="0 0 3600 1800" preserveAspectRatio="none" focusable="false">
+              <defs><radialGradient id="wlh4-glow"><stop offset="0" stop-color="#e6f2c4" stop-opacity="0.95"/><stop offset="0.35" stop-color="#d5e5ad" stop-opacity="0.55"/><stop offset="1" stop-color="#d5e5ad" stop-opacity="0"/></radialGradient></defs>
+              <path class="wlh4__path" d="M 1500 1950 Q 2300 1000 3700 420"/>
+              <circle class="wlh4__glow" cx="1753" cy="1673" r="44"/><circle class="wlh4__point" cx="1753" cy="1673" r="9"/>
+              <circle class="wlh4__glow" cx="2034" cy="1413" r="44" style="--d: 1.2s"/><circle class="wlh4__point" cx="2034" cy="1413" r="9"/>
+              <circle class="wlh4__glow" cx="3216" cy="641" r="44" style="--d: 2.4s"/><circle class="wlh4__point" cx="3216" cy="641" r="9"/>
+              <circle class="wlh4__glow" cx="3534" cy="491" r="44" style="--d: 0.6s"/><circle class="wlh4__point" cx="3534" cy="491" r="9"/>
+            </svg>
+            <img class="wlh4__person" src="assets/images/weight-loss/v4-woman.webp" alt="" width="1495" height="1521">
+          </div>
+          <div class="wlh4__haze" aria-hidden="true"></div>
+
+          <div class="wlh4__copy">
+            <p class="chip wlh4__chip"><span>Doctor-guided weight loss</span></p>
+            <h1 class="wlh4__title" id="wlh4-title">Weight Loss Is Hard.<br><span class="wlh4__accent">Getting the Right Care<br>Shouldn't Be.</span></h1>
+            <p class="wlh4__lede">Discover a simpler approach to weight loss with personalized medical guidance and GLP-1 treatment options designed around your goals.</p>
+            <h2 class="wlh4__list-title">A Smarter Way to Lose Weight.</h2>
+            <ul class="wlh4__points">
+              <li><span class="wlh4__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Personalized weight-loss plans designed around your goals.</li>
+              <li><span class="wlh4__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Clear, upfront pricing with no unexpected surprises.</li>
+              <li><span class="wlh4__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>GLP-1 treatment options when medically appropriate.</li>
+              <li><span class="wlh4__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Licensed medical providers guiding your treatment.</li>
+              <li><span class="wlh4__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Convenient online care from the comfort of home.</li>
+              <li><span class="wlh4__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Fast, discreet medication delivery when prescribed and available.</li>
+            </ul>
+            <a class="btn btn--dark btn--pill btn--l wlh4__cta" href="#intake-weight-loss">Get Started</a>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/hero--v4 END -->
     </div>
 
   </main>
