@@ -58,12 +58,13 @@
 }
 /* Each side is its own column, two ingredients one fixed gap apart (user,
    2026-11-25: "why the gap is same now also"; shared rows had let the
-   taller block opposite, and the ampoule, stretch the space between them),
-   centred against the ampoule. */
+   taller block opposite, and the ampoule, stretch the space between them);
+   both sides start level. */
 .mhsci__side {
   display: flex;
   flex-direction: column;
   gap: clamp(48px, 4vw, 72px);
+  align-self: start; /* both sides start on one line: 01 and 03 level ("make the texts more even") */
 }
 
 /* ---------- One ingredient, after the Nervana block ---------- */
@@ -146,7 +147,7 @@
 }
 .mhsci__item--end .mhsci__curve { right: auto; left: 0; transform: scaleX(-1); }
 .mhsci__item--end.mhsci__item--low .mhsci__curve { transform: scale(-1, -1); }
-.mhsci__item--end > p:not(.mhsci__label) { margin-left: auto; }
+.mhsci__item.mhsci__item--end > p:not(.mhsci__label):not(.mhsci__sub) { margin-left: auto; text-align-last: right; } /* outranks the paragraph rule below */
 
 .mhsci__name {
   margin-top: 22px;
@@ -168,7 +169,14 @@
   font-size: 16px;
   line-height: 1.5;
   color: var(--color-text-muted);
-  text-wrap: balance; /* lines of even length (user, 2026-11-25: "make it more even") */
+  /* even text (user, 2026-11-25: "make it more even", then "make the texts more even"): justified to
+     the column on both edges, the last line on the block's own side; hyphenation keeps the spacing tight */
+  text-align: justify;
+  text-align-last: left;
+  text-wrap: pretty;            /* no single word left on a last line */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphenate-limit-chars: 10 4 4; /* only long words break (pharmacological, effectiveness), never short ones */
 }
 .mhsci__sub + p { margin-top: 14px; }
 
