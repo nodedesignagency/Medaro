@@ -8,10 +8,13 @@
    Frame: the cards sit on the frame (16px, max 1888) 16px under the hero's
    stage, 16px apart, so stage and cards read as one set. The copy uses the
    hero's 48px inset: card 1's text starts on the logo's line (64px).
-   Images (stand-ins): card 1 the approved Tirzepatide vial with its print
-   and the two blank tablets (components/product.css), built in code; card 2
-   the running couple from the first Home photo, cut out above the grass
-   (card-progress.webp), standing on the card's foot.
+   Images (round 3, 2026-11-25, the user's picks): one Magnific render per
+   card, shot on the card colour (tools/wl-card-art.py). Card 1: the vial on
+   a pale ledge in hard sun (after the user's NAD+ jar reference), the wall
+   brought exactly to --p-mist so it is the card; the label print is
+   tools/pack-print.py's, wrapped onto this render. Card 2: the hero V4
+   couple in a kettlebell lunge (after the user's lunge reference), cut out,
+   with their own floor shadows kept as alpha, standing on the card.
    ========================================================================== */
 
 .wlpp {
@@ -61,6 +64,9 @@
   text-wrap: pretty;
 }
 .wlpp__cta { margin-top: 24px; }
+/* the copy paints over the images: card 1's photo is opaque (its wall is the card colour) */
+.wlpp__title,
+.wlpp__body { position: relative; z-index: 1; }
 .wlpp__nowrap { white-space: nowrap; } /* "GLP-1" never splits at its hyphen */
 
 /* ---------- Images, on the card's right ---------- */
@@ -72,28 +78,35 @@
   width: var(--media-w);
 }
 
-/* Card 1: the vial standing tilted, two blank tablets around it */
-.wlpp__vial {
+/* Card 1: one photograph, the vial on a ledge. Sized by the card's height so
+   the vial stays as tall as before (about 62% of the card); the vial sits on
+   the column's centre line. The ledge runs off the card's right and bottom
+   edges; where it would end at the photo's left edge it fades into the card
+   (a gradient mask, never an image mask: those fail from file://). */
+.wlpp__shot {
+  --ar: 1344 / 1800;
   position: absolute;
-  left: 54%;
-  top: 46%;
-  height: 60%;
-  transform: translate(-50%, -50%) rotate(8deg);
-  filter: drop-shadow(0 22px 22px rgba(38, 43, 30, 0.22));
+  left: var(--vial-x, 56%);
+  top: var(--vial-y, 53%);
+  height: 172%;
+  transform: translate(-50%, -51%); /* the vial's centre in the render: 50% across, 51% down */
+  -webkit-mask-image: linear-gradient(to right, transparent 8%, #000 30%);
+  mask-image: linear-gradient(to right, transparent 8%, #000 30%);
 }
-.wlpp__pill {
-  position: absolute;
-  height: auto;
-  filter: drop-shadow(0 14px 14px rgba(38, 43, 30, 0.24));
-}
-.wlpp__pill--white { width: 21%; left: 4%; bottom: 13%; transform: rotate(-12deg); } /* at the vial's foot, left */
-.wlpp__pill--oval { width: 29%; right: 8%; bottom: 8%; transform: rotate(14deg); }  /* at the vial's foot, right */
 
-/* Card 2: the runners stand on the card's foot (their cut is the card's edge) */
+/* Card 2: the couple stands on the card, feet a little above its foot, their
+   long shadows running off its right edge. The box is as big as the couple
+   may get; object-fit keeps the photo whole inside it, anchored bottom right.
+   It is the column's width that limits it (1280-1920): 104% keeps the
+   woman's knee and kettlebell 30px+ clear of the paragraph's box (measured
+   per row of the cut-out at 1280, 1440, 1920). */
 .wlpp__people {
   position: absolute;
-  right: 4%;
-  bottom: 0;
-  width: 96%;
-  height: auto;
+  right: 0;
+  bottom: 3%;
+  width: 104%;
+  max-width: none; /* the base img rule caps images at their box */
+  height: 90%;
+  object-fit: contain;
+  object-position: 100% 100%;
 }

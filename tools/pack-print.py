@@ -226,24 +226,26 @@ class Print:
     def band(self, y0, y1, fill, x_min, x_max, opacity=1.0):
         self.layers.append((fill, opacity, self.band_path(y0, y1, x_min, x_max)))
 
-    def svg(self, w, h, title, shade=None, clip=None, shade_clip=None, fade=None):
+    def svg(self, w, h, title, shade=None, clip=None, shade_clip=None, fade=None, span=None):
         """shade: (stops) for a horizontal black overlay that darkens the print towards the cylinder's sides,
         clipped to shade_clip (path data) when given, so it never touches the glass around a label.
         fade: (stops) for a horizontal opacity mask on the print instead, for print that is screened onto
-        glass: black shading would show as a box where the render is transparent."""
+        glass: black shading would show as a box where the render is transparent.
+        span: (x0, x1) the gradients run across; default the whole image (the label fills it)."""
+        gx0, gx1 = span or (0, w)
         out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">',
                f"<title>{title}</title>"]
         defs = []
         if shade:
             stops = "".join(f'<stop offset="{o}" stop-color="#000" stop-opacity="{a}"/>' for o, a in shade)
-            defs.append(f'<linearGradient id="shade" x1="0" x2="{w}" y1="0" y2="0" gradientUnits="userSpaceOnUse">{stops}</linearGradient>')
+            defs.append(f'<linearGradient id="shade" x1="{fmt(gx0)}" x2="{fmt(gx1)}" y1="0" y2="0" gradientUnits="userSpaceOnUse">{stops}</linearGradient>')
         if clip:
             defs.append(f'<clipPath id="clip"><path d="{clip}"/></clipPath>')
         if shade_clip:
             defs.append(f'<clipPath id="shade-clip"><path d="{shade_clip}"/></clipPath>')
         if fade:
             stops = "".join(f'<stop offset="{o}" stop-color="#fff" stop-opacity="{a}"/>' for o, a in fade)
-            defs.append(f'<linearGradient id="fade-g" x1="0" x2="{w}" y1="0" y2="0" gradientUnits="userSpaceOnUse">{stops}</linearGradient>'
+            defs.append(f'<linearGradient id="fade-g" x1="{fmt(gx0)}" x2="{fmt(gx1)}" y1="0" y2="0" gradientUnits="userSpaceOnUse">{stops}</linearGradient>'
                         f'<mask id="fade" maskUnits="userSpaceOnUse" x="0" y="0" width="{w}" height="{h}"><rect width="{w}" height="{h}" fill="url(#fade-g)"/></mask>')
         if defs:
             out.append("<defs>" + "".join(defs) + "</defs>")
@@ -260,56 +262,80 @@ class Print:
 
 
 # ------------------------------------------------------------- the vial ----
+class VialShot:
+    """One render of the vial: its label cylinder, the label's front top/bottom, the silhouette, the
+    image size. The label is laid out once, in the first render's units (front y 398-995); `m` scales
+    that layout onto this render's label (sizes, rows and u alike), anchored at the label's top."""
+
+    def __init__(self, cyl, top, bot, x, size, m=1.0, span=None):
+        self.cyl, self.top, self.bot, self.x, self.size, self.m = cyl, top, bot, x, size, m
+        self.span = span or (0, size[0])  # what the shading gradients run across
+
+    def y(self, y_ref):
+        return self.top + (y_ref - 398) * self.m
+
+
 # assets/images/products/vial-tirzepatide.webp, 466×1100: a blank white paper
 # label on a clear vial, lime flip cap. Label silhouette x 4–461 (centre 232.5,
 # R 228.5), front y 398–995; its edges arc by 8px at the top and 27px at the
 # bottom, which puts the camera's eye level at y 551 (k 0.0641).
-VIAL = Cylinder(cx=232.5, r=228.5, eye=551, k=0.0641)
-VIAL_TOP, VIAL_BOT = 398, 995
-VIAL_X = (3.5, 462.5)  # the label runs right to the silhouette (paper is opaque to x 4–461, half-covered at 462)
-VIAL_TOP, VIAL_BOT = VIAL_TOP - 1.5, VIAL_BOT + 1  # cover the paper's bright cut edge
+VIAL = VialShot(Cylinder(cx=232.5, r=228.5, eye=551, k=0.0641), 398, 995,
+                (3.5, 462.5),  # the label runs right to the silhouette (paper is opaque to x 4–461, half-covered at 462)
+                (466, 1100))
+
+# assets/images/weight-loss/card-vial.webp, 1344×1800 (the 3584×4800 render ×0.375): the vial on
+# the ledge, seen from below with a long lens. Measured on the render: silhouette x 1426.5–2158.5
+# (centre 1792.5, R 366), label front y 2146–3060; both edges arch (14px and 12px at u ±207), so the
+# camera's eye is far below the label: eye 7958, k 0.01387. All ×0.375 here.
+LEDGE = VialShot(Cylinder(cx=672.19, r=137.25, eye=2984.25, k=0.01387), 804.75, 1147.5,
+                 (534.94, 809.44), (1344, 1800), m=(1147.5 - 804.75) / (995 - 398), span=(534.94, 809.44))
 
 
-def vial(variant):
+def vial(variant, shot=VIAL):
     """The client's MEDARO Tirzepatide vial mock-up, word for word: Injection · Compounded ·
     Tirzepatide · <variant> Vial · RX ONLY. Body in the brand's olive (client: "change the Color
     of the body to the brand Color"). Our layout, the pens' recipe turned across the vial: the row
     above (RX ONLY), hairline, the name band (Compounded in lime over Tirzepatide), hairline, the use
     line (Injection), and the variant on one solid lime block across the foot, a third of the label
     like the pens' dose tab. Even 50-unit steps between rows."""
-    p = Print(VIAL)
-    L = -152  # content edge, flat (−0.67 rad: still face-on); hairlines run right round
-    edge = math.pi / 2 * VIAL.r
-    p.band(VIAL_TOP, VIAL_BOT, MOSS, *VIAL_X)
-    p.text("RX ONLY", L, 465, 25, 500, PAPER, tracking=0.12, opacity=0.82)
-    p.line(-edge, edge, 503, 2.2, PAPER, 0.36)
-    p.text("Compounded", L - 1, 583, 40, 400, LIME)
-    p.text("Tirzepatide", L - 3, 661, 72, 500, PAPER, tracking=-0.02)
-    p.line(-edge, edge, 707, 2.2, PAPER, 0.36)
-    p.text("Injection", L, 777, 29, 400, PAPER, opacity=0.82)
-    p.band(823, VIAL_BOT, LIME, *VIAL_X)
-    p.text(f"{variant} Vial", L, 925, 38, 500, INK, tracking=-0.015)
+    p = Print(shot.cyl)
+    m, y = shot.m, shot.y
+    top, bot = shot.top - 1.5 * m, shot.bot + 1 * m  # cover the paper's bright cut edge
+    L = -152 * m  # content edge, flat (−0.67 rad: still face-on); hairlines run right round
+    edge = math.pi / 2 * shot.cyl.r
+    p.band(top, bot, MOSS, *shot.x)
+    p.text("RX ONLY", L, y(465), 25 * m, 500, PAPER, tracking=0.12, opacity=0.82)
+    p.line(-edge, edge, y(503), 2.2 * m, PAPER, 0.36)
+    p.text("Compounded", L - 1 * m, y(583), 40 * m, 400, LIME)
+    p.text("Tirzepatide", L - 3 * m, y(661), 72 * m, 500, PAPER, tracking=-0.02)
+    p.line(-edge, edge, y(707), 2.2 * m, PAPER, 0.36)
+    p.text("Injection", L, y(777), 29 * m, 400, PAPER, opacity=0.82)
+    p.band(y(823), bot, LIME, *shot.x)
+    p.text(f"{variant} Vial", L, y(925), 38 * m, 500, INK, tracking=-0.015)
     # the paper's own shading carries the light (the print multiplies onto it); deepen the far sides a little
     shade = [(0, 0.34), (0.1, 0.12), (0.24, 0), (0.9, 0), (1, 0.1)]
-    body = p.band_path(VIAL_TOP, VIAL_BOT, *VIAL_X)
-    return p.svg(466, 1100, f"Compounded Tirzepatide, {variant} Vial: label print", shade=shade, shade_clip=body)
+    body = p.band_path(top, bot, *shot.x)
+    return p.svg(*shot.size, f"Compounded Tirzepatide, {variant} Vial: label print", shade=shade, shade_clip=body,
+                 span=shot.span)
 
 
-def vial_sheen():
+def vial_sheen(shot=VIAL):
     """A satin highlight on the label where the key light (from the right) glances off it,
     laid over the print with screen. Same for every vial label."""
-    p = Print(VIAL)
-    body = p.band_path(VIAL_TOP, VIAL_BOT, *VIAL_X)
+    p = Print(shot.cyl)
+    w, h = shot.size
+    x0, x1 = (fmt(v) for v in shot.span)
+    body = p.band_path(shot.top - 1.5 * shot.m, shot.bot + 1 * shot.m, *shot.x)
     stops = [(0, 0), (0.62, 0), (0.76, 0.07), (0.835, 0.17), (0.875, 0.2), (0.92, 0.1), (0.97, 0.03), (1, 0)]
     g = "".join(f'<stop offset="{o}" stop-color="#fff" stop-opacity="{a}"/>' for o, a in stops)
     # a faint cool rim on the shadow side, where the backdrop reflects
     r = "".join(f'<stop offset="{o}" stop-color="#e8eedb" stop-opacity="{a}"/>' for o, a in [(0, 0.08), (0.05, 0.03), (0.12, 0)])
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 466 1100" width="466" height="1100">'
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">'
             f'<title>Vial label: satin highlight</title><defs>'
-            f'<linearGradient id="s" x1="0" x2="466" gradientUnits="userSpaceOnUse">{g}</linearGradient>'
-            f'<linearGradient id="r" x1="0" x2="466" gradientUnits="userSpaceOnUse">{r}</linearGradient>'
+            f'<linearGradient id="s" x1="{x0}" x2="{x1}" gradientUnits="userSpaceOnUse">{g}</linearGradient>'
+            f'<linearGradient id="r" x1="{x0}" x2="{x1}" gradientUnits="userSpaceOnUse">{r}</linearGradient>'
             f'<clipPath id="c"><path d="{body}"/></clipPath></defs>'
-            f'<g clip-path="url(#c)"><rect width="466" height="1100" fill="url(#s)"/><rect width="466" height="1100" fill="url(#r)"/></g></svg>\n')
+            f'<g clip-path="url(#c)"><rect width="{w}" height="{h}" fill="url(#s)"/><rect width="{w}" height="{h}" fill="url(#r)"/></g></svg>\n')
 
 
 # ---------------------------------------------------------- the ampoule ----
@@ -364,6 +390,11 @@ if __name__ == "__main__":
         "print-ampoule-quad4-ink.svg": ampoule(ink=True),
         "sheen-vial.svg": vial_sheen(),
     }
+    wl = os.path.join(ROOT, "site", "assets", "images", "weight-loss")
+    files.update({
+        os.path.join(wl, "print-vial-ledge.svg"): vial("Microdose", LEDGE),
+        os.path.join(wl, "sheen-vial-ledge.svg"): vial_sheen(LEDGE),
+    })
     for name, data in files.items():
         with open(os.path.join(OUT, name), "w") as f:
             f.write(data)
