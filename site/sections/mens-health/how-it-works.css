@@ -1,0 +1,240 @@
+/* ==========================================================================
+   Men's Health · How MEDARO works (2026-11-25)
+   The user's reference (a screen recording of StemWave's "Transform the way
+   you help patients recover": "make it something like this in our style"):
+   the heading top left, the points as a list under it, the open one a white
+   card with its text and a thin line filling along its foot; when the line
+   is full the next point opens; a large photo on the right changes with it
+   (cross-fade).
+   Ours: the page colour, the chip in the Men's blue, the page's section
+   heading, the steps numbered as in the client's copy (01, 02, 03) in the
+   Men's blue, the card pure white like the hero's category tiles (radius
+   12), the line in the Men's blue; copy on the logo's line, the photo on
+   the frame (16px) at the nav bar's radius; the client's CTA at the foot,
+   level with the photo's foot.
+   Framer: a section; the step list one component with a variant per open
+   step, timed (7s), the photos changing with it.
+   ========================================================================== */
+
+.mhhiw {
+  --mhhiw-blue: #0a6fc7; /* the Men's chip blue: 4.5:1 on the page, 5.1:1 on white */
+  --mhhiw-step: 7s;      /* how long each step stays open */
+  --mhhiw-pad: 28px;     /* the card's inset: titles, text and the line */
+  --mhhiw-num: 44px;     /* the numbers' column */
+  padding: var(--space-9) var(--frame-side);
+  color: var(--color-ink);
+}
+
+.mhhiw__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.14fr);
+  column-gap: clamp(48px, 5vw, 96px);
+}
+
+/* ---------- Left: chip, heading, the steps, the CTA ---------- */
+.mhhiw__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  padding-left: var(--space-7); /* the logo's line */
+}
+.mhhiw__chip { --color-chip: var(--mhhiw-blue); }
+.mhhiw__title {
+  margin-top: 28px;
+  margin-left: -0.04em; /* the B's side bearing: ink on the logo's line */
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.6vw, 68px); /* the page's section heading */
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+/* The chip on the photo's top line, the CTA on its foot, the steps centred
+   between them; the list keeps the height of its tallest state (set by the
+   script), so nothing above or below moves when a step opens */
+.mhhiw__steps {
+  align-self: stretch;
+  display: grid;
+  align-content: start;
+  margin-block: auto;
+}
+.mhhiw__step {
+  position: relative;
+  border-radius: 12px;
+  background-color: rgb(255 255 255 / 0);
+  transition: background-color 420ms var(--ease-out);
+}
+.mhhiw__step-btn {
+  display: grid;
+  grid-template-columns: var(--mhhiw-num) 1fr;
+  align-items: baseline;
+  width: 100%;
+  padding: 22px var(--mhhiw-pad);
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.mhhiw__step-btn:focus-visible {
+  outline: 2px solid var(--mhhiw-blue);
+  outline-offset: 2px;
+}
+.mhhiw__num {
+  font-size: clamp(14px, 1vw, 17px);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--mhhiw-blue);
+}
+.mhhiw__name {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.6vw, 28px);
+  font-weight: var(--weight-regular);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.mhhiw__text {
+  padding: 0 var(--mhhiw-pad) 28px calc(var(--mhhiw-pad) + var(--mhhiw-num)); /* under its title, across the card: two lines */
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: balance; /* even lines (the user's preference on this page, 2026-11-25) */
+}
+
+/* The line along the open card's foot, filling while the step is open */
+.mhhiw__progress {
+  position: absolute;
+  left: var(--mhhiw-pad);
+  right: var(--mhhiw-pad);
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--mhhiw-blue);
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* With the script: one step open at a time. Without it, every step is open. */
+.mhhiw.is-ready .mhhiw__step.is-active { background-color: #fff; }
+.mhhiw.is-ready .mhhiw__step-btn { transition: padding-bottom 460ms var(--ease-out); }
+.mhhiw__step.is-active .mhhiw__step-btn,
+.mhhiw:not(.is-ready) .mhhiw__step-btn { padding-bottom: 12px; } /* the open card's text close under its title */
+.mhhiw.is-ready .mhhiw__step:not(.is-active):hover { background-color: rgb(255 255 255 / 0.5); }
+.mhhiw.is-ready .mhhiw__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 460ms var(--ease-out), visibility 0s 460ms;
+}
+.mhhiw.is-ready .mhhiw__step.is-active .mhhiw__panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 460ms var(--ease-out);
+}
+.mhhiw.is-ready .mhhiw__panel > div { min-height: 0; overflow: hidden; }
+.mhhiw.is-ready .mhhiw__text {
+  opacity: 0;
+  transition: opacity 200ms var(--ease-out);
+}
+.mhhiw.is-ready .mhhiw__step.is-active .mhhiw__text {
+  opacity: 1;
+  transition: opacity 360ms var(--ease-out) 140ms;
+}
+.mhhiw.is-auto .mhhiw__step.is-active .mhhiw__progress {
+  opacity: 1;
+  animation: mhhiw-progress var(--mhhiw-step) linear forwards;
+}
+.mhhiw.is-auto.is-paused .mhhiw__step.is-active .mhhiw__progress { animation-play-state: paused; } /* after the shorthand above */
+@keyframes mhhiw-progress { to { transform: scaleX(1); } }
+
+
+
+/* ---------- Right: the photo, one per step ---------- */
+.mhhiw__media {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 1.1;
+  max-height: calc(100svh - 70px - 64px); /* the whole section fits a laptop window under the header */
+  border-radius: 12px;
+  background: #c9d6e4;
+}
+.mhhiw__shot {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transform: scale(1);
+  /* leaving: stays up until the next photo has faded in over it, then goes */
+  transition: opacity 0s 900ms, transform 0s 900ms;
+}
+.mhhiw__shot.is-active {
+  z-index: 1;
+  opacity: 1;
+  transform: scale(1.04); /* a slow push in while the step is open (the reference's photos are film) */
+  transition: opacity 900ms var(--ease-out), transform calc(var(--mhhiw-step) + 2s) cubic-bezier(0.3, 0.2, 0.4, 1);
+}
+.mhhiw__shot img { position: absolute; display: block; }
+.mhhiw__plate { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* Stand-ins, from the page's own pictures (no credits spent; the briefs
+   for the real photographs are in data-brief) */
+/* 1: Home's Men's Health man under the hero's steel-blue sky, turned to face the copy */
+.mhhiw__shot--1 .mhhiw__plate { object-position: 50% 100%; }
+.mhhiw__shot--1 .mhhiw__person {
+  left: 56%;
+  bottom: 0;
+  height: 88%;
+  width: auto;
+  transform: translateX(-50%) scaleX(-1);
+}
+/* 2: the blue Quad 4 ampoule standing in the slate's light (hero V2's plate) */
+.mhhiw__shot--2 .mhhiw__plate { object-position: 98% 50%; }
+.mhhiw__pack {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.mhhiw__pack img { inset: 0; width: 100%; height: 100%; }
+.mhhiw__pack--ampoule {
+  top: 9%;
+  height: 76%;
+  aspect-ratio: 406 / 2200;
+  filter: drop-shadow(0 24px 28px rgb(6 12 22 / 0.45));
+}
+.mhhiw__pack-print { mix-blend-mode: screen; }
+.mhhiw__floor {
+  position: absolute;
+  left: 50%;
+  top: 84.5%;
+  width: 34%;
+  height: 5%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(4 9 18 / 0.55), rgb(4 9 18 / 0));
+}
+/* 3: the hand holding the ampoule (the Quad 4 section's photograph) under a deeper sky */
+.mhhiw__shot--3 .mhhiw__plate { object-position: 30% 0%; }
+.mhhiw__pack--hand {
+  top: 3%;
+  height: 152%;
+  aspect-ratio: 1368 / 2475;
+  margin-left: 4%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mhhiw__step,
+  .mhhiw.is-ready .mhhiw__step-btn,
+  .mhhiw.is-ready .mhhiw__panel,
+  .mhhiw.is-ready .mhhiw__step.is-active .mhhiw__panel,
+  .mhhiw.is-ready .mhhiw__text,
+  .mhhiw.is-ready .mhhiw__step.is-active .mhhiw__text { transition: none; }
+  .mhhiw__shot,
+  .mhhiw__shot.is-active { transform: none; transition: opacity 200ms linear; }
+}

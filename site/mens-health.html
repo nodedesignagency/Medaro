@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="sections/mens-health/quad.css">
   <link rel="stylesheet" href="sections/mens-health/quad-cards.css">
   <link rel="stylesheet" href="sections/mens-health/science.css">
+  <link rel="stylesheet" href="sections/mens-health/how-it-works.css">
 </head>
 <body>
   <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
@@ -295,6 +296,65 @@
     </section>
     <!-- SECTION:mens-health/science END -->
 
+    <!-- SECTION:mens-health/how-it-works START · styles: sections/mens-health/how-it-works.css · scripts: sections/mens-health/how-it-works.js · assets (stand-ins): assets/images/mens-health/v1-sky.webp, v2-slate.webp, assets/images/people/man-a.webp, assets/images/products/ampoule-quad4-blue.webp, print-ampoule-quad4.svg, hand-ampoule-quad4.webp, print-hand-ampoule-quad4.svg, hand-ampoule-quad4-front.webp
+         The brief's "How Medaro works", after the user's reference (2026-11-25, a recording of StemWave's "Transform the way you
+         help patients recover": "make it something like this in our style"): heading top left, the steps as a list, the open one a
+         white card with its text and a line filling along its foot, then the next opens; a large photo on the right changes with it.
+         Copy: content/mens-health.md → How Medaro works, word for word (eyebrow as the chip; "01 — " as the number column).
+         Photos are stand-ins (no credits spent): briefs in data-brief. [LINK NEEDED] intake URL. -->
+    <section class="mhhiw" id="how-it-works" aria-labelledby="mhhiw-title">
+      <div class="mhhiw__inner">
+        <div class="mhhiw__copy">
+          <div class="mhhiw__head">
+            <p class="chip mhhiw__chip"><span>How MEDARO Works</span></p>
+            <h2 class="mhhiw__title" id="mhhiw-title">Better Men's Health in<br>Three Simple Steps.</h2>
+          </div>
+          <ol class="mhhiw__steps">
+            <li class="mhhiw__step">
+              <h3><button class="mhhiw__step-btn" type="button" id="mhhiw-step-1" aria-expanded="true" aria-controls="mhhiw-text-1"><span class="mhhiw__num">01</span><span class="mhhiw__name">Tell Us About Yourself</span></button></h3>
+              <div class="mhhiw__panel" id="mhhiw-text-1" role="region" aria-labelledby="mhhiw-step-1"><div><p class="mhhiw__text">Complete a confidential online assessment covering your medical history, symptoms, and treatment goals.</p></div></div>
+              <span class="mhhiw__progress" aria-hidden="true"></span>
+            </li>
+            <li class="mhhiw__step">
+              <h3><button class="mhhiw__step-btn" type="button" id="mhhiw-step-2" aria-expanded="true" aria-controls="mhhiw-text-2"><span class="mhhiw__num">02</span><span class="mhhiw__name">Get Expert Medical Guidance</span></button></h3>
+              <div class="mhhiw__panel" id="mhhiw-text-2" role="region" aria-labelledby="mhhiw-step-2"><div><p class="mhhiw__text">A licensed healthcare provider reviews your information, evaluates your needs, and discusses appropriate treatment options.</p></div></div>
+              <span class="mhhiw__progress" aria-hidden="true"></span>
+            </li>
+            <li class="mhhiw__step">
+              <h3><button class="mhhiw__step-btn" type="button" id="mhhiw-step-3" aria-expanded="true" aria-controls="mhhiw-text-3"><span class="mhhiw__num">03</span><span class="mhhiw__name">Move Forward With Your Treatment</span></button></h3>
+              <div class="mhhiw__panel" id="mhhiw-text-3" role="region" aria-labelledby="mhhiw-step-3"><div><p class="mhhiw__text">If an appropriate medication is prescribed, home delivery may be available through a licensed pharmacy.</p></div></div>
+              <span class="mhhiw__progress" aria-hidden="true"></span>
+            </li>
+          </ol>
+          <a class="btn btn--dark btn--pill btn--l mhhiw__cta" href="#intake-mens-health">Start Your Assessment</a>
+        </div>
+
+        <div class="mhhiw__media" aria-hidden="true">
+          <figure class="mhhiw__shot mhhiw__shot--1 is-active media-brief" data-brief="Photo: a man in his late 30s to 40s at home, relaxed on a sofa or at a kitchen table, completing the confidential online assessment on his phone or laptop; soft daylight, blue-grey tones; the screen not readable. Not one of the hero models.">
+            <img class="mhhiw__plate" src="assets/images/mens-health/v1-sky.webp" alt="" width="3600" height="1800" loading="lazy">
+            <img class="mhhiw__person" src="assets/images/people/man-a.webp" alt="" width="1000" height="1017" loading="lazy">
+          </figure>
+          <figure class="mhhiw__shot mhhiw__shot--2 media-brief" data-brief="Photo: a licensed provider reviewing a patient's information on a laptop, hands and screen only (no lab coat, no name, no face), calm, soft daylight, blue-grey tones.">
+            <img class="mhhiw__plate" src="assets/images/mens-health/v2-slate.webp" alt="" width="3600" height="1800" loading="lazy">
+            <span class="mhhiw__floor"></span>
+            <span class="mhhiw__pack mhhiw__pack--ampoule">
+              <img src="assets/images/products/ampoule-quad4-blue.webp" alt="" width="406" height="2200" loading="lazy">
+              <img class="mhhiw__pack-print" src="assets/images/products/print-ampoule-quad4.svg" alt="" width="406" height="2200" loading="lazy">
+            </span>
+          </figure>
+          <figure class="mhhiw__shot mhhiw__shot--3 media-brief" data-brief="Photo: a plain, discreet unbranded box arriving at a front door or in a man's hands, natural light, blue-grey tones; no drug names and no MEDARO wordmark on any medication.">
+            <img class="mhhiw__plate" src="assets/images/mens-health/v1-sky.webp" alt="" width="3600" height="1800" loading="lazy">
+            <span class="mhhiw__pack mhhiw__pack--hand">
+              <img src="assets/images/products/hand-ampoule-quad4.webp" alt="" width="1368" height="2475" loading="lazy">
+              <img class="mhhiw__pack-print" src="assets/images/products/print-hand-ampoule-quad4.svg" alt="" width="1368" height="2475" loading="lazy">
+              <img src="assets/images/products/hand-ampoule-quad4-front.webp" alt="" width="1368" height="2475" loading="lazy">
+            </span>
+          </figure>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION:mens-health/how-it-works END -->
+
   </main>
 
   <script src="main.js" defer></script>
@@ -302,5 +362,6 @@
   <script src="assets/images/products/label-ampoule-quad4.js" defer></script>
   <script src="components/pack-spin.js" defer></script>
   <script src="sections/mens-health/science.js" defer></script>
+  <script src="sections/mens-health/how-it-works.js" defer></script>
 </body>
 </html>
