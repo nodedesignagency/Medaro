@@ -1,82 +1,130 @@
 /* ==========================================================================
-   Weight Loss · Ongoing care, V1: the care cycle (under hero V4; ?ongoing=v1)
-   Round 2 (user, 2026-11-25): "remove those +++ in bg … remove that dot …
-   those 4 icons would be placed on sides and top [and] bottom … sticky
-   scroll animation: first all 4 wont be highlighted, first we will see the
-   content at center … then on scroll one by one that center part will
-   change to the content of those 4 icons … one icon highlighted after
-   another". Plus one addition from Mobbin's Ada "four easy steps" (a ring
-   whose active segment lights up): the ring draws itself in leaf green as
-   you scroll, reaching each icon as it lights up and closing the loop
-   after the fourth.
-   Layout: a white stage on the frame (16px edges, max 1888, radius 18),
-   pinned and centred in the window while you scroll (one stretch of
-   scroll per state: the intro, then the four points). A hairline ring with
-   four nodes at top, right, bottom and left (clockwise: follow-up care,
-   your response, side effects, adjustments), each with its title outside
-   the ring. In the middle: the chip, the changing text (intro: the heading
-   and the closing lines; then each point's title and sentence), and the
-   dark pill CTA, which stays.
-   Nodes: upcoming = white with a hairline; active = ink with a lime icon
-   and a lime halo; done = lime.
-   ongoing--v1.js adds .is-live (pinned, room to scroll), sets the state
-   and the ring's progress. Without JS: not pinned, the intro in the
-   middle, each point's sentence under its title.
+   Weight Loss · Ongoing care, V1: the care dial (under hero V4; ?ongoing=v1)
+   Round 3 (user, 2026-11-25): "remove that big box white … lets not do boxy
+   design … see this video reference [Ada's "four easy steps": the heading
+   above, a big dial rising from below that pins while you scroll, its
+   centre text changing per step] … make it in a way that matches our theme
+   … dont want to blindly copy", and the "Your clock is ticking" reference
+   (a dark section, a ring of small glowing dots, little content).
+   Ours:
+   - no box: the page itself turns deep olive while the section holds the
+     middle of the screen (data-scene="wl-ongoing", like the steps' lime
+     scene); ?ongoingbg=light keeps the page colour to compare;
+   - above: the chip, the heading, one line; it scrolls away;
+   - below: the dial, pinned under the header: a ring of 96 fine dots with
+     our four icon nodes at top, right, bottom and left; the centre shows
+     the closing lines first, then each point in turn;
+   - the signature: as you scroll, the dots light up one after another in
+     glowing lime, clockwise from the top; each node lights as the dots
+     reach it; the loop closes after the fourth. One CSS variable (--lit,
+     set by ongoing--v1.js) drives every dot: opacity = clamp(0, --lit − i, 1).
+   - the CTA sits under the dial throughout.
+   Without JS: not pinned, the dial unlit, the intro in the centre, each
+   point's sentence under its title. Reduced motion: the text swaps without
+   moving; the dots still follow the scroll (the reader drives it).
    Copy: content/weight-loss.md → Ongoing care, rephrased with the user's OK.
-   Framer: a sticky section; the ring as a component with 5 variants.
+   Framer: a sticky section; the dial as a component with 5 variants.
    ========================================================================== */
 
+/* ---------- Scene: the page turns deep olive ---------- */
+:root[data-scene="wl-ongoing"]:not([data-ongoingbg="light"]) {
+  --color-bg: var(--p-deep);
+  --color-surface: color-mix(in srgb, var(--p-deep) 90%, var(--p-paper));
+  --color-ink: var(--p-paper);
+  --color-text: var(--p-paper);
+  --color-text-muted: color-mix(in srgb, var(--p-paper) 72%, var(--p-deep));
+  --color-line: color-mix(in srgb, var(--p-paper) 16%, transparent);
+}
+:root[data-scene="wl-ongoing"]:not([data-ongoingbg="light"]) .btn--dark { --btn-bg: var(--p-accent); color: var(--p-ink); }
+:root[data-scene="wl-ongoing"]:not([data-ongoingbg="light"]) .btn--dark:hover { --btn-bg: var(--p-accent-hover); }
+:root[data-scene="wl-ongoing"]:not([data-ongoingbg="light"]) .wlong1 { --lit-colour: var(--p-accent); --chip: var(--p-accent); }
+
 .wlong1 {
-  padding: 0 var(--frame-side) var(--space-9);
-  color: var(--p-ink);
+  --lit-colour: #367d12;   /* light page: leaf green */
+  --chip: #367d12;
+  padding: clamp(120px, 11vw, 200px) var(--frame-side) var(--space-9);
+  color: var(--color-ink);
 }
 
+/* ---------- Above: the heading ---------- */
+.wlong1__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.wlong1__chip { --color-chip: var(--chip); }
+.wlong1__title {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.6vw, 68px);   /* the page's section heading */
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+.wlong1__lede {
+  max-width: 32em;
+  margin-top: 18px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: balance;
+}
+
+/* ---------- Below: the pinned dial ---------- */
 .wlong1__track {
   --header: 70px;
-  --h: clamp(600px, calc(100svh - var(--header) - 32px), 860px); /* the stage: never taller than the window */
-  --d: calc(var(--h) - 176px);                                     /* the ring: room for a node and its title above and below */
+  --h: calc(100svh - var(--header));
+  --d: clamp(360px, calc(var(--h) - 290px), 700px);   /* room for the top and bottom titles and the CTA */
+  margin-top: clamp(24px, 2.4vw, 48px);
 }
-
 .wlong1__stage {
-  position: relative;
-  height: var(--h);
-  overflow: hidden;
-  border-radius: 18px;
-  background: #fff;
-  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 92px;              /* the bottom node's title sits in this gap, clear of the CTA */
+  padding-top: 56px;      /* and the top node's title in this one */
+  min-height: var(--h);
 }
 .wlong1.is-live .wlong1__stage {
   position: sticky;
-  top: calc(var(--header) + (100svh - var(--header) - var(--h)) / 2); /* centred in the window under the header */
+  top: var(--header);
+  height: var(--h);
 }
 
-/* ---------- The ring and its progress ---------- */
-.wlong1__ring {
-  position: absolute;
-  left: 50%;
-  top: 50%;
+.wlong1__dial {
+  --lit: 0;               /* dots lit, 0–96: set by the script */
+  --enter: 1;             /* 0.9 → 1 as the dial rises into place: set by the script */
+  position: relative;
+  flex: none;
   width: var(--d);
   height: var(--d);
-  margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2);
+  transform: scale(var(--enter));
+}
+
+/* The dots: viewBox -50…50, so the ring has radius 50 */
+.wlong1__dots {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   overflow: visible;
-  transform: rotate(-90deg);            /* the progress starts at the top node */
   pointer-events: none;
 }
-.wlong1__ring circle { fill: none; } /* no viewBox: user units are pixels, so pathLength keeps the dashes true */
-.wlong1__ring-base { stroke: color-mix(in srgb, var(--p-ink) 18%, transparent); stroke-width: 1; }
-.wlong1__ring-progress {
-  stroke: #367d12;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-dasharray: 100 100;
-  stroke-dashoffset: calc(100 - var(--p, 0));   /* --p: 0–100, set by the script as you scroll */
+.wlong1__dots-base circle { fill: color-mix(in srgb, var(--color-ink) 24%, transparent); }
+.wlong1__dots-lit { filter: drop-shadow(0 0 0.9px var(--lit-colour)) drop-shadow(0 0 2.4px color-mix(in srgb, var(--lit-colour) 70%, transparent)); }
+.wlong1__dots-lit circle {
+  fill: var(--lit-colour);
+  opacity: clamp(0, calc(var(--lit) - var(--i)), 1);
 }
 
 /* ---------- The four nodes ---------- */
+.wlong1__points { position: absolute; inset: 0; }
 .wlong1__point {
   position: absolute;
-  left: calc(50% + var(--x) * var(--d) / 2);
-  top: calc(50% + var(--y) * var(--d) / 2);
+  left: calc(50% + var(--x) * 50%);
+  top: calc(50% + var(--y) * 50%);
   width: 0;
   height: 0;
 }
@@ -86,55 +134,51 @@
 .wlong1__point:nth-child(4) { --x: -1; --y: 0; }  /* left */
 .wlong1__node {
   position: absolute;
-  left: -27px;
-  top: -27px;
+  left: -25px;
+  top: -25px;
   display: grid;
   place-items: center;
-  width: 54px;
-  height: 54px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: #fff;
-  color: var(--p-ink-soft);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--p-ink) 22%, transparent), 0 0 0 0 color-mix(in srgb, var(--p-accent) 0%, transparent);
-  transition: background-color 400ms var(--ease-out), color 400ms var(--ease-out), transform 500ms var(--ease-out), box-shadow 500ms var(--ease-out);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 30%, transparent);
+  transition: background-color 450ms var(--ease-out), color 450ms var(--ease-out), transform 550ms var(--ease-out), box-shadow 550ms var(--ease-out);
 }
-.wlong1__node svg { width: 22px; height: 22px; }
-.wlong1__point.is-done .wlong1__node {
+.wlong1__node svg { width: 21px; height: 21px; }
+.wlong1__point.is-done .wlong1__node,
+.wlong1__point.is-active .wlong1__node {
   background: var(--p-accent);
   color: var(--p-ink);
-  box-shadow: inset 0 0 0 1px transparent, 0 0 0 0 transparent;
+  box-shadow: inset 0 0 0 1px transparent;
 }
 .wlong1__point.is-active .wlong1__node {
-  background: var(--p-ink);
-  color: var(--p-accent);
-  transform: scale(1.14);
-  box-shadow: inset 0 0 0 1px transparent, 0 0 0 9px color-mix(in srgb, var(--p-accent) 55%, transparent);
+  transform: scale(1.16);
+  box-shadow: inset 0 0 0 1px transparent, 0 0 0 8px color-mix(in srgb, var(--p-accent) 22%, transparent), 0 0 36px 6px color-mix(in srgb, var(--p-accent) 34%, transparent);
 }
 
-/* Titles outside the ring */
-.wlong1__label { position: absolute; width: max-content; max-width: 260px; }
-.wlong1__point:nth-child(1) .wlong1__label { left: 50%; bottom: 44px; transform: translateX(-50%); text-align: center; }
-.wlong1__point:nth-child(2) .wlong1__label { left: 48px; top: 50%; transform: translateY(-50%); }
-.wlong1__point:nth-child(3) .wlong1__label { left: 50%; top: 44px; transform: translateX(-50%); text-align: center; }
-.wlong1__point:nth-child(4) .wlong1__label { right: 48px; top: 50%; transform: translateY(-50%); text-align: right; }
+/* Titles outside the ring: small, quiet */
+.wlong1__label { position: absolute; width: max-content; max-width: 240px; }
+.wlong1__point:nth-child(1) .wlong1__label { left: 50%; bottom: 42px; transform: translateX(-50%); text-align: center; }
+.wlong1__point:nth-child(2) .wlong1__label { left: 44px; top: 50%; transform: translateY(-50%); }
+.wlong1__point:nth-child(3) .wlong1__label { left: 50%; top: 42px; transform: translateX(-50%); text-align: center; }
+.wlong1__point:nth-child(4) .wlong1__label { right: 44px; top: 50%; transform: translateY(-50%); text-align: right; }
 .wlong1__name {
-  font-family: var(--font-display);
-  font-size: clamp(17px, 1.3vw, 21px);
+  font-size: 15px;
   font-weight: var(--weight-medium);
   line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: var(--p-ink-soft);
-  transition: color 400ms var(--ease-out);
+  color: var(--color-text-muted);
+  transition: color 450ms var(--ease-out);
 }
-.wlong1__point.is-active .wlong1__name,
-.wlong1__point.is-done .wlong1__name { color: var(--p-ink); }
+.wlong1__point.is-active .wlong1__name { color: var(--color-ink); }
 .wlong1__label p {
   margin-top: 6px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.45;
-  color: var(--p-ink-soft);
+  color: var(--color-text-muted);
 }
-/* Live: each sentence shows in the middle instead (still read by screen readers here) */
+/* Live: each sentence shows in the centre instead (kept here for screen readers) */
 .wlong1.is-live .wlong1__label p {
   position: absolute;
   width: 1px;
@@ -144,23 +188,16 @@
   white-space: nowrap;
 }
 
-/* ---------- The middle ---------- */
+/* ---------- The centre ---------- */
 .wlong1__core {
   position: absolute;
   left: 50%;
   top: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: calc(var(--d) * 0.72);
-  text-align: center;
-  transform: translate(-50%, -50%);
-}
-.wlong1__chip { --color-chip: #367d12; }
-.wlong1__states {
   display: grid;
   align-items: center;
-  margin-top: 16px;
+  width: calc(var(--d) * 0.7);
+  text-align: center;
+  transform: translate(-50%, -50%);
 }
 .wlong1__state {
   grid-area: 1 / 1;
@@ -170,41 +207,46 @@
 }
 .wlong1.is-live .wlong1__state {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(12px);
+  filter: blur(4px);
   visibility: hidden;
-  transition: opacity 220ms ease-out, transform 220ms ease-out, visibility 0s linear 220ms;
+  transition: opacity 220ms ease-out, transform 220ms ease-out, filter 220ms ease-out, visibility 0s linear 220ms;
 }
 .wlong1.is-live .wlong1__state.is-on {
   opacity: 1;
   transform: none;
+  filter: none;
   visibility: visible;
-  transition: opacity 480ms var(--ease-out) 140ms, transform 640ms var(--ease-out) 140ms, visibility 0s;
+  transition: opacity 520ms var(--ease-out) 120ms, transform 680ms var(--ease-out) 120ms, filter 520ms var(--ease-out) 120ms, visibility 0s;
 }
 .wlong1:not(.is-live) .wlong1__state:not(:first-child) { display: none; }
-.wlong1__title,
 .wlong1__state-title {
   font-family: var(--font-display);
-  font-size: clamp(36px, min(3.2vw, 6.6cqh), 58px);
+  font-size: clamp(34px, min(3.4vw, calc(var(--d) * 0.085)), 60px);
   font-weight: var(--weight-regular);
   line-height: 1.04;
   letter-spacing: -0.035em;
-  color: var(--p-ink);
+  color: var(--color-ink);
 }
 .wlong1__state p:not(.wlong1__state-title) {
-  max-width: 26em;
+  max-width: 24em;
   margin-top: 14px;
   font-size: clamp(15px, 1.15vw, 18px);
   line-height: 1.5;
-  color: var(--p-ink-soft);
+  color: var(--color-text-muted);
   text-wrap: balance;
 }
-.wlong1__cta { margin-top: 24px; }
+/* The intro: the closing lines, quieter than a point's title */
+.wlong1__state--intro .wlong1__state-title { font-size: clamp(26px, min(2.3vw, calc(var(--d) * 0.06)), 40px); line-height: 1.15; letter-spacing: -0.025em; }
+
+.wlong1 :focus-visible { outline-color: currentColor; }
+
+/* Without JS each sentence sits under its title outside the ring: a smaller ring leaves room for them */
+.wlong1:not(.is-live) .wlong1__track { --d: clamp(340px, calc(var(--h) - 360px), 560px); }
 
 @media (prefers-reduced-motion: reduce) {
   .wlong1.is-live .wlong1__state,
-  .wlong1.is-live .wlong1__state.is-on { transform: none; transition: opacity 1ms, visibility 0s; }
+  .wlong1.is-live .wlong1__state.is-on { transform: none; filter: none; transition: opacity 1ms, visibility 0s; }
   .wlong1__node { transition: none; }
+  .wlong1__dial { transform: none; }
 }
-
-/* Without JS each sentence sits under its title outside the ring: a smaller ring leaves room for them */
-.wlong1:not(.is-live) .wlong1__track { --d: calc(var(--h) - 330px); }
