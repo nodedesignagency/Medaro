@@ -140,7 +140,12 @@
    style we are having … dummy for now … current icon will have full opacity, old or next icon will have low
    opacity"): our illustrated icons, no disc colour, no halo. A disc of the page colour behind each one keeps
    the dots and the line from running through it. The current one at full opacity and full size; the others
-   at 45% and a touch smaller. */
+   at 45% and a touch smaller.
+   Round 6 (user, 2026-11-25: "these are dummy icons … we have dark bg we have to change colors tone of icons to
+   … [the] color we have in button like primary so we can see icon properly"): the real four, one Magnific sheet
+   in our illustrated style but in the buttons' lime (assets/icons/ongoing/): a calendar with a heart, a pulse
+   card, two speech bubbles, three sliders. Their dark details are cut through, so they show the page colour.
+   Made for the dark scene; on ?ongoingbg=light they read pale (that version would need the dark-green set). */
 .wlong1__node {
   position: absolute;
   left: -33px;
