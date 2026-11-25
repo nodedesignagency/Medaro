@@ -14,11 +14,11 @@
    - below: the dial, pinned under the header: a ring of 96 fine dots with
      our four icon nodes at top, right, bottom and left; the centre shows
      the closing lines first, then each point in turn;
-   - round 4: as you scroll, a fine lime line draws round just inside the
-     dots, led by a small tip (the dots stay a quiet texture, no glow);
-     each illustrated node comes to full opacity as the line reaches it,
-     the others at 45%; the loop closes after the fourth. One variable
-     (--pct, 0–100, set by ongoing--v1.js) drives the line and the tip.
+   - round 5: as you scroll, the dots light up in lime one after another,
+     clockwise from the top, flat with no glow; each illustrated node comes
+     to full opacity as the dots reach it, the others at 45%; the loop
+     closes after the fourth. One variable (--pct, 0–100, set by
+     ongoing--v1.js) drives every dot.
    - the CTA sits under the dial throughout.
    Without JS: not pinned, the dial unlit, the intro in the centre, each
    point's sentence under its title. Reduced motion: the text swaps without
@@ -115,21 +115,13 @@
 }
 .wlong1__dots-base circle { fill: color-mix(in srgb, var(--color-ink) 22%, transparent); } /* a quiet, even texture: no glow (user, round 4) */
 
-/* Progress (round 4: "remove those dotted glows … think if we can do anything else"): a fine line drawn
-   just inside the dots, led by a small tip, like the sweep of a watch hand. No glow. */
-.wlong1__line {
-  fill: none;
-  stroke: var(--line-colour);
-  stroke-width: 0.26;               /* ≈ 1.6px on a 620px dial */
-  stroke-linecap: round;
-  stroke-dasharray: 100 100;
-  stroke-dashoffset: calc(100 - var(--pct));
+/* Progress (round 5, user: "lets do that normal scroll thing animation like in those dots just remove that
+   glow"): the dots light up in lime one after another with the scroll, clockwise from the top; flat, no glow.
+   One variable drives them all: each dot's opacity = clamp(0, --lit − i, 1). */
+.wlong1__dots-lit circle {
+  fill: var(--line-colour);
+  opacity: clamp(0, calc(var(--pct) * 0.96 - var(--i)), 1);   /* --pct 0–100 → 0–96 dots */
 }
-.wlong1__tip {
-  transform: rotate(calc(var(--pct) * 3.6deg));   /* round the centre (the viewBox origin) */
-  opacity: clamp(0, var(--pct), 1);               /* hidden at 0 */
-}
-.wlong1__tip circle { fill: var(--line-colour); }
 
 /* ---------- The four nodes ---------- */
 .wlong1__points { position: absolute; inset: 0; }
@@ -151,18 +143,18 @@
    at 45% and a touch smaller. */
 .wlong1__node {
   position: absolute;
-  left: -38px;
-  top: -38px;
+  left: -33px;
+  top: -33px;
   display: grid;
   place-items: center;
-  width: 76px;
-  height: 76px;
+  width: 66px;            /* small enough that the dots either side show whole */
+  height: 66px;
   border-radius: 50%;
   background: var(--color-bg);
 }
 .wlong1__node img {
-  width: 64px;
-  height: 64px;
+  width: 62px;
+  height: 62px;
   opacity: 0.45;
   transform: scale(0.88);
   transition: opacity 500ms var(--ease-out), transform 600ms var(--ease-out);
