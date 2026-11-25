@@ -6,7 +6,7 @@
    the image to cover whole screen, make it like card in hero": the photo
    sits in a rounded stage on the frame like hero V4 (16px edges, max 1888,
    radius 18), not full bleed.
-   Ours: a deep olive wall with warm light falling across it, paper type,
+   Ours: a real-life photo with a deep olive shade behind the copy, paper type,
    the section chip in lime, the client's lime button as a pill (the page's
    dark pill would vanish on the dark stage). Copy starts at the stage's
    centre line like the reference; its right edge is the 48px content inset
@@ -15,8 +15,8 @@
    paragraph's three sentences are the three lines along the foot (the
    reference's three facts); the belief and the closing line sit under the
    headline, over the CTA (DESIGN.md → Copy flags).
-   Photo: stand-in (people/woman-a.webp, cut out) on a wall built in code;
-   brief in data-brief. The real photo replaces both the wall and the cut-out.
+   Photo (2026-11-25): "Garden steps", one render (why-garden-steps.webp)
+   under a deep olive shade on the right; the built wall and cut-out are gone.
    Framer: a section with a fill image, the copy stack and a 3-column row.
    ========================================================================== */
 
@@ -33,51 +33,33 @@
   height: clamp(580px, min(calc(100cqw / 2.1), calc(100svh - 70px - 32px)), 900px);
   overflow: hidden;
   border-radius: 18px;
-  /* the wall: deep olive, lit on the left behind her, falling into shade on the right where the copy sits (like the reference) */
-  background:
-    radial-gradient(60% 85% at 30% 42%, rgba(222, 208, 160, 0.16) 0%, rgba(222, 208, 160, 0) 72%),
-    linear-gradient(90deg, #505841 0%, #444c37 38%, #353c2a 66%, #2b3122 100%);
+  background: #2f3626; /* the photo's shade tone, while it loads */
   color: var(--color-on-dark);
   container-type: size;
   isolation: isolate;
 }
 
-/* Window light: late sun through a window, two slanted panes of warm light
-   split by the frame's shadow, falling across the wall and over her (the
-   reference's light). Soft-light blend, so it warms what it crosses instead
-   of painting over it. Behind the copy it has already faded out. */
-.wlwhy__light {
+/* The photo (user, 2026-11-25: "i dont like that bg in here … can we use real life style image"): one
+   render filling the stage like object-fit: cover, kept on the woman (30% across); the deep olive shade
+   on the right takes the foliage down so the paper type reads (measured), and a little along the foot
+   under the three lines. */
+.wlwhy__photo {
   position: absolute;
-  inset: -12% -6%;
-  z-index: 1;
-  background:
-    linear-gradient(146deg,
-      transparent 0 27%,
-      rgba(255, 226, 168, 0.55) 27% 39%,
-      transparent 39% 41.5%,
-      rgba(255, 226, 168, 0.45) 41.5% 54%,
-      transparent 54% 100%);
-  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 38%, transparent 56%);
-          mask-image: linear-gradient(90deg, #000 0%, #000 38%, transparent 56%);
-  filter: blur(16px);
-  mix-blend-mode: soft-light;
-  pointer-events: none;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 30% 50%;
 }
-
-.wlwhy__media {
+.wlwhy__scrim {
   position: absolute;
   inset: 0;
   z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(38, 43, 30, 0) 30%, rgba(38, 43, 30, 0.66) 46%, rgba(38, 43, 30, 0.84) 58%, rgba(38, 43, 30, 0.86) 100%),
+    linear-gradient(0deg, rgba(38, 43, 30, 0.35) 0%, rgba(38, 43, 30, 0) 30%);
   pointer-events: none;
-}
-/* The woman, standing in the left half, cropped by the stage's foot like the reference */
-.wlwhy__person {
-  position: absolute;
-  left: 7%;
-  bottom: 0;
-  height: 90%;
-  width: auto;
-  max-width: none;
 }
 
 /* ---------- Copy: the right half ---------- */
