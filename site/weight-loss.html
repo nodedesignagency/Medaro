@@ -426,11 +426,16 @@
             <div class="wlsteps__copy">
               <p class="chip wlsteps__chip"><span>Simple from the start</span></p>
               <h2 class="wlsteps__title" id="wlsteps-title">Three Steps Toward<br>Better Health.</h2>
-              <!-- The brief's follow-on block, as text (user, 2026-11-24: "bring it back but not in card") -->
+              <!-- The brief's follow-on block (round 3: "bring it back but not in card"); round 4 (2026-11-25: "search for better ui
+                   in mobbin … we can rephrase it a bit"): the title over three icon rows, the three things the client's sentence
+                   says you can do (after Jira's support rows on Mobbin). Cut lines listed in DESIGN.md → Copy flags. -->
               <div class="wlsteps__care">
                 <h3 class="wlsteps__care-title">Your Care Doesn't End With a Prescription.</h3>
-                <p>Your weight-loss journey deserves more than a treatment plan. With ongoing medical guidance and personalized support, you can ask questions, discuss your progress, and receive care as your needs evolve.</p>
-                <p class="wlsteps__care-close">Because better results start with better support.</p>
+                <ul class="wlsteps__care-list">
+                  <li><span class="wlsteps__care-icon" aria-hidden="true"><svg><use href="#i-chat"/></svg></span>Ask questions</li>
+                  <li><span class="wlsteps__care-icon" aria-hidden="true"><svg><use href="#i-pulse"/></svg></span>Discuss your progress</li>
+                  <li><span class="wlsteps__care-icon" aria-hidden="true"><svg><use href="#i-sliders"/></svg></span>Receive care as your needs evolve</li>
+                </ul>
               </div>
               <div class="wlsteps__foot">
                 <a class="btn btn--dark btn--pill btn--l" href="#intake-weight-loss">Get Started</a>
@@ -445,7 +450,7 @@
                   <img class="wlsteps__art" src="assets/icons/step-1-assessment.webp" alt="" width="768" height="768" loading="lazy">
                   <div class="wlsteps__text">
                     <h3 class="wlsteps__name">Tell Us About You</h3>
-                    <p>Complete an online health assessment covering your medical history, current health, and weight-management goals.</p>
+                    <p>Complete an online health assessment covering your medical history, current health, and <span class="wlsteps__nowrap">weight-management</span> goals.</p>
                   </div>
                 </li>
                 <li class="wlsteps__card" data-wlsteps-card>
