@@ -1,123 +1,147 @@
 /* ==========================================================================
    Weight Loss · Ongoing care, V1: the care cycle (under hero V4; ?ongoing=v1)
-   User, 2026-11-25: "for ongoing care what we have currently i dont like it
-   … why there is phone … see mobbin for better references … make 2
-   versions", with their reference of a circle with points around it
-   ("Seamless, connected healthcare", points at the circle's edge, the
-   statement in the middle) and Mobbin's Rox "revenue cycle".
-   Follow-up care is a loop, so the section is one: a hairline circle with
-   four points on it (follow-up, your response, side effects, adjustments,
-   clockwise), each a lime node with the page's line icon and its words
-   outside the circle; the heading, the closing lines and the CTA in the
-   middle. A small dot travels round the circle (24s a turn): care that
-   keeps going. Reduced motion: it rests at the top.
-   Surface: a white stage on the frame (16px edges, max 1888, radius 18)
-   with a faint grid of plus marks, like the reference.
-   Copy: content/weight-loss.md → Ongoing care, rephrased with the user's OK
-   ("we have freedom there"): DESIGN.md → Copy flags.
-   Framer: a section; the circle as one component (ring, 4 nodes, orbit).
+   Round 2 (user, 2026-11-25): "remove those +++ in bg … remove that dot …
+   those 4 icons would be placed on sides and top [and] bottom … sticky
+   scroll animation: first all 4 wont be highlighted, first we will see the
+   content at center … then on scroll one by one that center part will
+   change to the content of those 4 icons … one icon highlighted after
+   another". Plus one addition from Mobbin's Ada "four easy steps" (a ring
+   whose active segment lights up): the ring draws itself in leaf green as
+   you scroll, reaching each icon as it lights up and closing the loop
+   after the fourth.
+   Layout: a white stage on the frame (16px edges, max 1888, radius 18),
+   pinned and centred in the window while you scroll (one stretch of
+   scroll per state: the intro, then the four points). A hairline ring with
+   four nodes at top, right, bottom and left (clockwise: follow-up care,
+   your response, side effects, adjustments), each with its title outside
+   the ring. In the middle: the chip, the changing text (intro: the heading
+   and the closing lines; then each point's title and sentence), and the
+   dark pill CTA, which stays.
+   Nodes: upcoming = white with a hairline; active = ink with a lime icon
+   and a lime halo; done = lime.
+   ongoing--v1.js adds .is-live (pinned, room to scroll), sets the state
+   and the ring's progress. Without JS: not pinned, the intro in the
+   middle, each point's sentence under its title.
+   Copy: content/weight-loss.md → Ongoing care, rephrased with the user's OK.
+   Framer: a sticky section; the ring as a component with 5 variants.
    ========================================================================== */
 
 .wlong1 {
-  container-type: inline-size;
   padding: 0 var(--frame-side) var(--space-9);
   color: var(--p-ink);
 }
 
-.wlong1__stage {
-  --d: min(78cqh, 640px);              /* the circle's diameter */
-  --o: calc(var(--d) * 0.35355);       /* a node's offset on the diagonals (r · sin 45°) */
-  position: relative;
-  height: clamp(640px, min(calc(100svh - 102px), 56cqw), 860px);
-  overflow: hidden;
-  border-radius: 18px;
-  background-color: #fff;
-  /* the reference's faint grid of plus marks, 80px apart (an inline SVG background: fine from file://) */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 35v10M35 40h10' stroke='%23343b29' stroke-opacity='.12' stroke-width='1'/%3E%3C/svg%3E");
-  background-position: center;
-  container-type: size;
-  isolation: isolate;
+.wlong1__track {
+  --header: 70px;
+  --h: clamp(600px, calc(100svh - var(--header) - 32px), 860px); /* the stage: never taller than the window */
+  --d: calc(var(--h) - 176px);                                     /* the ring: room for a node and its title above and below */
 }
 
-/* ---------- The ring and the orbiting dot ---------- */
-.wlong1__ring,
-.wlong1__orbit {
+.wlong1__stage {
+  position: relative;
+  height: var(--h);
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+  isolation: isolate;
+}
+.wlong1.is-live .wlong1__stage {
+  position: sticky;
+  top: calc(var(--header) + (100svh - var(--header) - var(--h)) / 2); /* centred in the window under the header */
+}
+
+/* ---------- The ring and its progress ---------- */
+.wlong1__ring {
   position: absolute;
   left: 50%;
   top: 50%;
   width: var(--d);
   height: var(--d);
   margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2);
-  border-radius: 50%;
+  overflow: visible;
+  transform: rotate(-90deg);            /* the progress starts at the top node */
   pointer-events: none;
 }
-.wlong1__ring { border: 1px solid color-mix(in srgb, var(--p-ink) 20%, transparent); }
-.wlong1__orbit { animation: wlong1-orbit 24s linear infinite; }
-.wlong1__orbit::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 10px;
-  height: 10px;
-  margin: -5px 0 0 -5px;
-  border-radius: 50%;
-  background: #367d12;
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--p-accent) 70%, transparent);
+.wlong1__ring circle { fill: none; } /* no viewBox: user units are pixels, so pathLength keeps the dashes true */
+.wlong1__ring-base { stroke: color-mix(in srgb, var(--p-ink) 18%, transparent); stroke-width: 1; }
+.wlong1__ring-progress {
+  stroke: #367d12;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: calc(100 - var(--p, 0));   /* --p: 0–100, set by the script as you scroll */
 }
-@keyframes wlong1-orbit { to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .wlong1__orbit { animation: none; } }
 
-/* ---------- The four points ---------- */
+/* ---------- The four nodes ---------- */
 .wlong1__point {
-  --x: -1; --y: -1;                     /* which diagonal: set per point */
   position: absolute;
-  left: calc(50% + var(--x) * var(--o));
-  top: calc(50% + var(--y) * var(--o));
+  left: calc(50% + var(--x) * var(--d) / 2);
+  top: calc(50% + var(--y) * var(--d) / 2);
   width: 0;
   height: 0;
 }
-.wlong1__point:nth-child(1) { --x: -1; --y: -1; }
-.wlong1__point:nth-child(2) { --x: 1;  --y: -1; }
-.wlong1__point:nth-child(3) { --x: 1;  --y: 1; }
-.wlong1__point:nth-child(4) { --x: -1; --y: 1; }
+.wlong1__point:nth-child(1) { --x: 0;  --y: -1; } /* top */
+.wlong1__point:nth-child(2) { --x: 1;  --y: 0; }  /* right */
+.wlong1__point:nth-child(3) { --x: 0;  --y: 1; }  /* bottom */
+.wlong1__point:nth-child(4) { --x: -1; --y: 0; }  /* left */
 .wlong1__node {
   position: absolute;
-  left: -26px;
-  top: -26px;
+  left: -27px;
+  top: -27px;
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
-  background: var(--p-accent);
-  color: var(--p-ink);
-  box-shadow: 0 0 0 6px #fff;           /* a white collar where the ring meets the node */
+  background: #fff;
+  color: var(--p-ink-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--p-ink) 22%, transparent), 0 0 0 0 color-mix(in srgb, var(--p-accent) 0%, transparent);
+  transition: background-color 400ms var(--ease-out), color 400ms var(--ease-out), transform 500ms var(--ease-out), box-shadow 500ms var(--ease-out);
 }
 .wlong1__node svg { width: 22px; height: 22px; }
-.wlong1__label {
-  position: absolute;
-  top: 0;
-  width: clamp(220px, 19cqw, 300px);
-  transform: translateY(-50%);
+.wlong1__point.is-done .wlong1__node {
+  background: var(--p-accent);
+  color: var(--p-ink);
+  box-shadow: inset 0 0 0 1px transparent, 0 0 0 0 transparent;
 }
-.wlong1__point:nth-child(1) .wlong1__label,
-.wlong1__point:nth-child(4) .wlong1__label { right: 46px; text-align: right; }   /* left side: words to the left of the node */
-.wlong1__point:nth-child(2) .wlong1__label,
-.wlong1__point:nth-child(3) .wlong1__label { left: 46px; text-align: left; }     /* right side: words to the right */
+.wlong1__point.is-active .wlong1__node {
+  background: var(--p-ink);
+  color: var(--p-accent);
+  transform: scale(1.14);
+  box-shadow: inset 0 0 0 1px transparent, 0 0 0 9px color-mix(in srgb, var(--p-accent) 55%, transparent);
+}
+
+/* Titles outside the ring */
+.wlong1__label { position: absolute; width: max-content; max-width: 260px; }
+.wlong1__point:nth-child(1) .wlong1__label { left: 50%; bottom: 44px; transform: translateX(-50%); text-align: center; }
+.wlong1__point:nth-child(2) .wlong1__label { left: 48px; top: 50%; transform: translateY(-50%); }
+.wlong1__point:nth-child(3) .wlong1__label { left: 50%; top: 44px; transform: translateX(-50%); text-align: center; }
+.wlong1__point:nth-child(4) .wlong1__label { right: 48px; top: 50%; transform: translateY(-50%); text-align: right; }
 .wlong1__name {
   font-family: var(--font-display);
-  font-size: clamp(19px, 1.5vw, 24px);
+  font-size: clamp(17px, 1.3vw, 21px);
   font-weight: var(--weight-medium);
   line-height: 1.2;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
+  color: var(--p-ink-soft);
+  transition: color 400ms var(--ease-out);
 }
+.wlong1__point.is-active .wlong1__name,
+.wlong1__point.is-done .wlong1__name { color: var(--p-ink); }
 .wlong1__label p {
   margin-top: 6px;
-  font-size: clamp(14px, 1.04vw, 16px);
+  font-size: 15px;
   line-height: 1.45;
   color: var(--p-ink-soft);
-  text-wrap: pretty;
+}
+/* Live: each sentence shows in the middle instead (still read by screen readers here) */
+.wlong1.is-live .wlong1__label p {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* ---------- The middle ---------- */
@@ -128,24 +152,59 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(var(--d) * 0.74);
+  width: calc(var(--d) * 0.72);
   text-align: center;
   transform: translate(-50%, -50%);
 }
 .wlong1__chip { --color-chip: #367d12; }
-.wlong1__title {
+.wlong1__states {
+  display: grid;
+  align-items: center;
   margin-top: 16px;
+}
+.wlong1__state {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wlong1.is-live .wlong1__state {
+  opacity: 0;
+  transform: translateY(14px);
+  visibility: hidden;
+  transition: opacity 220ms ease-out, transform 220ms ease-out, visibility 0s linear 220ms;
+}
+.wlong1.is-live .wlong1__state.is-on {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition: opacity 480ms var(--ease-out) 140ms, transform 640ms var(--ease-out) 140ms, visibility 0s;
+}
+.wlong1:not(.is-live) .wlong1__state:not(:first-child) { display: none; }
+.wlong1__title,
+.wlong1__state-title {
   font-family: var(--font-display);
-  font-size: clamp(36px, min(3.2vw, 7cqh), 60px);
+  font-size: clamp(36px, min(3.2vw, 6.6cqh), 58px);
   font-weight: var(--weight-regular);
   line-height: 1.04;
   letter-spacing: -0.035em;
+  color: var(--p-ink);
 }
-.wlong1__lede {
+.wlong1__state p:not(.wlong1__state-title) {
+  max-width: 26em;
   margin-top: 14px;
-  font-size: clamp(15px, 1.1vw, 17px);
+  font-size: clamp(15px, 1.15vw, 18px);
   line-height: 1.5;
   color: var(--p-ink-soft);
   text-wrap: balance;
 }
-.wlong1__cta { margin-top: 22px; }
+.wlong1__cta { margin-top: 24px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wlong1.is-live .wlong1__state,
+  .wlong1.is-live .wlong1__state.is-on { transform: none; transition: opacity 1ms, visibility 0s; }
+  .wlong1__node { transition: none; }
+}
+
+/* Without JS each sentence sits under its title outside the ring: a smaller ring leaves room for them */
+.wlong1:not(.is-live) .wlong1__track { --d: calc(var(--h) - 330px); }

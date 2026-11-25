@@ -580,32 +580,44 @@
 
       <!-- ===== Ongoing care: two versions (?ongoing=v1|v2); round 1 (the phone) is in git history ===== -->
       <div data-version="ongoing:v1">
-        <!-- SECTION:weight-loss/ongoing--v1 START · styles: sections/weight-loss/ongoing--v1.css · icons: #i-target, #i-pulse, #i-chat, #i-sliders in the sprite
-             The brief's "Ongoing care", round 2, V1 (user, 2026-11-25: "i dont like it … why there is phone … make 2 versions"; after
-             their circle reference and Mobbin's Rox "revenue cycle"): follow-up care as a loop, four points on a ring, the heading in
-             the middle, a dot travelling round. Copy from content/weight-loss.md, rephrased with the user's OK (DESIGN.md → Copy flags).
-             [LINK NEEDED] intake URL. -->
-        <section class="wlong1" aria-labelledby="wlong1-title">
-          <div class="wlong1__stage">
-            <div class="wlong1__ring" aria-hidden="true"></div>
-            <div class="wlong1__orbit" aria-hidden="true"></div>
+        <!-- SECTION:weight-loss/ongoing--v1 START · styles: sections/weight-loss/ongoing--v1.css · scripts: sections/weight-loss/ongoing--v1.js · icons: #i-target, #i-pulse, #i-chat, #i-sliders in the sprite
+             The brief's "Ongoing care", V1 round 2 (user, 2026-11-25): no plus grid, no dot; four nodes at top, right, bottom and left;
+             the stage pins while you scroll: the intro in the middle first, then each node lights up in turn and the middle shows its
+             words; the ring draws itself in green with the scroll (after Mobbin's Ada "four easy steps"). The middle's point layers
+             repeat the labels' sentences and are aria-hidden; the labels keep them for screen readers. [LINK NEEDED] intake URL. -->
+        <section class="wlong1" aria-labelledby="wlong1-title" data-wlong1>
+          <div class="wlong1__track" data-wlong1-track>
+            <div class="wlong1__stage" data-wlong1-stage>
+              <svg class="wlong1__ring" aria-hidden="true" focusable="false">
+                <circle class="wlong1__ring-base" cx="50%" cy="50%" r="50%"/>
+                <circle class="wlong1__ring-progress" cx="50%" cy="50%" r="50%" pathLength="100"/>
+              </svg>
 
-            <ul class="wlong1__points">
-              <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-target"/></svg></span>
-                <div class="wlong1__label"><h3 class="wlong1__name">Follow-up care</h3><p>Weight management is an ongoing process, and your needs may change along the way.</p></div></li>
-              <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-pulse"/></svg></span>
-                <div class="wlong1__label"><h3 class="wlong1__name">Your response</h3><p>Your provider can evaluate your response to treatment.</p></div></li>
-              <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-chat"/></svg></span>
-                <div class="wlong1__label"><h3 class="wlong1__name">Side effects</h3><p>Discuss any side effects with your provider.</p></div></li>
-              <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-sliders"/></svg></span>
-                <div class="wlong1__label"><h3 class="wlong1__name">Adjustments</h3><p>Your provider can determine whether adjustments are appropriate.</p></div></li>
-            </ul>
+              <ul class="wlong1__points">
+                  <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-target"/></svg></span>
+                    <div class="wlong1__label"><h3 class="wlong1__name">Follow-up care</h3><p>Weight management is an ongoing process, and your needs may change along the way.</p></div></li>
+                  <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-pulse"/></svg></span>
+                    <div class="wlong1__label"><h3 class="wlong1__name">Your response</h3><p>Your provider can evaluate your response to treatment.</p></div></li>
+                  <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-chat"/></svg></span>
+                    <div class="wlong1__label"><h3 class="wlong1__name">Side effects</h3><p>Discuss any side effects with your provider.</p></div></li>
+                  <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-sliders"/></svg></span>
+                    <div class="wlong1__label"><h3 class="wlong1__name">Adjustments</h3><p>Your provider can determine whether adjustments are appropriate.</p></div></li>
+              </ul>
 
-            <div class="wlong1__core">
-              <p class="chip wlong1__chip"><span>Ongoing care</span></p>
-              <h2 class="wlong1__title" id="wlong1-title">Support Beyond<br>the First Step</h2>
-              <p class="wlong1__lede">Because the right treatment plan isn't just about getting started. It's about knowing how to move forward.</p>
-              <a class="btn btn--dark btn--pill btn--l wlong1__cta" href="#intake-weight-loss">Start Your Assessment</a>
+              <div class="wlong1__core">
+                <p class="chip wlong1__chip"><span>Ongoing care</span></p>
+                <div class="wlong1__states">
+                  <div class="wlong1__state is-on">
+                    <h2 class="wlong1__title" id="wlong1-title">Support Beyond<br>the First Step</h2>
+                    <p>Because the right treatment plan isn't just about getting started. It's about knowing how to move forward.</p>
+                  </div>
+                    <div class="wlong1__state" aria-hidden="true"><p class="wlong1__state-title">Follow-up care</p><p>Weight management is an ongoing process, and your needs may change along the way.</p></div>
+                    <div class="wlong1__state" aria-hidden="true"><p class="wlong1__state-title">Your response</p><p>Your provider can evaluate your response to treatment.</p></div>
+                    <div class="wlong1__state" aria-hidden="true"><p class="wlong1__state-title">Side effects</p><p>Discuss any side effects with your provider.</p></div>
+                    <div class="wlong1__state" aria-hidden="true"><p class="wlong1__state-title">Adjustments</p><p>Your provider can determine whether adjustments are appropriate.</p></div>
+                </div>
+                <a class="btn btn--dark btn--pill btn--l wlong1__cta" href="#intake-weight-loss">Start Your Assessment</a>
+              </div>
             </div>
           </div>
         </section>
@@ -716,6 +728,7 @@
   <script src="sections/weight-loss/hero--v3.js" defer></script>
   <script src="sections/weight-loss/care.js" defer></script>
   <script src="sections/weight-loss/steps.js" defer></script>
+  <script src="sections/weight-loss/ongoing--v1.js" defer></script>
   <script src="components/faq.js" defer></script>
 </body>
 </html>
