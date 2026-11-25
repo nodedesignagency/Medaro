@@ -146,13 +146,22 @@
   font-size: clamp(17px, 1.27vw, 19.5px);
   line-height: 1.3;
 }
-/* The three icons: drawn for these rows in our illustration style (tools/step-art/care-*.svg, like the step
-   art and Home's heart and sprout; user, 2026-11-25: "lets make 3 icons … as per our design style") */
+/* The page's icon circle (as on the ongoing-care phone and the care ticks), +15% with the box; white on the
+   lime scene's panel, where a lime circle would vanish. (2026-11-25: briefly swapped for illustrations, which
+   the user did not ask for: "i wanted to change 3 icons on right side 01 02 03 cards".) */
 .wlsteps__care-icon {
   flex: none;
-  width: 44px;
-  height: 44px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--p-accent);
+  color: var(--p-ink);
+  transition: background-color 700ms var(--ease-in-out);
 }
+:root[data-scene="wl-steps"] .wlsteps__care-icon { background: #fff; }
+.wlsteps__care-icon svg { width: 17px; height: 17px; }
 .wlsteps__foot {
   display: flex;
   align-items: center;

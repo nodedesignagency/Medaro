@@ -1,20 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- 03 Move Forward With Your Plan: a plain parcel (fulfilled by a licensed pharmacy), no label or logo. Same style as step-1. -->
+  <!-- 03 Move Forward With Your Plan: fulfilled through a licensed pharmacy, a plain paper pharmacy bag, folded and sealed with an olive tab, a lime label with a cross. No branding, no pills. MEDARO illustration style: flat shapes, soft gradients, fine grain, no outlines. Round 2 (2026-11-25): replaces the box. -->
   <defs>
-    <filter id="grain" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="7" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="matrix" values="2.2 0 0 0 -0.6  2.2 0 0 0 -0.6  2.2 0 0 0 -0.6  0 0 0 0 0.32" result="grey"/><feComposite in="grey" in2="SourceAlpha" operator="in" result="g"/><feBlend in="g" in2="SourceGraphic" mode="soft-light" result="b"/><feComposite in="b" in2="SourceAlpha" operator="in"/></filter>
-    <linearGradient id="top" x1="0" y1="0" x2="0.8" y2="1"><stop offset="0" stop-color="#fcf5df"/><stop offset="1" stop-color="#ecdfb8"/></linearGradient>
-    <linearGradient id="left" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#e6d8ae"/><stop offset="1" stop-color="#d0bd8a"/></linearGradient>
-    <linearGradient id="right" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#c7b484"/><stop offset="1" stop-color="#a8955f"/></linearGradient>
-    <linearGradient id="tapeTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dcee96"/><stop offset="1" stop-color="#bcd468"/></linearGradient>
-    <linearGradient id="tapeSide" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9c35a"/><stop offset="1" stop-color="#7f9a3c"/></linearGradient>
+    <filter id="grain" filterUnits="userSpaceOnUse" x="0" y="0" width="512" height="512" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="7" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="matrix" values="2.2 0 0 0 -0.6  2.2 0 0 0 -0.6  2.2 0 0 0 -0.6  0 0 0 0 0.32" result="grey"/><feComposite in="grey" in2="SourceAlpha" operator="in" result="g"/><feBlend in="g" in2="SourceGraphic" mode="soft-light" result="b"/><feComposite in="b" in2="SourceAlpha" operator="in"/></filter>
+    <linearGradient id="lime" x1="0" y1="0" x2="0.7" y2="1"><stop offset="0" stop-color="#dcee96"/><stop offset="0.55" stop-color="#b3cb5c"/><stop offset="1" stop-color="#7f9a3c"/></linearGradient>
+    <linearGradient id="board" x1="0.1" y1="0" x2="0.8" y2="1"><stop offset="0" stop-color="#a6ae8a"/><stop offset="0.5" stop-color="#717c55"/><stop offset="1" stop-color="#4b5535"/></linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#fbf6e6"/><stop offset="1" stop-color="#e9ddba"/></linearGradient>
+    <linearGradient id="kraft" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#f1e6c6"/><stop offset="1" stop-color="#d9c79a"/></linearGradient>
+    <linearGradient id="kraftside" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dccb9f"/><stop offset="1" stop-color="#c4b07e"/></linearGradient>
+    <linearGradient id="clip" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#d9ec90"/><stop offset="1" stop-color="#8ea948"/></linearGradient>
+    <linearGradient id="lens" x1="0" y1="0" x2="0.6" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.75"/><stop offset="1" stop-color="#f3ecd2" stop-opacity="0.55"/></linearGradient>
   </defs>
   <g filter="url(#grain)">
-    <g transform="translate(256 282) scale(1.16) translate(-256 -282)">
-    <path d="M256 112 L424 196 L256 280 L88 196 Z" fill="url(#top)" stroke="url(#top)" stroke-width="6" stroke-linejoin="round"/>
-    <path d="M88 196 L256 280 L256 452 L88 368 Z" fill="url(#left)" stroke="url(#left)" stroke-width="6" stroke-linejoin="round"/>
-    <path d="M256 280 L424 196 L424 368 L256 452 Z" fill="url(#right)" stroke="url(#right)" stroke-width="6" stroke-linejoin="round"/>
-    <path d="M154 163 L190 145 L358 229 L322 247 Z" fill="url(#tapeTop)"/>
-    <path d="M322 247 L358 229 L358 401 L322 419 Z" fill="url(#tapeSide)"/>
+    <g transform="rotate(5 256 280)">
+      <path d="M340 150 L392 172 L392 452 L340 466 Z" fill="url(#kraftside)"/>
+      <rect x="120" y="150" width="226" height="316" rx="22" fill="url(#kraft)"/>
+      <rect x="120" y="112" width="226" height="58" rx="16" fill="#e2d1a4"/>
+      <path d="M340 116 L388 136 L388 172 L340 168 Z" fill="#cdb98a"/>
+      <rect x="120" y="164" width="226" height="10" fill="#d6c494"/>
+      <rect x="213" y="92" width="40" height="96" rx="14" fill="url(#board)"/>
+      <rect x="168" y="250" width="130" height="130" rx="32" fill="url(#lime)"/>
+      <rect x="221" y="272" width="24" height="86" rx="10" fill="#fbf6e6"/>
+      <rect x="190" y="303" width="86" height="24" rx="10" fill="#fbf6e6"/>
     </g>
   </g>
 </svg>
