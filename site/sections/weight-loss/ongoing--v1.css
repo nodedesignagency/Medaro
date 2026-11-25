@@ -14,10 +14,11 @@
    - below: the dial, pinned under the header: a ring of 96 fine dots with
      our four icon nodes at top, right, bottom and left; the centre shows
      the closing lines first, then each point in turn;
-   - the signature: as you scroll, the dots light up one after another in
-     glowing lime, clockwise from the top; each node lights as the dots
-     reach it; the loop closes after the fourth. One CSS variable (--lit,
-     set by ongoing--v1.js) drives every dot: opacity = clamp(0, --lit − i, 1).
+   - round 4: as you scroll, a fine lime line draws round just inside the
+     dots, led by a small tip (the dots stay a quiet texture, no glow);
+     each illustrated node comes to full opacity as the line reaches it,
+     the others at 45%; the loop closes after the fourth. One variable
+     (--pct, 0–100, set by ongoing--v1.js) drives the line and the tip.
    - the CTA sits under the dial throughout.
    Without JS: not pinned, the dial unlit, the intro in the centre, each
    point's sentence under its title. Reduced motion: the text swaps without
@@ -37,10 +38,10 @@
 }
 :root[data-scene="wl-ongoing"]:not([data-ongoingbg="light"]) .btn--dark { --btn-bg: var(--p-accent); color: var(--p-ink); }
 :root[data-scene="wl-ongoing"]:not([data-ongoingbg="light"]) .btn--dark:hover { --btn-bg: var(--p-accent-hover); }
-:root[data-scene="wl-ongoing"]:not([data-ongoingbg="light"]) .wlong1 { --lit-colour: var(--p-accent); --chip: var(--p-accent); }
+:root[data-scene="wl-ongoing"]:not([data-ongoingbg="light"]) .wlong1 { --line-colour: var(--p-accent); --chip: var(--p-accent); }
 
 .wlong1 {
-  --lit-colour: #367d12;   /* light page: leaf green */
+  --line-colour: #367d12;  /* light page: leaf green */
   --chip: #367d12;
   padding: clamp(120px, 11vw, 200px) var(--frame-side) var(--space-9);
   color: var(--color-ink);
@@ -94,7 +95,7 @@
 }
 
 .wlong1__dial {
-  --lit: 0;               /* dots lit, 0–96: set by the script */
+  --pct: 0;               /* progress round the ring, 0–100: set by the script */
   --enter: 1;             /* 0.9 → 1 as the dial rises into place: set by the script */
   position: relative;
   flex: none;
@@ -112,12 +113,23 @@
   overflow: visible;
   pointer-events: none;
 }
-.wlong1__dots-base circle { fill: color-mix(in srgb, var(--color-ink) 24%, transparent); }
-.wlong1__dots-lit { filter: drop-shadow(0 0 0.9px var(--lit-colour)) drop-shadow(0 0 2.4px color-mix(in srgb, var(--lit-colour) 70%, transparent)); }
-.wlong1__dots-lit circle {
-  fill: var(--lit-colour);
-  opacity: clamp(0, calc(var(--lit) - var(--i)), 1);
+.wlong1__dots-base circle { fill: color-mix(in srgb, var(--color-ink) 22%, transparent); } /* a quiet, even texture: no glow (user, round 4) */
+
+/* Progress (round 4: "remove those dotted glows … think if we can do anything else"): a fine line drawn
+   just inside the dots, led by a small tip, like the sweep of a watch hand. No glow. */
+.wlong1__line {
+  fill: none;
+  stroke: var(--line-colour);
+  stroke-width: 0.26;               /* ≈ 1.6px on a 620px dial */
+  stroke-linecap: round;
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: calc(100 - var(--pct));
 }
+.wlong1__tip {
+  transform: rotate(calc(var(--pct) * 3.6deg));   /* round the centre (the viewBox origin) */
+  opacity: clamp(0, var(--pct), 1);               /* hidden at 0 */
+}
+.wlong1__tip circle { fill: var(--line-colour); }
 
 /* ---------- The four nodes ---------- */
 .wlong1__points { position: absolute; inset: 0; }
@@ -132,38 +144,37 @@
 .wlong1__point:nth-child(2) { --x: 1;  --y: 0; }  /* right */
 .wlong1__point:nth-child(3) { --x: 0;  --y: 1; }  /* bottom */
 .wlong1__point:nth-child(4) { --x: -1; --y: 0; }  /* left */
+/* Round 4 (user: "the selected state looks too ai … i want something premium"; "change these icons to the
+   style we are having … dummy for now … current icon will have full opacity, old or next icon will have low
+   opacity"): our illustrated icons, no disc colour, no halo. A disc of the page colour behind each one keeps
+   the dots and the line from running through it. The current one at full opacity and full size; the others
+   at 45% and a touch smaller. */
 .wlong1__node {
   position: absolute;
-  left: -25px;
-  top: -25px;
+  left: -38px;
+  top: -38px;
   display: grid;
   place-items: center;
-  width: 50px;
-  height: 50px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   background: var(--color-bg);
-  color: var(--color-text-muted);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 30%, transparent);
-  transition: background-color 450ms var(--ease-out), color 450ms var(--ease-out), transform 550ms var(--ease-out), box-shadow 550ms var(--ease-out);
 }
-.wlong1__node svg { width: 21px; height: 21px; }
-.wlong1__point.is-done .wlong1__node,
-.wlong1__point.is-active .wlong1__node {
-  background: var(--p-accent);
-  color: var(--p-ink);
-  box-shadow: inset 0 0 0 1px transparent;
+.wlong1__node img {
+  width: 64px;
+  height: 64px;
+  opacity: 0.45;
+  transform: scale(0.88);
+  transition: opacity 500ms var(--ease-out), transform 600ms var(--ease-out);
 }
-.wlong1__point.is-active .wlong1__node {
-  transform: scale(1.16);
-  box-shadow: inset 0 0 0 1px transparent, 0 0 0 8px color-mix(in srgb, var(--p-accent) 22%, transparent), 0 0 36px 6px color-mix(in srgb, var(--p-accent) 34%, transparent);
-}
+.wlong1__point.is-active .wlong1__node img { opacity: 1; transform: none; }
 
 /* Titles outside the ring: small, quiet */
 .wlong1__label { position: absolute; width: max-content; max-width: 240px; }
-.wlong1__point:nth-child(1) .wlong1__label { left: 50%; bottom: 42px; transform: translateX(-50%); text-align: center; }
-.wlong1__point:nth-child(2) .wlong1__label { left: 44px; top: 50%; transform: translateY(-50%); }
-.wlong1__point:nth-child(3) .wlong1__label { left: 50%; top: 42px; transform: translateX(-50%); text-align: center; }
-.wlong1__point:nth-child(4) .wlong1__label { right: 44px; top: 50%; transform: translateY(-50%); text-align: right; }
+.wlong1__point:nth-child(1) .wlong1__label { left: 50%; bottom: 46px; transform: translateX(-50%); text-align: center; }
+.wlong1__point:nth-child(2) .wlong1__label { left: 50px; top: 50%; transform: translateY(-50%); }
+.wlong1__point:nth-child(3) .wlong1__label { left: 50%; top: 46px; transform: translateX(-50%); text-align: center; }
+.wlong1__point:nth-child(4) .wlong1__label { right: 50px; top: 50%; transform: translateY(-50%); text-align: right; }
 .wlong1__name {
   font-size: 15px;
   font-weight: var(--weight-medium);
@@ -172,6 +183,7 @@
   transition: color 450ms var(--ease-out);
 }
 .wlong1__point.is-active .wlong1__name { color: var(--color-ink); }
+.wlong1__point:not(.is-active) .wlong1__name { opacity: 0.7; }
 .wlong1__label p {
   margin-top: 6px;
   font-size: 14px;
@@ -247,6 +259,6 @@
 @media (prefers-reduced-motion: reduce) {
   .wlong1.is-live .wlong1__state,
   .wlong1.is-live .wlong1__state.is-on { transform: none; filter: none; transition: opacity 1ms, visibility 0s; }
-  .wlong1__node { transition: none; }
+  .wlong1__node img { transition: none; }
   .wlong1__dial { transform: none; }
 }
