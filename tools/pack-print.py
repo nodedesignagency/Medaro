@@ -438,7 +438,7 @@ if __name__ == "__main__":
             "hand-ampoule-quad4", ampoule(where=Scaled(Flat(), HAND_S, 1060, HAND_LIQ)), HAND_AMPOULE, HAND_SIZE,
             (HAND_LIQ + (1130 - 1060) * HAND_S, HAND_LIQ + (2140 - 1060) * HAND_S),
             "Quad 4 ampoule in the hand: print on glass (white), flat",
-            back=0.22, fade=[0.72, 0.9]),
+            back=0.3, fade=[0.72, 0.9]),
     }
     for name, data in files.items():
         with open(os.path.join(OUT, name), "w") as f:
