@@ -14,10 +14,12 @@
   <!-- Components (shared across pages) -->
   <link rel="stylesheet" href="components/header.css">
   <link rel="stylesheet" href="components/pack-spin.css">
+  <link rel="stylesheet" href="components/product.css">
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
   <link rel="stylesheet" href="sections/mens-health/hero--v1.css">
   <link rel="stylesheet" href="sections/mens-health/hero--v2.css">
   <link rel="stylesheet" href="sections/mens-health/quad.css">
+  <link rel="stylesheet" href="sections/mens-health/quad-cards.css">
 </head>
 <body>
   <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
@@ -159,6 +161,59 @@
       </div>
     </section>
     <!-- SECTION:mens-health/quad END -->
+
+    <!-- SECTION:mens-health/quad-cards START · styles: sections/mens-health/quad-cards.css, components/product.css · assets: assets/images/products/ampoule-quad4.webp, print-ampoule-quad4-ink.svg, assets/images/weight-loss/card-progress.webp, assets/images/people/man-a.webp
+         The brief's three blocks under "Introducing Quad 4" as three cards, after the Weight Loss pricing + progress cards
+         (user, 2026-11-25: "add these three points in the design of this here we have 2 make it 3 … use the blue color cards
+         here like how we did in weightloss page for green"): pale steel-blue cards on the frame, heading top left in the hero's
+         weight, the copy, an image on the card's foot. Copy: content/mens-health.md → Introducing Quad 4, word for word; the
+         block's closing CTA "Explore Quad 4" sits in the last card, after its points. [LINK NEEDED] intake URL.
+         Images: stand-ins (data-brief): our Quad 4 ampoule; the Weight Loss runners; Home's Men's Health man. -->
+    <section class="mhqc" aria-label="More about Quad 4">
+      <div class="mhqc__cards">
+        <article class="mhqc__card">
+          <h3 class="mhqc__title">Designed for<br>Convenience</h3>
+          <p class="mhqc__lede">A Modern Approach to Intimate Wellness.</p>
+          <p class="mhqc__text">Quad 4 is designed as a sublingual formulation, administered under the tongue for a convenient, discreet treatment experience.</p>
+          <ul class="mhqc__points">
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Simple sublingual administration.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>No traditional pill to swallow.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Discreet and convenient to use.</li>
+          </ul>
+          <div class="mhqc__media media-brief" aria-hidden="true" data-brief="Product still life on the card colour: our Quad 4 ampoule with its print, lying on a diagonal, soft studio light, a real shadow. No MEDARO on the pack, no pills.">
+            <span class="pack pack--ampoule mhqc__ampoule"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200" loading="lazy"><img class="product__print" src="assets/images/products/print-ampoule-quad4-ink.svg" alt="" width="406" height="2200" loading="lazy"></span>
+          </div>
+        </article>
+        <article class="mhqc__card">
+          <h3 class="mhqc__title">More Freedom.<br>Less Planning.</h3>
+          <p class="mhqc__lede">Make Room for the Moments That Matter.</p>
+          <p class="mhqc__text">Your intimate life shouldn't revolve around complicated routines. Explore a treatment approach designed with convenience and personal preferences in mind.</p>
+          <ul class="mhqc__points">
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>A convenient administration method.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Care that considers your lifestyle.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>More confidence in your treatment choices.</li>
+          </ul>
+          <div class="mhqc__media media-brief" aria-hidden="true" data-brief="A couple in their late 30s to 40s, relaxed and close, laughing together outdoors, waist up, cut out on the card colour; stone, navy or white clothes, warm natural light. Nothing suggestive, no bedroom.">
+            <img class="mhqc__person mhqc__person--couple" src="assets/images/weight-loss/card-progress.webp" alt="" width="1194" height="1083" loading="lazy">
+          </div>
+        </article>
+        <article class="mhqc__card">
+          <h3 class="mhqc__title">Confidence on<br>Your Terms.</h3>
+          <p class="mhqc__lede">Because Every Moment Matters.</p>
+          <p class="mhqc__text">With ingredients that have established roles in erectile dysfunction treatment, Quad 4 brings together different pharmacological properties in one proposed formulation.</p>
+          <ul class="mhqc__points">
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Four active ingredients.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>One convenient formulation.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Personalized medical guidance.</li>
+          </ul>
+          <a class="btn btn--dark btn--pill mhqc__cta" href="#intake-mens-health">Explore Quad 4</a>
+          <div class="mhqc__media media-brief" aria-hidden="true" data-brief="One man, 40s, at ease and confident, chest up, looking off to the side with a small smile, cut out on the card colour; navy or stone tee. Not the hero's model, no lab coat.">
+            <img class="mhqc__person mhqc__person--man" src="assets/images/people/man-a.webp" alt="" width="1000" height="1017" loading="lazy">
+          </div>
+        </article>
+      </div>
+    </section>
+    <!-- SECTION:mens-health/quad-cards END -->
 
   </main>
 
