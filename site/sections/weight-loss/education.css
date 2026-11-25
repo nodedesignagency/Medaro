@@ -2,7 +2,8 @@
    Weight Loss · GLP-1 education (under hero V4, after Why MEDARO)
    After the user's reference (2026-11-24, Seed's "DS-01 benefits" strip):
    the heading on the left; four light cards in a row on the right, each
-   with a fine line icon at the top and its words under it.
+   with an icon at the top and its words under it (round 3: our illustrated
+   icons instead of the reference's fine line icons).
    Round 2 (user, 2026-11-24: "remove green from here and update the color
    and all accordingly"): no band. The section sits on the page colour; the
    cards are pure white like the steps cards and the hero's category tiles,
@@ -61,10 +62,15 @@
   border-radius: 12px;
   background: #fff; /* pure white, like the steps cards and the category tiles */
 }
+/* Our illustrated icons (round 3, user 2026-11-25: "change those icons to ones
+   we are using throughout the site"): one Magnific sheet in the style of the
+   About and Supplement icons, cut out and trimmed to the art, so every icon has
+   the same height and its left edge sits on the text's line. */
 .wledu__icon {
-  width: 32px;
-  height: 32px;
-  color: var(--color-ink);
+  display: block;
+  align-self: flex-start; /* keep its own width in the card's column */
+  width: auto;
+  height: clamp(40px, 3.06vw, 58px); /* 44px at 1440 */
 }
 .wledu__q {
   min-height: 2lh; /* two lines on every card, so the answers start on one line across the row */
