@@ -19,8 +19,10 @@
      one quarter-turns onto the flat one, so plus becomes minus by moving,
      on the same clock as the answer opening (grid rows 0fr → 1fr).
    Ours: Host Grotesk, ink and muted ink on the page colour, the chip, the
-   page's section heading, card radius 12 like the page's cards, our arrow
-   (the user's, #i-arrow-ne), our motion tokens. Not taken: Mahadeva's bar
+   page's section heading, the hairlines in --color-line, our motion tokens;
+   the card finished like our promo card (round 40px mist button that turns
+   lime, image radius 8, 20px medium title) with the user's arrow
+   (#i-arrow-ne) instead of Mahadeva's square corner box. Not taken: Mahadeva's bar
    reveal on the heading (no section of ours uses it).
    Behaviour (faq.js): buttons with aria-expanded / aria-controls; closed
    answers hidden from screen readers (visibility). Without JS every answer
@@ -72,9 +74,16 @@
   color: var(--color-text-muted);
 }
 
-/* The card: the whole of it is the link */
+/* The card: the whole of it is the link. Mahadeva's card, finished like our
+   promo card (components/promo-card.css, the approved --paper card): radius
+   12, 8px inset, image radius 8, a 40px round arrow button 8px from the
+   top-right corner in mist that turns lime on hover, the 20px medium title.
+   From Mahadeva only the behaviour: the fill swells 2px past every edge on
+   hover, and the arrow is replaced, one leaving through the button's
+   top-right as another arrives from its bottom left (the circle clips them). */
 .faq__card {
   --grow: 2px;
+  --travel: 28px;           /* a 16px arrow centred in 40px clears the circle at 28 */
   position: relative;
   display: flex;
   align-items: center;
@@ -82,7 +91,7 @@
   width: 100%;
   max-width: 420px;
   margin-top: auto;         /* anchored to the column's foot */
-  padding: 8px;
+  padding: 8px 56px 8px 8px; /* clear of the 40px button */
   color: var(--color-ink);
   text-decoration: none;
   isolation: isolate;
@@ -92,8 +101,8 @@
   inset: 0;
   z-index: -1;
   border-radius: 12px;
-  background: #fff; /* pure white, like the page's other cards */
-  transition: inset 250ms var(--ease-out);
+  background: #fff; /* pure white, like the page's other cards on the page colour */
+  transition: inset var(--dur-base) var(--ease-out);
 }
 .faq__card:hover .faq__card-fill,
 .faq__card:focus-visible .faq__card-fill { inset: calc(var(--grow) * -1); }
@@ -105,7 +114,7 @@
   width: 64px;
   height: 64px;
   overflow: hidden;
-  border-radius: 6px;
+  border-radius: 8px; /* like the promo card's image and the nav's buttons */
   background: var(--color-surface);
 }
 .faq__card-photo img {
@@ -120,11 +129,9 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding-right: 40px; /* clear of the corner */
 }
-.faq__card-title {
-  font-family: var(--font-display);
-  font-size: clamp(18px, 1.35vw, 22px);
+.faq__card-title { /* the promo card's title */
+  font-size: 20px;
   font-weight: var(--weight-medium);
   line-height: 1.15;
   letter-spacing: -0.015em;
@@ -135,30 +142,32 @@
   color: var(--color-ink); /* the action: ink like the title, as in Mahadeva */
 }
 
-/* The corner: clips the two arrows so one leaves as the other arrives */
-.faq__card-corner {
+/* The round button: the promo card's, 8px from the corner */
+.faq__card-go {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 8px;
+  right: 8px;
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   overflow: hidden;
-  border-top-right-radius: 12px;
-  border-bottom-left-radius: 6px;
-  background: color-mix(in srgb, var(--color-ink) 10%, transparent);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  transition: background-color var(--dur-fast) var(--ease-out);
 }
+.faq__card:hover .faq__card-go,
+.faq__card:focus-visible .faq__card-go { background: var(--color-accent); }
 .faq__arrow {
   grid-area: 1 / 1;
   width: 16px;
   height: 16px;
-  color: var(--color-ink);
-  transition: transform 500ms var(--ease-in-out);
+  transition: transform var(--dur-slow) var(--ease-in-out);
 }
-.faq__arrow--in { transform: translate(-24px, 24px); }
+.faq__arrow--in { transform: translate(calc(var(--travel) * -1), var(--travel)); }
 .faq__card:hover .faq__arrow--out,
-.faq__card:focus-visible .faq__arrow--out { transform: translate(24px, -24px); }
+.faq__card:focus-visible .faq__arrow--out { transform: translate(var(--travel), calc(var(--travel) * -1)); }
 .faq__card:hover .faq__arrow--in,
 .faq__card:focus-visible .faq__arrow--in { transform: translate(0, 0); }
 
@@ -238,5 +247,6 @@
   .faq.is-ready .faq__a-inner,
   .faq__mark::after,
   .faq__card-fill,
+  .faq__card-go,
   .faq__arrow { transition-duration: 1ms; }
 }
