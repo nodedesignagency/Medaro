@@ -16,8 +16,10 @@
 .mhquad {
   --screen: min(1200px, max(640px, calc(100svh - 70px))); /* one screen under the 70px header */
   --pin: 110svh;                                           /* the scroll that turns it once */
+  --hand-gap: clamp(88px, 8vw, 160px);                     /* more hand between this section and the cards */
   position: relative;
   height: calc(var(--screen) + var(--pin));
+  margin-bottom: var(--hand-gap);
   color: var(--color-ink);
 }
 .mhquad__pin {
@@ -28,22 +30,7 @@
   align-items: center;
   height: var(--screen);
   padding: clamp(52px, 4.6vw, 96px) calc(var(--frame-side) + var(--space-7)) 0;
-  overflow: hidden; /* the forearm runs out of the screen's foot */
   text-align: center;
-}
-/* The forearm fades into the page at the screen's foot, so when the section
-   moves on (and the cards come up under it) the hand never ends on a hard
-   cut. Under the sentence and the button (z-index 2). */
-.mhquad__pin::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  height: clamp(72px, 11svh, 140px);
-  background: linear-gradient(to bottom, color-mix(in srgb, var(--color-bg) 0%, transparent), var(--color-bg) 92%);
-  pointer-events: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .mhquad { height: auto; }
@@ -78,6 +65,10 @@
   min-height: 320px;
   margin-top: clamp(16px, 1.6vw, 32px);
   container-type: size;
+  /* the forearm runs on below the screen (user, 2026-11-25: "dont fade this here make it behind the card below
+     and show more hand"): through the space after the section and on behind the middle card, cut well
+     under the cards' top edge, where the card hides it */
+  clip-path: inset(-4px -100vw calc(-1 * (var(--hand-gap) + 32px + 180px)) -100vw);
 }
 .mhquad__pack {
   position: absolute;
@@ -106,4 +97,11 @@
 }
 .mhquad__cta {
   right: calc(var(--frame-side) + var(--space-7));
+}
+
+/* The section after this one (the Quad 4 cards) sits over the hand, so the
+   forearm passes behind the middle card */
+.mhquad + .mhqc {
+  position: relative;
+  z-index: 1;
 }
