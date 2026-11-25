@@ -15,7 +15,7 @@
    paragraph's three sentences are the three lines along the foot (the
    reference's three facts); the belief and the closing line sit under the
    headline, over the CTA (DESIGN.md → Copy flags).
-   Photo (2026-11-25): "Garden steps", one render (why-garden-steps.webp)
+   Photo (2026-11-25, round 3): "Meadow", one render (why-meadow.webp)
    under a deep olive shade on the right; the built wall and cut-out are gone.
    Framer: a section with a fill image, the copy stack and a 3-column row.
    ========================================================================== */
@@ -40,7 +40,7 @@
 }
 
 /* The photo (user, 2026-11-25: "i dont like that bg in here … can we use real life style image"): one
-   render filling the stage like object-fit: cover, kept on the woman (30% across); the deep olive shade
+   render filling the stage like object-fit: cover, anchored to its right edge so the group sits clear of the copy; the deep olive shade
    on the right takes the foliage down so the paper type reads (measured), and a little along the foot
    under the three lines. */
 .wlwhy__photo {
@@ -50,14 +50,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 30% 50%;
+  object-position: 100% 50%; /* anchored right: the group sits as far left as the crop allows, clear of the copy */
 }
 .wlwhy__scrim {
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(90deg, rgba(38, 43, 30, 0) 30%, rgba(38, 43, 30, 0.66) 46%, rgba(38, 43, 30, 0.84) 58%, rgba(38, 43, 30, 0.86) 100%),
+    linear-gradient(90deg, rgba(38, 43, 30, 0) 34%, rgba(38, 43, 30, 0.66) 48%, rgba(38, 43, 30, 0.84) 58%, rgba(38, 43, 30, 0.86) 100%),
     linear-gradient(0deg, rgba(38, 43, 30, 0.35) 0%, rgba(38, 43, 30, 0) 30%);
   pointer-events: none;
 }
