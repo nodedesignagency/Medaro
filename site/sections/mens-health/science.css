@@ -45,7 +45,7 @@
 /* ---------- Body: two ingredients · the ampoule · two ingredients ---------- */
 .mhsci__body {
   --gap-x: clamp(32px, 3.4vw, 64px);
-  --col-c: clamp(240px, 20vw, 380px);                  /* the ampoule's column */
+  --col-c: clamp(200px, 16vw, 340px);                  /* the ampoule's column: narrow enough that the sides hold Tadalafil's 384px measure at 1280 */
   --pack-h: clamp(500px, 44vw, 820px);                 /* the ampoule's height */
   --pack-w: calc(var(--pack-h) * 406 / 2200);          /* and width (the render's ratio) */
   --reach: calc(var(--gap-x) + (var(--col-c) - var(--pack-w)) / 2 - 18px); /* a label line's run past its column: to 18px short of the glass */
@@ -147,7 +147,7 @@
 }
 .mhsci__item--end .mhsci__curve { right: auto; left: 0; transform: scaleX(-1); }
 .mhsci__item--end.mhsci__item--low .mhsci__curve { transform: scale(-1, -1); }
-.mhsci__item.mhsci__item--end > p:not(.mhsci__label):not(.mhsci__sub) { margin-left: auto; text-align-last: right; } /* outranks the paragraph rule below */
+.mhsci__item--end > p:not(.mhsci__label) { margin-left: auto; }
 
 .mhsci__name {
   margin-top: 22px;
@@ -164,19 +164,18 @@
   line-height: 1.35;
 }
 .mhsci__item > p:not(.mhsci__label):not(.mhsci__sub) {
-  max-width: 30rem;
+  /* even text by width, not by spacing (user, 2026-11-25: "make it even by making the width small or
+     something for each points and set which is looking best"): each ingredient sets its own --measure
+     (inline on its <article>), picked by measuring every width from 240 to 480px for the most even
+     lines, from the middle of the range where its breaks hold: Sildenafil 340, Vardenafil 344,
+     Tadalafil 384 (its first sentence needs 366 to stay on one line), Apomorphine 384.
+     Normal word spacing, no hyphens. */
+  max-width: var(--measure, 30rem);
   margin-top: 10px;
   font-size: 16px;
   line-height: 1.5;
   color: var(--color-text-muted);
-  /* even text (user, 2026-11-25: "make it more even", then "make the texts more even"): justified to
-     the column on both edges, the last line on the block's own side; hyphenation keeps the spacing tight */
-  text-align: justify;
-  text-align-last: left;
-  text-wrap: pretty;            /* no single word left on a last line */
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphenate-limit-chars: 10 4 4; /* only long words break (pharmacological, effectiveness), never short ones */
+  text-wrap: balance; /* within the measure, lines of near-equal length; the same breaks across a wide range of measures */
 }
 .mhsci__sub + p { margin-top: 14px; }
 
