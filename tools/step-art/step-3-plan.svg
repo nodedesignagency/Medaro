@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- 03 Move Forward With Your Plan: fulfilled through a licensed pharmacy, a plain paper pharmacy bag, folded and sealed with an olive tab, a lime label with a cross. No branding, no pills. MEDARO illustration style: flat shapes, soft gradients, fine grain, no outlines. Round 2 (2026-11-25): replaces the box. -->
+  <!-- 03 Move Forward With Your Plan: fulfilled through a licensed pharmacy, a plain paper pharmacy bag, front-on, its folded top, side shade, olive seal tab and lime cross label all inside one rounded outline (round 3, 2026-11-25: "looks uneven with corners"). No branding, no pills. MEDARO illustration style: flat shapes, soft gradients, fine grain, no outlines. Round 2 (2026-11-25): replaces the box. -->
   <defs>
     <filter id="grain" filterUnits="userSpaceOnUse" x="0" y="0" width="512" height="512" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="7" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="matrix" values="2.2 0 0 0 -0.6  2.2 0 0 0 -0.6  2.2 0 0 0 -0.6  0 0 0 0 0.32" result="grey"/><feComposite in="grey" in2="SourceAlpha" operator="in" result="g"/><feBlend in="g" in2="SourceGraphic" mode="soft-light" result="b"/><feComposite in="b" in2="SourceAlpha" operator="in"/></filter>
     <linearGradient id="lime" x1="0" y1="0" x2="0.7" y2="1"><stop offset="0" stop-color="#dcee96"/><stop offset="0.55" stop-color="#b3cb5c"/><stop offset="1" stop-color="#7f9a3c"/></linearGradient>
@@ -11,16 +11,19 @@
     <linearGradient id="lens" x1="0" y1="0" x2="0.6" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.75"/><stop offset="1" stop-color="#f3ecd2" stop-opacity="0.55"/></linearGradient>
   </defs>
   <g filter="url(#grain)">
-    <g transform="rotate(5 256 280)">
-      <path d="M340 150 L392 172 L392 452 L340 466 Z" fill="url(#kraftside)"/>
-      <rect x="120" y="150" width="226" height="316" rx="22" fill="url(#kraft)"/>
-      <rect x="120" y="112" width="226" height="58" rx="16" fill="#e2d1a4"/>
-      <path d="M340 116 L388 136 L388 172 L340 168 Z" fill="#cdb98a"/>
-      <rect x="120" y="164" width="226" height="10" fill="#d6c494"/>
-      <rect x="213" y="92" width="40" height="96" rx="14" fill="url(#board)"/>
-      <rect x="168" y="250" width="130" height="130" rx="32" fill="url(#lime)"/>
-      <rect x="221" y="272" width="24" height="86" rx="10" fill="#fbf6e6"/>
-      <rect x="190" y="303" width="86" height="24" rx="10" fill="#fbf6e6"/>
+    <g transform="rotate(5 256 284)">
+      <!-- One outline for the whole bag: every part below is clipped to it, so all corners match -->
+      <clipPath id="bag"><rect x="136" y="104" width="240" height="360" rx="30"/></clipPath>
+      <g clip-path="url(#bag)">
+        <rect x="136" y="104" width="240" height="360" fill="url(#kraft)"/>
+        <rect x="336" y="104" width="40" height="360" fill="url(#kraftside)" opacity="0.75"/>
+        <rect x="136" y="104" width="240" height="66" fill="#e2d1a4"/>
+        <rect x="136" y="170" width="240" height="8" fill="#d2bf8e"/>
+      </g>
+      <rect x="236" y="86" width="40" height="104" rx="20" fill="url(#board)"/>
+      <rect x="191" y="252" width="130" height="130" rx="34" fill="url(#lime)"/>
+      <rect x="244" y="275" width="24" height="84" rx="12" fill="#fbf6e6"/>
+      <rect x="214" y="305" width="84" height="24" rx="12" fill="#fbf6e6"/>
     </g>
   </g>
 </svg>
