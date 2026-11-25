@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Men's Health · hero V2 (2026-11-25)
+   V1's layout and copy (after the Weight Loss hero V4) on the Men's deep
+   slate #1D2A3A: the colour the Home page turns when its Men's Health
+   section arrives. A soft cool light behind his head; paper type; the
+   Men's chip in sky blue #8CC8FF (as on Home); the lime pill, since the
+   dark pill would vanish on the slate (as on the Weight Loss page's dark
+   stages); the arc in the same dots and lit points.
+   Plate: v2-slate.webp, 2:1, the light, grain and dither baked in so the
+   gradient never bands on a Retina screen; anchored to the stage's right
+   edge like V1. The man (Home's Men's Health card portrait) stands on the
+   plate's foot, cropped by the stage, looking towards the copy.
+   ========================================================================== */
+
+.mhh2 {
+  padding: 0 var(--frame-side) var(--edge);
+}
+
+.mhh2__stage {
+  position: relative;
+  height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* fills the screen under the header, never scrolls */
+  overflow: hidden;
+  border-radius: 18px;
+  background: #1d2a3a; /* the plate's slate while it loads */
+  color: var(--p-paper);
+  container-type: size;
+  isolation: isolate;
+}
+
+/* ---------- The plate: 2:1, right edge on the stage's right edge ---------- */
+.mhh2__media {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: max(100cqw, 200cqh);
+  aspect-ratio: 2 / 1;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+.mhh2__plate {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mhh2__arc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.mhh2__path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: 0 30;
+}
+.mhh2__glow {
+  fill: url(#mhh2-glow);
+  animation: mhh2-pulse 3.6s ease-in-out var(--d, 0s) infinite;
+}
+.mhh2__point { fill: #f4f8e6; }
+@keyframes mhh2-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.95; }
+}
+
+/* The man, standing on the plate's foot (in % of the plate) */
+.mhh2__person {
+  position: absolute;
+  left: 55.5%;
+  bottom: 0;
+  width: 40.31%;
+  height: auto;
+}
+
+/* ---------- Copy: left, vertically centred ---------- */
+.mhh2__copy {
+  position: absolute;
+  left: var(--space-7);
+  top: 50%;
+  width: min(620px, 46cqw);
+  transform: translateY(-50%);
+}
+.mhh2__chip { --color-chip: #8cc8ff; } /* the Men's sky blue, as on Home; 8.2:1 on the slate */
+.mhh2__title {
+  margin-top: 20px;
+  margin-left: -0.04em; /* the T's side bearing: ink on the logo's line (measured) */
+  font-family: var(--font-display);
+  font-size: clamp(38px, min(3.3vw, 6.4cqh), 64px);
+  font-weight: var(--weight-regular);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+.mhh2__lede {
+  margin-top: clamp(22px, 3.4cqh, 30px);
+  font-size: clamp(17px, 1.25vw, 20px);
+  font-weight: var(--weight-medium);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.mhh2__text {
+  max-width: 33em;
+  text-wrap: pretty; /* no lone last word */
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(244, 245, 239, 0.8);
+}
+
+.mhh2__points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin-top: clamp(20px, 3cqh, 26px);
+}
+.mhh2__points li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: var(--weight-medium);
+  line-height: 1.4;
+}
+.mhh2__tick {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--p-accent);
+  color: var(--p-ink);
+}
+.mhh2__tick svg { width: 14px; height: 14px; }
+
+.mhh2__cta { margin-top: clamp(24px, 3.8cqh, 34px); }
+.mhh2 :focus-visible { outline-color: var(--p-accent); } /* lime ring on the slate */
