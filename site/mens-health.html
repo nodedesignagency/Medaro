@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="sections/mens-health/science.css">
   <link rel="stylesheet" href="sections/mens-health/how-it-works.css">
   <link rel="stylesheet" href="sections/mens-health/difference.css">
+  <link rel="stylesheet" href="sections/mens-health/ongoing.css">
 </head>
 <body>
   <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
@@ -41,6 +42,10 @@
     <symbol id="i-molecule" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9.1 15.4 11.05v3.9L12 16.9l-3.4-1.95v-3.9Z"/><path d="M12 9.1V6.1M15.4 14.95l2.6 1.5M8.6 14.95 6 16.45"/><circle cx="12" cy="4.4" r="1.7"/><circle cx="19.45" cy="17.3" r="1.7"/><circle cx="4.55" cy="17.3" r="1.7"/></g></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.25"/><path d="M12 7.5V12l3 2"/></g></symbol>
     <symbol id="i-brain" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.6c-.9-1.5-3.3-1.9-4.6-.4-1.9-.1-3.1 1.9-2.4 3.6-1.4.9-1.5 3.2-.1 4.2-.6 2 .9 4 2.9 3.8.6 1.7 2.9 2.2 4.2.8"/><path d="M12 5.6c.9-1.5 3.3-1.9 4.6-.4 1.9-.1 3.1 1.9 2.4 3.6 1.4.9 1.5 3.2.1 4.2.6 2-.9 4-2.9 3.8-.6 1.7-2.9 2.2-4.2.8"/><path d="M12 5.6v12"/><path d="M8.3 9.3c1.1.1 1.9.9 2 2M15.7 9.3c-1.1.1-1.9.9-2 2M7.9 14.2c1-.6 2.3-.4 3 .4M16.1 14.2c-1-.6-2.3-.4-3 .4"/></g></symbol>
+    <symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.75 3.25H5a1 1 0 0 0-1 1V9a4.5 4.5 0 0 0 9 0V4.25a1 1 0 0 0-1-1h-.75"/><path d="M8.5 13.5v1.75a4.5 4.5 0 0 0 9 0V13"/><circle cx="17.5" cy="11" r="2"/></g></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12.5h3.75l2.5-6 4.5 11 2.5-5H21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 11.75a7.75 7.75 0 0 1-11.3 6.9L4 20l1.35-4.4A7.75 7.75 0 1 1 20 11.75Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7.5h9.5M18.5 7.5H20M4 16.5h3.5M12.5 16.5H20"/><circle cx="16" cy="7.5" r="2.25"/><circle cx="10" cy="16.5" r="2.25"/></g></symbol>
   </svg>
 
   <a class="visually-hidden" href="#main">Skip to content</a>
@@ -425,6 +430,49 @@
     </section>
     <!-- SECTION:mens-health/difference END -->
 
+    <!-- SECTION:mens-health/ongoing START · styles: sections/mens-health/ongoing.css · scripts: sections/mens-health/ongoing.js · icons: #i-stethoscope, #i-pulse, #i-chat, #i-sliders in the sprite
+         The brief's "Ongoing care", after the user's screenshot of the first Weight Loss ongoing care section (2026-11-25: "make it like
+         this"; git b467fad, after hims' "Unlimited ongoing support"): a centred chip and heading, then a wide rounded stage with a phone
+         rising from its foot showing a follow-up screen; the care text left of the phone, the closing line right.
+         Copy: content/mens-health.md → Ongoing care, word for word (eyebrow as the chip). No CTA in the brief. The phone's words come
+         from the follow-up sentence; "Your provider" has no name, photo or badge. Phone UI is a stand-in built in code. -->
+    <section class="mhong" aria-labelledby="mhong-title">
+      <header class="mhong__head">
+        <p class="chip mhong__chip"><span>Personalized Medical Guidance</span></p>
+        <h2 class="mhong__title" id="mhong-title">Your Care Doesn't End<br>With a Prescription.</h2>
+      </header>
+
+      <div class="mhong__stage">
+        <div class="mhong__side">
+          <h3 class="mhong__care-title">Your sexual health deserves more than a one-time treatment.</h3>
+          <p>Appropriate follow-up care can help address questions, evaluate your response, and determine whether changes to your treatment are needed.</p>
+        </div>
+
+        <!-- Decorative: a follow-up screen built in code; its words are the client's (the sentence on the left). -->
+        <div class="mhong__phone" aria-hidden="true">
+          <div class="mhong__screen">
+            <span class="mhong__island"></span>
+            <span class="mhong__time">9:41</span>
+            <div class="mhong__ui">
+              <svg class="mhong__logo"><use href="#wordmark"/></svg>
+              <div class="mhong__from"><span class="mhong__avatar"><svg><use href="#i-stethoscope"/></svg></span>Your provider</div>
+              <p class="mhong__screen-title">Follow-up care</p>
+              <div class="mhong__rows">
+                <div class="mhong__row" style="--i: 0"><span class="mhong__row-icon"><svg><use href="#i-chat"/></svg></span>Questions</div>
+                <div class="mhong__row" style="--i: 1"><span class="mhong__row-icon"><svg><use href="#i-pulse"/></svg></span>Your response</div>
+                <div class="mhong__row" style="--i: 2"><span class="mhong__row-icon"><svg><use href="#i-sliders"/></svg></span>Changes to your treatment</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mhong__side mhong__side--end">
+          <p class="mhong__close">Because better care means looking beyond the prescription.</p>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION:mens-health/ongoing END -->
+
   </main>
 
   <script src="main.js" defer></script>
@@ -433,5 +481,6 @@
   <script src="components/pack-spin.js" defer></script>
   <script src="sections/mens-health/science.js" defer></script>
   <script src="sections/mens-health/how-it-works.js" defer></script>
+  <script src="sections/mens-health/ongoing.js" defer></script>
 </body>
 </html>

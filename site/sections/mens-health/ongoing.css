@@ -1,0 +1,219 @@
+/* ==========================================================================
+   Men's Health · Ongoing care (2026-11-25)
+   The user: "make it like this", with a screenshot of the first Weight Loss
+   ongoing care section (a centred chip and heading, then a wide rounded
+   stage with a phone rising from its foot, a follow-up screen on it; the
+   care text left of the phone, the closing lines right). Built from that
+   section (git b467fad, sections/weight-loss/ongoing.css, after hims'
+   "Unlimited ongoing support"), in the Men's colours: the chip in the Men's
+   blue, the stage the Men's slate with a cool light behind the phone, the
+   screen's rows in the Men's mist.
+   Copy: content/mens-health.md → Ongoing care, word for word. Head: the
+   eyebrow as the chip and the heading. Left of the phone: "Your sexual
+   health deserves more than a one-time treatment." as the block's title
+   and the follow-up sentence. Right: the closing line. No CTA (none in the
+   brief). The phone is UI built in code; its words come from the follow-up
+   sentence ("Follow-up care", "Questions", "Your response", "Changes to
+   your treatment"), "Your provider" with no name, photo or badge.
+   Motion: the three rows come in one after another when the stage reaches
+   the screen (ongoing.js adds .is-in); reduced motion: they're just there.
+   Framer: a section; the phone as one component (bezel + screen stack).
+   ========================================================================== */
+
+.mhong {
+  container-type: inline-size; /* 100cqw = the frame's width, for the stage's height */
+  padding: var(--space-6) var(--frame-side) var(--space-9);
+  color: var(--color-ink);
+}
+
+/* ---------- Header: centred, like hims ---------- */
+.mhong__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.mhong__chip { --color-chip: #0a6fc7; } /* the Men's blue on the page colour: 4.5:1 */
+.mhong__title {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.6vw, 68px); /* the page's section heading */
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+/* ---------- The stage ---------- */
+.mhong__stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  height: clamp(540px, min(calc(100cqw / 2.3), calc(100svh - 70px - 32px)), 860px);
+  margin-top: clamp(40px, 3.6vw, 64px);
+  overflow: hidden;
+  border-radius: 18px;
+  background: /* the Men's slate (hero V2, Home's Men's scene) with a cool light behind the phone; Weight Loss: deep olive */
+    radial-gradient(38% 70% at 50% 34%, rgba(140, 200, 255, 0.16) 0%, rgba(140, 200, 255, 0) 72%),
+    radial-gradient(120% 100% at 50% 0%, #34465c 0%, #243447 52%, #172230 100%);
+  color: var(--color-on-dark);
+  container-type: size;
+  isolation: isolate;
+}
+
+/* ---------- Beside the phone ---------- */
+.mhong__side {
+  width: min(100%, 34cqw, calc(26em + 2 * var(--space-7))); /* grows with the stage up to a comfortable line length */
+  padding-inline: var(--space-7);
+}
+.mhong__side--end {
+  justify-self: end;
+  text-align: left;
+}
+.mhong__care-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 1.8vw, 32px);
+  font-weight: var(--weight-medium);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-on-dark);
+  text-wrap: balance;
+}
+.mhong__side p {
+  margin-top: 14px;
+  font-size: clamp(15px, 1.12vw, 18px);
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--p-paper) 84%, transparent);
+  text-wrap: pretty;
+}
+.mhong__side .mhong__close { /* the brief's closing line, alone on the right (the brief has no CTA here) */
+  margin-top: 0;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.6vw, 28px);
+  font-weight: var(--weight-regular);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--color-on-dark);
+  text-wrap: balance;
+}
+
+/* ---------- The phone: rises from the stage's foot, cropped by it ---------- */
+.mhong__phone {
+  --w: 50cqh;                       /* scales with the stage's height */
+  align-self: start;
+  width: var(--w);
+  aspect-ratio: 0.47;
+  margin-top: 13cqh;
+  padding: calc(var(--w) * 0.032);
+  border-radius: calc(var(--w) * 0.15);
+  background: #121a24;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 2px 4px rgba(0, 0, 0, 0.18),
+    0 40px 80px -24px rgba(0, 0, 0, 0.55);
+  /* the foot of the phone dissolves into the stage, like hims' (a gradient, never an image mask) */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0 72%, rgba(0, 0, 0, 0.35) 88%, transparent 94%);
+          mask-image: linear-gradient(to bottom, #000 0 72%, rgba(0, 0, 0, 0.35) 88%, transparent 94%);
+}
+.mhong__screen {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: calc(var(--w) * 0.12);
+  background: #fff;
+  color: var(--color-ink);
+  container-type: inline-size;     /* the UI below is sized in the screen's width */
+}
+.mhong__island {
+  position: absolute;
+  top: 3.6cqi;
+  left: 50%;
+  width: 31cqi;
+  height: 9cqi;
+  border-radius: 99px;
+  background: #121a24;
+  transform: translateX(-50%);
+}
+.mhong__time {
+  position: absolute;
+  top: 5.6cqi;
+  left: 9cqi;
+  font-size: 4.6cqi;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.01em;
+}
+.mhong__ui {
+  padding: 21cqi 7.5cqi 0;
+}
+.mhong__logo {
+  display: block;
+  height: 5cqi;
+  width: auto;
+  aspect-ratio: 4413 / 712;
+  color: var(--color-ink);
+}
+.mhong__from {
+  display: flex;
+  align-items: center;
+  gap: 3.2cqi;
+  margin-top: 9cqi;
+  padding-bottom: 5.5cqi;
+  border-bottom: 1px solid var(--color-line);
+  font-size: 4.8cqi;
+  color: var(--color-text-muted);
+}
+.mhong__avatar {
+  display: grid;
+  place-items: center;
+  width: 11.5cqi;
+  height: 11.5cqi;
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+.mhong__avatar svg { width: 6.6cqi; height: 6.6cqi; color: var(--color-ink); }
+.mhong__screen-title {
+  margin-top: 7.5cqi;
+  font-size: 10.4cqi;
+  font-weight: var(--weight-medium);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+.mhong__rows {
+  display: grid;
+  gap: 3cqi;
+  margin-top: 7cqi;
+}
+.mhong__row {
+  display: flex;
+  align-items: center;
+  gap: 4cqi;
+  padding: 4.2cqi;
+  border-radius: 5cqi;
+  background: var(--color-surface);
+  font-size: 5.4cqi;
+  font-weight: var(--weight-medium);
+  line-height: 1.25;
+}
+.mhong__row-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 12.5cqi;
+  height: 12.5cqi;
+  border-radius: 50%;
+  background: var(--p-accent);
+}
+.mhong__row-icon svg { width: 7cqi; height: 7cqi; color: var(--p-ink); }
+
+/* The rows come in one after another (ongoing.js) */
+.mhong.is-armed .mhong__row {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 520ms var(--ease-out), transform 520ms var(--ease-out);
+  transition-delay: calc(var(--i) * 220ms + 200ms);
+}
+.mhong.is-armed.is-in .mhong__row { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .mhong.is-armed .mhong__row { opacity: 1; transform: none; transition: none; }
+}
+
