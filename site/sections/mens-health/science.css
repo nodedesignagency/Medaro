@@ -8,8 +8,9 @@
    page colour, not in a card. Mobbin: Graza's olive and David's bar
    (callouts set around one product).
    Ours: the page's section heading and chip; the ingredients two each side
-   on the content inset (the logo's line, 64px at 1440), the left pair's
-   rules running in towards the ampoule; lime icon circles like the Weight
+   on the content inset (the logo's line, 64px at 1440), the right pair
+   mirrored, every label's dotted line running to the ampoule and ending in
+   the reference's curve (round 2); lime icon circles like the Weight
    Loss care rows; the Men's blue for the labels and rules; our Quad 4
    ampoule in the hand's blue (tools/blue-ampoule.py), its white print
    turning (components/pack-spin.js, data-pack-spin-auto), a soft shadow
@@ -44,8 +45,12 @@
 /* ---------- Body: two ingredients · the ampoule · two ingredients ---------- */
 .mhsci__body {
   --gap-x: clamp(32px, 3.4vw, 64px);
+  --col-c: clamp(240px, 20vw, 380px);                  /* the ampoule's column */
+  --pack-h: clamp(500px, 44vw, 820px);                 /* the ampoule's height */
+  --pack-w: calc(var(--pack-h) * 406 / 2200);          /* and width (the render's ratio) */
+  --reach: calc(var(--gap-x) + (var(--col-c) - var(--pack-w)) / 2 - 18px); /* a label line's run past its column: to 18px short of the glass */
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(240px, 20vw, 380px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) var(--col-c) minmax(0, 1fr);
   grid-template-rows: auto auto;
   gap: clamp(48px, 4.4vw, 84px) var(--gap-x);
   align-items: start;
@@ -69,9 +74,12 @@
 }
 .mhsci__icon svg { width: 24px; height: 24px; }
 
-/* The label runs into a dotted rule in the Men's blue. The left pair's rules
-   carry on across the gap towards the ampoule; the right pair's stop at the
-   frame's inset. */
+/* The label runs into a dotted line in the Men's blue that carries on to the
+   ampoule and ends in the Nervana reference's curve (user, 2026-11-25: "it
+   should be as if the bottle is the product and we are showing its
+   feature"): above the ampoule's middle it bends down, below it up; the
+   right pair is mirrored. The straight part is CSS dots; the curve, an SVG
+   on the line's end, dots by dasharray, trailing off. */
 .mhsci__label {
   display: flex;
   align-items: center;
@@ -84,21 +92,57 @@
   text-transform: uppercase;
   color: var(--mhsci-blue);
 }
-.mhsci__label span {
+.mhsci__label-text {
   flex: none;
-  text-box: trim-both cap alphabetic; /* the box is the capitals, so the rule sits on their middle */
+  text-box: trim-both cap alphabetic; /* the box is the capitals, so the line sits on their middle */
 }
-.mhsci__label::after {
-  content: "";
+.mhsci__lead {
+  --curve-w: 80px;
+  position: relative;
   flex: 1 1 auto;
   height: 2px;
-  background: radial-gradient(circle, currentColor 0.9px, transparent 1.2px) 0 50% / 7px 2px repeat-x;
-  opacity: 0.55;
+  margin-right: calc(-1 * var(--reach)); /* across the gap, to just short of the glass */
+  padding-right: var(--curve-w);
+  background: radial-gradient(circle, currentColor 0.9px, transparent 1.2px) 100% 50% / 7px 2px repeat-x; /* dots counted from the curve's end, so they run on into it 7px apart */
+  background-clip: content-box;
+  background-origin: content-box;
+  opacity: 0.6;
 }
-.mhsci__item--power .mhsci__label::after,
-.mhsci__item--speed .mhsci__label::after {
-  margin-right: calc(-1 * var(--gap-x) + 12px); /* across the gap, 12px short of the ampoule's column */
+.mhsci__curve {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--curve-w);
+  height: 24px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 0 7;
+  transform-origin: 50% 1px; /* turns about the line, so flipped curves still start on it */
+  -webkit-mask-image: linear-gradient(to right, #000 30%, rgba(0, 0, 0, 0.2)); /* a gradient, not an image file: fine from file:// */
+  mask-image: linear-gradient(to right, #000 30%, rgba(0, 0, 0, 0.2));
 }
+
+/* below the ampoule's middle: the curve bends up */
+.mhsci__item--low .mhsci__curve { transform: scaleY(-1); }
+
+/* the right pair, mirrored: aligned to the frame's right edge, the line runs
+   left to the ampoule */
+.mhsci__item--end { text-align: right; }
+.mhsci__item--end .mhsci__icon { margin-left: auto; }
+.mhsci__item--end .mhsci__label { flex-direction: row-reverse; }
+.mhsci__item--end .mhsci__lead {
+  margin-right: 0;
+  margin-left: calc(-1 * var(--reach));
+  padding-right: 0;
+  padding-left: var(--curve-w);
+  background-position: 0 50%;
+}
+.mhsci__item--end .mhsci__curve { right: auto; left: 0; transform: scaleX(-1); }
+.mhsci__item--end.mhsci__item--low .mhsci__curve { transform: scale(-1, -1); }
+.mhsci__item--end > p:not(.mhsci__label) { margin-left: auto; }
 
 .mhsci__name {
   margin-top: 22px;
@@ -133,7 +177,7 @@
   padding-bottom: 40px; /* room for its shadow */
 }
 .mhsci__pack {
-  height: clamp(500px, 44vw, 820px);
+  height: var(--pack-h);
   filter: drop-shadow(0 18px 22px rgba(29, 42, 58, 0.12));
 }
 /* a soft shadow on the "floor", a little under its base: it floats */
