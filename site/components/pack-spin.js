@@ -18,7 +18,10 @@
    full turn while it is pinned, front to front; otherwise one full turn
    while the section crosses the screen, facing front when it is centred.
    Hand: drag it sideways, it follows the finger and coasts to a stop. Reduced motion: it faces front
-   and only turns when dragged. No WebGL, no script, or a lost context: the
+   and only turns when dragged.
+   On its own (data-pack-spin-auto="<seconds per turn>"): it turns continuously while on screen,
+   whatever the scroll, and holds still while the pointer rests on it (and under reduced motion);
+   drags still turn it. No WebGL, no script, or a lost context: the
    approved static print (.pack-spin__still) shows instead.
    The print is drawn from path data (no image files), so the WebGL texture
    works from file:// too.
@@ -153,6 +156,9 @@
     // ---------- state ----------
     const scope = root.closest('[data-pack-spin-scope]') || root.closest('section') || root;
     const sticky = scope.querySelector('[data-pack-spin-sticky]');
+    const auto = parseFloat(root.dataset.packSpinAuto) || 0;   // seconds per turn, turning on its own
+    let autoPhi = 0;        // what turning on its own added
+    let resting = false;    // the pointer rests on it: hold still
     let shown = 0;          // the turn on screen
     let scrollPhi = 0;      // where scrolling wants it
     let dragPhi = 0;        // what dragging and coasting added
@@ -172,7 +178,7 @@
     // Pinned (a [data-pack-spin-sticky] block inside the scope): one turn while the block is held,
     // front to front. Otherwise: one turn while the scope crosses the screen, front when centred.
     function readScroll() {
-      if (reduce.matches) { scrollPhi = 0; return; }
+      if (reduce.matches || auto) { scrollPhi = 0; return; }
       const r = scope.getBoundingClientRect();
       if (sticky && getComputedStyle(sticky).position === 'sticky') {
         const top = parseFloat(getComputedStyle(sticky).top) || 0;
@@ -205,12 +211,14 @@
         vel *= Math.exp(-dt / 380);
         if (Math.abs(vel) < 0.00002 || reduce.matches) vel = 0;
       }
-      const target = scrollPhi + dragPhi;
+      const spinning = auto && !dragging && !resting && !reduce.matches;
+      if (spinning) autoPhi += dt * 2 * Math.PI / (auto * 1000);
+      const target = scrollPhi + dragPhi + autoPhi;
       // scroll moves arrive eased (wheel steps read as a smooth turn); drags follow the finger
       shown += (target - shown) * (dragging ? 1 : 1 - Math.exp(-dt / 110));
       if (Math.abs(target - shown) < 0.0004) shown = target;
       if (shown !== drawn) draw(shown);
-      if (visible && (dragging || vel || shown !== target)) queue();
+      if (visible && (dragging || vel || spinning || shown !== target)) queue();
       else prev = 0;
     }
 
@@ -228,6 +236,8 @@
     // radians per CSS pixel of drag: the surface under the finger moves with it
     const radPerPx = () => 1 / (root.clientWidth * cyl.r / size[0]);
 
+    root.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') resting = true; });
+    root.addEventListener('pointerleave', () => { resting = false; queue(); });
     root.addEventListener('pointerdown', (e) => {
       if (e.button !== 0) return;
       dragging = true; vel = 0;

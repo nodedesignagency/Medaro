@@ -432,6 +432,11 @@ if __name__ == "__main__":
         # top and foot down the axis with a margin, so the texture holds only what is printed
         "label-ampoule-quad4-ink.js": label_js("ampoule-quad4-ink", ampoule(ink=True, flat=True), AMPOULE,
                                                (406, 2200), (1130, 2140), "Quad 4 ampoule: print on glass (ink), flat"),
+        # the blue Quad 4 ampoule on its own, turning (Men's Health landing → The science behind Quad 4):
+        # the white print, flat, screened onto ampoule-quad4-blue.webp (tools/blue-ampoule.py) like the hand's;
+        # its still fallback is print-ampoule-quad4.svg
+        "label-ampoule-quad4.js": label_js("ampoule-quad4", ampoule(flat=True), AMPOULE, (406, 2200), (1130, 2140),
+                                           "Quad 4 ampoule: print on glass (white), flat", back=0.3, fade=[0.72, 0.9]),
         # the Quad 4 ampoule in the hand (Men's Health landing): the white print, screened onto the blue glass
         "print-hand-ampoule-quad4.svg": hand_ampoule_print(),
         "label-hand-ampoule-quad4.js": label_js(
