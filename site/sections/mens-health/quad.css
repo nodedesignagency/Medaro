@@ -31,6 +31,20 @@
   overflow: hidden; /* the forearm runs out of the screen's foot */
   text-align: center;
 }
+/* The forearm fades into the page at the screen's foot, so when the section
+   moves on (and the cards come up under it) the hand never ends on a hard
+   cut. Under the sentence and the button (z-index 2). */
+.mhquad__pin::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  height: clamp(72px, 11svh, 140px);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--color-bg) 0%, transparent), var(--color-bg) 92%);
+  pointer-events: none;
+}
 @media (prefers-reduced-motion: reduce) {
   .mhquad { height: auto; }
   .mhquad__pin { position: relative; top: 0; }
