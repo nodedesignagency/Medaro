@@ -58,9 +58,24 @@
   --color-text-muted: color-mix(in srgb, var(--p-paper) 74%, var(--p-ink));
   --color-line: color-mix(in srgb, var(--p-paper) 18%, transparent);
 }
-:root[data-scene="wl-steps"] .wlsteps__chip { --color-chip: var(--p-accent); } /* lime on the dark panel, like Why MEDARO's */
-:root[data-scene="wl-steps"] .btn--dark { --btn-bg: var(--p-accent); color: var(--p-ink); }
-:root[data-scene="wl-steps"] .btn--dark:hover { --btn-bg: var(--p-accent-hover); }
+:root[data-scene="wl-steps"]:not([data-stepsbg="lime"]) .wlsteps__chip { --color-chip: var(--p-accent); } /* lime on the dark panel, like Why MEDARO's */
+:root[data-scene="wl-steps"]:not([data-stepsbg="lime"]) .btn--dark { --btn-bg: var(--p-accent); color: var(--p-ink); }
+:root[data-scene="wl-steps"]:not([data-stepsbg="lime"]) .btn--dark:hover { --btn-bg: var(--p-accent-hover); }
+
+/* Option to compare (user, 2026-11-25: "can you try this color we have in button as bg i want to compare
+   both"): ?stepsbg=lime (review switcher → stepsbg) turns the page the lime button's colour instead.
+   Ink stays ink (8.6:1 on lime), the panel a paler lime, the chip keeps its leaf green (5.3:1 on the
+   panel), the dark pills stay dark, and the care icons' circles turn white (lime would vanish on lime).
+   Default: ?stepsbg=green. */
+:root[data-scene="wl-steps"][data-stepsbg="lime"] {
+  --color-bg: var(--p-accent);                                           /* #d5e5ad, the lime button */
+  --color-surface: color-mix(in srgb, var(--p-accent) 50%, var(--p-paper)); /* the panel, a paler lime */
+  --color-ink: var(--p-ink);
+  --color-text: var(--p-ink);
+  --color-text-muted: var(--p-ink-soft);                                 /* 5.1:1 on the panel */
+  --color-line: color-mix(in srgb, var(--p-ink) 16%, transparent);
+}
+:root[data-scene="wl-steps"][data-stepsbg="lime"] .wlsteps__care-icon { background: #fff; }
 
 .wlsteps__track {
   --header: 70px;                                                /* the landing header (compact) */
