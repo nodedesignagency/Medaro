@@ -1,0 +1,83 @@
+/* ==========================================================================
+   Men's Health · Introducing Quad 4 (2026-11-25)
+   After the user's Good Life reference ("The Good Life Difference"): on the
+   page colour, a huge headline centred in two lines, one pack centred under
+   it, tilted about 19° clockwise (measured from the reference), the button
+   centred over the pack's foot. Ours: the chip above, the client's sentence
+   under the headline, our Quad 4 ampoule (exactly as on Home and in the
+   menu, its ink print), turning on its axis with scroll and by hand
+   (components/pack-spin.js, after the user's recording).
+   Frame: the headline stays inside the content inset (the frame + 48px).
+   ========================================================================== */
+
+/* The section pins under the sticky header for about one screen of scroll
+   while the ampoule makes one full turn (components/pack-spin.js reads the
+   progress), then the page moves on. Reduced motion: no pin, no turn. */
+.mhquad {
+  --screen: min(1200px, max(640px, calc(100svh - 70px))); /* one screen under the 70px header */
+  --pin: 110svh;                                           /* the scroll that turns it once */
+  position: relative;
+  height: calc(var(--screen) + var(--pin));
+  color: var(--color-ink);
+}
+.mhquad__pin {
+  position: sticky;
+  top: 70px; /* under the header */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: var(--screen);
+  padding: clamp(52px, 4.6vw, 96px) calc(var(--frame-side) + var(--space-7)) clamp(36px, 3vw, 60px);
+  text-align: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mhquad { height: auto; }
+  .mhquad__pin { position: relative; top: 0; }
+}
+
+.mhquad__chip { --color-chip: #0a6fc7; } /* the Men's sky blue, deep enough for paper: 4.7:1 (Components → Chip) */
+
+/* The reference's headline: very large, tight, two centred lines */
+.mhquad__title {
+  margin-top: 28px;
+  font-family: var(--font-display);
+  font-size: clamp(56px, min(5.9vw, 9.6svh), 112px); /* also capped by the window's height, so the pack keeps its room */
+  font-weight: var(--weight-regular);
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.mhquad__text {
+  max-width: 35em;
+  margin-top: clamp(22px, 2vw, 32px);
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+/* The pack: centred, tilted like the reference, as long as the room left
+   under the copy allows (the tilted ampoule is 1.006 × its length tall). */
+.mhquad__stage {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 300px;
+  margin-top: clamp(24px, 2.4vw, 44px);
+  container-type: size;
+}
+.mhquad__pack {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 99cqh;
+  transform: translate(-50%, -50%) rotate(19deg);
+}
+
+/* The reference's button: centred, over the pack's foot */
+.mhquad__cta {
+  position: relative;
+  z-index: 1;
+  margin-top: -40px;
+}
