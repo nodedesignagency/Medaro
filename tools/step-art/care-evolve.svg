@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Care row "Receive care as your needs evolve": a lime heart inside a turning arrow (care that keeps going and changes with you). MEDARO illustration style: flat shapes, soft gradients, fine grain, no outlines. -->
+  <defs>
+    <filter id="grain" filterUnits="userSpaceOnUse" x="0" y="0" width="512" height="512" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="7" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="matrix" values="2.2 0 0 0 -0.6  2.2 0 0 0 -0.6  2.2 0 0 0 -0.6  0 0 0 0 0.32" result="grey"/><feComposite in="grey" in2="SourceAlpha" operator="in" result="g"/><feBlend in="g" in2="SourceGraphic" mode="soft-light" result="b"/><feComposite in="b" in2="SourceAlpha" operator="in"/></filter>
+    <linearGradient id="lime" x1="0" y1="0" x2="0.7" y2="1"><stop offset="0" stop-color="#dcee96"/><stop offset="0.55" stop-color="#b3cb5c"/><stop offset="1" stop-color="#7f9a3c"/></linearGradient>
+    <linearGradient id="board" x1="0.1" y1="0" x2="0.8" y2="1"><stop offset="0" stop-color="#a6ae8a"/><stop offset="0.5" stop-color="#717c55"/><stop offset="1" stop-color="#4b5535"/></linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#fbf6e6"/><stop offset="1" stop-color="#e9ddba"/></linearGradient>
+    <linearGradient id="clip" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#d9ec90"/><stop offset="1" stop-color="#8ea948"/></linearGradient>
+  </defs>
+  <g filter="url(#grain)">
+    <path d="M334.9 113.7 A168 168 0 1 1 152.6 129.6" fill="none" stroke="url(#board)" stroke-width="38" stroke-linecap="round"/>
+    <path d="M188.8 101.3 L123.2 101.8 L172.5 164.8 Z" fill="#5c6742" stroke="#5c6742" stroke-width="10" stroke-linejoin="round"/>
+    <path d="M256 360 C202 322 154 286 154 236 C154 204 178 182 207 182 C229 182 246 194 256 212 C266 194 283 182 305 182 C334 182 358 204 358 236 C358 286 310 322 256 360 Z" fill="url(#lime)"/>
+  </g>
+</svg>

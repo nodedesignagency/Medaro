@@ -1,11 +1,10 @@
 /* ==========================================================================
    Weight Loss · the MEDARO difference (under hero V4)
    After the user's Superpower "How it works" reference: a centred heading
-   and subline, then four square image cards in a row, each with a small
-   dark glass badge top left and, on three, a frosted glass card of plain
+   and subline, then four square image cards in a row, on three a frosted glass card of plain
    words over the photo; a title and a short text under each image.
    Ours: chip, heading (Host Grotesk 400 like the hero), the client's
-   sentence; the badges carry icons, not numbers (these are not steps); the
+   sentence; no badges on the photos (removed, user 2026-11-25: "lets remove those icons"); the
    glass rows use neutral dots, not ticks (nothing here is a result).
    Frame: the cards span the frame (16px edges, max 1888) like the cards
    and panel above; 16px apart; images radius 12.
@@ -95,23 +94,6 @@
 .wldiff__pill--white { width: 16%; left: 13%; top: 24%; transform: rotate(-12deg); }   /* left of the vial's shoulder */
 .wldiff__pill--oval { width: 22%; right: 10%; bottom: 17%; transform: rotate(16deg); } /* right of the vial's foot */
 
-/* The badge: a small dark glass square, top left (Superpower's number tile) */
-.wldiff__badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  color: #fff;
-  background: rgba(38, 43, 30, 0.45);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
-}
-.wldiff__badge svg { width: 18px; height: 18px; }
 
 /* The glass card of plain words over the photo */
 .wldiff__glass {

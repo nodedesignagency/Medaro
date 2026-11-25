@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-palettes="a" data-options="stepsbg:green,lime">
+<html lang="en" data-palettes="a">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -43,10 +43,6 @@
     <symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.75 3.25H5a1 1 0 0 0-1 1V9a4.5 4.5 0 0 0 9 0V4.25a1 1 0 0 0-1-1h-.75"/><path d="M8.5 13.5v1.75a4.5 4.5 0 0 0 9 0V13"/><circle cx="17.5" cy="11" r="2"/></g></symbol>
     <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.75"/><circle cx="12" cy="12" r="1.1"/></g></symbol>
     <symbol id="i-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
-    <!-- Difference section badges (line icons from Home's sprite) -->
-    <symbol id="i-plan" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
-    <symbol id="i-flask" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M10.5 3v6L5.2 18.2A1.9 1.9 0 0 0 6.9 21h10.2a1.9 1.9 0 0 0 1.7-2.8L13.5 9V3"/><path d="M7.6 15h8.8"/></g></symbol>
-    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.75" cy="10.75" r="6.5"/><path d="m15.5 15.5 5 5"/></g></symbol>
     <!-- GLP-1 education cards: fine line icons like the reference's (stroke 1.2 on 24 → 1.6px at 32px) -->
     <symbol id="i-edu-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
     <symbol id="i-edu-clipboard" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
@@ -343,7 +339,7 @@
            Copy: content/weight-loss.md, word for word, re-arranged: header = the Medaro difference (eyebrow, heading, sentence);
            cards = the treatment block. Cards 3 and 4 have no heading in the brief: their titles are cut from their own sentences
            ("appetite and feelings of fullness", "FDA-approved prescription options"; DESIGN.md → Copy flags). The block's eyebrow
-           "Treatment that starts with you" is not shown (flagged). Badges are icons, not Superpower's 1–4: these are not steps.
+           "Treatment that starts with you" is not shown (flagged). Badges removed (user, 2026-11-25: "lets remove those icons").
            Glass cards use only the copy's own words; no data, no results. [LINK NEEDED] intake URL. Images: stand-ins (data-brief). -->
       <section class="wldiff" aria-labelledby="wldiff-title">
         <header class="wldiff__head">
@@ -356,7 +352,6 @@
           <li class="wldiff__card">
             <div class="wldiff__media wldiff__media--sage media-brief" aria-hidden="true" data-brief="Portrait: an adult in a quiet, thoughtful moment, soft side light, sage backdrop, everyday clothes.">
               <img class="wldiff__portrait" src="assets/images/people/woman-a.webp" alt="" width="1000" height="1020" loading="lazy">
-              <span class="wldiff__badge"><svg><use href="#i-plan"/></svg></span>
               <div class="wldiff__glass">
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Medical history</span>
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Health goals</span>
@@ -372,7 +367,6 @@
               <span class="pack pack--vial wldiff__vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100" loading="lazy"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100" loading="lazy"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100" loading="lazy"></span>
               <img class="wldiff__pill wldiff__pill--white" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy">
               <img class="wldiff__pill wldiff__pill--oval" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy">
-              <span class="wldiff__badge"><svg><use href="#i-vial"/></svg></span>
             </div>
             <h3 class="wldiff__card-title">GLP-1 Weight-Loss Medications</h3>
             <p class="wldiff__card-text">Medical treatment. Individualized decisions.</p>
@@ -380,7 +374,6 @@
           <li class="wldiff__card">
             <div class="wldiff__media media-brief" aria-hidden="true" data-brief="Lifestyle: an adult outdoors in warm light, relaxed and active, olive/cream palette. No food scales, no measuring tapes, no before/after.">
               <img class="wldiff__photo" src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" loading="lazy" style="object-position: 50% 20%">
-              <span class="wldiff__badge"><svg><use href="#i-flask"/></svg></span>
               <div class="wldiff__glass">
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Appetite</span>
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Feelings of fullness</span>
@@ -392,7 +385,6 @@
           <li class="wldiff__card">
             <div class="wldiff__media media-brief" aria-hidden="true" data-brief="Lifestyle: two adults outdoors, calm and confident, sage sky, olive/cream palette. No before/after.">
               <img class="wldiff__photo" src="assets/images/weight-loss/standin-stretch.webp" alt="" width="3840" height="2143" loading="lazy" style="object-position: 55% 40%">
-              <span class="wldiff__badge"><svg><use href="#i-search"/></svg></span>
               <div class="wldiff__glass">
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Semaglutide-based treatments</span>
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Tirzepatide-based treatments</span>
@@ -410,7 +402,7 @@
       </section>
       <!-- SECTION:weight-loss/difference END -->
 
-      <!-- SECTION:weight-loss/steps START · styles: sections/weight-loss/steps.css · scripts: sections/weight-loss/steps.js · assets: assets/icons/step-1-assessment.webp, step-2-evaluation.webp, step-3-plan.webp (sources: tools/step-art/)
+      <!-- SECTION:weight-loss/steps START · styles: sections/weight-loss/steps.css · scripts: sections/weight-loss/steps.js · assets: assets/icons/step-1-assessment.webp, step-2-evaluation.webp, step-3-plan.webp, care-ask.webp, care-progress.webp, care-evolve.webp (sources: tools/step-art/)
            The brief's "Three steps", laid out after the user's "Our Process" reference (2026-11-24: "make this section like this but i
            dont want this style of icon it should be like ours … make it with sticky left and scroll right animation"): a panel with the
            chip and heading top left and the CTA bottom left; on the right one card per step. The panel pins while you scroll: the left
@@ -432,9 +424,9 @@
               <div class="wlsteps__care">
                 <h3 class="wlsteps__care-title">Your Care Doesn't End With a Prescription.</h3>
                 <ul class="wlsteps__care-list">
-                  <li><span class="wlsteps__care-icon" aria-hidden="true"><svg><use href="#i-chat"/></svg></span>Ask questions</li>
-                  <li><span class="wlsteps__care-icon" aria-hidden="true"><svg><use href="#i-pulse"/></svg></span>Discuss your progress</li>
-                  <li><span class="wlsteps__care-icon" aria-hidden="true"><svg><use href="#i-sliders"/></svg></span>Receive care as your needs evolve</li>
+                  <li><img class="wlsteps__care-icon" src="assets/icons/care-ask.webp" alt="" width="768" height="768" loading="lazy">Ask questions</li>
+                  <li><img class="wlsteps__care-icon" src="assets/icons/care-progress.webp" alt="" width="768" height="768" loading="lazy">Discuss your progress</li>
+                  <li><img class="wlsteps__care-icon" src="assets/icons/care-evolve.webp" alt="" width="768" height="768" loading="lazy">Receive care as your needs evolve</li>
                 </ul>
               </div>
               <div class="wlsteps__foot">
