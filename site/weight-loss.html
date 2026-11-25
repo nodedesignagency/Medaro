@@ -27,7 +27,8 @@
   <link rel="stylesheet" href="sections/weight-loss/why--v1.css">
   <link rel="stylesheet" href="sections/weight-loss/why--v2.css">
   <link rel="stylesheet" href="sections/weight-loss/education.css">
-  <link rel="stylesheet" href="sections/weight-loss/ongoing.css">
+  <link rel="stylesheet" href="sections/weight-loss/ongoing--v1.css">
+  <link rel="stylesheet" href="sections/weight-loss/ongoing--v2.css">
 </head>
 <body>
   <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
@@ -577,53 +578,73 @@
       </section>
       <!-- SECTION:weight-loss/education END -->
 
-      <!-- SECTION:weight-loss/ongoing START · styles: sections/weight-loss/ongoing.css · scripts: sections/weight-loss/ongoing.js · icons: #i-stethoscope, #i-pulse, #i-chat, #i-sliders in the sprite
-           The brief's "Ongoing care", after hims' "Unlimited ongoing support" (Mobbin; the user, 2026-11-24: "make this section with the
-           help of mobbin"): a centred heading and one sentence, then a wide rounded stage with a phone rising from its foot, the screen
-           showing a message from the provider. Not copied: hims' two-tone heading, the doctor's name, photo and MD badge, the patient's
-           name and the message text (all invented for us). The phone carries only the client's words: "Follow-up care", "Your provider",
-           and the three things the follow-up sentence names. Beside the phone: the care block (left), the closing lines and the CTA (right).
-           Copy: content/weight-loss.md → Ongoing care, word for word (eyebrow as the chip; the heading in title case). The h3
-           repeats the steps section's (DESIGN.md → Copy flags). [LINK NEEDED] intake URL. Phone UI is a stand-in built in code. -->
-      <section class="wlong" aria-labelledby="wlong-title">
-        <header class="wlong__head">
-          <p class="chip wlong__chip"><span>Ongoing care</span></p>
-          <h2 class="wlong__title" id="wlong-title">Support Beyond<br>the First Step</h2>
-          <p class="wlong__lede">Weight management is an ongoing process, and your needs may change along the way.</p>
-        </header>
+      <!-- ===== Ongoing care: two versions (?ongoing=v1|v2); round 1 (the phone) is in git history ===== -->
+      <div data-version="ongoing:v1">
+        <!-- SECTION:weight-loss/ongoing--v1 START · styles: sections/weight-loss/ongoing--v1.css · icons: #i-target, #i-pulse, #i-chat, #i-sliders in the sprite
+             The brief's "Ongoing care", round 2, V1 (user, 2026-11-25: "i dont like it … why there is phone … make 2 versions"; after
+             their circle reference and Mobbin's Rox "revenue cycle"): follow-up care as a loop, four points on a ring, the heading in
+             the middle, a dot travelling round. Copy from content/weight-loss.md, rephrased with the user's OK (DESIGN.md → Copy flags).
+             [LINK NEEDED] intake URL. -->
+        <section class="wlong1" aria-labelledby="wlong1-title">
+          <div class="wlong1__stage">
+            <div class="wlong1__ring" aria-hidden="true"></div>
+            <div class="wlong1__orbit" aria-hidden="true"></div>
 
-        <div class="wlong__stage">
-          <div class="wlong__side">
-            <h3 class="wlong__care-title">Your Care Doesn't End With a Prescription.</h3>
-            <p>Follow-up care can help your provider evaluate your response to treatment, discuss side effects, and determine whether adjustments are appropriate.</p>
+            <ul class="wlong1__points">
+              <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-target"/></svg></span>
+                <div class="wlong1__label"><h3 class="wlong1__name">Follow-up care</h3><p>Weight management is an ongoing process, and your needs may change along the way.</p></div></li>
+              <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-pulse"/></svg></span>
+                <div class="wlong1__label"><h3 class="wlong1__name">Your response</h3><p>Your provider can evaluate your response to treatment.</p></div></li>
+              <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-chat"/></svg></span>
+                <div class="wlong1__label"><h3 class="wlong1__name">Side effects</h3><p>Discuss any side effects with your provider.</p></div></li>
+              <li class="wlong1__point"><span class="wlong1__node" aria-hidden="true"><svg><use href="#i-sliders"/></svg></span>
+                <div class="wlong1__label"><h3 class="wlong1__name">Adjustments</h3><p>Your provider can determine whether adjustments are appropriate.</p></div></li>
+            </ul>
+
+            <div class="wlong1__core">
+              <p class="chip wlong1__chip"><span>Ongoing care</span></p>
+              <h2 class="wlong1__title" id="wlong1-title">Support Beyond<br>the First Step</h2>
+              <p class="wlong1__lede">Because the right treatment plan isn't just about getting started. It's about knowing how to move forward.</p>
+              <a class="btn btn--dark btn--pill btn--l wlong1__cta" href="#intake-weight-loss">Start Your Assessment</a>
+            </div>
           </div>
+        </section>
+        <!-- SECTION:weight-loss/ongoing--v1 END -->
+      </div>
+      <div data-version="ongoing:v2">
+        <!-- SECTION:weight-loss/ongoing--v2 START · styles: sections/weight-loss/ongoing--v2.css · assets: assets/images/people/woman-a.webp
+             V2 (2026-11-25), after the user's Quantum Body reference and Mobbin's Biograph "A private retreat": a deep olive stage, a
+             centred statement joining the brief's two headings, then a portrait card (stand-in) beside the follow-up paragraph, a small
+             line drawing of a loop with three points, the closing lines and the CTA. [LINK NEEDED] intake URL. -->
+        <section class="wlong2" aria-labelledby="wlong2-title">
+          <div class="wlong2__stage">
+            <p class="chip wlong2__chip"><span>Ongoing care</span></p>
+            <h2 class="wlong2__title" id="wlong2-title">Support beyond the first step. Your care doesn't end with a prescription.</h2>
 
-          <!-- Decorative: a follow-up screen built in code; its words are the client's (the sentence on the left). -->
-          <div class="wlong__phone" aria-hidden="true">
-            <div class="wlong__screen">
-              <span class="wlong__island"></span>
-              <span class="wlong__time">9:41</span>
-              <div class="wlong__ui">
-                <svg class="wlong__logo"><use href="#wordmark"/></svg>
-                <div class="wlong__from"><span class="wlong__avatar"><svg><use href="#i-stethoscope"/></svg></span>Your provider</div>
-                <p class="wlong__screen-title">Follow-up care</p>
-                <div class="wlong__rows">
-                  <div class="wlong__row" style="--i: 0"><span class="wlong__row-icon"><svg><use href="#i-pulse"/></svg></span>Your response to treatment</div>
-                  <div class="wlong__row" style="--i: 1"><span class="wlong__row-icon"><svg><use href="#i-chat"/></svg></span>Side effects</div>
-                  <div class="wlong__row" style="--i: 2"><span class="wlong__row-icon"><svg><use href="#i-sliders"/></svg></span>Adjustments</div>
-                </div>
+            <div class="wlong2__body">
+              <div class="wlong2__card media-brief" aria-hidden="true" data-brief="One adult, waist up, calm and content, everyday clothes in our olive/cream palette, soft natural light on a plain warm backdrop; tall 4:5 crop. Real skin, opaque clothing, no lab coat.">
+                <img src="assets/images/people/woman-a.webp" alt="" width="1000" height="1020" loading="lazy">
+              </div>
+              <div class="wlong2__words">
+                <p>Weight management is an ongoing process, and your needs may change along the way.</p>
+                <p>Follow-up care can help your provider evaluate your response to treatment, discuss side effects, and determine whether adjustments are appropriate.</p>
+                <!-- A loop with three points on it: the three things follow-up care covers. Decorative. -->
+                <svg class="wlong2__loop" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+                  <g fill="none" stroke="currentColor" stroke-width="1">
+                    <circle cx="60" cy="60" r="44"/>
+                    <circle cx="60" cy="60" r="28" stroke-opacity=".5"/>
+                    <circle cx="60" cy="16" r="9"/><circle cx="98.1" cy="82" r="9"/><circle cx="21.9" cy="82" r="9"/>
+                  </g>
+                  <g fill="currentColor"><circle cx="60" cy="16" r="2.5"/><circle cx="98.1" cy="82" r="2.5"/><circle cx="21.9" cy="82" r="2.5"/></g>
+                </svg>
+                <p class="wlong2__close">Because the right treatment plan isn't just about getting started. <strong>It's about knowing how to move forward.</strong></p>
+                <a class="btn btn--primary btn--pill btn--l wlong2__cta" href="#intake-weight-loss">Start Your Assessment</a>
               </div>
             </div>
           </div>
-
-          <div class="wlong__side wlong__side--end">
-            <p>Because the right treatment plan isn't just about getting started.</p>
-            <p class="wlong__close">It's about knowing how to move forward.</p>
-            <a class="btn btn--primary btn--pill btn--l wlong__cta" href="#intake-weight-loss">Start Your Assessment</a>
-          </div>
-        </div>
-      </section>
-      <!-- SECTION:weight-loss/ongoing END -->
+        </section>
+        <!-- SECTION:weight-loss/ongoing--v2 END -->
+      </div>
 
       <!-- SECTION:weight-loss/faq START · styles: components/faq.css · scripts: components/faq.js · assets: assets/images/people/woman-a.webp, #i-arrow-ne in the sprite
            The brief's FAQ, round 2 (user, 2026-11-25: "make it like mahadeva … I want style to be like us use mahadeva as reference"):
@@ -695,7 +716,6 @@
   <script src="sections/weight-loss/hero--v3.js" defer></script>
   <script src="sections/weight-loss/care.js" defer></script>
   <script src="sections/weight-loss/steps.js" defer></script>
-  <script src="sections/weight-loss/ongoing.js" defer></script>
   <script src="components/faq.js" defer></script>
 </body>
 </html>

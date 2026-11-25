@@ -1,0 +1,151 @@
+/* ==========================================================================
+   Weight Loss · Ongoing care, V1: the care cycle (under hero V4; ?ongoing=v1)
+   User, 2026-11-25: "for ongoing care what we have currently i dont like it
+   … why there is phone … see mobbin for better references … make 2
+   versions", with their reference of a circle with points around it
+   ("Seamless, connected healthcare", points at the circle's edge, the
+   statement in the middle) and Mobbin's Rox "revenue cycle".
+   Follow-up care is a loop, so the section is one: a hairline circle with
+   four points on it (follow-up, your response, side effects, adjustments,
+   clockwise), each a lime node with the page's line icon and its words
+   outside the circle; the heading, the closing lines and the CTA in the
+   middle. A small dot travels round the circle (24s a turn): care that
+   keeps going. Reduced motion: it rests at the top.
+   Surface: a white stage on the frame (16px edges, max 1888, radius 18)
+   with a faint grid of plus marks, like the reference.
+   Copy: content/weight-loss.md → Ongoing care, rephrased with the user's OK
+   ("we have freedom there"): DESIGN.md → Copy flags.
+   Framer: a section; the circle as one component (ring, 4 nodes, orbit).
+   ========================================================================== */
+
+.wlong1 {
+  container-type: inline-size;
+  padding: 0 var(--frame-side) var(--space-9);
+  color: var(--p-ink);
+}
+
+.wlong1__stage {
+  --d: min(78cqh, 640px);              /* the circle's diameter */
+  --o: calc(var(--d) * 0.35355);       /* a node's offset on the diagonals (r · sin 45°) */
+  position: relative;
+  height: clamp(640px, min(calc(100svh - 102px), 56cqw), 860px);
+  overflow: hidden;
+  border-radius: 18px;
+  background-color: #fff;
+  /* the reference's faint grid of plus marks, 80px apart (an inline SVG background: fine from file://) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 35v10M35 40h10' stroke='%23343b29' stroke-opacity='.12' stroke-width='1'/%3E%3C/svg%3E");
+  background-position: center;
+  container-type: size;
+  isolation: isolate;
+}
+
+/* ---------- The ring and the orbiting dot ---------- */
+.wlong1__ring,
+.wlong1__orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--d);
+  height: var(--d);
+  margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.wlong1__ring { border: 1px solid color-mix(in srgb, var(--p-ink) 20%, transparent); }
+.wlong1__orbit { animation: wlong1-orbit 24s linear infinite; }
+.wlong1__orbit::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: #367d12;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--p-accent) 70%, transparent);
+}
+@keyframes wlong1-orbit { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .wlong1__orbit { animation: none; } }
+
+/* ---------- The four points ---------- */
+.wlong1__point {
+  --x: -1; --y: -1;                     /* which diagonal: set per point */
+  position: absolute;
+  left: calc(50% + var(--x) * var(--o));
+  top: calc(50% + var(--y) * var(--o));
+  width: 0;
+  height: 0;
+}
+.wlong1__point:nth-child(1) { --x: -1; --y: -1; }
+.wlong1__point:nth-child(2) { --x: 1;  --y: -1; }
+.wlong1__point:nth-child(3) { --x: 1;  --y: 1; }
+.wlong1__point:nth-child(4) { --x: -1; --y: 1; }
+.wlong1__node {
+  position: absolute;
+  left: -26px;
+  top: -26px;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--p-accent);
+  color: var(--p-ink);
+  box-shadow: 0 0 0 6px #fff;           /* a white collar where the ring meets the node */
+}
+.wlong1__node svg { width: 22px; height: 22px; }
+.wlong1__label {
+  position: absolute;
+  top: 0;
+  width: clamp(220px, 19cqw, 300px);
+  transform: translateY(-50%);
+}
+.wlong1__point:nth-child(1) .wlong1__label,
+.wlong1__point:nth-child(4) .wlong1__label { right: 46px; text-align: right; }   /* left side: words to the left of the node */
+.wlong1__point:nth-child(2) .wlong1__label,
+.wlong1__point:nth-child(3) .wlong1__label { left: 46px; text-align: left; }     /* right side: words to the right */
+.wlong1__name {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 1.5vw, 24px);
+  font-weight: var(--weight-medium);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.wlong1__label p {
+  margin-top: 6px;
+  font-size: clamp(14px, 1.04vw, 16px);
+  line-height: 1.45;
+  color: var(--p-ink-soft);
+  text-wrap: pretty;
+}
+
+/* ---------- The middle ---------- */
+.wlong1__core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(var(--d) * 0.74);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+.wlong1__chip { --color-chip: #367d12; }
+.wlong1__title {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: clamp(36px, min(3.2vw, 7cqh), 60px);
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+.wlong1__lede {
+  margin-top: 14px;
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.5;
+  color: var(--p-ink-soft);
+  text-wrap: balance;
+}
+.wlong1__cta { margin-top: 22px; }

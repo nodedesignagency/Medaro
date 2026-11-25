@@ -1,0 +1,95 @@
+/* ==========================================================================
+   Weight Loss · Ongoing care, V2: the statement (under hero V4; ?ongoing=v2)
+   After the user's Quantum Body reference (a dark section, a small chip, a
+   big centred statement, then a portrait card with a short paragraph and a
+   fine line drawing beside it) and Mobbin's Biograph "A private retreat
+   built around your health" (centred statement over photo cards).
+   Ours: a deep olive stage on the frame (16px edges, max 1888, radius 18),
+   paper type, the lime chip; the statement joins the brief's two headings;
+   under it a portrait card (stand-in) and, beside it, the follow-up
+   paragraph, a small line drawing of a loop with three points on it (the
+   three things follow-up care covers), the closing lines and the lime pill.
+   Copy: content/weight-loss.md → Ongoing care (DESIGN.md → Copy flags).
+   Framer: a section; card + text as a horizontal stack.
+   ========================================================================== */
+
+.wlong2 {
+  padding: 0 var(--frame-side) var(--space-9);
+}
+
+.wlong2__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(56px, 5vw, 96px) var(--space-7);
+  border-radius: 18px;
+  background:
+    radial-gradient(60% 55% at 50% 0%, rgba(213, 229, 173, 0.08) 0%, rgba(213, 229, 173, 0) 70%),
+    var(--p-deep);
+  color: var(--p-paper);
+}
+.wlong2__chip { --color-chip: var(--p-accent); } /* lime on deep olive: 11:1 */
+.wlong2__title {
+  max-width: 20em; /* two balanced lines */
+  margin-top: 24px;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.6vw, 68px);
+  font-weight: var(--weight-regular);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* ---------- The card and the words beside it ---------- */
+.wlong2__body {
+  display: grid;
+  grid-template-columns: clamp(300px, 24vw, 440px) clamp(320px, 25vw, 440px);
+  column-gap: clamp(32px, 3.4vw, 64px);
+  margin-top: clamp(48px, 4.4vw, 80px);
+}
+.wlong2__card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 12px;
+  background: radial-gradient(90% 80% at 50% 20%, #d9dfcd 0%, var(--p-sage) 70%, #949c83 100%);
+}
+.wlong2__card img {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 118%;
+  max-width: none;
+  height: auto;
+  transform: translateX(-50%);
+}
+.wlong2__words {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.wlong2__words p {
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--p-paper) 80%, transparent); /* 9:1 on the deep olive */
+  text-wrap: pretty;
+}
+.wlong2__words p + p { margin-top: 12px; }
+
+/* The line drawing: a loop with three points on it, in lime hairlines */
+.wlong2__loop {
+  width: clamp(72px, 6vw, 104px);
+  height: auto;
+  margin: clamp(20px, 1.8vw, 32px) 0;
+  color: var(--p-accent);
+  overflow: visible;
+}
+.wlong2__close {
+  margin-top: auto;
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.5;
+}
+.wlong2__close strong { font-weight: var(--weight-medium); color: var(--p-paper); }
+.wlong2__cta { margin-top: 22px; }
+.wlong2 :focus-visible { outline-color: var(--p-accent); }
