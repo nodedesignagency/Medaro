@@ -1,26 +1,38 @@
 /* ==========================================================================
    FAQ (component: both landings)
-   After the user's reference (2026-11-24, "make faq like this": "Your
-   Answers To Popular Questions"): the heading top left with a tall photo
-   under it; on the right the questions as a plain list between hairlines,
-   a thin plus at the end of each row, the answer opening under it.
-   Ours: the page colour (no band), the chip and heading in the page's
-   section style, the photo radius 12 like the page's other images. The
-   list's top rule is level with the chip; the photo runs down to the
-   list's last rule (it grows with the list when an answer opens; it is
-   cropped from the top, so only more of the picture shows).
-   Behaviour (faq.js): one answer open at a time; the row opens with a
-   height transition (grid rows 0fr → 1fr) and the plus turns into a
-   minus. Closed answers are hidden from screen readers too (visibility).
-   Without JS every answer is open. Reduced motion: no transition.
-   Frame: on the frame, copy on the 48px content inset on both sides (the
-   logo's line, the header CTA's line).
+   Round 2 (user, 2026-11-25: "make it like mahadeva … I want style to be
+   like us use mahadeva as reference"): the structure and behaviour of the
+   Mahadeva template's FAQ (nodedesignagency/Mahadeva → sections/Faq.tsx,
+   motion/Accordion.tsx), in MEDARO's own type, colours and radius.
+   From Mahadeva:
+   - a 5 : 7 grid; heading on the left, the accordion filling the right;
+   - a call-to-action card anchored to the left column's foot: the whole
+     card is the link; a white fill, 8px padding, a 64px square portrait
+     (cut-out, cropped from the top), a title and a line; the arrow rides
+     the top-right corner in a box of its own, filled with the ink at a
+     tenth; on hover the fill swells 2px past every edge and the arrow is
+     replaced: one leaves through the corner as another arrives from the
+     bottom left (the corner clips them);
+   - the accordion: one open at a time, the first open on arrival; rows
+     between hairlines (the first with a rule on top too), 28px above and
+     below the question; the mark is two 1 × 17px hairlines and the upright
+     one quarter-turns onto the flat one, so plus becomes minus by moving,
+     on the same clock as the answer opening (grid rows 0fr → 1fr).
+   Ours: Host Grotesk, ink and muted ink on the page colour, the chip, the
+   page's section heading, card radius 12 like the page's cards, our arrow
+   (the user's, #i-arrow-ne), our motion tokens. Not taken: Mahadeva's bar
+   reveal on the heading (no section of ours uses it).
+   Behaviour (faq.js): buttons with aria-expanded / aria-controls; closed
+   answers hidden from screen readers (visibility). Without JS every answer
+   is open. Reduced motion: no travel, things just arrive.
+   Frame: on the frame, the copy on the 48px content inset on both sides
+   (the logo's line, the header CTA's line).
    Markup:
-     <section class="faq"> .faq__layout > .faq__head (chip, .faq__title,
-     .faq__lede) + .faq__media (img) + .faq__list > .faq__item >
-     h3 > button.faq__q[aria-expanded][aria-controls] (+ .faq__icon) and
-     .faq__a[role=region] > .faq__a-inner > p
-   Framer: one FAQ component; an item component with closed / open variants.
+     section.faq > .faq__layout > .faq__side (.faq__head: chip, .faq__title,
+     .faq__lede?; a.faq__card) + .faq__list > .faq__item > h3 >
+     button.faq__q (span + .faq__mark) and .faq__a[role=region] > .faq__a-inner > p
+   Framer: one FAQ component; an item component with closed / open variants;
+   the card as a component with a hover variant.
    ========================================================================== */
 
 .faq {
@@ -30,42 +42,73 @@
 
 .faq__layout {
   display: grid;
-  grid-template-columns: minmax(0, 30%) minmax(0, 1fr);
-  grid-template-rows: auto 1fr;
-  column-gap: clamp(48px, 5.4vw, 104px);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: clamp(48px, 5.6vw, 104px);
   padding-inline: var(--space-7);
 }
 
-/* ---------- Left: chip, heading, lede; the photo under them ---------- */
-.faq__head { grid-column: 1; grid-row: 1; }
+/* ---------- Left: heading at the top, the card at the foot ---------- */
+.faq__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.faq__head { padding-bottom: var(--space-8); } /* the card never comes closer than 64px */
 .faq__chip { --color-chip: #367d12; } /* leaf green on the page colour: 4.8:1 */
 .faq__title {
   margin-top: 20px;
   margin-left: -0.03em; /* the Y's side bearing: ink on the logo's line */
   font-family: var(--font-display);
-  font-size: clamp(40px, 3.4vw, 64px);
+  font-size: clamp(40px, 3.6vw, 68px); /* the page's section heading */
   font-weight: var(--weight-regular);
   line-height: 1.04;
   letter-spacing: -0.035em;
 }
 .faq__lede {
-  margin-top: 16px;
+  max-width: 38ch;
+  margin-top: 24px;
   font-size: 18px;
   line-height: 1.5;
   color: var(--color-text-muted);
 }
 
-.faq__media {
-  grid-column: 1;
-  grid-row: 2;
+/* The card: the whole of it is the link */
+.faq__card {
+  --grow: 2px;
   position: relative;
-  min-height: 320px;
-  margin-top: clamp(28px, 2.6vw, 44px);
-  overflow: hidden;
-  border-radius: 12px;
-  background: var(--p-sage);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 420px;
+  margin-top: auto;         /* anchored to the column's foot */
+  padding: 8px;
+  color: var(--color-ink);
+  text-decoration: none;
+  isolation: isolate;
 }
-.faq__media img {
+.faq__card-fill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 12px;
+  background: #fff; /* pure white, like the page's other cards */
+  transition: inset 250ms var(--ease-out);
+}
+.faq__card:hover .faq__card-fill,
+.faq__card:focus-visible .faq__card-fill { inset: calc(var(--grow) * -1); }
+.faq__card:focus-visible { outline-offset: 6px; border-radius: 12px; }
+
+.faq__card-photo {
+  position: relative;
+  flex: none;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--color-surface);
+}
+.faq__card-photo img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -73,64 +116,105 @@
   object-fit: cover;
   object-position: 50% 0%;
 }
-
-/* ---------- Right: the questions ---------- */
-.faq__list {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  align-self: start;
-  border-top: 1px solid color-mix(in srgb, var(--color-ink) 22%, transparent);
+.faq__card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 40px; /* clear of the corner */
 }
-.faq__item { border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 22%, transparent); }
+.faq__card-title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.35vw, 22px);
+  font-weight: var(--weight-medium);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.faq__card-body {
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--color-ink); /* the action: ink like the title, as in Mahadeva */
+}
+
+/* The corner: clips the two arrows so one leaves as the other arrives */
+.faq__card-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 6px;
+  background: color-mix(in srgb, var(--color-ink) 10%, transparent);
+}
+.faq__arrow {
+  grid-area: 1 / 1;
+  width: 16px;
+  height: 16px;
+  color: var(--color-ink);
+  transition: transform 500ms var(--ease-in-out);
+}
+.faq__arrow--in { transform: translate(-24px, 24px); }
+.faq__card:hover .faq__arrow--out,
+.faq__card:focus-visible .faq__arrow--out { transform: translate(24px, -24px); }
+.faq__card:hover .faq__arrow--in,
+.faq__card:focus-visible .faq__arrow--in { transform: translate(0, 0); }
+
+/* ---------- Right: the accordion ---------- */
+.faq__list { align-self: start; }
+.faq__item { border-bottom: 1px solid var(--color-line); }
+.faq__item:first-child { border-top: 1px solid var(--color-line); }
 .faq__item h3 { font: inherit; }
 .faq__q {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-5);
+  gap: 24px;
   width: 100%;
-  padding: clamp(22px, 1.9vw, 30px) 0;
+  padding: 28px 0;
   border: 0;
   background: none;
   color: var(--color-ink);
-  font-family: var(--font-body);
-  font-size: clamp(17px, 1.3vw, 21px);
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.6vw, 28px);
   font-weight: var(--weight-regular);
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   text-align: left;
   cursor: pointer;
 }
 .faq__q:focus-visible { outline-offset: 6px; }
 
-/* The plus: two 1.5px bars; the upright one folds away when open */
-.faq__icon {
+/* The mark: two 1 × 17px hairlines; the upright one turns onto the flat one */
+.faq__mark {
   position: relative;
   flex: none;
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 }
-.faq__icon::before,
-.faq__icon::after {
+.faq__mark::before,
+.faq__mark::after {
   content: "";
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 16px;
-  height: 1.5px;
+  width: 1px;
+  height: 17px;
+  margin: -8.5px 0 0 -0.5px;
   border-radius: 1px;
   background: currentColor;
-  transform: translate(-50%, -50%);
-  transition: transform var(--dur-base) var(--ease-out);
 }
-.faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); }
-.faq__q[aria-expanded="true"] .faq__icon::after { transform: translate(-50%, -50%) rotate(90deg) scaleX(0); }
+.faq__mark::before { transform: rotate(90deg); }
+.faq__mark::after { transition: transform var(--dur-slow) var(--ease-in-out); }
+.faq__q[aria-expanded="true"] .faq__mark::after { transform: rotate(90deg); }
 
-/* The answer: open without JS; faq.js adds .is-ready to fold them */
+/* The answer: open without JS; faq.js adds .is-ready to fold the closed ones */
 .faq__a-inner p {
-  max-width: 44em;
-  padding: 0 calc(16px + var(--space-5)) clamp(24px, 2vw, 32px) 0;
-  font-size: clamp(15px, 1.12vw, 18px);
+  max-width: 60ch;
+  padding-bottom: 28px;
+  font-size: clamp(16px, 1.12vw, 18px);
   line-height: 1.55;
   color: var(--color-text-muted);
   text-wrap: pretty;
@@ -138,13 +222,13 @@
 .faq.is-ready .faq__a {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 360ms var(--ease-out);
+  transition: grid-template-rows var(--dur-slow) var(--ease-in-out);
 }
 .faq.is-ready .faq__a-inner {
   min-height: 0;
   overflow: hidden;
   visibility: hidden;
-  transition: visibility 0s linear 360ms;
+  transition: visibility 0s linear var(--dur-slow);
 }
 .faq.is-ready .faq__a.is-open { grid-template-rows: 1fr; }
 .faq.is-ready .faq__a.is-open .faq__a-inner { visibility: visible; transition-delay: 0s; }
@@ -152,6 +236,7 @@
 @media (prefers-reduced-motion: reduce) {
   .faq.is-ready .faq__a,
   .faq.is-ready .faq__a-inner,
-  .faq__icon::before,
-  .faq__icon::after { transition: none; }
+  .faq__mark::after,
+  .faq__card-fill,
+  .faq__arrow { transition-duration: 1ms; }
 }
