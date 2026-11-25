@@ -11,7 +11,15 @@ Source: `content/source/footer-content.webp` (the client's footer content, share
 
 ## Badges
 
-- PLACEHOLDER · OFFICIAL LEGITSCRIPT BADGE – PLACEHOLDER ONLY
+- PLACEHOLDER · OFFICIAL LEGITSCRIPT BADGE – PLACEHOLDER ONLY *(replaced 2026-11-25: the client sent LegitScript's seal code, below; the sample image in their message was missing, so the seal comes from LegitScript's URL)*
+
+  LegitScript seal, as sent by the client (2026-11-25): "If you wish to include the seal, simply add the following HTML code … The seal will be linked to your website's validation page at LegitScript.com. The seal is 73 pixels wide and 79 pixels high. We do not recommend scaling the image via CSS as it may become hard to read at smaller sizes."
+
+  ```html
+  <a href="https://www.legitscript.com/websites/?checker_keywords=mymedaro.com" target="_blank" title="Verify LegitScript Approval for www.mymedaro.com">
+    <img src="https://static.legitscript.com/seals/52586936.png" alt="Verify Approval for www.mymedaro.com" width="73" height="79" />
+  </a>
+  ```
 - HIPAA COMPLIANT *(shown in the screenshot as a caduceus badge image; the client supplies the artwork)*
 
 ## Links
