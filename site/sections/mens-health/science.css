@@ -168,7 +168,7 @@
   font-size: 16px;
   line-height: 1.5;
   color: var(--color-text-muted);
-  text-wrap: pretty;
+  text-wrap: balance; /* lines of even length (user, 2026-11-25: "make it more even") */
 }
 .mhsci__sub + p { margin-top: 14px; }
 
