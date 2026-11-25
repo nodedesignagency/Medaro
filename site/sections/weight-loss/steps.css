@@ -36,9 +36,31 @@
 
 .wlsteps {
   container-type: inline-size; /* 100cqw = the frame's width, for the panel's size */
-  padding: 0 var(--frame-side) var(--space-9);
+  /* much more room above and below (user, 2026-11-25: "this section is coming directly after above section
+     there should be much space"): the page changes colour across this gap */
+  padding: clamp(120px, 11vw, 200px) var(--frame-side) clamp(120px, 11vw, 200px);
   color: var(--color-ink);
 }
+
+/* ---------- Scene: the page turns the buttons' dark green ----------
+   User, 2026-11-25: "lets do color change of bg to dark green that we are using in the buttons so we get
+   feeling of bg change". data-scene="wl-steps" (main.js → scenes) sets this on <html> while the section
+   holds the middle of the screen; styles.css fades the six page tokens in 700ms (instant with reduced
+   motion), like Home's Men's Health blue. The panel turns a step lighter than the page so it still reads
+   as a box; the white step cards keep their own ink.
+   Because the page is now the dark pill's own colour, every dark pill on screen (the header's Get Started,
+   this panel's, the difference section's) turns lime for the scene, the client's button colour. */
+:root[data-scene="wl-steps"] {
+  --color-bg: var(--p-ink);                                             /* #343b29, the dark pill */
+  --color-surface: color-mix(in srgb, var(--p-ink) 92%, var(--p-paper)); /* the panel, a step lighter */
+  --color-ink: var(--p-paper);
+  --color-text: var(--p-paper);
+  --color-text-muted: color-mix(in srgb, var(--p-paper) 74%, var(--p-ink));
+  --color-line: color-mix(in srgb, var(--p-paper) 18%, transparent);
+}
+:root[data-scene="wl-steps"] .wlsteps__chip { --color-chip: var(--p-accent); } /* lime on the dark panel, like Why MEDARO's */
+:root[data-scene="wl-steps"] .btn--dark { --btn-bg: var(--p-accent); color: var(--p-ink); }
+:root[data-scene="wl-steps"] .btn--dark:hover { --btn-bg: var(--p-accent-hover); }
 
 .wlsteps__track {
   --header: 70px;                                                /* the landing header (compact) */
@@ -168,7 +190,7 @@
   overflow: hidden;
   border-radius: 12px;
   background: #fff;
-  color: var(--color-ink);
+  color: var(--p-ink); /* raw ink: the card stays dark-on-white when the page turns dark green */
   container-type: inline-size;
 }
 .wlsteps.is-live .wlsteps__card {
@@ -225,7 +247,7 @@
   margin-top: 12px;
   font-size: clamp(15px, 2.7cqi, 18px);
   line-height: 1.5;
-  color: var(--color-text-muted); /* 6.1:1 on white */
+  color: var(--p-ink-soft); /* 6.1:1 on white; raw, so the scene's light muted never lands on the card */
   text-wrap: pretty;
 }
 .wlsteps__nowrap { white-space: nowrap; } /* "weight-management" never splits at its hyphen */
