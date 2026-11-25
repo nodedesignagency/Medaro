@@ -61,7 +61,7 @@
   fill: url(#mhh2-glow);
   animation: mhh2-pulse 3.6s ease-in-out var(--d, 0s) infinite;
 }
-.mhh2__point { fill: #f4f8e6; }
+.mhh2__point { fill: #f3f9ff; }
 @keyframes mhh2-pulse {
   0%, 100% { opacity: 0.45; }
   50% { opacity: 0.95; }
@@ -137,4 +137,4 @@
 .mhh2__tick svg { width: 14px; height: 14px; }
 
 .mhh2__cta { margin-top: clamp(24px, 3.8cqh, 34px); }
-.mhh2 :focus-visible { outline-color: var(--p-accent); } /* lime ring on the slate */
+.mhh2 :focus-visible { outline-color: var(--p-accent); } /* the accent ring on the slate (sky on this page) */

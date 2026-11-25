@@ -13,7 +13,7 @@
    foot (the way the Weight Loss runners stand on theirs).
    Ours for Men's Health: the card is a pale steel blue, the mist of the
    Men's blue (the Weight Loss cards are the olive mist): ink 9.2:1, muted
-   text 4.8:1 on it. The points carry the hero's lime ticks.
+   text 4.8:1 on it. The points carry the hero's ticks (the page accent: sky blue since 2026-11-25).
    Rows line up across the three cards (subgrid), so headings, sentences,
    points and images sit on the same lines whatever the copy's length.
    ========================================================================== */
@@ -70,7 +70,7 @@
   text-wrap: pretty;
 }
 
-/* The points, with the hero's lime ticks */
+/* The points, with the hero's ticks */
 .mhqc__points {
   display: grid;
   gap: 10px;

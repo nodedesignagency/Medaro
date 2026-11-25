@@ -67,7 +67,7 @@
   fill: url(#mhh1-glow);
   animation: mhh1-pulse 3.6s ease-in-out var(--d, 0s) infinite;
 }
-.mhh1__point { fill: #f4f8e6; }
+.mhh1__point { fill: #f3f9ff; }
 @keyframes mhh1-pulse {
   0%, 100% { opacity: 0.55; }
   50% { opacity: 1; }
