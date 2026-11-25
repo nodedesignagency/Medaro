@@ -24,7 +24,8 @@
   <link rel="stylesheet" href="sections/weight-loss/care.css">
   <link rel="stylesheet" href="sections/weight-loss/difference.css">
   <link rel="stylesheet" href="sections/weight-loss/steps.css">
-  <link rel="stylesheet" href="sections/weight-loss/why.css">
+  <link rel="stylesheet" href="sections/weight-loss/why--v1.css">
+  <link rel="stylesheet" href="sections/weight-loss/why--v2.css">
   <link rel="stylesheet" href="sections/weight-loss/education.css">
   <link rel="stylesheet" href="sections/weight-loss/ongoing.css">
 </head>
@@ -468,39 +469,70 @@
       </section>
       <!-- SECTION:weight-loss/steps END -->
 
-      <!-- SECTION:weight-loss/why START · styles: sections/weight-loss/why.css · assets: assets/images/weight-loss/why-meadow.webp
-           The brief's "Why Medaro", after the user's reference (2026-11-24: a woman with a mug in warm window light on the left; chip,
-           big headline and a light button on the right; three short lines with hairlines along the foot), "I dont want the image
-           to cover whole screen instead make it like card in hero": the photo sits in a rounded stage on the frame like hero V4.
-           Copy: content/weight-loss.md → Why Medaro, word for word (eyebrow as the chip, the heading in title case). The first
-           paragraph's three sentences are the reference's three lines along the foot; the belief and "Your goals matter. Your
-           health matters more." sit under the heading, over the CTA (DESIGN.md → Copy flags). [LINK NEEDED] intake URL.
-           Photo: "Meadow" (2026-11-25, round 3), friends on a grassy slope by a wood. -->
-      <section class="wlwhy" aria-labelledby="wlwhy-title">
-        <div class="wlwhy__stage">
-          <!-- The photo (2026-11-25, round 3; user: "scrape what we had and make something else related to grass, woods … seeing these
-               references"): one Magnific render, Nano Banana 2.1, 4K, from a text prompt with our own hero woman render as the
-               style reference (no outside image): three friends laughing as they walk up a grassy slope at the edge of a wood,
-               one with a rolled yoga mat, in our cream / olive / sage / deep-brown athleisure; the shaded wood on the right holds the copy. -->
-          <img class="wlwhy__photo" src="assets/images/weight-loss/why-meadow.webp" alt="" width="2880" height="1222" loading="lazy">
-          <div class="wlwhy__scrim" aria-hidden="true"></div>
+      <!-- ===== Why MEDARO: two versions (?why=v1|v2) ===== -->
+      <div data-version="why:v1">
+        <!-- SECTION:weight-loss/why--v1 START · styles: sections/weight-loss/why--v1.css · assets: assets/images/weight-loss/why-meadow.webp
+             The brief's "Why Medaro", after the user's reference (2026-11-24: a woman with a mug in warm window light on the left; chip,
+             big headline and a light button on the right; three short lines with hairlines along the foot), "I dont want the image
+             to cover whole screen instead make it like card in hero": the photo sits in a rounded stage on the frame like hero V4.
+             Copy: content/weight-loss.md → Why Medaro, word for word (eyebrow as the chip, the heading in title case). The first
+             paragraph's three sentences are the reference's three lines along the foot; the belief and "Your goals matter. Your
+             health matters more." sit under the heading, over the CTA (DESIGN.md → Copy flags). [LINK NEEDED] intake URL.
+             Photo: "Meadow" (2026-11-25, round 3), friends on a grassy slope by a wood, under a deep olive shade on the right.
+             V1 of two (user, 2026-11-25: "keep this layout as v1 and we have to create v2"). -->
+        <section class="wlwhy" aria-labelledby="wlwhy-title">
+          <div class="wlwhy__stage">
+            <!-- The photo (2026-11-25, round 3; user: "scrape what we had and make something else related to grass, woods … seeing these
+                 references"): one Magnific render, Nano Banana 2.1, 4K, from a text prompt with our own hero woman render as the
+                 style reference (no outside image): three friends laughing as they walk up a grassy slope at the edge of a wood,
+                 one with a rolled yoga mat, in our cream / olive / sage / deep-brown athleisure; the shaded wood on the right holds the copy. -->
+            <img class="wlwhy__photo" src="assets/images/weight-loss/why-meadow.webp" alt="" width="2880" height="1222" loading="lazy">
+            <div class="wlwhy__scrim" aria-hidden="true"></div>
 
-          <div class="wlwhy__copy">
-            <p class="chip wlwhy__chip"><span>Why MEDARO</span></p>
-            <h2 class="wlwhy__title" id="wlwhy-title">More Than a Number<br>on the Scale</h2>
-            <p class="wlwhy__lede">At MEDARO, we believe weight management should be guided by medical expertise, informed by your individual needs, and grounded in realistic expectations.</p>
-            <p class="wlwhy__close">Your goals matter. Your health matters more.</p>
-            <a class="btn btn--primary btn--pill btn--l wlwhy__cta" href="#intake-weight-loss">Take the First Step</a>
+            <div class="wlwhy__copy">
+              <p class="chip wlwhy__chip"><span>Why MEDARO</span></p>
+              <h2 class="wlwhy__title" id="wlwhy-title">More Than a Number<br>on the Scale</h2>
+              <p class="wlwhy__lede">At MEDARO, we believe weight management should be guided by medical expertise, informed by your individual needs, and grounded in realistic expectations.</p>
+              <p class="wlwhy__close">Your goals matter. Your health matters more.</p>
+              <a class="btn btn--primary btn--pill btn--l wlwhy__cta" href="#intake-weight-loss">Take the First Step</a>
 
-            <ul class="wlwhy__row">
-              <li>It's about feeling more comfortable in your body.</li>
-              <li>Making choices with greater confidence.</li>
-              <li>And taking meaningful steps toward the life you want to live.</li>
-            </ul>
+              <ul class="wlwhy__row">
+                <li>It's about feeling more comfortable in your body.</li>
+                <li>Making choices with greater confidence.</li>
+                <li>And taking meaningful steps toward the life you want to live.</li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </section>
-      <!-- SECTION:weight-loss/why END -->
+        </section>
+        <!-- SECTION:weight-loss/why--v1 END -->
+      </div>
+      <div data-version="why:v2">
+        <!-- SECTION:weight-loss/why--v2 START · styles: sections/weight-loss/why--v2.css · assets: assets/images/weight-loss/why-sky.webp
+             V2 (user, 2026-11-25: "see image 3 and 4 so those images were made in a way that there is space inside the image itself …
+             so we dont need to add that green overlay gradient"): V1's layout and copy, but the photo is shot with its own empty
+             space: a low angle up at three friends on a hilltop, the right half open pale sky. The copy sits straight on the sky in
+             ink, no shade over the photo; the CTA is the page's dark pill. Copy and links as V1. [LINK NEEDED] intake URL. -->
+        <section class="wlwhy2" aria-labelledby="wlwhy2-title">
+          <div class="wlwhy2__stage">
+            <img class="wlwhy2__photo" src="assets/images/weight-loss/why-sky.webp" alt="" width="3200" height="1524" loading="lazy">
+
+            <div class="wlwhy2__copy">
+              <p class="chip wlwhy2__chip"><span>Why MEDARO</span></p>
+              <h2 class="wlwhy2__title" id="wlwhy2-title">More Than a Number<br>on the Scale</h2>
+              <p class="wlwhy2__lede">At MEDARO, we believe weight management should be guided by medical expertise, informed by your individual needs, and grounded in realistic expectations.</p>
+              <p class="wlwhy2__close">Your goals matter. Your health matters more.</p>
+              <a class="btn btn--dark btn--pill btn--l wlwhy2__cta" href="#intake-weight-loss">Take the First Step</a>
+
+              <ul class="wlwhy2__row">
+                <li>It's about feeling more comfortable in your body.</li>
+                <li>Making choices with greater confidence.</li>
+                <li>And taking meaningful steps toward the life you want to live.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <!-- SECTION:weight-loss/why--v2 END -->
+      </div>
 
       <!-- SECTION:weight-loss/education START · styles: sections/weight-loss/education.css · icons: #i-edu-* in the sprite
            The brief's "GLP-1 education", after the user's reference (2026-11-24, "make it like this": Seed's "DS-01 benefits" strip,

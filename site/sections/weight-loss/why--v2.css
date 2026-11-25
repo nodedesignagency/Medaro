@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Weight Loss · Why MEDARO, V2 (under hero V4; ?why=v2)
+   User, 2026-11-25: "see image 3 and 4 so those images were made in a way
+   that there is space inside the image itself you know so we dont need to
+   add that green overlay gradient": V1's layout and copy (chip, heading,
+   belief, closing line, CTA, three lines along the foot), but the photo is
+   composed with its own empty space: a low angle up at three friends on a
+   hilltop, the right half open pale sky. The copy sits straight on the sky
+   in ink, with no shade over the photo; the CTA is the page's dark pill.
+   Self-contained (its own block, .wlwhy2), so either version can be
+   promoted on its own.
+   Frame: a rounded stage on the frame like hero V4 (16px edges, max 1888,
+   radius 18); copy from the stage's centre line to the 48px inset.
+   ========================================================================== */
+
+.wlwhy2 {
+  container-type: inline-size;
+  padding: 0 var(--frame-side) var(--space-9);
+}
+
+.wlwhy2__stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: clamp(580px, min(calc(100cqw / 2.1), calc(100svh - 70px - 32px)), 900px);
+  overflow: hidden;
+  border-radius: 18px;
+  background: #dfe6dc; /* the sky's tone, while the photo loads */
+  color: var(--p-ink);
+  container-type: size;
+  isolation: isolate;
+}
+
+/* The photo fills the stage like object-fit: cover; anchored so the group stays left and the sky stays behind the copy */
+.wlwhy2__photo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--why2-x, 0%) 50%;
+}
+
+/* ---------- Copy: the right half, on the sky ---------- */
+.wlwhy2__copy {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 0;
+  padding: clamp(48px, 10cqh, 96px) var(--space-7) clamp(32px, 5cqh, 44px) 0;
+}
+.wlwhy2__chip { --color-chip: #275c0c; } /* leaf green a step deeper for the pale sky: 5.6:1 at its lightest */
+.wlwhy2__title {
+  margin-top: clamp(20px, 3.4cqh, 32px);
+  margin-left: -0.022em; /* the M's side bearing, as V1 */
+  font-family: var(--font-display);
+  font-size: clamp(48px, min(4.6vw, 10.4cqh), 88px);
+  font-weight: var(--weight-regular);
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--p-ink);
+}
+.wlwhy2__lede {
+  max-width: 31em;
+  margin-top: clamp(18px, 3.2cqh, 28px);
+  font-size: clamp(16px, 1.15vw, 19px);
+  line-height: 1.5;
+  color: #4d5442; /* muted ink a step deeper for the sky: 5.6:1 at its lightest */
+  text-wrap: pretty;
+}
+.wlwhy2__close {
+  margin-top: 10px;
+  font-size: clamp(16px, 1.15vw, 19px);
+  line-height: 1.5;
+  font-weight: var(--weight-medium);
+  color: var(--p-ink);
+}
+.wlwhy2__cta { margin-top: clamp(24px, 4.4cqh, 40px); }
+
+.wlwhy2__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--edge);
+  width: 100%;
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+.wlwhy2__row li {
+  padding-top: 14px;
+  border-top: 1px solid color-mix(in srgb, var(--p-ink) 28%, transparent);
+  font-size: clamp(14px, 1.04vw, 17px);
+  line-height: 1.42;
+  color: #4d5442;
+  text-wrap: balance;
+}
