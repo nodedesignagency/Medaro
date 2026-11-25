@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="sections/mens-health/quad-cards.css">
   <link rel="stylesheet" href="sections/mens-health/science.css">
   <link rel="stylesheet" href="sections/mens-health/how-it-works.css">
+  <link rel="stylesheet" href="sections/mens-health/difference.css">
 </head>
 <body>
   <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
@@ -354,6 +355,75 @@
       </div>
     </section>
     <!-- SECTION:mens-health/how-it-works END -->
+
+    <!-- SECTION:mens-health/difference START · styles: sections/mens-health/difference.css · assets (stand-ins): assets/images/people/man-a.webp, assets/images/mens-health/v1-sky.webp, v1-man.webp, v2-slate.webp, assets/images/products/ampoule-quad4-blue.webp, print-ampoule-quad4.svg, hand-ampoule-quad4.webp, print-hand-ampoule-quad4.svg, hand-ampoule-quad4-front.webp
+         The brief's "The Medaro difference", after the Weight Loss difference section (user, 2026-11-25: "make it like this"):
+         a centred chip, heading and sentence, then four square image cards across the frame, glass cards of plain words over
+         three photos, one product still life; title and text under each. No badges (removed on Weight Loss, 2026-11-25).
+         Copy: content/mens-health.md → The Medaro difference, word for word; the glass words are the copy's own. No CTA in the brief.
+         Images: stand-ins (data-brief). -->
+    <section class="mhdiff" aria-labelledby="mhdiff-title">
+      <header class="mhdiff__head">
+        <p class="chip mhdiff__chip"><span>The MEDARO difference</span></p>
+        <h2 class="mhdiff__title" id="mhdiff-title">Men's Health Care Without the Awkwardness.</h2>
+        <p class="mhdiff__lede">We believe taking care of your sexual health should feel straightforward, private, and personal.</p>
+      </header>
+
+      <ul class="mhdiff__cards">
+        <li class="mhdiff__card">
+          <div class="mhdiff__media mhdiff__media--steel media-brief" aria-hidden="true" data-brief="Portrait: a man in his late 30s to 40s in a quiet, private moment at home, soft side light, steel-blue backdrop, everyday clothes. Not one of the hero models.">
+            <img class="mhdiff__person mhdiff__person--portrait" src="assets/images/people/man-a.webp" alt="" width="1000" height="1017" loading="lazy">
+            <div class="mhdiff__glass">
+              <span class="mhdiff__row"><span class="mhdiff__dot"></span>Straightforward</span>
+              <span class="mhdiff__row"><span class="mhdiff__dot"></span>Private</span>
+              <span class="mhdiff__row"><span class="mhdiff__dot"></span>Personal</span>
+            </div>
+          </div>
+          <h3 class="mhdiff__card-title">Private Online Experience</h3>
+          <p class="mhdiff__card-text">Explore sensitive health concerns with discretion.</p>
+        </li>
+        <li class="mhdiff__card">
+          <div class="mhdiff__media media-brief" aria-hidden="true" data-brief="Lifestyle: a man outdoors under a clear steel-blue sky, calm and confident, from the chest up; or a provider's hands with a laptop (no lab coat, no name, no face).">
+            <img class="mhdiff__plate" src="assets/images/mens-health/v1-sky.webp" alt="" width="3600" height="1800" loading="lazy" style="object-position: 60% 60%">
+            <img class="mhdiff__person mhdiff__person--sky" src="assets/images/mens-health/v1-man.webp" alt="" width="852" height="1500" loading="lazy">
+            <div class="mhdiff__glass">
+              <span class="mhdiff__row"><span class="mhdiff__dot"></span>Professional guidance</span>
+              <span class="mhdiff__row"><span class="mhdiff__dot"></span>Individual medical needs</span>
+            </div>
+          </div>
+          <h3 class="mhdiff__card-title">Licensed Medical Providers</h3>
+          <p class="mhdiff__card-text">Get professional guidance based on your individual medical needs.</p>
+        </li>
+        <li class="mhdiff__card">
+          <div class="mhdiff__media mhdiff__media--slate media-brief" aria-hidden="true" data-brief="Product still life: our Quad 4 ampoule in blue with its own print, in a soft cool light on slate. No MEDARO on the ampoule.">
+            <img class="mhdiff__plate" src="assets/images/mens-health/v2-slate.webp" alt="" width="3600" height="1800" loading="lazy">
+            <span class="mhdiff__pack mhdiff__pack--ampoule">
+              <img src="assets/images/products/ampoule-quad4-blue.webp" alt="" width="406" height="2200" loading="lazy">
+              <img class="mhdiff__pack-print" src="assets/images/products/print-ampoule-quad4.svg" alt="" width="406" height="2200" loading="lazy">
+            </span>
+          </div>
+          <h3 class="mhdiff__card-title">Personalized Treatment Options</h3>
+          <p class="mhdiff__card-text">Your health history and treatment goals help guide medical decisions.</p>
+        </li>
+        <li class="mhdiff__card">
+          <div class="mhdiff__media mhdiff__media--hand media-brief" aria-hidden="true" data-brief="Lifestyle: a plain, discreet unbranded box at a front door or in a man's hands, natural light, blue-grey tones; no drug names, no MEDARO on any medication.">
+            <img class="mhdiff__plate" src="assets/images/mens-health/v1-sky.webp" alt="" width="3600" height="1800" loading="lazy">
+            <span class="mhdiff__pack mhdiff__pack--hand">
+              <img src="assets/images/products/hand-ampoule-quad4.webp" alt="" width="1368" height="2475" loading="lazy">
+              <img class="mhdiff__pack-print" src="assets/images/products/print-hand-ampoule-quad4.svg" alt="" width="1368" height="2475" loading="lazy">
+              <img src="assets/images/products/hand-ampoule-quad4-front.webp" alt="" width="1368" height="2475" loading="lazy">
+            </span>
+            <div class="mhdiff__glass">
+              <span class="mhdiff__row"><span class="mhdiff__dot"></span>Directly to your door</span>
+              <span class="mhdiff__note">When prescribed and available</span>
+            </div>
+          </div>
+          <h3 class="mhdiff__card-title">Discreet Delivery</h3>
+          <p class="mhdiff__card-text">When prescribed and available, medications may be delivered directly to your door.</p>
+        </li>
+      </ul>
+    </section>
+    <!-- SECTION:mens-health/difference END -->
 
   </main>
 

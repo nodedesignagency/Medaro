@@ -1,0 +1,171 @@
+/* ==========================================================================
+   Men's Health · the MEDARO difference (2026-11-25)
+   The user: "make it like this" (the Weight Loss difference section: a
+   centred chip, heading and sentence, then four square image cards across
+   the frame, a frosted glass card of plain words over three of the photos,
+   one product still life, a title and a short text under each image; no
+   badges since the user's "lets remove those icons").
+   Ours for Men's Health: the Men's blue chip, the page colour, the glass in
+   the Men's slate (the Weight Loss glass is olive), the lime dots kept;
+   the glass words are the copy's own (the header's "straightforward,
+   private, and personal"; each card's own sentence), and the delivery
+   card keeps its qualifier on the glass ("When prescribed and available").
+   No CTA: the Men's brief has none for this block.
+   Frame: the cards span the frame (16px edges, max 1888), 16px apart,
+   images radius 12, like the Weight Loss cards.
+   ========================================================================== */
+
+.mhdiff {
+  --mhdiff-glass: 20, 30, 44; /* the Men's slate (#1D2A3A), a touch deeper */
+  padding: var(--space-6) var(--frame-side) var(--space-9);
+  color: var(--color-ink);
+}
+
+/* ---------- Header ---------- */
+.mhdiff__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.mhdiff__chip { --color-chip: #0a6fc7; } /* the Men's blue: 4.5:1 on the page */
+.mhdiff__title {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.6vw, 68px); /* the page's section heading */
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.mhdiff__lede {
+  max-width: 40em;
+  margin-top: 18px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: balance;
+}
+
+/* ---------- Cards ---------- */
+.mhdiff__cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--edge);
+  margin-top: clamp(48px, 4.4vw, 80px);
+}
+.mhdiff__media {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #8ea9c7;
+  container-type: inline-size;
+  isolation: isolate;
+}
+/* Card 1: a studio portrait on the Men's steel blue (the Weight Loss card 1 is on sage) */
+.mhdiff__media--steel { background: radial-gradient(90% 80% at 50% 25%, #bccbdc 0%, #8ea9c7 58%, #6b88ab 100%); }
+.mhdiff__plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+.mhdiff__person {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: auto;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+.mhdiff__person--portrait { width: 104%; }
+.mhdiff__person--sky { width: 74%; bottom: -46%; } /* hero V1's man, from the chest up */
+
+/* Card 3: our Quad 4 ampoule in blue, its white print screened on, in the slate's light */
+.mhdiff__media--slate .mhdiff__plate { object-position: 94% 50%; }
+.mhdiff__pack {
+  position: absolute;
+  left: 50%;
+  z-index: -1;
+}
+.mhdiff__pack img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.mhdiff__pack-print { mix-blend-mode: screen; }
+.mhdiff__pack--ampoule {
+  top: 11%;
+  height: 74%;
+  aspect-ratio: 406 / 2200;
+  transform: translateX(-50%) rotate(8deg);
+  filter: drop-shadow(0 18px 20px rgba(4, 9, 18, 0.5));
+}
+/* Card 4: the Quad 4 section's hand holding the ampoule, under a deeper sky */
+.mhdiff__media--hand .mhdiff__plate { object-position: 30% 0%; }
+.mhdiff__pack--hand {
+  top: 4%;
+  height: 150%;
+  aspect-ratio: 1368 / 2475;
+  transform: translateX(-46%);
+}
+
+/* The glass card of plain words over the photo (the Weight Loss recipe, in slate) */
+.mhdiff__glass {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 7%;
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  color: #fff;
+  background: rgba(var(--mhdiff-glass), 0.55);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  backdrop-filter: blur(14px) saturate(1.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 14px 30px -16px rgba(0, 0, 0, 0.5);
+}
+.mhdiff__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(13px, 4.6cqi, 17px);
+  font-weight: var(--weight-medium);
+  line-height: 1.3;
+}
+.mhdiff__dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--p-accent);
+}
+.mhdiff__note {
+  padding-left: 17px;
+  font-size: clamp(12.5px, 3.6cqi, 14px);
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.mhdiff__card-title {
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-size: clamp(21px, 1.7vw, 28px);
+  font-weight: var(--weight-regular);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.mhdiff__card-text {
+  max-width: 30em;
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
