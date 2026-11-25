@@ -112,9 +112,25 @@ class Flat:
     """No wrap: the print as it would lie flat, u (arc length from the front centre) across and y down.
     Used for the spinning packs (components/pack-spin.js), which wrap the print live in the browser
     with the same cylinder maths as above, so the pack can turn on its axis."""
+    flat = True
 
     def __call__(self, pt):
         return pt
+
+
+class Scaled:
+    """The same pack in another photo: the print drawn for one render, moved onto the other at the same
+    size relative to the glass (scale s about the front centre; y_from in the first render lands on y_to
+    in the second), then wrapped by `inner` (that photo's Cylinder, or Flat for the spinning print)."""
+
+    def __init__(self, inner, s, y_from, y_to):
+        self.inner, self.s, self.y_from, self.y_to = inner, s, y_from, y_to
+        self.flat = getattr(inner, "flat", False)
+        self.r = getattr(inner, "r", None)
+
+    def __call__(self, pt):
+        u, y = pt
+        return self.inner((u * self.s, self.y_to + (y - self.y_from) * self.s))
 
 
 class WarpPen(FilterPen):
@@ -169,7 +185,7 @@ class Print:
     def _pen(self):
         svg = SVGPathPen(None, ntos=fmt)
         # flat print: straight lines stay straight, no need to split them
-        return svg, WarpPen(svg, self.cyl, step=1e9 if isinstance(self.cyl, Flat) else 4.0)
+        return svg, WarpPen(svg, self.cyl, step=1e9 if getattr(self.cyl, "flat", False) else 4.0)
 
     def rect(self, u0, y0, u1, y1, fill, opacity=1.0):
         svg, pen = self._pen()
@@ -236,7 +252,7 @@ class Print:
     def band(self, y0, y1, fill, x_min, x_max, opacity=1.0):
         self.layers.append((fill, opacity, self.band_path(y0, y1, x_min, x_max)))
 
-    def svg(self, w, h, title, shade=None, clip=None, shade_clip=None, fade=None):
+    def svg(self, w, h, title, shade=None, clip=None, shade_clip=None, fade=None, fade_span=None):
         """shade: (stops) for a horizontal black overlay that darkens the print towards the cylinder's sides,
         clipped to shade_clip (path data) when given, so it never touches the glass around a label.
         fade: (stops) for a horizontal opacity mask on the print instead, for print that is screened onto
@@ -253,7 +269,8 @@ class Print:
             defs.append(f'<clipPath id="shade-clip"><path d="{shade_clip}"/></clipPath>')
         if fade:
             stops = "".join(f'<stop offset="{o}" stop-color="#fff" stop-opacity="{a}"/>' for o, a in fade)
-            defs.append(f'<linearGradient id="fade-g" x1="0" x2="{w}" y1="0" y2="0" gradientUnits="userSpaceOnUse">{stops}</linearGradient>'
+            fx0, fx1 = fade_span or (0, w)
+            defs.append(f'<linearGradient id="fade-g" x1="{fmt(fx0)}" x2="{fmt(fx1)}" y1="0" y2="0" gradientUnits="userSpaceOnUse">{stops}</linearGradient>'
                         f'<mask id="fade" maskUnits="userSpaceOnUse" x="0" y="0" width="{w}" height="{h}"><rect width="{w}" height="{h}" fill="url(#fade-g)"/></mask>')
         if defs:
             out.append("<defs>" + "".join(defs) + "</defs>")
@@ -331,7 +348,7 @@ def vial_sheen():
 AMPOULE = Cylinder(cx=202.5, r=197, eye=1100, k=0.03)
 
 
-def ampoule(ink=False, flat=False):
+def ampoule(ink=False, flat=False, where=None):
     """Quad 4 (Men's Health) as a glass ampoule, after the user's references (Rising, SNP, Dr.Melaxin,
     Avon): print straight on the glass, running along the axis. Words: the client's own copy only
     (content/mens-health.md): Quad 4 · Sildenafil · Vardenafil · Tadalafil · Apomorphine · Sublingual ·
@@ -344,8 +361,9 @@ def ampoule(ink=False, flat=False):
     little towards the shadow side so it sits in the light.
     ink=True: the same print in dark olive ink, multiplied, for the light cards and the menu, where the clear
     glass shows the paper behind it and white print would vanish.
-    flat=True: the same print unwrapped (its layers in flat u, y), for the spinning ampoule."""
-    p = Print(Flat() if flat else AMPOULE)
+    flat=True: the same print unwrapped (its layers in flat u, y), for the spinning ampoule.
+    where: another photo of the same ampoule (a Scaled warp), e.g. the hand holding it."""
+    p = Print(where or (Flat() if flat else AMPOULE))
     PAPER_ = INK if ink else PAPER
     KNOCK = "#fff" if ink else "#000"   # what a knocked-out letter is drawn in: invisible under each blend
     top, foot = 1150, 2118          # the print's length down the axis
@@ -363,18 +381,41 @@ def ampoule(ink=False, flat=False):
     # the lanes either side
     p.text("Rx only", band_r + 16, top + 4, 31, 500, PAPER_, along=True)
     p.text("Sildenafil · Vardenafil · Tadalafil · Apomorphine", band_l - 40, top + 4, 30, 500, PAPER_, along=True)
-    if flat:
+    if flat or (where is not None):
         return p
     fade = None if ink else [(0, 0.72), (0.2, 0.86), (0.42, 0.97), (0.55, 1), (0.9, 1), (1, 0.9)]
     return p.svg(406, 2200, "Quad 4 ampoule: print on glass" + (" (ink)" if ink else ""), fade=fade)
 
 
-def label_js(key, p, cyl, size, rows, title):
+# ---------------------------------------------------- the ampoule in a hand ----
+# assets/images/products/hand-ampoule-quad4.webp, 1368×2475: a man's hand holding the Quad 4 ampoule up,
+# pinched at its base (Nano Banana 2.1, 2026-11-25, after the user's hand reference and their AIDA ampoule
+# for the blue: "Use the same bottle design but i want this type of blue color in it … a hand holding this
+# bottle … the hand should be of man"). The same ampoule, blue liquid, blank, upright; background removed.
+# Glass centre x 684, R 82.5, liquid line y 522, base y 1009 (the render's: 202.5, 197, 1060, 2194).
+# The print moves across unchanged, at the same size relative to the glass, anchored on the liquid line.
+# Its fingers in front of the glass: hand-ampoule-quad4-front.webp, laid over the print.
+HAND_S = 82.5 / 197
+HAND_LIQ = 522.0
+HAND_AMPOULE = Cylinder(cx=684, r=82.5, eye=HAND_LIQ + 40 * HAND_S, k=0.03)
+HAND_SIZE = (1368, 2475)
+HAND_FADE = [(0, 0.72), (0.2, 0.86), (0.42, 0.97), (0.55, 1), (0.9, 1), (1, 0.9)]  # the render's, across the glass
+
+
+def hand_ampoule_print():
+    """The ampoule's white print (screened onto the blue glass), wrapped onto the hand photo: the still
+    fallback for the spinning print."""
+    p = ampoule(where=Scaled(HAND_AMPOULE, HAND_S, 1060, HAND_LIQ))
+    span = (HAND_AMPOULE.cx - HAND_AMPOULE.r, HAND_AMPOULE.cx + HAND_AMPOULE.r)
+    return p.svg(*HAND_SIZE, "Quad 4 ampoule in the hand: print on glass", fade=HAND_FADE, fade_span=span)
+
+
+def label_js(key, p, cyl, size, rows, title, **extra):
     """A spinning pack's print for components/pack-spin.js: the flat layers (fill, opacity, path data in
     u, y), the render's size and its cylinder. A script, not JSON, so it loads from file:// too."""
     import json
     data = {"title": title, "size": list(size), "cyl": {"cx": cyl.cx, "r": cyl.r, "eye": cyl.eye, "k": cyl.k},
-            "rows": list(rows), "layers": [[f, round(o, 3), d] for f, o, d in p.layers]}
+            "rows": list(rows), "layers": [[f, round(o, 3), d] for f, o, d in p.layers], **extra}
     return ("/* Generated by tools/pack-print.py: edit and run the script, never this file. */\n"
             f"(window.MEDARO_LABELS = window.MEDARO_LABELS || {{}})[{json.dumps(key)}] = "
             + json.dumps(data, separators=(",", ":")) + ";\n")
@@ -391,6 +432,13 @@ if __name__ == "__main__":
         # top and foot down the axis with a margin, so the texture holds only what is printed
         "label-ampoule-quad4-ink.js": label_js("ampoule-quad4-ink", ampoule(ink=True, flat=True), AMPOULE,
                                                (406, 2200), (1130, 2140), "Quad 4 ampoule: print on glass (ink), flat"),
+        # the Quad 4 ampoule in the hand (Men's Health landing): the white print, screened onto the blue glass
+        "print-hand-ampoule-quad4.svg": hand_ampoule_print(),
+        "label-hand-ampoule-quad4.js": label_js(
+            "hand-ampoule-quad4", ampoule(where=Scaled(Flat(), HAND_S, 1060, HAND_LIQ)), HAND_AMPOULE, HAND_SIZE,
+            (HAND_LIQ + (1130 - 1060) * HAND_S, HAND_LIQ + (2140 - 1060) * HAND_S),
+            "Quad 4 ampoule in the hand: print on glass (white), flat",
+            back=0.22, fade=[0.72, 0.9]),
     }
     for name, data in files.items():
         with open(os.path.join(OUT, name), "w") as f:

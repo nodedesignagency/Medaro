@@ -23,6 +23,12 @@
    The print is drawn from path data (no image files), so the WebGL texture
    works from file:// too.
 
+   A pack in a photo (the Quad 4 ampoule in a hand): .pack-spin--screen for
+   white print on coloured glass, an <img class="pack-spin__front"> of what is
+   in front of the pack (the fingers) over the print, and in the label data
+   `axis` (the pack's lean), `back` (the far side's strength), `fade` (the
+   light's falloff at the left and right silhouettes).
+
    Markup:
      <section data-pack-spin-scope> <div data-pack-spin-sticky> …   (optional: pin while it turns)
      <div class="pack-spin" data-pack-spin="ampoule-quad4-ink" style="--pack-ratio: 406 / 2200">
@@ -55,13 +61,16 @@
     uniform vec2 uRows;    // the texture's top and foot, down the axis
     uniform float uPhi;    // the turn, radians
     uniform float uBack;
+    uniform vec3 uAxis;    // the pack's lean: angle (radians, clockwise), pivot x, y. 0 for an upright render
+    uniform vec2 uFade;    // the print's brightness at the left and right silhouettes (light falling off)
     varying vec2 vPos;
+    vec2 P;                // this pixel in the upright pack's frame
     const float PI = 3.141592653589793;
 
     // the flat print at angle th round the axis (c = cos th): undo the perspective arc, then look up u
     vec4 printAt(float th, float c, float bias) {
       float k = uCyl.w, eye = uCyl.z;
-      float ys = (vPos.y + k * eye * c) / (1.0 + k * c);
+      float ys = (P.y + k * eye * c) / (1.0 + k * c);
       float yf = ys * (1.0 + k) - k * eye;
       float ty = (yf - uRows.x) / (uRows.y - uRows.x);
       float tx = (th - uPhi + PI) / (2.0 * PI);
@@ -70,14 +79,18 @@
     }
 
     void main() {
-      float s0 = (vPos.x - uCyl.x) / uCyl.y;
+      vec2 d = vPos - uAxis.yz;
+      float ca = cos(uAxis.x), sa = sin(uAxis.x);
+      P = uAxis.yz + vec2(ca * d.x + sa * d.y, -sa * d.x + ca * d.y);   // undo the lean
+      float s0 = (P.x - uCyl.x) / uCyl.y;
       float inside = step(abs(s0), 0.9995);
       float s = clamp(s0, -0.9995, 0.9995);
       float th = asin(s);
       float c = sqrt(1.0 - s * s);
       vec4 front = printAt(th, c, -0.6) * smoothstep(0.0, 0.16, c);   // a little sharper than the default mip (matches the static print)
       vec4 back = printAt(PI - th, -c, 1.6) * uBack * smoothstep(0.0, 0.35, c);
-      gl_FragColor = (front + back * (1.0 - front.a)) * inside;
+      float light = mix(uFade.x, 1.0, smoothstep(-1.0, -0.15, s)) * mix(1.0, uFade.y, smoothstep(0.55, 1.0, s));
+      gl_FragColor = (front + back * (1.0 - front.a)) * inside * light;
     }`;
 
   document.querySelectorAll('[data-pack-spin]').forEach(init);
@@ -92,7 +105,7 @@
     const prog = program(gl, VERT, FRAG);
     if (!prog) return;
     const loc = (n) => gl.getUniformLocation(prog, n);
-    const u = { size: loc('uSize'), cyl: loc('uCyl'), rows: loc('uRows'), phi: loc('uPhi'), back: loc('uBack'), tex: loc('uTex') };
+    const u = { size: loc('uSize'), cyl: loc('uCyl'), rows: loc('uRows'), phi: loc('uPhi'), back: loc('uBack'), tex: loc('uTex'), axis: loc('uAxis'), fade: loc('uFade') };
 
     const buf = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buf);
@@ -127,7 +140,11 @@
     gl.uniform2f(u.size, size[0], size[1]);
     gl.uniform4f(u.cyl, cyl.cx, cyl.r, cyl.eye, cyl.k);
     gl.uniform2f(u.rows, rows[0], rows[1]);
-    gl.uniform1f(u.back, BACK);
+    gl.uniform1f(u.back, label.back != null ? label.back : BACK);
+    const ax = label.axis || { angle: 0, x: 0, y: 0 };
+    gl.uniform3f(u.axis, ax.angle * Math.PI / 180, ax.x, ax.y);
+    const fd = label.fade || [1, 1];
+    gl.uniform2f(u.fade, fd[0], fd[1]);
     gl.uniform1i(u.tex, 0);
     gl.enableVertexAttribArray(aPos);
     gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);

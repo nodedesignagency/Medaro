@@ -132,25 +132,29 @@
       <!-- SECTION:mens-health/hero--v2 END -->
     </div>
 
-    <!-- SECTION:mens-health/quad START · styles: sections/mens-health/quad.css, components/pack-spin.css · scripts: components/pack-spin.js · assets: assets/images/products/ampoule-quad4.webp, print-ampoule-quad4-ink.svg, label-ampoule-quad4-ink.js (from tools/pack-print.py)
+    <!-- SECTION:mens-health/quad START · styles: sections/mens-health/quad.css, components/pack-spin.css · scripts: components/pack-spin.js · assets: assets/images/products/hand-ampoule-quad4.webp, hand-ampoule-quad4-front.webp, print-hand-ampoule-quad4.svg, label-hand-ampoule-quad4.js (from tools/pack-print.py)
          The brief's "Introducing Quad 4", after the user's Good Life reference (2026-11-25: "For this section i am thinking about
-         this style. Also if possible make it rotatable like this": "The Good Life Difference", a huge centred headline, one bottle
-         tilted under it, the button over its foot; and a recording of the bottle turning on its axis).
-         The product is OUR Quad 4 ampoule exactly as on the Home hero and in the menu (user: "use our quad 4 bottle no color or
-         anything change just want the animation"), with its ink print, the menu's version for light backgrounds.
+         this style. Also if possible make it rotatable like this": "The Good Life Difference", a huge centred headline, the pack
+         under it; and a recording of the bottle turning on its axis).
+         Round 2 (2026-11-25): "Use the same bottle design but i want this type of blue color in it [their AIDA ampoule] and also i want
+         to add a hand holding this bottle [their hand-and-capsule photo] … the hand should be of man". Our Quad 4 ampoule, same
+         shape and print (white, screened onto the glass as on Home), blue liquid, held up by a man's hand: one Magnific photograph
+         (blank ampoule), its print added in code and turning on the axis; the fingers in front of the glass sit over the print.
+         The sentence moves to the bottom-left corner and the CTA to the bottom-right, on the frame lines, to give the hand the middle.
          Copy: content/mens-health.md → Introducing Quad 4, word for word (eyebrow as the chip). [LINK NEEDED] intake URL. -->
     <section class="mhquad" id="quad-4" aria-labelledby="mhquad-title" data-pack-spin-scope>
       <div class="mhquad__pin" data-pack-spin-sticky>
         <p class="chip mhquad__chip"><span>Introducing Quad 4</span></p>
         <h2 class="mhquad__title" id="mhquad-title">Four Powerful Ingredients.<br>One Modern Approach.</h2>
-        <p class="mhquad__text">A convenient sublingual formula designed to dissolve under your tongue, bringing together four ingredients with distinct properties in one treatment.</p>
         <div class="mhquad__stage">
-          <div class="mhquad__pack pack-spin" data-pack-spin="ampoule-quad4-ink" style="--pack-ratio: 406 / 2200">
-            <img class="pack-spin__body" src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200">
-            <img class="pack-spin__still" src="assets/images/products/print-ampoule-quad4-ink.svg" alt="" width="406" height="2200">
+          <div class="mhquad__pack pack-spin pack-spin--screen" data-pack-spin="hand-ampoule-quad4" style="--pack-ratio: 1368 / 2475">
+            <img class="pack-spin__body" src="assets/images/products/hand-ampoule-quad4.webp" alt="" width="1368" height="2475">
+            <img class="pack-spin__still" src="assets/images/products/print-hand-ampoule-quad4.svg" alt="" width="1368" height="2475">
             <canvas class="pack-spin__print" aria-hidden="true"></canvas>
+            <img class="pack-spin__front" src="assets/images/products/hand-ampoule-quad4-front.webp" alt="" width="1368" height="2475">
           </div>
         </div>
+        <p class="mhquad__text">A convenient sublingual formula designed to dissolve under your tongue, bringing together four ingredients with distinct properties in one treatment.</p>
         <a class="btn btn--dark btn--pill btn--l mhquad__cta" href="#intake-mens-health">Explore Quad 4</a>
       </div>
     </section>
@@ -159,7 +163,7 @@
   </main>
 
   <script src="main.js" defer></script>
-  <script src="assets/images/products/label-ampoule-quad4-ink.js" defer></script>
+  <script src="assets/images/products/label-hand-ampoule-quad4.js" defer></script>
   <script src="components/pack-spin.js" defer></script>
 </body>
 </html>

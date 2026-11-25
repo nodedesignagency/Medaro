@@ -27,7 +27,8 @@
   flex-direction: column;
   align-items: center;
   height: var(--screen);
-  padding: clamp(52px, 4.6vw, 96px) calc(var(--frame-side) + var(--space-7)) clamp(36px, 3vw, 60px);
+  padding: clamp(52px, 4.6vw, 96px) calc(var(--frame-side) + var(--space-7)) 0;
+  overflow: hidden; /* the forearm runs out of the screen's foot */
   text-align: center;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -39,6 +40,8 @@
 
 /* The reference's headline: very large, tight, two centred lines */
 .mhquad__title {
+  position: relative;
+  z-index: 1;
   margin-top: 28px;
   font-family: var(--font-display);
   font-size: clamp(56px, min(5.9vw, 9.6svh), 112px); /* also capped by the window's height, so the pack keeps its room */
@@ -48,36 +51,45 @@
   text-wrap: balance;
 }
 
-.mhquad__text {
-  max-width: 35em;
-  margin-top: clamp(22px, 2vw, 32px);
-  font-size: clamp(16px, 1.25vw, 19px);
-  line-height: 1.5;
-  color: var(--color-text-muted);
-  text-wrap: pretty;
-}
-
-/* The pack: centred, tilted like the reference, as long as the room left
-   under the copy allows (the tilted ampoule is 1.006 × its length tall). */
+/* The hand holding the ampoule: centred on the ampoule's axis, rising from
+   the screen's foot. The photo is 1368 × 2475 with the axis on its centre
+   line and the ampoule's tip 2.6% down; at 200% of the stage's height the
+   tip sits just under the headline, the ampoule takes about three quarters
+   of the stage (as big as the room allows, for the print) and the hand is
+   cut across the fingers and knuckles. */
 .mhquad__stage {
   position: relative;
   flex: 1 1 auto;
   width: 100%;
-  min-height: 300px;
-  margin-top: clamp(24px, 2.4vw, 44px);
+  min-height: 320px;
+  margin-top: clamp(16px, 1.6vw, 32px);
   container-type: size;
 }
 .mhquad__pack {
   position: absolute;
   left: 50%;
-  top: 50%;
-  height: 99cqh;
-  transform: translate(-50%, -50%) rotate(19deg);
+  top: -3.6cqh;
+  height: 200cqh;
+  transform: translateX(-50%);
 }
 
-/* The reference's button: centred, over the pack's foot */
+/* The sentence and the button in the bottom corners, on the frame lines
+   (the logo's and the header button's), so the hand has the middle */
+.mhquad__text,
 .mhquad__cta {
-  position: relative;
-  z-index: 1;
-  margin-top: -40px;
+  position: absolute;
+  z-index: 2;
+  bottom: clamp(36px, 3.4vw, 64px);
+}
+.mhquad__text {
+  left: calc(var(--frame-side) + var(--space-7));
+  max-width: min(24em, 30vw);
+  font-size: clamp(16px, 1.2vw, 19px);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-align: left;
+  text-wrap: pretty;
+}
+.mhquad__cta {
+  right: calc(var(--frame-side) + var(--space-7));
 }

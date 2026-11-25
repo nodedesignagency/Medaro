@@ -3,7 +3,9 @@
    A pack that turns on its axis: the blank render, the approved static print
    (shown until the live print has drawn, and whenever it can't), and the
    live print canvas, both multiplied onto the render like the menu's ink
-   print. Size the root by height or width; --pack-ratio is the render's.
+   print (--screen: white print screened onto coloured glass), and an
+   optional __front image of what is in front of the pack in the photo
+   (fingers). Size the root by height or width; --pack-ratio is the render's.
    Drag sideways to turn it; touch keeps scrolling the page.
    ========================================================================== */
 
@@ -20,7 +22,8 @@
 
 .pack-spin__body,
 .pack-spin__still,
-.pack-spin__print {
+.pack-spin__print,
+.pack-spin__front {
   position: absolute;
   inset: 0;
   display: block;
@@ -31,6 +34,11 @@
 }
 .pack-spin__still,
 .pack-spin__print { mix-blend-mode: multiply; }
+/* white print on coloured glass (the ampoule in the hand): screened on, like the Home hero's ampoule */
+.pack-spin--screen .pack-spin__still,
+.pack-spin--screen .pack-spin__print { mix-blend-mode: screen; }
+/* whatever sits in front of the pack in the photo (the fingers holding it), over the turning print */
+.pack-spin__front { z-index: 1; }
 
 .pack-spin__print { opacity: 0; }
 .pack-spin.is-live .pack-spin__print { opacity: 1; }
