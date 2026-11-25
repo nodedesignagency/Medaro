@@ -40,12 +40,17 @@
 }
 .wlpp__card--people { --media-w: 44%; }
 
+/* The hero's headline style: Host Grotesk 400, -0.035em, 1.05 (user, 2026-11-25:
+   "why there is different weights i like hero one make it same here").
+   Two lines (user: "make both cards heading 2 liners not 3 liners"): the
+   heading may run on over the image's column, which it clears at its top. */
 .wlpp__title {
+  width: max-content; /* two lines, set by hand; clears the vial by 18px+ at 1280 (measured) */
   font-family: var(--font-display);
   font-size: clamp(30px, 2.5vw, 46px);
-  font-weight: var(--weight-medium);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  font-weight: var(--weight-regular);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
   text-box: trim-start cap alphabetic; /* cap top on the 44px inset, like the hero's chip */
 }
 .wlpp__body p {

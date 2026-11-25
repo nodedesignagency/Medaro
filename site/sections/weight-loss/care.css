@@ -14,19 +14,27 @@
    stage's.
    ========================================================================== */
 
+/* 50 : 50 like the pricing and progress cards above (user, 2026-11-25: "lets
+   have image and this content part 50-50 … on left we wont have box … no bg
+   but as we will use box structure … it will look centered and we would have
+   less visual gap between content and image"): two equal columns 16px apart;
+   the copy sits in an invisible box with card 1's padding (its text on the
+   logo's line), centred top to bottom against the panel. */
 .wlcare {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) min(44%, 820px);
-  column-gap: var(--space-8);
-  align-items: center;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--edge);
   padding: 0 var(--frame-side) var(--space-9);
   color: var(--color-ink);
 }
 
-/* ---------- Copy ---------- */
+/* ---------- Copy: an invisible card, the same box as the cards above ---------- */
 .wlcare__copy {
-  padding-left: var(--space-7); /* the hero's inset: the logo's line */
-  max-width: calc(560px + var(--space-7));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 44px var(--space-7) 48px; /* card 1's padding: the text on the logo's line */
 }
 .wlcare__chip { --color-chip: #367d12; } /* leaf green on paper, 4.8:1 */
 .wlcare__title {
@@ -83,13 +91,21 @@
     radial-gradient(120% 90% at 50% 0%, #4a5340 0%, #343b29 55%, var(--p-deep) 100%);
   isolation: isolate;
 }
+/* The portrait fills the panel's width (a little over, so the cut-out's soft
+   shoulder edges never show the panel at the corners) and stands on its foot;
+   where the 50 : 50 panel is wider than tall (1920) a full-width portrait is
+   taller than the panel, so it keeps 8% of headroom and crops at the chest
+   instead of losing the top of the head. The cut-out is 1000 × 1017, cropped
+   at the hair: height = 104cqw × 1.017 = 105.8cqw. */
+.wlcare__panel { container-type: size; }
 .wlcare__person {
   position: absolute;
   left: 50%;
-  bottom: 0;
-  width: 124%;
+  top: max(calc(100cqh - 105.8cqw), 8cqh);
+  width: 104cqw;
+  max-width: none;
   height: auto;
-  transform: translateX(-52%);
+  transform: translateX(-50%);
 }
 
 /* ---------- Glass cards across the foot ---------- */
