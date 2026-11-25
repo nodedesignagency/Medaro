@@ -22,6 +22,18 @@
   --p-deep: #262b1e;       /* derived: dark sections, from the ink */
 }
 
+/* ---------- Page tints ----------
+   A landing page can tint the page colours towards its care line. Men's
+   Health is blue (user, 2026-11-25: "the background is green tone in this
+   page make it bluish tone"): the paper's exact counterpart in blue (same
+   lightness, tint 0.010 in OKLab towards hue 253 instead of 0.008 towards
+   the olive's 114), the mist likewise. Ink 10.3:1, muted 5.4:1, the Men's
+   chip #0A6FC7 4.5:1 on it. <html data-page="mens-health">. */
+:root[data-page="mens-health"] {
+  --p-paper-mh: #edf2f8;
+  --p-mist-mh: #e4eaf2;
+}
+
 /* ---------- Animatable colour tokens ----------
    Registered so a scene (a section that recolours the page, e.g. Men's
    Health in blue: :root[data-scene="mens"]) fades every colour at once. */
@@ -117,6 +129,10 @@
   --dur-fast: 160ms;
   --dur-base: 260ms;
   --dur-slow: 560ms;
+}
+:root[data-page="mens-health"] {
+  --color-bg: var(--p-paper-mh);
+  --color-surface: var(--p-mist-mh);
 }
 
 /* Scene changes fade the whole page (reduced motion: instant, see below) */

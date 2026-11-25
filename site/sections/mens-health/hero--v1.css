@@ -82,12 +82,12 @@
   height: 83.333%;
 }
 
-/* Haze behind the copy: paper over the sky, gone before he starts */
+/* Haze behind the copy: the page's (blue) paper over the sky, gone before he starts */
 .mhh1__haze {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, rgba(244, 245, 239, 0.66) 0%, rgba(244, 245, 239, 0.58) 26%, rgba(244, 245, 239, 0.34) 41%, rgba(244, 245, 239, 0) 54%);
+  background: linear-gradient(90deg, rgba(237, 242, 248, 0.66) 0%, rgba(237, 242, 248, 0.58) 26%, rgba(237, 242, 248, 0.34) 41%, rgba(237, 242, 248, 0) 54%); /* the page's blue paper (#edf2f8) */
   pointer-events: none;
 }
 
