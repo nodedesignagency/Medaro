@@ -28,13 +28,24 @@
   color: var(--color-ink);
 }
 
-/* ---------- Copy: an invisible card, the same box as the cards above ---------- */
+/* ---------- Copy: an invisible card, the same box as the cards above ----------
+   The copy is one block centred in it both ways (user, 2026-11-25: "make it
+   center centered too so it looks like centered compared to box"): equal room
+   left and right of the block, equal above and below; the text inside stays
+   left-aligned so the ticks line up. The block is as wide as its widest line
+   (the sentence, 30em; the heading breaks by hand), never closer than 48px to
+   the box's edges. */
 .wlcare__copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 44px var(--space-7) 48px; /* card 1's padding */
+}
+.wlcare__inner {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  padding: 44px var(--space-7) 48px; /* card 1's padding: the text on the logo's line */
+  min-width: 0;
 }
 .wlcare__chip { --color-chip: #367d12; } /* leaf green on paper, 4.8:1 */
 .wlcare__title {
