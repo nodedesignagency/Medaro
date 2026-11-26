@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-palettes="a">
+<html lang="en" data-palettes="a" data-options="glass:off,on">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -335,15 +335,18 @@
       </section>
       <!-- SECTION:weight-loss/care END -->
 
-      <!-- SECTION:weight-loss/difference START · styles: sections/weight-loss/difference.css, components/product.css · assets: assets/images/people/woman-a.webp, assets/images/products/stage-plate.webp, vial-tirzepatide.webp, print-vial-microdose.svg, sheen-vial.svg, tablet-white-blank.webp, tablet-oval-lime-blank.webp, assets/images/standin-mh-man.webp, assets/images/weight-loss/standin-stretch.webp
+      <!-- SECTION:weight-loss/difference START · styles: sections/weight-loss/difference.css, components/product.css · assets: assets/images/weight-loss/diff-personal.webp, diff-vial-steps.webp, print-vial-steps.svg, sheen-vial-steps.svg, diff-bowl.webp, diff-consult.webp (print: tools/pack-print.py → STEPS)
            The brief's "The Medaro difference" and "Treatment that starts with you" after the user's Superpower "How it works"
-           reference (2026-11-24, "make this like it"): a centred heading and subline, then four image cards in a row, each with a
-           small badge top left and, on three, a frosted glass card of plain words over the photo; title and text under each.
+           reference (2026-11-24, "make this like it"): a centred heading and subline, then four square image cards in a row,
+           title and text under each.
            Copy: content/weight-loss.md, word for word, re-arranged: header = the Medaro difference (eyebrow, heading, sentence);
            cards = the treatment block. Cards 3 and 4 have no heading in the brief: their titles are cut from their own sentences
            ("appetite and feelings of fullness", "FDA-approved prescription options"; DESIGN.md → Copy flags). The block's eyebrow
            "Treatment that starts with you" is not shown (flagged). Badges removed (user, 2026-11-25: "lets remove those icons").
-           Glass cards use only the copy's own words; no data, no results. [LINK NEEDED] intake URL. Images: stand-ins (data-brief). -->
+           Images (round 2, 2026-11-26, after the user's references: a laughing woman shot from below on a blue sky, products on
+           green steps under the sky, a hands-holding-a-pack studio shot, people at laptops): one Magnific render each, our palette.
+           The glass cards are off (review option ?glass=on shows them): they repeated the words under each card.
+           [LINK NEEDED] intake URL. -->
       <section class="wldiff" aria-labelledby="wldiff-title">
         <header class="wldiff__head">
           <p class="chip wldiff__chip"><span>The MEDARO difference</span></p>
@@ -353,8 +356,8 @@
 
         <ul class="wldiff__cards">
           <li class="wldiff__card">
-            <div class="wldiff__media wldiff__media--sage media-brief" aria-hidden="true" data-brief="Portrait: an adult in a quiet, thoughtful moment, soft side light, sage backdrop, everyday clothes.">
-              <img class="wldiff__portrait" src="assets/images/people/woman-a.webp" alt="" width="1000" height="1020" loading="lazy">
+            <div class="wldiff__media" aria-hidden="true">
+              <img class="wldiff__photo" src="assets/images/weight-loss/diff-personal.webp" alt="" width="1024" height="1024" loading="lazy">
               <div class="wldiff__glass">
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Medical history</span>
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Health goals</span>
@@ -365,18 +368,15 @@
             <p class="wldiff__card-text">Weight-loss treatment isn't the same for everyone. Your medical history, health goals, and clinical needs all help determine the best way forward.</p>
           </li>
           <li class="wldiff__card">
-            <div class="wldiff__media wldiff__media--plate media-brief" aria-hidden="true" data-brief="Product still life: the plain Tirzepatide vial and two blank tablets in the hero's studio light. No MEDARO on the pills.">
-              <img class="wldiff__plate" src="assets/images/products/stage-plate.webp" alt="" width="3840" height="2143" loading="lazy">
-              <span class="pack pack--vial wldiff__vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100" loading="lazy"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100" loading="lazy"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100" loading="lazy"></span>
-              <img class="wldiff__pill wldiff__pill--white" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy">
-              <img class="wldiff__pill wldiff__pill--oval" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy">
+            <div class="wldiff__media" aria-hidden="true">
+              <span class="pack wldiff__shot"><img src="assets/images/weight-loss/diff-vial-steps.webp" alt="" width="1024" height="1024" loading="lazy"><img class="product__print" src="assets/images/weight-loss/print-vial-steps.svg" alt="" width="1024" height="1024" loading="lazy"><img class="product__sheen" src="assets/images/weight-loss/sheen-vial-steps.svg" alt="" width="1024" height="1024" loading="lazy"></span>
             </div>
             <h3 class="wldiff__card-title">GLP-1 Weight-Loss Medications</h3>
             <p class="wldiff__card-text">Medical treatment. Individualized decisions.</p>
           </li>
           <li class="wldiff__card">
-            <div class="wldiff__media media-brief" aria-hidden="true" data-brief="Lifestyle: an adult outdoors in warm light, relaxed and active, olive/cream palette. No food scales, no measuring tapes, no before/after.">
-              <img class="wldiff__photo" src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" loading="lazy" style="object-position: 50% 20%">
+            <div class="wldiff__media" aria-hidden="true">
+              <img class="wldiff__photo" src="assets/images/weight-loss/diff-bowl.webp" alt="" width="1024" height="1024" loading="lazy">
               <div class="wldiff__glass">
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Appetite</span>
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Feelings of fullness</span>
@@ -386,8 +386,8 @@
             <p class="wldiff__card-text">GLP-1-based medications can help eligible adults manage weight by affecting appetite and feelings of fullness.</p>
           </li>
           <li class="wldiff__card">
-            <div class="wldiff__media media-brief" aria-hidden="true" data-brief="Lifestyle: two adults outdoors, calm and confident, sage sky, olive/cream palette. No before/after.">
-              <img class="wldiff__photo" src="assets/images/weight-loss/standin-stretch.webp" alt="" width="3840" height="2143" loading="lazy" style="object-position: 55% 40%">
+            <div class="wldiff__media" aria-hidden="true">
+              <img class="wldiff__photo" src="assets/images/weight-loss/diff-consult.webp" alt="" width="1024" height="1024" loading="lazy">
               <div class="wldiff__glass">
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Semaglutide-based treatments</span>
                 <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Tirzepatide-based treatments</span>

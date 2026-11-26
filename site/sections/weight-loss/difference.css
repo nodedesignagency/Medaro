@@ -1,11 +1,15 @@
 /* ==========================================================================
    Weight Loss · the MEDARO difference (under hero V4)
    After the user's Superpower "How it works" reference: a centred heading
-   and subline, then four square image cards in a row, on three a frosted glass card of plain
-   words over the photo; a title and a short text under each image.
+   and subline, then four square image cards in a row; a title and a short
+   text under each image.
    Ours: chip, heading (Host Grotesk 400 like the hero), the client's
-   sentence; no badges on the photos (removed, user 2026-11-25: "lets remove those icons"); the
-   glass rows use neutral dots, not ticks (nothing here is a result).
+   sentence; no badges on the photos (removed, user 2026-11-25: "lets remove those icons").
+   Images (round 2, 2026-11-26): one photograph per card, square, filling it:
+   the laughing woman on the sky, the Tirzepatide vial on olive steps (our
+   label print wrapped on in code), hands holding a bowl, a man on a video
+   consult at home. The glass cards of plain words are off; the review
+   option ?glass=on brings them back to compare.
    Frame: the cards span the frame (16px edges, max 1888) like the cards
    and panel above; 16px apart; images radius 12.
    ========================================================================== */
@@ -56,9 +60,7 @@
   container-type: inline-size;
   isolation: isolate;
 }
-.wldiff__media--sage { background: radial-gradient(90% 80% at 50% 25%, #c3c9b4 0%, var(--p-sage) 60%, #8f977f 100%); }
-.wldiff__photo,
-.wldiff__plate {
+.wldiff__photo {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -66,42 +68,24 @@
   object-fit: cover;
   z-index: -1;
 }
-.wldiff__plate { object-position: 70% 50%; }
-.wldiff__portrait {
+
+/* Card 2: the vial render with its label print (multiply) and satin sheen
+   (screen) on the render's own pixel grid (tools/pack-print.py → STEPS) */
+.wldiff__shot {
+  --ar: 1 / 1;
   position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 104%;
-  height: auto;
-  transform: translateX(-50%);
+  inset: 0;
   z-index: -1;
 }
 
-/* Card 2: the vial and the blank tablets in the hero's studio light */
-.wldiff__vial {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 66%;
-  transform: translate(-50%, -50%) rotate(8deg);
-  filter: drop-shadow(0 18px 20px rgba(0, 0, 0, 0.45));
-}
-.wldiff__pill {
-  position: absolute;
-  height: auto;
-  filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.45));
-}
-.wldiff__pill--white { width: 16%; left: 13%; top: 24%; transform: rotate(-12deg); }   /* left of the vial's shoulder */
-.wldiff__pill--oval { width: 22%; right: 10%; bottom: 17%; transform: rotate(16deg); } /* right of the vial's foot */
-
-
-/* The glass card of plain words over the photo */
+/* The glass card of plain words over the photo: off by default (it repeated
+   the words under each card); the review option ?glass=on shows it */
 .wldiff__glass {
+  display: none;
   position: absolute;
   left: 7%;
   right: 7%;
   bottom: 7%;
-  display: grid;
   gap: 8px;
   padding: 14px 16px;
   border-radius: 12px;
@@ -111,6 +95,7 @@
   backdrop-filter: blur(14px) saturate(1.1);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 14px 30px -16px rgba(0, 0, 0, 0.5);
 }
+:root[data-glass="on"] .wldiff__glass { display: grid; }
 .wldiff__row {
   display: flex;
   align-items: center;

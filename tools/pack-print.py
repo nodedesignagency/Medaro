@@ -290,6 +290,13 @@ VIAL = VialShot(Cylinder(cx=232.5, r=228.5, eye=551, k=0.0641), 398, 995,
 LEDGE = VialShot(Cylinder(cx=672.19, r=137.25, eye=2984.25, k=0.01387), 804.75, 1147.5,
                  (534.94, 809.44), (1344, 1800), m=(1147.5 - 804.75) / (995 - 398), span=(534.94, 809.44))
 
+# assets/images/weight-loss/diff-vial-steps.webp, 1024×1024 (the 2048×2048 render ×0.5): the vial on the
+# top of olive steps under the sky (the MEDARO difference, card 2). Measured on the render: silhouette
+# x 1165.5–1546 (centre 1355.75, R 190.25), label front y 745–1223; the top edge arches by 9.5px and the
+# bottom edge sags by 14px, so the camera's eye is inside the label: eye 939.3, k 0.0511. All ×0.5 here.
+STEPS = VialShot(Cylinder(cx=677.875, r=95.125, eye=469.65, k=0.0511), 372.5, 611.5,
+                 (582.75, 773), (1024, 1024), m=(611.5 - 372.5) / (995 - 398), span=(582.75, 773))
+
 
 def vial(variant, shot=VIAL):
     """The client's MEDARO Tirzepatide vial mock-up, word for word: Injection · Compounded ·
@@ -394,6 +401,8 @@ if __name__ == "__main__":
     files.update({
         os.path.join(wl, "print-vial-ledge.svg"): vial("Microdose", LEDGE),
         os.path.join(wl, "sheen-vial-ledge.svg"): vial_sheen(LEDGE),
+        os.path.join(wl, "print-vial-steps.svg"): vial("Microdose", STEPS),
+        os.path.join(wl, "sheen-vial-steps.svg"): vial_sheen(STEPS),
     })
     for name, data in files.items():
         with open(os.path.join(OUT, name), "w") as f:
