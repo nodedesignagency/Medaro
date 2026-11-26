@@ -1,12 +1,11 @@
 /* ==========================================================================
    Weight Loss · care (under hero V4)
    The brief's "Care that puts you first". Copy on the left (chip, heading in
-   the hero's style, the client's sentence, the dark pill CTA), centred in an
-   invisible box the size of the cards above; on the right a tall rounded
-   photo with ONE glass card holding the client's five points (round 3, user,
-   2026-11-26: "go with 1 and move points into the card"): the card of Home's
-   approved Supplements section (V3), same glass, radius, rows and type, so in
-   Framer both are one component (rows with or without a second line).
+   the hero's style, the client's sentence, the five points with the hero's
+   lime ticks, the dark pill CTA), centred in an invisible box the size of the
+   cards above; on the right a tall rounded photo, nothing on it (round 3,
+   user, 2026-11-26: "lets keep this content layout on left and remove that
+   glass part on that image").
    Frame: the panel ends on the frame's right edge, like the cards above.
    Panel radius 18, the hero stage's.
    ========================================================================== */
@@ -62,102 +61,48 @@
   line-height: 1.5;
   color: var(--color-text-muted);
 }
+.wlcare__points {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+.wlcare__points li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  column-gap: 12px;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.wlcare__tick {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--p-accent);
+  color: var(--p-ink);
+}
+.wlcare__tick svg { width: 14px; height: 14px; }
 .wlcare__cta { margin-top: 32px; }
 
 /* ---------- The photo panel ---------- */
 .wlcare__panel {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
   height: clamp(640px, 54vw, 900px);
-  padding: clamp(28px, 3.2vw, 48px);
   overflow: hidden;
   border-radius: 18px;
   background: #b9c4b4; /* the photo's pale sage sky while it loads */
-  color: #fff;
-  isolation: isolate;
 }
 /* The photo covers the panel. It is taller than the panel at every desktop
-   width (4 : 5 against 0.89-1.04), so the crop point decides where his face
-   lands: 30% down trims a little sky and keeps his chin 57px+ above the card
-   at 1280 and 86px+ at 1440 (measured), the top of his head never cut. */
+   width (4 : 5 against 0.89-1.04), so the crop point decides how much sky
+   sits above his head: 30% down keeps 59-76px of it (1920-1440, measured),
+   the top of his head never cut, his crossed legs and shoes at the foot. */
 .wlcare__photo {
   position: absolute;
   inset: 0;
-  z-index: -1;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% var(--photo-y, 30%);
-}
-
-/* ---------- The glass card: Home's Supplements card (main, sections/home/
-   supplements.css → .sp__card): radius 18, 12px padding, the same rows,
-   icon tiles and type. One change: the glass is our deep olive (--p-deep) at
-   62% instead of Home's warm brown at 50%, because this photo is lighter
-   behind the card (his cream tee): white names measured 5.1:1 or more
-   against the lightest pixel behind each row at 1280, 1440 and 1920 (Home's
-   values gave 3.9:1 here; 4.5:1 needed at this size). The client gives the
-   five points as titles only, so the rows have no second line. Anchored at
-   the panel's foot, over his chest; his face clear above it. ---------- */
-.wlcare__card {
-  width: min(100%, 506px);
-  margin-bottom: var(--card-lift, 0px);
-  padding: 12px;
-  border-radius: 18px;
-  background: rgba(38, 43, 30, 0.62);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 16px 36px -18px rgba(16, 18, 12, 0.6);
-  backdrop-filter: blur(22px) saturate(1.2);
-  -webkit-backdrop-filter: blur(22px) saturate(1.2);
-}
-.wlcare__list {
-  display: grid;
-  gap: 2px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.wlcare__item {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 7px 14px 7px 7px;
-  border-radius: 12px;
-  transition: background-color var(--dur-base) var(--ease-out), opacity 640ms var(--ease-out), transform 640ms var(--ease-out);
-}
-.wlcare__item:hover { background: rgba(255, 255, 255, 0.06); }
-.wlcare__item-icon {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: clamp(46px, 3.45vw, 60px);
-  aspect-ratio: 1;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-.wlcare__item-icon svg { width: 46%; height: 46%; }
-.wlcare__item-name {
-  font-size: clamp(18px, 1.38vw, 23px);
-  font-weight: var(--weight-medium);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: #fff;
-}
-
-/* rise in, one after another, when the panel comes into view (main.js adds
-   .is-in), exactly as on Home: the card fades up, then its rows, 60ms apart */
-.wlcare__card { transition: opacity 640ms var(--ease-out), transform 640ms var(--ease-out); }
-.wlcare__item:nth-child(1) { transition-delay: 0ms, 120ms, 120ms; }
-.wlcare__item:nth-child(2) { transition-delay: 0ms, 180ms, 180ms; }
-.wlcare__item:nth-child(3) { transition-delay: 0ms, 240ms, 240ms; }
-.wlcare__item:nth-child(4) { transition-delay: 0ms, 300ms, 300ms; }
-.wlcare__item:nth-child(5) { transition-delay: 0ms, 360ms, 360ms; }
-.wlcare__panel[data-reveal]:not(.is-in) .wlcare__card { opacity: 0; transform: translateY(20px); }
-.wlcare__panel[data-reveal]:not(.is-in) .wlcare__item { opacity: 0; transform: translateY(10px); }
-
-@media (prefers-reduced-motion: reduce) {
-  .wlcare__panel[data-reveal]:not(.is-in) .wlcare__card,
-  .wlcare__panel[data-reveal]:not(.is-in) .wlcare__item { opacity: 1; transform: none; }
 }

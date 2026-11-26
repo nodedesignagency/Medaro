@@ -45,9 +45,6 @@
     <symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.75 3.25H5a1 1 0 0 0-1 1V9a4.5 4.5 0 0 0 9 0V4.25a1 1 0 0 0-1-1h-.75"/><path d="M8.5 13.5v1.75a4.5 4.5 0 0 0 9 0V13"/><circle cx="17.5" cy="11" r="2"/></g></symbol>
     <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.75"/><circle cx="12" cy="12" r="1.1"/></g></symbol>
     <symbol id="i-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
-    <!-- Care card rows (2026-11-26): line icons in the care icons' style (stroke 1.5 on 24) -->
-    <symbol id="i-laptop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4.75" y="5.25" width="14.5" height="10" rx="1.5"/><path d="M2.75 18.75h18.5"/></g></symbol>
-    <symbol id="i-parcel" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.9 20.25 7v10L12 21.1 3.75 17V7Z"/><path d="M3.75 7 12 11.1 20.25 7"/><path d="M12 11.1v10"/><path d="m7.9 4.95 8.25 4.1"/></g></symbol>
     <!-- GLP-1 education cards: fine line icons like the reference's (stroke 1.2 on 24 → 1.6px at 32px) -->
     <symbol id="i-edu-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
     <symbol id="i-edu-clipboard" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
@@ -299,14 +296,13 @@
       </section>
       <!-- SECTION:weight-loss/pricing-progress END -->
 
-      <!-- SECTION:weight-loss/care START · styles: sections/weight-loss/care.css · scripts: main.js (reveal) · assets: assets/images/weight-loss/care-man.webp (source: Magnific, see DESIGN.md)
+      <!-- SECTION:weight-loss/care START · styles: sections/weight-loss/care.css · assets: assets/images/weight-loss/care-man.webp (source: Magnific, see DESIGN.md)
            The brief's "Care that puts you first". Round 1 after the user's hims reference (2026-11-24); round 2 50 : 50 (2026-11-25).
-           Round 3 (user, 2026-11-26: "should we have it like this those glassy card thing here as what we have currently i dont
-           like it" → "go with 1 and move points into the card"): the turning glass cards are gone; the right panel is one photo
-           with ONE glass card holding the client's five points, the card of Home's approved Supplements section (V3), so the list
-           no longer repeats on the left. Rows carry the client's titles only: the brief has no second lines, none invented.
-           Photo: a relatable man of about 34 on sunlit grass, laughing (user: "not 40 maybe 33-36"), after the user's photo picks
-           (described in words, never uploaded). Not a doctor, no lab coat (client rule).
+           Round 3 (2026-11-26): the turning glass cards are gone ("i dont like it"); the right panel is one photo, a relatable man
+           of about 34 on sunlit grass, laughing (user: "not 40 maybe 33-36"), after the user's photo picks (described in words,
+           never uploaded). The points went into a glass card on the photo, then back (user: "lets keep this content layout on left
+           and remove that glass part on that image"): copy and the five ticked points on the left, the photo clean on the right.
+           Not a doctor, no lab coat (client rule).
            Copy: content/weight-loss.md → Care that puts you first, word for word (eyebrow in caps as the chip). [LINK NEEDED] intake URL. -->
       <section class="wlcare" aria-labelledby="wlcare-title">
         <div class="wlcare__copy">
@@ -316,22 +312,19 @@
             <p class="chip wlcare__chip"><span>The care you need. Without the runaround.</span></p>
             <h2 class="wlcare__title" id="wlcare-title">Weight Loss Care<br>That Puts You First.</h2>
             <p class="wlcare__lede">Everything starts with understanding your health, your goals, and the treatment options that may be right for you.</p>
+            <ul class="wlcare__points">
+                <li><span class="wlcare__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Licensed Medical Providers</li>
+                <li><span class="wlcare__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Personalized Treatment Options</li>
+                <li><span class="wlcare__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Convenient Online Evaluations</li>
+                <li><span class="wlcare__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Ongoing Care Guidance</li>
+                <li><span class="wlcare__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Fast, Discreet Delivery</li>
+            </ul>
             <a class="btn btn--dark btn--pill btn--l wlcare__cta" href="#intake-weight-loss">Explore Your Options</a>
           </div>
         </div>
 
-        <div class="wlcare__panel media-brief" data-reveal data-brief="A relatable man of about 34, natural build, on sunlit park grass after a walk, laughing off-camera; cream waffle tee, olive shorts; hard late-morning sun, pale sage sky. Not a doctor, no lab coat, no scrubs.">
+        <div class="wlcare__panel media-brief" data-brief="A relatable man of about 34, natural build, on sunlit park grass after a walk, laughing off-camera; cream waffle tee, olive shorts; hard late-morning sun, pale sage sky. Not a doctor, no lab coat, no scrubs.">
           <img class="wlcare__photo" src="assets/images/weight-loss/care-man.webp" alt="" width="1800" height="2234" loading="lazy">
-          <!-- One glass card: the client's five points (content, so a real list) -->
-          <div class="wlcare__card">
-            <ul class="wlcare__list" aria-label="Your care includes">
-              <li class="wlcare__item"><span class="wlcare__item-icon" aria-hidden="true"><svg><use href="#i-stethoscope"/></svg></span><span class="wlcare__item-name">Licensed Medical Providers</span></li>
-              <li class="wlcare__item"><span class="wlcare__item-icon" aria-hidden="true"><svg><use href="#i-sliders"/></svg></span><span class="wlcare__item-name">Personalized Treatment Options</span></li>
-              <li class="wlcare__item"><span class="wlcare__item-icon" aria-hidden="true"><svg><use href="#i-laptop"/></svg></span><span class="wlcare__item-name">Convenient Online Evaluations</span></li>
-              <li class="wlcare__item"><span class="wlcare__item-icon" aria-hidden="true"><svg><use href="#i-chat"/></svg></span><span class="wlcare__item-name">Ongoing Care Guidance</span></li>
-              <li class="wlcare__item"><span class="wlcare__item-icon" aria-hidden="true"><svg><use href="#i-parcel"/></svg></span><span class="wlcare__item-name">Fast, Discreet Delivery</span></li>
-            </ul>
-          </div>
         </div>
       </section>
       <!-- SECTION:weight-loss/care END -->
