@@ -10,18 +10,21 @@
    arrow and a small line.
    Ours: the stage on the frame (16px edges, radius 18, like the heroes), the
    column centred on it. One structure for both pages; the colours come from
-   the page's own tokens, so nothing here is page-specific:
-     --p-deep    the panel (Weight Loss: deep olive · Men's: deep navy)
-     --p-accent  the ticks, the button and the chip on the glass (lime · sky)
-     --p-ink     the list's text and the button's text (olive · navy)
-   The glass is clear like Milo's, smoked only behind the words at its top so
-   they read on any photo (the approved nav's smoke glass, rgb 19 19 19).
+   the page's own tokens, so nothing here is page-specific (--p-ink, --p-ink-
+   soft, --p-accent: olive and lime on Weight Loss, navy and sky on Men's).
+   Round 2 (user, 2026-11-26: "you made exact copy like the reference ui part
+   … button make like ours … why we have that dark tint … change the bottom
+   ui part to something else a lil bit"): the glass is clear (no smoke), the
+   check list and the dark panel became one white card of ours, and the
+   button is the landing pages' dark pill. Round 3: the list and panel back
+   ("this bottom part ui was better"), with our inset, our button and a
+   centred line (below).
    Copy (each page's brief, word for word): the chip, the heading and the
-   first sentence(s) on the glass; the sign-off line split into the three
-   rows ("Your health. / Your goals. / Your next move."); the button; the
-   last sentence as the small line under it.
+   first sentence(s) on the glass; the sign-off line split into the list's
+   three rows ("Your health. / Your goals. / Your next move."); the button;
+   the last sentence as the small line under it.
    Framer: one component, a Stage frame with the photo fill, a Stack (Glass ·
-   List · Panel) centred; the variants are only the colour styles.
+   List · Panel) centred; variants: the colour styles, and On light (ink words).
    ========================================================================== */
 
 .cta-band {
@@ -59,7 +62,11 @@
   height: calc(100% - 2 * clamp(40px, 6.5%, 64px));
 }
 
-/* Glass: clear like the reference, a hairline rim, smoke only behind the words */
+/* Glass: clear like the reference, a hairline rim and nothing else (user,
+   2026-11-26: "why we have that dark tint … it was not there in image 2").
+   So the photo carries the words: dark photos take white words (default),
+   light ones take the page's ink with --on-light. Pick or make each photo
+   with a calm area of one tone behind the words. */
 .cta-band__glass {
   position: relative;
   flex: 1;
@@ -69,17 +76,11 @@
   padding: 28px 28px calc(28px + var(--cta-overlap));
   border-radius: var(--cta-r) var(--cta-r) 0 0;
   color: #fff;
-  /* smoke held at full strength down past the words (they end by ~280px at
-     every width), then gone: the photo stays sharp through the rest, like
-     the reference's clear glass */
-  background: linear-gradient(to bottom,
-    rgba(19, 19, 19, 0.58) 0,
-    rgba(19, 19, 19, 0.54) 300px,
-    rgba(19, 19, 19, 0.12) 430px,
-    rgba(19, 19, 19, 0) 100%);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
 }
 .cta-band__chip { --color-chip: var(--p-accent); }
+.cta-band--on-light .cta-band__glass { color: var(--p-ink); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7); }
+.cta-band--on-light .cta-band__chip { --color-chip: var(--p-ink); } /* a coloured chip can't hold 4.5:1 on a mid-tone photo; the ink does */
 .cta-band__title {
   margin-top: 6px;
   font-family: var(--font-display);
@@ -93,11 +94,19 @@
   max-width: 26em;
   font-size: 16px;
   line-height: 1.5;
-  color: #fff;
   text-wrap: pretty;
 }
 
-/* List: the white card of three rows, hairlines between them */
+/* Bottom (round 3, user, 2026-11-26: "this bottom part ui was better … use
+   that base and change few stuff there"): round 1's base exactly (the white
+   list tucked over the glass's foot, full width; the dark panel under it),
+   with only these changes:
+   · our button: the landing pages' pill in the page accent, full width, no
+     separate round arrow (user: "button make like ours not like theirs");
+   · the small line centred under the button, after Superpower's membership
+     card (Mobbin).
+   (An inset list, 8px in from the edges, was tried and dropped the same day:
+   it left the photo showing in thin gaps beside it.) */
 .cta-band__list {
   position: relative;
   z-index: 2;
@@ -129,70 +138,23 @@
 }
 .cta-band__tick svg { width: 14px; height: 14px; }
 
-/* Panel: the page's deep colour, the button and the small line */
 .cta-band__panel {
   position: relative;
   z-index: 1;
+  display: grid;
+  gap: 12px;
   margin-top: calc(-1 * var(--cta-overlap));
   padding: calc(14px + var(--cta-overlap)) 14px 16px;
   border-radius: 0 0 var(--cta-r) var(--cta-r);
   background: var(--p-deep);
   color: var(--p-paper);
 }
-
-/* One link: the label pill and the round arrow, like the reference's pair */
-.cta-band__cta {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  text-decoration: none;
-  border-radius: 999px;
-  outline-offset: 4px;
-}
-.cta-band__cta-label {
-  flex: 1;
-  display: grid;
-  place-items: center;
-  height: 52px;
-  padding: 0 24px;
-  border-radius: 999px;
-  background: var(--p-accent);
-  color: var(--p-ink);
-  font-size: 16px;
-  font-weight: var(--weight-medium);
-  transition: background-color var(--dur-fast) var(--ease-out);
-}
-.cta-band__cta-icon {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: #fff;
-  color: var(--p-ink);
-}
-.cta-band__cta-icon svg {
-  width: 18px;
-  height: 18px;
-  transition: transform var(--dur-base) var(--ease-out);
-}
-.cta-band__cta:hover .cta-band__cta-label { background: var(--p-accent-hover); }
-.cta-band__cta:hover .cta-band__cta-icon svg { transform: translate(2px, -2px); }
-.cta-band__cta:active { transform: scale(0.99); }
-.cta-band__cta:focus-visible { outline: 2px solid var(--p-accent); }
-
+.cta-band__cta { width: 100%; }
 .cta-band__note {
-  margin-top: 12px;
-  padding: 0 6px;
+  padding: 0 12px;
   font-size: 14px;
   line-height: 1.45;
+  text-align: center;
   color: color-mix(in srgb, var(--p-paper) 74%, transparent);
-  text-wrap: pretty;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cta-band__cta-icon svg,
-  .cta-band__cta-label { transition: none; }
-  .cta-band__cta:hover .cta-band__cta-icon svg { transform: none; }
+  text-wrap: balance;
 }
