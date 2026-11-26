@@ -20,7 +20,6 @@
 
 .mhqc {
   --mhqc-card: #dee6ee; /* Men's mist: pale steel blue (Weight Loss uses --color-surface, the olive mist) */
-  --mhqc-shadow: 29, 42, 58; /* the Men's slate, for product shadows on the blue */
   padding: var(--space-6) var(--frame-side) var(--space-9); /* close under the Quad 4 block it belongs to */
 }
 
@@ -113,17 +112,27 @@
   margin: 24px -48px 0; /* the card's full width */
 }
 
-/* Card 1: our Quad 4 ampoule (as on Home and in the menu, its ink print),
-   lying almost level across the card so "Quad 4" reads, floating over its
-   own shadow (the offset is turned with it: it falls straight down) */
+/* Card 1: our blue Quad 4 ampoule lying on the card (round 2, 2026-11-26): a
+   top-down render on one flat paper, the paper taken out in code
+   (tools/quad-card-ampoule.py), so its shadow and the blue light of its liquid
+   fall on the card's own colour. Our white print sits on the glass, screened
+   like the hand's. Laid at a slight rise to the tip, centred in the image row. */
 .mhqc__ampoule {
   position: absolute;
   left: 50%;
-  top: 48%;
-  height: 150%;
-  transform: translate(-50%, -50%) rotate(-74deg);
-  filter: drop-shadow(-19px 5px 14px rgba(var(--mhqc-shadow), 0.2));
+  top: 50%;
+  width: 94%;
+  aspect-ratio: 1400 / 447;
+  transform: translate(-50%, -50%) rotate(12deg);
+  isolation: isolate; /* the print screens onto the glass only */
 }
+.mhqc__ampoule img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.mhqc__print { mix-blend-mode: screen; }
 
 /* Cards 2 and 3: people stand on the card's foot (their cut is the card's
    edge), on the right like the Weight Loss runners */
@@ -133,5 +142,5 @@
   height: 100%;
   width: auto;
 }
-.mhqc__person--couple { right: 6%; }
-.mhqc__person--man { right: -5%; } /* cut by the card's edge, leaving the CTA its room */
+.mhqc__person--couple { right: 4%; }
+.mhqc__person--man { right: -3%; } /* the sleeve cut by the card's edge, leaving the CTA its room */
