@@ -56,6 +56,11 @@
   z-index: -1;
 }
 
+/* A product's label print, laid over its photo on the same grid (same size,
+   same object-fit and position): it multiplies onto the blank label, so the
+   photo's light stays on it (Weight Loss: tools/cta-vial.py) */
+.cta-band__print { mix-blend-mode: multiply; }
+
 /* ---------- The column ---------- */
 .cta-band__stack {
   display: flex;
