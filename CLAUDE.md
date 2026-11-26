@@ -43,7 +43,7 @@ git clone https://github.com/nodedesignagency/Medaro.git ~/Desktop/medaro-previe
 
 ## Files
 
-- `site/index.html` (Home), `about.html`, `contact.html`, `weight-loss.html`, `mens-health.html`, `legal/<slug>.html`. One HTML file per page. Sections are wrapped in `<!-- SECTION:<page>/<name> START · styles: … · scripts: … -->` and `<!-- SECTION:<page>/<name> END -->`.
+- `site/index.html` (Home), `about.html`, `contact.html`, `weight-loss.html`, `mens-health.html`, `404.html`, `legal/<slug>.html`. One HTML file per page. Sections are wrapped in `<!-- SECTION:<page>/<name> START · styles: … · scripts: … -->` and `<!-- SECTION:<page>/<name> END -->`.
 - `site/styles.css`: **all tokens** (colour, type scale, spacing, radius, shadows, motion), base styles and the small shared pieces (buttons, eyebrow, links, container). Token names are fixed in `DESIGN.md`; change values only with a note there.
 - `site/components/<name>.css`: blocks used on more than one page and built as Framer components: header, footer, steps, faq, cta-band, disclaimer, check-list, treatment card.
 - `site/sections/<page>/<name>.css`: one stylesheet per section (e.g. `sections/home/hero.css`). Asset paths inside start with `../../assets/`.
@@ -75,6 +75,7 @@ Use the same class names everywhere (BEM-ish: `.hero__title`, `.btn--primary`). 
 | Weight Loss landing | `weight-loss.html` | `content/weight-loss.md` | **No links to Home or any other page.** Logo is not a link. Every CTA goes to the Weight Loss intake form. |
 | Men's Health landing | `mens-health.html` | `content/mens-health.md` | **No links to Home or any other page.** Every CTA goes to the Men's Health (ED) intake form. |
 | Legal (11) | `legal/<slug>.html` | `content/source/legal/*.pdf` | Footer links. Docs have placeholders like `[BRAND_NAME]`, `[EFFECTIVE_DATE]`: keep them visible until the client fills them. |
+| 404 | `404.html` | ours (flagged in `DESIGN.md` → Copy flags) | Full header and footer, built only from the approved system (Home's stage, hero type, chip, lime pill). Links that scroll Home point at `index.html#…`. In Framer: the project's 404 page. |
 
 Women's Health has no page: every Women's Health link scrolls to the `#womens-health` section on Home, whose CTA is the client's **[Coming Soon]** (client, 2026-11-20). Intake form URLs, the Supplements link and the hero CTA are unknown: use `#intake-weight-loss`, `#intake-mens-health`, `#supplements-link` and mark `[LINK NEEDED]`.
 
