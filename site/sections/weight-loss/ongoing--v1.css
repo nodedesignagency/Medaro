@@ -16,7 +16,8 @@
      the closing lines first, then each point in turn;
    - round 5: as you scroll, the dots light up in lime one after another,
      clockwise from the top, flat with no glow; each illustrated node comes
-     to full opacity as the dots reach it, the others at 45%; the loop
+     to full opacity as the dots reach it and stays lit (round 7), the ones
+     still ahead at 45%; the loop
      closes after the fourth. One variable (--pct, 0–100, set by
      ongoing--v1.js) drives every dot.
    - the CTA sits under the dial throughout.
@@ -164,7 +165,10 @@
   transform: scale(0.88);
   transition: opacity 500ms var(--ease-out), transform 600ms var(--ease-out);
 }
-.wlong1__point.is-active .wlong1__node img { opacity: 1; transform: none; }
+/* Round 7 (user, 2026-11-26: "when the circle gets filled make those icons active"): a node the lit dots have
+   reached stays at full opacity and size; only the ones still ahead wait at 45%. */
+.wlong1__point.is-active .wlong1__node img,
+.wlong1__point.is-done .wlong1__node img { opacity: 1; transform: none; }
 
 /* Titles outside the ring: small, quiet */
 .wlong1__label { position: absolute; width: max-content; max-width: 240px; }
