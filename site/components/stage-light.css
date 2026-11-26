@@ -1,0 +1,19 @@
+/* ==========================================================================
+   Component: stage light (components/stage-light.js)
+   The live light beam, laid exactly over the photo plate it replaces (same
+   box), under the section's scrim. Fades in over the plate once the first
+   frame is drawn; the plate is the fallback when WebGL or JS is missing.
+   ========================================================================== */
+.stage-light {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out);
+}
+.stage-light.is-live { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .stage-light { transition-duration: 200ms; }
+}

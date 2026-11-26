@@ -1,0 +1,151 @@
+/* ==========================================================================
+   About · Why MEDARO (exploring, 2026-11-23)
+   After the user's Daylight "Why partners choose Daylight" reference (Mobbin):
+   a tall coloured card on the left (chip, big headline, a line summing up the
+   points) beside a stack of light cards on the right, one per point, each a
+   big numeral, a small caps label, a title and one line.
+   Ours: a deep olive card with a quiet pattern behind the words (round 2,
+   user: "on left i dont like that as its been repetitive everywhere … see
+   mobbin lets use something else"; the studio light was the Home stage's),
+   our chip in lime; the right cards are mist like the Supplement cards. The client's four points are the labels, word for
+   word; titles and lines are rewritten in plain words (user: "there is lot
+   of ai jargon we will rephrase content"), proposal in DESIGN.md.
+   Three points, not four (round 2, user: "do we need 4 points or 3 would
+   work?"): online care and discreet delivery share the third card.
+   Round 3: the small caps labels are off the cards (user: "lets remove those
+   chips from those 3 cards"); each card is a numeral, a title and a line.
+   Versions ?why=a|b: A = this card; B = the chip, heading and summary above
+   the grid, left aligned, and a photo in the card's place (why--b.css).
+   Round 4, scene (user, 2026-11-23: "can we try light green color bg we have
+   in how medaro works section in framer … add the color changing animation as
+   well as change card color"): while the section holds the middle of the
+   screen the page fades to Framer's How Medaro Works light green
+   (data-scene="why"; main.js → scenes, styles.css fades the tokens, 700ms;
+   reduced motion: instant). The point cards take the green tile.
+   Review option ?whycard=contour|dots|rings, the card's pattern, after Mobbin:
+   contour = topographic hairlines (Linear's sweeping curves), dots = a fading
+   dot grid (Figma's panels), rings = two overlapping circles, the overlap
+   hatched (Linear "Practices"): you and your provider. SVGs from
+   tools/about-patterns.py.
+   ========================================================================== */
+
+:root[data-scene="why"] {
+  --color-bg: #e2ecd3;               /* light green, Framer's Steps Green */
+  --color-surface: #d3e0bf;          /* the cards: Steps Tile */
+  --color-ink: #262b1e;              /* deep olive, 11.9:1 */
+  --color-text: #262b1e;
+  --color-text-muted: #4f5942;       /* 6.0:1 on the green, 5.3:1 on the tiles */
+  --color-line: rgba(38, 43, 30, 0.16);
+}
+
+/* Round 5 (user: "lets add a straight border above this section so there is
+   no overlap", after their Daily Wellness reference): a full-width hairline
+   marks where the section starts, the content well below it */
+.why {
+  padding: clamp(72px, 6.5vw, 112px) calc(var(--frame-side) + 48px) clamp(120px, 10vw, 192px);
+  border-top: 1px solid var(--color-line);
+}
+
+.why__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 37fr) minmax(0, 63fr); /* Daylight: 610 : 1030 */
+  gap: 12px;
+  max-width: 1792px;
+  margin: 0 auto;
+}
+
+/* ---------- The card ---------- */
+.why__card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(40px, 3.4vw, 64px);
+  border-radius: 16px;
+  background: linear-gradient(165deg, #30372a 0%, var(--p-deep) 52%, #1f2318 100%);
+  color: var(--p-paper);
+}
+.why__pattern {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+:root[data-whycard="contour"] .why__pattern--contour,
+:root[data-whycard="dots"] .why__pattern--dots,
+:root[data-whycard="rings"] .why__pattern--rings { display: block; }
+.why__pattern--rings { object-position: 50% 100%; } /* the rings sit on the card's foot, below the words */
+.why__pattern--dots {
+  background-image: radial-gradient(circle, rgba(213, 229, 173, 0.34) 1.3px, transparent 1.8px);
+  background-size: 20px 20px;
+  background-position: 10px 10px;
+  -webkit-mask-image: radial-gradient(130% 85% at 100% 100%, #000 12%, transparent 72%);
+  mask-image: radial-gradient(130% 85% at 100% 100%, #000 12%, transparent 72%); /* a gradient, not an image: fine from file:// */
+}
+.why .chip { --color-chip: var(--p-accent); margin: 0 0 32px; }
+.why__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(52px, 4.5vw, 84px); /* 65 at 1440 */
+  font-weight: var(--weight-regular);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+.why__summary {
+  max-width: 30ch;
+  margin: 32px 0 0;
+  font-size: 20px;
+  line-height: 1.45;
+  color: rgba(244, 245, 239, 0.88);
+  text-wrap: pretty;
+}
+
+/* ---------- The points ---------- */
+.why__points {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.why-point {
+  display: grid;
+  grid-template-columns: clamp(96px, 8.6vw, 156px) minmax(0, 1fr);
+  align-items: start;
+  padding: clamp(28px, 2.4vw, 44px) clamp(28px, 2.8vw, 52px);
+  border-radius: 16px;
+  background: var(--color-surface); /* mist, the Supplement cards */
+}
+.why-point__num {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 5.6vw, 104px); /* 81 at 1440 */
+  font-weight: var(--weight-regular);
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  color: #56662f; /* olive label: 5.2:1 on mist, 4.6:1 on the green tiles */
+}
+
+.why-point__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 1.8vw, 32px); /* 26 at 1440 */
+  font-weight: var(--weight-medium);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+.why-point__text {
+  max-width: 62ch;
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}

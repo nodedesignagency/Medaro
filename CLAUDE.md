@@ -49,9 +49,14 @@ git clone https://github.com/nodedesignagency/Medaro.git ~/Desktop/medaro-previe
 - `site/sections/<page>/<name>.css`: one stylesheet per section (e.g. `sections/home/hero.css`). Asset paths inside start with `../../assets/`.
 - `site/main.js`: small shared JS (header, scroll links, FAQ, version switcher).
 - `site/assets/logo/`: the client's official wordmark. `wordmark.svg` is cropped tight to the letters (black), `wordmark-white.svg` for dark backgrounds, `medaro-logo-original.svg` and `.jpg` exactly as delivered. Pages inline it from the sprite as `#wordmark` (`currentColor`). **Use these, never typeset "MEDARO" for the logo.**
+- `site/assets/icons/`: the user's icons as delivered (`arrow.svg`, 2026-11-20: the one arrow used everywhere; pages use it from the sprite in `currentColor`, `#i-arrow-right`, `#i-arrow-ne`, never another arrow shape), and illustrated icons made with Magnific in the user's gradient-icon style (`supplement-heart.webp`, `supplement-sprout.webp`, 2026-11-21; `about/` for About · Our Mission, 2026-11-23).
+- `site/assets/badges/`: trust badges the client supplies (`hipaa-compliant.png` in our ink, `-original.png` as delivered). Never make one up: a missing badge stays a marked placeholder.
 - `site/assets/images/`: photography and renders, compressed (WebP/AVIF, ≤300 KB each, hero ≤500 KB).
 - `site/versions/<name>/`: frozen snapshots the user asked to keep for comparison. Never edit them and never promote them to `main`; open with `./preview.sh <branch> versions/<name>/index.html`.
-- `content/`: the client's copy as Markdown, word for word: `home.md`, `about.md`, `weight-loss.md`, `mens-health.md`. Originals in `content/source/` (`medaro-copy.pdf` and `legal/*.pdf`, 11 legal documents).
+- `tools/pack-print.py`: makes the print on the packs (`site/assets/images/products/print-*.svg`), wrapped onto the renders. Edit and run it (`python3 tools/pack-print.py`; needs `pip install fonttools brotli uharfbuzz`), never hand-edit its SVGs.
+- `tools/about-patterns.py`: makes the Why MEDARO card's patterns (`site/assets/images/about/why-contour.svg`, `why-rings.svg`). Edit and run it, never hand-edit the SVGs.
+- `tools/unmix-glass.py`: makes clear glass in a cut-out see-through again by taking out the flat colour it was rendered on (render glass on one plain colour, never a gradient: `DESIGN.md` → Direction, rule 7).
+- `content/`: the client's copy as Markdown, word for word: `home.md`, `about.md`, `weight-loss.md`, `mens-health.md`, `footer.md` (from the client's footer screenshot, `content/source/footer-content.webp`). Originals in `content/source/` (`medaro-copy.pdf` and `legal/*.pdf`, 11 legal documents).
 - `review/`: screenshots and videos for review. Git-ignored; send them to the user, don't commit them.
 
 **Versions inside one branch:** when offering versions of a section, give each its own block and stylesheet (`SECTION:home/hero--v1`, `sections/home/hero--v1.css`, same for `--v2`) and mark the wrapper `data-version="hero:v1"`. `main.js` shows one at a time, chosen with `?hero=v2`, and adds a small review switcher in the corner (hidden with `?review=0`). The switcher is review-only and never goes to Framer. If a version needs its own header, put the header inside the same wrapper.
@@ -62,24 +67,25 @@ Use the same class names everywhere (BEM-ish: `.hero__title`, `.btn--primary`). 
 
 | Page | File | Copy | Nav |
 |---|---|---|---|
-| Home | `index.html` | `content/home.md` | Full header: **logo left · six links centred · "Contact" secondary button + Get Started right, no login**. Weight Loss · Men's Health · Women's Health · Supplement · How Medaro Works **scroll** to sections on Home (like home.medvi.org). About Us and the Contact button **open pages** (Contact goes to the Contact Support page). |
+| Home | `index.html` | `content/home.md` | Full header, **the approved menu header** (2026-11-20): **logo left · Get Started + round menu button right, no login**; the six links, Contact and Get Started live in the menu sheet. Weight Loss · Men's Health · Women's Health · Supplement · How Medaro Works **scroll** to sections on Home (like home.medvi.org). About Us and Contact **open pages** (Contact goes to the Contact Support page). |
 | About Us | `about.html` | `content/about.md` | Full header |
 | Contact Support | `contact.html` | **[COPY NEEDED]** | Full header |
 | Weight Loss landing | `weight-loss.html` | `content/weight-loss.md` | **No links to Home or any other page.** Logo is not a link. Every CTA goes to the Weight Loss intake form. |
 | Men's Health landing | `mens-health.html` | `content/mens-health.md` | **No links to Home or any other page.** Every CTA goes to the Men's Health (ED) intake form. |
 | Legal (11) | `legal/<slug>.html` | `content/source/legal/*.pdf` | Footer links. Docs have placeholders like `[BRAND_NAME]`, `[EFFECTIVE_DATE]`: keep them visible until the client fills them. |
 
-Women's Health shows **Coming Soon** (no link). Intake form URLs, the Supplements link and the hero CTA are unknown: use `#intake-weight-loss`, `#intake-mens-health`, `#supplements-link` and mark `[LINK NEEDED]`.
+Women's Health has no page: every Women's Health link scrolls to the `#womens-health` section on Home, whose CTA is the client's **[Coming Soon]** (client, 2026-11-20). Intake form URLs, the Supplements link and the hero CTA are unknown: use `#intake-weight-loss`, `#intake-mens-health`, `#supplements-link` and mark `[LINK NEEDED]`.
 
 ## Copy and compliance (telehealth: this matters)
 
-- **Read the copy brief before designing a section.** The four care lines (Weight Loss, Men's Health, Women's Health, Supplement) live in the header nav only, never in the hero, except where the user asks for something specific (V1 has one supplement promo card at their request).
+- **Read the copy brief before designing a section.** The four care lines (Weight Loss, Men's Health, Women's Health, Supplement) live in the header nav only, never in the hero, except where the user asks for something specific (the approved hero has the supplement promo card and the client's Weight Loss / Men's Health / Women's Health category rows, both at the user's request).
 - **When the user gives a reference, follow it closely**; don't invent extra devices. The first round of heroes was rejected as "AI slop" (see `DESIGN.md` → Rejected).
 - Hero copy is ours to write (the user said so); everywhere else, use the client's copy from `content/` word for word. You may change case and layout, not words. If a design needs shorter copy, propose the cut to the user; never edit silently. Missing copy: a short placeholder marked `[COPY NEEDED]`. No lorem ipsum.
 - **Never remove or soften a qualifier or disclaimer** ("when medically appropriate", "if prescribed", "has not been demonstrated", "not FDA-approved", "results vary"). Disclaimers stay visible near the claims they qualify, not only in the footer.
 - **Never invent** numbers, prices, pounds lost, percentages, patient counts, ratings, reviews, testimonials, doctor names or credentials, "as seen in" logos, or certification badges. Placeholders only, marked `[DATA NEEDED]`.
 - Quad 4 is a proposed compounded formulation: never call it FDA-approved, never imply speed or duration claims the copy explicitly denies.
 - Imagery: no before/after bodies, no scales or measuring tapes as "results", no branded drug packaging (Ozempic, Wegovy, Mounjaro, Zepbound, Viagra, Cialis are trademarks), no lab coats implying a real MEDARO doctor unless the client supplies the person. Generic vials, sublingual tablets, plain unbranded packaging and lifestyle photography are fine.
+- **MEDARO does not make the drugs** (client, 2026-11-20). Never put the MEDARO wordmark on vials, ampoules or bottles, and keep the floating pills in the hero blank (client, 2026-11-21: "remove medaro name from the pills on the wallpaper"), never reuse a competitor's pack design or words, and keep label words to the client's copy (`DESIGN.md` → Direction, rules 7–8). Labels come from `tools/pack-print.py`.
 - Accessibility is part of compliance for a health site: WCAG 2.2 AA contrast, keyboard focus, semantic headings, `prefers-reduced-motion` respected.
 
 ## Open questions (ask the user, then move the answer into the right section)
@@ -111,6 +117,7 @@ See `DESIGN.md`. Breakpoints match Framer: desktop ≥1200, tablet 810–1199, p
 ## Phase 2 (Framer) rules, only once the user says "move to Framer"
 
 - Work only in the Framer project the user names. Never touch their other Framer projects.
+- **Animations match the HTML exactly** (user, 2026-11-23: "dont ever do whatever you want i want same animations and stuff … i dont care if it takes more coding"): same values, timings and behaviour as the approved HTML (scroll scenes, drift, decks, reveals, hovers). If Framer can't do it natively, write a code component or override (sources kept in `framer/`); never substitute a different effect. Ask before any deviation.
 - Order: text and colour styles from the tokens first, then components (header, footer, buttons, steps, FAQ, CTA band, disclaimer, cards), then pages, section by section from `main` only.
 - **Responsive happens here.** For every component and section, build the tablet (810–1199) and phone (≤809) breakpoints as it is transferred, using the phone type scale in `DESIGN.md`. Show the user the phone and tablet versions before moving to the next section.
 - Home nav scroll links become section anchors; landing pages get the minimal header with no links out.
@@ -122,6 +129,6 @@ Chromium and Playwright are pre-installed. Serve `site/` with `python3 -m http.s
 
 Network: launch Chromium with `proxy: { server: process.env.HTTPS_PROXY, bypass: '<-loopback>,localhost,127.0.0.1' }` so Google Fonts load and localhost isn't sent to the proxy (it returns a 405 page otherwise). The same launch can screenshot reference sites the user shares; save them to `review/inspo/`. Sites behind a bot check (nekohealth.com) won't load: ask the user for screenshots instead of working around it.
 
-Product imagery: follow "MEDARO product imagery" in `DESIGN.md` → Direction. **When the user gives an exact reference image, upload it to Magnific as the reference and recreate it; only branding and colours change.** (the real wordmark goes in as an image reference; one render per set, then cut out with background removal at 3 credits and split into pieces in code).
+Product imagery: follow "MEDARO product imagery" in `DESIGN.md` → Direction. **Magnific makes the 3D product, code makes the branding.** One render per object (never one scene for everything), each object whole in its frame (never cropped), pens upright and tilted in CSS, rendered **blank** (no text, logos or numbers; debossed tablets are the only exception). Cut out with background removal (3 credits); each object floats on its own. **All label text and branding is SVG in code**, clean but structured with one strong colour block, after the user's Superpower, Face Formula and Immortals references (hairlines along the label, product name, a solid colour tab with the dose, small MEDARO mark + Rx only, one use line: `DESIGN.md` → Direction, rule 6), printed with multiply and clipped with an SVG clipPath. **Every word must be readable in the hero** (nothing under about 6.5px on screen at 1440): cut what would be smaller. Never a big wordmark, tiny text, hairline "fields", slogans or invented small print, and never a CSS `mask-image` with an image (it vanishes when the page is opened from disk). Check pages from `file://` as well as from the server: that is how the user previews.
 
 Images: Magnific (Freepik) is connected on a paid plan. Stock downloads and generations cost credits (a free-licence stock photo is 40), so ask the user before spending any.

@@ -1,0 +1,17 @@
+/* ==========================================================================
+   About · hero · A "One lede" (exploring, 2026-11-23)
+   The user: "the text part below heading feels too odd should we rephrase it
+   a bit or you can check mobbin". After Mobbin's About heroes (Dovetail,
+   Webflow, Handshake, Programa, PayPal): the headline carries one short
+   paragraph, never a stack. The client's three paragraphs are rewritten into
+   one, in one colour (the two-tone first try was dropped by the user).
+   ========================================================================== */
+.about-hero--a .about-hero__lede {
+  max-width: min(540px, 40vw); /* wraps before the runners at 1280 */
+  margin: 4px 0 0;
+  font-size: 20px;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: rgba(244, 245, 239, 0.88); /* one colour throughout (user, 2026-11-23: "make all text same color") */
+  text-wrap: pretty;
+}

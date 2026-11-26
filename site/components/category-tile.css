@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Component: category tile
+   One care category as a large white card, laid out after hims' category
+   cards (user, 2026-11-20): the name top left with a short line under it,
+   the round arrow bottom left (no "Learn more": the user, 2026-11-20), the
+   line's product large on the right and cut off by the card's edge, no
+   shadow (user, 2026-11-20: "i dont like shadows you are using"), standing
+   still (no bob: the user on the category cards, 2026-11-20, "there wont be
+   any updown animation"); it lifts a little on hover.
+   Text in one colour family (ink, ink-soft): the user, "I dont want text
+   colourful i want like ours".
+   First use: the three care categories in one row along the foot of Home
+   hero V4.
+   Variants: --weight, --mens, --womens (the product and its placement).
+   Framer: one component, a variant per care line (name, line, product).
+   ========================================================================== */
+
+.category-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.category-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: var(--tile-h, 176px);
+  padding: 22px 24px 24px;
+  overflow: hidden; /* the product runs off the card's edge */
+  border-radius: 12px;
+  background: #fff; /* pure white (user, 2026-11-20) */
+  color: var(--color-ink);
+  text-decoration: none;
+  isolation: isolate;
+}
+
+/* ---------- Text: name and line top left ---------- */
+.category-tile__text {
+  display: grid;
+  gap: 8px;
+  max-width: 58%; /* clear of the product */
+}
+.category-tile__name {
+  font-size: 28px;
+  font-weight: var(--weight-regular);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+.category-tile__line {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  text-wrap: balance;
+}
+
+/* ---------- The product, large on the right, cut off by the card ---------- */
+.category-tile__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.category-tile__float {
+  position: absolute;
+  inset: 0;
+}
+/* (doubled class: beats .pack's position in product.css, which loads later) */
+.category-tile .category-tile__obj {
+  position: absolute;
+  left: var(--ct-x);
+  top: var(--ct-y);
+  width: auto;
+  max-width: none;
+  height: var(--ct-h);
+  transform: translate(-50%, -50%) rotate(var(--ct-r, 0deg));
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.category-tile:hover .category-tile__obj {
+  transform: translate(-50%, calc(-50% - 4px)) rotate(calc(var(--ct-r, 0deg) + var(--ct-hover-r, 2deg)));
+}
+
+/* ---------- The arrow: the round one, bottom left ----------
+   In place of a "Learn more" line (user, 2026-11-20: "i dont want learn more text instead replace that with
+   arrow"), the 40px round arrow of the promo and category cards: mist, lime on hover. */
+.category-tile__go {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.category-tile__go svg {
+  width: 16px;
+  height: 16px; /* the MEDARO arrow (assets/icons/arrow.svg) */
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.category-tile:hover .category-tile__go { background: var(--color-accent); }
+.category-tile:hover .category-tile__go svg { transform: translateX(2px); }
+
+/* ---------- The three lines ---------- */
+/* Weight Loss: the client's Tirzepatide Microdose vial, large, cap and label in view, its foot cut off by the card */
+.category-tile--weight {
+  --ct-h: 122%;
+  --ct-x: 74%;
+  --ct-y: 73%;
+  --ct-r: 9deg;
+}
+/* Men's and Women's Health: a person, chest up, cut out, the card cropping them at the foot (client, 2026-11-21:
+   "remove the blue pills from [ Men's Health ] and put an A.I men photo there and do the same for women healths";
+   the user's references: hims-style cut-outs that fade out towards the bottom). Head near the top of the card,
+   the face on the right, the shoulders fading into the white card. */
+.category-tile .category-tile__obj--person {
+  -webkit-mask-image: linear-gradient(180deg, #000 58%, rgba(0, 0, 0, 0) 96%);
+  mask-image: linear-gradient(180deg, #000 58%, rgba(0, 0, 0, 0) 96%); /* a gradient, not an image file: works from file:// */
+}
+.category-tile--mens,
+.category-tile--womens {
+  --ct-h: 122%;
+  --ct-x: 80%;
+  --ct-y: 66%;
+  --ct-r: 0deg;
+  --ct-hover-r: 0deg;
+}
+@media (prefers-reduced-motion: reduce) {
+  .category-tile .category-tile__obj { transition: none; }
+}
