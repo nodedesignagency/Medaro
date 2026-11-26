@@ -22,6 +22,31 @@
   --p-deep: #262b1e;       /* derived: dark sections, from the ink */
 }
 
+/* ---------- Page tints ----------
+   A landing page can tint the page colours towards its care line. Men's
+   Health is blue (user, 2026-11-25: "the background is green tone in this
+   page make it bluish tone"): the paper's exact counterpart in blue (same
+   lightness, tint 0.010 in OKLab towards hue 253 instead of 0.008 towards
+   the olive's 114), the mist likewise. Ink 10.3:1, muted 5.4:1, the Men's
+   chip #0A6FC7 4.5:1 on it. <html data-page="mens-health">. */
+:root[data-page="mens-health"] {
+  --p-paper-mh: #edf2f8;
+  --p-mist-mh: #e4eaf2;
+  /* Men's Health in blue throughout (user, 2026-11-25: "make these [the lime
+     icon circles] in blue theme like our page and also the text and color of
+     button should be in blue tone"): the client's palette turned to the
+     paper's blue hue (OKLab h 253) at the same lightness, the ink a little
+     more chroma so it reads as navy. Ink 10.5:1 on the page, soft ink 5.4:1
+     (4.8:1 on the Quad 4 cards' #DEE6EE), ink on the accent 7.6:1. */
+  --p-ink: #1f3957;          /* navy: text, headlines, the logo's ink, the dark buttons */
+  --p-ink-soft: #4a6482;     /* blue-grey: secondary text */
+  --p-accent: #a7d5ff;       /* sky: icon circles, ticks, light buttons (the lime's place) */
+  --p-accent-hover: #8cc8ff; /* the Men's sky (the chip on the slate) */
+  --p-deep: #162a40;         /* deep navy: the dark buttons' hover, shadows */
+  --p-paper: #edf2f8;        /* text on dark stages turns blue-white too */
+  --p-mist: #e4eaf2;
+}
+
 /* ---------- Animatable colour tokens ----------
    Registered so a scene (a section that recolours the page, e.g. Men's
    Health in blue: :root[data-scene="mens"]) fades every colour at once. */
@@ -117,6 +142,10 @@
   --dur-fast: 160ms;
   --dur-base: 260ms;
   --dur-slow: 560ms;
+}
+:root[data-page="mens-health"] {
+  --color-bg: var(--p-paper-mh);
+  --color-surface: var(--p-mist-mh);
 }
 
 /* Scene changes fade the whole page (reduced motion: instant, see below) */

@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Men's Health · Introducing Quad 4 (2026-11-25)
+   After the user's Good Life reference ("The Good Life Difference"): on the
+   page colour, a huge headline centred in two lines, one pack centred under
+   it, tilted about 19° clockwise (measured from the reference), the button
+   centred over the pack's foot. Ours: the chip above, the client's sentence
+   under the headline, our Quad 4 ampoule (exactly as on Home and in the
+   menu, its ink print), turning on its axis with scroll and by hand
+   (components/pack-spin.js, after the user's recording).
+   Frame: the headline stays inside the content inset (the frame + 48px).
+   ========================================================================== */
+
+/* The section pins under the sticky header for about one screen of scroll
+   while the ampoule makes one full turn (components/pack-spin.js reads the
+   progress), then the page moves on. Reduced motion: no pin, no turn. */
+.mhquad {
+  --screen: min(1200px, max(640px, calc(100svh - 70px))); /* one screen under the 70px header */
+  --pin: 110svh;                                           /* the scroll that turns it once */
+  --hand-gap: clamp(88px, 8vw, 160px);                     /* more hand between this section and the cards */
+  position: relative;
+  height: calc(var(--screen) + var(--pin));
+  margin-bottom: var(--hand-gap);
+  color: var(--color-ink);
+}
+.mhquad__pin {
+  position: sticky;
+  top: 70px; /* under the header */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: var(--screen);
+  padding: clamp(52px, 4.6vw, 96px) calc(var(--frame-side) + var(--space-7)) 0;
+  text-align: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mhquad { height: auto; }
+  .mhquad__pin { position: relative; top: 0; }
+}
+
+.mhquad__chip { --color-chip: #0a6fc7; } /* the Men's sky blue, deep enough for paper: 4.7:1 (Components → Chip) */
+
+/* The reference's headline: very large, tight, two centred lines */
+.mhquad__title {
+  position: relative;
+  z-index: 1;
+  margin-top: 28px;
+  font-family: var(--font-display);
+  font-size: clamp(56px, min(5.9vw, 9.6svh), 112px); /* also capped by the window's height, so the pack keeps its room */
+  font-weight: var(--weight-regular);
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+/* The hand holding the ampoule: centred on the ampoule's axis, rising from
+   the screen's foot. The photo is 1368 × 2475 with the axis on its centre
+   line and the ampoule's tip 2.6% down; at 200% of the stage's height the
+   tip sits just under the headline, the ampoule takes about three quarters
+   of the stage (as big as the room allows, for the print) and the hand is
+   cut across the fingers and knuckles. */
+.mhquad__stage {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 320px;
+  margin-top: clamp(16px, 1.6vw, 32px);
+  container-type: size;
+  /* the forearm runs on below the screen (user, 2026-11-25: "dont fade this here make it behind the card below
+     and show more hand"): through the space after the section and on behind the middle card, cut well
+     under the cards' top edge, where the card hides it */
+  clip-path: inset(-4px -100vw calc(-1 * (var(--hand-gap) + 32px + 180px)) -100vw);
+}
+.mhquad__pack {
+  position: absolute;
+  left: 50%;
+  top: -3.6cqh;
+  height: 200cqh;
+  transform: translateX(-50%);
+}
+
+/* The sentence and the button in the bottom corners, on the frame lines
+   (the logo's and the header button's), so the hand has the middle */
+.mhquad__text,
+.mhquad__cta {
+  position: absolute;
+  z-index: 2;
+  bottom: clamp(36px, 3.4vw, 64px);
+}
+.mhquad__text {
+  left: calc(var(--frame-side) + var(--space-7));
+  max-width: min(24em, 30vw);
+  font-size: clamp(16px, 1.2vw, 19px);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-align: left;
+  text-wrap: pretty;
+}
+.mhquad__cta {
+  right: calc(var(--frame-side) + var(--space-7));
+}
+
+/* The section after this one (the Quad 4 cards) sits over the hand, so the
+   forearm passes behind the middle card */
+.mhquad + .mhqc {
+  position: relative;
+  z-index: 1;
+}
