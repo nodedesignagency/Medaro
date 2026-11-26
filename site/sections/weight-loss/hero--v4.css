@@ -1,16 +1,18 @@
 /* ==========================================================================
    Weight Loss · hero V4 (round 3, user 2026-11-24: a new version, next to V1–V3)
-   Round 2 V1's photo (one clear sage-teal sky, the couple, a dotted arc with
-   lit points passing behind her) with the hims weight-loss hero's layout:
-   the copy on the left, vertically centred: chip, the headline (one colour, ink, 2026-11-24), then
-   four points (the sentence removed, 2026-11-24) as a check list (the client's six merged, 2026-11-24),
-   and the CTA. A man and a woman stand back to back on the right (one Magnific render, 2026-11-24).
+   The hims weight-loss hero's layout: the copy on the left, vertically
+   centred: chip, the headline (one colour, ink, 2026-11-24), then four
+   points (the sentence removed, 2026-11-24) as a check list (the client's six
+   merged, 2026-11-24), and the CTA.
+   Photo, round 4 (2026-11-26, "real life feeling … text on left feels
+   readable"): one photograph, the same couple jogging along a grassy
+   headland above the sea, full figure on the right; open sage sky over the
+   sea on the left, under the copy. No cut-out, no arc.
    Frame: Home's stage (frame edge 16px, max 1888, radius 18, fills the
    screen under the 70px header). Copy on the 48px inset, the logo's line.
-   Photo: a 2:1 plate anchored to the stage's right edge, so the couple keeps
-   their place from the right at every width; the sky runs on to the left,
-   behind the copy. A light paper haze over the left half (above the photo,
-   ending before them) keeps every line of ink type at AA (measured).
+   Photo: 4200×1782 (21:9), anchored to the stage's right edge and covering
+   it, so the couple keeps its place from the right at every width and the
+   sky runs on to the left, behind the copy.
    Header: components/header.css, --plain --compact --landing.
    ========================================================================== */
 
@@ -23,72 +25,31 @@
   height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* fills the screen under the header, never scrolls */
   overflow: hidden;
   border-radius: 18px;
-  background: #8aa59d; /* the sky's mid tone while the photo loads */
+  background: #b8b597; /* the photo's mean tone while it loads */
   color: var(--color-ink);
   container-type: size;
   isolation: isolate;
 }
 
-/* ---------- The photo: 2:1 plate, right edge on the stage's right edge ---------- */
+/* ---------- The photo: covers the stage, right edge on the stage's right edge ---------- */
 .wlh4__media {
   position: absolute;
   top: 50%;
   right: 0;
-  width: max(100cqw, 200cqh);
-  aspect-ratio: 2 / 1;
+  width: max(100cqw, calc(100cqh * 4200 / 1782));
+  aspect-ratio: 4200 / 1782;
   transform: translateY(-50%);
   z-index: -2;
 }
-.wlh4__sky {
+.wlh4__photo {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-/* The arc: round dots (zero-length dashes, round caps) in the plate's own
-   units, so it scales and crops with the photo. It rises from the foot of
-   the stage right of the copy and passes behind her chest. */
-.wlh4__arc {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-.wlh4__path {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.78);
-  stroke-width: 7;
-  stroke-linecap: round;
-  stroke-dasharray: 0 30;
-}
-.wlh4__glow {
-  fill: url(#wlh4-glow);
-  animation: wlh4-pulse 3.6s ease-in-out var(--d, 0s) infinite;
-}
-.wlh4__point { fill: #f4f8e6; }
-@keyframes wlh4-pulse {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 1; }
-}
-
-/* The couple, cut out of the same photo, exactly where it was shot */
-.wlh4__person {
-  position: absolute;
-  left: 59.556%;
-  top: 19.389%;
-  width: 24.889%;
-  height: 80.611%;
-}
-
-/* Haze behind the copy: paper over the sky, gone before she starts */
-.wlh4__haze {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(90deg, rgba(244, 245, 239, 0.62) 0%, rgba(244, 245, 239, 0.54) 26%, rgba(244, 245, 239, 0.32) 41%, rgba(244, 245, 239, 0) 54%);
-  pointer-events: none;
-}
+/* No haze: the copy sits straight on the light sky (2026-11-26). Measured on the
+   photo's own pixels behind every line, the lowest is the chip at 6.4:1 (1440×790);
+   the headline 6.7:1 or more at 1280, 1440 and 1920. */
 
 /* ---------- Copy: left, vertically centred (hims) ---------- */
 .wlh4__copy {
