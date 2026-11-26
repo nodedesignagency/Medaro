@@ -10,7 +10,7 @@
    sea on the left, under the copy. No cut-out, no arc.
    Frame: Home's stage (frame edge 16px, max 1888, radius 18, fills the
    screen under the 70px header). Copy on the 48px inset, the logo's line.
-   Photo: 4200×1782 (21:9), anchored to the stage's right edge and covering
+   Photo: 4000×1886 (the 21:9 render with its empty right tenth cut), anchored to the stage's right edge and covering
    it, so the couple keeps its place from the right at every width and the
    sky runs on to the left, behind the copy.
    Header: components/header.css, --plain --compact --landing.
@@ -25,7 +25,7 @@
   height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* fills the screen under the header, never scrolls */
   overflow: hidden;
   border-radius: 18px;
-  background: #b8b597; /* the photo's mean tone while it loads */
+  background: #b7b79f; /* the photo's mean tone while it loads */
   color: var(--color-ink);
   container-type: size;
   isolation: isolate;
@@ -36,8 +36,8 @@
   position: absolute;
   top: 50%;
   right: 0;
-  width: max(100cqw, calc(100cqh * 4200 / 1782));
-  aspect-ratio: 4200 / 1782;
+  width: max(100cqw, calc(100cqh * 4000 / 1886));
+  aspect-ratio: 4000 / 1886;
   transform: translateY(-50%);
   z-index: -2;
 }
