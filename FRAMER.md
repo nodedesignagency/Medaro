@@ -28,6 +28,7 @@ Log of what has moved from `main` (HTML) into Framer, how it was built, and what
 | **Home text reveal + parallax** | done (2026-11-26) | all (reveal) · desktop (hero depth) | See "Home animation" → Text reveal, Parallax. Native text effects (words in from blur) on every Home section's chip, heading and paragraphs and the footer tagline; **Parallax.tsx** (`withHeroDepth` on the hero Products, `withRiseIn` on the footer Vial) |
 | **Heading weights** | done (2026-11-26) | all | Display headings Regular 400 like the hero (see Home animation → Heading weights) |
 | **Smooth scroll (Lenis)** | done (2026-11-26) | desktop wheel/trackpad (touch native) | `SmoothScroll.tsx` in the Main template; see Home animation → Smooth scroll |
+| **About text reveal + parallax** | done (2026-11-26) | all (reveal, Why photo) · desktop (hero photo) | See About page → Animation (2026-11-26). Our Mission keeps only its own MissionTitle animation |
 
 ## Components (folder "MEDARO Components")
 
@@ -167,6 +168,17 @@ The user: "there is this what we do section we made in html somewhere but its no
 
 **Verification (2026-11-26):** Framer renders at 1200, 810 and 390 (names on one line at every size, no lone words, the people centred on their heads). The override was **not watched live** (overrides don't run on the canvas): check the rise-in and the hover in Preview before publishing.
 
+
+### Animation (2026-11-26)
+
+The user: "add text reveal and parallax to about page too … our mission section has some text animation i love it dont hinder it okay lets use that in that section". Same system as Home (`Home animation` above).
+
+- **Text reveal** (Framer's text effect, words in from blur; the chip / heading / text presets of Home): **About Hero** chip (0.1s), H1 (0.2s), the three paragraphs (0.55s), on screen at load so it plays as the page opens; **What We Do** chip and heading (the cards keep their own **withWwdCards** rise-in, so their names and lines have no reveal); **Why MEDARO** chip, heading, summary (0.4s) and, card by card as each comes into view, the numeral, the title (0.1s) and the line (0.3s).
+- **Our Mission: untouched.** Its **MissionTitle** (the icons opening in the words) stays the only text animation there; the chip and paragraph have no reveal, and the orbs keep their drift.
+- **Parallax** (overrides in `Parallax.tsx`):
+  - **`withBackdropDepth`** on the hero **Photo (kitchen breakfast)** (`yIiWq7BIE`, desktop): the photo drifts down at 30% of the scroll while the hero leaves, so it moves slower than the page. The stage starts under the fixed 70px header, so the strip that opens at the photo's top is always behind the header or off screen (checked at scroll 0 / 200 / 450). Tablet and phone: off (the photo sits in the lower part of the stage there).
+  - **`withImagePan`** on **Photo (cooking at home)** (`PqzULEMnv`, Why MEDARO, every breakpoint): pans the photo inside its frame while the frame crosses the screen, around its fill position (28%), up to 9% of the frame's height each way and never past the image (checked: 45px each way on the published page).
+- Checked by running the same functions on the published About page in Chromium at 1440 × 900. Not watched in Framer Preview or Safari.
 
 ## 404 page (2026-11-26)
 

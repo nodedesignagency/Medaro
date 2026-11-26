@@ -192,3 +192,58 @@ export function withHeroDepth(Component: ComponentType<any>): ComponentType<any>
 export function withRiseIn(Component: ComponentType<any>): ComponentType<any> {
     return riseIn(Component)
 }
+
+// About (2026-11-26, user: "add text reveal and parallax to about page too")
+// withBackdropDepth (About hero photo, desktop): the photo drifts down at 30% of the scroll while the hero leaves,
+// so it moves slower than the page. Its top edge only ever opens behind the fixed 70px header (the stage starts
+// under it), so no gap shows. Tablet and phone: off (the photo sits in the lower part of the stage there).
+const backdropDepth = parallax((el, vh, vw) => {
+    const section = el.closest("section")
+    if (!section || vw < 1200) {
+        el.style.translate = ""
+        return
+    }
+    const r = section.getBoundingClientRect()
+    const d = Math.min(Math.max(-r.top, 0), r.height)
+    el.style.translate = d ? "0 " + (0.3 * d).toFixed(1) + "px" : ""
+})
+
+// withImagePan (About Why MEDARO photo): pans the frame's own photo inside it while it crosses the screen, around
+// its set position (Framer's fill position, 28% here), up to 9% of the frame's height each way and never past the
+// image, so no edge shows. Every breakpoint.
+function panImage(el: HTMLElement, vh: number) {
+    const img = el.querySelector(":scope > [data-framer-background-image-wrapper] img") as HTMLImageElement | null
+    if (!img) return
+    if (!img.complete || !img.naturalWidth) {
+        img.addEventListener("load", queue, { once: true })
+        return
+    }
+    if (!img.dataset.panBase) {
+        const pos = getComputedStyle(img).objectPosition.split(" ")
+        img.dataset.panX = pos[0] || "50%"
+        img.dataset.panBase = pos[1] || "50%"
+    }
+    const W = el.clientWidth
+    const H = el.clientHeight
+    const s = Math.max(W / img.naturalWidth, H / img.naturalHeight)
+    const slack = img.naturalHeight * s - H
+    if (slack < 4) {
+        img.style.objectPosition = ""
+        return
+    }
+    const b = img.dataset.panBase
+    const base = b.endsWith("%") ? (parseFloat(b) / 100) * slack : Math.max(0, -parseFloat(b) || 0)
+    const r = el.getBoundingClientRect()
+    const p = Math.min(1, Math.max(-1, (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2)))
+    const off = Math.min(slack, Math.max(0, base + p * Math.min(0.09 * H, slack / 2)))
+    img.style.objectPosition = img.dataset.panX + " " + (-off).toFixed(1) + "px"
+}
+const imagePan = parallax(panImage)
+
+export function withBackdropDepth(Component: ComponentType<any>): ComponentType<any> {
+    return backdropDepth(Component)
+}
+
+export function withImagePan(Component: ComponentType<any>): ComponentType<any> {
+    return imagePan(Component)
+}
