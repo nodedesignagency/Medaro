@@ -51,6 +51,8 @@
   height: 100%;
   object-fit: cover;
   object-position: var(--cta-photo-pos, 50% 50%);
+  /* each photo is cropped (in the file) so its subject sits in the glass
+     between the words and the list, like the reference's dog */
   z-index: -1;
 }
 
