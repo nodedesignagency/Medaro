@@ -25,6 +25,8 @@ Log of what has moved from `main` (HTML) into Framer, how it was built, and what
 | Weight Loss (Home) | done (2026-11-24) | 1200 / 810 / 390 | Between the hero and Men's Health. See "Weight Loss (2026-11-24)" below; the mirror and partition are the **WeightLossStage** code component |
 | 404 page (`/404`) | done (2026-11-26) | 1200 / 810 / 390 | See "404 page" below. Home's stage with the Stage Light shader, chip, the 404 in the new **Error Number** style, two lines, Lime button to `/`; Main template |
 | **Home hero intro** | done (2026-11-26, desktop) | desktop only | See "Home animation" below. Code override **withHeroIntro** (`HeroIntro.tsx`) on the Home **Hero** section: full-screen stage with the products big in the centre, pulls back into its frame, then header, headline, sentence and cards come in. Tablet and phone: no intro yet |
+| **Home text reveal + parallax** | done (2026-11-26) | all (reveal) · desktop (hero depth) | See "Home animation" → Text reveal, Parallax. Native text effects (words in from blur) on every Home section's chip, heading and paragraphs and the footer tagline; **Parallax.tsx** (`withHeroDepth` on the hero Products, `withRiseIn` on the footer Vial) |
+| **Heading weights** | done (2026-11-26) | all | Display headings Regular 400 like the hero (see Home animation → Heading weights) |
 
 ## Components (folder "MEDARO Components")
 
@@ -194,7 +196,27 @@ The user: "now we are working on the animation part of the home page which we wi
 - **Tablet, phone and reduced motion:** no intro; the hero shows as it is (`@media (min-width: 1200px) and (prefers-reduced-motion: no-preference)`).
 - **Plays on every visit to Home** (also when coming back through the logo). Playing it once per visit would need a small script; ask the user.
 - **Not watched yet:** Framer Preview and the published site with the override itself (the user previews it in Framer; publish only when asked). Check Safari there too.
-- **Next (the user's references):** the Good Life text reveal and image parallax for the sections below the hero, only where a section needs one.
+
+### Text reveal (Good Life, 2026-11-26)
+
+The user: "now add good life text reveal and parallax to other sections". **Framer's own text effect** (Effects → Text, editable in the canvas): `trigger onInView`, threshold 0.4, once, **split by word**, each word from opacity 0 and blur to sharp, `cubic-bezier(0.22, 1, 0.36, 1)`, no movement (like goodlifemeds.com). Three presets (the transition's delay is the gap between words):
+- **chip**: blur 8px, 0.6s, 0.05s between words;
+- **heading**: blur 12px, 0.8s, 0.06s between words, starting 0.1s after its chip;
+- **text**: blur 6px, 0.6s, 0.012s between words, starting 0.25–0.4s after its heading.
+
+On: Weight Loss (chip, h2, paragraph, h3, lead, the five care points 80ms apart, both card headings and paragraphs), Men's Health and Women's Health (chip, h2, lede, paragraph), Supplement (chip, h2, both card titles and texts, the note; the glass list card keeps its own **withReveal**), How Medaro Works (chip, h2; the deck keeps its own text roll), the **footer tagline** (Main template, so on every page). Not on: the disclaimer and the footer small print (they stay plainly visible), the hero (it has its intro), buttons. Primary breakpoint only; tablet and phone inherit. Framer's site setting turns text effects off for reduced motion.
+
+### Parallax (2026-11-26)
+
+Code overrides in **Parallax.tsx** (folder "Code"; source `framer/Parallax.tsx`), using the CSS `translate` property so Framer's own transforms and loops are untouched; one shared scroll listener; none with reduced motion. **Each layer rests exactly where it was approved** (top of the page / end of the page) and only moves while its section scrolls:
+- **`withHeroDepth`** on the hero **Products** (`EuIyATax5`): as the hero scrolls away the products rise faster than the page, up to 14% of the hero's height when it has left the screen (126px at 900 tall), away from "Better Health." (never into it). Desktop only: on tablet the products sit in the flow under the sentence. Doesn't touch the intro (the intro moves Upper, this moves Products).
+- **`withRiseIn`** on the footer **Vial** (`gdlUlELPQ`, Main template): while the footer comes up the vial sits up to 35% of its height lower and rises into place, reached when the footer is fully on screen (the end of the page).
+- **Not on the Supplement photo**, on purpose: her head starts 12–19px under the panel's top and her chin is 18–31px above the glass card (the user's crop rules: "i dont want to cut women head", face clear of the card), so any slide inside the panel crops her head or puts her chin under the card. Doing it would need a looser crop (the full render is in git `a528098`). Not on the Weight Loss mirror either (the platform would come off its floor line) or the Men's and Women's tiles (they already drift).
+- Checked by running the same functions on the published site in Chromium at 1440 × 900: scroll 0 / 300 / 600 for the hero, the footer 700 / 350 / 0px from the end.
+
+### Heading weights (2026-11-26)
+
+The user, with screenshots of How Medaro Works, Women's Health and Men's Health: "the font weight is bigger than hero and some other places can we fix this as well". The hero's headline and card titles are Host Grotesk **Regular 400**; these text styles were **Medium 500** and are now **400** (tracking eased a touch for the lighter weight): **Section Display** (Men's, Women's, How Medaro Works h2; −0.048 → −0.04em), **Feature Title** (Weight Loss h2; −0.042 → −0.038em), **Feature Subtitle** (Weight Loss h3; −0.03 → −0.028em), **Card Heading** (Weight Loss cards; −0.025 → −0.022em), **Step Number**, **Step Title** (−0.035 → −0.032em), **Tile Text** (Men's and Women's tiles; −0.03 → −0.025em), **Why Point Title** (About). **StepsDeck.tsx** drew its own number and titles at 500: all four now 400 (titles −0.032em). Small UI labels stay Medium: Chip, Menu Title, Menu Label, Treatment Name, Glass Name, the Coming Soon tag. Layout unchanged (same line heights; the Weight Loss mirror still meets the chip). `main`'s HTML still has the Medium headings.
 
 ## Links (`[LINK NEEDED]`)
 
