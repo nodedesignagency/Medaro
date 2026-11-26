@@ -55,12 +55,14 @@
 }
 .wwd .chip { margin: 0 auto 28px; } /* leaf green on paper (styles.css default) */
 .wwd__title {
-  max-width: 14em;
+  /* the same heading as Why MEDARO (why--b.css) and Our Mission: Regular, not Medium
+     (user, 2026-11-26: "this heading weight look thicker than other … lets fix that") */
+  max-width: 15em;
   font-family: var(--font-display);
-  font-size: clamp(48px, 4.6vw, 88px);
-  font-weight: var(--weight-medium);
-  line-height: 1;
-  letter-spacing: -0.045em;
+  font-size: clamp(44px, 4vw, 76px); /* 58 at 1440 */
+  font-weight: var(--weight-regular);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 

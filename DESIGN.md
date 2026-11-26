@@ -151,6 +151,7 @@ Write what the user said, in their words where possible, with the date.
 
 ### Likes
 
+- 2026-11-26: About headings: "this heading weight look thicker than other compared to other sections we have in this page lets fix that". What We Do's heading now matches Why MEDARO's (Regular 400, −0.04em, 1.02, `clamp(44px, 4vw, 76px)`, 58 at 1440; Framer: Why Title). **Rule: every About section heading is Regular, never Medium.**
 - 2026-11-26: "there is this what we do section we made in html somewhere but its not in the framer can you check and fix that": What We Do (HTML round 2, `claude/sharp-dijkstra-uwyvwy`) is now in Framer and in this branch's `about.html`, in the client's order (after Our Mission).
 - 2026-11-26: About page photos: "i want something that looks like real life photoshoot", like the people photos on the other pages (Weight Loss, Men's, How Medaro Works). The user then asked that **each image match its section's copy** ("i want it to feel the image matches content get it?"). Picked from our ideas: hero "Saturday breakfast" (with a care detail: a phone) and Why "Cooking at home" (with our box on the counter); user: "go with your picks, generate hero 1 and why 1", with five photos of their own as direction (couple at a warm kitchen island, man cooking by a big garden window, couple at breakfast outdoors, couple toasting by the sea). Rule kept from earlier rounds: their photos are direction **in words**; image references are our own renders.
 
