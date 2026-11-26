@@ -12,6 +12,12 @@
    12), the line in the Men's blue; copy on the logo's line, the photo on
    the frame (16px) at the nav bar's radius; the client's CTA at the foot,
    level with the photo's foot.
+   Round 2 (user, 2026-11-26: "the image is too big height wise and on left
+   we are using space between i dont like that lets use simple padding and
+   gapping there and decrease the height of image"): the left column flows
+   with fixed gaps (40px heading to steps, 32px steps to CTA), and the photo
+   takes its height from the left column (chip line to CTA foot) instead of
+   its own 1.1 shape, so it is landscape and never taller than the copy.
    Framer: a section; the step list one component with a variant per open
    step, timed (7s), the photos changing with it.
    ========================================================================== */
@@ -50,14 +56,14 @@
   letter-spacing: -0.035em;
 }
 
-/* The chip on the photo's top line, the CTA on its foot, the steps centred
-   between them; the list keeps the height of its tallest state (set by the
-   script), so nothing above or below moves when a step opens */
+/* Simple gaps, no spreading: the steps 40px under the heading, the CTA 32px
+   under the steps. The list keeps the height of its tallest state (set by
+   the script), so nothing below moves when a step opens */
 .mhhiw__steps {
   align-self: stretch;
   display: grid;
   align-content: start;
-  margin-block: auto;
+  margin-top: 8px; /* + the column's 32px gap = 40 */
 }
 .mhhiw__step {
   position: relative;
@@ -155,13 +161,15 @@
 
 
 
-/* ---------- Right: the photo, one per step ---------- */
+/* ---------- Right: the photo, one per step ----------
+   As tall as the left column (the grid row): top on the chip's line, foot on
+   the CTA's foot. Its pictures are absolutely placed, so the copy alone sets
+   the height. */
 .mhhiw__media {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  aspect-ratio: 1.1;
-  max-height: calc(100svh - 70px - 64px); /* the whole section fits a laptop window under the header */
+  min-height: 480px;
   border-radius: 12px;
   background: #c9d6e4;
 }
