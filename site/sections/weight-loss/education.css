@@ -37,6 +37,11 @@
   padding-block: 24px 0; /* the chip on the icons' line */
 }
 .wledu__chip { --color-chip: #367d12; } /* leaf green on the page colour: 4.8:1 (as in care and difference) */
+/* When the ongoing care scene turns the page deep olive (it starts while this heading is still on screen), the chip
+   turns lime like the ongoing care chip, and back to leaf green when the scene ends; the chip's 700ms colour fade
+   keeps it in step with the page (user, 2026-11-26: "make this color change like this ongoing care"). Lime on deep
+   olive ≈ 12:1; leaf green there would be 2.6:1. */
+:root[data-scene="wl-ongoing"]:not([data-ongoingbg="light"]) .wledu__chip { --color-chip: var(--p-accent); }
 .wledu__title {
   margin-top: 20px;
   margin-left: -0.03em; /* the U's side bearing: ink on the logo's line */
