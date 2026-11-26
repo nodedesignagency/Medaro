@@ -65,15 +65,10 @@
   width: min(620px, 46cqw);
   transform: translateY(-50%);
 }
-/* The chip in a colour from the photo (user, 2026-11-26: "chip should have some different color here
-   that will match hero"): the most vivid of its hue that still passes AA on the sky behind it (4.8:1,
-   measured). Green (the grass, the page's chip family) by default; ?wlchip=teal (the sea), ochre (the dry grass). */
+/* The chip in green from the photo's grass (user, 2026-11-26: "chip should have some different color
+   here that will match hero", then "keep green chip"): the most vivid green that still passes AA on the
+   sky behind it (4.8:1, measured at 1280, 1440 and 1920). Teal, ochre and lime were tried. */
 .wlh4__chip { --color-chip: #2B5900; }
-:root[data-wlchip="teal"] .wlh4__chip { --color-chip: #005858; }
-:root[data-wlchip="ochre"] .wlh4__chip { --color-chip: #6C4701; }
-/* ?wlchip=lime (user, 2026-11-26: "try lime too in chip", then "just change in text"): the lime as
-   the text colour, like the others. On this sky it measures about 1.3:1, under AA: review option only. */
-:root[data-wlchip="lime"] .wlh4__chip { --color-chip: var(--p-accent); }
 .wlh4__title {
   margin-top: 20px;
   margin-left: -0.035em; /* the W's side bearing: ink on the logo's line */
