@@ -55,6 +55,13 @@
   gap: 8px;
 }
 .wledu__card {
+  /* The card is always white, so its words are always ink: it keeps its own colour tokens and never follows a
+     page scene (user, 2026-11-26: the ongoing care scene below turned them white on white, "dont make color change
+     in this state"). */
+  --color-ink: var(--p-ink);
+  --color-text: var(--p-ink);
+  --color-text-muted: var(--p-ink-soft);
+  color: var(--color-ink);
   display: flex;
   flex-direction: column;
   padding: 24px 24px 28px;
