@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="sections/about/hero--b.css">
   <link rel="stylesheet" href="sections/about/mission--v1.css">
   <link rel="stylesheet" href="sections/about/mission--v2.css">
+  <link rel="stylesheet" href="sections/about/what-we-do.css">
   <link rel="stylesheet" href="sections/about/why.css">
   <link rel="stylesheet" href="sections/about/why--b.css">
   <link rel="stylesheet" href="sections/about/why--c.css">
@@ -266,6 +267,50 @@
     </section>
     </div>
     <!-- SECTION:about/mission--v2 END -->
+
+    <!-- SECTION:about/what-we-do START · styles: sections/about/what-we-do.css · scripts: main.js (reveal) · assets: assets/images/about/ (wwd-weight.webp, wwd-mens.webp, wwd-womens.webp)
+         After the user's hims reference (2026-11-23), three cards instead of two. Copy: content/about.md → What We Do,
+         word for word ("What We Do" as the chip, the lead-in sentence as the headline, its colon removed by the user). Photos: Magnific, 2026-11-23,
+         cut out over the row's gradient (drawn in code). -->
+    <section class="wwd" id="what-we-do" aria-labelledby="wwd-title">
+      <div class="wwd__frame">
+        <header class="wwd__head">
+          <p class="chip"><span>What We Do</span></p>
+          <h2 class="wwd__title" id="wwd-title">We focus on three essential areas of health</h2>
+        </header>
+
+        <ul class="wwd__cards" data-reveal>
+          <li>
+            <a class="wwd-card wwd-card--weight" href="weight-loss.html" style="--i:0">
+              <span class="wwd-card__text">
+                <span class="wwd-card__name">Weight Management</span>
+                <span class="wwd-card__line">Medically guided <span class="wwd-card__keep">weight-loss</span> treatment options.</span>
+              </span>
+              <img class="wwd-card__person" src="assets/images/about/wwd-weight.webp" alt="" width="949" height="1200" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <li>
+            <a class="wwd-card wwd-card--mens" href="mens-health.html" style="--i:1">
+              <span class="wwd-card__text">
+                <span class="wwd-card__name">Men's Health</span>
+                <span class="wwd-card__line">Personalized care for sexual health and wellness.</span>
+              </span>
+              <img class="wwd-card__person" src="assets/images/about/wwd-mens.webp" alt="" width="1143" height="1200" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <li>
+            <a class="wwd-card wwd-card--womens" href="index.html#womens-health" style="--i:2">
+              <span class="wwd-card__text">
+                <span class="wwd-card__name">Women's Health</span>
+                <span class="wwd-card__line">Support for hormonal health, menopause, and overall well-being.</span>
+              </span>
+              <img class="wwd-card__person" src="assets/images/about/wwd-womens.webp" alt="" width="1072" height="1200" loading="lazy" decoding="async">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- SECTION:about/what-we-do END -->
 
     <!-- SECTION:about/why START · styles: sections/about/why.css, why--b.css, why--c.css (versions: ?why=a|b|c) · assets: assets/images/about/why-contour.svg, why-rings.svg (tools/about-patterns.py), why-cooking.webp (B), why-frame-standin.webp (C) · review option (A): ?whycard=contour|dots|rings · scripts: main.js (scenes: the page turns light green)
          After the user's Daylight "Why partners choose Daylight" reference (2026-11-23). Copy: content/about.md → Why MEDARO; the
