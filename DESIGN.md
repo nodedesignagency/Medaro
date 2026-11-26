@@ -102,9 +102,18 @@ Status: `exploring` (on a branch) · `approved` (on `main`) · `rejected`. Add a
 | how-it-works | — | | |
 | footer | — | | |
 
-### About (`about.html`) · Contact (`contact.html`) · Weight Loss (`weight-loss.html`) · Men's Health (`mens-health.html`) · Legal
+### About (`/about`, built in Framer: project "Distinct Plans")
 
-Not started.
+The hero, Our Mission and Why MEDARO are built in Framer (see `FRAMER.md` on `claude/friendly-ride-ffnze4` / `claude/wizardly-ptolemy-pfb6su` for the build; the HTML of record for Our Mission and Why is `site/about.html` on `claude/optimistic-johnson-dxo64b`).
+
+| Section | Status | Branch | Notes |
+|---|---|---|---|
+| hero photo | **live in Framer, waiting for the user's verdict** (2026-11-26) | `claude/modest-wozniak-kgjug1` | **"Saturday breakfast"** (`site/assets/images/about/about-hero-kitchen.webp`, 3840×2143, 222 KB) replaces the hero-run stand-in. A couple in their early forties at a walnut-and-stone kitchen island in low morning sun from the right: she slices a pear and laughs, he glances at his phone (screen away) with a coffee. **Matches the copy**: care that fits into a normal morning ("simple, accessible, built around you", "without the long waits", "modern technology"); the phone is the care detail. Magnific Nano Banana 2.1, 4K, 2 variants (290 credits); references were our own renders only (Weight Loss video-call man for the home and grade, How Medaro Works step 01 for people realism), the user's five photos (couple at a kitchen island, man cooking by a garden window, etc.) taken **in words only**. The pick put the couple at 40–87% across, under the copy column at 1200–1440, so it was **widened with Magnific expand** (left and top, more shaded walnut kitchen; 130 credits) and the sharp 4K original composited back over the expanded frame in code (aligned to 1px, 80px feathered edges): the couple now sits at 62–92%. Framer: desktop `fillImagePositionX` **right** (was left), tablet and phone **85%** (was 60%), so the couple stays clear of the text at 1200 (≈40px gap) and is fully in frame on phone. A second pendant lamp in the expanded left sits under "Healthcare", dimmed by the scrim; text stays readable. |
+| why-medaro photo | **live in Framer, waiting for the user's verdict** (2026-11-26) | `claude/modest-wozniak-kgjug1` | **"Cooking at home"** (`site/assets/images/about/why-cooking.webp`, 1400×1875, 130 KB) replaces the stretch stand-in. A man about fifty stirs vegetables in a sage-green kitchen beside a floor-to-ceiling garden window; **our sage MEDARO box** (the How Medaro Works step 03 box, blank lid with the debossed contour pattern) lies on the counter in front. **Matches the copy**: "more than a prescription" / "your health and your goals" (health is how you live), and card 03 "From home, to your door" (the box). Nano Banana 2.1, 4K, 3:4, 2 variants (290 credits), references: the Weight Loss video-call man and `step-3-blank.webp`. Framer crop: desktop Y 30% (unchanged), tablet **18%** (head in frame), phone **45%** (box in frame). |
+
+### Contact (`contact.html`) · Weight Loss (`weight-loss.html`) · Men's Health (`mens-health.html`) · Legal
+
+Not started on this branch (Weight Loss and Men's Health are in progress on other branches).
 
 ## 6. Decisions log
 
@@ -118,6 +127,8 @@ Write what the user said, in their words where possible, with the date.
 - 2026-11-19: Client palette shared on a call: button `#D5E5AD` Soft Nude Lime ("not the light green"), text `#343B29` Dark Olive Green, `#A8AF98` Dusty Olive. The user told the client we'd explore 2–3 colour options after the first version.
 
 ### Likes
+
+- 2026-11-26: About page photos: "i want something that looks like real life photoshoot", like the people photos on the other pages (Weight Loss, Men's, How Medaro Works). The user then asked that **each image match its section's copy** ("i want it to feel the image matches content get it?"). Picked from our ideas: hero "Saturday breakfast" (with a care detail: a phone) and Why "Cooking at home" (with our box on the counter); user: "go with your picks, generate hero 1 and why 1", with five photos of their own as direction (couple at a warm kitchen island, man cooking by a big garden window, couple at breakfast outdoors, couple toasting by the sea). Rule kept from earlier rounds: their photos are direction **in words**; image references are our own renders.
 
 - 2026-11-20: Link hover: "make the links hover animation like this for footer … and nav bar", then "change this to all hero versions in all branch … only the links animation". `.link-roll` added on every branch to all nav links (V1 and V2 header links, V3 menu links); footer links get it when the footer is built.
 
@@ -135,6 +146,9 @@ Write what the user said, in their words where possible, with the date.
 - 2026-11-19: Fill V1's empty top-right. Two ideas from the user: (1) a short supplement promo card like their reference card, built now; (2) a 3D supplement floating up and down, like a floating-pens-and-pills reference. **Build (2) only when the user asks.**
 
 ### Rejected
+
+- 2026-11-26, About photo ideas, round 1: a person standing in the Home stage's diagonal light beam on dark olive ("no i dont want hero bg like home this is different"), and the first list of ideas (morning window, dawn ridge, motion loop; garden still life, laughing portrait): "i dont like these much". Lesson: About photos are real-life lifestyle photography, not the Home product stage, and each one must carry its section's copy.
+- 2026-11-26, About ideas dropped after checking them against the copy: "Out the front door" (reads as going to work, not as "no waiting room") and "In the garden" (beside cards about providers and delivery it reads as a gardening ad).
 
 - 2026-11-19, round 1 heroes A/B/C, called "full AI slop" by the user. What to avoid from now on:
   - Putting the care lines in the hero (index list, cards, frosted strip). They stay in the nav.
