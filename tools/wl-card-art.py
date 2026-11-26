@@ -6,6 +6,7 @@ in the MEDARO Magnific project, not in git).
 
     python3 tools/wl-card-art.py vial  <vial-render.png>
     python3 tools/wl-card-art.py lunge <lunge-render.png> <lunge-cutout.png>
+    python3 tools/wl-card-art.py care  <care-render.png> <head-enhanced.png> <x> <y> <w> <h>
 
 vial:  the Tirzepatide vial standing on a pale ledge (after the user's
        NAD+ jar-on-a-ledge reference). Rendered on a flat wall close to the
@@ -24,6 +25,13 @@ lunge: the couple in a kettlebell lunge (after the user's lunge reference;
        kept as black at (1 - ratio) opacity, so on any card colour it multiplies
        like a real shadow. Output has alpha.
        -> site/assets/images/weight-loss/card-lunge.webp
+
+care:  the care section's photo (2026-11-26): a man of about 34 on park
+       grass, laughing (Nano Banana 2.1, 4K, 3712x4608). His head was cropped
+       (x, y, w, h: 1400 360 1760 1500) and run through Magnific's skin enhancer (faithful); here it
+       goes back in place with a soft 60px edge, and the photo is scaled for
+       the panel (1800 wide: 2x at 1920).
+       -> site/assets/images/weight-loss/care-man.webp
 
 Needs: pip install pillow numpy scipy
 """
@@ -130,6 +138,31 @@ def lunge(src, cutout):
     return prev
 
 
+def care(src, head, x, y, w, hh):
+    im = Image.open(src).convert("RGB")
+    crop = im.crop((x, y, x + w, y + hh))
+    h = Image.open(head).convert("RGB").resize((w, hh), Image.LANCZOS)  # the enhancer returns it upscaled
+    # the enhancer shifts the colour a few levels (darker, cooler): take its fine detail, the
+    # original's colour (low-frequency difference added back), so no patch shows in the sky
+    o, e = np.asarray(crop).astype(float), np.asarray(h).astype(float)
+    diff = ndimage.gaussian_filter(o - e, sigma=(40, 40, 0))
+    h = Image.fromarray(np.clip(e + diff, 0, 255).astype(np.uint8))
+    # feathered mask: full inside, fading over 60px to the crop's edges
+    m = np.ones((h.height, h.width), dtype=float)
+    f = 60
+    ramp = np.clip(np.arange(h.width) / f, 0, 1)
+    m *= np.minimum(ramp, ramp[::-1])[None, :]
+    ramp = np.clip(np.arange(h.height) / f, 0, 1)
+    m *= np.minimum(ramp, ramp[::-1])[:, None]
+    mask = Image.fromarray((m * 255).astype(np.uint8))
+    im.paste(h, (x, y), mask)
+    W = 1800
+    im = im.resize((W, round(im.height * W / im.width)), Image.LANCZOS)
+    path = os.path.join(OUT, "care-man.webp")
+    im.save(path, quality=74, method=6)  # under 300 KB
+    print(path, im.size, os.path.getsize(path) // 1024, "KB")
+
+
 if __name__ == "__main__":
     what = sys.argv[1]
     if what == "vial":
@@ -138,5 +171,7 @@ if __name__ == "__main__":
         p = lunge(sys.argv[2], sys.argv[3])
         if len(sys.argv) > 4:
             p.convert("RGB").save(sys.argv[4], quality=88)
+    elif what == "care":
+        care(sys.argv[2], sys.argv[3], *(int(v) for v in sys.argv[4:8]))
     else:
         sys.exit(__doc__)
