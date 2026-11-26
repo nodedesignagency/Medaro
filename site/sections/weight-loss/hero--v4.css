@@ -10,7 +10,7 @@
    sea on the left, under the copy. No cut-out, no arc.
    Frame: Home's stage (frame edge 16px, max 1888, radius 18, fills the
    screen under the 70px header). Copy on the 48px inset, the logo's line.
-   Photo: 4000×1886 (the 21:9 render with its empty right tenth cut), anchored to the stage's right edge and covering
+   Photo: 4016×1886 (a square close shot of the couple, extended left with sky, sea and grass), anchored to the stage's right edge and covering
    it, so the couple keeps its place from the right at every width and the
    sky runs on to the left, behind the copy.
    Header: components/header.css, --plain --compact --landing.
@@ -25,7 +25,7 @@
   height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* fills the screen under the header, never scrolls */
   overflow: hidden;
   border-radius: 18px;
-  background: #b7b79f; /* the photo's mean tone while it loads */
+  background: #abaa8f; /* the photo's mean tone while it loads */
   color: var(--color-ink);
   container-type: size;
   isolation: isolate;
@@ -36,8 +36,8 @@
   position: absolute;
   top: 50%;
   right: 0;
-  width: max(100cqw, calc(100cqh * 4000 / 1886));
-  aspect-ratio: 4000 / 1886;
+  width: max(100cqw, calc(100cqh * 4016 / 1886));
+  aspect-ratio: 4016 / 1886;
   transform: translateY(-50%);
   z-index: -2;
 }
@@ -47,9 +47,15 @@
   height: 100%;
 }
 
-/* No haze: the copy sits straight on the light sky (2026-11-26). Measured on the
-   photo's own pixels behind every line, the lowest is the chip at 6.4:1 (1440×790);
-   the headline 6.7:1 or more at 1280, 1440 and 1920. */
+/* A soft haze along the horizon, only behind the lower points: the tall grass
+   rises into the sky there. Everything above sits straight on the sky. */
+.wlh4__haze {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse 36% 20% at 25% 61%, rgba(244, 245, 239, var(--haze, 0.28)) 0%, rgba(244, 245, 239, calc(var(--haze, 0.28) * 0.6)) 45%, rgba(244, 245, 239, 0) 100%);
+  pointer-events: none;
+}
 
 /* ---------- Copy: left, vertically centred (hims) ---------- */
 .wlh4__copy {
