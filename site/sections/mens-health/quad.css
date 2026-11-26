@@ -5,36 +5,28 @@
    it, tilted about 19° clockwise (measured from the reference), the button
    centred over the pack's foot. Ours: the chip above, the client's sentence
    under the headline, our Quad 4 ampoule (exactly as on Home and in the
-   menu, its ink print), turning on its axis with scroll and by hand
-   (components/pack-spin.js, after the user's recording).
+   menu, its ink print), held still facing front (round 3, user 2026-11-26:
+   "make it still not rotate on scroll"; it used to pin and turn on its axis
+   with the scroll, components/pack-spin.js, git 9496afe).
    Frame: the headline stays inside the content inset (the frame + 48px).
    ========================================================================== */
 
-/* The section pins under the sticky header for about one screen of scroll
-   while the ampoule makes one full turn (components/pack-spin.js reads the
-   progress), then the page moves on. Reduced motion: no pin, no turn. */
+/* One screen under the header; it scrolls by like any section (no pin) */
 .mhquad {
   --screen: min(1200px, max(640px, calc(100svh - 70px))); /* one screen under the 70px header */
-  --pin: 110svh;                                           /* the scroll that turns it once */
   --hand-gap: clamp(88px, 8vw, 160px);                     /* more hand between this section and the cards */
   position: relative;
-  height: calc(var(--screen) + var(--pin));
   margin-bottom: var(--hand-gap);
   color: var(--color-ink);
 }
-.mhquad__pin {
-  position: sticky;
-  top: 70px; /* under the header */
+.mhquad__inner {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: var(--screen);
   padding: clamp(52px, 4.6vw, 96px) calc(var(--frame-side) + var(--space-7)) 0;
   text-align: center;
-}
-@media (prefers-reduced-motion: reduce) {
-  .mhquad { height: auto; }
-  .mhquad__pin { position: relative; top: 0; }
 }
 
 .mhquad__chip { --color-chip: #0a6fc7; } /* the Men's sky blue, deep enough for paper: 4.7:1 (Components → Chip) */
@@ -75,8 +67,19 @@
   left: 50%;
   top: -3.6cqh;
   height: 200cqh;
+  aspect-ratio: 1368 / 2475;
   transform: translateX(-50%);
 }
+/* three layers of one photograph: the hand and ampoule, the white print
+   screened onto the blue glass, the fingers in front of the glass over it */
+.mhquad__pack img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.mhquad__print { mix-blend-mode: screen; }
 
 /* The sentence and the button in the bottom corners, on the frame lines
    (the logo's and the header button's), so the hand has the middle */

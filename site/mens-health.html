@@ -149,7 +149,7 @@
       <!-- SECTION:mens-health/hero--v2 END -->
     </div>
 
-    <!-- SECTION:mens-health/quad START · styles: sections/mens-health/quad.css, components/pack-spin.css · scripts: components/pack-spin.js · assets: assets/images/products/hand-ampoule-quad4.webp, hand-ampoule-quad4-front.webp, print-hand-ampoule-quad4.svg, label-hand-ampoule-quad4.js (from tools/pack-print.py)
+    <!-- SECTION:mens-health/quad START · styles: sections/mens-health/quad.css · assets: assets/images/products/hand-ampoule-quad4.webp, hand-ampoule-quad4-front.webp, print-hand-ampoule-quad4.svg (from tools/pack-print.py)
          The brief's "Introducing Quad 4", after the user's Good Life reference (2026-11-25: "For this section i am thinking about
          this style. Also if possible make it rotatable like this": "The Good Life Difference", a huge centred headline, the pack
          under it; and a recording of the bottle turning on its axis).
@@ -158,17 +158,17 @@
          shape and print (white, screened onto the glass as on Home), blue liquid, held up by a man's hand: one Magnific photograph
          (blank ampoule), its print added in code and turning on the axis; the fingers in front of the glass sit over the print.
          The sentence moves to the bottom-left corner and the CTA to the bottom-right, on the frame lines, to give the hand the middle.
+         Round 3 (2026-11-26): "make it still not rotate on scroll": the ampoule faces front and holds still; no pin, no turning, no drag.
          Copy: content/mens-health.md → Introducing Quad 4, word for word (eyebrow as the chip). [LINK NEEDED] intake URL. -->
-    <section class="mhquad" id="quad-4" aria-labelledby="mhquad-title" data-pack-spin-scope>
-      <div class="mhquad__pin" data-pack-spin-sticky>
+    <section class="mhquad" id="quad-4" aria-labelledby="mhquad-title">
+      <div class="mhquad__inner">
         <p class="chip mhquad__chip"><span>Introducing Quad 4</span></p>
         <h2 class="mhquad__title" id="mhquad-title">Four Powerful Ingredients.<br>One Modern Approach.</h2>
         <div class="mhquad__stage">
-          <div class="mhquad__pack pack-spin pack-spin--screen" data-pack-spin="hand-ampoule-quad4" style="--pack-ratio: 1368 / 2475">
-            <img class="pack-spin__body" src="assets/images/products/hand-ampoule-quad4.webp" alt="" width="1368" height="2475">
-            <img class="pack-spin__still" src="assets/images/products/print-hand-ampoule-quad4.svg" alt="" width="1368" height="2475">
-            <canvas class="pack-spin__print" aria-hidden="true"></canvas>
-            <img class="pack-spin__front" src="assets/images/products/hand-ampoule-quad4-front.webp" alt="" width="1368" height="2475">
+          <div class="mhquad__pack">
+            <img src="assets/images/products/hand-ampoule-quad4.webp" alt="" width="1368" height="2475">
+            <img class="mhquad__print" src="assets/images/products/print-hand-ampoule-quad4.svg" alt="" width="1368" height="2475">
+            <img src="assets/images/products/hand-ampoule-quad4-front.webp" alt="" width="1368" height="2475">
           </div>
         </div>
         <p class="mhquad__text">A convenient sublingual formula designed to dissolve under your tongue, bringing together four ingredients with distinct properties in one treatment.</p>
@@ -529,7 +529,6 @@
   </main>
 
   <script src="main.js" defer></script>
-  <script src="assets/images/products/label-hand-ampoule-quad4.js" defer></script>
   <script src="assets/images/products/label-ampoule-quad4.js" defer></script>
   <script src="components/pack-spin.js" defer></script>
   <script src="sections/mens-health/science.js" defer></script>
