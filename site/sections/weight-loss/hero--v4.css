@@ -65,7 +65,12 @@
   width: min(620px, 46cqw);
   transform: translateY(-50%);
 }
-.wlh4__chip { --color-chip: var(--p-ink); } /* on the hazed sky */
+/* The chip in a colour from the photo (user, 2026-11-26: "chip should have some different color here
+   that will match hero"): the most vivid of its hue that still passes AA on the sky behind it (4.8:1,
+   measured). Green (the grass, the page's chip family) by default; ?wlchip=teal (the sea), ochre (the dry grass). */
+.wlh4__chip { --color-chip: #2B5900; }
+:root[data-wlchip="teal"] .wlh4__chip { --color-chip: #005858; }
+:root[data-wlchip="ochre"] .wlh4__chip { --color-chip: #6C4701; }
 .wlh4__title {
   margin-top: 20px;
   margin-left: -0.035em; /* the W's side bearing: ink on the logo's line */
@@ -101,4 +106,5 @@
 }
 .wlh4__tick svg { width: 14px; height: 14px; }
 
+/* The CTA in the check circles' lime (user, 2026-11-26: "use color we have on points in cta too") */
 .wlh4__cta { margin-top: clamp(22px, 3.8cqh, 34px); }
