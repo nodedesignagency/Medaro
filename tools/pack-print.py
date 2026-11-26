@@ -298,13 +298,17 @@ STEPS = VialShot(Cylinder(cx=677.875, r=95.125, eye=469.65, k=0.0511), 372.5, 61
                  (582.75, 773), (1024, 1024), m=(611.5 - 372.5) / (995 - 398), span=(582.75, 773))
 
 
-def vial(variant, shot=VIAL):
+def vial(variant=None, shot=VIAL):
     """The client's MEDARO Tirzepatide vial mock-up, word for word: Injection · Compounded ·
     Tirzepatide · <variant> Vial · RX ONLY. Body in the brand's olive (client: "change the Color
     of the body to the brand Color"). Our layout, the pens' recipe turned across the vial: the row
     above (RX ONLY), hairline, the name band (Compounded in lime over Tirzepatide), hairline, the use
     line (Injection), and the variant on one solid lime block across the foot, a third of the label
-    like the pens' dose tab. Even 50-unit steps between rows."""
+    like the pens' dose tab. Even 50-unit steps between rows.
+    variant=None: the plain label, "Vial" alone in the foot block. The client dropped the doses
+    (2026-11-21: "Just remove the microdose", "Don't add the Multidose"); Framer and every Weight Loss
+    page vial use it. The Microdose / Multidose prints stay only for `main`'s approved hero HTML."""
+    foot = f"{variant} Vial" if variant else "Vial"
     p = Print(shot.cyl)
     m, y = shot.m, shot.y
     top, bot = shot.top - 1.5 * m, shot.bot + 1 * m  # cover the paper's bright cut edge
@@ -318,11 +322,11 @@ def vial(variant, shot=VIAL):
     p.line(-edge, edge, y(707), 2.2 * m, PAPER, 0.36)
     p.text("Injection", L, y(777), 29 * m, 400, PAPER, opacity=0.82)
     p.band(y(823), bot, LIME, *shot.x)
-    p.text(f"{variant} Vial", L, y(925), 38 * m, 500, INK, tracking=-0.015)
+    p.text(foot, L, y(925), 38 * m, 500, INK, tracking=-0.015)
     # the paper's own shading carries the light (the print multiplies onto it); deepen the far sides a little
     shade = [(0, 0.34), (0.1, 0.12), (0.24, 0), (0.9, 0), (1, 0.1)]
     body = p.band_path(top, bot, *shot.x)
-    return p.svg(*shot.size, f"Compounded Tirzepatide, {variant} Vial: label print", shade=shade, shade_clip=body,
+    return p.svg(*shot.size, f"Compounded Tirzepatide, {foot}: label print", shade=shade, shade_clip=body,
                  span=shot.span)
 
 
@@ -393,15 +397,16 @@ if __name__ == "__main__":
     files = {
         "print-vial-microdose.svg": vial("Microdose"),
         "print-vial-multidose.svg": vial("Multidose"),
+        "print-vial-tirzepatide.svg": vial(),
         "print-ampoule-quad4.svg": ampoule(),
         "print-ampoule-quad4-ink.svg": ampoule(ink=True),
         "sheen-vial.svg": vial_sheen(),
     }
     wl = os.path.join(ROOT, "site", "assets", "images", "weight-loss")
     files.update({
-        os.path.join(wl, "print-vial-ledge.svg"): vial("Microdose", LEDGE),
+        os.path.join(wl, "print-vial-ledge.svg"): vial(shot=LEDGE),
         os.path.join(wl, "sheen-vial-ledge.svg"): vial_sheen(LEDGE),
-        os.path.join(wl, "print-vial-steps.svg"): vial("Microdose", STEPS),
+        os.path.join(wl, "print-vial-steps.svg"): vial(shot=STEPS),
         os.path.join(wl, "sheen-vial-steps.svg"): vial_sheen(STEPS),
     })
     for name, data in files.items():
