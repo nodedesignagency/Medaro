@@ -35,4 +35,4 @@
 .about-hero--b .about-hero__copy { width: 60%; }
 /* the stand-in photo, zoomed 12% from its top-left corner: the runners move right and down,
    clear of the one-line lede on wide, short screens (1280×800, 1366×768) */
-.about-hero--b .about-hero__photo { transform: scale(1.12); transform-origin: 0 0; }
+/* (2026-11-26) no zoom with the "Saturday breakfast" photo: it would crop the man at the right edge */

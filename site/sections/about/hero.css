@@ -31,7 +31,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: left center;
+  object-position: right center; /* "Saturday breakfast": the couple stays on the right, clear of the copy (Framer: right on desktop) */
 }
 
 /* Two scrims in Home's scrim colour: dark on the left and along the top,

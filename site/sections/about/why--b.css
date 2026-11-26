@@ -48,5 +48,5 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 30%;
+  object-position: 50% 28%; /* "Cooking at home": his head always in frame; the MEDARO box shows where the photo is tall (≤1280, phone), crops out on wide screens (Framer: Y 28% on desktop) */
 }
