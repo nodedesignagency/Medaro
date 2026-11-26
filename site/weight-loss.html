@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="components/header.css">
   <link rel="stylesheet" href="components/product.css">
   <link rel="stylesheet" href="components/faq.css">
+  <link rel="stylesheet" href="components/cta-band.css">
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
   <link rel="stylesheet" href="sections/weight-loss/hero--v1.css">
   <link rel="stylesheet" href="sections/weight-loss/hero--v2.css">
@@ -649,6 +650,34 @@
         </div>
       </section>
       <!-- SECTION:weight-loss/faq END -->
+
+      <!-- SECTION:weight-loss/cta START · styles: components/cta-band.css · assets: assets/images/weight-loss/standin-stretch.webp (stand-in), #i-check, #i-arrow-ne in the sprite
+           The brief's closing CTA in the shared CTA band (components/cta-band.css), after the user's Milo reference (2026-11-26:
+           "see image 2 i like that design … but in our theme"; "we will make one design and use in both page with color change").
+           Copy: content/weight-loss.md → Closing CTA, word for word (the sign-off line split into the three rows). [LINK NEEDED] intake URL.
+           Photo: stand-in (data-brief), to be generated once the design is confirmed. -->
+      <section class="cta-band" aria-labelledby="wlcta-title">
+        <div class="cta-band__stage">
+          <img class="cta-band__photo" src="assets/images/weight-loss/standin-stretch.webp" alt="" width="3840" height="2143" loading="lazy" style="--cta-photo-pos: 50% 60%" data-brief="A woman in her 30s to 40s at home or outdoors in soft morning light, at ease, the middle of the frame calm for the glass card; sage, olive and cream. Not the hero&rsquo;s model.">
+          <div class="cta-band__stack">
+            <div class="cta-band__glass">
+              <p class="chip cta-band__chip"><span>MEDARO Made for Better Health</span></p>
+              <h2 class="cta-band__title" id="wlcta-title">A Better Way Forward Starts With You.</h2>
+              <p class="cta-band__text">You don&rsquo;t need another unrealistic promise. You need clear options, qualified medical guidance, and a plan that makes sense for your health.</p>
+            </div>
+            <ul class="cta-band__list">
+              <li><span class="cta-band__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Your health.</li>
+              <li><span class="cta-band__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Your goals.</li>
+              <li><span class="cta-band__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Your next move.</li>
+            </ul>
+            <div class="cta-band__panel">
+              <a class="cta-band__cta" href="#intake-weight-loss"><span class="cta-band__cta-label">Start Your Assessment</span><span class="cta-band__cta-icon" aria-hidden="true"><svg><use href="#i-arrow-ne"/></svg></span></a>
+              <p class="cta-band__note">Take the first step toward understanding what medically guided weight loss could look like for you.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/cta END -->
     </div>
 
   </main>
