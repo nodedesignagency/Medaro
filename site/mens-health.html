@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-palettes="a" data-page="mens-health">
+<html lang="en" data-palettes="a" data-page="mens-health" data-options="photo:home,couple,sky">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -67,29 +67,23 @@
 
     <!-- ================= HERO V1 (Weight Loss hero V4's layout, in the Men's steel-blue sky) ================= -->
     <div data-version="hero:v1">
-      <!-- SECTION:mens-health/hero--v1 START · styles: sections/mens-health/hero--v1.css · assets: assets/images/mens-health/v1-sky.webp, v1-man.webp
+      <!-- SECTION:mens-health/hero--v1 START · styles: sections/mens-health/hero--v1.css · assets: assets/images/mens-health/hero-home.webp, hero-couple.webp, hero-sky.webp
            User, 2026-11-25: "first we will make hero section with the reference of weight page hero. use our own style".
-           The reference: weight-loss.html hero V4 (rounded stage on the frame, a sky photo with the person on the right,
-           a dotted arc with lit points passing behind them, the copy left on the logo's line: chip, headline, check points, dark pill).
-           Ours for Men's Health: the line's blue (Home's Men's Health tiles: men under steel-blue skies).
            Copy: content/mens-health.md, Section 1, word for word (eyebrow as the section chip; the closing line
            "Private. Convenient. Medically Guided." as the three ticks, full stops dropped).
-           Stand-in photo (no credits spent): the Supplement set's man (git a528098, sp-man.webp), his sage sky keyed out in code
-           and redrawn as a steel-blue sky with the same light and grain; cut out so the arc passes behind him.
-           He is the same model as the Weight Loss couple's man: the real photo is a different man (data-brief). [LINK NEEDED] intake URL. -->
+           Round 2 (user, 2026-11-26: "i dont like that image or bg what i want is real life looking image where our
+           content on left is also visible", then "go with 1 and 2 generate them … also i think we should do like a sky thingy"):
+           the stand-in sky, the cut-out man and the dotted arc are gone; the stage holds ONE real-looking photograph,
+           the man on the right, a calm light area on the left for the copy. Three photos to compare (?photo=home|couple|sky):
+           home (a man in his 40s on a sofa by the window, navy knit), couple (a couple laughing at the kitchen island),
+           sky (a man running on a rooftop under a blue sky, after the user's sky references).
+           Magnific, Nano Banana 2.1, 4K, 145 credits each; AI-generated people, not patients or providers. [LINK NEEDED] intake URL. -->
       <section class="mhh1" aria-labelledby="mhh1-title">
         <div class="mhh1__stage">
-          <div class="mhh1__media media-brief" aria-hidden="true" data-brief="One man, late 30s to 40s, low angle against a clear steel-blue sky, from the thighs up, on the right third, calm and confident, looking off-camera left; stone, white or navy clothes; hard warm sun, 35mm grain. Open sky on the left for the copy. Not the Weight Loss model.">
-            <img class="mhh1__sky" src="assets/images/mens-health/v1-sky.webp" alt="" width="3600" height="1800">
-            <svg class="mhh1__arc" viewBox="0 0 3600 1800" preserveAspectRatio="none" focusable="false">
-              <defs><radialGradient id="mhh1-glow"><stop offset="0" stop-color="#d6ecff" stop-opacity="0.95"/><stop offset="0.35" stop-color="#a7d5ff" stop-opacity="0.55"/><stop offset="1" stop-color="#a7d5ff" stop-opacity="0"/></radialGradient></defs>
-              <path class="mhh1__path" d="M 1500 1950 Q 2300 1000 3700 420"/>
-              <circle class="mhh1__glow" cx="1753" cy="1673" r="44"/><circle class="mhh1__point" cx="1753" cy="1673" r="9"/>
-              <circle class="mhh1__glow" cx="2004" cy="1440" r="44" style="--d: 1.2s"/><circle class="mhh1__point" cx="2004" cy="1440" r="9"/>
-              <circle class="mhh1__glow" cx="3216" cy="641" r="44" style="--d: 2.4s"/><circle class="mhh1__point" cx="3216" cy="641" r="9"/>
-              <circle class="mhh1__glow" cx="3534" cy="491" r="44" style="--d: 0.6s"/><circle class="mhh1__point" cx="3534" cy="491" r="9"/>
-            </svg>
-            <img class="mhh1__person" src="assets/images/mens-health/v1-man.webp" alt="" width="852" height="1500">
+          <div class="mhh1__media" aria-hidden="true">
+            <img class="mhh1__photo mhh1__photo--home" src="assets/images/mens-health/hero-home.webp" alt="" width="3200" height="1786" fetchpriority="high">
+            <img class="mhh1__photo mhh1__photo--couple" src="assets/images/mens-health/hero-couple.webp" alt="" width="3200" height="1786" loading="lazy">
+            <img class="mhh1__photo mhh1__photo--sky" src="assets/images/mens-health/hero-sky.webp" alt="" width="3200" height="1786" loading="lazy">
           </div>
           <div class="mhh1__haze" aria-hidden="true"></div>
 
