@@ -34,6 +34,11 @@
 :root[data-scene="mh-ongoing"] .btn--dark { --btn-bg: var(--p-accent); color: var(--p-ink); } /* navy on sky, 7.6:1 */
 :root[data-scene="mh-ongoing"] .btn--dark:hover { --btn-bg: var(--p-accent-hover); }
 :root[data-scene="mh-ongoing"] .mhong { --line-colour: var(--p-accent); --chip: var(--p-accent); }
+/* The scene ends while the FAQ heading below is already on screen: its chip turns the same sky as this section's
+   while the page is navy, and back to the Men's blue when the scene ends, on the chip's 700ms fade (user, 2026-11-26:
+   "change the frequently asked question to color of other in this state"; as on Weight Loss). Sky on the navy
+   ≈ 9.5:1; the Men's blue there would be 2.9:1. Kept with the scene so the FAQ files need not know about it. */
+:root[data-scene="mh-ongoing"] .mhfaq .faq__chip { --color-chip: var(--p-accent); }
 
 .mhong {
   --line-colour: #0a6fc7;  /* before the scene arrives: the Men's blue on the paper */
