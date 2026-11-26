@@ -189,8 +189,8 @@
 
 /* The photos (2026-11-26): the hero's home man, one moment per step, 4:3
    renders covering the frame (landscape, 1.13 to 1.58 across the desktop
-   range), centred. A slow push in on the photo only, so the card's text
-   stays sharp (the reference's photos are film). */
+   range), centred. A slow push in on the photo while its step is open
+   (the reference's photos are film). */
 .mhhiw__photo {
   position: absolute;
   inset: 0;
@@ -207,76 +207,8 @@
   transition: transform calc(var(--mhhiw-step) + 2s) cubic-bezier(0.3, 0.2, 0.4, 1);
 }
 .mhhiw__shot--1 .mhhiw__photo { --y: 35%; }
-.mhhiw__shot--2 .mhhiw__photo { --x: 40%; --y: 30%; }
-.mhhiw__shot--3 .mhhiw__photo { --x: 22%; --y: 30%; } /* more of the courier: he moves right, clear of the card at 1280 */
-
-/* The glass card on the photo, after the user's hims/Hers references (a
-   frosted bubble beside the person): the Men's navy glass, white type, the
-   page's sky ticks, no rim (the user turned down light edges on dark glass,
-   2026-11-19). Words cut from the step's own sentence. It rises in once the
-   photo has arrived; its rows follow one by one. */
-.mhhiw__tag {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  z-index: 1;
-  width: max-content;
-  max-width: min(320px, 52%);
-  padding: 16px 20px 18px 18px;
-  border-radius: 16px;
-  background: rgb(18 36 58 / 0.74); /* navy, see-through: white type 5.5:1+ and the label 4.9:1+ over the brightest wall (measured) */
-  -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  backdrop-filter: blur(16px) saturate(1.2);
-  color: #fff;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0s 900ms, transform 0s 900ms;
-}
-.mhhiw__shot.is-active .mhhiw__tag {
-  opacity: 1;
-  transform: none;
-  transition: opacity 520ms var(--ease-out) 420ms, transform 620ms var(--ease-out) 420ms;
-}
-.mhhiw__tag-label {
-  font-size: 13px;
-  font-weight: var(--weight-medium);
-  line-height: 1.35;
-  color: rgb(255 255 255 / 0.88);
-}
-.mhhiw__tag-list {
-  display: grid;
-  gap: 8px;
-  margin-top: 12px;
-}
-.mhhiw__tag-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 15px;
-  line-height: 1.35;
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0s 900ms, transform 0s 900ms;
-}
-.mhhiw__shot.is-active .mhhiw__tag-list li {
-  opacity: 1;
-  transform: none;
-  transition: opacity 420ms var(--ease-out) calc(640ms + var(--i, 0) * 110ms), transform 420ms var(--ease-out) calc(640ms + var(--i, 0) * 110ms);
-}
-.mhhiw__tag-list li:nth-child(2) { --i: 1; }
-.mhhiw__tag-list li:nth-child(3) { --i: 2; }
-.mhhiw__tag-tick {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 18px;
-  height: 18px;
-  margin-top: 1px;
-  border-radius: 50%;
-  background: var(--p-accent); /* the page's sky */
-  color: var(--p-ink);
-}
-.mhhiw__tag-tick svg { width: 11px; height: 11px; }
+.mhhiw__shot--2 .mhhiw__photo { --y: 30%; }
+.mhhiw__shot--3 .mhhiw__photo { --y: 30%; }
 
 @media (prefers-reduced-motion: reduce) {
   .mhhiw__step,
@@ -289,8 +221,4 @@
   .mhhiw__shot.is-active { transition: opacity 200ms linear; }
   .mhhiw__photo,
   .mhhiw__shot.is-active .mhhiw__photo { transform: none; transition: none; }
-  .mhhiw__tag,
-  .mhhiw__tag-list li,
-  .mhhiw__shot.is-active .mhhiw__tag,
-  .mhhiw__shot.is-active .mhhiw__tag-list li { transform: none; transition: opacity 200ms linear; }
 }
