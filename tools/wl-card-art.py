@@ -6,6 +6,7 @@ in the MEDARO Magnific project, not in git).
 
     python3 tools/wl-card-art.py vial  <vial-render.png>
     python3 tools/wl-card-art.py care  <care-render.png> <head-enhanced.png> <x> <y> <w> <h>
+    python3 tools/wl-card-art.py plate <landscape-render.png>
     python3 tools/wl-card-art.py couple <couple-render.png> <couple-cutout.png> <heads-enhanced.png> <x> <y> <w> <h>
 
 vial:  the Tirzepatide vial standing on a pale ledge (after the user's
@@ -34,6 +35,14 @@ couple: card 2 since 2026-11-27 (the client: no exercise; the user picked
        so the patch's own edges and the shade around it cancel out), kept as
        black alpha, only where it touches them.
        -> site/assets/images/weight-loss/card-couple.webp
+
+plate: hero V4's background since 2026-11-27 (user: "add landscape behind
+       the couple"): the hero render's sky, sun and grain with no people and
+       low hazy hills and oaks along the foot (Nano Banana 2.1, 4K, 16:9,
+       5504x3072, words only, the hero render the only reference). 320px of
+       sky off the top makes it exactly 2:1; scaled to the old plate's size,
+       so the couple's cut-out (v4-people.webp) keeps its place in %.
+       -> site/assets/images/weight-loss/v4-sky.webp (3600x1800)
 
 Needs: pip install pillow numpy scipy
 """
@@ -151,10 +160,21 @@ def couple(src, cutout, head, x, y, w, hh):
     return prev
 
 
+def plate(src):
+    im = Image.open(src).convert("RGB")
+    W, H = im.size
+    im = im.crop((0, H - W // 2, W, H)).resize((3600, 1800), Image.LANCZOS)  # sky off the top: 2:1
+    path = os.path.join(OUT, "v4-sky.webp")
+    im.save(path, quality=80, method=6)
+    print(path, im.size, os.path.getsize(path) // 1024, "KB")
+
+
 if __name__ == "__main__":
     what = sys.argv[1]
     if what == "vial":
         vial(sys.argv[2])
+    elif what == "plate":
+        plate(sys.argv[2])
     elif what == "couple":
         p = couple(sys.argv[2], sys.argv[3], sys.argv[4], *(int(v) for v in sys.argv[5:9]))
         if len(sys.argv) > 9:
