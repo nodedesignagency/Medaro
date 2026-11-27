@@ -21,7 +21,7 @@
 
 .mhsci {
   --mhsci-blue: #0a6fc7; /* the Men's sky blue, deep enough for the blue paper: 4.5:1 (the quad chip's) */
-  padding: var(--space-6) var(--frame-side) var(--space-9);
+  padding: var(--space-10) var(--frame-side) var(--space-9); /* right under the hero now (client, 2026-11-27): the room the cards' foot used to give (96 + 32) */
   color: var(--color-ink);
 }
 
@@ -216,3 +216,23 @@
 }
 
 .mhsci__nowrap { white-space: nowrap; } /* "Quad 4" never splits */
+
+/* ---------- Order Now + See Pricing (client, 2026-11-27) ----------
+   The hero's pair (components/cta-pair.css), centred under the closing
+   line, the client's prescription line under it. */
+.mhsci__cta {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  margin-top: clamp(32px, 2.8vw, 48px);
+}
+.mhsci__buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--edge);
+}
+.mhsci__note {
+  max-width: 34em;
+  text-align: center;
+  text-wrap: balance;
+}

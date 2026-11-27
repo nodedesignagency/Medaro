@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-palettes="a" data-page="mens-health" data-options="photo:home,couple,sky">
+<html lang="en" data-palettes="a" data-page="mens-health" data-options="buttons:sky,outline,navy">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -15,9 +15,8 @@
   <link rel="stylesheet" href="components/header.css">
   <link rel="stylesheet" href="components/pack-spin.css">
   <link rel="stylesheet" href="components/product.css">
+  <link rel="stylesheet" href="components/cta-pair.css">
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
-  <link rel="stylesheet" href="sections/mens-health/hero--v1.css">
-  <link rel="stylesheet" href="sections/mens-health/hero--v2.css">
   <link rel="stylesheet" href="sections/mens-health/quad.css">
   <link rel="stylesheet" href="sections/mens-health/quad-cards.css">
   <link rel="stylesheet" href="sections/mens-health/science.css">
@@ -66,85 +65,10 @@
 
   <main id="main">
 
-    <!-- ================= HERO V1 (Weight Loss hero V4's layout, in the Men's steel-blue sky) ================= -->
-    <div data-version="hero:v1">
-      <!-- SECTION:mens-health/hero--v1 START · styles: sections/mens-health/hero--v1.css · assets: assets/images/mens-health/hero-home.webp, hero-couple.webp, hero-sky.webp
-           User, 2026-11-25: "first we will make hero section with the reference of weight page hero. use our own style".
-           Copy: content/mens-health.md, Section 1, word for word (eyebrow as the section chip; the closing line
-           "Private. Convenient. Medically Guided." as the three ticks, full stops dropped).
-           Round 2 (user, 2026-11-26: "i dont like that image or bg what i want is real life looking image where our
-           content on left is also visible", then "go with 1 and 2 generate them … also i think we should do like a sky thingy"):
-           the stand-in sky, the cut-out man and the dotted arc are gone; the stage holds ONE real-looking photograph,
-           the man on the right, a calm light area on the left for the copy. Three photos to compare (?photo=home|couple|sky):
-           home (a man in his 40s on a sofa by the window, navy knit), couple (a couple laughing at the kitchen island),
-           sky (a man running on a rooftop under a blue sky, after the user's sky references).
-           Magnific, Nano Banana 2.1, 4K, 145 credits each; AI-generated people, not patients or providers. [LINK NEEDED] intake URL. -->
-      <section class="mhh1" aria-labelledby="mhh1-title">
-        <div class="mhh1__stage">
-          <div class="mhh1__media" aria-hidden="true">
-            <img class="mhh1__photo mhh1__photo--home" src="assets/images/mens-health/hero-home.webp" alt="" width="3200" height="1786" fetchpriority="high">
-            <img class="mhh1__photo mhh1__photo--couple" src="assets/images/mens-health/hero-couple.webp" alt="" width="3200" height="1786" loading="lazy">
-            <img class="mhh1__photo mhh1__photo--sky" src="assets/images/mens-health/hero-sky.webp" alt="" width="3200" height="1786" loading="lazy">
-          </div>
-          <div class="mhh1__haze" aria-hidden="true"></div>
+    <!-- The photo heroes (V1 home / couple / sky, V2 slate) were dropped by the client on 2026-11-27 ("I want to eliminate this hero";
+         the Quad 4 section below is the hero now). Kept as a frozen snapshot: versions/mh-hero-round-2/index.html. -->
 
-          <div class="mhh1__copy">
-            <p class="chip mhh1__chip"><span>Men's sexual health. Reimagined.</span></p>
-            <h1 class="mhh1__title" id="mhh1-title">Take Control of<br>Your Sexual Health.<br>With Confidence.</h1>
-            <p class="mhh1__lede">Your intimate health deserves more than guesswork.</p>
-            <p class="mhh1__text">Discover a modern approach to men's sexual health with personalized medical guidance, convenient online evaluations, and discreet treatment options.</p>
-            <ul class="mhh1__points">
-              <li><span class="mhh1__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Private</li>
-              <li><span class="mhh1__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Convenient</li>
-              <li><span class="mhh1__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Medically Guided</li>
-            </ul>
-            <a class="btn btn--dark btn--pill btn--l mhh1__cta" href="#intake-mens-health">Explore Your Options</a>
-          </div>
-        </div>
-      </section>
-      <!-- SECTION:mens-health/hero--v1 END -->
-    </div>
-
-    <!-- ================= HERO V2 (the same layout on the Men's deep slate, Home's Men's Health colour) ================= -->
-    <div data-version="hero:v2">
-      <!-- SECTION:mens-health/hero--v2 START · styles: sections/mens-health/hero--v2.css · assets: assets/images/mens-health/v2-slate.webp, assets/images/people/man-a.webp
-           Same layout and copy as V1. The stage is the Men's deep slate #1D2A3A (the colour the Home page turns when its
-           Men's Health section arrives) with a soft cool light behind his head; paper type, the sky-blue Men's chip #8CC8FF,
-           the lime pill (the dark pill would vanish on the slate, as on the Weight Loss page's dark stages).
-           Stand-in: Home's Men's Health card man (people/man-a.webp), so the Home card and this page share a face. -->
-      <section class="mhh2" aria-labelledby="mhh2-title">
-        <div class="mhh2__stage">
-          <div class="mhh2__media media-brief" aria-hidden="true" data-brief="One man, late 30s to 40s, chest up, warm side light from the left, looking off towards the copy with a relaxed smile, on a plain dark slate-blue backdrop (or shot to cut out); navy, stone or olive tee. No lab coat, no props.">
-            <img class="mhh2__plate" src="assets/images/mens-health/v2-slate.webp" alt="" width="3600" height="1800">
-            <svg class="mhh2__arc" viewBox="0 0 3600 1800" preserveAspectRatio="none" focusable="false">
-              <defs><radialGradient id="mhh2-glow"><stop offset="0" stop-color="#d6ecff" stop-opacity="0.9"/><stop offset="0.35" stop-color="#a7d5ff" stop-opacity="0.45"/><stop offset="1" stop-color="#a7d5ff" stop-opacity="0"/></radialGradient></defs>
-              <path class="mhh2__path" d="M 1500 1950 Q 2300 1000 3700 420"/>
-              <circle class="mhh2__glow" cx="1753" cy="1673" r="44"/><circle class="mhh2__point" cx="1753" cy="1673" r="9"/>
-              <circle class="mhh2__glow" cx="1960" cy="1484" r="44" style="--d: 1.2s"/><circle class="mhh2__point" cx="1960" cy="1484" r="9"/>
-              <circle class="mhh2__glow" cx="3216" cy="641" r="44" style="--d: 2.4s"/><circle class="mhh2__point" cx="3216" cy="641" r="9"/>
-              <circle class="mhh2__glow" cx="3534" cy="491" r="44" style="--d: 0.6s"/><circle class="mhh2__point" cx="3534" cy="491" r="9"/>
-            </svg>
-            <img class="mhh2__person" src="assets/images/people/man-a.webp" alt="" width="1000" height="1017">
-          </div>
-
-          <div class="mhh2__copy">
-            <p class="chip mhh2__chip"><span>Men's sexual health. Reimagined.</span></p>
-            <h1 class="mhh2__title" id="mhh2-title">Take Control of<br>Your Sexual Health.<br>With Confidence.</h1>
-            <p class="mhh2__lede">Your intimate health deserves more than guesswork.</p>
-            <p class="mhh2__text">Discover a modern approach to men's sexual health with personalized medical guidance, convenient online evaluations, and discreet treatment options.</p>
-            <ul class="mhh2__points">
-              <li><span class="mhh2__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Private</li>
-              <li><span class="mhh2__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Convenient</li>
-              <li><span class="mhh2__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Medically Guided</li>
-            </ul>
-            <a class="btn btn--primary btn--pill btn--l mhh2__cta" href="#intake-mens-health">Explore Your Options</a>
-          </div>
-        </div>
-      </section>
-      <!-- SECTION:mens-health/hero--v2 END -->
-    </div>
-
-    <!-- SECTION:mens-health/quad START · styles: sections/mens-health/quad.css · assets: assets/images/products/hand-ampoule-quad4.webp, hand-ampoule-quad4-front.webp, print-hand-ampoule-quad4.svg (from tools/pack-print.py)
+    <!-- SECTION:mens-health/quad START · styles: sections/mens-health/quad.css, components/cta-pair.css (+ .btn--xl in styles.css) · assets: assets/images/products/hand-ampoule-quad4.webp, hand-ampoule-quad4-front.webp, print-hand-ampoule-quad4.svg (from tools/pack-print.py)
          The brief's "Introducing Quad 4", after the user's Good Life reference (2026-11-25: "For this section i am thinking about
          this style. Also if possible make it rotatable like this": "The Good Life Difference", a huge centred headline, the pack
          under it; and a recording of the bottle turning on its axis).
@@ -154,81 +78,35 @@
          (blank ampoule), its print added in code and turning on the axis; the fingers in front of the glass sit over the print.
          The sentence moves to the bottom-left corner and the CTA to the bottom-right, on the frame lines, to give the hand the middle.
          Round 3 (2026-11-26): "make it still not rotate on scroll": the ampoule faces front and holds still; no pin, no turning, no drag.
-         Copy: content/mens-health.md → Introducing Quad 4, word for word (eyebrow as the chip). [LINK NEEDED] intake URL. -->
+         Round 4 (client, 2026-11-27): THE PAGE'S HERO ("I want this to be the hero page"; the photo heroes are gone). "add on the left
+         side of the blue bottle [Order now] and right side [See Pricing] let both be big": two xl pills level with the ampoule's body,
+         one each side of the glass (components/cta-pair.css; the secondary's look is a review option, ?buttons=sky|outline|navy).
+         "Explore Quad 4" leaves the hero (a third CTA to the same intake as Order Now); the cards keep theirs. Its corner takes the
+         client's prescription line (content/footer.md, word for word), mirroring the sentence, so "Order Now" is never without it.
+         The forearm no longer runs on behind a card (the cards moved after the science section): it ends at the hero's foot.
+         Copy: content/mens-health.md → Introducing Quad 4, word for word (eyebrow as the chip). [LINK NEEDED] intake URL;
+         [LINK NEEDED] See Pricing: no pricing section on this page yet (#pricing), [PRICING NEEDED]. -->
     <section class="mhquad" id="quad-4" aria-labelledby="mhquad-title">
       <div class="mhquad__inner">
         <p class="chip mhquad__chip"><span>Introducing Quad 4</span></p>
-        <h2 class="mhquad__title" id="mhquad-title">Four Powerful Ingredients.<br>One Modern Approach.</h2>
+        <h1 class="mhquad__title" id="mhquad-title">Four Powerful Ingredients.<br>One Modern Approach.</h1>
         <div class="mhquad__stage">
           <div class="mhquad__pack">
-            <img src="assets/images/products/hand-ampoule-quad4.webp" alt="" width="1368" height="2475">
+            <img src="assets/images/products/hand-ampoule-quad4.webp" alt="" width="1368" height="2475" fetchpriority="high">
             <img class="mhquad__print" src="assets/images/products/print-hand-ampoule-quad4.svg" alt="" width="1368" height="2475">
             <img src="assets/images/products/hand-ampoule-quad4-front.webp" alt="" width="1368" height="2475">
           </div>
+          <!-- the pair, level with the ampoule's body: Order Now on its left, See Pricing on its right -->
+          <a class="btn btn--dark btn--pill btn--xl cta-pair__btn mhquad__btn mhquad__btn--order" href="#intake-mens-health">Order Now</a>
+          <a class="btn btn--pill btn--xl cta-pair__btn cta-pair__btn--secondary mhquad__btn mhquad__btn--price" href="#pricing">See Pricing</a>
         </div>
         <p class="mhquad__text">A convenient sublingual formula designed to dissolve under your tongue, bringing together four ingredients with distinct properties in one treatment.</p>
-        <a class="btn btn--dark btn--pill btn--l mhquad__cta" href="#intake-mens-health">Explore Quad 4</a>
+        <p class="cta-pair__note mhquad__note">Medications shown on this site require a valid prescription from a licensed provider following an evaluation.</p>
       </div>
     </section>
     <!-- SECTION:mens-health/quad END -->
 
-    <!-- SECTION:mens-health/quad-cards START · styles: sections/mens-health/quad-cards.css · assets: assets/images/mens-health/quad-card-ampoule.webp, quad-card-ampoule-print.svg (tools/quad-card-ampoule.py), quad-card-couple.webp, quad-card-man.webp
-         The brief's three blocks under "Introducing Quad 4" as three cards, after the Weight Loss pricing + progress cards
-         (user, 2026-11-25: "add these three points in the design of this here we have 2 make it 3 … use the blue color cards
-         here like how we did in weightloss page for green"): pale steel-blue cards on the frame, heading top left in the hero's
-         weight, the copy, an image on the card's foot. Copy: content/mens-health.md → Introducing Quad 4, word for word; the
-         block's closing CTA "Explore Quad 4" sits in the last card, after its points. [LINK NEEDED] intake URL.
-         Images (round 2, 2026-11-26, the user: "go with A for all three, generate them … make in blue tone for this mens page"):
-         three Magnific renders (Nano Banana 2.1, 2K) in the page's blue: our blue Quad 4 ampoule lying on the card with its
-         shadow and the blue light of its liquid; a couple in their 40s laughing under the hero's steel-blue sky; a man in his
-         50s in a navy polo under the same sky. AI-generated people, not patients or providers. -->
-    <section class="mhqc" aria-label="More about Quad 4">
-      <div class="mhqc__cards">
-        <article class="mhqc__card">
-          <h3 class="mhqc__title">Designed for<br>Convenience</h3>
-          <p class="mhqc__lede">A Modern Approach to Intimate Wellness.</p>
-          <p class="mhqc__text">Quad 4 is designed as a sublingual formulation, administered under the tongue for a convenient, discreet treatment experience.</p>
-          <ul class="mhqc__points">
-            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Simple sublingual administration.</li>
-            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>No traditional pill to swallow.</li>
-            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Discreet and convenient to use.</li>
-          </ul>
-          <div class="mhqc__media" aria-hidden="true" data-brief="Our blue Quad 4 ampoule lying on the card's paper, top-down, soft daylight from the upper left: a soft shadow and the blue light of the liquid on the paper. Our white print in code.">
-            <span class="mhqc__ampoule"><img src="assets/images/mens-health/quad-card-ampoule.webp" alt="" width="1400" height="447" loading="lazy"><img class="mhqc__print" src="assets/images/mens-health/quad-card-ampoule-print.svg" alt="" width="1400" height="447" loading="lazy"></span>
-          </div>
-        </article>
-        <article class="mhqc__card">
-          <h3 class="mhqc__title">More Freedom.<br>Less Planning.</h3>
-          <p class="mhqc__lede">Make Room for the Moments That Matter.</p>
-          <p class="mhqc__text">Your intimate life shouldn't revolve around complicated routines. Explore a treatment approach designed with convenience and personal preferences in mind.</p>
-          <ul class="mhqc__points">
-            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>A convenient administration method.</li>
-            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Care that considers your lifestyle.</li>
-            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>More confidence in your treatment choices.</li>
-          </ul>
-          <div class="mhqc__media" aria-hidden="true" data-brief="A couple in their 40s laughing together, his arm round her, waist up, under the hero's steel-blue sky; white linen shirt, navy linen dress; warm late sun from the left. Cut out.">
-            <img class="mhqc__person mhqc__person--couple" src="assets/images/mens-health/quad-card-couple.webp" alt="" width="989" height="900" loading="lazy">
-          </div>
-        </article>
-        <article class="mhqc__card">
-          <h3 class="mhqc__title">Confidence on<br>Your Terms.</h3>
-          <p class="mhqc__lede">Because Every Moment Matters.</p>
-          <p class="mhqc__text">With ingredients that have established roles in erectile dysfunction treatment, Quad 4 brings together different pharmacological properties in one proposed formulation.</p>
-          <ul class="mhqc__points">
-            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Four active ingredients.</li>
-            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>One convenient formulation.</li>
-            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Personalized medical guidance.</li>
-          </ul>
-          <a class="btn btn--dark btn--pill mhqc__cta" href="#intake-mens-health">Explore Quad 4</a>
-          <div class="mhqc__media" aria-hidden="true" data-brief="A man in his 50s, salt-and-pepper hair and beard, navy polo with a white tipped collar, chest up, looking towards the copy with a small smile, under the hero's steel-blue sky; warm late sun from the left. Cut out.">
-            <img class="mhqc__person mhqc__person--man" src="assets/images/mens-health/quad-card-man.webp" alt="" width="541" height="900" loading="lazy">
-          </div>
-        </article>
-      </div>
-    </section>
-    <!-- SECTION:mens-health/quad-cards END -->
-
-    <!-- SECTION:mens-health/science START · styles: sections/mens-health/science.css, components/pack-spin.css · scripts: components/pack-spin.js, sections/mens-health/science.js · assets: assets/images/products/ampoule-quad4-blue.webp (tools/blue-ampoule.py), print-ampoule-quad4.svg, label-ampoule-quad4.js (tools/pack-print.py) · icons: #i-drop, #i-molecule, #i-clock, #i-brain in the sprite
+    <!-- SECTION:mens-health/science START · styles: sections/mens-health/science.css, components/pack-spin.css, components/cta-pair.css (+ .btn--xl in styles.css) · scripts: components/pack-spin.js, sections/mens-health/science.js · assets: assets/images/products/ampoule-quad4-blue.webp (tools/blue-ampoule.py), print-ampoule-quad4.svg, label-ampoule-quad4.js (tools/pack-print.py) · icons: #i-drop, #i-molecule, #i-clock, #i-brain in the sprite
          The brief's "The science behind Quad 4" (user, 2026-11-25: "I want this type of structure which we made for other page but in
          the middle i want the quad 4 bottle which will be rotating continuously automatically and then i want to show 4 ingrediants and
          its text like this but all in our style … take reference from mobbin also i dont want it to be inside a card i want it with the
@@ -240,6 +118,8 @@
          mirrored then for bottom left and bottom right it will be accrodingly it should be as if the bottle is the product and we are
          showing its feature": each label's dotted line runs to the ampoule and ends in Nervana's curve, bending down above its middle
          and up below it; the right pair mirrored (aligned to the frame's right edge). Mobbin: Rains (features around one product).
+         Client, 2026-11-27: now right after the hero ("After that page this"), before the three Quad 4 cards; Order Now + See Pricing
+         under the closing line (components/cta-pair.css).
          Copy: content/mens-health.md → The science behind Quad 4, word for word, every qualifier kept at full size next to its claim. -->
     <section class="mhsci" aria-labelledby="mhsci-title">
       <header class="mhsci__head">
@@ -297,8 +177,74 @@
       </div>
 
       <p class="mhsci__close">Four Ingredients. Distinct Properties. One Innovative Approach.</p>
+
+      <!-- Client, 2026-11-27: "This page should also have an [order now] and [See pricing]": the hero's pair, centred under the
+           closing line, with the client's prescription line under it (content/footer.md). [LINK NEEDED] intake; [LINK NEEDED] pricing. -->
+      <div class="mhsci__cta">
+        <div class="mhsci__buttons">
+          <a class="btn btn--dark btn--pill btn--xl cta-pair__btn" href="#intake-mens-health">Order Now</a>
+          <a class="btn btn--pill btn--xl cta-pair__btn cta-pair__btn--secondary" href="#pricing">See Pricing</a>
+        </div>
+        <p class="cta-pair__note mhsci__note">Medications shown on this site require a valid prescription from a licensed provider following an evaluation.</p>
+      </div>
     </section>
     <!-- SECTION:mens-health/science END -->
+
+    <!-- SECTION:mens-health/quad-cards START · styles: sections/mens-health/quad-cards.css · assets: assets/images/mens-health/quad-card-ampoule.webp, quad-card-ampoule-print.svg (tools/quad-card-ampoule.py), quad-card-couple.webp, quad-card-man.webp
+         The brief's three blocks under "Introducing Quad 4" as three cards, after the Weight Loss pricing + progress cards
+         (user, 2026-11-25: "add these three points in the design of this here we have 2 make it 3 … use the blue color cards
+         here like how we did in weightloss page for green"): pale steel-blue cards on the frame, heading top left in the hero's
+         weight, the copy, an image on the card's foot. Copy: content/mens-health.md → Introducing Quad 4, word for word; the
+         block's closing CTA "Explore Quad 4" sits in the last card, after its points. [LINK NEEDED] intake URL.
+         Images (round 2, 2026-11-26, the user: "go with A for all three, generate them … make in blue tone for this mens page"):
+         three Magnific renders (Nano Banana 2.1, 2K) in the page's blue: our blue Quad 4 ampoule lying on the card with its
+         shadow and the blue light of its liquid; a couple in their 40s laughing under the hero's steel-blue sky; a man in his
+         50s in a navy polo under the same sky. AI-generated people, not patients or providers. -->
+    <section class="mhqc" aria-label="More about Quad 4">
+      <div class="mhqc__cards">
+        <article class="mhqc__card">
+          <h3 class="mhqc__title">Designed for<br>Convenience</h3>
+          <p class="mhqc__lede">A Modern Approach to Intimate Wellness.</p>
+          <p class="mhqc__text">Quad 4 is designed as a sublingual formulation, administered under the tongue for a convenient, discreet treatment experience.</p>
+          <ul class="mhqc__points">
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Simple sublingual administration.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>No traditional pill to swallow.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Discreet and convenient to use.</li>
+          </ul>
+          <div class="mhqc__media" aria-hidden="true" data-brief="Our blue Quad 4 ampoule lying on the card's paper, top-down, soft daylight from the upper left: a soft shadow and the blue light of the liquid on the paper. Our white print in code.">
+            <span class="mhqc__ampoule"><img src="assets/images/mens-health/quad-card-ampoule.webp" alt="" width="1400" height="447" loading="lazy"><img class="mhqc__print" src="assets/images/mens-health/quad-card-ampoule-print.svg" alt="" width="1400" height="447" loading="lazy"></span>
+          </div>
+        </article>
+        <article class="mhqc__card">
+          <h3 class="mhqc__title">More Freedom.<br>Less Planning.</h3>
+          <p class="mhqc__lede">Make Room for the Moments That Matter.</p>
+          <p class="mhqc__text">Your intimate life shouldn't revolve around complicated routines. Explore a treatment approach designed with convenience and personal preferences in mind.</p>
+          <ul class="mhqc__points">
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>A convenient administration method.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Care that considers your lifestyle.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>More confidence in your treatment choices.</li>
+          </ul>
+          <div class="mhqc__media" aria-hidden="true" data-brief="A couple in their 40s laughing together, his arm round her, waist up, under the hero's steel-blue sky; white linen shirt, navy linen dress; warm late sun from the left. Cut out.">
+            <img class="mhqc__person mhqc__person--couple" src="assets/images/mens-health/quad-card-couple.webp" alt="" width="989" height="900" loading="lazy">
+          </div>
+        </article>
+        <article class="mhqc__card">
+          <h3 class="mhqc__title">Confidence on<br>Your Terms.</h3>
+          <p class="mhqc__lede">Because Every Moment Matters.</p>
+          <p class="mhqc__text">With ingredients that have established roles in erectile dysfunction treatment, Quad 4 brings together different pharmacological properties in one proposed formulation.</p>
+          <ul class="mhqc__points">
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Four active ingredients.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>One convenient formulation.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Personalized medical guidance.</li>
+          </ul>
+          <a class="btn btn--dark btn--pill mhqc__cta" href="#intake-mens-health">Explore Quad 4</a>
+          <div class="mhqc__media" aria-hidden="true" data-brief="A man in his 50s, salt-and-pepper hair and beard, navy polo with a white tipped collar, chest up, looking towards the copy with a small smile, under the hero's steel-blue sky; warm late sun from the left. Cut out.">
+            <img class="mhqc__person mhqc__person--man" src="assets/images/mens-health/quad-card-man.webp" alt="" width="541" height="900" loading="lazy">
+          </div>
+        </article>
+      </div>
+    </section>
+    <!-- SECTION:mens-health/quad-cards END -->
 
     <!-- SECTION:mens-health/how-it-works START · styles: sections/mens-health/how-it-works.css · scripts: sections/mens-health/how-it-works.js · assets: assets/images/mens-health/hiw-assessment.webp, hiw-guidance.webp, hiw-delivery.webp
          The brief's "How Medaro works", after the user's reference (2026-11-25, a recording of StemWave's "Transform the way you

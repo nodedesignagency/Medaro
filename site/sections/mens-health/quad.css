@@ -8,15 +8,19 @@
    menu, its ink print), held still facing front (round 3, user 2026-11-26:
    "make it still not rotate on scroll"; it used to pin and turn on its axis
    with the scroll, components/pack-spin.js, git 9496afe).
+   Round 4 (client, 2026-11-27): this is the page's hero now (the photo
+   heroes are frozen in versions/mh-hero-round-2/). Order Now and See
+   Pricing, both xl, level with the ampoule's body on either side of the
+   glass (components/cta-pair.css). The sentence keeps the bottom-left
+   corner; the bottom-right takes the client's prescription line. The
+   forearm ends at the hero's foot (the cards no longer follow).
    Frame: the headline stays inside the content inset (the frame + 48px).
    ========================================================================== */
 
-/* One screen under the header; it scrolls by like any section (no pin) */
+/* The hero: one screen under the header */
 .mhquad {
   --screen: min(1200px, max(640px, calc(100svh - 70px))); /* one screen under the 70px header */
-  --hand-gap: clamp(88px, 8vw, 160px);                     /* more hand between this section and the cards */
   position: relative;
-  margin-bottom: var(--hand-gap);
   color: var(--color-ink);
 }
 .mhquad__inner {
@@ -57,10 +61,11 @@
   min-height: 320px;
   margin-top: clamp(16px, 1.6vw, 32px);
   container-type: size;
-  /* the forearm runs on below the screen (user, 2026-11-25: "dont fade this here make it behind the card below
-     and show more hand"): through the space after the section and on behind the middle card, cut well
-     under the cards' top edge, where the card hides it */
-  clip-path: inset(-4px -100vw calc(-1 * (var(--hand-gap) + 32px + 180px)) -100vw);
+  /* The hand ends at the hero's foot. It used to run on behind the middle Quad 4 card (user, 2026-11-25: "dont fade
+     this here make it behind the card below"); the cards now come after the science section, so nothing covers the
+     cut: the last stretch of the hand melts into the page instead of ending on a hard line when the page scrolls. */
+  mask-image: linear-gradient(to bottom, #000 calc(100% - var(--hand-melt)), transparent);
+  --hand-melt: clamp(72px, 13cqh, 140px);
 }
 .mhquad__pack {
   position: absolute;
@@ -81,10 +86,29 @@
 }
 .mhquad__print { mix-blend-mode: screen; }
 
-/* The sentence and the button in the bottom corners, on the frame lines
-   (the logo's and the header button's), so the hand has the middle */
+/* Order Now and See Pricing, level with the ampoule's body (client,
+   2026-11-27: "on the left side of the blue bottle [Order now] and right
+   side [See Pricing] let both be big"). Measured on the photo: the body runs
+   from 20% to 36% of its height (the fingers start under it) and is 168 of
+   its 1368px wide, on the centre line. With the photo at 200% of the stage
+   and lifted 3.6cqh, its middle is 52cqh down the stage and its half width
+   6.8cqh; the pair stands a fixed gap off the glass on each side. */
+.mhquad__btn {
+  --glass-mid: 52cqh;
+  --glass-half: 6.8cqh;
+  --glass-gap: clamp(40px, 4vw, 76px);
+  position: absolute;
+  z-index: 2;
+  top: var(--glass-mid);
+  translate: 0 -50%; /* not transform: .btn:active scales with it */
+}
+.mhquad__btn--order { right: calc(50% + var(--glass-half) + var(--glass-gap)); }
+.mhquad__btn--price { left: calc(50% + var(--glass-half) + var(--glass-gap)); }
+
+/* The sentence and the prescription line in the bottom corners, on the frame
+   lines (the logo's and the header button's), so the hand has the middle */
 .mhquad__text,
-.mhquad__cta {
+.mhquad__note {
   position: absolute;
   z-index: 2;
   bottom: clamp(36px, 3.4vw, 64px);
@@ -98,13 +122,11 @@
   text-align: left;
   text-wrap: pretty;
 }
-.mhquad__cta {
+/* the client's prescription line (content/footer.md), mirroring the sentence */
+.mhquad__note {
   right: calc(var(--frame-side) + var(--space-7));
-}
-
-/* The section after this one (the Quad 4 cards) sits over the hand, so the
-   forearm passes behind the middle card */
-.mhquad + .mhqc {
-  position: relative;
-  z-index: 1;
+  max-width: min(25em, 26vw);
+  font-size: clamp(14px, 1vw, 16px);
+  text-align: right;
+  text-wrap: balance;
 }

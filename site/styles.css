@@ -250,6 +250,8 @@ button { font: inherit; color: inherit; }
 .btn--pill { border-radius: var(--radius-pill); }
 .btn--s { --btn-h: 40px; padding: 0 16px; font-size: 14px; }
 .btn--l { --btn-h: 54px; padding: 0 28px; font-size: 16px; }
+/* xl: the Men's Health Order Now / See Pricing pair (client, 2026-11-27: "let both be big"); 60–74px tall */
+.btn--xl { --btn-h: clamp(60px, 4.6vw, 74px); padding: 0 clamp(36px, 3vw, 52px); font-size: clamp(17px, 1.3vw, 21px); letter-spacing: -0.01em; }
 
 /* Fills go through --btn-bg so the arrow variant's pieces share one colour */
 .btn--primary { --btn-bg: var(--color-accent); background: var(--btn-bg); color: var(--color-on-accent); }

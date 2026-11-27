@@ -20,7 +20,7 @@
 
 .mhqc {
   --mhqc-card: #dee6ee; /* Men's mist: pale steel blue (Weight Loss uses --color-surface, the olive mist) */
-  padding: var(--space-6) var(--frame-side) var(--space-9); /* close under the Quad 4 block it belongs to */
+  padding: var(--space-6) var(--frame-side) var(--space-9); /* after the science section since 2026-11-27 (client): its 96px foot + 32 */
 }
 
 .mhqc__cards {
