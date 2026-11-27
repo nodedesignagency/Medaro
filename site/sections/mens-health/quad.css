@@ -96,7 +96,7 @@
 .mhquad__btn {
   --glass-mid: 52cqh;
   --glass-half: 6.8cqh;
-  --glass-gap: clamp(40px, 4vw, 76px);
+  --glass-gap: clamp(36px, 3.4vw, 64px); /* closer with the smaller pair (2026-11-27) */
   position: absolute;
   z-index: 2;
   top: var(--glass-mid);
