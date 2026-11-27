@@ -34,6 +34,7 @@ import urllib.request
 
 import uharfbuzz as hb
 from fontTools.pens.filterPen import FilterPen
+from fontTools.pens.recordingPen import DecomposingRecordingPen
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 from fontTools.ttLib import TTFont
@@ -181,6 +182,10 @@ class Print:
     def __init__(self, cyl):
         self.cyl = cyl
         self.layers = []  # (fill, opacity, path data)
+        # print on the pack's far side, seen through the glass and the liquid (static prints only: the
+        # spinning prints keep it in `layers`, at its place round the axis, and pack-spin.js fades it)
+        self.back_layers = []
+        self.back_blur = 0.0
 
     def _pen(self):
         svg = SVGPathPen(None, ntos=fmt)
@@ -225,7 +230,9 @@ class Print:
                 tp = TransformPen(pen, (0, scale, scale, 0, u + gy, y - shift + gx))
             else:
                 tp = TransformPen(pen, (scale, 0, 0, -scale, u - shift + gx, y - gy))
-            glyphset[name].draw(tp)
+            rec = DecomposingRecordingPen(glyphset)  # composite glyphs (e.g. "(", ".") drawn as plain outlines,
+            glyphset[name].draw(rec)                 # so every point goes through the wrap
+            rec.replay(tp)
         self.layers.append((fill, opacity, svg.getCommands()))
         return width
 
@@ -272,10 +279,20 @@ class Print:
             fx0, fx1 = fade_span or (0, w)
             defs.append(f'<linearGradient id="fade-g" x1="{fmt(fx0)}" x2="{fmt(fx1)}" y1="0" y2="0" gradientUnits="userSpaceOnUse">{stops}</linearGradient>'
                         f'<mask id="fade" maskUnits="userSpaceOnUse" x="0" y="0" width="{w}" height="{h}"><rect width="{w}" height="{h}" fill="url(#fade-g)"/></mask>')
+        if self.back_layers and self.back_blur:
+            defs.append(f'<filter id="back-blur" x="-10%" y="-2%" width="120%" height="104%">'
+                        f'<feGaussianBlur stdDeviation="{fmt(self.back_blur)}"/></filter>')
         if defs:
             out.append("<defs>" + "".join(defs) + "</defs>")
         attrs = (' clip-path="url(#clip)"' if clip else "") + (' mask="url(#fade)"' if fade else "")
         out.append(f"<g{attrs}>")
+        if self.back_layers:  # the far side first: mirrored by the wrap, softer through glass and liquid
+            bf = ' filter="url(#back-blur)"' if self.back_blur else ""
+            out.append(f'<g opacity="{BACK_STILL}"{bf}>')
+            for fill, op, d in self.back_layers:
+                o = f' fill-opacity="{op}"' if op < 1 else ""
+                out.append(f'<path fill="{fill}"{o} d="{d}"/>')
+            out.append("</g>")
         for fill, op, d in self.layers:
             o = f' fill-opacity="{op}"' if op < 1 else ""
             out.append(f'<path fill="{fill}"{o} d="{d}"/>')
@@ -348,7 +365,7 @@ def vial_sheen():
 AMPOULE = Cylinder(cx=202.5, r=197, eye=1100, k=0.03)
 
 
-def ampoule(ink=False, flat=False, where=None):
+def ampoule(ink=False, flat=False, where=None, back=False):
     """Quad 4 (Men's Health) as a glass ampoule, after the user's references (Rising, SNP, Dr.Melaxin,
     Avon): print straight on the glass, running along the axis. Words: the client's own copy only
     (content/mens-health.md): Quad 4 · Sildenafil · Vardenafil · Tadalafil · Apomorphine · Sublingual ·
@@ -362,7 +379,10 @@ def ampoule(ink=False, flat=False, where=None):
     ink=True: the same print in dark olive ink, multiplied, for the light cards and the menu, where the clear
     glass shows the paper behind it and white print would vanish.
     flat=True: the same print unwrapped (its layers in flat u, y), for the spinning ampoule.
-    where: another photo of the same ampoule (a Scaled warp), e.g. the hand holding it."""
+    where: another photo of the same ampoule (a Scaled warp), e.g. the hand holding it.
+    back=True: a second sticker on the far side with the medicine's details (ampoule_back), seen through the
+    glass and the liquid on a still print, coming round to the front on a spinning one (Men's Health only;
+    Home's ampoule keeps the front print alone)."""
     p = Print(where or (Flat() if flat else AMPOULE))
     PAPER_ = INK if ink else PAPER
     KNOCK = "#fff" if ink else "#000"   # what a knocked-out letter is drawn in: invisible under each blend
@@ -381,10 +401,98 @@ def ampoule(ink=False, flat=False, where=None):
     # the lanes either side
     p.text("Rx only", band_r + 16, top + 4, 31, 500, PAPER_, along=True)
     p.text("Sildenafil · Vardenafil · Tadalafil · Apomorphine", band_l - 40, top + 4, 30, 500, PAPER_, along=True)
+    if back:
+        is_flat = getattr(p.cyl, "flat", False)
+        half = math.pi * AMPOULE.r  # the far side, half way round
+        saved, p.layers = p.layers, []
+        # a flat (spinning) print runs u from −πR to πR, so the far side's centre is its two ends: each lane
+        # goes to the end it falls in (wrap)
+        ampoule_back(p, PAPER_, half, top, foot, wrap=half if is_flat else None)
+        far, p.layers = p.layers, saved
+        if is_flat:
+            p.layers = far + p.layers
+        else:
+            p.back_layers = far
+            p.back_blur = 1.2 * getattr(where, "s", 1.0)  # in the print's own units: a touch soft behind the liquid
     if flat or (where is not None):
         return p
     fade = None if ink else [(0, 0.72), (0.2, 0.86), (0.42, 0.97), (0.55, 1), (0.9, 1), (1, 0.9)]
-    return p.svg(406, 2200, "Quad 4 ampoule: print on glass" + (" (ink)" if ink else ""), fade=fade)
+    return p.svg(406, 2200, "Quad 4 ampoule: print on glass" + (" (ink)" if ink else "") + (", with its back sticker" if back else ""), fade=fade)
+
+
+BACK = 0.3  # the far side's strength through the glass and the liquid, on the spinning prints (pack-spin.js uBack)
+BACK_STILL = 0.45  # on a still print, where the back sticker never comes round: strong enough to read as a second label
+
+
+def ampoule_back(p, colour, centre, top, foot, wrap=None):
+    """The Quad 4 ampoule's back sticker (user, 2026-11-27: "at the back of the name text sticker can we write
+    details about what is inside and other stuff like a real bottle. the main sticker with name will not change
+    but the back of it will have other sticker text with the real like details of a medicine … make it like the
+    way you did the quad sticker with code"). Centred on the far side of the glass (u = centre), the same length
+    down the axis as the front print and in its system: lanes along the axis reading top to bottom (the first
+    lane on the right, as on the front), the front's hairlines between three groups, like a medicine's back label:
+    what it is · what is in it and how it is taken · the warnings.
+    Words: the client's only (content/mens-health.md, content/footer.md), word for word, split into lanes:
+      "Quad 4 is designed as a sublingual formulation" · "Quad 4 is a proposed compounded formulation" (FAQ) ·
+      "Rx only" (the front) · "Four active ingredients." (card 3) · the four names (the front) · "administered
+      under the tongue" (card 1) · the FAQ's PDE5 warning and "Do not combine ED medications without explicit
+      guidance from your prescribing clinician." · the footer's "Compounded medications are not reviewed or
+      approved by the U.S. Food and Drug Administration (FDA) for safety or efficacy."
+    No strengths, NDC, lot, expiry or pharmacy: the client has not given them ([DATA NEEDED]), and they are
+    never invented. No MEDARO mark (MEDARO does not make the drugs).
+    wrap: half the circumference, for a flat (spinning) print, whose u runs from −wrap to wrap: each lane is
+    moved into that span, and a lane that straddles its end is drawn at both ends."""
+    groups = [
+        [("Quad 4 · Sublingual formulation", 34, 500, 1.0),
+         ("Proposed compounded formulation · Rx only", 25, 400, 0.9)],
+        [("Four active ingredients", 25, 500, 1.0),
+         ("Sildenafil · Vardenafil · Tadalafil · Apomorphine", 25, 400, 0.9),
+         ("Administered under the tongue.", 25, 400, 0.9)],
+        [("Combining PDE5 inhibitors can increase adverse-effect risks.", 23, 500, 0.95),
+         ("Do not combine ED medications without explicit", 23, 400, 0.9),
+         ("guidance from your prescribing clinician.", 23, 400, 0.9),
+         ("Compounded medications are not reviewed or approved by the", 23, 400, 0.9),
+         ("U.S. Food and Drug Administration (FDA) for safety or efficacy.", 23, 400, 0.9)],
+    ]
+    # lay the lanes out from the right (u falls lane by lane), then centre the block on the far side
+    GAP = 22  # either side of a hairline
+    items, u = [], 0.0
+    for gi, lanes in enumerate(groups):
+        if gi:
+            u -= GAP
+            items.append(("rule", u))
+            u -= GAP
+        for text, size, weight, op in lanes:
+            u -= size * 0.74                  # the cap height sits right of the baseline (letter tops face +u)
+            items.append(((text, size, weight, op), u))
+            u -= size * 0.66                  # the line's descent and leading
+    lo, hi = u, 0.0
+    shift = centre - (lo + hi) / 2
+    length = foot - top - 8
+    def places(u, below, above):
+        """where to draw a lane whose ink runs from u − below to u + above"""
+        if not wrap:
+            return [u]
+        while u - below > wrap:
+            u -= 2 * wrap
+        while u + above < -wrap:
+            u += 2 * wrap
+        out = [u]
+        if u + above > wrap:
+            out.append(u - 2 * wrap)
+        if u - below < -wrap:
+            out.append(u + 2 * wrap)
+        return out
+
+    for item, uu in items:
+        if item == "rule":
+            for at in places(uu + shift, 1.3, 1.3):
+                p.segment((at, top), (at, foot), 2.6, colour, 0.6)
+        else:
+            text, size, weight, op = item
+            for at in places(uu + shift, size * 0.25, size * 0.8):
+                w = p.text(text, at, top + 4, size, weight, colour, opacity=op, along=True)
+                assert w <= length, f"back sticker lane too long for the label: {text!r} ({w:.0f} > {length})"
 
 
 # ---------------------------------------------------- the ampoule in a hand ----
@@ -405,7 +513,7 @@ HAND_FADE = [(0, 0.72), (0.2, 0.86), (0.42, 0.97), (0.55, 1), (0.9, 1), (1, 0.9)
 def hand_ampoule_print():
     """The ampoule's white print (screened onto the blue glass), wrapped onto the hand photo: the still
     fallback for the spinning print."""
-    p = ampoule(where=Scaled(HAND_AMPOULE, HAND_S, 1060, HAND_LIQ))
+    p = ampoule(where=Scaled(HAND_AMPOULE, HAND_S, 1060, HAND_LIQ), back=True)
     span = (HAND_AMPOULE.cx - HAND_AMPOULE.r, HAND_AMPOULE.cx + HAND_AMPOULE.r)
     return p.svg(*HAND_SIZE, "Quad 4 ampoule in the hand: print on glass", fade=HAND_FADE, fade_span=span)
 
@@ -435,15 +543,18 @@ if __name__ == "__main__":
         # the blue Quad 4 ampoule on its own, turning (Men's Health landing → The science behind Quad 4):
         # the white print, flat, screened onto ampoule-quad4-blue.webp (tools/blue-ampoule.py) like the hand's;
         # its still fallback is print-ampoule-quad4.svg
-        "label-ampoule-quad4.js": label_js("ampoule-quad4", ampoule(flat=True), AMPOULE, (406, 2200), (1130, 2140),
-                                           "Quad 4 ampoule: print on glass (white), flat", back=0.3, fade=[0.72, 0.9]),
+        "label-ampoule-quad4.js": label_js("ampoule-quad4", ampoule(flat=True, back=True), AMPOULE, (406, 2200), (1130, 2140),
+                                           "Quad 4 ampoule: print on glass (white), flat, with its back sticker",
+                                           back=BACK, fade=[0.72, 0.9]),
+        # its still fallback, with the back sticker seen through the glass (print-ampoule-quad4.svg stays Home's)
+        "print-ampoule-quad4-blue.svg": ampoule(back=True),
         # the Quad 4 ampoule in the hand (Men's Health landing): the white print, screened onto the blue glass
         "print-hand-ampoule-quad4.svg": hand_ampoule_print(),
         "label-hand-ampoule-quad4.js": label_js(
-            "hand-ampoule-quad4", ampoule(where=Scaled(Flat(), HAND_S, 1060, HAND_LIQ)), HAND_AMPOULE, HAND_SIZE,
+            "hand-ampoule-quad4", ampoule(where=Scaled(Flat(), HAND_S, 1060, HAND_LIQ), back=True), HAND_AMPOULE, HAND_SIZE,
             (HAND_LIQ + (1130 - 1060) * HAND_S, HAND_LIQ + (2140 - 1060) * HAND_S),
-            "Quad 4 ampoule in the hand: print on glass (white), flat",
-            back=0.3, fade=[0.72, 0.9]),
+            "Quad 4 ampoule in the hand: print on glass (white), flat, with its back sticker",
+            back=BACK, fade=[0.72, 0.9]),
     }
     for name, data in files.items():
         with open(os.path.join(OUT, name), "w") as f:
