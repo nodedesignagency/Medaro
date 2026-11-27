@@ -12,9 +12,10 @@
    card, shot on the card colour (tools/wl-card-art.py). Card 1: the vial on
    a pale ledge in hard sun (after the user's NAD+ jar reference), the wall
    brought exactly to --p-mist so it is the card; the label print is
-   tools/pack-print.py's, wrapped onto this render. Card 2: the hero V4
-   couple in a kettlebell lunge (after the user's lunge reference), cut out,
-   with their own floor shadows kept as alpha, standing on the card.
+   tools/pack-print.py's, wrapped onto this render. Card 2 (2026-11-27, the
+   client: no exercise): the hero V4 couple standing close and laughing in
+   casual clothes, cut out, with their own floor shadows kept as alpha,
+   standing on the card.
    ========================================================================== */
 
 .wlpp {
@@ -96,17 +97,18 @@
 
 /* Card 2: the couple stands on the card, feet a little above its foot, their
    long shadows running off its right edge. The box is as big as the couple
-   may get; object-fit keeps the photo whole inside it, anchored bottom right.
-   It is the column's width that limits it (1280-1920): 104% keeps the
-   woman's knee and kettlebell 30px+ clear of the paragraph's box (measured
-   per row of the cut-out at 1280, 1440, 1920). */
+   may get; object-fit keeps the photo whole inside it, anchored bottom
+   right. Standing, they are taller than wide, so the card's height limits
+   them (86%): about 396px tall at 1440, their heads level with the heading's
+   top (54px down at 1440), centred in the image column, 60px+ clear of the
+   paragraph at 1280-1920 (measured). */
 .wlpp__people {
   position: absolute;
   right: 0;
   bottom: 3%;
   width: 104%;
   max-width: none; /* the base img rule caps images at their box */
-  height: 90%;
+  height: 86%;
   object-fit: contain;
   object-position: 100% 100%;
 }

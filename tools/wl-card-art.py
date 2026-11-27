@@ -5,8 +5,8 @@ Magnific renders (2026-11-25, Nano Banana 2.1, 4K, 3584x4800; the renders stay
 in the MEDARO Magnific project, not in git).
 
     python3 tools/wl-card-art.py vial  <vial-render.png>
-    python3 tools/wl-card-art.py lunge <lunge-render.png> <lunge-cutout.png>
     python3 tools/wl-card-art.py care  <care-render.png> <head-enhanced.png> <x> <y> <w> <h>
+    python3 tools/wl-card-art.py couple <couple-render.png> <couple-cutout.png> <heads-enhanced.png> <x> <y> <w> <h>
 
 vial:  the Tirzepatide vial standing on a pale ledge (after the user's
        NAD+ jar-on-a-ledge reference). Rendered on a flat wall close to the
@@ -17,21 +17,23 @@ vial:  the Tirzepatide vial standing on a pale ledge (after the user's
        image's pixel grid (print-vial-ledge.svg).
        -> site/assets/images/weight-loss/card-vial.webp (1344x1800)
 
-lunge: the couple in a kettlebell lunge (after the user's lunge reference;
-       the people from hero V4 as image references). The wall in the render is
-       darker sage than the card, so the people come from Magnific's background
-       removal and their shadows are lifted off the original floor: the floor's
-       brightness divided by the lit floor, thin stray light-stripes closed away,
-       kept as black at (1 - ratio) opacity, so on any card colour it multiplies
-       like a real shadow. Output has alpha.
-       -> site/assets/images/weight-loss/card-lunge.webp
-
 care:  the care section's photo (2026-11-26): a man of about 34 on park
        grass, laughing (Nano Banana 2.1, 4K, 3712x4608). His head was cropped
        (x, y, w, h: 1400 360 1760 1500) and run through Magnific's skin enhancer (faithful); here it
        goes back in place with a soft 60px edge, and the photo is scaled for
        the panel (1800 wide: 2x at 1920).
        -> site/assets/images/weight-loss/care-man.webp
+
+couple: card 2 since 2026-11-27 (the client: no exercise; the user picked
+       "close and laughing"): the hero couple standing side by side, laughing,
+       in casual clothes, on a pale studio floor (Nano Banana 2.1, 4K,
+       3584x4800, words only, the hero render as the only reference). Heads
+       through the skin enhancer (1300 560 1100 1150) and put back; the couple
+       from Magnific's background removal; their shadows lifted off the sunlit
+       floor patch: brightness / the patch's local level (a 361px grey closing,
+       so the patch's own edges and the shade around it cancel out), kept as
+       black alpha, only where it touches them.
+       -> site/assets/images/weight-loss/card-couple.webp
 
 Needs: pip install pillow numpy scipy
 """
@@ -71,91 +73,27 @@ def vial(src):
     print(path, os.path.getsize(path) // 1024, "KB")
 
 
-def lunge(src, cutout):
-    o = Image.open(src).convert("RGB")
-    W, H = o.size
-    orig = np.asarray(o).astype(float)
-    cut = Image.open(cutout).convert("RGBA").resize((W, H), Image.LANCZOS)
-    c = np.asarray(cut).astype(float)
-    alpha = c[:, :, 3] / 255.0
-
-    # ---- shadows on the floor
-    L = orig.mean(axis=2)
-    lit = 238.0  # the sunlit floor, measured (234-241)
-    ratio = np.clip(L / lit, 0, 1)
-    ys, xs = np.mgrid[0:H, 0:W]
-    edge = 3545 + xs * 0.042  # the floor's back edge (the wall above it is not floor)
-    ratio[ys < edge + 10] = 1.0
-    back = np.clip((ys - (edge + 10)) / 340.0, 0, 1) ** 0.8  # shadows fade in from the back edge, no hard line
-    # the dark strip left of the sunlit patch is the room's shade, not theirs
-    left = np.clip((xs - 420) / 260.0, 0, 1)
-    ratio = 1 - (1 - ratio) * left
-    # two thin straight shadow-lines run right across the floor (an off-frame window frame, not
-    # theirs): measured per column, centre y = a + b*x. Fill each band from the floor just above
-    # and below it, so where it crosses their own shadow the shadow carries on unbroken.
-    for a0, b, hw in ((3904, 0.0590, 34), (4321, 0.0679, 36)):
-        for x in range(W):
-            yc = a0 + b * x
-            y0, y1 = int(yc - hw), int(yc + hw)
-            top = np.median(ratio[y0 - 10:y0 - 2, x])
-            bot = np.median(ratio[y1 + 2:y1 + 10, x])
-            t = np.linspace(0, 1, y1 - y0)
-            band = top + (bot - top) * t
-            keep = alpha[y0:y1, x] > 0.5
-            ratio[y0:y1, x] = np.where(keep, ratio[y0:y1, x], band)
-    ratio[alpha > 0.5] = 1.0
-    # a soft fade at the right and bottom, so the shadows never end on a hard line
-    fade = np.clip((W - xs) / 240.0, 0, 1) * np.clip((H - ys) / 200.0, 0, 1)
-    ratio = 1 - (1 - ratio) * fade * back
-    ratio = ndimage.gaussian_filter(ratio, 2.0)  # lose the film grain in the shadow
-    shadow_a = np.clip(1 - ratio, 0, 1)
-    shadow_a[shadow_a < 0.012] = 0
-    # keep only shadow that touches them: floor marks and stray specks go
-    lab, n = ndimage.label(shadow_a > 0.03)
-    touch = np.unique(lab[ndimage.binary_dilation(alpha > 0.5, iterations=14) & (lab > 0)])
-    keep = np.isin(lab, touch)
-    keep = ndimage.binary_dilation(keep, iterations=6)  # keep their soft edges too
-    shadow_a[~keep] = 0
-
-    # ---- people over their shadows (the cut-out's own colour)
-    a_out = alpha + shadow_a * (1 - alpha)
-    rgb = c[:, :, :3] * alpha[..., None] / np.maximum(a_out, 1e-6)[..., None]  # shadow is black
-    rgba = np.dstack([rgb, a_out * 255]).clip(0, 255).astype(np.uint8)
-    img = Image.fromarray(rgba, "RGBA")
-
-    # crop to the content (people + shadows) with a little air, then scale for the web
-    bb = img.getchannel("A").point(lambda v: 255 if v > 6 else 0).getbbox()
-    x0, y0, x1, y1 = bb
-    img = img.crop((max(0, x0 - 40), max(0, y0 - 40), x1, y1))
-    s = 1400 / img.width
-    img = img.resize((1400, round(img.height * s)), Image.LANCZOS)
-    path = os.path.join(OUT, "card-lunge.webp")
-    img.save(path, quality=84, method=6)
-    print(path, img.size, os.path.getsize(path) // 1024, "KB")
-    # preview on the card colour
-    prev = Image.new("RGBA", img.size, tuple(int(v) for v in CARD) + (255,))
-    prev.alpha_composite(img)
-    return prev
-
-
-def care(src, head, x, y, w, hh):
+def paste_head(src, head, x, y, w, hh):
+    """The render with a skin-enhanced crop (x, y, w, hh) put back: the enhancer's fine detail with
+    the original's colour (it shifts a few levels darker and cooler), feathered over 60px."""
     im = Image.open(src).convert("RGB")
     crop = im.crop((x, y, x + w, y + hh))
     h = Image.open(head).convert("RGB").resize((w, hh), Image.LANCZOS)  # the enhancer returns it upscaled
-    # the enhancer shifts the colour a few levels (darker, cooler): take its fine detail, the
-    # original's colour (low-frequency difference added back), so no patch shows in the sky
     o, e = np.asarray(crop).astype(float), np.asarray(h).astype(float)
     diff = ndimage.gaussian_filter(o - e, sigma=(40, 40, 0))
     h = Image.fromarray(np.clip(e + diff, 0, 255).astype(np.uint8))
-    # feathered mask: full inside, fading over 60px to the crop's edges
-    m = np.ones((h.height, h.width), dtype=float)
+    m = np.ones((hh, w), dtype=float)
     f = 60
-    ramp = np.clip(np.arange(h.width) / f, 0, 1)
+    ramp = np.clip(np.arange(w) / f, 0, 1)
     m *= np.minimum(ramp, ramp[::-1])[None, :]
-    ramp = np.clip(np.arange(h.height) / f, 0, 1)
+    ramp = np.clip(np.arange(hh) / f, 0, 1)
     m *= np.minimum(ramp, ramp[::-1])[:, None]
-    mask = Image.fromarray((m * 255).astype(np.uint8))
-    im.paste(h, (x, y), mask)
+    im.paste(h, (x, y), Image.fromarray((m * 255).astype(np.uint8)))
+    return im
+
+
+def care(src, head, x, y, w, hh):
+    im = paste_head(src, head, x, y, w, hh)
     W = 1800
     im = im.resize((W, round(im.height * W / im.width)), Image.LANCZOS)
     path = os.path.join(OUT, "care-man.webp")
@@ -163,14 +101,64 @@ def care(src, head, x, y, w, hh):
     print(path, im.size, os.path.getsize(path) // 1024, "KB")
 
 
+def couple(src, cutout, head, x, y, w, hh):
+    orig = np.asarray(Image.open(src).convert("RGB")).astype(float)
+    H, W = orig.shape[:2]
+    rgb = np.asarray(paste_head(src, head, x, y, w, hh)).astype(float)
+    cut = np.asarray(Image.open(cutout).convert("RGBA").resize((W, H), Image.LANCZOS)).astype(float)
+    alpha = cut[:, :, 3] / 255.0
+    edge = (alpha > 0) & (alpha < 0.98)
+    rgb[edge] = cut[:, :, :3][edge]  # soft edges (hair) from the cut-out, never the wall behind
+
+    # ---- their shadows, only inside the sunlit floor patch (the shade around it is the room's)
+    L = orig.mean(axis=2)
+    ys = np.arange(H)[:, None]
+    xs = np.arange(W)[None, :]
+    lit_px = (L > 228) & (ys > 3700)
+    lit_level = float(np.median(L[lit_px]))
+    # the patch: the lit floor, closed (their shadows and feet inside it are filled in), holes filled,
+    # then pulled 40px in from its soft edge so the edge itself never reads as a shadow line
+    m = lit_px.astype(np.uint8)
+    m = ndimage.minimum_filter(ndimage.maximum_filter(m, size=301), size=301)
+    m = ndimage.binary_fill_holes(m)
+    m = ndimage.minimum_filter(m.astype(np.uint8), size=81).astype(float)
+    inside = ndimage.gaussian_filter(m, 18)
+    ratio = np.clip(L / lit_level, 0, 1)
+    ratio[alpha > 0.5] = 1.0
+    ratio = ndimage.gaussian_filter(ratio, 2.0)
+    shadow_a = np.clip(1 - ratio, 0, 1) * inside
+    shadow_a[shadow_a < 0.02] = 0
+    lab, n = ndimage.label(shadow_a > 0.04)
+    touch = np.unique(lab[ndimage.binary_dilation(alpha > 0.5, iterations=14) & (lab > 0)])
+    keep = ndimage.binary_dilation(np.isin(lab, touch), iterations=6)
+    shadow_a[~keep] = 0
+    fade = np.clip((W - xs) / 240.0, 0, 1) * np.clip((H - ys) / 200.0, 0, 1)
+    shadow_a *= fade
+    print("lit floor", round(lit_level, 1))
+
+    a_out = alpha + shadow_a * (1 - alpha)
+    out = rgb * alpha[..., None] / np.maximum(a_out, 1e-6)[..., None]  # shadow is black
+    img = Image.fromarray(np.dstack([out, a_out * 255]).clip(0, 255).astype(np.uint8), "RGBA")
+    x0, y0, x1, y1 = img.getchannel("A").point(lambda v: 255 if v > 6 else 0).getbbox()
+    img = img.crop((max(0, x0 - 30), max(0, y0 - 30), min(W, x1 + 10), min(H, y1 + 10)))
+    Ht = 1400
+    img = img.resize((round(img.width * Ht / img.height), Ht), Image.LANCZOS)
+    path = os.path.join(OUT, "card-couple.webp")
+    img.save(path, quality=82, method=6)
+    print(path, img.size, os.path.getsize(path) // 1024, "KB")
+    prev = Image.new("RGBA", img.size, tuple(int(v) for v in CARD) + (255,))
+    prev.alpha_composite(img)
+    return prev
+
+
 if __name__ == "__main__":
     what = sys.argv[1]
     if what == "vial":
         vial(sys.argv[2])
-    elif what == "lunge":
-        p = lunge(sys.argv[2], sys.argv[3])
-        if len(sys.argv) > 4:
-            p.convert("RGB").save(sys.argv[4], quality=88)
+    elif what == "couple":
+        p = couple(sys.argv[2], sys.argv[3], sys.argv[4], *(int(v) for v in sys.argv[5:9]))
+        if len(sys.argv) > 9:
+            p.convert("RGB").save(sys.argv[9], quality=88)
     elif what == "care":
         care(sys.argv[2], sys.argv[3], *(int(v) for v in sys.argv[4:8]))
     else:
