@@ -297,7 +297,8 @@
            weight slider with a result and the CTA; small print under it): "make this section in weightloss use our bottles".
            Copy: heading and prices from the client (2026-11-27, forwarded: "One Price. Every Dose", Semaglutide from $99/mo+,
            Tirzepatide $159/mo+). The sentence, the ticks and the small print are the brief's lines, word for word. The calculator's
-           labels follow the reference; its result is [DATA NEEDED] until the client gives the basis (never invent pounds lost).
+           labels follow the reference; its result uses MOCK rates for now (user, 2026-11-27: "add random mock weight for now"),
+           with the client's "results vary" line under it; real rates and basis from the client before main.
            Vials: the client's Tirzepatide mock-up; Semaglutide is the same label with the name changed (tools/pack-print.py).
            [LINK NEEDED] intake URL. -->
       <section class="wlprice" aria-labelledby="wlprice-title" data-wlprice data-product="semaglutide">
@@ -316,8 +317,10 @@
 
           <div class="wlprice__card">
             <div class="wlprice__product">
-              <!-- data-rate: the share of body weight the result shows, per product. Empty until the client gives it [DATA NEEDED] -->
-              <div class="wlprice__item is-on" data-product="semaglutide" data-rate="">
+              <!-- data-rate: the share of body weight the result shows, per product.
+                   MOCK VALUES (user, 2026-11-27: "add random mock weight for now"): 0.15 and 0.20 are placeholders for review,
+                   NOT client data. Replace with the client's figures and basis before this goes to main or Framer. -->
+              <div class="wlprice__item is-on" data-product="semaglutide" data-rate="0.15">
                 <h3 class="wlprice__name">Semaglutide</h3>
                 <span class="pack pack--vial wlprice__vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100" loading="lazy"><img class="product__print" src="assets/images/products/print-vial-semaglutide-microdose.svg" alt="" width="466" height="1100" loading="lazy"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100" loading="lazy"></span>
                 <p class="wlprice__from">From</p>
@@ -328,7 +331,7 @@
                     <li><span class="wlprice__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Fast, discreet medication delivery when prescribed and available.</li>
                   </ul>
               </div>
-              <div class="wlprice__item" data-product="tirzepatide" data-rate="">
+              <div class="wlprice__item" data-product="tirzepatide" data-rate="0.20">
                 <h3 class="wlprice__name">Tirzepatide</h3>
                 <span class="pack pack--vial wlprice__vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100" loading="lazy"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100" loading="lazy"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100" loading="lazy"></span>
                 <p class="wlprice__from">From</p>
@@ -349,9 +352,10 @@
               <input class="wlprice__range" type="range" id="wlprice-weight" min="120" max="400" step="1" value="200" aria-valuetext="200 pounds">
               <div class="wlprice__result" aria-live="polite">
                 <p class="wlprice__result-lead">You could lose up to</p>
-                <p class="wlprice__result-value" data-result data-empty><span data-result-num>XX</span><span class="wlprice__unit">lbs</span></p>
+                <p class="wlprice__result-value" data-result><span data-result-num>30</span><span class="wlprice__unit">lbs</span></p>
                 <p class="wlprice__result-with">with <span data-name>Semaglutide</span></p>
-                <p class="wlprice__needed" data-needed>[DATA NEEDED]</p>
+                <!-- The figure is a claim: the client's own qualifier (content/weight-loss.md → FAQ, word for word) sits right under it -->
+                <p class="wlprice__qualifier">Weight-loss results vary by person, medication, adherence, and other health factors. No specific amount or rate of weight loss can be guaranteed.</p>
               </div>
               <a class="btn btn--dark btn--pill btn--l wlprice__cta" href="#intake-weight-loss">Start Your Assessment</a>
             </div>
