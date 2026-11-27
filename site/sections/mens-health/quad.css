@@ -14,26 +14,37 @@
    glass (components/cta-pair.css). The sentence keeps the bottom-left
    corner; the bottom-right takes the client's prescription line. The
    forearm ends at the hero's foot (the cards no longer follow).
-   Frame: the headline stays inside the content inset (the frame + 48px).
+   Round 5 (user, 2026-11-27: "make hero section inside a boundary card like
+   what we did in weightloss page"): the Weight Loss hero V4's stage. A card
+   on the frame (16px from the screen's sides and foot, max 1888, radius 18)
+   that fills the screen under the 70px header (680–1000px), in the Men's
+   mist (the Quad 4 cards' pale steel blue); the hand rises from the card's
+   foot and its edge crops it, so the melt at the foot is gone.
+   Frame: copy on the card's 48px inset, the logo's line.
    ========================================================================== */
 
-/* The hero: one screen under the header */
+/* The hero: a card on the frame, like the Weight Loss hero V4's stage */
 .mhquad {
-  --screen: min(1200px, max(640px, calc(100svh - 70px))); /* one screen under the 70px header */
   position: relative;
+  padding: 0 var(--frame-side) var(--edge);
   color: var(--color-ink);
 }
 .mhquad__inner {
+  --mhquad-card: #dee6ee; /* Men's mist, the Quad 4 cards' colour: ink 9.4:1, muted text 4.9:1 */
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: var(--screen);
-  padding: clamp(52px, 4.6vw, 96px) calc(var(--frame-side) + var(--space-7)) 0;
+  height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* fills the screen under the header, as on Weight Loss */
+  padding: clamp(48px, 4.2vw, 88px) var(--space-7) 0;
+  overflow: hidden; /* the card's edge crops the hand */
+  border-radius: 18px;
+  background: var(--mhquad-card);
   text-align: center;
+  isolation: isolate;
 }
 
-.mhquad__chip { --color-chip: #0a6fc7; } /* the Men's sky blue, deep enough for paper: 4.7:1 (Components → Chip) */
+.mhquad__chip { --color-chip: #0862b2; } /* the Men's blue one step deeper for the mist: 4.9:1 (#0a6fc7 is 4.05 on it) */
 
 /* The reference's headline: very large, tight, two centred lines */
 .mhquad__title {
@@ -60,12 +71,7 @@
   width: 100%;
   min-height: 320px;
   margin-top: clamp(16px, 1.6vw, 32px);
-  container-type: size;
-  /* The hand ends at the hero's foot. It used to run on behind the middle Quad 4 card (user, 2026-11-25: "dont fade
-     this here make it behind the card below"); the cards now come after the science section, so nothing covers the
-     cut: the last stretch of the hand melts into the page instead of ending on a hard line when the page scrolls. */
-  mask-image: linear-gradient(to bottom, #000 calc(100% - var(--hand-melt)), transparent);
-  --hand-melt: clamp(72px, 13cqh, 140px);
+  container-type: size; /* the hand runs to the card's foot, where the card's edge crops it */
 }
 .mhquad__pack {
   position: absolute;
@@ -105,16 +111,17 @@
 .mhquad__btn--order { right: calc(50% + var(--glass-half) + var(--glass-gap)); }
 .mhquad__btn--price { left: calc(50% + var(--glass-half) + var(--glass-gap)); }
 
-/* The sentence and the prescription line in the bottom corners, on the frame
-   lines (the logo's and the header button's), so the hand has the middle */
+/* The sentence and the prescription line in the card's bottom corners, on
+   its 48px inset (the logo's and the header button's lines), so the hand has
+   the middle */
 .mhquad__text,
 .mhquad__note {
   position: absolute;
   z-index: 2;
-  bottom: clamp(36px, 3.4vw, 64px);
+  bottom: var(--space-7);
 }
 .mhquad__text {
-  left: calc(var(--frame-side) + var(--space-7));
+  left: var(--space-7);
   max-width: min(24em, 30vw);
   font-size: clamp(16px, 1.2vw, 19px);
   line-height: 1.5;
@@ -124,7 +131,7 @@
 }
 /* the client's prescription line (content/footer.md), mirroring the sentence */
 .mhquad__note {
-  right: calc(var(--frame-side) + var(--space-7));
+  right: var(--space-7);
   max-width: min(25em, 26vw);
   font-size: clamp(14px, 1vw, 16px);
   text-align: right;

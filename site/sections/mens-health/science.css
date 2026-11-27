@@ -21,7 +21,7 @@
 
 .mhsci {
   --mhsci-blue: #0a6fc7; /* the Men's sky blue, deep enough for the blue paper: 4.5:1 (the quad chip's) */
-  padding: var(--space-10) var(--frame-side) var(--space-9); /* right under the hero now (client, 2026-11-27): the room the cards' foot used to give (96 + 32) */
+  padding: var(--space-9) var(--frame-side); /* right under the hero card (client, 2026-11-27): 96 + the card's 16px foot */
   color: var(--color-ink);
 }
 
