@@ -291,9 +291,10 @@ LEDGE = VialShot(Cylinder(cx=672.19, r=137.25, eye=2984.25, k=0.01387), 804.75, 
                  (534.94, 809.44), (1344, 1800), m=(1147.5 - 804.75) / (995 - 398), span=(534.94, 809.44))
 
 
-def vial(variant, shot=VIAL):
+def vial(variant, shot=VIAL, drug="Tirzepatide"):
     """The client's MEDARO Tirzepatide vial mock-up, word for word: Injection · Compounded ·
-    Tirzepatide · <variant> Vial · RX ONLY. Body in the brand's olive (client: "change the Color
+    Tirzepatide · <variant> Vial · RX ONLY. `drug` swaps only the name (2026-11-27: the Weight Loss
+    pricing section shows a Semaglutide vial beside it, the client's mock-up with its name changed). Body in the brand's olive (client: "change the Color
     of the body to the brand Color"). Our layout, the pens' recipe turned across the vial: the row
     above (RX ONLY), hairline, the name band (Compounded in lime over Tirzepatide), hairline, the use
     line (Injection), and the variant on one solid lime block across the foot, a third of the label
@@ -307,7 +308,7 @@ def vial(variant, shot=VIAL):
     p.text("RX ONLY", L, y(465), 25 * m, 500, PAPER, tracking=0.12, opacity=0.82)
     p.line(-edge, edge, y(503), 2.2 * m, PAPER, 0.36)
     p.text("Compounded", L - 1 * m, y(583), 40 * m, 400, LIME)
-    p.text("Tirzepatide", L - 3 * m, y(661), 72 * m, 500, PAPER, tracking=-0.02)
+    p.text(drug, L - 3 * m, y(661), 72 * m, 500, PAPER, tracking=-0.02)
     p.line(-edge, edge, y(707), 2.2 * m, PAPER, 0.36)
     p.text("Injection", L, y(777), 29 * m, 400, PAPER, opacity=0.82)
     p.band(y(823), bot, LIME, *shot.x)
@@ -315,7 +316,7 @@ def vial(variant, shot=VIAL):
     # the paper's own shading carries the light (the print multiplies onto it); deepen the far sides a little
     shade = [(0, 0.34), (0.1, 0.12), (0.24, 0), (0.9, 0), (1, 0.1)]
     body = p.band_path(top, bot, *shot.x)
-    return p.svg(*shot.size, f"Compounded Tirzepatide, {variant} Vial: label print", shade=shade, shade_clip=body,
+    return p.svg(*shot.size, f"Compounded {drug}, {variant} Vial: label print", shade=shade, shade_clip=body,
                  span=shot.span)
 
 
@@ -386,6 +387,7 @@ if __name__ == "__main__":
     files = {
         "print-vial-microdose.svg": vial("Microdose"),
         "print-vial-multidose.svg": vial("Multidose"),
+        "print-vial-semaglutide-microdose.svg": vial("Microdose", drug="Semaglutide"),
         "print-ampoule-quad4.svg": ampoule(),
         "print-ampoule-quad4-ink.svg": ampoule(ink=True),
         "sheen-vial.svg": vial_sheen(),
