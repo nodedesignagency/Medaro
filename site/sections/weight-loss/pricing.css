@@ -1,0 +1,355 @@
+/* ==========================================================================
+   Weight Loss · Pricing: "One Price. Every Dose." (under hero V4)
+   After the user's reference (2026-11-27, two photos of a GLP-1 pricing
+   block: a dark section, a two-line heading with its second phrase in the
+   accent, one sentence, a pill switch between the two medications, then one
+   card in two halves: left the product (name, vial, "from" price, three
+   ticks) on a colour that changes with the switch (white ↔ yellow there),
+   right the weight slider, a result box and the CTA; small print under it).
+   "make this section in weightloss use our bottles".
+   Ours:
+   - the dark section is a deep olive stage on the frame (radius 18), like
+     hero V4's stage and ongoing care V2;
+   - the accent phrase in the buttons' lime; no italics (not in our type);
+   - the switch: a paper track, the chosen side an ink pill with lime words
+     (the reference's dark pill with yellow words), sliding between them;
+   - the product half: mist for Semaglutide, the buttons' lime for
+     Tirzepatide (the reference's white ↔ yellow); our vial (the client's
+     Tirzepatide mock-up; the Semaglutide one is the same label with the name
+     changed, tools/pack-print.py), crossfading with a small rise;
+   - the calculator half: white, our type; the CTA is the page's dark pill
+     (dark pills on light surfaces, lime on dark);
+   - the result is [DATA NEEDED] until the client gives the basis for it
+     (CLAUDE.md: never invent pounds lost). pricing.js computes
+     weight × data-rate as soon as each product has a rate.
+   Copy: the heading and prices are the client's (2026-11-27, forwarded:
+   "One Price. Every Dose", Semaglutide from $99/mo+, Tirzepatide $159/mo+);
+   the sentence, ticks and small print are the brief's lines, word for word;
+   the calculator's labels follow the reference (DESIGN.md → Copy flags).
+   Without JS: Semaglutide shows, the switch and slider do nothing.
+   Framer: a component with two variants (Semaglutide, Tirzepatide); the
+   slider as a code component.
+   ========================================================================== */
+
+.wlprice {
+  padding: 0 var(--frame-side) var(--space-9);
+}
+
+.wlprice__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(72px, 6.6vw, 120px) 48px clamp(56px, 5vw, 88px);
+  border-radius: 18px; /* the hero stage's radius */
+  background: var(--p-deep);
+  color: var(--p-paper);
+}
+
+/* ---------- Heading ---------- */
+.wlprice__head { text-align: center; }
+.wlprice__title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.6vw, 68px); /* the page's section heading */
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+.wlprice__accent { color: var(--p-accent); } /* lime on deep olive ≈ 12:1 */
+.wlprice__nowrap { white-space: nowrap; } /* "GLP-1" never splits at its hyphen */
+.wlprice__lede {
+  margin-top: 18px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--p-paper) 72%, var(--p-deep)); /* ≈ 8:1 */
+}
+
+/* ---------- The switch ---------- */
+.wlprice__switch {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: clamp(32px, 3vw, 48px);
+  padding: 5px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--p-paper);
+}
+.wlprice__switch legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.wlprice__switch input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.wlprice__switch label {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  min-width: 188px;
+  height: 48px;
+  padding: 0 28px;
+  border-radius: var(--radius-pill);
+  font-size: 17px;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.01em;
+  color: var(--p-ink-soft);
+  cursor: pointer;
+  transition: color var(--dur-base) var(--ease-out);
+}
+.wlprice__switch label:hover { color: var(--p-ink); }
+.wlprice__switch input:checked + label { color: var(--p-accent); } /* lime on ink ≈ 8.6:1 */
+.wlprice__switch input:focus-visible + label { outline: 2px solid var(--p-ink); outline-offset: 3px; }
+/* The ink pill under the chosen side, sliding between them */
+.wlprice__thumb {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 5px;
+  width: calc(50% - 5px);
+  border-radius: var(--radius-pill);
+  background: var(--p-ink);
+  transition: transform 420ms var(--ease-out);
+}
+.wlprice[data-product="tirzepatide"] .wlprice__thumb { transform: translateX(100%); }
+
+/* ---------- The card ---------- */
+.wlprice__card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(100%, 1040px);
+  margin-top: 24px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--p-ink);
+  /* always white: its own colour tokens, so no page scene recolours its words (DESIGN.md → white cards) */
+  --color-ink: var(--p-ink);
+  --color-text: var(--p-ink);
+  --color-text-muted: var(--p-ink-soft);
+}
+
+/* Left: the product, on a colour that changes with the switch */
+.wlprice__product {
+  --panel: var(--p-mist);
+  --tick-bg: var(--p-accent);
+  --tick-ink: var(--p-ink);
+  position: relative;
+  display: grid;
+  background: var(--panel);
+  transition: background-color 520ms var(--ease-out);
+}
+.wlprice[data-product="tirzepatide"] .wlprice__product {
+  --panel: var(--p-accent);
+  --tick-bg: var(--p-ink);
+  --tick-ink: var(--p-accent);
+}
+.wlprice__item {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 40px 44px;
+  text-align: center;
+}
+.wlprice.is-live .wlprice__item {
+  transition: opacity 260ms ease-out, transform 260ms ease-out, visibility 0s linear 260ms;
+}
+.wlprice.is-live .wlprice__item:not(.is-on) {
+  opacity: 0;
+  transform: translateY(10px);
+  visibility: hidden;
+}
+.wlprice.is-live .wlprice__item.is-on {
+  transition: opacity 420ms var(--ease-out) 120ms, transform 560ms var(--ease-out) 120ms, visibility 0s;
+}
+.wlprice:not(.is-live) .wlprice__item:not(:first-child) { display: none; }
+
+.wlprice__name {
+  font-size: clamp(26px, 2vw, 32px);
+  font-weight: var(--weight-medium);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.wlprice__vial {
+  width: auto;
+  height: clamp(240px, 19.5vw, 320px); /* 281px at 1440: the label's smallest words ≈ 6.4px */
+  margin-top: 24px;
+  filter: drop-shadow(0 14px 18px rgb(38 43 30 / 0.16)) drop-shadow(0 2px 3px rgb(38 43 30 / 0.12));
+}
+.wlprice__from {
+  margin-top: 24px;
+  font-size: 15px;
+  color: var(--p-ink-soft);
+}
+.wlprice__price {
+  margin-top: 2px;
+  font-size: clamp(36px, 2.8vw, 46px);
+  font-weight: var(--weight-medium);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.wlprice__ticks {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+.wlprice__ticks li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 12px;
+  align-items: start;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.wlprice__tick {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: -1px;
+  border-radius: 50%;
+  background: var(--tick-bg);
+  color: var(--tick-ink);
+  transition: background-color 520ms var(--ease-out), color 520ms var(--ease-out);
+}
+.wlprice__tick svg { width: 14px; height: 14px; }
+
+/* Right: the weight slider, the result and the CTA */
+.wlprice__calc {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+.wlprice__weight {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.wlprice__weight label {
+  font-size: 18px;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.01em;
+}
+.wlprice__weight output {
+  font-size: clamp(44px, 3.4vw, 56px);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.wlprice__unit {
+  margin-left: 6px;
+  font-size: 16px;
+  font-weight: var(--weight-regular);
+  letter-spacing: 0;
+  color: var(--p-ink-soft);
+}
+
+/* The slider: ink up to the thumb, the mist after it */
+.wlprice__range {
+  --fill: 40%;
+  width: 100%;
+  height: 28px;
+  margin: 20px 0 36px;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+.wlprice__range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, var(--p-ink) var(--fill), var(--p-mist) var(--fill));
+}
+.wlprice__range::-moz-range-track { height: 6px; border-radius: 3px; background: var(--p-mist); }
+.wlprice__range::-moz-range-progress { height: 6px; border-radius: 3px; background: var(--p-ink); }
+.wlprice__range::-webkit-slider-thumb {
+  width: 28px;
+  height: 28px;
+  margin-top: -11px;
+  border: 2px solid var(--p-ink);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgb(38 43 30 / 0.18);
+  -webkit-appearance: none;
+  appearance: none;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.wlprice__range::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--p-ink);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgb(38 43 30 / 0.18);
+}
+.wlprice__range:active::-webkit-slider-thumb { transform: scale(1.08); }
+.wlprice__range:focus-visible { outline: none; }
+.wlprice__range:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--p-ink); outline-offset: 3px; }
+.wlprice__range:focus-visible::-moz-range-thumb { outline: 2px solid var(--p-ink); outline-offset: 3px; }
+
+.wlprice__result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;              /* fills the space between the slider and the CTA, its words centred, like the reference */
+  justify-content: center;
+  padding: 32px 24px 30px;
+  border-radius: 12px;
+  background: var(--p-mist);
+  text-align: center;
+}
+.wlprice__result-lead { font-size: 16px; color: var(--p-ink-soft); }
+.wlprice__result-value {
+  margin-top: 10px;
+  font-size: clamp(52px, 4.2vw, 72px); /* the reference's big figure: 60px at 1440 */
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.wlprice__result-value[data-empty] { color: color-mix(in srgb, var(--p-ink-soft) 70%, var(--p-mist)); } /* the placeholder "XX", quieter than a real figure */
+.wlprice__result-with {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.01em;
+}
+.wlprice__needed {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.03em;
+  color: #8a3b12; /* placeholder marker: a warm rust so it can't pass for content (5.6:1 on the mist) */
+}
+
+.wlprice__cta { width: 100%; margin-top: 28px; }
+
+.wlprice__small {
+  max-width: 40em;
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  color: color-mix(in srgb, var(--p-paper) 72%, var(--p-deep));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wlprice__thumb,
+  .wlprice__product,
+  .wlprice__tick { transition: none; }
+  .wlprice.is-live .wlprice__item,
+  .wlprice.is-live .wlprice__item.is-on { transform: none; transition: opacity 1ms, visibility 0s; }
+}

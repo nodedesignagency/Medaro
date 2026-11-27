@@ -297,9 +297,10 @@ VIAL_X = (3.5, 462.5)  # the label runs right to the silhouette (paper is opaque
 VIAL_TOP, VIAL_BOT = VIAL_TOP - 1.5, VIAL_BOT + 1  # cover the paper's bright cut edge
 
 
-def vial(variant):
+def vial(variant, drug="Tirzepatide"):
     """The client's MEDARO Tirzepatide vial mock-up, word for word: Injection · Compounded ·
-    Tirzepatide · <variant> Vial · RX ONLY. Body in the brand's olive (client: "change the Color
+    Tirzepatide · <variant> Vial · RX ONLY. `drug` swaps only the name (2026-11-27: the Weight Loss
+    pricing section shows a Semaglutide vial beside it, the client's mock-up with its name changed). Body in the brand's olive (client: "change the Color
     of the body to the brand Color"). Our layout, the pens' recipe turned across the vial: the row
     above (RX ONLY), hairline, the name band (Compounded in lime over Tirzepatide), hairline, the use
     line (Injection), and the variant on one solid lime block across the foot, a third of the label
@@ -311,7 +312,7 @@ def vial(variant):
     p.text("RX ONLY", L, 465, 25, 500, PAPER, tracking=0.12, opacity=0.82)
     p.line(-edge, edge, 503, 2.2, PAPER, 0.36)
     p.text("Compounded", L - 1, 583, 40, 400, LIME)
-    p.text("Tirzepatide", L - 3, 661, 72, 500, PAPER, tracking=-0.02)
+    p.text(drug, L - 3, 661, 72, 500, PAPER, tracking=-0.02)
     p.line(-edge, edge, 707, 2.2, PAPER, 0.36)
     p.text("Injection", L, 777, 29, 400, PAPER, opacity=0.82)
     p.band(823, VIAL_BOT, LIME, *VIAL_X)
@@ -319,7 +320,7 @@ def vial(variant):
     # the paper's own shading carries the light (the print multiplies onto it); deepen the far sides a little
     shade = [(0, 0.34), (0.1, 0.12), (0.24, 0), (0.9, 0), (1, 0.1)]
     body = p.band_path(VIAL_TOP, VIAL_BOT, *VIAL_X)
-    return p.svg(466, 1100, f"Compounded Tirzepatide, {variant} Vial: label print", shade=shade, shade_clip=body)
+    return p.svg(466, 1100, f"Compounded {drug}, {variant} Vial: label print", shade=shade, shade_clip=body)
 
 
 def vial_sheen():
@@ -425,6 +426,8 @@ if __name__ == "__main__":
     files = {
         "print-vial-microdose.svg": vial("Microdose"),
         "print-vial-multidose.svg": vial("Multidose"),
+        # the Semaglutide vial (Weight Loss pricing, "One Price. Every Dose."): the same label, the name changed
+        "print-vial-semaglutide-microdose.svg": vial("Microdose", drug="Semaglutide"),
         "print-ampoule-quad4.svg": ampoule(),
         "print-ampoule-quad4-ink.svg": ampoule(ink=True),
         "sheen-vial.svg": vial_sheen(),
