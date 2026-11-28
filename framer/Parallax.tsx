@@ -338,3 +338,24 @@ export function withStageDrift(Component: ComponentType<any>): ComponentType<any
 export function withCutoutRise(Component: ComponentType<any>): ComponentType<any> {
     return cutoutRise(Component)
 }
+
+// withImageDepth (Men's Health hero "Hand and ampoule", desktop; 2026-11-28, user: "dont do parallax in these cta bruh
+// only image"): the layer holds the Order Now and See Pricing lanes, so only its photo moves, not the layer: the photo
+// drifts down at 30% of the scroll while the hero leaves (withBackdropDepth's values) and the buttons stay with the page.
+// The stage card clips the photo as it sinks. Tablet and phone: off.
+const imageDepth = parallax((el, vh, vw) => {
+    const wrap = el.querySelector(":scope > [data-framer-background-image-wrapper]") as HTMLElement | null
+    if (!wrap) return
+    const section = el.closest("section")
+    if (!section || vw < 1200) {
+        wrap.style.translate = ""
+        return
+    }
+    const r = section.getBoundingClientRect()
+    const d = Math.min(Math.max(-r.top, 0), r.height)
+    wrap.style.translate = d ? "0 " + (0.3 * d).toFixed(1) + "px" : ""
+})
+
+export function withImageDepth(Component: ComponentType<any>): ComponentType<any> {
+    return imageDepth(Component)
+}
