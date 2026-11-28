@@ -1,0 +1,10 @@
+/* ==========================================================================
+   Men's Health · FAQ (2026-11-25)
+   The user: "make it like how you did in fatloss" (the Weight Loss FAQ,
+   round 2, after the Mahadeva template). Built from the shared FAQ
+   component (components/faq.css + faq.js) unchanged; this file only gives
+   the chip the Men's blue (the component's default is the Weight Loss leaf
+   green). The page's mist (#E4EAF2) and hairlines come with the page tint.
+   ========================================================================== */
+
+.mhfaq .faq__chip { --color-chip: #0a6fc7; } /* the Men's blue on the page colour: 4.5:1 */

@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 900" preserveAspectRatio="xMaxYMin meet">
+  <!-- Anchored right: the boxes run on past the left of the viewBox, so when the
+       image box is wider than 640:840 (it bleeds to the screen edge) they still
+       reach the edge. -->
+  <!-- STAND-IN for the Weight Loss product shot on Home, not final art.
+       Brief: the MEDARO weight-loss set, after the Good Life reference: two plain
+       dark-olive boxes stacked (wordmark on the front), a frosted vial with an
+       olive metal cap and a cream label, a white tablet bottle and a small vial
+       on top. Studio light from the upper left, soft floor shadow. The set
+       bleeds off the left edge; the right of the frame stays empty.
+       Labels on the bottle and vials are blank (client, 2026-11-20: no MEDARO
+       wordmark on vials, ampoules or bottles; "we do not make the drugs"). -->
+  <defs>
+    <linearGradient id="boxFront" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#3d4532"/>
+      <stop offset="0.55" stop-color="#2f3626"/>
+      <stop offset="1" stop-color="#252a1d"/>
+    </linearGradient>
+    <linearGradient id="boxSide" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22271a"/>
+      <stop offset="1" stop-color="#1a1e14"/>
+    </linearGradient>
+    <linearGradient id="boxTop" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#596349"/>
+      <stop offset="1" stop-color="#4a533d"/>
+    </linearGradient>
+    <linearGradient id="frost" x1="0" x2="1">
+      <stop offset="0" stop-color="#b9beb0"/>
+      <stop offset="0.18" stop-color="#e2e5db"/>
+      <stop offset="0.4" stop-color="#f7f8f3"/>
+      <stop offset="0.72" stop-color="#dcdfd3"/>
+      <stop offset="1" stop-color="#a9ae9f"/>
+    </linearGradient>
+    <linearGradient id="white" x1="0" x2="1">
+      <stop offset="0" stop-color="#cfd1c7"/>
+      <stop offset="0.2" stop-color="#f4f4ef"/>
+      <stop offset="0.42" stop-color="#ffffff"/>
+      <stop offset="0.76" stop-color="#e6e7df"/>
+      <stop offset="1" stop-color="#bcbfb2"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" x2="1">
+      <stop offset="0" stop-color="#262c1c"/>
+      <stop offset="0.3" stop-color="#4f5a3a"/>
+      <stop offset="0.5" stop-color="#65714b"/>
+      <stop offset="1" stop-color="#20251a"/>
+    </linearGradient>
+    <linearGradient id="cream" x1="0" x2="1">
+      <stop offset="0" stop-color="#cfcdba"/>
+      <stop offset="0.35" stop-color="#ecebdc"/>
+      <stop offset="0.6" stop-color="#f1f0e3"/>
+      <stop offset="1" stop-color="#c6c4b0"/>
+    </linearGradient>
+    <linearGradient id="sageLabel" x1="0" x2="1">
+      <stop offset="0" stop-color="#8f9680"/>
+      <stop offset="0.35" stop-color="#b3b9a4"/>
+      <stop offset="0.6" stop-color="#bac0ab"/>
+      <stop offset="1" stop-color="#8b927b"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="softer" x="-20%" y="-80%" width="140%" height="260%"><feGaussianBlur stdDeviation="16"/></filter>
+    <!-- Official MEDARO wordmark paths (from site/assets/logo), drawn at 1 unit = 1/4413 of the width -->
+    <g id="wm"><g transform="translate(80 780) scale(1 -1)">
+      <path d="M114 0V700H175L495 154H463L780 700H841V0H770V589H787L495 89H460L166 589H185V0Z"/>
+      <path transform="translate(870 0)" d="M114 0V700H594V636H188V64H609V0ZM180 324V387H550V324Z"/>
+      <path transform="translate(1500 0)" d="M114 0V700H399Q511 700 595.5 655.5Q680 611 727.0 532.0Q774 453 774 350Q774 247 727.0 168.0Q680 89 595.5 44.5Q511 0 399 0ZM188 64H395Q488 64 556.5 100.5Q625 137 663.0 201.5Q701 266 701 350Q701 435 663.0 499.0Q625 563 556.5 599.5Q488 636 395 636H188Z"/>
+      <path transform="translate(2300 0)" d="M2 0 L322 700 L395 700 L715 0 L637 0 L343 657 L373 657 L79 0 Z"/>
+      <path transform="translate(3040 0)" d="M114 0V700H376Q509 700 585.5 636.5Q662 573 662 460Q662 386 627.5 332.5Q593 279 529.0 250.5Q465 222 376 222H155L188 256V0ZM592 0 412 254H492L673 0ZM188 250 155 285H374Q479 285 533.5 331.0Q588 377 588 460Q588 544 533.5 590.0Q479 636 374 636H155L188 671Z"/>
+      <path transform="translate(3740 0)" d="M420 -6Q341 -6 273.5 20.5Q206 47 156.5 95.5Q107 144 79.5 208.5Q52 273 52 350Q52 427 79.5 491.5Q107 556 156.5 604.5Q206 653 273.0 679.5Q340 706 420 706Q499 706 566.0 679.5Q633 653 682.5 605.0Q732 557 759.5 492.0Q787 427 787 350Q787 273 759.5 208.0Q732 143 682.5 95.0Q633 47 566.0 20.5Q499 -6 420 -6ZM420 60Q483 60 536.5 81.5Q590 103 629.5 142.5Q669 182 691.0 234.5Q713 287 713 350Q713 413 691.0 465.5Q669 518 629.5 557.5Q590 597 536.5 618.5Q483 640 420 640Q357 640 303.0 618.5Q249 597 209.5 557.5Q170 518 147.5 465.5Q125 413 125 350Q125 288 147.5 235.0Q170 182 209.5 142.5Q249 103 303.0 81.5Q357 60 420 60Z"/>
+    </g></g>
+  </defs>
+
+  <!-- floor shadow -->
+  <path d="M-1400 714 L392 797 L452 768 L490 782 L404 826 L-1400 742 Z" fill="#262b1e" opacity="0.3" filter="url(#softer)"/>
+
+  <!-- lower box: front, side, top -->
+  <path d="M-1400 423.7 L392 506 L392 800 L-1400 717.7 Z" fill="url(#boxFront)"/>
+  <path d="M392 506 L452 476 L452 770 L392 800 Z" fill="url(#boxSide)"/>
+  <path d="M-1400 390.7 L452 476 L392 506 L-1400 423.7 Z" fill="url(#boxTop)"/>
+  <path d="M-1400 423.7 L392 506" stroke="#6b7558" stroke-opacity="0.5" stroke-width="1"/>
+  <g transform="rotate(2.63 128 628) translate(119.2 624.6) scale(0.0453)" fill="#e7e9dc" opacity="0.92"><use href="#wm"/></g>
+
+  <!-- shadow the upper box casts on the lower box's lid -->
+  <path d="M-1400 415.7 L292 494 L332 476 L344 486 L300 506 L-1400 429.7 Z" fill="#14170f" opacity="0.55" filter="url(#soft)"/>
+
+  <!-- upper box -->
+  <path d="M-1400 267.7 L290 345.3 L290 495.3 L-1400 417.7 Z" fill="url(#boxFront)"/>
+  <path d="M290 345.3 L330 325.3 L330 475.3 L290 495.3 Z" fill="url(#boxSide)"/>
+  <path d="M-1400 245.9 L330 325.3 L290 345.3 L-1400 267.7 Z" fill="url(#boxTop)"/>
+  <path d="M-1400 267.7 L290 345.3" stroke="#6b7558" stroke-opacity="0.5" stroke-width="1"/>
+
+  <!-- tablet bottle on the upper box -->
+  <ellipse cx="142" cy="332" rx="58" ry="7" fill="#14170f" opacity="0.5" filter="url(#soft)"/>
+  <rect x="100" y="104" width="84" height="40" rx="6" fill="url(#metal)"/>
+  <g stroke="#14170f" stroke-opacity="0.35" stroke-width="1.4"><path d="M108 108v32M116 108v32M124 108v32M132 108v32M140 108v32M148 108v32M156 108v32M164 108v32M172 108v32"/></g>
+  <rect x="106" y="142" width="72" height="10" fill="#d4d6cb"/>
+  <path d="M92 172c0-13 8-20 21-20h58c13 0 21 7 21 20v146c0 8-6 14-14 14h-72c-8 0-14-6-14-14Z" fill="url(#white)"/>
+  <rect x="92" y="206" width="100" height="92" fill="url(#sageLabel)"/>
+  <rect x="110" y="266" width="38" height="3" rx="1.5" fill="#343b29" opacity="0.35"/>
+  <rect x="110" y="274" width="24" height="3" rx="1.5" fill="#343b29" opacity="0.25"/>
+  <rect x="99" y="166" width="6" height="150" rx="3" fill="#fff" opacity="0.7"/>
+
+  <!-- small vial on the upper box -->
+  <ellipse cx="236" cy="338" rx="32" ry="5" fill="#14170f" opacity="0.5" filter="url(#soft)"/>
+  <rect x="215" y="236" width="42" height="18" rx="4" fill="url(#metal)"/>
+  <rect x="221" y="254" width="30" height="9" fill="#9da38f"/>
+  <path d="M210 276c0-8 5-13 13-13h26c8 0 13 5 13 13v54c0 5-4 8-8 8h-36c-4 0-8-3-8-8Z" fill="url(#frost)" opacity="0.96"/>
+  <rect x="210" y="286" width="52" height="34" fill="url(#cream)"/>
+  <rect x="212.5" y="274" width="3" height="60" rx="1.5" fill="#fff" opacity="0.6"/>
+
+  <!-- vial in front, on the lower box -->
+  <ellipse cx="356" cy="501" rx="46" ry="7" fill="#14170f" opacity="0.55" filter="url(#soft)"/>
+  <rect x="322" y="356" width="68" height="28" rx="6" fill="url(#metal)"/>
+  <rect x="330" y="384" width="52" height="13" fill="#9da38f"/>
+  <path d="M316 418c0-14 8-21 21-21h38c13 0 21 7 21 21v70c0 7-6 12-12 12h-56c-6 0-12-5-12-12Z" fill="url(#frost)" opacity="0.97"/>
+  <rect x="316" y="424" width="80" height="54" fill="url(#cream)"/>
+  <rect x="320" y="414" width="5" height="80" rx="2.5" fill="#fff" opacity="0.62"/>
+</svg>

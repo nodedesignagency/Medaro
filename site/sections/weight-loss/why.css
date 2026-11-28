@@ -1,0 +1,141 @@
+/* ==========================================================================
+   Weight Loss · Why MEDARO (under hero V4, after the three steps)
+   After the user's reference (2026-11-24, a woman with a mug in warm window
+   light, eyes closed, left; chip, big headline and a light button on the
+   right; three short lines with hairlines along the foot), "but I don't want
+   the image to cover whole screen, make it like card in hero": the photo
+   sits in a rounded stage on the frame like hero V4 (16px edges, max 1888,
+   radius 18), not full bleed.
+   Ours: a deep olive wall with warm light falling across it, paper type,
+   the section chip in lime, the client's lime button as a pill (the page's
+   dark pill would vanish on the dark stage). Copy starts at the stage's
+   centre line like the reference; its right edge is the 48px content inset
+   (the header CTA's line).
+   Copy: content/weight-loss.md → Why Medaro, word for word. The first
+   paragraph's three sentences are the three lines along the foot (the
+   reference's three facts); the belief and the closing line sit under the
+   headline, over the CTA (DESIGN.md → Copy flags).
+   Photo: stand-in (people/woman-a.webp, cut out) on a wall built in code;
+   brief in data-brief. The real photo replaces both the wall and the cut-out.
+   Framer: a section with a fill image, the copy stack and a 3-column row.
+   ========================================================================== */
+
+.wlwhy {
+  container-type: inline-size; /* 100cqw = the frame's width, for the stage's height */
+  padding: 0 var(--frame-side) var(--space-9);
+}
+
+/* ---------- The stage: the reference's ~2.1 : 1, never taller than the window under the 70px header ---------- */
+.wlwhy__stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: clamp(580px, min(calc(100cqw / 2.1), calc(100svh - 70px - 32px)), 900px);
+  overflow: hidden;
+  border-radius: 18px;
+  /* the wall: deep olive, lit on the left behind her, falling into shade on the right where the copy sits (like the reference) */
+  background:
+    radial-gradient(60% 85% at 30% 42%, rgba(222, 208, 160, 0.16) 0%, rgba(222, 208, 160, 0) 72%),
+    linear-gradient(90deg, #505841 0%, #444c37 38%, #353c2a 66%, #2b3122 100%);
+  color: var(--color-on-dark);
+  container-type: size;
+  isolation: isolate;
+}
+
+/* Window light: late sun through a window, two slanted panes of warm light
+   split by the frame's shadow, falling across the wall and over her (the
+   reference's light). Soft-light blend, so it warms what it crosses instead
+   of painting over it. Behind the copy it has already faded out. */
+.wlwhy__light {
+  position: absolute;
+  inset: -12% -6%;
+  z-index: 1;
+  background:
+    linear-gradient(146deg,
+      transparent 0 27%,
+      rgba(255, 226, 168, 0.55) 27% 39%,
+      transparent 39% 41.5%,
+      rgba(255, 226, 168, 0.45) 41.5% 54%,
+      transparent 54% 100%);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 38%, transparent 56%);
+          mask-image: linear-gradient(90deg, #000 0%, #000 38%, transparent 56%);
+  filter: blur(16px);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.wlwhy__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+/* The woman, standing in the left half, cropped by the stage's foot like the reference */
+.wlwhy__person {
+  position: absolute;
+  left: 7%;
+  bottom: 0;
+  height: 90%;
+  width: auto;
+  max-width: none;
+}
+
+/* ---------- Copy: the right half ---------- */
+.wlwhy__copy {
+  position: relative;
+  z-index: 2;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 0;
+  padding: clamp(48px, 10cqh, 96px) var(--space-7) clamp(32px, 5cqh, 44px) 0;
+}
+.wlwhy__chip { --color-chip: var(--p-accent); } /* lime on the olive wall: 9:1 */
+.wlwhy__title {
+  margin-top: clamp(20px, 3.4cqh, 32px);
+  margin-left: -0.022em; /* the M's side bearing: its ink on the column's edge (measured at 1280, 1440, 1920) */
+  font-family: var(--font-display);
+  font-size: clamp(48px, min(4.6vw, 10.4cqh), 88px);
+  font-weight: var(--weight-regular);
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--color-on-dark);
+}
+.wlwhy__lede {
+  max-width: 31em;
+  margin-top: clamp(18px, 3.2cqh, 28px);
+  font-size: clamp(16px, 1.15vw, 19px);
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--p-paper) 84%, transparent); /* 5.4:1 on the lightest wall behind it */
+  text-wrap: pretty;
+}
+.wlwhy__close {
+  margin-top: 10px;
+  font-size: clamp(16px, 1.15vw, 19px);
+  line-height: 1.5;
+  font-weight: var(--weight-medium);
+  color: var(--color-on-dark);
+}
+.wlwhy__cta { margin-top: clamp(24px, 4.4cqh, 40px); }
+
+/* ---------- The three lines along the foot (the reference's facts) ---------- */
+.wlwhy__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--edge);
+  width: 100%;
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+.wlwhy__row li {
+  padding-top: 14px;
+  border-top: 1px solid color-mix(in srgb, var(--p-paper) 30%, transparent);
+  font-size: clamp(14px, 1.04vw, 17px);
+  line-height: 1.42;
+  color: color-mix(in srgb, var(--p-paper) 84%, transparent);
+  text-wrap: balance;
+}
+
+/* Keyboard focus: the site's ink ring would vanish on the olive wall; lime instead (9:1) */
+.wlwhy :focus-visible { outline-color: var(--p-accent); }

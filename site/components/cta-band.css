@@ -1,0 +1,167 @@
+/* ==========================================================================
+   CTA band (component) · the closing call to action of both landing pages
+   (2026-11-26). The user: "lets now create this cta type section … see
+   image 2 i like that design can we use like that? but in our theme", then
+   "wightloss and men have similar content … we will make one design and use
+   in both page with color change". Image 2: Milo's hero (dog insurance): a
+   full-bleed photo, a tall clear glass card in the middle with the headline
+   at its top and the photo showing through, a white card of three check rows
+   overlapping its foot, and a dark panel under that with the button, a round
+   arrow and a small line.
+   Ours: the stage on the frame (16px edges, radius 18, like the heroes), the
+   column centred on it. One structure for both pages; the colours come from
+   the page's own tokens, so nothing here is page-specific (--p-ink, --p-ink-
+   soft, --p-accent: olive and lime on Weight Loss, navy and sky on Men's).
+   Round 2 (user, 2026-11-26: "you made exact copy like the reference ui part
+   … button make like ours … why we have that dark tint … change the bottom
+   ui part to something else a lil bit"): the glass is clear (no smoke), the
+   check list and the dark panel became one white card of ours, and the
+   button is the landing pages' dark pill. Round 3: the list and panel back
+   ("this bottom part ui was better"), with our inset, our button and a
+   centred line (below).
+   Copy (each page's brief, word for word): the chip, the heading and the
+   first sentence(s) on the glass; the sign-off line split into the list's
+   three rows ("Your health. / Your goals. / Your next move."); the button;
+   the last sentence as the small line under it.
+   Framer: one component, a Stage frame with the photo fill, a Stack (Glass ·
+   List · Panel) centred; variants: the colour styles, and On light (ink words).
+   ========================================================================== */
+
+.cta-band {
+  --cta-w: clamp(380px, 30vw, 520px);
+  --cta-r: 12px;          /* the cards: the nav bar's radius */
+  --cta-overlap: 14px;    /* each card tucks under the one below it */
+  padding: var(--space-6) var(--frame-side) var(--edge);
+}
+
+.cta-band__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: clamp(700px, calc(100svh - 32px), 960px);
+  overflow: hidden;
+  border-radius: 18px; /* the heroes' stage */
+  background: var(--p-deep);
+  isolation: isolate;
+}
+.cta-band__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--cta-photo-pos, 50% 50%);
+  /* each photo is cropped (in the file) so its subject sits in the glass
+     between the words and the list, like the reference's dog */
+  z-index: -1;
+}
+
+/* A product's label print, laid over its photo on the same grid (same size,
+   same object-fit and position): it multiplies onto the blank label, so the
+   photo's light stays on it (Weight Loss: tools/cta-vial.py) */
+.cta-band__print { mix-blend-mode: multiply; }
+
+/* ---------- The column ---------- */
+.cta-band__stack {
+  display: flex;
+  flex-direction: column;
+  width: var(--cta-w);
+  height: calc(100% - 2 * clamp(40px, 6.5%, 64px));
+}
+
+/* Glass: clear like the reference, a hairline rim and nothing else (user,
+   2026-11-26: "why we have that dark tint … it was not there in image 2").
+   So the photo carries the words: dark photos take white words (default),
+   light ones take the page's ink with --on-light. Pick or make each photo
+   with a calm area of one tone behind the words. */
+.cta-band__glass {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px 28px calc(28px + var(--cta-overlap));
+  border-radius: var(--cta-r) var(--cta-r) 0 0;
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+.cta-band__chip { --color-chip: var(--p-accent); }
+.cta-band--on-light .cta-band__glass { color: var(--p-ink); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7); }
+.cta-band--on-light .cta-band__chip { --color-chip: var(--p-ink); } /* a coloured chip can't hold 4.5:1 on a mid-tone photo; the ink does */
+.cta-band__title {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 2.6vw, 46px);
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.cta-band__text {
+  max-width: 26em;
+  font-size: 16px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+/* Bottom (round 3, user, 2026-11-26: "this bottom part ui was better … use
+   that base and change few stuff there"): round 1's base exactly (the white
+   list tucked over the glass's foot, full width; the dark panel under it),
+   with only these changes:
+   · our button: the landing pages' pill in the page accent, full width, no
+     separate round arrow (user: "button make like ours not like theirs");
+   · the small line centred under the button, after Superpower's membership
+     card (Mobbin).
+   (An inset list, 8px in from the edges, was tried and dropped the same day:
+   it left the photo showing in thin gaps beside it.) */
+.cta-band__list {
+  position: relative;
+  z-index: 2;
+  margin-top: calc(-1 * var(--cta-overlap));
+  padding: 4px 20px;
+  border-radius: var(--cta-r);
+  background: #fff;
+  color: var(--p-ink);
+}
+.cta-band__list li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  column-gap: 12px;
+  padding: 13px 0;
+  font-size: 16px;
+  font-weight: var(--weight-medium);
+  line-height: 1.3;
+}
+.cta-band__list li + li { border-top: 1px solid color-mix(in srgb, var(--p-ink) 12%, transparent); }
+.cta-band__tick {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--p-accent);
+  color: var(--p-ink);
+}
+.cta-band__tick svg { width: 14px; height: 14px; }
+
+.cta-band__panel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  margin-top: calc(-1 * var(--cta-overlap));
+  padding: calc(14px + var(--cta-overlap)) 14px 16px;
+  border-radius: 0 0 var(--cta-r) var(--cta-r);
+  background: var(--p-deep);
+  color: var(--p-paper);
+}
+.cta-band__cta { width: 100%; }
+.cta-band__note {
+  padding: 0 12px;
+  font-size: 14px;
+  line-height: 1.45;
+  text-align: center;
+  color: color-mix(in srgb, var(--p-paper) 74%, transparent);
+  text-wrap: balance;
+}

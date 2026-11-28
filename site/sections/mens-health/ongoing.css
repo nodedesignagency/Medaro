@@ -1,0 +1,247 @@
+/* ==========================================================================
+   Men's Health · Ongoing care: the care dial (2026-11-26)
+   The user: "make this section as this which is made in weightloss page"
+   (a screenshot of the Weight Loss ongoing care V1, round 7, from
+   claude/awesome-feynman-su67d2: the page turns dark, a ring of fine dots
+   with illustrated icon nodes, the dots light up one after another as you
+   scroll, the centre showing each point; "Start Your Assessment" under it).
+   It replaces round 1 here (the phone on a slate stage, git 728e4dc).
+   Same build as Weight Loss (ongoing--v1.css/.js there), ours for Men's:
+   - the page turns deep navy (--p-deep #162A40) while the section holds the
+     middle of the screen (data-scene="mh-ongoing"); text blue-white;
+   - the lit dots, the chip and the CTA in the Men's sky (#A7D5FF);
+   - THREE nodes, not four: the Men's copy names three things follow-up
+     care does (questions, your response, changes to your treatment), so
+     they sit at 12, 4 and 8 o'clock; the dots reach each one as it lights;
+   - the icons are the Weight Loss set turned to the Men's sky in OKLab
+     (tools/tint-icons.py; assets/icons/ongoing/blue/): two speech bubbles,
+     the pulse card, three sliders (the phone's chat, pulse, sliders).
+   Without JS: not pinned, the dial unlit, the intro in the centre, each
+   point's sentence under its title. Reduced motion: the text swaps without
+   moving; the dots still follow the scroll (the reader drives it).
+   Framer: a sticky section; the dial as a component with 4 variants.
+   ========================================================================== */
+
+/* ---------- Scene: the page turns deep navy ---------- */
+:root[data-page="mens-health"][data-scene="mh-ongoing"] {
+  --color-bg: var(--p-deep);
+  --color-surface: color-mix(in srgb, var(--p-deep) 90%, var(--p-paper));
+  --color-ink: var(--p-paper);
+  --color-text: var(--p-paper);
+  --color-text-muted: color-mix(in srgb, var(--p-paper) 74%, var(--p-deep)); /* 8.6:1 on the navy */
+  --color-line: color-mix(in srgb, var(--p-paper) 16%, transparent);
+}
+:root[data-scene="mh-ongoing"] .btn--dark { --btn-bg: var(--p-accent); color: var(--p-ink); } /* navy on sky, 7.6:1 */
+:root[data-scene="mh-ongoing"] .btn--dark:hover { --btn-bg: var(--p-accent-hover); }
+:root[data-scene="mh-ongoing"] .mhong { --line-colour: var(--p-accent); --chip: var(--p-accent); }
+
+.mhong {
+  --line-colour: #0a6fc7;  /* before the scene arrives: the Men's blue on the paper */
+  --chip: #0a6fc7;
+  padding: clamp(120px, 11vw, 200px) var(--frame-side) var(--space-9);
+  color: var(--color-ink);
+}
+
+/* ---------- Above: the heading ---------- */
+.mhong__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.mhong__chip { --color-chip: var(--chip); }
+.mhong__title {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.6vw, 68px);   /* the page's section heading */
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+.mhong__lede {
+  max-width: 32em;
+  margin-top: 18px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: balance;
+}
+
+/* ---------- Below: the pinned dial ---------- */
+.mhong__track {
+  --header: 70px;
+  --h: calc(100svh - var(--header));
+  --d: clamp(360px, calc(var(--h) - 270px), 700px);   /* room for the top title and the CTA (no node at the foot) */
+  margin-top: clamp(24px, 2.4vw, 48px);
+}
+.mhong__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 72px;              /* the ring's foot to the CTA */
+  padding-top: 56px;      /* the top node's title sits in this */
+  min-height: var(--h);
+}
+.mhong.is-live .mhong__stage {
+  position: sticky;
+  top: var(--header);
+  height: var(--h);
+}
+
+.mhong__dial {
+  --pct: 0;               /* progress round the ring, 0–100: set by the script */
+  --enter: 1;             /* 0.9 → 1 as the dial rises into place: set by the script */
+  position: relative;
+  flex: none;
+  width: var(--d);
+  height: var(--d);
+  transform: scale(var(--enter));
+}
+
+/* The dots: viewBox -50…50, so the ring has radius 50; 96 places, the three
+   either side of each node left out */
+.mhong__dots {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.mhong__dots-base circle { fill: color-mix(in srgb, var(--color-ink) 22%, transparent); }
+/* Each dot's opacity = clamp(0, lit − i, 1): they light one after another, clockwise from the top, flat */
+.mhong__dots-lit circle {
+  fill: var(--line-colour);
+  opacity: clamp(0, calc(var(--pct) * 0.96 - var(--i)), 1);   /* --pct 0–100 → 0–96 dots */
+}
+
+/* ---------- The three nodes ---------- */
+.mhong__points { position: absolute; inset: 0; }
+.mhong__point {
+  position: absolute;
+  left: calc(50% + var(--x) * 50%);
+  top: calc(50% + var(--y) * 50%);
+  width: 0;
+  height: 0;
+}
+.mhong__point:nth-child(1) { --x: 0;       --y: -1; }   /* 12 o'clock */
+.mhong__point:nth-child(2) { --x: 0.866;   --y: 0.5; }  /* 4 o'clock */
+.mhong__point:nth-child(3) { --x: -0.866;  --y: 0.5; }  /* 8 o'clock */
+/* A disc of the page colour behind each icon keeps the dots off it; the
+   icons' dark details are cut through, so they show the page too */
+.mhong__node {
+  position: absolute;
+  left: -33px;
+  top: -33px;
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: var(--color-bg);
+}
+.mhong__node img {
+  width: 62px;
+  height: 62px;
+  opacity: 0.45;
+  transform: scale(0.88);
+  transition: opacity 500ms var(--ease-out), transform 600ms var(--ease-out);
+}
+/* A node the lit dots have reached stays at full opacity and size (Weight Loss round 7) */
+.mhong__point.is-active .mhong__node img,
+.mhong__point.is-done .mhong__node img { opacity: 1; transform: none; }
+
+/* Titles outside the ring: small, quiet */
+.mhong__label { position: absolute; width: max-content; max-width: 240px; }
+.mhong__point:nth-child(1) .mhong__label { left: 50%; bottom: 46px; transform: translateX(-50%); text-align: center; }
+.mhong__point:nth-child(2) .mhong__label { left: 50px; top: 50%; transform: translateY(-50%); }
+.mhong__point:nth-child(3) .mhong__label { right: 50px; top: 50%; transform: translateY(-50%); text-align: right; }
+.mhong__name {
+  font-size: 15px;
+  font-weight: var(--weight-medium);
+  line-height: 1.2;
+  color: var(--color-text-muted);
+  transition: color 450ms var(--ease-out);
+}
+.mhong__point.is-active .mhong__name { color: var(--color-ink); }
+.mhong__point:not(.is-active) .mhong__name { opacity: 0.7; }
+.mhong__label p {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+/* Live: each sentence shows in the centre instead (kept here for screen readers) */
+.mhong.is-live .mhong__label p {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- The centre ---------- */
+.mhong__core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  align-items: center;
+  width: calc(var(--d) * 0.7);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+.mhong__state {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mhong.is-live .mhong__state {
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(4px);
+  visibility: hidden;
+  transition: opacity 220ms ease-out, transform 220ms ease-out, filter 220ms ease-out, visibility 0s linear 220ms;
+}
+.mhong.is-live .mhong__state.is-on {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  visibility: visible;
+  transition: opacity 520ms var(--ease-out) 120ms, transform 680ms var(--ease-out) 120ms, filter 520ms var(--ease-out) 120ms, visibility 0s;
+}
+.mhong:not(.is-live) .mhong__state:not(:first-child) { display: none; }
+.mhong__state-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, min(3.4vw, calc(var(--d) * 0.085)), 60px);
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+.mhong__state p:not(.mhong__state-title) {
+  max-width: 24em;
+  margin-top: 14px;
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: balance;
+}
+/* The intro: the closing line, quieter than a point's title */
+.mhong__state--intro .mhong__state-title { font-size: clamp(26px, min(2.3vw, calc(var(--d) * 0.06)), 40px); line-height: 1.15; letter-spacing: -0.025em; }
+
+.mhong :focus-visible { outline-color: currentColor; }
+
+/* Without JS each sentence sits under its title outside the ring: a smaller ring leaves room for them */
+.mhong:not(.is-live) .mhong__track { --d: clamp(340px, calc(var(--h) - 340px), 560px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .mhong.is-live .mhong__state,
+  .mhong.is-live .mhong__state.is-on { transform: none; filter: none; transition: opacity 1ms, visibility 0s; }
+  .mhong__node img { transition: none; }
+  .mhong__dial { transform: none; }
+}

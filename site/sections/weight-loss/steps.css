@@ -1,0 +1,203 @@
+/* ==========================================================================
+   Weight Loss · three steps (under hero V4)
+   Layout after the user's "Our Process" reference (2026-11-24): one rounded
+   panel; chip and heading top left, the CTA bottom left; on the right one
+   card at a time (number top left, illustration top right, title and text
+   at the foot). "Sticky left and scroll right" (user): the panel pins under
+   the header while you scroll; the left side stays, the cards change on the
+   right.
+   In this page's own style (round 2, user: "it is not as per our design
+   style"): the panel is a mist surface like the pricing and progress cards
+   (`--color-surface`), the cards pure white like the hero's category tiles,
+   radius 12, the page's section heading (Host Grotesk 400), the leaf-green
+   chip, the dark pill CTA every section of this landing uses, our
+   illustrations (the Supplement heart and sprout's style). Only the three
+   steps; no count beside the heading.
+   Motion (round 3, after the user's second recording, the "Built for every
+   stage of growth" cards): the cards sit on a wheel whose hub is far off to
+   the right of the panel. Scrolling to the next step turns the wheel: the
+   card showing swings up and out past the top-right corner, tilting
+   clockwise, while the next swings in from the bottom right, tilted the
+   other way, and straightens as it lands. 36° between cards with the hub
+   2.24 card-widths to the right, so neighbours never touch. Each turn plays
+   as a 1s transition once the scroll passes into the next step, and
+   reverses on the way back. Reduced motion: no turn, the card just changes.
+   The brief's "Your Care Doesn't End With a Prescription." block sits on the
+   left under the heading, as text (user: "bring it back but not in card").
+   Frame: the panel spans the frame (16px edges, max 1888), radius 18 like
+   the hero stage; copy on the 48px inset (the logo's line).
+   steps.js adds .is-live (pinned panel, room to scroll) and sets --pos on
+   each card (its place on the wheel: 0 showing, 1 next, -1 last). Without it the panel scrolls normally, the copy
+   sticks on the left and the cards sit one under another on the right.
+   Framer: a sticky section; the cards as one component with a variant per
+   step, scroll-driven like How Medaro Works.
+   ========================================================================== */
+
+.wlsteps {
+  container-type: inline-size; /* 100cqw = the frame's width, for the panel's size */
+  padding: 0 var(--frame-side) var(--space-9);
+  color: var(--color-ink);
+}
+
+.wlsteps__track {
+  --header: 70px;                                                /* the landing header (compact) */
+  --panel-h: min(calc(100cqw / 2.2), calc(100svh - var(--header) - 32px)); /* the reference's 2.2 : 1, never taller than the window */
+  --inset: 32px;                                                 /* cards from the panel's top, right and bottom edges */
+  --card-ratio: 1.07;                                            /* the reference's card, a little wider than tall */
+  --card-h: calc(var(--panel-h) - 2 * var(--inset));
+  --card-w: calc(var(--card-h) * var(--card-ratio));
+}
+
+/* ---------- The panel ---------- */
+.wlsteps__panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--space-7);
+  overflow: clip; /* clips the cards without becoming a scroll box, so the fallback's sticky copy still sticks */
+  border-radius: 18px;
+  background: var(--color-surface);
+  isolation: isolate;
+}
+.wlsteps.is-live .wlsteps__track { height: calc(var(--panel-h) + 200svh); } /* steps.js sets the exact room */
+.wlsteps.is-live .wlsteps__panel {
+  position: sticky;
+  top: calc(var(--header) + (100svh - var(--header) - var(--panel-h)) / 2); /* centred in the window under the header */
+  height: var(--panel-h);
+}
+
+/* ---------- Left: chip, heading, CTA ---------- */
+.wlsteps__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--inset) 0 var(--inset) var(--space-7);
+}
+.wlsteps:not(.is-live) .wlsteps__copy {
+  position: sticky;
+  top: calc(var(--header) + 16px);
+  align-self: start;
+  min-height: var(--panel-h);
+}
+.wlsteps__chip { --color-chip: #2f6e0f; } /* leaf green a step deeper for the mist: 5.1:1 (#367d12 is 4.2 here) */
+.wlsteps__title {
+  margin-top: 20px;
+  margin-left: -0.04em; /* the T's side bearing: letters on the logo's line */
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.6vw, 68px); /* the page's section heading (difference) */
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+/* The brief's follow-on block, as text under the heading */
+.wlsteps__care {
+  max-width: 31em;
+  margin-top: clamp(28px, 2.6vw, 48px);
+}
+.wlsteps__care-title {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 1.5vw, 26px);
+  font-weight: var(--weight-medium);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.wlsteps__care p {
+  margin-top: 10px;
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.55;
+  color: var(--color-text-muted); /* 5:1 on the mist */
+  text-wrap: pretty;
+}
+.wlsteps__care .wlsteps__care-close {
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+.wlsteps__foot {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+.wlsteps__foot .btn { flex: none; }
+.wlsteps__note {
+  max-width: 17em;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-text-muted); /* 5:1 on the mist */
+}
+
+/* ---------- Right: the deck ---------- */
+.wlsteps__deck {
+  position: relative;
+  width: calc(var(--card-w) + var(--inset));
+}
+.wlsteps:not(.is-live) .wlsteps__deck { padding: var(--inset) var(--inset) var(--inset) 0; }
+.wlsteps:not(.is-live) .wlsteps__list { display: grid; gap: var(--space-4); }
+
+.wlsteps__card {
+  position: relative;
+  width: var(--card-w);
+  aspect-ratio: var(--card-ratio);
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--color-ink);
+  container-type: inline-size;
+}
+.wlsteps.is-live .wlsteps__card {
+  position: absolute;
+  top: var(--inset);
+  right: var(--inset);
+  transform-origin: 274% 50%; /* the wheel's hub: 2.24 card-widths right of the card's centre, off the panel */
+  transform: rotate(calc(var(--pos, 0) * -36deg));
+  will-change: transform;
+}
+/* turns animate only once the wheel is in place (steps.js adds .is-ready a frame later), so nothing swings on load */
+.wlsteps.is-ready .wlsteps__card { transition: transform 1000ms cubic-bezier(0.7, 0, 0.2, 1); } /* leaves briskly, lands softly; reduced motion: instant (styles.css) */
+/* before the script runs: the first card showing, the others below on the wheel */
+.wlsteps.is-live .wlsteps__list > :nth-child(2) { --pos: 1; }
+.wlsteps.is-live .wlsteps__list > :nth-child(3) { --pos: 2; }
+
+.wlsteps__num {
+  position: absolute;
+  top: 6.5cqi;
+  left: 6.5cqi;
+  font-family: var(--font-display);
+  font-size: 12cqi;
+  font-weight: var(--weight-medium); /* How Medaro Works' numbers */
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  text-box: trim-both cap alphabetic;
+}
+.wlsteps__art {
+  position: absolute;
+  top: 3cqi;
+  right: 3.5cqi;
+  width: 44cqi;
+  height: auto;
+  pointer-events: none;
+}
+.wlsteps__text {
+  position: absolute;
+  left: 6.5cqi;
+  right: 6.5cqi;
+  bottom: 6.5cqi;
+}
+.wlsteps__name {
+  max-width: 15em;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 4.8cqi, 38px);
+  font-weight: var(--weight-regular);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.wlsteps__text p {
+  max-width: 31em;
+  margin-top: 12px;
+  font-size: clamp(15px, 2.7cqi, 18px);
+  line-height: 1.5;
+  color: var(--color-text-muted); /* 6.1:1 on white */
+  text-wrap: pretty;
+}

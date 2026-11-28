@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en" data-palettes="a" data-page="mens-health" data-options="buttons:sky,outline,navy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MEDARO · Men's Sexual Health</title>
+  <meta name="description" content="Discover a modern approach to men's sexual health with personalized medical guidance, convenient online evaluations, and discreet treatment options.">
+  <meta name="robots" content="noindex, nofollow"><!-- Draft: keep staging out of search -->
+  <meta name="theme-color" content="#edf2f8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Components (shared across pages) -->
+  <link rel="stylesheet" href="components/header.css">
+  <link rel="stylesheet" href="components/pack-spin.css">
+  <link rel="stylesheet" href="components/product.css">
+  <link rel="stylesheet" href="components/cta-pair.css">
+  <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
+  <link rel="stylesheet" href="sections/mens-health/quad.css">
+  <link rel="stylesheet" href="sections/mens-health/quad-cards.css">
+  <link rel="stylesheet" href="sections/mens-health/science.css">
+  <link rel="stylesheet" href="sections/mens-health/how-it-works.css">
+  <link rel="stylesheet" href="sections/mens-health/difference.css">
+  <link rel="stylesheet" href="components/faq.css">
+  <link rel="stylesheet" href="sections/mens-health/ongoing.css">
+  <link rel="stylesheet" href="sections/mens-health/faq.css">
+  <link rel="stylesheet" href="components/cta-band.css">
+</head>
+<body>
+  <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
+       every CTA goes to the Men's Health (ED) intake form. [LINK NEEDED] intake URL: #intake-mens-health until we have it. -->
+
+  <!-- Sprite: logo and icons -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <!-- Official MEDARO wordmark (site/assets/logo/, from the client), cropped tight, currentColor -->
+    <symbol id="wordmark" viewBox="194 74 4413 712"><g fill="currentColor" transform="translate(80 780) scale(1 -1)"><path transform="translate(0 0)" d="M114 0V700H175L495 154H463L780 700H841V0H770V589H787L495 89H460L166 589H185V0Z"/><path transform="translate(870 0)" d="M114 0V700H594V636H188V64H609V0ZM180 324V387H550V324Z"/><path transform="translate(1500 0)" d="M114 0V700H399Q511 700 595.5 655.5Q680 611 727.0 532.0Q774 453 774 350Q774 247 727.0 168.0Q680 89 595.5 44.5Q511 0 399 0ZM188 64H395Q488 64 556.5 100.5Q625 137 663.0 201.5Q701 266 701 350Q701 435 663.0 499.0Q625 563 556.5 599.5Q488 636 395 636H188Z"/><path transform="translate(2300 0)" d="M2 0 L322 700 L395 700 L715 0 L637 0 L343 657 L373 657 L79 0 Z"/><path transform="translate(3040 0)" d="M114 0V700H376Q509 700 585.5 636.5Q662 573 662 460Q662 386 627.5 332.5Q593 279 529.0 250.5Q465 222 376 222H155L188 256V0ZM592 0 412 254H492L673 0ZM188 250 155 285H374Q479 285 533.5 331.0Q588 377 588 460Q588 544 533.5 590.0Q479 636 374 636H155L188 671Z"/><path transform="translate(3740 0)" d="M420 -6Q341 -6 273.5 20.5Q206 47 156.5 95.5Q107 144 79.5 208.5Q52 273 52 350Q52 427 79.5 491.5Q107 556 156.5 604.5Q206 653 273.0 679.5Q340 706 420 706Q499 706 566.0 679.5Q633 653 682.5 605.0Q732 557 759.5 492.0Q787 427 787 350Q787 273 759.5 208.0Q732 143 682.5 95.0Q633 47 566.0 20.5Q499 -6 420 -6ZM420 60Q483 60 536.5 81.5Q590 103 629.5 142.5Q669 182 691.0 234.5Q713 287 713 350Q713 413 691.0 465.5Q669 518 629.5 557.5Q590 597 536.5 618.5Q483 640 420 640Q357 640 303.0 618.5Q249 597 209.5 557.5Q170 518 147.5 465.5Q125 413 125 350Q125 288 147.5 235.0Q170 182 209.5 142.5Q249 103 303.0 81.5Q357 60 420 60Z"/></g></symbol>
+    <!-- Check for the hero's points (the project's check, as on the Weight Loss hero) -->
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.4 6.6 11.4 12.5 4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <!-- The science behind Quad 4: one line icon per ingredient, from the client's own words (stroke 1.5 on 24, like the
+         Weight Loss care icons): blood flow (Sildenafil), a PDE5 molecule (Vardenafil; no speed icon: the copy says faster onset
+         has not been demonstrated), the extended window (Tadalafil), the brain (Apomorphine) -->
+    <symbol id="i-drop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.25c-3 3.5-6.1 7.4-6.1 10.85a6.1 6.1 0 0 0 12.2 0c0-3.45-3.1-7.35-6.1-10.85Z"/><path d="M9.1 14.5a3 3 0 0 0 2.7 2.8"/></g></symbol>
+    <symbol id="i-molecule" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9.1 15.4 11.05v3.9L12 16.9l-3.4-1.95v-3.9Z"/><path d="M12 9.1V6.1M15.4 14.95l2.6 1.5M8.6 14.95 6 16.45"/><circle cx="12" cy="4.4" r="1.7"/><circle cx="19.45" cy="17.3" r="1.7"/><circle cx="4.55" cy="17.3" r="1.7"/></g></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.25"/><path d="M12 7.5V12l3 2"/></g></symbol>
+    <symbol id="i-brain" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.6c-.9-1.5-3.3-1.9-4.6-.4-1.9-.1-3.1 1.9-2.4 3.6-1.4.9-1.5 3.2-.1 4.2-.6 2 .9 4 2.9 3.8.6 1.7 2.9 2.2 4.2.8"/><path d="M12 5.6c.9-1.5 3.3-1.9 4.6-.4 1.9-.1 3.1 1.9 2.4 3.6 1.4.9 1.5 3.2.1 4.2.6 2-.9 4-2.9 3.8-.6 1.7-2.9 2.2-4.2.8"/><path d="M12 5.6v12"/><path d="M8.3 9.3c1.1.1 1.9.9 2 2M15.7 9.3c-1.1.1-1.9.9-2 2M7.9 14.2c1-.6 2.3-.4 3 .4M16.1 14.2c-1-.6-2.3-.4-3 .4"/></g></symbol>
+    <!-- The user's arrow (assets/icons/arrow.svg) turned 45°, as on Home (FAQ card) -->
+    <symbol id="i-arrow-ne" viewBox="0 0 16 16"><path fill="currentColor" transform="rotate(-45 7.98 7.96)" d="M9.04045 13.5006C9.05132 13.5116 9.38447 13.5951 9.78072 13.6861C10.177 13.7772 10.5056 13.8378 10.5108 13.8209C10.5161 13.8039 10.5571 13.5289 10.6019 13.2096C10.692 12.5686 10.9101 11.82 11.1431 11.3519C11.8694 9.893 13.1726 8.92699 14.7532 8.67591L15.1557 8.61196V7.96748V7.32295L14.7909 7.26174C12.4008 6.86077 10.8426 5.07371 10.5511 2.39938C10.5321 2.22474 10.5094 2.08191 10.5006 2.08191C10.42 2.08191 9.08438 2.40379 9.05912 2.42929C9.04085 2.44773 9.05444 2.61144 9.08936 2.79303C9.47585 4.80384 10.5825 6.44009 12.0186 7.12424L12.363 7.28836L5.2793 7.30121L0.800003 7.30937V8.6137L5.29082 8.62187L12.3578 8.63477L11.923 8.85512C10.7947 9.42671 9.90149 10.5479 9.37547 12.0529C9.22557 12.4817 8.99939 13.4592 9.04045 13.5006Z"/></symbol>
+  </svg>
+
+  <a class="visually-hidden" href="#main">Skip to content</a>
+
+  <!-- SECTION:header--landing START · styles: components/header.css · scripts: main.js (header)
+       The approved header (Home: --plain --compact) without anything that links out: plain logo, no menu
+       button, Get Started to the intake. Same as weight-loss.html. Shared by every hero version below. [LINK NEEDED] intake URL. -->
+  <header class="site-header site-header--plain site-header--compact site-header--landing" data-header>
+    <div class="site-header__bar">
+      <span class="logo" role="img" aria-label="MEDARO"><svg aria-hidden="true"><use href="#wordmark"/></svg></span>
+      <div class="site-header__actions">
+        <a class="btn btn--dark btn--pill" href="#intake-mens-health">Get Started</a>
+      </div>
+    </div>
+  </header>
+  <!-- SECTION:header--landing END -->
+
+  <main id="main">
+
+    <!-- The photo heroes (V1 home / couple / sky, V2 slate) were dropped by the client on 2026-11-27 ("I want to eliminate this hero";
+         the Quad 4 section below is the hero now). Kept as a frozen snapshot: versions/mh-hero-round-2/index.html. -->
+
+    <!-- SECTION:mens-health/quad START · styles: sections/mens-health/quad.css, components/cta-pair.css (+ .btn--xl in styles.css) · assets: assets/images/products/hand-ampoule-quad4.webp, hand-ampoule-quad4-front.webp, print-hand-ampoule-quad4.svg (from tools/pack-print.py, with the back sticker seen through the glass)
+         The brief's "Introducing Quad 4", after the user's Good Life reference (2026-11-25: "For this section i am thinking about
+         this style. Also if possible make it rotatable like this": "The Good Life Difference", a huge centred headline, the pack
+         under it; and a recording of the bottle turning on its axis).
+         Round 2 (2026-11-25): "Use the same bottle design but i want this type of blue color in it [their AIDA ampoule] and also i want
+         to add a hand holding this bottle [their hand-and-capsule photo] … the hand should be of man". Our Quad 4 ampoule, same
+         shape and print (white, screened onto the glass as on Home), blue liquid, held up by a man's hand: one Magnific photograph
+         (blank ampoule), its print added in code and turning on the axis; the fingers in front of the glass sit over the print.
+         The sentence moves to the bottom-left corner and the CTA to the bottom-right, on the frame lines, to give the hand the middle.
+         Round 3 (2026-11-26): "make it still not rotate on scroll": the ampoule faces front and holds still; no pin, no turning, no drag.
+         Round 4 (client, 2026-11-27): THE PAGE'S HERO ("I want this to be the hero page"; the photo heroes are gone). "add on the left
+         side of the blue bottle [Order now] and right side [See Pricing] let both be big": two xl pills level with the ampoule's body,
+         one each side of the glass (components/cta-pair.css; the secondary's look is a review option, ?buttons=sky|outline|navy).
+         "Explore Quad 4" leaves the hero (a third CTA to the same intake as Order Now); the cards keep theirs. Its corner takes the
+         client's prescription line (content/footer.md, word for word), mirroring the sentence, so "Order Now" is never without it.
+         The forearm no longer runs on behind a card (the cards moved after the science section): it ends at the hero's foot.
+         Copy: content/mens-health.md → Introducing Quad 4, word for word (eyebrow as the chip). [LINK NEEDED] intake URL;
+         [LINK NEEDED] See Pricing: no pricing section on this page yet (#pricing), [PRICING NEEDED]. -->
+    <section class="mhquad" id="quad-4" aria-labelledby="mhquad-title">
+      <div class="mhquad__inner">
+        <p class="chip mhquad__chip"><span>Introducing Quad 4</span></p>
+        <h1 class="mhquad__title" id="mhquad-title">Four Powerful Ingredients.<br>One Modern Approach.</h1>
+        <div class="mhquad__stage">
+          <div class="mhquad__pack">
+            <img src="assets/images/products/hand-ampoule-quad4.webp" alt="" width="1368" height="2475" fetchpriority="high">
+            <img class="mhquad__print" src="assets/images/products/print-hand-ampoule-quad4.svg" alt="" width="1368" height="2475">
+            <img src="assets/images/products/hand-ampoule-quad4-front.webp" alt="" width="1368" height="2475">
+          </div>
+          <!-- the pair, level with the ampoule's body: Order Now on its left, See Pricing on its right -->
+          <a class="btn btn--dark btn--pill btn--xl cta-pair__btn mhquad__btn mhquad__btn--order" href="#intake-mens-health">Order Now</a>
+          <a class="btn btn--pill btn--xl cta-pair__btn cta-pair__btn--secondary mhquad__btn mhquad__btn--price" href="#pricing">See Pricing</a>
+        </div>
+        <p class="mhquad__text">A convenient sublingual formula designed to dissolve under your tongue, bringing together four ingredients with distinct properties in one treatment.</p>
+        <p class="cta-pair__note mhquad__note">Medications shown on this site require a valid prescription from a licensed provider following an evaluation.</p>
+      </div>
+    </section>
+    <!-- SECTION:mens-health/quad END -->
+
+    <!-- SECTION:mens-health/science START · styles: sections/mens-health/science.css, components/pack-spin.css, components/cta-pair.css (+ .btn--xl in styles.css) · scripts: components/pack-spin.js, sections/mens-health/science.js · assets: assets/images/products/ampoule-quad4-blue.webp (tools/blue-ampoule.py), print-ampoule-quad4-blue.svg, label-ampoule-quad4.js (tools/pack-print.py; both with the back sticker) · icons: #i-drop, #i-molecule, #i-clock, #i-brain in the sprite
+         The brief's "The science behind Quad 4" (user, 2026-11-25: "I want this type of structure which we made for other page but in
+         the middle i want the quad 4 bottle which will be rotating continuously automatically and then i want to show 4 ingrediants and
+         its text like this but all in our style … take reference from mobbin also i dont want it to be inside a card i want it with the
+         normal background"). Structure: the Weight Loss ongoing care section (centred head, then copy left · the object in the middle ·
+         copy right), without its stage: on the page colour. The middle: our Quad 4 ampoule in the hand's blue (same shape and print),
+         turning on its own. The four ingredients after the user's Nervana reference (icon circle, caps label running into a dotted rule,
+         then the text), two each side, like Graza's olive and David's bar on Mobbin (callouts around one product).
+         Round 2 (2026-11-25): "make it like this here you see the curve in line it will be at top left then for top right this will be
+         mirrored then for bottom left and bottom right it will be accrodingly it should be as if the bottle is the product and we are
+         showing its feature": each label's dotted line runs to the ampoule and ends in Nervana's curve, bending down above its middle
+         and up below it; the right pair mirrored (aligned to the frame's right edge). Mobbin: Rains (features around one product).
+         Client, 2026-11-27: now right after the hero ("After that page this"), before the three Quad 4 cards; Order Now + See Pricing
+         under the closing line (components/cta-pair.css).
+         Copy: content/mens-health.md → The science behind Quad 4, word for word, every qualifier kept at full size next to its claim. -->
+    <section class="mhsci" aria-labelledby="mhsci-title">
+      <header class="mhsci__head">
+        <p class="chip mhsci__chip"><span>The science behind Quad 4</span></p>
+        <h2 class="mhsci__title" id="mhsci-title">Four Ingredients.<br>Different Mechanisms.</h2>
+      </header>
+
+      <div class="mhsci__body">
+        <div class="mhsci__side">
+            <article class="mhsci__item mhsci__item--power" style="--measure: 340px">
+              <span class="mhsci__icon" aria-hidden="true"><svg><use href="#i-drop"/></svg></span>
+              <p class="mhsci__label"><span class="mhsci__label-text">01 — Power</span><span class="mhsci__lead" aria-hidden="true"><svg class="mhsci__curve" viewBox="0 0 80 24" focusable="false"><path d="M3.5 1H24C48 1 64 5 79 19"/></svg></span></p>
+              <h3 class="mhsci__name">Sildenafil</h3>
+              <p class="mhsci__sub">The Established Foundation.</p>
+              <p>One of the most extensively studied medications for erectile dysfunction, with more than 25 years of clinical use.</p>
+              <p>Sildenafil is a PDE5 inhibitor that helps improve erectile function by supporting blood flow during sexual stimulation.</p>
+            </article>
+            <article class="mhsci__item mhsci__item--speed mhsci__item--low" style="--measure: 344px">
+              <span class="mhsci__icon" aria-hidden="true"><svg><use href="#i-molecule"/></svg></span>
+              <p class="mhsci__label"><span class="mhsci__label-text">02 — Speed</span><span class="mhsci__lead" aria-hidden="true"><svg class="mhsci__curve" viewBox="0 0 80 24" focusable="false"><path d="M3.5 1H24C48 1 64 5 79 19"/></svg></span></p>
+              <h3 class="mhsci__name">Vardenafil</h3>
+              <p class="mhsci__sub">A Different PDE5 Option.</p>
+              <p>Vardenafil is another established PDE5 inhibitor used to treat erectile dysfunction.</p>
+              <p>Although it has a different pharmacological profile from sildenafil, faster onset or greater effectiveness when combined in <span class="mhsci__nowrap">Quad 4</span> has not been demonstrated.</p>
+            </article>
+        </div>
+
+        <!-- Decorative: our Quad 4 ampoule turning on its own (drag to turn it, rests while the pointer is on it, still under reduced motion) -->
+        <div class="mhsci__product" aria-hidden="true">
+          <div class="mhsci__pack pack-spin pack-spin--screen" data-pack-spin="ampoule-quad4" data-pack-spin-auto="12" style="--pack-ratio: 406 / 2200">
+            <img class="pack-spin__body" src="assets/images/products/ampoule-quad4-blue.webp" alt="" width="406" height="2200" loading="lazy">
+            <img class="pack-spin__still" src="assets/images/products/print-ampoule-quad4-blue.svg" alt="" width="406" height="2200" loading="lazy">
+            <canvas class="pack-spin__print"></canvas>
+          </div>
+        </div>
+
+        <div class="mhsci__side mhsci__side--end">
+            <article class="mhsci__item mhsci__item--long mhsci__item--end" style="--measure: 384px">
+              <span class="mhsci__icon" aria-hidden="true"><svg><use href="#i-clock"/></svg></span>
+              <p class="mhsci__label"><span class="mhsci__label-text">03 — Longer-acting</span><span class="mhsci__lead" aria-hidden="true"><svg class="mhsci__curve" viewBox="0 0 80 24" focusable="false"><path d="M3.5 1H24C48 1 64 5 79 19"/></svg></span></p>
+              <h3 class="mhsci__name">Tadalafil</h3>
+              <p class="mhsci__sub">The Extended Window.</p>
+              <p>Tadalafil is known for its longer duration of action.</p>
+              <p>Certain FDA-approved tadalafil formulations can remain effective for up to 36 hours, offering greater flexibility in the timing of sexual activity.</p>
+              <p>This duration has not been established for the combined <span class="mhsci__nowrap">Quad 4</span> formulation.</p>
+            </article>
+            <article class="mhsci__item mhsci__item--brain mhsci__item--end mhsci__item--low" style="--measure: 384px">
+              <span class="mhsci__icon" aria-hidden="true"><svg><use href="#i-brain"/></svg></span>
+              <p class="mhsci__label"><span class="mhsci__label-text">04 — The Brain</span><span class="mhsci__lead" aria-hidden="true"><svg class="mhsci__curve" viewBox="0 0 80 24" focusable="false"><path d="M3.5 1H24C48 1 64 5 79 19"/></svg></span></p>
+              <h3 class="mhsci__name">Apomorphine</h3>
+              <p class="mhsci__sub">A New Dimension in Men's Sexual Health.</p>
+              <p>Apomorphine works through dopamine receptors in the brain, targeting central nervous system pathways involved in sexual arousal and response.</p>
+            </article>
+        </div>
+      </div>
+
+      <p class="mhsci__close">Four Ingredients. Distinct Properties. One Innovative Approach.</p>
+
+      <!-- Client, 2026-11-27: "This page should also have an [order now] and [See pricing]": the hero's pair, centred under the
+           closing line, with the client's prescription line under it (content/footer.md). [LINK NEEDED] intake; [LINK NEEDED] pricing. -->
+      <div class="mhsci__cta">
+        <div class="mhsci__buttons">
+          <a class="btn btn--dark btn--pill btn--xl cta-pair__btn" href="#intake-mens-health">Order Now</a>
+          <a class="btn btn--pill btn--xl cta-pair__btn cta-pair__btn--secondary" href="#pricing">See Pricing</a>
+        </div>
+        <p class="cta-pair__note mhsci__note">Medications shown on this site require a valid prescription from a licensed provider following an evaluation.</p>
+      </div>
+    </section>
+    <!-- SECTION:mens-health/science END -->
+
+    <!-- SECTION:mens-health/quad-cards START · styles: sections/mens-health/quad-cards.css · assets: assets/images/mens-health/quad-card-ampoule.webp, quad-card-ampoule-print.svg (tools/quad-card-ampoule.py), quad-card-couple.webp, quad-card-man.webp
+         The brief's three blocks under "Introducing Quad 4" as three cards, after the Weight Loss pricing + progress cards
+         (user, 2026-11-25: "add these three points in the design of this here we have 2 make it 3 … use the blue color cards
+         here like how we did in weightloss page for green"): pale steel-blue cards on the frame, heading top left in the hero's
+         weight, the copy, an image on the card's foot. Copy: content/mens-health.md → Introducing Quad 4, word for word; the
+         block's closing CTA "Explore Quad 4" sits in the last card, after its points. [LINK NEEDED] intake URL.
+         Images (round 2, 2026-11-26, the user: "go with A for all three, generate them … make in blue tone for this mens page"):
+         three Magnific renders (Nano Banana 2.1, 2K) in the page's blue: our blue Quad 4 ampoule lying on the card with its
+         shadow and the blue light of its liquid; a couple in their 40s laughing under the hero's steel-blue sky; a man in his
+         50s in a navy polo under the same sky. AI-generated people, not patients or providers. -->
+    <section class="mhqc" aria-label="More about Quad 4">
+      <div class="mhqc__cards">
+        <article class="mhqc__card">
+          <h3 class="mhqc__title">Designed for<br>Convenience</h3>
+          <p class="mhqc__lede">A Modern Approach to Intimate Wellness.</p>
+          <p class="mhqc__text">Quad 4 is designed as a sublingual formulation, administered under the tongue for a convenient, discreet treatment experience.</p>
+          <ul class="mhqc__points">
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Simple sublingual administration.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>No traditional pill to swallow.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Discreet and convenient to use.</li>
+          </ul>
+          <div class="mhqc__media" aria-hidden="true" data-brief="Our blue Quad 4 ampoule lying on the card's paper, top-down, soft daylight from the upper left: a soft shadow and the blue light of the liquid on the paper. Our white print in code.">
+            <span class="mhqc__ampoule"><img src="assets/images/mens-health/quad-card-ampoule.webp" alt="" width="1400" height="447" loading="lazy"><img class="mhqc__print" src="assets/images/mens-health/quad-card-ampoule-print.svg" alt="" width="1400" height="447" loading="lazy"></span>
+          </div>
+        </article>
+        <article class="mhqc__card">
+          <h3 class="mhqc__title">More Freedom.<br>Less Planning.</h3>
+          <p class="mhqc__lede">Make Room for the Moments That Matter.</p>
+          <p class="mhqc__text">Your intimate life shouldn't revolve around complicated routines. Explore a treatment approach designed with convenience and personal preferences in mind.</p>
+          <ul class="mhqc__points">
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>A convenient administration method.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Care that considers your lifestyle.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>More confidence in your treatment choices.</li>
+          </ul>
+          <div class="mhqc__media" aria-hidden="true" data-brief="A couple in their 40s laughing together, his arm round her, waist up, under the hero's steel-blue sky; white linen shirt, navy linen dress; warm late sun from the left. Cut out.">
+            <img class="mhqc__person mhqc__person--couple" src="assets/images/mens-health/quad-card-couple.webp" alt="" width="989" height="900" loading="lazy">
+          </div>
+        </article>
+        <article class="mhqc__card">
+          <h3 class="mhqc__title">Confidence on<br>Your Terms.</h3>
+          <p class="mhqc__lede">Because Every Moment Matters.</p>
+          <p class="mhqc__text">With ingredients that have established roles in erectile dysfunction treatment, Quad 4 brings together different pharmacological properties in one proposed formulation.</p>
+          <ul class="mhqc__points">
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Four active ingredients.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>One convenient formulation.</li>
+            <li><span class="mhqc__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Personalized medical guidance.</li>
+          </ul>
+          <a class="btn btn--dark btn--pill mhqc__cta" href="#intake-mens-health">Explore Quad 4</a>
+          <div class="mhqc__media" aria-hidden="true" data-brief="A man in his 50s, salt-and-pepper hair and beard, navy polo with a white tipped collar, chest up, looking towards the copy with a small smile, under the hero's steel-blue sky; warm late sun from the left. Cut out.">
+            <img class="mhqc__person mhqc__person--man" src="assets/images/mens-health/quad-card-man.webp" alt="" width="541" height="900" loading="lazy">
+          </div>
+        </article>
+      </div>
+    </section>
+    <!-- SECTION:mens-health/quad-cards END -->
+
+    <!-- SECTION:mens-health/how-it-works START · styles: sections/mens-health/how-it-works.css · scripts: sections/mens-health/how-it-works.js · assets: assets/images/mens-health/hiw-assessment.webp, hiw-guidance.webp, hiw-delivery.webp
+         The brief's "How Medaro works", after the user's reference (2026-11-25, a recording of StemWave's "Transform the way you
+         help patients recover": "make it something like this in our style"): heading top left, the steps as a list, the open one a
+         white card with its text and a line filling along its foot, then the next opens; a large photo on the right changes with it.
+         Copy: content/mens-health.md → How Medaro works, word for word (eyebrow as the chip; "01 — " as the number column).
+         Photos (2026-11-26, the user: "go with A, use the home man", with hims/Hers references for placement and glass bubbles):
+         the hero's home man in his own flat, one moment per step (sofa with his phone, a video call at his laptop, a plain box at
+         his door). Magnific, Nano Banana 2.1, 4K 4:3, the hero render as the reference, 145 credits each; AI-generated person.
+         Glass cards on the photos were tried and removed (user, 2026-11-26: "remove these boxes man in all 3").
+         [LINK NEEDED] intake URL. -->
+    <section class="mhhiw" id="how-it-works" aria-labelledby="mhhiw-title">
+      <div class="mhhiw__inner">
+        <div class="mhhiw__copy">
+          <div class="mhhiw__head">
+            <p class="chip mhhiw__chip"><span>How MEDARO Works</span></p>
+            <h2 class="mhhiw__title" id="mhhiw-title">Better Men's Health in<br>Three Simple Steps.</h2>
+          </div>
+          <ol class="mhhiw__steps">
+            <li class="mhhiw__step">
+              <h3><button class="mhhiw__step-btn" type="button" id="mhhiw-step-1" aria-expanded="true" aria-controls="mhhiw-text-1"><span class="mhhiw__num">01</span><span class="mhhiw__name">Tell Us About Yourself</span></button></h3>
+              <div class="mhhiw__panel" id="mhhiw-text-1" role="region" aria-labelledby="mhhiw-step-1"><div><p class="mhhiw__text">Complete a confidential online assessment covering your medical history, symptoms, and treatment goals.</p></div></div>
+              <span class="mhhiw__progress" aria-hidden="true"></span>
+            </li>
+            <li class="mhhiw__step">
+              <h3><button class="mhhiw__step-btn" type="button" id="mhhiw-step-2" aria-expanded="true" aria-controls="mhhiw-text-2"><span class="mhhiw__num">02</span><span class="mhhiw__name">Get Expert Medical Guidance</span></button></h3>
+              <div class="mhhiw__panel" id="mhhiw-text-2" role="region" aria-labelledby="mhhiw-step-2"><div><p class="mhhiw__text">A licensed healthcare provider reviews your information, evaluates your needs, and discusses appropriate treatment options.</p></div></div>
+              <span class="mhhiw__progress" aria-hidden="true"></span>
+            </li>
+            <li class="mhhiw__step">
+              <h3><button class="mhhiw__step-btn" type="button" id="mhhiw-step-3" aria-expanded="true" aria-controls="mhhiw-text-3"><span class="mhhiw__num">03</span><span class="mhhiw__name">Move Forward With Your Treatment</span></button></h3>
+              <div class="mhhiw__panel" id="mhhiw-text-3" role="region" aria-labelledby="mhhiw-step-3"><div><p class="mhhiw__text">If an appropriate medication is prescribed, home delivery may be available through a licensed pharmacy.</p></div></div>
+              <span class="mhhiw__progress" aria-hidden="true"></span>
+            </li>
+          </ol>
+          <a class="btn btn--dark btn--pill btn--l mhhiw__cta" href="#intake-mens-health">Start Your Assessment</a>
+        </div>
+
+        <div class="mhhiw__media" aria-hidden="true">
+          <figure class="mhhiw__shot mhhiw__shot--1 is-active">
+            <img class="mhhiw__photo" src="assets/images/mens-health/hiw-assessment.webp" alt="" width="2400" height="1964" loading="lazy">
+          </figure>
+          <figure class="mhhiw__shot mhhiw__shot--2">
+            <img class="mhhiw__photo" src="assets/images/mens-health/hiw-guidance.webp" alt="" width="2400" height="1911" loading="lazy">
+          </figure>
+          <figure class="mhhiw__shot mhhiw__shot--3">
+            <img class="mhhiw__photo" src="assets/images/mens-health/hiw-delivery.webp" alt="" width="2400" height="1792" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION:mens-health/how-it-works END -->
+
+    <!-- SECTION:mens-health/difference START · styles: sections/mens-health/difference.css · assets: assets/images/mens-health/diff-armchair.webp, diff-booth.webp, diff-ampoule-stone.webp, diff-ampoule-stone-print.svg (tools/photo-ampoule-print.py), diff-box-stones.webp
+         The brief's "The Medaro difference", after the Weight Loss difference section (user, 2026-11-25: "make it like this"):
+         a centred chip, heading and sentence, then four square image cards across the frame, one of them a product still life;
+         title and text under each. No badges (removed on Weight Loss, 2026-11-25), no glass cards over the images (user,
+         2026-11-26: "we should remove those glass thing above images too").
+         Copy: content/mens-health.md → The Medaro difference, word for word. No CTA in the brief.
+         Images (round 2, 2026-11-26): four Magnific photographs in the page's blue after the user's references, two different
+         men and two still lifes, none repeating a shot elsewhere on the page or the site (phone on the sofa, laptop at home,
+         box at the door). AI-generated people, not patients or providers. -->
+    <section class="mhdiff" aria-labelledby="mhdiff-title">
+      <header class="mhdiff__head">
+        <p class="chip mhdiff__chip"><span>The MEDARO difference</span></p>
+        <h2 class="mhdiff__title" id="mhdiff-title">Men's Health Care Without the Awkwardness.</h2>
+        <p class="mhdiff__lede">We believe taking care of your sexual health should feel straightforward, private, and personal.</p>
+      </header>
+
+      <ul class="mhdiff__cards">
+        <li class="mhdiff__card">
+          <div class="mhdiff__media" aria-hidden="true" data-brief="A man in his mid 40s at ease in a cream armchair, legs crossed, smiling at the camera; navy band-collar shirt; concrete column, a woven textile in cream and blues; soft window light, film look.">
+            <img class="mhdiff__photo" src="assets/images/mens-health/diff-armchair.webp" alt="" width="1200" height="1200" loading="lazy">
+          </div>
+          <h3 class="mhdiff__card-title">Private Online Experience</h3>
+          <p class="mhdiff__card-text">Explore sensitive health concerns with discretion.</p>
+        </li>
+        <li class="mhdiff__card">
+          <div class="mhdiff__media" aria-hidden="true" data-brief="A man around 30 with round glasses in a private navy felt booth, laptop and notebook, earbuds in, listening with a small smile; a hard slice of sunlight across the navy wall, a steel-blue plane in the foreground.">
+            <img class="mhdiff__photo" src="assets/images/mens-health/diff-booth.webp" alt="" width="1200" height="1200" loading="lazy">
+          </div>
+          <h3 class="mhdiff__card-title">Licensed Medical Providers</h3>
+          <p class="mhdiff__card-text">Get professional guidance based on your individual medical needs.</p>
+        </li>
+        <li class="mhdiff__card">
+          <div class="mhdiff__media" aria-hidden="true" data-brief="Our blue Quad 4 ampoule standing on a rough pale limestone block, plain pale steel-blue studio backdrop, soft light from the left, the liquid's blue light on the stone. Blank render; our white print in code.">
+            <img class="mhdiff__photo" src="assets/images/mens-health/diff-ampoule-stone.webp" alt="" width="1200" height="1200" loading="lazy">
+            <img class="mhdiff__photo mhdiff__print" src="assets/images/mens-health/diff-ampoule-stone-print.svg" alt="" width="1200" height="1200" loading="lazy">
+          </div>
+          <h3 class="mhdiff__card-title">Personalized Treatment Options</h3>
+          <p class="mhdiff__card-text">Your health history and treatment goals help guide medical decisions.</p>
+        </li>
+        <li class="mhdiff__card">
+          <div class="mhdiff__media" aria-hidden="true" data-brief="A plain, unbranded white mailer box with a tear strip, standing among stacked dark blue-grey porous stones, pale steel-blue studio backdrop. No text, no MEDARO.">
+            <img class="mhdiff__photo" src="assets/images/mens-health/diff-box-stones.webp" alt="" width="1200" height="1200" loading="lazy">
+          </div>
+          <h3 class="mhdiff__card-title">Discreet Delivery</h3>
+          <p class="mhdiff__card-text">When prescribed and available, medications may be delivered directly to your door.</p>
+        </li>
+      </ul>
+    </section>
+    <!-- SECTION:mens-health/difference END -->
+
+    <!-- SECTION:mens-health/ongoing START · styles: sections/mens-health/ongoing.css · scripts: sections/mens-health/ongoing.js, main.js (scenes) · assets: assets/icons/ongoing/blue/bubbles.webp, pulse.webp, sliders.webp (tools/tint-icons.py)
+         The brief's "Ongoing care", round 2 (user, 2026-11-26: "make this section as this which is made in weightloss page", a screenshot of
+         the Weight Loss care dial, V1 round 7): no box, the page turns deep navy; the heading above; the dial below pins while you scroll:
+         the dots light up in the Men's sky one by one, clockwise, each node comes to full opacity as they reach it and stays lit, and the
+         centre shows its words. Three nodes: the Men's copy names three things follow-up care does. Round 1 (the phone) is in git, 728e4dc.
+         Copy: content/mens-health.md → Ongoing care. The lede and the closing line word for word; the three points cut from the follow-up
+         sentence ("Appropriate follow-up care can help address questions, evaluate your response, and determine whether changes to your
+         treatment are needed."), its subject repeated for each: to confirm with the user. CTA "Start Your Assessment" is the brief's own
+         (How MEDARO Works, Closing CTA). The centre's point layers repeat the labels' sentences and are aria-hidden. [LINK NEEDED] intake URL. -->
+    <section class="mhong" aria-labelledby="mhong-title" data-mhong data-scene="mh-ongoing">
+      <header class="mhong__head">
+        <p class="chip mhong__chip"><span>Personalized Medical Guidance</span></p>
+        <h2 class="mhong__title" id="mhong-title">Your Care Doesn't End<br>With a Prescription.</h2>
+        <p class="mhong__lede">Your sexual health deserves more than a one-time treatment.</p>
+      </header>
+
+      <div class="mhong__track" data-mhong-track>
+        <div class="mhong__stage" data-mhong-stage>
+          <div class="mhong__dial">
+            <svg class="mhong__dots" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false">
+              <g class="mhong__dots-base"><circle cx="6.53" cy="-49.57" r="0.42"/><circle cx="9.75" cy="-49.04" r="0.42"/><circle cx="12.94" cy="-48.30" r="0.42"/><circle cx="16.07" cy="-47.35" r="0.42"/><circle cx="19.13" cy="-46.19" r="0.42"/><circle cx="22.11" cy="-44.84" r="0.42"/><circle cx="25.00" cy="-43.30" r="0.42"/><circle cx="27.78" cy="-41.57" r="0.42"/><circle cx="30.44" cy="-39.67" r="0.42"/><circle cx="32.97" cy="-37.59" r="0.42"/><circle cx="35.36" cy="-35.36" r="0.42"/><circle cx="37.59" cy="-32.97" r="0.42"/><circle cx="39.67" cy="-30.44" r="0.42"/><circle cx="41.57" cy="-27.78" r="0.42"/><circle cx="43.30" cy="-25.00" r="0.42"/><circle cx="44.84" cy="-22.11" r="0.42"/><circle cx="46.19" cy="-19.13" r="0.42"/><circle cx="47.35" cy="-16.07" r="0.42"/><circle cx="48.30" cy="-12.94" r="0.42"/><circle cx="49.04" cy="-9.75" r="0.42"/><circle cx="49.57" cy="-6.53" r="0.42"/><circle cx="49.89" cy="-3.27" r="0.42"/><circle cx="50.00" cy="-0.00" r="0.42"/><circle cx="49.89" cy="3.27" r="0.42"/><circle cx="49.57" cy="6.53" r="0.42"/><circle cx="49.04" cy="9.75" r="0.42"/><circle cx="48.30" cy="12.94" r="0.42"/><circle cx="47.35" cy="16.07" r="0.42"/><circle cx="46.19" cy="19.13" r="0.42"/><circle cx="39.67" cy="30.44" r="0.42"/><circle cx="37.59" cy="32.97" r="0.42"/><circle cx="35.36" cy="35.36" r="0.42"/><circle cx="32.97" cy="37.59" r="0.42"/><circle cx="30.44" cy="39.67" r="0.42"/><circle cx="27.78" cy="41.57" r="0.42"/><circle cx="25.00" cy="43.30" r="0.42"/><circle cx="22.11" cy="44.84" r="0.42"/><circle cx="19.13" cy="46.19" r="0.42"/><circle cx="16.07" cy="47.35" r="0.42"/><circle cx="12.94" cy="48.30" r="0.42"/><circle cx="9.75" cy="49.04" r="0.42"/><circle cx="6.53" cy="49.57" r="0.42"/><circle cx="3.27" cy="49.89" r="0.42"/><circle cx="0.00" cy="50.00" r="0.42"/><circle cx="-3.27" cy="49.89" r="0.42"/><circle cx="-6.53" cy="49.57" r="0.42"/><circle cx="-9.75" cy="49.04" r="0.42"/><circle cx="-12.94" cy="48.30" r="0.42"/><circle cx="-16.07" cy="47.35" r="0.42"/><circle cx="-19.13" cy="46.19" r="0.42"/><circle cx="-22.11" cy="44.84" r="0.42"/><circle cx="-25.00" cy="43.30" r="0.42"/><circle cx="-27.78" cy="41.57" r="0.42"/><circle cx="-30.44" cy="39.67" r="0.42"/><circle cx="-32.97" cy="37.59" r="0.42"/><circle cx="-35.36" cy="35.36" r="0.42"/><circle cx="-37.59" cy="32.97" r="0.42"/><circle cx="-39.67" cy="30.44" r="0.42"/><circle cx="-46.19" cy="19.13" r="0.42"/><circle cx="-47.35" cy="16.07" r="0.42"/><circle cx="-48.30" cy="12.94" r="0.42"/><circle cx="-49.04" cy="9.75" r="0.42"/><circle cx="-49.57" cy="6.53" r="0.42"/><circle cx="-49.89" cy="3.27" r="0.42"/><circle cx="-50.00" cy="0.00" r="0.42"/><circle cx="-49.89" cy="-3.27" r="0.42"/><circle cx="-49.57" cy="-6.53" r="0.42"/><circle cx="-49.04" cy="-9.75" r="0.42"/><circle cx="-48.30" cy="-12.94" r="0.42"/><circle cx="-47.35" cy="-16.07" r="0.42"/><circle cx="-46.19" cy="-19.13" r="0.42"/><circle cx="-44.84" cy="-22.11" r="0.42"/><circle cx="-43.30" cy="-25.00" r="0.42"/><circle cx="-41.57" cy="-27.78" r="0.42"/><circle cx="-39.67" cy="-30.44" r="0.42"/><circle cx="-37.59" cy="-32.97" r="0.42"/><circle cx="-35.36" cy="-35.36" r="0.42"/><circle cx="-32.97" cy="-37.59" r="0.42"/><circle cx="-30.44" cy="-39.67" r="0.42"/><circle cx="-27.78" cy="-41.57" r="0.42"/><circle cx="-25.00" cy="-43.30" r="0.42"/><circle cx="-22.11" cy="-44.84" r="0.42"/><circle cx="-19.13" cy="-46.19" r="0.42"/><circle cx="-16.07" cy="-47.35" r="0.42"/><circle cx="-12.94" cy="-48.30" r="0.42"/><circle cx="-9.75" cy="-49.04" r="0.42"/><circle cx="-6.53" cy="-49.57" r="0.42"/></g>
+              <g class="mhong__dots-lit"><circle cx="6.53" cy="-49.57" r="0.55" style="--i:2"/><circle cx="9.75" cy="-49.04" r="0.55" style="--i:3"/><circle cx="12.94" cy="-48.30" r="0.55" style="--i:4"/><circle cx="16.07" cy="-47.35" r="0.55" style="--i:5"/><circle cx="19.13" cy="-46.19" r="0.55" style="--i:6"/><circle cx="22.11" cy="-44.84" r="0.55" style="--i:7"/><circle cx="25.00" cy="-43.30" r="0.55" style="--i:8"/><circle cx="27.78" cy="-41.57" r="0.55" style="--i:9"/><circle cx="30.44" cy="-39.67" r="0.55" style="--i:10"/><circle cx="32.97" cy="-37.59" r="0.55" style="--i:11"/><circle cx="35.36" cy="-35.36" r="0.55" style="--i:12"/><circle cx="37.59" cy="-32.97" r="0.55" style="--i:13"/><circle cx="39.67" cy="-30.44" r="0.55" style="--i:14"/><circle cx="41.57" cy="-27.78" r="0.55" style="--i:15"/><circle cx="43.30" cy="-25.00" r="0.55" style="--i:16"/><circle cx="44.84" cy="-22.11" r="0.55" style="--i:17"/><circle cx="46.19" cy="-19.13" r="0.55" style="--i:18"/><circle cx="47.35" cy="-16.07" r="0.55" style="--i:19"/><circle cx="48.30" cy="-12.94" r="0.55" style="--i:20"/><circle cx="49.04" cy="-9.75" r="0.55" style="--i:21"/><circle cx="49.57" cy="-6.53" r="0.55" style="--i:22"/><circle cx="49.89" cy="-3.27" r="0.55" style="--i:23"/><circle cx="50.00" cy="-0.00" r="0.55" style="--i:24"/><circle cx="49.89" cy="3.27" r="0.55" style="--i:25"/><circle cx="49.57" cy="6.53" r="0.55" style="--i:26"/><circle cx="49.04" cy="9.75" r="0.55" style="--i:27"/><circle cx="48.30" cy="12.94" r="0.55" style="--i:28"/><circle cx="47.35" cy="16.07" r="0.55" style="--i:29"/><circle cx="46.19" cy="19.13" r="0.55" style="--i:30"/><circle cx="39.67" cy="30.44" r="0.55" style="--i:34"/><circle cx="37.59" cy="32.97" r="0.55" style="--i:35"/><circle cx="35.36" cy="35.36" r="0.55" style="--i:36"/><circle cx="32.97" cy="37.59" r="0.55" style="--i:37"/><circle cx="30.44" cy="39.67" r="0.55" style="--i:38"/><circle cx="27.78" cy="41.57" r="0.55" style="--i:39"/><circle cx="25.00" cy="43.30" r="0.55" style="--i:40"/><circle cx="22.11" cy="44.84" r="0.55" style="--i:41"/><circle cx="19.13" cy="46.19" r="0.55" style="--i:42"/><circle cx="16.07" cy="47.35" r="0.55" style="--i:43"/><circle cx="12.94" cy="48.30" r="0.55" style="--i:44"/><circle cx="9.75" cy="49.04" r="0.55" style="--i:45"/><circle cx="6.53" cy="49.57" r="0.55" style="--i:46"/><circle cx="3.27" cy="49.89" r="0.55" style="--i:47"/><circle cx="0.00" cy="50.00" r="0.55" style="--i:48"/><circle cx="-3.27" cy="49.89" r="0.55" style="--i:49"/><circle cx="-6.53" cy="49.57" r="0.55" style="--i:50"/><circle cx="-9.75" cy="49.04" r="0.55" style="--i:51"/><circle cx="-12.94" cy="48.30" r="0.55" style="--i:52"/><circle cx="-16.07" cy="47.35" r="0.55" style="--i:53"/><circle cx="-19.13" cy="46.19" r="0.55" style="--i:54"/><circle cx="-22.11" cy="44.84" r="0.55" style="--i:55"/><circle cx="-25.00" cy="43.30" r="0.55" style="--i:56"/><circle cx="-27.78" cy="41.57" r="0.55" style="--i:57"/><circle cx="-30.44" cy="39.67" r="0.55" style="--i:58"/><circle cx="-32.97" cy="37.59" r="0.55" style="--i:59"/><circle cx="-35.36" cy="35.36" r="0.55" style="--i:60"/><circle cx="-37.59" cy="32.97" r="0.55" style="--i:61"/><circle cx="-39.67" cy="30.44" r="0.55" style="--i:62"/><circle cx="-46.19" cy="19.13" r="0.55" style="--i:66"/><circle cx="-47.35" cy="16.07" r="0.55" style="--i:67"/><circle cx="-48.30" cy="12.94" r="0.55" style="--i:68"/><circle cx="-49.04" cy="9.75" r="0.55" style="--i:69"/><circle cx="-49.57" cy="6.53" r="0.55" style="--i:70"/><circle cx="-49.89" cy="3.27" r="0.55" style="--i:71"/><circle cx="-50.00" cy="0.00" r="0.55" style="--i:72"/><circle cx="-49.89" cy="-3.27" r="0.55" style="--i:73"/><circle cx="-49.57" cy="-6.53" r="0.55" style="--i:74"/><circle cx="-49.04" cy="-9.75" r="0.55" style="--i:75"/><circle cx="-48.30" cy="-12.94" r="0.55" style="--i:76"/><circle cx="-47.35" cy="-16.07" r="0.55" style="--i:77"/><circle cx="-46.19" cy="-19.13" r="0.55" style="--i:78"/><circle cx="-44.84" cy="-22.11" r="0.55" style="--i:79"/><circle cx="-43.30" cy="-25.00" r="0.55" style="--i:80"/><circle cx="-41.57" cy="-27.78" r="0.55" style="--i:81"/><circle cx="-39.67" cy="-30.44" r="0.55" style="--i:82"/><circle cx="-37.59" cy="-32.97" r="0.55" style="--i:83"/><circle cx="-35.36" cy="-35.36" r="0.55" style="--i:84"/><circle cx="-32.97" cy="-37.59" r="0.55" style="--i:85"/><circle cx="-30.44" cy="-39.67" r="0.55" style="--i:86"/><circle cx="-27.78" cy="-41.57" r="0.55" style="--i:87"/><circle cx="-25.00" cy="-43.30" r="0.55" style="--i:88"/><circle cx="-22.11" cy="-44.84" r="0.55" style="--i:89"/><circle cx="-19.13" cy="-46.19" r="0.55" style="--i:90"/><circle cx="-16.07" cy="-47.35" r="0.55" style="--i:91"/><circle cx="-12.94" cy="-48.30" r="0.55" style="--i:92"/><circle cx="-9.75" cy="-49.04" r="0.55" style="--i:93"/><circle cx="-6.53" cy="-49.57" r="0.55" style="--i:94"/></g>
+            </svg>
+
+            <ul class="mhong__points">
+              <li class="mhong__point"><span class="mhong__node" aria-hidden="true"><img src="assets/icons/ongoing/blue/bubbles.webp" alt="" width="512" height="512" loading="lazy"></span>
+                <div class="mhong__label"><h3 class="mhong__name">Questions</h3><p>Appropriate follow-up care can help address questions.</p></div></li>
+              <li class="mhong__point"><span class="mhong__node" aria-hidden="true"><img src="assets/icons/ongoing/blue/pulse.webp" alt="" width="512" height="512" loading="lazy"></span>
+                <div class="mhong__label"><h3 class="mhong__name">Your response</h3><p>Appropriate follow-up care can help evaluate your response.</p></div></li>
+              <li class="mhong__point"><span class="mhong__node" aria-hidden="true"><img src="assets/icons/ongoing/blue/sliders.webp" alt="" width="512" height="512" loading="lazy"></span>
+                <div class="mhong__label"><h3 class="mhong__name">Changes to your treatment</h3><p>Appropriate follow-up care can help determine whether changes to your treatment are needed.</p></div></li>
+            </ul>
+
+            <div class="mhong__core">
+              <div class="mhong__state mhong__state--intro is-on"><p class="mhong__state-title">Because better care means looking beyond the prescription.</p></div>
+              <div class="mhong__state" aria-hidden="true"><p class="mhong__state-title">Questions</p><p>Appropriate follow-up care can help address questions.</p></div>
+              <div class="mhong__state" aria-hidden="true"><p class="mhong__state-title">Your response</p><p>Appropriate follow-up care can help evaluate your response.</p></div>
+              <div class="mhong__state" aria-hidden="true"><p class="mhong__state-title">Changes to your treatment</p><p>Appropriate follow-up care can help determine whether changes to your treatment are needed.</p></div>
+            </div>
+          </div>
+
+          <a class="btn btn--dark btn--pill btn--l mhong__cta" href="#intake-mens-health">Start Your Assessment</a>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION:mens-health/ongoing END -->
+
+    <!-- SECTION:mens-health/faq START · styles: components/faq.css, sections/mens-health/faq.css · scripts: components/faq.js · assets: assets/images/mens-health/faq-card.webp, #i-arrow-ne in the sprite
+         The brief's FAQ in the shared FAQ component, as on Weight Loss (user, 2026-11-25: "make it like how you did in fatloss"; the
+         Weight Loss FAQ round 2, after the Mahadeva template): heading left with a call-to-action card at the column's foot, the
+         accordion right, the first answer open, one at a time.
+         Copy: content/mens-health.md → FAQ, word for word (eyebrow as the chip); every qualifier in the answers kept. The brief gives
+         the FAQ no CTA and no card line: the card carries the hero's line "Your intimate health deserves more than guesswork." and the
+         page's CTA label "Start Your Assessment" (DESIGN.md → Copy flags). [LINK NEEDED] intake URL. Portrait (2026-11-26): the hero's home man, head and shoulders in his flat
+         (Magnific, Nano Banana 2.1, 2K, the hero render as the reference, 65 credits); AI-generated person. -->
+    <section class="faq mhfaq" aria-labelledby="mhfaq-title">
+      <div class="faq__layout">
+        <div class="faq__side">
+          <div class="faq__head">
+            <p class="chip faq__chip"><span>Frequently asked questions</span></p>
+            <h2 class="faq__title" id="mhfaq-title">Everything You<br>Want to Know.</h2>
+          </div>
+          <a class="faq__card" href="#intake-mens-health">
+            <span class="faq__card-fill" aria-hidden="true"></span>
+            <span class="faq__card-photo" aria-hidden="true"><img src="assets/images/mens-health/faq-card.webp" alt="" width="480" height="480" loading="lazy"></span>
+            <span class="faq__card-text">
+              <span class="faq__card-title">Your intimate health deserves more than guesswork.</span>
+              <span class="faq__card-body">Start Your Assessment</span>
+            </span>
+            <span class="faq__card-go" aria-hidden="true">
+              <svg class="faq__arrow faq__arrow--out"><use href="#i-arrow-ne"/></svg>
+              <svg class="faq__arrow faq__arrow--in"><use href="#i-arrow-ne"/></svg>
+            </span>
+          </a>
+        </div>
+        <div class="faq__list">
+          <div class="faq__item">
+            <h3><button class="faq__q" id="mhfaq-q1" aria-expanded="true" aria-controls="mhfaq-a1"><span>What is Quad 4?</span><span class="faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="faq__a" id="mhfaq-a1" role="region" aria-labelledby="mhfaq-q1"><div class="faq__a-inner"><p>Quad 4 is a proposed compounded formulation containing sildenafil, vardenafil, tadalafil, and apomorphine.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__q" id="mhfaq-q2" aria-expanded="false" aria-controls="mhfaq-a2"><span>Can I take Quad 4 with other ED medications?</span><span class="faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="faq__a" id="mhfaq-a2" role="region" aria-labelledby="mhfaq-q2"><div class="faq__a-inner"><p>Combining PDE5 inhibitors can increase adverse-effect risks. Quad 4 already contains three PDE5 inhibitors, so its proposed formulation requires particular medical scrutiny. Do not combine ED medications without explicit guidance from your prescribing clinician.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__q" id="mhfaq-q3" aria-expanded="false" aria-controls="mhfaq-a3"><span>Can I get a prescription online?</span><span class="faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="faq__a" id="mhfaq-a3" role="region" aria-labelledby="mhfaq-q3"><div class="faq__a-inner"><p>A licensed healthcare provider may prescribe an appropriate medication after evaluating your medical history and clinical needs, subject to applicable regulations.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__q" id="mhfaq-q4" aria-expanded="false" aria-controls="mhfaq-a4"><span>Will my medication arrive discreetly?</span><span class="faq__mark" aria-hidden="true"></span></button></h3>
+            <div class="faq__a" id="mhfaq-a4" role="region" aria-labelledby="mhfaq-q4"><div class="faq__a-inner"><p>Discreet home delivery may be available for prescribed treatments through participating licensed pharmacies.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION:mens-health/faq END -->
+
+    <!-- SECTION:mens-health/cta START · styles: components/cta-band.css · assets: assets/images/mens-health/cta-watch.webp (tools/cta-vial.py → watch), #i-check in the sprite
+         The brief's closing CTA in the shared CTA band (components/cta-band.css), after the user's Milo reference (2026-11-26:
+         "see image 2 i like that design … but in our theme"; "we will make one design and use in both page with color change").
+         Copy: content/mens-health.md → Closing CTA, word for word (the sign-off line split into the list&rsquo;s three rows). [LINK NEEDED] intake URL.
+         Photo: a Magnific render after the Milo reference (user, 2026-11-26: "generate the photos for both pages … real life image just like reference … think different and outside the box"). -->
+    <section class="cta-band" aria-labelledby="mhcta-title">
+      <div class="cta-band__stage">
+        <img class="cta-band__photo" src="assets/images/mens-health/cta-watch.webp" alt="" width="2752" height="1936" loading="lazy" style="--cta-photo-pos: 50% 47%" data-brief="Getting ready for an evening out: a woman&rsquo;s hands fasten a plain steel watch on a man&rsquo;s wrist at the centre of the frame, his navy suit sleeve and white cuff from the right, her black sleeves from the left, no faces; a deep navy wall above for the white words. Magnific render (Nano Banana 2.1, 2K), after the Milo reference.">
+        <div class="cta-band__stack">
+          <div class="cta-band__glass">
+            <p class="chip cta-band__chip"><span>Made for Better Health.</span></p>
+            <h2 class="cta-band__title" id="mhcta-title">Your Confidence Deserves Better Care.</h2>
+            <p class="cta-band__text">Your health is personal. Your care should be too.</p>
+          </div>
+          <ul class="cta-band__list">
+            <li><span class="cta-band__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Your Health.</li>
+            <li><span class="cta-band__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Your Confidence.</li>
+            <li><span class="cta-band__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Your Next Chapter.</li>
+          </ul>
+          <div class="cta-band__panel">
+            <a class="btn btn--primary btn--pill btn--l cta-band__cta" href="#intake-mens-health">Start Your Assessment</a>
+            <p class="cta-band__note">Explore medically guided men&rsquo;s sexual health treatment options with MEDARO.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION:mens-health/cta END -->
+
+  </main>
+
+  <script src="main.js" defer></script>
+  <script src="assets/images/products/label-ampoule-quad4.js" defer></script>
+  <script src="components/pack-spin.js" defer></script>
+  <script src="sections/mens-health/science.js" defer></script>
+  <script src="sections/mens-health/how-it-works.js" defer></script>
+  <script src="sections/mens-health/ongoing.js" defer></script>
+  <script src="components/faq.js" defer></script>
+</body>
+</html>

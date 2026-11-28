@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Men's Health · the MEDARO difference (2026-11-25)
+   The user: "make it like this" (the Weight Loss difference section: a
+   centred chip, heading and sentence, then four square image cards across
+   the frame, one product still life among the photos, a title and a short
+   text under each image; no badges since the user's "lets remove those
+   icons"). No glass cards over the images on this page (user, 2026-11-26:
+   "we should remove those glass thing above images too"): the photos stand
+   on their own; the delivery card's qualifier ("When prescribed and
+   available") stays in its text, right under the image.
+   Ours for Men's Health: the Men's blue chip, the page colour.
+   No CTA: the Men's brief has none for this block.
+   Frame: the cards span the frame (16px edges, max 1888), 16px apart,
+   images radius 12, like the Weight Loss cards.
+   ========================================================================== */
+
+.mhdiff {
+  padding: var(--space-6) var(--frame-side) var(--space-9);
+  color: var(--color-ink);
+}
+
+/* ---------- Header ---------- */
+.mhdiff__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.mhdiff__chip { --color-chip: #0a6fc7; } /* the Men's blue: 4.5:1 on the page */
+.mhdiff__title {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.6vw, 68px); /* the page's section heading */
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.mhdiff__lede {
+  max-width: 40em;
+  margin-top: 18px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: balance;
+}
+
+/* ---------- Cards ---------- */
+.mhdiff__cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--edge);
+  margin-top: clamp(48px, 4.4vw, 80px);
+}
+.mhdiff__media {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #c9d3dd; /* the still lifes' backdrop, while a photo loads */
+  isolation: isolate; /* card 3's print screens onto its photo only */
+}
+/* Round 2 (2026-11-26): four square photographs in the page's blue, each a
+   different man or object, after the user's references (a man at ease in an
+   armchair, a man in a booth with hard light, a bottle on a stone block, a
+   phone in stacked stones). They fill the square. */
+.mhdiff__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Card 3: our white Quad 4 print on the ampoule in the photo (same pixel grid,
+   tools/photo-ampoule-print.py), screened onto the blue glass like the hand's */
+.mhdiff__print { mix-blend-mode: screen; }
+
+.mhdiff__card-title {
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-size: clamp(21px, 1.7vw, 28px);
+  font-weight: var(--weight-regular);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.mhdiff__card-text {
+  max-width: 30em;
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}

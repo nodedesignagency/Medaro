@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en" data-palettes="a">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MEDARO · Doctor-Guided Weight Loss</title>
+  <meta name="description" content="Discover a simpler approach to weight loss with personalized medical guidance and GLP-1 treatment options designed around your goals.">
+  <meta name="robots" content="noindex, nofollow"><!-- Draft: keep staging out of search -->
+  <meta name="theme-color" content="#f4f5ef">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Components (shared across pages) -->
+  <link rel="stylesheet" href="components/header.css">
+  <link rel="stylesheet" href="components/product.css">
+  <link rel="stylesheet" href="components/faq.css">
+  <link rel="stylesheet" href="components/cta-band.css">
+  <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
+  <link rel="stylesheet" href="sections/weight-loss/hero--v1.css">
+  <link rel="stylesheet" href="sections/weight-loss/hero--v2.css">
+  <link rel="stylesheet" href="sections/weight-loss/hero--v3.css">
+  <link rel="stylesheet" href="sections/weight-loss/hero--v4.css">
+  <link rel="stylesheet" href="sections/weight-loss/pricing-progress.css">
+  <link rel="stylesheet" href="sections/weight-loss/care.css">
+  <link rel="stylesheet" href="sections/weight-loss/difference.css">
+  <link rel="stylesheet" href="sections/weight-loss/steps.css">
+  <link rel="stylesheet" href="sections/weight-loss/why.css">
+  <link rel="stylesheet" href="sections/weight-loss/education.css">
+  <link rel="stylesheet" href="sections/weight-loss/ongoing.css">
+</head>
+<body>
+  <!-- Landing page (paid traffic). Client rule: NO links to Home or any other page; the logo is not a link;
+       every CTA goes to the Weight Loss intake form. [LINK NEEDED] intake URL: #intake-weight-loss until we have it.
+       Round 1 of the hero (three versions, rejected 2026-11-23) is frozen in versions/wl-hero-round-1/. -->
+
+  <!-- Sprite: logo and icons -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <!-- Official MEDARO wordmark (site/assets/logo/, from the client), cropped tight, currentColor -->
+    <symbol id="wordmark" viewBox="194 74 4413 712"><g fill="currentColor" transform="translate(80 780) scale(1 -1)"><path transform="translate(0 0)" d="M114 0V700H175L495 154H463L780 700H841V0H770V589H787L495 89H460L166 589H185V0Z"/><path transform="translate(870 0)" d="M114 0V700H594V636H188V64H609V0ZM180 324V387H550V324Z"/><path transform="translate(1500 0)" d="M114 0V700H399Q511 700 595.5 655.5Q680 611 727.0 532.0Q774 453 774 350Q774 247 727.0 168.0Q680 89 595.5 44.5Q511 0 399 0ZM188 64H395Q488 64 556.5 100.5Q625 137 663.0 201.5Q701 266 701 350Q701 435 663.0 499.0Q625 563 556.5 599.5Q488 636 395 636H188Z"/><path transform="translate(2300 0)" d="M2 0 L322 700 L395 700 L715 0 L637 0 L343 657 L373 657 L79 0 Z"/><path transform="translate(3040 0)" d="M114 0V700H376Q509 700 585.5 636.5Q662 573 662 460Q662 386 627.5 332.5Q593 279 529.0 250.5Q465 222 376 222H155L188 256V0ZM592 0 412 254H492L673 0ZM188 250 155 285H374Q479 285 533.5 331.0Q588 377 588 460Q588 544 533.5 590.0Q479 636 374 636H155L188 671Z"/><path transform="translate(3740 0)" d="M420 -6Q341 -6 273.5 20.5Q206 47 156.5 95.5Q107 144 79.5 208.5Q52 273 52 350Q52 427 79.5 491.5Q107 556 156.5 604.5Q206 653 273.0 679.5Q340 706 420 706Q499 706 566.0 679.5Q633 653 682.5 605.0Q732 557 759.5 492.0Q787 427 787 350Q787 273 759.5 208.0Q732 143 682.5 95.0Q633 47 566.0 20.5Q499 -6 420 -6ZM420 60Q483 60 536.5 81.5Q590 103 629.5 142.5Q669 182 691.0 234.5Q713 287 713 350Q713 413 691.0 465.5Q669 518 629.5 557.5Q590 597 536.5 618.5Q483 640 420 640Q357 640 303.0 618.5Q249 597 209.5 557.5Q170 518 147.5 465.5Q125 413 125 350Q125 288 147.5 235.0Q170 182 209.5 142.5Q249 103 303.0 81.5Q357 60 420 60Z"/></g></symbol>
+    <!-- Check for V4's points (the project's check, from the Supplement V3 round 2 cards) -->
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.4 6.6 11.4 12.5 4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <!-- Care section glass cards (line icons from Home's sprite) -->
+    <symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.75 3.25H5a1 1 0 0 0-1 1V9a4.5 4.5 0 0 0 9 0V4.25a1 1 0 0 0-1-1h-.75"/><path d="M8.5 13.5v1.75a4.5 4.5 0 0 0 9 0V13"/><circle cx="17.5" cy="11" r="2"/></g></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.75"/><circle cx="12" cy="12" r="1.1"/></g></symbol>
+    <symbol id="i-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
+    <!-- Difference section badges (line icons from Home's sprite) -->
+    <symbol id="i-plan" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M10.5 3v6L5.2 18.2A1.9 1.9 0 0 0 6.9 21h10.2a1.9 1.9 0 0 0 1.7-2.8L13.5 9V3"/><path d="M7.6 15h8.8"/></g></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.75" cy="10.75" r="6.5"/><path d="m15.5 15.5 5 5"/></g></symbol>
+    <!-- GLP-1 education cards: fine line icons like the reference's (stroke 1.2 on 24 → 1.6px at 32px) -->
+    <symbol id="i-edu-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
+    <symbol id="i-edu-clipboard" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
+    <symbol id="i-edu-sprout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9.5"/><path d="M12 13.5c0-3.6-2.6-6.3-6.75-6.3 0 3.6 2.6 6.3 6.75 6.3Z"/><path d="M12 11.5c0-3.9 2.8-6.9 7.25-6.9 0 3.9-2.8 6.9-7.25 6.9Z"/><path d="M7.5 21h9"/></g></symbol>
+    <symbol id="i-edu-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.75 4.75 5.6v5.65c0 4.55 3.05 8.3 7.25 9.95 4.2-1.65 7.25-5.4 7.25-9.95V5.6Z"/><path d="M12 8.25v4.75"/></g><circle cx="12" cy="16.1" r="0.85" fill="currentColor"/></symbol>
+    <!-- The user's arrow (assets/icons/arrow.svg) turned 45°, as on Home (FAQ card) -->
+    <symbol id="i-arrow-ne" viewBox="0 0 16 16"><path fill="currentColor" transform="rotate(-45 7.98 7.96)" d="M9.04045 13.5006C9.05132 13.5116 9.38447 13.5951 9.78072 13.6861C10.177 13.7772 10.5056 13.8378 10.5108 13.8209C10.5161 13.8039 10.5571 13.5289 10.6019 13.2096C10.692 12.5686 10.9101 11.82 11.1431 11.3519C11.8694 9.893 13.1726 8.92699 14.7532 8.67591L15.1557 8.61196V7.96748V7.32295L14.7909 7.26174C12.4008 6.86077 10.8426 5.07371 10.5511 2.39938C10.5321 2.22474 10.5094 2.08191 10.5006 2.08191C10.42 2.08191 9.08438 2.40379 9.05912 2.42929C9.04085 2.44773 9.05444 2.61144 9.08936 2.79303C9.47585 4.80384 10.5825 6.44009 12.0186 7.12424L12.363 7.28836L5.2793 7.30121L0.800003 7.30937V8.6137L5.29082 8.62187L12.3578 8.63477L11.923 8.85512C10.7947 9.42671 9.90149 10.5479 9.37547 12.0529C9.22557 12.4817 8.99939 13.4592 9.04045 13.5006Z"/></symbol>
+    <!-- Ongoing care phone rows (stroke 1.5 on 24, like the care section's icons) -->
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12.5h3.75l2.5-6 4.5 11 2.5-5H21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 11.75a7.75 7.75 0 0 1-11.3 6.9L4 20l1.35-4.4A7.75 7.75 0 1 1 20 11.75Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7.5h9.5M18.5 7.5H20M4 16.5h3.5M12.5 16.5H20"/><circle cx="16" cy="7.5" r="2.25"/><circle cx="10" cy="16.5" r="2.25"/></g></symbol>
+  </svg>
+
+  <a class="visually-hidden" href="#main">Skip to content</a>
+
+  <!-- SECTION:header--landing START · styles: components/header.css · scripts: main.js (header)
+       The approved header (Home: --plain --compact) without anything that links out: plain logo, no menu
+       button, Get Started to the intake. Shared by every hero version below. [LINK NEEDED] intake URL. -->
+  <header class="site-header site-header--plain site-header--compact site-header--landing" data-header>
+    <div class="site-header__bar">
+      <span class="logo" role="img" aria-label="MEDARO"><svg aria-hidden="true"><use href="#wordmark"/></svg></span>
+      <div class="site-header__actions">
+        <a class="btn btn--dark btn--pill" href="#intake-weight-loss">Get Started</a>
+      </div>
+    </div>
+  </header>
+  <!-- SECTION:header--landing END -->
+
+  <main id="main">
+
+    <!-- ================= HERO V1 (after hims "Get your edge back") ================= -->
+    <div data-version="hero:v1">
+      <!-- SECTION:weight-loss/hero--v1 START · styles: sections/weight-loss/hero--v1.css · assets: assets/images/weight-loss/v1-sky.webp, v1-woman.webp
+           After the user's hims reference (image 1, 2026-11-23): headline centred at the top of a full-bleed sky,
+           one person centred and cropped at the waist, a dotted arc with a few lit points passing behind them,
+           the CTA centred at the foot. Copy: content/weight-loss.md, Section 1, word for word (eyebrow in caps as a chip).
+           Photo: stand-in, the Supplement section's AI woman (wider render from git history), the sky extended in code
+           and the woman cut out so the arc can pass behind her. -->
+      <section class="wlh1" aria-labelledby="wlh1-title">
+        <div class="wlh1__stage">
+          <div class="wlh1__media media-brief" aria-hidden="true" data-brief="One adult, low angle against a clear sage-teal sky, waist up, centred, calm and confident; cream top, olive bottoms; film grain. Room above the head for the headline. No before/after.">
+            <img class="wlh1__sky" src="assets/images/weight-loss/v1-sky.webp" alt="" width="3600" height="1800">
+            <div class="wlh1__haze"></div>
+            <svg class="wlh1__arc" viewBox="0 0 3600 1800" preserveAspectRatio="none" focusable="false">
+              <defs><radialGradient id="wlh1-glow"><stop offset="0" stop-color="#e6f2c4" stop-opacity="0.95"/><stop offset="0.35" stop-color="#d5e5ad" stop-opacity="0.55"/><stop offset="1" stop-color="#d5e5ad" stop-opacity="0"/></radialGradient></defs>
+              <path class="wlh1__path" d="M -40 1470 Q 1700 1100 3640 380"/>
+              <g class="wlh1__points">
+                <circle class="wlh1__glow" cx="451" cy="1360" r="44"/><circle class="wlh1__point" cx="451" cy="1360" r="9"/>
+                <circle class="wlh1__glow" cx="914" cy="1245" r="44" style="--d: 1.2s"/><circle class="wlh1__point" cx="914" cy="1245" r="9"/>
+                <circle class="wlh1__glow" cx="2683" cy="718" r="44" style="--d: 2.4s"/><circle class="wlh1__point" cx="2683" cy="718" r="9"/>
+                <circle class="wlh1__glow" cx="3254" cy="521" r="44" style="--d: 0.6s"/><circle class="wlh1__point" cx="3254" cy="521" r="9"/>
+              </g>
+            </svg>
+            <img class="wlh1__person" src="assets/images/weight-loss/v1-woman.webp" alt="" width="1297" height="1088">
+          </div>
+
+          <div class="wlh1__head">
+            <p class="chip wlh1__chip"><span>Doctor-guided weight loss</span></p>
+            <h1 class="wlh1__title" id="wlh1-title">Weight Loss Is Hard.<br>Getting the Right Care Shouldn't Be.</h1>
+            <p class="wlh1__lede">Discover a simpler approach to weight loss with personalized medical guidance and GLP-1 treatment options designed around your goals.</p>
+          </div>
+
+          <div class="wlh1__actions">
+            <a class="btn btn--dark btn--pill btn--l" href="#intake-weight-loss">Get Started</a>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/hero--v1 END -->
+    </div>
+
+    <!-- ================= HERO V2 (after hims weight loss, made ours) ================= -->
+    <div data-version="hero:v2">
+      <!-- SECTION:weight-loss/hero--v2 START · styles: sections/weight-loss/hero--v2.css, components/product.css · assets: assets/images/people/, assets/images/products/, assets/images/supplements/sp-woman.webp, assets/images/standin-mh-*.webp, assets/images/weight-loss/standin-stretch.webp
+           After the user's hims weight-loss reference (image 2, 2026-11-23): copy on the left, a wall of photos on the
+           right, cropped by the top and bottom edges. Changed so it isn't hims (user: "change few things … it will look
+           same otherwise"): three columns instead of two, drifting slowly in opposite directions (paused on hover, still
+           with reduced motion); the photos alternate with our product tiles (the approved Tirzepatide vial, the blank
+           tablets) on palette colours, after Retool's colour-and-photo grid (Mobbin); all of it inside the mist stage on
+           the frame, like Home's hero. The hims check list stays out: it is section 2 (user, 2026-11-23).
+           Copy: content/weight-loss.md, Section 1, word for word. Photos: stand-ins from main (data-brief). -->
+      <section class="wlh2" aria-labelledby="wlh2-title">
+        <div class="wlh2__stage">
+          <div class="wlh2__copy">
+            <p class="chip wlh2__chip"><span>Doctor-guided weight loss</span></p>
+            <h1 class="wlh2__title" id="wlh2-title">Weight Loss Is Hard.<br><span class="wlh2__accent">Getting the Right Care Shouldn't Be.</span></h1>
+            <p class="wlh2__lede">Discover a simpler approach to weight loss with personalized medical guidance and GLP-1 treatment options designed around your goals.</p>
+            <a class="btn btn--dark btn--pill btn--l wlh2__cta" href="#intake-weight-loss">Get Started</a>
+          </div>
+
+          <div class="wlh2__wall media-brief" aria-hidden="true" data-brief="Real people of different ages and sizes in everyday moments (walking, cooking, stretching, laughing), our olive/sage/cream palette, alternating with blank product shots. No before/after, no scales.">
+            <div class="wlh2__col wlh2__col--a"><div class="wlh2__track">
+              <div class="wlh2__group">
+                <figure class="wlh2__tile wlh2__tile--portrait wlh2__tile--sage" style="--ar: 4 / 5"><img src="assets/images/people/woman-a.webp" alt="" width="1000" height="1020"></figure>
+                <figure class="wlh2__tile wlh2__tile--product wlh2__tile--lime" style="--ar: 1 / 1"><img class="wlh2__pill wlh2__pill--white" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665"><img class="wlh2__pill wlh2__pill--oval" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617"></figure>
+                <figure class="wlh2__tile" style="--ar: 4 / 5"><img src="assets/images/standin-mh-couple.webp" alt="" width="800" height="800" style="object-position: 50% 30%"></figure>
+              </div>
+              <div class="wlh2__group">
+                <figure class="wlh2__tile wlh2__tile--portrait wlh2__tile--sage" style="--ar: 4 / 5"><img src="assets/images/people/woman-a.webp" alt="" width="1000" height="1020"></figure>
+                <figure class="wlh2__tile wlh2__tile--product wlh2__tile--lime" style="--ar: 1 / 1"><img class="wlh2__pill wlh2__pill--white" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665"><img class="wlh2__pill wlh2__pill--oval" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617"></figure>
+                <figure class="wlh2__tile" style="--ar: 4 / 5"><img src="assets/images/standin-mh-couple.webp" alt="" width="800" height="800" style="object-position: 50% 30%"></figure>
+              </div>
+            </div></div>
+
+            <div class="wlh2__col wlh2__col--b"><div class="wlh2__track">
+              <div class="wlh2__group">
+                <figure class="wlh2__tile" style="--ar: 3 / 4"><img src="assets/images/supplements/sp-woman.webp" alt="" width="1600" height="1778" style="object-position: 50% 12%"></figure>
+                <figure class="wlh2__tile wlh2__tile--product wlh2__tile--mist" style="--ar: 4 / 5"><span class="pack pack--vial wlh2__vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></span></figure>
+                <figure class="wlh2__tile wlh2__tile--portrait wlh2__tile--paper" style="--ar: 1 / 1"><img src="assets/images/people/man-a.webp" alt="" width="1000" height="1017"></figure>
+              </div>
+              <div class="wlh2__group">
+                <figure class="wlh2__tile" style="--ar: 3 / 4"><img src="assets/images/supplements/sp-woman.webp" alt="" width="1600" height="1778" style="object-position: 50% 12%"></figure>
+                <figure class="wlh2__tile wlh2__tile--product wlh2__tile--mist" style="--ar: 4 / 5"><span class="pack pack--vial wlh2__vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></span></figure>
+                <figure class="wlh2__tile wlh2__tile--portrait wlh2__tile--paper" style="--ar: 1 / 1"><img src="assets/images/people/man-a.webp" alt="" width="1000" height="1017"></figure>
+              </div>
+            </div></div>
+
+            <div class="wlh2__col wlh2__col--c"><div class="wlh2__track">
+              <div class="wlh2__group">
+                <figure class="wlh2__tile" style="--ar: 4 / 5"><img src="assets/images/weight-loss/standin-stretch.webp" alt="" width="3840" height="2143" style="object-position: 55% 40%"></figure>
+                <figure class="wlh2__tile wlh2__tile--product wlh2__tile--deep" style="--ar: 1 / 1"><img class="wlh2__pill wlh2__pill--solo" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617"></figure>
+                <figure class="wlh2__tile" style="--ar: 4 / 5"><img src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" style="object-position: 50% 20%"></figure>
+              </div>
+              <div class="wlh2__group">
+                <figure class="wlh2__tile" style="--ar: 4 / 5"><img src="assets/images/weight-loss/standin-stretch.webp" alt="" width="3840" height="2143" style="object-position: 55% 40%"></figure>
+                <figure class="wlh2__tile wlh2__tile--product wlh2__tile--deep" style="--ar: 1 / 1"><img class="wlh2__pill wlh2__pill--solo" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617"></figure>
+                <figure class="wlh2__tile" style="--ar: 4 / 5"><img src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" style="object-position: 50% 20%"></figure>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/hero--v2 END -->
+    </div>
+
+    <!-- ================= HERO V3 (after Mahadeva careers, "Grow With Mahadeva") ================= -->
+    <div data-version="hero:v3">
+      <!-- SECTION:weight-loss/hero--v3 START · styles: sections/weight-loss/hero--v3.css, components/product.css · scripts: sections/weight-loss/hero--v3.js · assets: as V2
+           After the user's Mahadeva careers reference (image 3; source: nodedesignagency/Mahadeva, GrowWithUs + PhotoFan):
+           the headline centred, seven square prints overlapping in a shallow arc (each turned −7…7°, the ends hanging
+           lower), the sentence centred below. The fan's entrance is the template's, 1:1: the pile rises from 1200px below
+           turned −40°, unwinds to −14° at 1.2×, settles upright, then opens (0.4 + 1.0 + 1.0 s, ease 0.44/0/0.56/1).
+           We add the CTA under the sentence. Copy: content/weight-loss.md, Section 1, word for word. Photos: stand-ins. -->
+      <section class="wlh3" aria-labelledby="wlh3-title">
+        <div class="wlh3__head">
+          <p class="chip wlh3__chip"><span>Doctor-guided weight loss</span></p>
+          <h1 class="wlh3__title" id="wlh3-title">Weight Loss Is Hard.<br>Getting the Right Care Shouldn't Be.</h1>
+        </div>
+
+        <div class="wlh3__band media-brief" data-fan-band aria-hidden="true" data-brief="Seven square photos: real people in everyday moments and two blank product shots, one palette (olive, sage, cream). No before/after.">
+          <ul class="wlh3__fan" data-fan>
+            <li class="wlh3__frame" style="--step: 3; --rot: -7deg; --drop: 10%"><div class="wlh3__print wlh3__print--sage wlh3__print--portrait"><img src="assets/images/people/woman-a.webp" alt="" width="1000" height="1020"></div></li>
+            <li class="wlh3__frame" style="--step: 2; --rot: -5deg; --drop: 4.5%"><div class="wlh3__print"><img src="assets/images/standin-mh-couple.webp" alt="" width="800" height="800"></div></li>
+            <li class="wlh3__frame" style="--step: 1; --rot: -3deg; --drop: 1.5%"><div class="wlh3__print wlh3__print--lime wlh3__print--product"><img class="wlh3__pill wlh3__pill--white" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665"><img class="wlh3__pill wlh3__pill--oval" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617"></div></li>
+            <li class="wlh3__frame" style="--step: 0; --rot: 0deg; --drop: 0%"><div class="wlh3__print"><img src="assets/images/weight-loss/standin-stretch.webp" alt="" width="3840" height="2143" style="object-position: 55% 40%"></div></li>
+            <li class="wlh3__frame" style="--step: -1; --rot: 3deg; --drop: 1.5%"><div class="wlh3__print wlh3__print--mist wlh3__print--portrait"><img src="assets/images/people/man-a.webp" alt="" width="1000" height="1017"></div></li>
+            <li class="wlh3__frame" style="--step: -2; --rot: 5deg; --drop: 4.5%"><div class="wlh3__print"><img src="assets/images/supplements/sp-woman.webp" alt="" width="1600" height="1778" style="object-position: 50% 10%"></div></li>
+            <li class="wlh3__frame" style="--step: -3; --rot: 7deg; --drop: 10%"><div class="wlh3__print wlh3__print--sage wlh3__print--product"><span class="pack pack--vial wlh3__vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></span></div></li>
+          </ul>
+        </div>
+
+        <div class="wlh3__foot">
+          <p class="wlh3__lede">Discover a simpler approach to weight loss with personalized medical guidance and GLP-1 treatment options designed around your goals.</p>
+          <a class="btn btn--dark btn--pill btn--l" href="#intake-weight-loss">Get Started</a>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/hero--v3 END -->
+    </div>
+
+    <!-- ================= HERO V4 (V1's photo, the woman on the right; hims weight-loss layout with the points) ================= -->
+    <div data-version="hero:v4">
+      <!-- SECTION:weight-loss/hero--v4 START · styles: sections/weight-loss/hero--v4.css · assets: assets/images/weight-loss/v4-sky.webp, v4-people.webp
+           V4, round 3 (user, 2026-11-24; "make it as new version not v1"): "I liked this version [round 2 V1: the sky photo, the woman, the dotted arc] but i want
+           this type of layout with points for the text [hims weight-loss hero: chip, two-tone headline, check points, CTA on the
+           left] … the girl will be at the right and text at the left. use content from the brief".
+           Copy: content/weight-loss.md, Section 1, word for word (eyebrow as the section chip, case only), shortened at the user's request
+           (2026-11-24: "concise the content a bit like subheading and stuff keep the points intact"): the sentence is removed (2026-11-24: "remove the subheading as content of it is redundant"); "A Smarter Way to Lose Weight." is visually hidden (still the list's heading); the six points are intact.
+           Photo (2026-11-24, user: "add a man also … man and women back facing each other. dont change the woman"; 148 credits
+         approved): one Magnific render (Nano Banana 2.1, 4K) with the Supplement set's woman and its matching man as references,
+         standing back to back, low angle on the same sage-teal sky; the sky extended to a 2:1 plate in code (v4-sky.webp) and the
+         couple cut out with Magnific's background removal (v4-people.webp, placed in % of the plate) so the arc passes behind them.
+         [LINK NEEDED] intake URL. -->
+      <section class="wlh4" aria-labelledby="wlh4-title">
+        <div class="wlh4__stage">
+          <div class="wlh4__media media-brief" aria-hidden="true" data-brief="A man and a woman back to back, low angle against a clear sage-teal sky, from the thighs up, on the right third; cream long-sleeve tops, olive bottoms; film grain. Open sky on the left for the copy. No before/after.">
+            <img class="wlh4__sky" src="assets/images/weight-loss/v4-sky.webp" alt="" width="3600" height="1800">
+            <svg class="wlh4__arc" viewBox="0 0 3600 1800" preserveAspectRatio="none" focusable="false">
+              <defs><radialGradient id="wlh4-glow"><stop offset="0" stop-color="#e6f2c4" stop-opacity="0.95"/><stop offset="0.35" stop-color="#d5e5ad" stop-opacity="0.55"/><stop offset="1" stop-color="#d5e5ad" stop-opacity="0"/></radialGradient></defs>
+              <path class="wlh4__path" d="M 1500 1950 Q 2300 1000 3700 420"/>
+              <circle class="wlh4__glow" cx="1753" cy="1673" r="44"/><circle class="wlh4__point" cx="1753" cy="1673" r="9"/>
+              <circle class="wlh4__glow" cx="2034" cy="1413" r="44" style="--d: 1.2s"/><circle class="wlh4__point" cx="2034" cy="1413" r="9"/>
+              <circle class="wlh4__glow" cx="3216" cy="641" r="44" style="--d: 2.4s"/><circle class="wlh4__point" cx="3216" cy="641" r="9"/>
+              <circle class="wlh4__glow" cx="3534" cy="491" r="44" style="--d: 0.6s"/><circle class="wlh4__point" cx="3534" cy="491" r="9"/>
+            </svg>
+            <img class="wlh4__person" src="assets/images/weight-loss/v4-people.webp" alt="" width="896" height="1451">
+          </div>
+          <div class="wlh4__haze" aria-hidden="true"></div>
+
+          <div class="wlh4__copy">
+            <p class="chip wlh4__chip"><span>Doctor-guided weight loss</span></p>
+            <h1 class="wlh4__title" id="wlh4-title">Weight Loss Is Hard.<br>Getting the Right Care<br>Shouldn't Be.</h1>
+            <h2 class="visually-hidden">A Smarter Way to Lose Weight.</h2><!-- kept for screen readers and search; off the page to keep the hero light (user, 2026-11-24) -->
+            <!-- The client's six points merged into four at the user's request (2026-11-24: "take this content and make it 4 points"); both qualifiers kept word for word. -->
+            <ul class="wlh4__points">
+              <li><span class="wlh4__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Personalized weight-loss plans, guided by licensed medical providers.</li>
+              <li><span class="wlh4__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Clear, upfront pricing with no unexpected surprises.</li>
+              <li><span class="wlh4__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>GLP-1 treatment options when medically appropriate.</li>
+              <li><span class="wlh4__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Online care and fast, discreet delivery when prescribed and available.</li>
+            </ul>
+            <a class="btn btn--dark btn--pill btn--l wlh4__cta" href="#intake-weight-loss">Get Started</a>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/hero--v4 END -->
+
+      <!-- SECTION:weight-loss/pricing-progress START · styles: sections/weight-loss/pricing-progress.css, components/product.css · assets: assets/images/products/vial-tirzepatide.webp, print-vial-microdose.svg, sheen-vial.svg, tablet-white-blank.webp, tablet-oval-lime-blank.webp, assets/images/weight-loss/card-progress.webp
+           The brief's "Pricing intro" and "Progress" blocks as two cards (user, 2026-11-24: "I am thinking of making this section
+           like this", after the two Weight Loss cards on claude/vigilant-lovelace-6zmvbh: mist cards, a big heading top left, the
+           paragraph at the foot, an image on the right). Under V4 for now ("continue in v4 for now").
+           Copy: content/weight-loss.md → Pricing intro, Progress, word for word. No prices exist: none shown ([PRICING NEEDED]).
+           [LINK NEEDED] intake URL. Images: stand-ins (data-brief). -->
+      <section class="wlpp" aria-label="Pricing and progress">
+        <div class="wlpp__cards">
+          <article class="wlpp__card wlpp__card--product">
+            <h2 class="wlpp__title">Expert-Guided Care.<br>Pricing That<br>Makes Sense.</h2>
+            <div class="wlpp__body">
+              <p>Explore personalized <span class="wlpp__nowrap">GLP-1</span> weight-loss treatment options with licensed medical providers and transparent pricing designed to make quality care more accessible.</p>
+            </div>
+            <div class="wlpp__media media-brief" aria-hidden="true" data-brief="Product still life on the card colour: the plain Tirzepatide vial with its label and two blank tablets, soft studio light, real shadows. No prices, no MEDARO on the pills.">
+              <span class="pack pack--vial wlpp__vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100" loading="lazy"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100" loading="lazy"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100" loading="lazy"></span>
+              <img class="wlpp__pill wlpp__pill--white" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy">
+              <img class="wlpp__pill wlpp__pill--oval" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy">
+            </div>
+          </article>
+          <article class="wlpp__card wlpp__card--people">
+            <h2 class="wlpp__title">Real Progress.<br>Meaningful<br>Change.</h2>
+            <div class="wlpp__body">
+              <p>Weight loss is about more than the number on the scale. With personalized medical care and <span class="wlpp__nowrap">GLP-1</span> treatment options, meaningful progress may be within reach. Discover what a healthier future could look like for you.</p>
+              <a class="btn btn--dark btn--pill wlpp__cta" href="#intake-weight-loss">Start Your Transformation</a>
+            </div>
+            <div class="wlpp__media media-brief" aria-hidden="true" data-brief="Two adults out running together, mid-stride, from the thighs up, on the card colour (or cut out), warm low sun. Everyday bodies, no before/after, no scales.">
+              <img class="wlpp__people" src="assets/images/weight-loss/card-progress.webp" alt="" width="1194" height="1083" loading="lazy">
+            </div>
+          </article>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/pricing-progress END -->
+
+      <!-- SECTION:weight-loss/care START · styles: sections/weight-loss/care.css · scripts: sections/weight-loss/care.js · assets: assets/images/people/man-a.webp
+           The brief's "Care that puts you first" after the user's hims reference (2026-11-24, "now lets make this section as this":
+           hims "Your membership comes with support"): copy left (heading, check points, CTA), a tall rounded portrait right with a
+           row of frosted glass cards across its foot, the side cards peeking. Not copied: the doctor in a lab coat (client rule: no
+           implied MEDARO doctor) and hims' made-up stats on the glass ("Movement 3x/week"); our glass cards carry the three things the
+           client's sentence names (your health, your goals, the treatment options), and turn slowly like hims' carousel.
+           Copy: content/weight-loss.md → Care that puts you first, word for word (eyebrow in caps as the chip). [LINK NEEDED] intake URL.
+           Photo: stand-in (Home's man portrait, cut out, on a sage backdrop), brief in data-brief. -->
+      <section class="wlcare" aria-labelledby="wlcare-title">
+        <div class="wlcare__copy">
+          <p class="chip wlcare__chip"><span>The care you need. Without the runaround.</span></p>
+          <h2 class="wlcare__title" id="wlcare-title">Weight Loss Care That Puts You First.</h2>
+          <p class="wlcare__lede">Everything starts with understanding your health, your goals, and the treatment options that may be right for you.</p>
+          <ul class="wlcare__points">
+              <li><span class="wlcare__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Licensed Medical Providers</li>
+              <li><span class="wlcare__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Personalized Treatment Options</li>
+              <li><span class="wlcare__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Convenient Online Evaluations</li>
+              <li><span class="wlcare__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Ongoing Care Guidance</li>
+              <li><span class="wlcare__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Fast, Discreet Delivery</li>
+          </ul>
+          <a class="btn btn--dark btn--pill btn--l wlcare__cta" href="#intake-weight-loss">Explore Your Options</a>
+        </div>
+
+        <div class="wlcare__panel media-brief" data-brief="One adult, waist up, warm and approachable, everyday clothes in our olive/cream palette, on a plain sage backdrop with soft side light. Not a doctor, no lab coat, no scrubs.">
+          <img class="wlcare__person" src="assets/images/people/man-a.webp" alt="" width="1000" height="1017" loading="lazy">
+          <!-- Glass cards: the three things the client's sentence names; they turn every few seconds (care.js). Decorative. -->
+          <div class="wlcare__glass" aria-hidden="true" data-care-carousel>
+            <div class="wlcare__card"><svg class="wlcare__icon"><use href="#i-stethoscope"/></svg><span class="wlcare__card-title">Your health</span></div>
+            <div class="wlcare__card"><svg class="wlcare__icon"><use href="#i-target"/></svg><span class="wlcare__card-title">Your goals</span></div>
+            <div class="wlcare__card"><svg class="wlcare__icon"><use href="#i-vial"/></svg><span class="wlcare__card-title">Treatment options that may be right for you</span></div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/care END -->
+
+      <!-- SECTION:weight-loss/difference START · styles: sections/weight-loss/difference.css, components/product.css · assets: assets/images/people/woman-a.webp, assets/images/products/stage-plate.webp, vial-tirzepatide.webp, print-vial-microdose.svg, sheen-vial.svg, tablet-white-blank.webp, tablet-oval-lime-blank.webp, assets/images/standin-mh-man.webp, assets/images/weight-loss/standin-stretch.webp
+           The brief's "The Medaro difference" and "Treatment that starts with you" after the user's Superpower "How it works"
+           reference (2026-11-24, "make this like it"): a centred heading and subline, then four image cards in a row, each with a
+           small badge top left and, on three, a frosted glass card of plain words over the photo; title and text under each.
+           Copy: content/weight-loss.md, word for word, re-arranged: header = the Medaro difference (eyebrow, heading, sentence);
+           cards = the treatment block. Cards 3 and 4 have no heading in the brief: their titles are cut from their own sentences
+           ("appetite and feelings of fullness", "FDA-approved prescription options"; DESIGN.md → Copy flags). The block's eyebrow
+           "Treatment that starts with you" is not shown (flagged). Badges are icons, not Superpower's 1–4: these are not steps.
+           Glass cards use only the copy's own words; no data, no results. [LINK NEEDED] intake URL. Images: stand-ins (data-brief). -->
+      <section class="wldiff" aria-labelledby="wldiff-title">
+        <header class="wldiff__head">
+          <p class="chip wldiff__chip"><span>The MEDARO difference</span></p>
+          <h2 class="wldiff__title" id="wldiff-title">Less Guesswork. More Direction.</h2>
+          <p class="wldiff__lede">MEDARO makes it easier to explore medically guided weight management, understand your options, and make informed decisions with qualified healthcare professionals.</p>
+        </header>
+
+        <ul class="wldiff__cards">
+          <li class="wldiff__card">
+            <div class="wldiff__media wldiff__media--sage media-brief" aria-hidden="true" data-brief="Portrait: an adult in a quiet, thoughtful moment, soft side light, sage backdrop, everyday clothes.">
+              <img class="wldiff__portrait" src="assets/images/people/woman-a.webp" alt="" width="1000" height="1020" loading="lazy">
+              <span class="wldiff__badge"><svg><use href="#i-plan"/></svg></span>
+              <div class="wldiff__glass">
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Medical history</span>
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Health goals</span>
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Clinical needs</span>
+              </div>
+            </div>
+            <h3 class="wldiff__card-title">The Right Approach Is a Personal One.</h3>
+            <p class="wldiff__card-text">Weight-loss treatment isn't the same for everyone. Your medical history, health goals, and clinical needs all help determine the best way forward.</p>
+          </li>
+          <li class="wldiff__card">
+            <div class="wldiff__media wldiff__media--plate media-brief" aria-hidden="true" data-brief="Product still life: the plain Tirzepatide vial and two blank tablets in the hero's studio light. No MEDARO on the pills.">
+              <img class="wldiff__plate" src="assets/images/products/stage-plate.webp" alt="" width="3840" height="2143" loading="lazy">
+              <span class="pack pack--vial wldiff__vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100" loading="lazy"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100" loading="lazy"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100" loading="lazy"></span>
+              <img class="wldiff__pill wldiff__pill--white" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665" loading="lazy">
+              <img class="wldiff__pill wldiff__pill--oval" src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617" loading="lazy">
+              <span class="wldiff__badge"><svg><use href="#i-vial"/></svg></span>
+            </div>
+            <h3 class="wldiff__card-title">GLP-1 Weight-Loss Medications</h3>
+            <p class="wldiff__card-text">Medical treatment. Individualized decisions.</p>
+          </li>
+          <li class="wldiff__card">
+            <div class="wldiff__media media-brief" aria-hidden="true" data-brief="Lifestyle: an adult outdoors in warm light, relaxed and active, olive/cream palette. No food scales, no measuring tapes, no before/after.">
+              <img class="wldiff__photo" src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" loading="lazy" style="object-position: 50% 20%">
+              <span class="wldiff__badge"><svg><use href="#i-flask"/></svg></span>
+              <div class="wldiff__glass">
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Appetite</span>
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Feelings of fullness</span>
+              </div>
+            </div>
+            <h3 class="wldiff__card-title">Appetite and Feelings of Fullness</h3>
+            <p class="wldiff__card-text">GLP-1-based medications can help eligible adults manage weight by affecting appetite and feelings of fullness.</p>
+          </li>
+          <li class="wldiff__card">
+            <div class="wldiff__media media-brief" aria-hidden="true" data-brief="Lifestyle: two adults outdoors, calm and confident, sage sky, olive/cream palette. No before/after.">
+              <img class="wldiff__photo" src="assets/images/weight-loss/standin-stretch.webp" alt="" width="3840" height="2143" loading="lazy" style="object-position: 55% 40%">
+              <span class="wldiff__badge"><svg><use href="#i-search"/></svg></span>
+              <div class="wldiff__glass">
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Semaglutide-based treatments</span>
+                <span class="wldiff__row"><span class="wldiff__dot" aria-hidden="true"></span>Tirzepatide-based treatments</span>
+                <span class="wldiff__note">When available and clinically appropriate</span>
+              </div>
+            </div>
+            <h3 class="wldiff__card-title">FDA-Approved Prescription Options</h3>
+            <p class="wldiff__card-text">Explore FDA-approved prescription options, including semaglutide- and tirzepatide-based treatments, when available and clinically appropriate.</p>
+          </li>
+        </ul>
+
+        <div class="wldiff__actions">
+          <a class="btn btn--dark btn--pill btn--l" href="#intake-weight-loss">Explore GLP-1 Options</a>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/difference END -->
+
+      <!-- SECTION:weight-loss/steps START · styles: sections/weight-loss/steps.css · scripts: sections/weight-loss/steps.js · assets: assets/icons/step-1-assessment.webp, step-2-evaluation.webp, step-3-plan.webp (sources: tools/step-art/)
+           The brief's "Three steps", laid out after the user's "Our Process" reference (2026-11-24: "make this section like this but i
+           dont want this style of icon it should be like ours … make it with sticky left and scroll right animation"): a panel with the
+           chip and heading top left and the CTA bottom left; on the right one card per step. The panel pins while you scroll: the left
+           stays, the cards turn on a wheel (round 3, after the user's "Built for every stage of growth" recording). Round 2 (user: "it is not as per our design style", no 4th card, no "(3)",
+           "why cards are colliding … make scroll animation smooth"): this page's mist surface, white cards, dark pill CTA, no tilt.
+           Illustrations in our style (the Supplement heart and sprout), drawn in code (tools/step-art/*.svg → WebP).
+           Copy: content/weight-loss.md → Three steps, word for word (eyebrow as the chip; "01 —" shown as the card number). The small
+           print sits beside the CTA. "Your Care Doesn't End With a Prescription." sits under the heading as text (round 3).
+           [LINK NEEDED] intake URL. -->
+      <section class="wlsteps" aria-labelledby="wlsteps-title" data-wlsteps>
+        <div class="wlsteps__track" data-wlsteps-track>
+          <div class="wlsteps__panel" data-wlsteps-panel>
+            <div class="wlsteps__copy">
+              <p class="chip wlsteps__chip"><span>Simple from the start</span></p>
+              <h2 class="wlsteps__title" id="wlsteps-title">Three Steps Toward<br>Better Health.</h2>
+              <!-- The brief's follow-on block, as text (user, 2026-11-24: "bring it back but not in card") -->
+              <div class="wlsteps__care">
+                <h3 class="wlsteps__care-title">Your Care Doesn't End With a Prescription.</h3>
+                <p>Your weight-loss journey deserves more than a treatment plan. With ongoing medical guidance and personalized support, you can ask questions, discuss your progress, and receive care as your needs evolve.</p>
+                <p class="wlsteps__care-close">Because better results start with better support.</p>
+              </div>
+              <div class="wlsteps__foot">
+                <a class="btn btn--dark btn--pill btn--l" href="#intake-weight-loss">Get Started</a>
+                <p class="wlsteps__note">Treatment and prescriptions are subject to clinical evaluation.</p>
+              </div>
+            </div>
+
+            <div class="wlsteps__deck">
+              <ol class="wlsteps__list">
+                <li class="wlsteps__card" data-wlsteps-card>
+                  <span class="wlsteps__num" aria-hidden="true">01</span>
+                  <img class="wlsteps__art" src="assets/icons/step-1-assessment.webp" alt="" width="768" height="768" loading="lazy">
+                  <div class="wlsteps__text">
+                    <h3 class="wlsteps__name">Tell Us About You</h3>
+                    <p>Complete an online health assessment covering your medical history, current health, and weight-management goals.</p>
+                  </div>
+                </li>
+                <li class="wlsteps__card" data-wlsteps-card>
+                  <span class="wlsteps__num" aria-hidden="true">02</span>
+                  <img class="wlsteps__art" src="assets/icons/step-2-evaluation.webp" alt="" width="768" height="768" loading="lazy">
+                  <div class="wlsteps__text">
+                    <h3 class="wlsteps__name">Get a Medical Evaluation</h3>
+                    <p>A licensed healthcare provider reviews your information and determines whether treatment is appropriate. Additional information, testing, or a consultation may be required.</p>
+                  </div>
+                </li>
+                <li class="wlsteps__card" data-wlsteps-card>
+                  <span class="wlsteps__num" aria-hidden="true">03</span>
+                  <img class="wlsteps__art" src="assets/icons/step-3-plan.webp" alt="" width="768" height="768" loading="lazy">
+                  <div class="wlsteps__text">
+                    <h3 class="wlsteps__name">Move Forward With Your Plan</h3>
+                    <p>If prescribed, medication may be fulfilled through a licensed pharmacy. Follow your provider's guidance as you begin and continue treatment.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/steps END -->
+
+      <!-- SECTION:weight-loss/why START · styles: sections/weight-loss/why.css · assets: assets/images/people/woman-a.webp
+           The brief's "Why Medaro", after the user's reference (2026-11-24: a woman with a mug in warm window light on the left; chip,
+           big headline and a light button on the right; three short lines with hairlines along the foot), "I dont want the image
+           to cover whole screen instead make it like card in hero": the photo sits in a rounded stage on the frame like hero V4.
+           Copy: content/weight-loss.md → Why Medaro, word for word (eyebrow as the chip, the heading in title case). The first
+           paragraph's three sentences are the reference's three lines along the foot; the belief and "Your goals matter. Your
+           health matters more." sit under the heading, over the CTA (DESIGN.md → Copy flags). [LINK NEEDED] intake URL.
+           Photo: stand-in (Home's woman, cut out, on a wall built in code), brief in data-brief. -->
+      <section class="wlwhy" aria-labelledby="wlwhy-title">
+        <div class="wlwhy__stage">
+          <div class="wlwhy__light" aria-hidden="true"></div>
+          <div class="wlwhy__media media-brief" aria-hidden="true" data-brief="One woman, waist up, side-on facing right, eyes closed, a quiet moment with a mug in both hands; late warm sun through a window throws soft frame shadows across a deep olive plaster wall and over her. She stands in the left half; the right half is plain wall in shade, for the copy. Everyday clothes in our olive/cream palette. No scales, no measuring tape, no before/after.">
+            <img class="wlwhy__person" src="assets/images/people/woman-a.webp" alt="" width="1000" height="1020" loading="lazy">
+          </div>
+
+          <div class="wlwhy__copy">
+            <p class="chip wlwhy__chip"><span>Why MEDARO</span></p>
+            <h2 class="wlwhy__title" id="wlwhy-title">More Than a Number<br>on the Scale</h2>
+            <p class="wlwhy__lede">At MEDARO, we believe weight management should be guided by medical expertise, informed by your individual needs, and grounded in realistic expectations.</p>
+            <p class="wlwhy__close">Your goals matter. Your health matters more.</p>
+            <a class="btn btn--primary btn--pill btn--l wlwhy__cta" href="#intake-weight-loss">Take the First Step</a>
+
+            <ul class="wlwhy__row">
+              <li>It's about feeling more comfortable in your body.</li>
+              <li>Making choices with greater confidence.</li>
+              <li>And taking meaningful steps toward the life you want to live.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/why END -->
+
+      <!-- SECTION:weight-loss/education START · styles: sections/weight-loss/education.css · icons: #i-edu-* in the sprite
+           The brief's "GLP-1 education", after the user's reference (2026-11-24, "make it like this": Seed's "DS-01 benefits" strip,
+           a pale band with the heading on the left and four light cards in a row, each a fine line icon over its words).
+           Ours: no band (round 2, user: "remove green from here"), white cards on the page colour; each card holds one question and its answer; the client's CTA sits under the
+           heading at the foot of the band (the reference has none). Icons: vial (the medications), clipboard (eligibility is a
+           provider's assessment), sprout (nutrition, activity, habits), shield with a mark (side effects and warnings; no tick: nothing
+           here is a promise of safety).
+           Copy: content/weight-loss.md → GLP-1 education, word for word (eyebrow as the chip; the heading in title case).
+           [LINK NEEDED] intake URL. -->
+      <section class="wledu" aria-labelledby="wledu-title">
+        <div class="wledu__layout">
+          <div class="wledu__copy">
+            <p class="chip wledu__chip"><span>GLP-1 Education</span></p>
+            <h2 class="wledu__title" id="wledu-title">Understand<br>Your Options</h2>
+            <a class="btn btn--dark btn--pill wledu__cta" href="#intake-weight-loss">Explore Your Treatment Options</a>
+          </div>
+
+          <ul class="wledu__cards">
+            <li class="wledu__card">
+              <svg class="wledu__icon" aria-hidden="true"><use href="#i-edu-vial"/></svg>
+              <h3 class="wledu__q">What are <span class="wledu__nowrap">GLP-1</span> medications?</h3>
+              <p class="wledu__a"><span class="wledu__nowrap">GLP-1</span> medications work on pathways involved in appetite and blood-sugar regulation. Certain FDA-approved medications are used for chronic weight management in eligible patients.</p>
+            </li>
+            <li class="wledu__card">
+              <svg class="wledu__icon" aria-hidden="true"><use href="#i-edu-clipboard"/></svg>
+              <h3 class="wledu__q">How do I know if I'm eligible?</h3>
+              <p class="wledu__a">Eligibility depends on factors such as your weight, medical history, existing health conditions, current medications, and a provider's clinical assessment.</p>
+            </li>
+            <li class="wledu__card">
+              <svg class="wledu__icon" aria-hidden="true"><use href="#i-edu-sprout"/></svg>
+              <h3 class="wledu__q">Is medication enough on its own?</h3>
+              <p class="wledu__a">Prescription weight-loss treatment is generally intended to be combined with changes in nutrition, physical activity, and other healthy habits.</p>
+            </li>
+            <li class="wledu__card">
+              <svg class="wledu__icon" aria-hidden="true"><use href="#i-edu-shield"/></svg>
+              <h3 class="wledu__q">Are there risks?</h3>
+              <p class="wledu__a">Yes. <span class="wledu__nowrap">GLP-1</span> medications can cause side effects and carry important warnings. A healthcare provider should review potential benefits, risks, contraindications, and alternatives before prescribing.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/education END -->
+
+      <!-- SECTION:weight-loss/ongoing START · styles: sections/weight-loss/ongoing.css · scripts: sections/weight-loss/ongoing.js · icons: #i-stethoscope, #i-pulse, #i-chat, #i-sliders in the sprite
+           The brief's "Ongoing care", after hims' "Unlimited ongoing support" (Mobbin; the user, 2026-11-24: "make this section with the
+           help of mobbin"): a centred heading and one sentence, then a wide rounded stage with a phone rising from its foot, the screen
+           showing a message from the provider. Not copied: hims' two-tone heading, the doctor's name, photo and MD badge, the patient's
+           name and the message text (all invented for us). The phone carries only the client's words: "Follow-up care", "Your provider",
+           and the three things the follow-up sentence names. Beside the phone: the care block (left), the closing lines and the CTA (right).
+           Copy: content/weight-loss.md → Ongoing care, word for word (eyebrow as the chip; the heading in title case). The h3
+           repeats the steps section's (DESIGN.md → Copy flags). [LINK NEEDED] intake URL. Phone UI is a stand-in built in code. -->
+      <section class="wlong" aria-labelledby="wlong-title">
+        <header class="wlong__head">
+          <p class="chip wlong__chip"><span>Ongoing care</span></p>
+          <h2 class="wlong__title" id="wlong-title">Support Beyond<br>the First Step</h2>
+          <p class="wlong__lede">Weight management is an ongoing process, and your needs may change along the way.</p>
+        </header>
+
+        <div class="wlong__stage">
+          <div class="wlong__side">
+            <h3 class="wlong__care-title">Your Care Doesn't End With a Prescription.</h3>
+            <p>Follow-up care can help your provider evaluate your response to treatment, discuss side effects, and determine whether adjustments are appropriate.</p>
+          </div>
+
+          <!-- Decorative: a follow-up screen built in code; its words are the client's (the sentence on the left). -->
+          <div class="wlong__phone" aria-hidden="true">
+            <div class="wlong__screen">
+              <span class="wlong__island"></span>
+              <span class="wlong__time">9:41</span>
+              <div class="wlong__ui">
+                <svg class="wlong__logo"><use href="#wordmark"/></svg>
+                <div class="wlong__from"><span class="wlong__avatar"><svg><use href="#i-stethoscope"/></svg></span>Your provider</div>
+                <p class="wlong__screen-title">Follow-up care</p>
+                <div class="wlong__rows">
+                  <div class="wlong__row" style="--i: 0"><span class="wlong__row-icon"><svg><use href="#i-pulse"/></svg></span>Your response to treatment</div>
+                  <div class="wlong__row" style="--i: 1"><span class="wlong__row-icon"><svg><use href="#i-chat"/></svg></span>Side effects</div>
+                  <div class="wlong__row" style="--i: 2"><span class="wlong__row-icon"><svg><use href="#i-sliders"/></svg></span>Adjustments</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wlong__side wlong__side--end">
+            <p>Because the right treatment plan isn't just about getting started.</p>
+            <p class="wlong__close">It's about knowing how to move forward.</p>
+            <a class="btn btn--primary btn--pill btn--l wlong__cta" href="#intake-weight-loss">Start Your Assessment</a>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/ongoing END -->
+
+      <!-- SECTION:weight-loss/faq START · styles: components/faq.css · scripts: components/faq.js · assets: assets/images/weight-loss/faq-card.webp (2026-11-26: the hero couple's woman, head and shoulders in the coastal light; Magnific, 2K, the V4 hero photo as the reference, 65 credits; AI-generated person), #i-arrow-ne in the sprite
+           The brief's FAQ, round 2 (user, 2026-11-25: "make it like mahadeva … I want style to be like us use mahadeva as reference"):
+           the Mahadeva template's FAQ (nodedesignagency/Mahadeva, sections/Faq.tsx + motion/Accordion.tsx) in MEDARO's style: heading
+           left with a call-to-action card at the column's foot, the accordion right, the first answer open.
+           Copy: content/weight-loss.md → FAQ, word for word, read with the PDF's layout: chip "Frequently asked questions" (the section
+           label), heading "Your Questions, Answered" (the PDF's caps line, title case). The card carries the brief's line "Get the Clarity
+           You Deserve." as its title (in the place of Mahadeva's "Still need clarity?") and the client's CTA label "Start Your Assessment"
+           (the brief gives the FAQ no CTA: DESIGN.md → Copy flags). Every qualifier in the answers kept. [LINK NEEDED] intake URL.
+           Portrait: stand-in (Home's woman, cut out), brief in data-brief. Round 1 (the photo column) is in git history. -->
+      <section class="faq" aria-labelledby="wlfaq-title">
+        <div class="faq__layout">
+          <div class="faq__side">
+            <div class="faq__head">
+              <p class="chip faq__chip"><span>Frequently asked questions</span></p>
+              <h2 class="faq__title" id="wlfaq-title">Your Questions,<br>Answered</h2>
+            </div>
+            <a class="faq__card" href="#intake-weight-loss">
+              <span class="faq__card-fill" aria-hidden="true"></span>
+              <span class="faq__card-photo" aria-hidden="true"><img src="assets/images/weight-loss/faq-card.webp" alt="" width="480" height="480" loading="lazy"></span>
+              <span class="faq__card-text">
+                <span class="faq__card-title">Get the Clarity You Deserve.</span>
+                <span class="faq__card-body">Start Your Assessment</span>
+              </span>
+              <span class="faq__card-go" aria-hidden="true">
+                <svg class="faq__arrow faq__arrow--out"><use href="#i-arrow-ne"/></svg>
+                <svg class="faq__arrow faq__arrow--in"><use href="#i-arrow-ne"/></svg>
+              </span>
+            </a>
+          </div>
+          <div class="faq__list">
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q1" aria-expanded="true" aria-controls="wlfaq-a1"><span>Do I need an in-person appointment?</span><span class="faq__mark" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a1" role="region" aria-labelledby="wlfaq-q1"><div class="faq__a-inner"><p>Many steps can take place online. Your provider will determine whether a virtual evaluation is appropriate or whether additional testing or an in-person assessment is necessary.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q2" aria-expanded="false" aria-controls="wlfaq-a2"><span>Is a prescription guaranteed?</span><span class="faq__mark" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a2" role="region" aria-labelledby="wlfaq-q2"><div class="faq__a-inner"><p>No. Prescriptions are issued only when a licensed healthcare provider determines that treatment is medically appropriate.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q3" aria-expanded="false" aria-controls="wlfaq-a3"><span>Does everyone qualify for GLP-1 treatment?</span><span class="faq__mark" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a3" role="region" aria-labelledby="wlfaq-q3"><div class="faq__a-inner"><p>No. Eligibility depends on individual medical factors, prescribing criteria, and treatment availability.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q4" aria-expanded="false" aria-controls="wlfaq-a4"><span>Will I lose weight quickly?</span><span class="faq__mark" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a4" role="region" aria-labelledby="wlfaq-q4"><div class="faq__a-inner"><p>Weight-loss results vary by person, medication, adherence, and other health factors. No specific amount or rate of weight loss can be guaranteed.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q5" aria-expanded="false" aria-controls="wlfaq-a5"><span>Can medication be delivered to my home?</span><span class="faq__mark" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a5" role="region" aria-labelledby="wlfaq-q5"><div class="faq__a-inner"><p>When available and prescribed, medications may be fulfilled through a licensed pharmacy offering home delivery.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q6" aria-expanded="false" aria-controls="wlfaq-a6"><span>What if GLP-1 treatment isn't right for me?</span><span class="faq__mark" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a6" role="region" aria-labelledby="wlfaq-q6"><div class="faq__a-inner"><p>Your provider may discuss alternative weight-management approaches depending on your individual health needs.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" id="wlfaq-q7" aria-expanded="false" aria-controls="wlfaq-a7"><span>Are GLP-1 medications safe?</span><span class="faq__mark" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="wlfaq-a7" role="region" aria-labelledby="wlfaq-q7"><div class="faq__a-inner"><p>FDA-approved GLP-1 medications have established prescribing information describing their benefits, risks, and approved uses. They can cause side effects and are not appropriate for everyone. A licensed healthcare provider should evaluate your medical history before treatment.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/faq END -->
+
+      <!-- SECTION:weight-loss/cta START · styles: components/cta-band.css · assets: assets/images/weight-loss/cta-vial.webp, cta-vial-print.svg (tools/cta-vial.py), #i-check in the sprite
+           The brief's closing CTA in the shared CTA band (components/cta-band.css), after the user's Milo reference (2026-11-26:
+           "see image 2 i like that design … but in our theme"; "we will make one design and use in both page with color change").
+           Copy: content/weight-loss.md → Closing CTA, word for word (the sign-off line split into the list&rsquo;s three rows). [LINK NEEDED] intake URL.
+           Photo: a Magnific render after the Milo reference (user, 2026-11-26: "generate the photos for both pages … real life image just like reference … think different and outside the box"). -->
+      <section class="cta-band cta-band--on-light" aria-labelledby="wlcta-title">
+        <div class="cta-band__stage">
+          <img class="cta-band__photo" src="assets/images/weight-loss/cta-vial.webp" alt="" width="2752" height="1936" loading="lazy" style="--cta-photo-pos: 50% 62%" data-brief="Our Tirzepatide vial on a sunlit kitchen counter at the centre of the frame, a glass of water and a bowl of blueberries beside it, a woman&rsquo;s hand in a cream sleeve reaching in from the right; a plain pale sage wall above for the ink words. Magnific render (Nano Banana 2.1, 2K, our blank vial as the reference), the label printed in code (tools/cta-vial.py). No syringe, no scale."><img class="cta-band__photo cta-band__print" src="assets/images/weight-loss/cta-vial-print.svg" alt="" width="2752" height="1936" loading="lazy" style="--cta-photo-pos: 50% 62%">
+          <div class="cta-band__stack">
+            <div class="cta-band__glass">
+              <p class="chip cta-band__chip"><span>MEDARO Made for Better Health</span></p>
+              <h2 class="cta-band__title" id="wlcta-title">A Better Way Forward Starts With You.</h2>
+              <p class="cta-band__text">You don&rsquo;t need another unrealistic promise. You need clear options, qualified medical guidance, and a plan that makes sense for your health.</p>
+            </div>
+            <ul class="cta-band__list">
+              <li><span class="cta-band__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Your health.</li>
+              <li><span class="cta-band__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Your goals.</li>
+              <li><span class="cta-band__tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Your next move.</li>
+            </ul>
+            <div class="cta-band__panel">
+              <a class="btn btn--primary btn--pill btn--l cta-band__cta" href="#intake-weight-loss">Start Your Assessment</a>
+              <p class="cta-band__note">Take the first step toward understanding what medically guided weight loss could look like for you.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION:weight-loss/cta END -->
+    </div>
+
+  </main>
+
+  <script src="main.js" defer></script>
+  <script src="sections/weight-loss/hero--v3.js" defer></script>
+  <script src="sections/weight-loss/care.js" defer></script>
+  <script src="sections/weight-loss/steps.js" defer></script>
+  <script src="sections/weight-loss/ongoing.js" defer></script>
+  <script src="components/faq.js" defer></script>
+</body>
+</html>

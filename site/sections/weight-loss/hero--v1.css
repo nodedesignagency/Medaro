@@ -1,0 +1,122 @@
+/* ==========================================================================
+   Weight Loss · hero V1 (after the user's hims "Get your edge back" reference)
+   One photograph fills the stage: a clear sky, one person centred and cropped
+   at the waist. The headline sits centred in the sky above her head, the
+   client's sentence under it; a dotted arc with four lit points crosses the
+   sky and passes behind her; the CTA is centred at the foot, over her.
+   Frame: the stage is Home's (on the frame edge, 16px, max 1888, radius 18,
+   fills the screen under the 70px header); 44px top, 48px insets.
+   Photo (stand-in): the Supplement section's AI woman, from the wider render
+   in git history; the sky extended in code to a 2:1 plate (v1-sky.webp) and
+   the woman cut out (v1-woman.webp, placed in % of the plate) so the arc can
+   run behind her. A light haze over the top of the sky keeps the ink type
+   at AA (the sky is darkest at the top).
+   Header: components/header.css, --plain --compact --landing.
+   ========================================================================== */
+
+.wlh1 {
+  padding: 0 var(--frame-side) var(--edge);
+}
+
+.wlh1__stage {
+  position: relative;
+  height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* fills the screen under the header, never scrolls */
+  overflow: hidden;
+  border-radius: 18px;
+  background: #8aa59d; /* the sky's mid tone while the photo loads */
+  color: var(--color-ink);
+  container-type: size;
+  isolation: isolate;
+}
+
+/* ---------- The photo: a 2:1 plate covering the stage, centred ---------- */
+.wlh1__media {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100cqw, 200cqh);
+  aspect-ratio: 2 / 1;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+.wlh1__sky {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.wlh1__haze {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(244, 245, 239, 0.56) 0%, rgba(244, 245, 239, 0.4) 24%, rgba(244, 245, 239, 0.16) 44%, rgba(244, 245, 239, 0) 62%); /* under the person, so only the sky lightens */
+}
+
+/* The arc: round dots (zero-length dashes, round caps) in the plate's own
+   units, so it scales and crops with the photo. Behind the person. */
+.wlh1__arc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.wlh1__path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.78);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: 0 30;
+}
+.wlh1__glow {
+  fill: url(#wlh1-glow);
+  animation: wlh1-pulse 3.6s ease-in-out var(--d, 0s) infinite;
+}
+.wlh1__point { fill: #f4f8e6; }
+@keyframes wlh1-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* The person, cut out of the same photo, exactly where it was shot */
+.wlh1__person {
+  position: absolute;
+  left: 33.111%;
+  top: 39.556%;
+  width: 36.028%;
+  height: 60.444%;
+}
+
+/* ---------- Copy: centred in the sky ---------- */
+.wlh1__head {
+  position: absolute;
+  top: 44px;
+  left: var(--space-7);
+  right: var(--space-7);
+  text-align: center;
+}
+.wlh1__chip {
+  --color-chip: var(--p-ink); /* on the hazed sky: 6:1 */
+  margin-inline: auto;
+}
+.wlh1__title {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(44px, min(3.9vw, 7.6cqh), 72px);
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+.wlh1__lede {
+  max-width: 34em;
+  margin: 18px auto 0;
+  font-size: 17px;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+/* ---------- CTA: centred at the foot ---------- */
+.wlh1__actions {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-7);
+  transform: translateX(-50%);
+}

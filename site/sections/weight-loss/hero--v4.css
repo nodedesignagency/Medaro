@@ -1,0 +1,137 @@
+/* ==========================================================================
+   Weight Loss · hero V4 (round 3, user 2026-11-24: a new version, next to V1–V3)
+   Round 2 V1's photo (one clear sage-teal sky, the couple, a dotted arc with
+   lit points passing behind her) with the hims weight-loss hero's layout:
+   the copy on the left, vertically centred: chip, the headline (one colour, ink, 2026-11-24), then
+   four points (the sentence removed, 2026-11-24) as a check list (the client's six merged, 2026-11-24),
+   and the CTA. A man and a woman stand back to back on the right (one Magnific render, 2026-11-24).
+   Frame: Home's stage (frame edge 16px, max 1888, radius 18, fills the
+   screen under the 70px header). Copy on the 48px inset, the logo's line.
+   Photo: a 2:1 plate anchored to the stage's right edge, so the couple keeps
+   their place from the right at every width; the sky runs on to the left,
+   behind the copy. A light paper haze over the left half (above the photo,
+   ending before them) keeps every line of ink type at AA (measured).
+   Header: components/header.css, --plain --compact --landing.
+   ========================================================================== */
+
+.wlh4 {
+  padding: 0 var(--frame-side) var(--edge);
+}
+
+.wlh4__stage {
+  position: relative;
+  height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* fills the screen under the header, never scrolls */
+  overflow: hidden;
+  border-radius: 18px;
+  background: #8aa59d; /* the sky's mid tone while the photo loads */
+  color: var(--color-ink);
+  container-type: size;
+  isolation: isolate;
+}
+
+/* ---------- The photo: 2:1 plate, right edge on the stage's right edge ---------- */
+.wlh4__media {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: max(100cqw, 200cqh);
+  aspect-ratio: 2 / 1;
+  transform: translateY(-50%);
+  z-index: -2;
+}
+.wlh4__sky {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* The arc: round dots (zero-length dashes, round caps) in the plate's own
+   units, so it scales and crops with the photo. It rises from the foot of
+   the stage right of the copy and passes behind her chest. */
+.wlh4__arc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.wlh4__path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.78);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: 0 30;
+}
+.wlh4__glow {
+  fill: url(#wlh4-glow);
+  animation: wlh4-pulse 3.6s ease-in-out var(--d, 0s) infinite;
+}
+.wlh4__point { fill: #f4f8e6; }
+@keyframes wlh4-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* The couple, cut out of the same photo, exactly where it was shot */
+.wlh4__person {
+  position: absolute;
+  left: 59.556%;
+  top: 19.389%;
+  width: 24.889%;
+  height: 80.611%;
+}
+
+/* Haze behind the copy: paper over the sky, gone before she starts */
+.wlh4__haze {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(244, 245, 239, 0.62) 0%, rgba(244, 245, 239, 0.54) 26%, rgba(244, 245, 239, 0.32) 41%, rgba(244, 245, 239, 0) 54%);
+  pointer-events: none;
+}
+
+/* ---------- Copy: left, vertically centred (hims) ---------- */
+.wlh4__copy {
+  position: absolute;
+  left: var(--space-7);
+  top: 50%;
+  width: min(620px, 46cqw);
+  transform: translateY(-50%);
+}
+.wlh4__chip { --color-chip: var(--p-ink); } /* on the hazed sky */
+.wlh4__title {
+  margin-top: 20px;
+  margin-left: -0.035em; /* the W's side bearing: ink on the logo's line */
+  font-family: var(--font-display);
+  font-size: clamp(38px, min(3.3vw, 6.4cqh), 64px);
+  font-weight: var(--weight-regular);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+/* The six points ("A Smarter Way to Lose Weight." is their visually hidden heading) */
+.wlh4__points {
+  display: grid;
+  gap: clamp(7px, 1.2cqh, 11px);
+  margin-top: clamp(28px, 4.4cqh, 40px); /* straight under the headline: no sentence, the list's heading visually hidden (user, 2026-11-24) */
+}
+.wlh4__points li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  column-gap: 12px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.wlh4__tick {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--p-accent);
+  color: var(--p-ink);
+}
+.wlh4__tick svg { width: 14px; height: 14px; }
+
+.wlh4__cta { margin-top: clamp(22px, 3.8cqh, 34px); }

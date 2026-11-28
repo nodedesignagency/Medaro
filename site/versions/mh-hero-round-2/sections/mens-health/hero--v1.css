@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Men's Health · hero V1 (2026-11-25)
+   After the Weight Loss hero V4 (user: "make hero section with the reference
+   of weight page hero. use our own style"): the same stage and layout, in
+   the Men's Health line's colour.
+   Frame: Home's stage (frame edge 16px, max 1888, radius 18, fills the
+   screen under the 70px header). Copy on the 48px inset, the logo's line,
+   vertically centred: chip, the headline (three lines, one colour, ink),
+   the client's two sentences, the three ticks, the dark pill.
+   Photo (round 2, 2026-11-26): one real-looking photograph covering the
+   stage, anchored right; three to compare (home, couple, sky). The stand-in
+   sky, the cut-out man and the dotted arc are gone.
+   Header: components/header.css, --plain --compact --landing.
+   ========================================================================== */
+
+.mhh1 {
+  padding: 0 var(--frame-side) var(--edge);
+}
+
+.mhh1__stage {
+  position: relative;
+  height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* fills the screen under the header, never scrolls */
+  overflow: hidden;
+  border-radius: 18px;
+  background: #e6e9ec; /* the photo's left tone while it loads (per photo below) */
+  color: var(--color-ink);
+  container-type: size;
+  isolation: isolate;
+}
+
+/* ---------- The photo: one real photograph covering the stage ----------
+   Round 2 (user, 2026-11-26: "real life looking image where our content on
+   left is also visible"). 16:9 renders, covered and anchored to the right, so
+   the man keeps his place from the right at every width and the calm left of
+   the frame sits behind the copy. One shown at a time: ?photo=home|couple|sky
+   (data-options on <html>, review only). */
+.mhh1__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.mhh1__photo {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% var(--y, 50%);
+}
+:root[data-photo="home"] .mhh1__photo--home,
+:root[data-photo="couple"] .mhh1__photo--couple,
+:root[data-photo="sky"] .mhh1__photo--sky { display: block; }
+:root:not([data-photo]) .mhh1__photo--home { display: block; } /* no JS: the first photo */
+
+.mhh1__photo--home { --y: 40%; }   /* his head stays clear of the top on wide stages */
+.mhh1__photo--couple { --y: 20%; } /* his hair sits near the top of the frame */
+.mhh1__photo--sky { --y: 30%; }
+
+:root[data-photo="home"] .mhh1__stage { background: #e6e9ec; }   /* the wall's tone while the photo loads */
+:root[data-photo="couple"] .mhh1__stage { background: #f0f0ee; }
+:root[data-photo="sky"] .mhh1__stage { background: #8fb9de; }
+
+/* Haze behind the copy: the page's blue paper, only where a photo needs it */
+.mhh1__haze {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(237, 242, 248, var(--haze, 0)) 0%, rgba(237, 242, 248, calc(var(--haze, 0) * 0.85)) 30%, rgba(237, 242, 248, 0) 52%); /* #edf2f8 */
+  pointer-events: none;
+}
+:root[data-photo="home"] .mhh1__haze { --haze: 0.42; } /* the grey wall: lifts the small type to AA */
+:root[data-photo="sky"] .mhh1__haze { --haze: 0.25; }  /* just enough over the upper sky for the chip */
+
+/* ---------- Copy: left, vertically centred ---------- */
+.mhh1__copy {
+  position: absolute;
+  left: var(--space-7);
+  top: 50%;
+  width: min(620px, 46cqw);
+  transform: translateY(-50%);
+}
+.mhh1__chip { --color-chip: var(--p-ink); } /* ink on the photo, like Weight Loss V4 */
+.mhh1__title {
+  margin-top: 20px;
+  margin-left: -0.04em; /* the T's side bearing: ink on the logo's line (measured) */
+  font-family: var(--font-display);
+  font-size: clamp(38px, min(3.3vw, 6.4cqh), 64px);
+  font-weight: var(--weight-regular);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+.mhh1__lede {
+  margin-top: clamp(22px, 3.4cqh, 30px);
+  font-size: clamp(17px, 1.25vw, 20px);
+  font-weight: var(--weight-medium);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.mhh1__text {
+  max-width: 33em;
+  text-wrap: pretty; /* no lone last word */
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-ink); /* ink, not the muted blue-grey: on the photos it would fall under AA */
+}
+
+/* "Private. Convenient. Medically Guided." as three ticks in a row */
+.mhh1__points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin-top: clamp(20px, 3cqh, 26px);
+}
+.mhh1__points li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: var(--weight-medium);
+  line-height: 1.4;
+}
+.mhh1__tick {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--p-accent);
+  color: var(--p-ink);
+}
+.mhh1__tick svg { width: 14px; height: 14px; }
+
+.mhh1__cta { margin-top: clamp(24px, 3.8cqh, 34px); }
