@@ -112,6 +112,7 @@ Write what the user said, in their words where possible, with the date.
 
 ### Process
 
+- 2026-11-28: **Weight Loss landing → Framer** (`/weight-loss`, on `claude/gallant-heisenberg-nwxnmo`): the user sent screenshots and a recording of the approved hero V4, pricing + progress cards, "One Price. Every Dose." and care sections (HTML of record: `claude/youthful-noether-ftr6t5` at `7ec4710`; `main` has no `weight-loss.html`) and asked for them in Framer with tablet and phone. Built 1:1 with its own "Landing (Weight Loss)" template; details, responsive decisions and the open items (mock calculator rates, intake links, landing footer) in `FRAMER.md` → Weight Loss landing page. The vial labels there read "Vial", not "Microdose Vial" (the client's Framer rule of 2026-11-21).
 - 2026-11-19: Desktop only in HTML. Confirmed sections move to `main`; when the user says "move to Framer", the responsive versions are built in Framer during the transfer.
 - 2026-11-19: `main` created from the setup (docs, copy, logo, Home placeholder). No sections on it yet.
 - 2026-11-19: A few images will need to be created; how is still to be decided with the user. Until then image slots show a soft palette wash and a one-line brief (hide briefs with `?briefs=off`).
