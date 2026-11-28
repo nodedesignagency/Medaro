@@ -29,6 +29,7 @@ Log of what has moved from `main` (HTML) into Framer, how it was built, and what
 | **Heading weights** | done (2026-11-26) | all | Display headings Regular 400 like the hero (see Home animation → Heading weights) |
 | **Smooth scroll (Lenis)** | done (2026-11-26) | desktop wheel/trackpad (touch native) | `SmoothScroll.tsx` in the Main template; see Home animation → Smooth scroll |
 | **About text reveal + parallax** | done (2026-11-26) | all (reveal, Why photo) · desktop (hero photo) | See About page → Animation (2026-11-26). Our Mission keeps only its own MissionTitle animation |
+| **Men's Health landing · sections 4–8** (`/mens-health`) | done (2026-11-28) | 1200 / 810 / 390 | How MEDARO Works, The MEDARO Difference, Ongoing care, FAQ, closing CTA, from `claude/bold-planck-4j99ja` at `5196f58`; built on `claude/focused-hamilton-shiazo` while another chat did the hero (Quad 4), Science, Quad 4 cards and the landing template. See "Men's Health landing · sections 4–8" below |
 
 ## Components (folder "MEDARO Components")
 
@@ -242,6 +243,70 @@ The user: "can we add smooth scroll throughout the site lenis is the one right f
 ### Heading weights (2026-11-26)
 
 The user, with screenshots of How Medaro Works, Women's Health and Men's Health: "the font weight is bigger than hero and some other places can we fix this as well". The hero's headline and card titles are Host Grotesk **Regular 400**; these text styles were **Medium 500** and are now **400** (tracking eased a touch for the lighter weight): **Section Display** (Men's, Women's, How Medaro Works h2; −0.048 → −0.04em), **Feature Title** (Weight Loss h2; −0.042 → −0.038em), **Feature Subtitle** (Weight Loss h3; −0.03 → −0.028em), **Card Heading** (Weight Loss cards; −0.025 → −0.022em), **Step Number**, **Step Title** (−0.035 → −0.032em), **Tile Text** (Men's and Women's tiles; −0.03 → −0.025em), **Why Point Title** (About). **StepsDeck.tsx** drew its own number and titles at 500: all four now 400 (titles −0.032em). Small UI labels stay Medium: Chip, Menu Title, Menu Label, Treatment Name, Glass Name, the Coming Soon tag. Layout unchanged (same line heights; the Weight Loss mirror still meets the chip). `main`'s HTML still has the Medium headings.
+
+## Men's Health landing · sections 4–8 (2026-11-28)
+
+The user: "other chat is already working on first 3 sections of mens page its transferring from html to framer here we are doing same transfer but for other sections … lets move these sections to framer and also make responsive version" (with screenshots of How MEDARO Works, The MEDARO Difference, the CTA band and the FAQ, and a recording of the Ongoing care dial). **Source of record:** `site/mens-health.html` on `claude/bold-planck-4j99ja` at `5196f58` (`main` has only quad, science and quad-cards). Copy word for word from the HTML (`content/mens-health.md`). Page `/mens-health` (`A74juXh1C`), template "Landing (Men's Health)" (both made by the other chat). **Order on the page:** Hero (Quad 4), Science, Quad 4 cards (other chat), then **How MEDARO Works, The MEDARO Difference, Ongoing Care, FAQ, Closing CTA** (this chat). Framer inserts new sections at odd places (twice above the hero): after adding a section, move it to its place.
+
+**Colours.** The sections use the other chat's MH styles (MH Ink `#1F3957`, MH Ink Soft, MH Sky `#A7D5FF`, MH Deep `#162A40`, MH Chip `#0A6FC7`) and new **MH Scene** styles (MEDARO Colours), the page's resting colours that the scene turns navy:
+
+| Style | Rest (the Men's paper) | Navy scene (`mh-ongoing`) |
+|---|---|---|
+| MH Scene BG | `#EDF2F8` | `#162A40` |
+| MH Scene Surface | `#E4EAF2` | `#2C3E52` (deep 90% + paper) |
+| MH Scene Ink | `#1F3957` | `#EDF2F8` |
+| MH Scene Muted | `#4A6482` | `#B5BEC8` (paper 74% on deep) |
+| MH Scene Line | navy 14% | paper 16% |
+| MH Scene Chip | `#0A6FC7` | `#A7D5FF` |
+| MH Scene Dots | navy 22% | paper 22% |
+| MH Scene Button / Hover / Label | `#1F3957` / `#162A40` / `#EDF2F8` | `#A7D5FF` / `#8CC8FF` / `#1F3957` |
+
+**`withMhScenes`** (code override, `MHScenes.tsx`; source `framer/MHScenes.tsx`) is on all five sections: while the element with id **`mh-ongoing`** (the Ongoing Care section) crosses the middle of the screen, it sets the MH Scene styles to the navy column on `<body>` (registered with `@property`, 700ms `cubic-bezier(0.65, 0, 0.35, 1)`, instant for reduced motion), the HTML's `data-scene="mh-ongoing"`. Separate from `Scenes.tsx`, so Home and About are untouched. **The header is not on the scene** (the HTML's landing header turns navy with a white logo and sky Get Started): it belongs to the template; bind its fills to the MH Scene styles if the user wants that.
+
+**Button variants added** (component Button): **Navy L** (54px navy pill, 16px label, 28px sides; `btn--dark btn--l`), **Sky L** (sky, navy label; `btn--primary btn--l`), **Scene L** (Navy L's shape with MH Scene Button / Hover / Label: navy on the paper, sky in the scene, like `.btn--dark` under `data-scene="mh-ongoing"`); each with hover and pressed (label rolls). Canvas columns 1600 / 1800 / 2400 (another chat put Dark L at 1400 and Lime L at 2000).
+
+**Text styles added** (MEDARO Text Styles; ≥1600 / ≥1400 / ≥1200 / ≥810 / phone where five steps): **MH Tile Title** h3 (27 / 24 / 21 / 22 / 21; the HTML's `clamp(21px, 1.7vw, 28px)`), **MH FAQ Question** (26 / 23 / 22 / 20), **MH FAQ Answer** (18 / 16 / 16 / 16, 1.55em), **MH CTA Title** h2 (42 / 37 / 32 / 34 / 32; `clamp(32px, 2.6vw, 46px)`), **MH Promo Title** (20, Medium), **MH Promo Line** (15). Section headings use the other chat's **MH Section Title** (64 / 52 / 44 / 34), chips **Chip**, ledes **Summary** (18 / 17), card text **Body 16**, list rows **MH Point**, the note **Small**. Chips, headings and ledes carry Home's Good Life text reveal (chip / heading / text presets).
+
+**Images** (uploaded 2026-11-28, from `site/assets/` on `claude/bold-planck-4j99ja`): `mh-hiw-assessment`, `mh-hiw-guidance`, `mh-hiw-delivery` (2400px), `mh-diff-armchair`, `mh-diff-booth`, `mh-diff-box-stones`, **`mh-diff-ampoule-stone`** (the photo with `diff-ampoule-stone-print.svg` screened on and flattened in Chromium, as the packs: Framer has no blend stack), `mh-faq-card` (480px), `mh-cta-watch` (2752×1936), `mh-ongoing-bubbles`, `-pulse`, `-sliders` (512px icons).
+
+### How MEDARO Works
+
+- Section (`#how-it-works`), padding 96 / 16; Inner max 1888, a row: **Copy** (1fr, 48px left inset, 32px gaps: chip + h2 26px apart, the steps 8px lower, the CTA) and **Photo** (1.14fr, the copy's height, min 480), 72px apart (the HTML's `clamp(48px, 5vw, 96px)` at 1440).
+- **`MHSteps`** and **`MHStepPhotos`** (code components, `MHHowItWorks.tsx`; source `framer/MHHowItWorks.tsx`), a 1:1 port of `how-it-works.css` + `.js`: one step open at a time, a white card (radius 12, 28px inset, 44px number column) with its text, a 2px line in MH Scene Chip filling along its foot for **7s**, then the next step opens (grid rows 0fr → 1fr over 460ms, text fades in 360ms after 140ms, card background 420ms); click or Enter/Space opens a step and restarts its line. **Holds still** off screen (less than 45% of the section showing), while the mouse is on the list, while the keyboard is in it, and for reduced motion (no line, no turning). The list keeps the height of its tallest state, so nothing below moves. The photo cross-fades (900ms) with a slow 1 → 1.04 push-in over 9s. The two share state by their **Group** control ("mh-how-it-works"), so the photo can sit in another column; instances not on screen (other breakpoints) never drive the timer. Title size `clamp(Title min, Title vw, Title max)` (desktop 20 / 1.6vw / 28, as the HTML), numbers 14 / 1vw / 17. Canvas: step 1 open, still.
+- **Checked** by bundling the file with esbuild into a page beside the HTML in Chromium at 1440: list 576 × 306, open card 137px, title at x 136, text 76px, the same as the HTML; the step advances at 7s, click jumps and restarts.
+- **Tablet / phone:** one column: chip, h2, then **a second `MHStepPhotos`** ("Photo (tablet, phone)", 520 / 300px tall; the desktop photo hidden), the steps (titles 21 / 19px, numbers 15 / 14, inset 24 / 18, number column 40 / 34, text 16 / 15), the CTA. Padding 104 / 48 and 80 / 24.
+- CTA: Button **Navy L**, "Start Your Assessment", unlinked (`[LINK NEEDED]` intake URL).
+
+### The MEDARO Difference
+
+- Section padding 32 / 16 / 96 (with How MEDARO Works' 96 that is the HTML's 128 between them). Head centred (chip, h2 balanced, lede max 720), 18px apart; **Cards**: a 4-column grid, 16px gaps, 64px under the head; each card a square photo (radius 12, height 340 with a 1:1 lock), 22px, the h3 (MH Tile Title, balanced) and 10px under it the text (Body 16, MH Scene Muted, max 480). Photos decorative (`aria-hidden`), as in the HTML.
+- **Tablet:** 2 × 2, 40px between rows. **Phone:** one column, photos **4:3** (cover, centred), 36px between cards.
+
+### Ongoing Care (the care dial)
+
+- Section **`#mh-ongoing`** (the scene's trigger), padding 158 / 16 / 96, **overflow visible** (the stage is sticky; the template's `overflow: clip` doesn't stop it). Head centred: chip, h2 (two lines, forced break), lede (max 576). Then the **`MHCareDial`** code component (`MHCareDial.tsx`; source `framer/MHCareDial.tsx`), 35px under the head, a 1:1 port of `ongoing.css` + `.js`: Layout **Dial** pins the stage under the 70px header for `stage + 0.2 × stretch + 3.4 × stretch` of scroll (stretch = 55% of the screen); the 96-dot ring (the three either side of each node left out) lights clockwise in MH Scene Chip as you scroll, each node (66px disc in MH Scene BG, the 62px icon at 45% and 0.88 until reached) comes to full and stays; the centre swaps from the intro line to each point (fade, 12px rise, 4px blur; 520/680ms after 120ms); the dial rises 0.9 → 1 as it comes up. Dial size `clamp(360px, screen − 70 − 270, 700px)`. The CTA is the **CTA slot**: a Button **Scene L** instance on the page canvas outside the breakpoints ("Ongoing CTA (in dial)"), 72px under the ring. The points (name, sentence, icon) and the intro line are controls; the icons are the uploaded `mh-ongoing-*`.
+- **Checked** against the HTML in Chromium at 1440 × 900 at six scroll positions (rising, pinned, each point, closed loop): the same dial position, size, scale, `--pct`, centre state and CTA position at every one.
+- **Tablet / phone: static** (Layout **List**; the user's rule for pinned scroll sections on tablet and phone, 2026-11-23): the intro line (28 / 24px), then the three points down a dotted line in the scene's lit colour, each node lit (56 / 52px), the title (22 / 21) and the sentence (16) beside it, then the CTA. The page still turns navy while the section holds the middle of the screen.
+- Framer's screenshot renderer ran the scene (navy page, sky chip, Scene L sky).
+
+### FAQ
+
+- Section padding 0 / 16 / 96; a row with 48px insets: **Side** (5fr: chip + h2 "Everything You / Want to Know." on top with 64px below, the card at the foot: space-between) and the **Questions** (7fr), 80px apart.
+- **MH FAQ Item** (component; variants **Open**, **Closed**; controls Question, Answer, event **On Toggle**): the row is a `button` (`aria-expanded` per variant), 28px above and below the question (MH FAQ Question, MH Scene Ink), the mark two 1 × 17px bars, the upright one turning onto the flat one (plus → minus); the answer (MH FAQ Answer, MH Scene Muted, max 640, 28px under it) in a clipped frame, 0px tall when closed; a 1px MH Scene Line under each item; transition 560ms `cubic-bezier(0.65, 0, 0.35, 1)` (the HTML's `--dur-slow` + `--ease-in-out`). Component frames have no fill (they sit on the scene colour).
+- **MH FAQ List** (component; variants **Q1 open** (default, as the HTML: first open on arrival), **Q2 open**, **Q3 open**, **Q4 open**, **None**): the four items word for word, a hairline on top; each item's On Toggle sets the list's variant, so one answer is open at a time and tapping the open one closes it.
+- **MH FAQ Card** (component; Default + Hover; controls Title, Line, Image, Link): the whole card is the link, 420 max, padding 8 / 56 / 8 / 8, the white fill swelling 2px past every edge on hover, the 64px photo (radius 8, from the top), MH Promo Title + MH Promo Line, the 40px round button 8px from the corner (MH Scene Surface → MH Sky on hover) with a **RollArrow** (up-right, 560ms) that rolls on hover. Unlinked (`[LINK NEEDED]`).
+- **Tablet / phone:** one column: head, questions, then **a second card** ("Card (tablet, phone)"; the side card hidden). Padding 0 / 48 / 104 and 0 / 24 / 80.
+- Not watched: the open/close in Preview (variant changes don't run on the canvas).
+
+### Closing CTA
+
+- Section padding 32 / 16 / 16; **Stage** max 1888, radius 18, `96.5vh` tall (min 700, max 960: the HTML's `clamp(700px, 100svh − 32px, 960px)` within 4px from 790 to 1080 tall), MH Deep under the photo (`mh-cta-watch`, cover, 50% 47%), padding 56 top / 28 bottom.
+- **Column** 30.6% of the stage (the HTML's 30vw within 2px), min 380, max 520: the **Glass** (fills, radius 12 12 0 0, a 1px white 40% rim, padding 28 / 28 / 42: chip in MH Sky, h2 MH CTA Title white, 22px; the sentence Body 16 white), the **List** (white, radius 12, padding 4 / 20, `role="list"`; three rows 13px tall padding, a 22px MH Sky tick with the check SVG, MH Point, hairlines navy 12%) and the **Panel** (MH Deep, radius 0 0 12 12, padding 28 / 14 / 16: Button **Sky L** full width, the note Small paper 74% centred). **Framer refuses negative gaps**, so the HTML's 14px tucks are `translateY` −14 (list) and −28 (panel), with the stage's bottom padding 28 instead of 56 so the column still sits 56 from both edges.
+- **Tablet:** stage 900 tall, column 440, padding 48 / 20. **Phone:** section padding 24 / 10 / 10, stage 780 tall, radius 16, padding 28 / 16 / 0, the column full width, glass padding 24 / 22 / 38.
+
+**Canvas heights** (the page breakpoints are template-sized; the live site grows with the page): with all eight sections the page renders **7350 / 9793 / 11206** tall at 1200 / 810 / 390 (no footer yet on the landing template). Left to the other chat to set.
+
+**Not watched:** Framer Preview and the published site (not published; publish only when the user asks). Check there: the step list turning and pausing, the dial pinning and the navy scene (desktop), the FAQ opening and closing, the card hover, and Safari.
 
 ## Links (`[LINK NEEDED]`)
 
