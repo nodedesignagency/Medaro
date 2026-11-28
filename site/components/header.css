@@ -149,3 +149,12 @@
   stroke-width: 1.8;
   stroke-linecap: round;
 }
+
+/* ---------- Landing pages (weight-loss.html, mens-health.html) ----------
+   The approved header (--plain --compact: 70px, on the page colour, logo
+   and CTA on the 48px content inset), minus everything that links out:
+   client rule, paid-traffic pages link only to their intake form. So the
+   logo is plain (not a link), there is no menu button (the menu sheet is
+   all links), and Get Started goes to the intake. (User, 2026-11-23: "we
+   wont have any links but we have to follow that".) */
+.site-header--landing .site-header__bar { grid-template-columns: 1fr auto; }
