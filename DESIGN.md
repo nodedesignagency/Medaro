@@ -134,7 +134,20 @@ Status: `exploring` (on a branch) · `approved` (on `main`) · `rejected`. Add a
 | science | **approved** (2026-11-28) | `main` (from `claude/bold-planck-4j99ja`) | The brief's "The science behind Quad 4", **right after the hero** (client: "After that page this"). `sections/mens-health/science.css` + `science.js`, `.mhsci__*`, on the page colour (no card), padding 96 / frame. Centred head (chip `#0A6FC7`, "Four Ingredients. / Different Mechanisms.", 40–68px), then three columns: Sildenafil and Vardenafil left, **our blue Quad 4 ampoule turning on its own in the middle** (Components → Pack spin, one turn per 12s, still under reduced motion; its back sticker comes round and reads normally), Tadalafil and Apomorphine right; each ingredient a sky icon circle, the label in caps in the Men's blue running into a dotted line that curves to the glass (Nervana's callout, mirrored on the right; `science.js` ends each line 6px from the glass), the name, the client's line, the paragraphs with every qualifier at full size. The brief's closing line centred, then **Order Now + See Pricing (outline)** centred under it, the prescription line under them (client: "This page should also have an [order now] and [See pricing]"). |
 | quad-cards | **approved** (2026-11-28) | `main` (from `claude/bold-planck-4j99ja`) | The brief's three blocks as **three cards, after the science section** (client: "Before this"). `sections/mens-health/quad-cards.css`, `.mhqc__*`: equal cards on the frame, 16px apart, radius 12, Men's mist `#DEE6EE`, padding 44 / 48; heading (Host Grotesk 400, 30–46px, two lines), the client's sub-line (medium 16–19), the sentence (16 muted), three points with sky ticks, then the image on the card's foot (row `clamp(240px, 19vw, 380px)`); rows line up across the cards (subgrid; Framer: fixed row heights). Images: card 1 our blue ampoule lying on the card's paper (print in code), card 2 a couple in their 40s laughing, card 3 a man in his 50s in a navy polo (AI-generated people, not patients or providers). Card 3 carries "Explore Quad 4" (dark pill) → the intake `[LINK NEEDED]`. |
 
-### About (`about.html`) · Contact (`contact.html`) · Weight Loss (`weight-loss.html`) · Legal
+### Weight Loss landing (`weight-loss.html`)
+
+Not on `main` yet. The sections are on their branches (latest: `claude/confident-mayer-rzv1ed`, `claude/youthful-noether-ftr6t5`, `claude/awesome-feynman-su67d2`). **Approved versions, in Framer since 2026-11-28** (the user, with screenshots and a recording: "adding the images and video of only approved version … start transferring these section to framer and also make responsive version of it"; `FRAMER.md` → Weight Loss landing):
+
+| Section | Status | HTML of record | Notes |
+|---|---|---|---|
+| difference | **approved** (in Framer, 2026-11-28) | `claude/confident-mayer-rzv1ed` | Round 2 photos (sage sky on card 1, the vial on the olive steps), glass cards off. |
+| steps | **approved** (in Framer, 2026-11-28) | `claude/confident-mayer-rzv1ed` (= `claude/keen-brown-azog3i`) | Round 5: lime scene, the card wheel, the 01–03 illustrations, the care rows. |
+| why | **approved: V2** (the sky photo, ink copy, dark pill; in Framer, 2026-11-28) | `claude/confident-mayer-rzv1ed` (`why--v2`) | The user's screenshot shows V2 (the review switcher in their other frames still read `why: V1`). Tablet/phone in Framer use the photo with sky extended upward (`tools/sky-extend.py`). |
+| education | **approved: round 3** (illustrated icons; in Framer, 2026-11-28) | `claude/keen-brown-azog3i` | Not on `claude/confident-mayer-rzv1ed`, which still has the line icons. |
+
+The hero, pricing/progress, pricing and care (another session) and ongoing care, FAQ, closing CTA (a third session) were moved to Framer the same day.
+
+### About (`about.html`) · Contact (`contact.html`) · Legal
 
 Not started on `main`.
 
@@ -151,6 +164,7 @@ Write what the user said, in their words where possible, with the date.
 
 ### Likes
 
+- 2026-11-28: **Weight Loss landing: the MEDARO difference, three steps, Why MEDARO (V2) and GLP-1 education are the approved versions** (the user, with screenshots of difference, why and education and a recording of the steps: "adding the images and video of only approved version so we dont get confused … start transferring these section to framer and also make responsive version of it"). Moved to Framer with tablet and phone (`FRAMER.md`). Not on `main` until the user says so.
 - 2026-11-28: **Men's Health landing, three sections approved by the client** (the user, with a recording: "these 3 sections we made are final from client move them to framer and make responsive too"): the Quad 4 hero in its card with Order Now / See Pricing at the ampoule, the science section with the same pair, the three Quad 4 cards. **See Pricing: outline** (the review switcher's pick in the client's recording; sky and navy dropped). The back sticker approved as built (its shortened lines, flagged to the user on 2026-11-27, included).
 - 2026-11-23: **Home sections to `main` again** ("move mens health, womens health, Supplement, How Medaro Works and footer section to main … make sure if its there or not", then of Supplement V3: "this is the final one use this"). Men's Health and How Medaro Works were already on `main`, unchanged. Women's Health (the five pink-world photos), the footer (MEDARO and the new phone number) and Supplement V3 (replacing V1) came over from `claude/festive-newton-eatsba`. Next: all five into Framer with tablet and phone; on tablet and phone the Men's and Women's tile rows lose the scroll drift and run as a plain marquee (user: "for mobile and tablet we can remove that and use simple marquee").
 - 2026-11-23, client: "For the bottom page use +1 559 236 8812 not +1 778 903 6742 and where it ask for company's name put MEDARO". Footer disclaimers updated (five MEDARO, the phone text and its `tel:` link); `content/footer.md` too.
