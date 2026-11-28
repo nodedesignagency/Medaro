@@ -69,8 +69,8 @@ Use the same class names everywhere (BEM-ish: `.hero__title`, `.btn--primary`). 
 | Home | `index.html` | `content/home.md` | Full header, **the approved menu header** (2026-11-20): **logo left · Get Started + round menu button right, no login**; the six links, Contact and Get Started live in the menu sheet. Weight Loss · Men's Health · Women's Health · Supplement · How Medaro Works **scroll** to sections on Home (like home.medvi.org). About Us and Contact **open pages** (Contact goes to the Contact Support page). |
 | About Us | `about.html` | `content/about.md` | Full header |
 | Contact Support | `contact.html` | **[COPY NEEDED]** | Full header |
-| Weight Loss landing | `weight-loss.html` | `content/weight-loss.md` | **No links to Home or any other page.** Logo is not a link. Every CTA goes to the Weight Loss intake form. |
-| Men's Health landing | `mens-health.html` | `content/mens-health.md` | **No links to Home or any other page.** Every CTA goes to the Men's Health (ED) intake form. |
+| Weight Loss landing | `weight-loss.html` | `content/weight-loss.md` | **No links to Home or any other page.** Logo is not a link. Every CTA goes to the Weight Loss intake form. **Footer: the landing footer, with no links** (user, 2026-11-28: tagline, badges, disclaimers, © bar, wordmark; no Shop / Support / Legal). |
+| Men's Health landing | `mens-health.html` | `content/mens-health.md` | **No links to Home or any other page.** Every CTA goes to the Men's Health (ED) intake form. **Footer: the landing footer, with no links**, in the page's blue. |
 | Legal (11) | `legal/<slug>.html` | `content/source/legal/*.pdf` | Footer links. Docs have placeholders like `[BRAND_NAME]`, `[EFFECTIVE_DATE]`: keep them visible until the client fills them. |
 
 Women's Health has no page: every Women's Health link scrolls to the `#womens-health` section on Home, whose CTA is the client's **[Coming Soon]** (client, 2026-11-20). Intake form URLs, the Supplements link and the hero CTA are unknown: use `#intake-weight-loss`, `#intake-mens-health`, `#supplements-link` and mark `[LINK NEEDED]`.
@@ -91,7 +91,6 @@ Women's Health has no page: every Women's Health link scrolls to the `#womens-he
 
 - Intake form URLs (weight loss, men's health) and the Supplements link.
 - Contact Support page copy (email, phone, hours, form?).
-- Landing-page footer: may it link to Privacy / Terms? (Ad platforms and state laws usually require it, even when the page has no other links.)
 - Photography and product renders: **images are made after the user confirms a design** (user, 2026-11-19). Until then use stand-ins (`assets/images/standin-*.svg`, or UI built in code) and write the photo brief in `data-brief`.
 - Body/UI typeface: the logo is Montserrat; is there a brand palette or font beyond the logo?
 
