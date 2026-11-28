@@ -1,0 +1,238 @@
+/* ==========================================================================
+   Men's Health · The science behind Quad 4 (2026-11-25)
+   The user's brief: the structure of the Weight Loss ongoing care section
+   (a centred head, then copy left · the object in the middle · copy right)
+   with the Quad 4 bottle turning on its own in the middle, the four
+   ingredients after their Nervana reference (an icon circle, a caps label
+   running into a dotted rule, then the text), "all in our style", on the
+   page colour, not in a card. Mobbin: Graza's olive and David's bar
+   (callouts set around one product).
+   Ours: the page's section heading and chip; the ingredients two each side
+   on the content inset (the logo's line, 64px at 1440), the right pair
+   mirrored, every label's dotted line running to the ampoule and ending in
+   the reference's curve (round 2); accent icon circles (sky blue on this page since 2026-11-25) like the Weight
+   Loss care rows; the Men's blue for the labels and rules; our Quad 4
+   ampoule in the hand's blue (tools/blue-ampoule.py), its white print
+   turning (components/pack-spin.js, data-pack-spin-auto), a soft shadow
+   under it. Every qualifier is set like the text around it.
+   Framer: a section; each ingredient one component; the ampoule the pack
+   spin code component.
+   ========================================================================== */
+
+.mhsci {
+  --mhsci-blue: #0a6fc7; /* the Men's sky blue, deep enough for the blue paper: 4.5:1 (the quad chip's) */
+  padding: var(--space-9) var(--frame-side); /* right under the hero card (client, 2026-11-27): 96 + the card's 16px foot */
+  color: var(--color-ink);
+}
+
+/* ---------- Head: centred, like the ongoing care section's ---------- */
+.mhsci__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.mhsci__chip { --color-chip: var(--mhsci-blue); }
+.mhsci__title {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.6vw, 68px); /* the page's section heading */
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+/* ---------- Body: two ingredients · the ampoule · two ingredients ---------- */
+.mhsci__body {
+  --gap-x: clamp(32px, 3.4vw, 64px);
+  --col-c: clamp(200px, 16vw, 340px);                  /* the ampoule's column: narrow enough that the sides hold Tadalafil's 384px measure at 1280 */
+  --pack-h: clamp(500px, 44vw, 820px);                 /* the ampoule's height */
+  --pack-w: calc(var(--pack-h) * 406 / 2200);          /* and width (the render's ratio) */
+  --reach: calc(var(--gap-x) + (var(--col-c) - var(--pack-w)) / 2 - 18px); /* a label line's run past its column: to 18px short of the glass */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--col-c) minmax(0, 1fr);
+  column-gap: var(--gap-x);
+  align-items: center;
+  margin-top: clamp(56px, 4.8vw, 92px);
+  padding-inline: clamp(72px, 7.2vw, 160px); /* more room at the sides than the logo's line (user, 2026-11-25: "add more padding at the sides"): text at 120px from the screen's edge at 1440 */
+}
+/* Each side is its own column, two ingredients one fixed gap apart (user,
+   2026-11-25: "why the gap is same now also"; shared rows had let the
+   taller block opposite, and the ampoule, stretch the space between them);
+   both sides start level. */
+.mhsci__side {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 4vw, 72px);
+  align-self: start; /* both sides start on one line: 01 and 03 level ("make the texts more even") */
+}
+
+/* ---------- One ingredient, after the Nervana block ---------- */
+.mhsci__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--p-accent);
+  color: var(--p-ink);
+}
+.mhsci__icon svg { width: 24px; height: 24px; }
+
+/* The label runs into a dotted line in the Men's blue that carries on to the
+   ampoule and ends in the Nervana reference's curve (user, 2026-11-25: "it
+   should be as if the bottle is the product and we are showing its
+   feature"): above the ampoule's middle it bends down, below it up; the
+   right pair is mirrored. The straight part is CSS dots; the curve, an SVG
+   on the line's end, dots by dasharray, trailing off. */
+.mhsci__label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+  font-size: var(--fs-chip);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--mhsci-blue);
+}
+.mhsci__label-text {
+  flex: none;
+  text-box: trim-both cap alphabetic; /* the box is the capitals, so the line sits on their middle */
+}
+.mhsci__lead {
+  --curve-w: 80px;
+  position: relative;
+  flex: 1 1 auto;
+  height: 2px;
+  margin-right: calc(-1 * var(--reach)); /* across the gap, to just short of the glass */
+  padding-right: var(--curve-w);
+  background: radial-gradient(circle, currentColor 0.9px, transparent 1.2px) 100% 50% / 7px 2px repeat-x; /* dots counted from the curve's end, so they run on into it 7px apart */
+  background-clip: content-box;
+  background-origin: content-box;
+  opacity: 0.6;
+}
+.mhsci__curve {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--curve-w);
+  height: 24px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 0 7;
+  transform-origin: 50% 1px; /* turns about the line, so flipped curves still start on it */
+  -webkit-mask-image: linear-gradient(to right, #000 30%, rgba(0, 0, 0, 0.2)); /* a gradient, not an image file: fine from file:// */
+  mask-image: linear-gradient(to right, #000 30%, rgba(0, 0, 0, 0.2));
+}
+
+/* below the ampoule's middle: the curve bends up */
+.mhsci__item--low .mhsci__curve { transform: scaleY(-1); }
+
+/* the right pair, mirrored: aligned to the frame's right edge, the line runs
+   left to the ampoule */
+.mhsci__item--end { text-align: right; }
+.mhsci__item--end .mhsci__icon { margin-left: auto; }
+.mhsci__item--end .mhsci__label { flex-direction: row-reverse; }
+.mhsci__item--end .mhsci__lead {
+  margin-right: 0;
+  margin-left: calc(-1 * var(--reach));
+  padding-right: 0;
+  padding-left: var(--curve-w);
+  background-position: 0 50%;
+}
+.mhsci__item--end .mhsci__curve { right: auto; left: 0; transform: scaleX(-1); }
+.mhsci__item--end.mhsci__item--low .mhsci__curve { transform: scale(-1, -1); }
+.mhsci__item--end > p:not(.mhsci__label) { margin-left: auto; }
+
+.mhsci__name {
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 2.2vw, 40px);
+  font-weight: var(--weight-regular);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.mhsci__sub {
+  margin-top: 10px;
+  font-size: clamp(16px, 1.2vw, 19px);
+  font-weight: var(--weight-medium);
+  line-height: 1.35;
+}
+.mhsci__item > p:not(.mhsci__label):not(.mhsci__sub) {
+  /* even text by width, not by spacing (user, 2026-11-25: "make it even by making the width small or
+     something for each points and set which is looking best"): each ingredient sets its own --measure
+     (inline on its <article>), picked by measuring every width from 240 to 480px for the most even
+     lines, from the middle of the range where its breaks hold: Sildenafil 340, Vardenafil 344,
+     Tadalafil 384 (its first sentence needs 366 to stay on one line), Apomorphine 384.
+     Normal word spacing, no hyphens. */
+  max-width: var(--measure, 30rem);
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: balance; /* within the measure, lines of near-equal length; the same breaks across a wide range of measures */
+}
+.mhsci__sub + p { margin-top: 14px; }
+
+/* ---------- The ampoule, in the middle, turning on its own ---------- */
+.mhsci__product {
+  justify-self: center;
+  position: relative;
+  padding-bottom: 40px; /* room for its shadow */
+}
+.mhsci__pack {
+  height: var(--pack-h);
+  filter: drop-shadow(0 18px 22px rgba(29, 42, 58, 0.12));
+}
+/* a soft shadow on the "floor", a little under its base: it floats */
+.mhsci__product::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 220%;
+  height: 26px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(29, 42, 58, 0.2), rgba(29, 42, 58, 0));
+  pointer-events: none;
+}
+
+/* ---------- The brief's closing line ---------- */
+.mhsci__close {
+  margin-top: clamp(48px, 4.2vw, 80px);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 1.8vw, 32px);
+  font-weight: var(--weight-regular);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.mhsci__nowrap { white-space: nowrap; } /* "Quad 4" never splits */
+
+/* ---------- Order Now + See Pricing (client, 2026-11-27) ----------
+   The hero's pair (components/cta-pair.css), centred under the closing
+   line, the client's prescription line under it. */
+.mhsci__cta {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  margin-top: clamp(32px, 2.8vw, 48px);
+}
+.mhsci__buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--edge);
+}
+.mhsci__note {
+  max-width: 34em;
+  text-align: center;
+  text-wrap: balance;
+}

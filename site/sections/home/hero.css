@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Home · hero (approved: hero V4, user 2026-11-21: "this one is perfect push
+   to main"; from claude/compassionate-gates-h0ymfe)
+   The dark rounded stage and live studio light of the earlier hero, laid out
+   anew:
+   - the headline split in two: "Made for" top left, "Better Health." bottom
+     right just above the cards (one h1, two lines at the one-line size);
+   - the client's sentence under "Made for", on the left inset;
+   - the products as one cluster, centred: the Quad 4 ampoule, the Microdose
+     Tirzepatide vial in front, the white tablet top right, the oval tablet at
+     the vial's lower left; the pills blank (client, 2026-11-21); nothing
+     overlaps the headline;
+   - the three care categories in one row along the foot, as large white
+     cards after hims' (components/category-tile.css).
+   Copy: content/home.md, word for word (the headline is ours).
+   Frame: the stage sits on the frame edge (16px, max 1888px, centred); the
+   header's logo and CTA line up with the content inset (48px) inside it.
+   Header: components/header.css, --plain --compact (70px). Products: components/product.css.
+   ========================================================================== */
+
+.hero {
+  --hero-inset: 48px; /* content inset inside the stage; the header uses it too */
+  padding: 0 var(--frame-side) var(--edge);
+}
+
+.hero__frame {
+  --lede-w: min(390px, 31cqw); /* 390 wraps into three near-full lines and a short last one */
+  --content-w: calc(100cqw - 2 * var(--hero-inset));
+  --fs: calc(var(--content-w) / 9.861);                  /* the headline's size: "Made for Better Health." runs inset to inset */
+  --cap: calc(var(--fs) * 0.7);                          /* its cap height */
+  --head-b: calc(44px + var(--content-w) * 0.0716);      /* the foot of "Made for" */
+  --tile-h: clamp(160px, 21cqh, 208px);                  /* the card row: a fifth of the stage, 160–208px */
+  --tiles-t: calc(100cqh - var(--hero-inset) - var(--tile-h)); /* top of the card row */
+  --line-b-t: calc(var(--tiles-t) - 32px - var(--cap)); /* top of "Better Health." */
+  position: relative;
+  height: clamp(680px, calc(100svh - 70px - var(--edge)), 1000px); /* compact header 70 + bottom edge 16: fills the screen (up to 1080 tall), never scrolls */
+  overflow: hidden;
+  border-radius: 18px;
+  color: #fff;
+  background: #171b11; /* the plate's own tone, under the plate */
+  container-type: size;
+  isolation: isolate;
+}
+
+/* ---------- The headline, split ----------
+   "Made for" top left, "Better Health." bottom right, 32px above the cards
+   (user, 2026-11-20: "lets transfer better health below"). One h1; each line
+   is placed on the stage at the one-line size, its letters trimmed to cap
+   height and baseline so they sit on the insets. */
+.hero__title {
+  font-family: var(--font-display);
+  font-size: var(--fs);
+  font-weight: var(--weight-regular);
+  letter-spacing: -0.035em;
+}
+.hero__title-line {
+  position: absolute;
+  line-height: 1;
+  white-space: nowrap;
+  text-box: trim-both cap alphabetic; /* box = cap top to baseline */
+}
+.hero__title-line--a { top: 44px; left: var(--hero-inset); }
+.hero__title-line--b {
+  right: var(--hero-inset);
+  bottom: calc(100cqh - var(--tiles-t) + 32px);
+}
+
+/* ---------- The sentence, under "Made for" on the left inset ---------- */
+.hero__lede {
+  position: absolute;
+  top: calc(var(--head-b) + 36px);
+  left: var(--hero-inset);
+  width: var(--lede-w);
+  margin: 0;
+  font-size: 14px; /* user, 2026-11-20 */
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+  text-wrap: pretty;
+}
+
+/* ---------- The care categories, one row along the foot ---------- */
+.hero__tiles {
+  position: absolute;
+  left: var(--hero-inset);
+  right: var(--hero-inset);
+  bottom: var(--hero-inset);
+}
+.hero .category-tile:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* ---------- Backdrop ---------- */
+/* the studio plate covers the stage like object-fit: cover, anchored right */
+.hero__media {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: max(100cqw, 179.17cqh);
+  aspect-ratio: 3840 / 2143;
+  transform: translateY(-50%);
+  z-index: -2;
+}
+.hero__plate {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* shade where the type sits: the headline across the top (the beam is
+   brightest top right), deeper on the left behind the sentence */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(38% 30% at 14% 30%, rgba(22, 26, 16, 0.6) 0%, rgba(22, 26, 16, 0) 100%),
+    linear-gradient(180deg, rgba(22, 26, 16, 0.62) 0%, rgba(22, 26, 16, 0.3) 24%, rgba(22, 26, 16, 0) 42%),
+    linear-gradient(0deg, rgba(22, 26, 16, 0.5) 0%, rgba(22, 26, 16, 0) 32%);
+}
+
+/* ---------- Products: one cluster, centred ----------
+   From the top of "Made for" to the top of "Better Health.", centred on the
+   stage, narrow enough (0.62) to keep clear of "for"; the bottles stop just
+   short of "Better Health."; drawn above the type (z-index 2) though nothing
+   overlaps it. The box is a size container: objects are placed in % of it. */
+.hero__scene {
+  --scene-ratio: 0.62;
+  position: absolute;
+  left: 50%;
+  top: 44px;
+  height: calc(var(--line-b-t) - 44px);
+  aspect-ratio: var(--scene-ratio);
+  transform: translateX(-50%);
+  z-index: 2;
+  container-type: size;
+  pointer-events: none;
+}
+.hero__set { position: absolute; inset: 0; }
+
+.hero .product--ampoule      { --h: 92%; --x: 56%; --y: 48%; --r: -14deg; }
+.hero .product--vial         { --h: 58%; --x: 29%; --y: 64%; --r: 10deg; }
+.hero .product--tablet-white { --h: 17%; --x: 80%; --y: 21%; --r: 0deg; }
+/* the oval tablet at the vial's lower left, just over its edge (user, 2026-11-20: "place here that tablet") */
+.hero .product--tablet-oval  { --h: 13%; --x: -2%; --y: 75%; --r: 0deg; }
