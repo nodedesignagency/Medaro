@@ -13,10 +13,20 @@
   <link rel="stylesheet" href="styles.css">
   <!-- Components (shared across pages) -->
   <link rel="stylesheet" href="components/header.css">
-  <link rel="stylesheet" href="components/promo-card.css">
+  <link rel="stylesheet" href="components/category-tile.css">
+  <link rel="stylesheet" href="components/menu.css">
+  <link rel="stylesheet" href="components/product.css">
+  <link rel="stylesheet" href="components/stage-light.css">
+  <link rel="stylesheet" href="components/care-tiles.css">
+  <link rel="stylesheet" href="components/steps.css">
+  <link rel="stylesheet" href="components/footer.css">
   <!-- One stylesheet per section, so a section can be approved and moved to main on its own -->
-  <link rel="stylesheet" href="sections/home/hero--v1.css">
-  <link rel="stylesheet" href="sections/home/hero--v2.css">
+  <link rel="stylesheet" href="sections/home/hero.css">
+  <link rel="stylesheet" href="sections/home/weight-loss.css">
+  <link rel="stylesheet" href="sections/home/mens-health.css">
+  <link rel="stylesheet" href="sections/home/womens-health.css">
+  <link rel="stylesheet" href="sections/home/supplements.css">
+  <link rel="stylesheet" href="sections/home/how-it-works.css">
 </head>
 <body id="top">
 
@@ -25,35 +35,465 @@
     <!-- Official MEDARO wordmark (site/assets/logo/, from the client), cropped tight, currentColor -->
     <symbol id="wordmark" viewBox="194 74 4413 712"><g fill="currentColor" transform="translate(80 780) scale(1 -1)"><path transform="translate(0 0)" d="M114 0V700H175L495 154H463L780 700H841V0H770V589H787L495 89H460L166 589H185V0Z"/><path transform="translate(870 0)" d="M114 0V700H594V636H188V64H609V0ZM180 324V387H550V324Z"/><path transform="translate(1500 0)" d="M114 0V700H399Q511 700 595.5 655.5Q680 611 727.0 532.0Q774 453 774 350Q774 247 727.0 168.0Q680 89 595.5 44.5Q511 0 399 0ZM188 64H395Q488 64 556.5 100.5Q625 137 663.0 201.5Q701 266 701 350Q701 435 663.0 499.0Q625 563 556.5 599.5Q488 636 395 636H188Z"/><path transform="translate(2300 0)" d="M2 0 L322 700 L395 700 L715 0 L637 0 L343 657 L373 657 L79 0 Z"/><path transform="translate(3040 0)" d="M114 0V700H376Q509 700 585.5 636.5Q662 573 662 460Q662 386 627.5 332.5Q593 279 529.0 250.5Q465 222 376 222H155L188 256V0ZM592 0 412 254H492L673 0ZM188 250 155 285H374Q479 285 533.5 331.0Q588 377 588 460Q588 544 533.5 590.0Q479 636 374 636H155L188 671Z"/><path transform="translate(3740 0)" d="M420 -6Q341 -6 273.5 20.5Q206 47 156.5 95.5Q107 144 79.5 208.5Q52 273 52 350Q52 427 79.5 491.5Q107 556 156.5 604.5Q206 653 273.0 679.5Q340 706 420 706Q499 706 566.0 679.5Q633 653 682.5 605.0Q732 557 759.5 492.0Q787 427 787 350Q787 273 759.5 208.0Q732 143 682.5 95.0Q633 47 566.0 20.5Q499 -6 420 -6ZM420 60Q483 60 536.5 81.5Q590 103 629.5 142.5Q669 182 691.0 234.5Q713 287 713 350Q713 413 691.0 465.5Q669 518 629.5 557.5Q590 597 536.5 618.5Q483 640 420 640Q357 640 303.0 618.5Q249 597 209.5 557.5Q170 518 147.5 465.5Q125 413 125 350Q125 288 147.5 235.0Q170 182 209.5 142.5Q249 103 303.0 81.5Q357 60 420 60Z"/></g></symbol>
     <!-- UI icons -->
-    <symbol id="i-arrow-ne" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <!-- The MEDARO arrow (user, 2026-11-20; source: assets/icons/arrow.svg). One glyph for every arrow, in currentColor;
+         i-arrow-ne is the same arrow turned 45° (promo card). -->
+    <symbol id="i-arrow-right" viewBox="0 0 16 16"><path fill="currentColor" d="M9.04045 13.5006C9.05132 13.5116 9.38447 13.5951 9.78072 13.6861C10.177 13.7772 10.5056 13.8378 10.5108 13.8209C10.5161 13.8039 10.5571 13.5289 10.6019 13.2096C10.692 12.5686 10.9101 11.82 11.1431 11.3519C11.8694 9.893 13.1726 8.92699 14.7532 8.67591L15.1557 8.61196V7.96748V7.32295L14.7909 7.26174C12.4008 6.86077 10.8426 5.07371 10.5511 2.39938C10.5321 2.22474 10.5094 2.08191 10.5006 2.08191C10.42 2.08191 9.08438 2.40379 9.05912 2.42929C9.04085 2.44773 9.05444 2.61144 9.08936 2.79303C9.47585 4.80384 10.5825 6.44009 12.0186 7.12424L12.363 7.28836L5.2793 7.30121L0.800003 7.30937V8.6137L5.29082 8.62187L12.3578 8.63477L11.923 8.85512C10.7947 9.42671 9.90149 10.5479 9.37547 12.0529C9.22557 12.4817 8.99939 13.4592 9.04045 13.5006Z"/></symbol>
+    <symbol id="i-arrow-ne" viewBox="0 0 16 16"><path fill="currentColor" transform="rotate(-45 7.98 7.96)" d="M9.04045 13.5006C9.05132 13.5116 9.38447 13.5951 9.78072 13.6861C10.177 13.7772 10.5056 13.8378 10.5108 13.8209C10.5161 13.8039 10.5571 13.5289 10.6019 13.2096C10.692 12.5686 10.9101 11.82 11.1431 11.3519C11.8694 9.893 13.1726 8.92699 14.7532 8.67591L15.1557 8.61196V7.96748V7.32295L14.7909 7.26174C12.4008 6.86077 10.8426 5.07371 10.5511 2.39938C10.5321 2.22474 10.5094 2.08191 10.5006 2.08191C10.42 2.08191 9.08438 2.40379 9.05912 2.42929C9.04085 2.44773 9.05444 2.61144 9.08936 2.79303C9.47585 4.80384 10.5825 6.44009 12.0186 7.12424L12.363 7.28836L5.2793 7.30121L0.800003 7.30937V8.6137L5.29082 8.62187L12.3578 8.63477L11.923 8.85512C10.7947 9.42671 9.90149 10.5479 9.37547 12.0529C9.22557 12.4817 8.99939 13.4592 9.04045 13.5006Z"/></symbol>
+    <!-- Supplement V3 line icons (24px, 1.5 stroke, round: the Weight Loss icons' style) -->
+    <symbol id="i-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13.5 14-14 .2 8.6-5 14-12.5 14H5Z"/><path d="M5 19c3-4 6-6.5 10-8.5"/></g></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M10.5 3v6L5.2 18.2A1.9 1.9 0 0 0 6.9 21h10.2a1.9 1.9 0 0 0 1.7-2.8L13.5 9V3"/><path d="M7.6 15h8.8"/></g></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.75"/><circle cx="12" cy="12" r="1.1"/></g></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.75v2M12 19.25v2M2.75 12h2M19.25 12h2M5.46 5.46l1.41 1.41M17.13 17.13l1.41 1.41M5.46 18.54l1.41-1.41M17.13 6.87l1.41-1.41"/></g></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.75" cy="10.75" r="6.5"/><path d="m15.5 15.5 5 5"/></g></symbol>
+    <!-- Weight Loss care-point icons (24px line icons, currentColor) -->
+    <symbol id="i-vial" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.75" width="7" height="3" rx="0.75"/><path d="M10 5.75v1.5M14 5.75v1.5"/><rect x="7" y="7.25" width="10" height="14" rx="2"/><path d="M7 11.25h10M7 17.25h10"/></g></symbol>
+    <symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.75 3.25H5a1 1 0 0 0-1 1V9a4.5 4.5 0 0 0 9 0V4.25a1 1 0 0 0-1-1h-.75"/><path d="M8.5 13.5v1.75a4.5 4.5 0 0 0 9 0V13"/><circle cx="17.5" cy="11" r="2"/></g></symbol>
+    <symbol id="i-plan" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5H17a2 2 0 0 1 2 2V19.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h1.5"/><rect x="8.5" y="2.75" width="7" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.75A2.75 2.75 0 0 1 6.75 4h10.5A2.75 2.75 0 0 1 20 6.75v7.5A2.75 2.75 0 0 1 17.25 17H10.5L6 20.5V17h0.75A2.75 2.75 0 0 1 4 14.25Z"/><path d="M8.5 9h7M8.5 12.5h4.5"/></g></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5Z"/><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9M7.75 5.25l8.5 4.5"/></g></symbol>
   </svg>
 
   <a class="visually-hidden" href="#main">Skip to content</a>
 
-  <!-- ================= HERO V1 (after avenn) ================= -->
-  <div data-version="hero:v1">
+  <!-- ================= HERO (approved: hero V4, user 2026-11-21) ================= -->
+  <!-- SECTION:header--menu START · styles: components/header.css, components/menu.css · scripts: main.js (header, menu)
+       After the client's hims and Superpower references (2026-11-20): logo left; Get Started and a menu button right.
+       The six links live in a sheet that slides in from the right (native <dialog>: focus stays inside, Esc closes).
+       Links: Home scroll links and page links as in content/home.md. [LINK NEEDED] Get Started destination. -->
+  <header class="site-header site-header--plain site-header--compact site-header--menu" data-header>
+    <div class="site-header__bar">
+      <a class="logo" href="#top" aria-label="MEDARO, back to top"><svg aria-hidden="true"><use href="#wordmark"/></svg></a>
+      <div class="site-header__actions">
+        <a class="btn btn--dark btn--pill" href="#how-it-works">Get Started</a>
+        <button class="menu-button" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="site-menu" data-menu-open>
+          <span class="visually-hidden">Open menu</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
 
-    <!-- SECTION:header--glass START · styles: components/header.css · scripts: main.js (header)
-         Logo left · six links centred · Contact (secondary) and Get Started right. Surface: smoke (the user's pick, 2026-11-19).
-         [LINK NEEDED] Get Started destination. -->
-    <header class="site-header site-header--glass site-header--smoke" data-header data-solid-after=".hero-v1">
-      <div class="site-header__bar">
-        <a class="logo" href="#top" aria-label="MEDARO, back to top"><svg aria-hidden="true"><use href="#wordmark"/></svg></a>
-        <nav class="site-header__links" aria-label="Main">
-          <a class="link-roll" href="#weight-loss">Weight Loss</a>
-          <a class="link-roll" href="#mens-health">Men's Health</a>
-          <a class="link-roll" href="#womens-health">Women's Health</a>
-          <a class="link-roll" href="#supplements">Supplement</a>
-          <a class="link-roll" href="#how-it-works">How Medaro Works</a>
-          <a class="link-roll" href="about.html">About Us</a>
+  <dialog class="menu" id="site-menu" aria-labelledby="site-menu-title" data-menu>
+    <div class="menu__scrim" data-menu-close></div>
+    <div class="menu__panel">
+      <div class="menu__top">
+        <h2 class="menu__title" id="site-menu-title">Menu</h2>
+        <button class="menu__close" type="button" data-menu-close>
+          <span class="visually-hidden">Close menu</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+
+      <nav class="menu__nav" aria-labelledby="site-menu-explore">
+        <p class="menu__label" id="site-menu-explore">Explore</p>
+        <ul class="menu__list">
+          <li style="--i:0"><a class="menu__link link-roll" href="#weight-loss" data-menu-close>Weight Loss<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li style="--i:1"><a class="menu__link link-roll" href="#mens-health" data-menu-close>Men's Health<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li style="--i:2"><a class="menu__link link-roll" href="#womens-health" data-menu-close>Women's Health<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li style="--i:3"><a class="menu__link link-roll" href="#supplements" data-menu-close>Supplement<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li style="--i:4"><a class="menu__link link-roll" href="#how-it-works" data-menu-close>How Medaro Works<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li style="--i:5"><a class="menu__link link-roll" href="about.html">About Us<svg class="menu__arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        </ul>
+      </nav>
+
+      <!-- Top treatments, after hims' menu: a row of product cards (Rx badge, product, name) that scrolls
+           sideways. Products: the client's packs, as in the hero (client, 2026-11-20: "Put the bottle in the menu
+           also", now the Quad 4 ampoule; no pens: "we do not make the drugs"; the Supplements tablet blank, client 2026-11-21:
+           no MEDARO name on the pills). Names: the client's mock-up cards (Tirzepatide Microdose,
+           Tirzepatide Multidose) and Quad 4 (content/mens-health.md). [LINK NEEDED] treatment pages; for now the
+           landing pages and the Supplement section. -->
+      <section class="menu__treat" aria-labelledby="site-menu-treat" style="--i:6">
+        <p class="menu__label" id="site-menu-treat">Top treatments</p>
+        <ul class="treat-row">
+          <li>
+            <a class="treat-card" href="weight-loss.html">
+              <span class="treat-card__rx">Rx</span>
+              <span class="treat-card__media" aria-hidden="true">
+                <span class="pack pack--vial treat-card__pack treat-card__pack--vial"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></span>
+              </span>
+              <span class="treat-card__name">Tirzepatide Microdose</span>
+            </a>
+          </li>
+          <li>
+            <a class="treat-card" href="mens-health.html">
+              <span class="treat-card__rx">Rx</span>
+              <span class="treat-card__media" aria-hidden="true">
+                <span class="pack pack--ampoule treat-card__pack treat-card__pack--ampoule"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print" src="assets/images/products/print-ampoule-quad4-ink.svg" alt="" width="406" height="2200"></span>
+              </span>
+              <span class="treat-card__name">Quad 4</span>
+            </a>
+          </li>
+          <li>
+            <a class="treat-card" href="weight-loss.html">
+              <span class="treat-card__rx">Rx</span>
+              <span class="treat-card__media" aria-hidden="true">
+                <span class="pack pack--vial treat-card__pack treat-card__pack--vial treat-card__pack--vial-b"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-multidose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></span>
+              </span>
+              <span class="treat-card__name">Tirzepatide Multidose</span>
+            </a>
+          </li>
+          <li>
+            <a class="treat-card" href="#supplements" data-menu-close>
+              <span class="treat-card__media" aria-hidden="true"><img class="treat-card__tab treat-card__tab--white" src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665"></span>
+              <span class="treat-card__name">Supplements</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <div class="menu__foot" style="--i:7">
+        <a class="btn btn--outline btn--pill" href="contact.html">Contact</a>
+        <a class="btn btn--dark btn--pill" href="#how-it-works" data-menu-close>Get Started</a>
+      </div>
+    </div>
+  </dialog>
+  <!-- SECTION:header--menu END -->
+
+  <main id="main">
+    <!-- SECTION:home/hero START · styles: sections/home/hero.css, components/category-tile.css, components/product.css, components/stage-light.css · scripts: components/stage-light.js · assets: assets/images/products/ (stage-plate.webp, vial-tirzepatide.webp, ampoule-quad4.webp, tablet-white-blank.webp, tablet-oval-lime-blank.webp, print-vial-microdose.svg, print-ampoule-quad4.svg, sheen-vial.svg), assets/images/people/ (man-a.webp, woman-a.webp) · tools: tools/pack-print.py, tools/unmix-glass.py
+         Approved: hero V4 (user, 2026-11-21: "this one is perfect push to main"; from claude/compassionate-gates-h0ymfe).
+         The headline in two lines ("Made for" top left, "Better Health." bottom right above the cards), the client's
+         sentence under it, the products as one centred cluster (the Quad 4 ampoule, the Microdose Tirzepatide vial, two
+         blank tablets: client, 2026-11-21, no MEDARO on the pills), and the three care categories as white cards along
+         the foot (Men's and Women's Health with AI portraits, client 2026-11-21). Nothing overlaps the headline.
+         Copy: the headline is ours; the sentence and the card lines are the client's (content/home.md), word for word. -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__frame">
+
+        <div class="hero__head">
+          <h1 class="hero__title" id="hero-title"><span class="hero__title-line hero__title-line--a">Made for</span> <span class="hero__title-line hero__title-line--b">Better Health.</span></h1>
+        </div>
+
+        <p class="hero__lede">Quality medical care shouldn't be complicated. We make it easier to connect with licensed providers, explore treatment options, and get the care you need.</p>
+
+        <!-- The three care categories (client, 2026-11-20): Weight Loss and Men's Health open their pages; Women's
+             Health scrolls to its Home section, which shows the client's [Coming Soon]. -->
+        <nav class="hero__tiles" aria-label="Care">
+          <ul class="category-tiles">
+            <li>
+              <a class="category-tile category-tile--weight" href="weight-loss.html">
+                <span class="category-tile__text">
+                  <span class="category-tile__name">Weight Loss</span>
+                  <span class="category-tile__line">A better way to lose weight.</span>
+                </span>
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+                <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><span class="pack pack--vial category-tile__obj"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></span></span></span>
+              </a>
+            </li>
+            <li>
+              <a class="category-tile category-tile--mens" href="mens-health.html">
+                <span class="category-tile__text">
+                  <span class="category-tile__name">Men's Health</span>
+                  <span class="category-tile__line">Better care for men who want more.</span>
+                </span>
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+                <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj category-tile__obj--person" src="assets/images/people/man-a.webp" alt="" width="1000" height="1017" data-brief="AI-generated stand-in (Nano Banana 2.1): man portrait, chest up, olive/sage/cream clothes, warm side light, plain background removed"></span></span>
+              </a>
+            </li>
+            <li>
+              <a class="category-tile category-tile--womens" href="#womens-health">
+                <span class="category-tile__text">
+                  <span class="category-tile__name">Women's Health</span>
+                  <span class="category-tile__line">Better care for every chapter of womanhood.</span>
+                </span>
+                <span class="category-tile__go" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span>
+                <span class="category-tile__media" aria-hidden="true"><span class="category-tile__float"><img class="category-tile__obj category-tile__obj--person" src="assets/images/people/woman-a.webp" alt="" width="1000" height="1017" data-brief="AI-generated stand-in (Nano Banana 2.1): woman portrait, chest up, olive/sage/cream clothes, warm side light, plain background removed"></span></span>
+              </a>
+            </li>
+          </ul>
         </nav>
-        <div class="site-header__actions">
-          <a class="btn btn--glass btn--s" href="contact.html">Contact</a>
-          <a class="btn btn--primary btn--s" href="#how-it-works">Get Started</a>
+
+        <!-- Backdrop: the same live studio light as the approved hero -->
+        <div class="hero__media" aria-hidden="true">
+          <img class="hero__plate" src="assets/images/products/stage-plate.webp" alt="" width="3840" height="2143">
+          <canvas class="stage-light" data-stage-light data-light="dust"></canvas>
+          <div class="hero__scrim"></div>
+        </div>
+
+        <!-- Products: one cluster, centred: the Quad 4 ampoule, the Microdose vial in front, the white tablet top right,
+             the oval tablet at the vial's lower left. Pills blank (client, 2026-11-21). -->
+        <div class="hero__scene" aria-hidden="true">
+          <div class="hero__set">
+            <div class="product product--ampoule"><div class="product__float"><img src="assets/images/products/ampoule-quad4.webp" alt="" width="406" height="2200"><img class="product__print product__print--glass" src="assets/images/products/print-ampoule-quad4.svg" alt="" width="406" height="2200"></div></div>
+            <div class="product product--vial"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
+            <div class="product product--tablet-white"><div class="product__float"><img src="assets/images/products/tablet-white-blank.webp" alt="" width="669" height="665"></div></div>
+            <div class="product product--tablet-oval"><div class="product__float"><img src="assets/images/products/tablet-oval-lime-blank.webp" alt="" width="900" height="617"></div></div>
+          </div>
         </div>
       </div>
-    </header>
-    <!-- SECTION:header--glass END -->
+    </section>
+    <!-- SECTION:home/hero END -->
+
+  <!-- SECTION:home/weight-loss START · styles: sections/home/weight-loss.css · assets: assets/images/standin-weight-loss.svg · icons: sprite #i-vial #i-stethoscope #i-plan #i-chat #i-box, #i-arrow-right
+       Layout after the user's Good Life reference (video, 2026-11-19). Copy: content/home.md → Weight Loss, word for word. -->
+  <section class="wl" id="weight-loss" aria-labelledby="wl-title">
+    <div class="wl__frame">
+
+      <div class="wl__intro wl__grid">
+        <!-- Stand-in: the real photo is made after the design is approved (see data-brief). -->
+        <figure class="wl__stage media-brief" data-brief="Wide studio photo: MEDARO weight-loss set (two plain dark-olive boxes with the wordmark, frosted vial with olive cap and cream label, tablet bottle) on the left, running off the edge, soft light from the upper left on a paper backdrop; no drug names, doses or pens">
+          <img src="assets/images/standin-weight-loss.svg" alt="" width="640" height="900">
+        </figure>
+        <div class="wl__copy">
+          <p class="wl__eyebrow chip"><span>Medically guided weight management</span></p>
+          <h2 class="wl__title" id="wl-title">Real Medical Care.<br>A Better Way<br>to Lose Weight.</h2>
+          <div class="wl__body">
+            <p>Weight loss is personal. Your treatment should be too. Explore prescription weight-loss options with licensed medical providers, without the unnecessary complications of traditional care.</p>
+            <a class="btn btn--primary btn--arrow" href="weight-loss.html"><span class="btn__label">Learn more</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wl__more wl__grid">
+        <h3 class="wl__subtitle">More Than Weight Loss.<br>A Healthier Way Forward.</h3>
+        <p class="wl__lead">Just straightforward access to medical guidance and treatment options designed around your individual needs.</p>
+      </div>
+
+      <div class="wl__care">
+        <p class="wl__label" id="wl-care">Your care, made simple</p>
+        <ul class="wl__cols wl__grid" aria-labelledby="wl-care">
+          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-vial"/></svg><span class="wl__point">Personalized <span class="wl__nowrap">GLP-1</span> treatment options</span></li>
+          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-stethoscope"/></svg><span class="wl__point">Medical evaluation by licensed providers</span></li>
+          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-plan"/></svg><span class="wl__point">Treatment plans tailored to your health goals</span></li>
+          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-chat"/></svg><span class="wl__point">24/7 Convenient online consultations</span></li>
+          <li><svg class="wl__icon" aria-hidden="true"><use href="#i-box"/></svg><span class="wl__point">Fast, Discreet Delivery to Your Door</span></li>
+        </ul>
+      </div>
+
+      <!-- Not in the reference: our proposal for the two follow-on blocks. -->
+      <div class="wl__cards">
+        <article class="wl__card">
+          <h3>Your Health. One Place.<br>Total Clarity.</h3>
+          <p>Stay connected to your care without the complications. Access your treatment information, track your progress, and stay in touch with your care team—all through one convenient patient portal.</p>
+        </article>
+        <article class="wl__card">
+          <h3>Your Care Doesn't End<br>at the Prescription.</h3>
+          <p>Getting treatment is just the beginning. Stay connected with your care team for medical guidance, follow-ups, and support throughout your treatment journey.</p>
+        </article>
+      </div>
+
+      <!-- Compliance: stays visible in this section, near the claims it qualifies. -->
+      <aside class="wl__disclaimer wl__grid" aria-labelledby="wl-disclaimer">
+        <h3 id="wl-disclaimer">Medical Disclaimer</h3>
+        <p>Prescription medications are provided only when an independent licensed healthcare provider determines they are medically appropriate following a clinical evaluation. Compounded medications, when legally available and prescribed, are not FDA-approved. Services, provider access, support hours, and treatment availability may vary by state and program.</p>
+      </aside>
+
+    </div>
+  </section>
+  <!-- SECTION:home/weight-loss END -->
+
+  <!-- SECTION:home/mens-health START · styles: components/care-tiles.css, sections/home/mens-health.css · scripts: main.js (scenes, drift) · assets: assets/images/standin-mh-*.webp, assets/images/supplements/tablet-round.webp, capsule.webp
+       After the user's "When we can help" reference (2026-11-19). The page turns blue while this section holds the middle of
+       the screen (data-scene). Copy: content/home.md → Men's Health, word for word. Photos are stand-ins cropped from the hero
+       photo; real ones are made after the design is approved (data-brief). Each row repeats its tiles so it covers any width;
+       only the first set is read by screen readers. -->
+  <section class="care care--mens" id="mens-health" aria-labelledby="mh-title" data-scene="mens">
+    <div class="care__frame">
+      <p class="care__eyebrow chip"><span>Men's Health. On Your Terms.</span></p>
+      <h2 class="care__title" id="mh-title">Better Care for Men<br>Who Want More.</h2>
+      <p class="care__lede">Personalized care to help you feel your best and perform with confidence.</p>
+    </div>
+
+    <!-- The client's "Care that focuses on what matters" label is off the page (user, 2026-11-21) but still names the list for screen readers. -->
+    <div class="care__rows" role="list" aria-label="Care that focuses on what matters">
+      <div class="care__row" data-drift="-1">
+            <div class="care__tile care__tile--photo media-brief" data-brief="Man in his forties outdoors, relaxed and confident, soft daylight, olive and blue tones; real, not posed" aria-hidden="true"><img src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--text" role="listitem">Sexual Health &amp; Confidence</div>
+            <div class="care__tile care__tile--product" aria-hidden="true"><img src="assets/images/supplements/tablet-round.webp" alt="" loading="lazy"></div>
+            <div class="care__tile care__tile--text" role="listitem">Hormonal Health</div>
+            <div class="care__tile care__tile--photo media-brief" data-brief="Couple at ease together outdoors, candid, warm light; no clinical setting" aria-hidden="true"><img src="assets/images/standin-mh-couple.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--text" role="listitem">Energy &amp; Vitality</div>
+            <div class="care__tile care__tile--photo media-brief" data-brief="Man in his forties outdoors, relaxed and confident, soft daylight, olive and blue tones; real, not posed" aria-hidden="true"><img src="assets/images/standin-mh-man.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Sexual Health &amp; Confidence</div>
+            <div class="care__tile care__tile--product" aria-hidden="true"><img src="assets/images/supplements/tablet-round.webp" alt="" loading="lazy"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Hormonal Health</div>
+            <div class="care__tile care__tile--photo media-brief" data-brief="Couple at ease together outdoors, candid, warm light; no clinical setting" aria-hidden="true"><img src="assets/images/standin-mh-couple.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Energy &amp; Vitality</div>
+      </div>
+      <div class="care__row" data-drift="1" data-phase="0.5">
+            <div class="care__tile care__tile--text" role="listitem">Performance &amp; Well-Being</div>
+            <div class="care__tile care__tile--photo media-brief" data-brief="Close crop of a man running or training, motion, morning light" aria-hidden="true"><img src="assets/images/standin-mh-stride.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--text" role="listitem">Fast, Discreet Delivery</div>
+            <div class="care__tile care__tile--product" aria-hidden="true"><img src="assets/images/supplements/capsule.webp" alt="" loading="lazy"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Performance &amp; Well-Being</div>
+            <div class="care__tile care__tile--photo media-brief" data-brief="Close crop of a man running or training, motion, morning light" aria-hidden="true"><img src="assets/images/standin-mh-stride.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Fast, Discreet Delivery</div>
+            <div class="care__tile care__tile--product" aria-hidden="true"><img src="assets/images/supplements/capsule.webp" alt="" loading="lazy"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Performance &amp; Well-Being</div>
+            <div class="care__tile care__tile--photo media-brief" data-brief="Close crop of a man running or training, motion, morning light" aria-hidden="true"><img src="assets/images/standin-mh-stride.webp" alt="" width="800" height="800" loading="lazy"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Fast, Discreet Delivery</div>
+            <div class="care__tile care__tile--product" aria-hidden="true"><img src="assets/images/supplements/capsule.webp" alt="" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="care__frame care__foot">
+      <p>From sexual health to hormone concerns, get access to licensed medical providers and personalized treatment options designed around your needs. No awkward waiting rooms. No unnecessary complications. Just straightforward care that puts you first.</p>
+      <a class="btn btn--primary btn--arrow" href="mens-health.html"><span class="btn__label">Explore Men's Health</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+    </div>
+  </section>
+  <!-- SECTION:home/mens-health END -->
+
+  <!-- SECTION:home/womens-health START · styles: components/care-tiles.css, sections/home/womens-health.css · scripts: main.js (scenes, drift) · assets: assets/images/womens/ (wh-balance, wh-stretch, wh-friends, wh-midlife, wh-delivery .webp)
+       Same layout as Men's Health (user, 2026-11-20). The page turns pink while this section holds the middle of the screen
+       (data-scene). Copy: content/home.md → Women's Health, word for word (lede set in sentence case). Not live: "Coming Soon"
+       is text, not a link. Photos: five AI-generated shots in the section's pink world, a different woman in each, no products
+       (user, 2026-11-21). Each row repeats its tiles so it covers any width; only the first set is read by screen readers. -->
+  <section class="care care--womens" id="womens-health" aria-labelledby="wh-title" data-scene="womens">
+    <div class="care__frame">
+      <p class="care__eyebrow chip"><span>Women's Health. On Your Terms.</span></p>
+      <h2 class="care__title" id="wh-title">Better Care for Every<br>Chapter of Womanhood.</h2>
+      <p class="care__lede">Personalized care for every stage of life.</p>
+    </div>
+
+    <!-- The client's "Care that supports what matters" label is off the page (user, 2026-11-21) but still names the list for screen readers. -->
+    <div class="care__rows" role="list" aria-label="Care that supports what matters">
+      <div class="care__row" data-drift="-1">
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-balance.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, early 40s, standing side-bend stretch, eyes closed, braid, dusty-rose sky"></div>
+            <div class="care__tile care__tile--text" role="listitem">Hormonal Health &amp; Balance</div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-stretch.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, mid-40s, seated arm stretch on a mat by the sea, rose sunset"></div>
+            <div class="care__tile care__tile--text" role="listitem">Healthy Weight Management</div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-friends.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): two women, early 30s, laughing with rolled yoga mats by a blush plaster wall"></div>
+            <div class="care__tile care__tile--text" role="listitem">Energy &amp; Well-Being</div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-balance.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, early 40s, standing side-bend stretch, eyes closed, braid, dusty-rose sky"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Hormonal Health &amp; Balance</div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-stretch.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, mid-40s, seated arm stretch on a mat by the sea, rose sunset"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Healthy Weight Management</div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-friends.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): two women, early 30s, laughing with rolled yoga mats by a blush plaster wall"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Energy &amp; Well-Being</div>
+      </div>
+      <div class="care__row" data-drift="1" data-phase="0.5">
+            <div class="care__tile care__tile--text" role="listitem">Menopause &amp; Midlife Wellness</div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-midlife.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, mid-50s, silver-streaked hair, glass of water, sunlit blush kitchen"></div>
+            <div class="care__tile care__tile--text" role="listitem">Fast, Discreet Delivery</div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-delivery.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): hands holding a plain unbranded blush box at a rose front door"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Menopause &amp; Midlife Wellness</div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-midlife.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, mid-50s, silver-streaked hair, glass of water, sunlit blush kitchen"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Fast, Discreet Delivery</div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-delivery.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): hands holding a plain unbranded blush box at a rose front door"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Menopause &amp; Midlife Wellness</div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-midlife.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): woman, mid-50s, silver-streaked hair, glass of water, sunlit blush kitchen"></div>
+            <div class="care__tile care__tile--text" aria-hidden="true">Fast, Discreet Delivery</div>
+            <div class="care__tile care__tile--photo" aria-hidden="true"><img src="assets/images/womens/wh-delivery.webp" alt="" width="1000" height="1000" loading="lazy" data-brief="AI-generated (Magnific): hands holding a plain unbranded blush box at a rose front door"></div>
+      </div>
+    </div>
+
+    <div class="care__frame care__foot">
+      <p>From hormonal changes to menopause and everyday <span class="care__nowrap">well-being</span>, explore doctor-guided treatment options designed around your body, your needs, and your stage of life.</p>
+      <!-- Not live: the client's "Coming Soon" is a status tag, not a link (user, 2026-11-21). -->
+      <p class="care__soon"><span class="care__dot" aria-hidden="true"></span><span>Coming Soon</span></p>
+    </div>
+  </section>
+  <!-- SECTION:home/womens-health END -->
+
+  <!-- SECTION:home/supplements START · styles: sections/home/supplements.css · scripts: main.js (reveal) · assets: assets/images/supplements/sp-woman.webp, assets/icons/supplement-heart.webp, supplement-sprout.webp
+       Approved 2026-11-23 (user: "this is the final one"; V3 of the exploration, replaces V1, the deep olive scene). After
+       the user's "Everything you need to stay aligned — in one place." reference: left, the chip, heading, the client's two
+       statements as cards with illustrated icons, the CTA and the closing line; right, the woman photo with the five
+       details in one frosted glass card. Copy: content/home.md → Supplement, word for word; placement changed, no words.
+       [LINK NEEDED] Explore Supplements. -->
+  <section class="sp" id="supplements" aria-labelledby="sp-title">
+    <div class="sp__frame">
+      <div class="sp__side">
+        <div class="sp__head">
+          <p class="sp__eyebrow chip"><span>More Than Just Supplement</span></p>
+          <h2 class="sp__title" id="sp-title">Supplements designed to support better health and lasting wellness</h2>
+        </div>
+        <!-- Cards and CTA held at the foot, level with the photo's bottom edge (user, 2026-11-21: "push bottom part down … use
+             space between so that it looks and fits image height") -->
+        <div class="sp__lower">
+        <!-- The client's two statements as two equal cards with an icon (user, 2026-11-21: the rows looked "too plain and
+             uneven"; after Intercom's two-up cards and Slash's icon rows on Mobbin). Icons: Magnific, in the style of the
+             user's gradient icon sheet, our greens, cut out; no frame (user, 2026-11-21). -->
+        <div class="sp__points">
+          <div class="sp__point">
+            <img class="sp__point-icon" src="assets/icons/supplement-heart.webp" alt="" width="512" height="512">
+            <h3>Better support for your everyday health.</h3>
+            <p>Thoughtfully formulated supplements with quality ingredients, designed to support your wellness goals and help you feel your best every day.</p>
+          </div>
+          <div class="sp__point">
+            <img class="sp__point-icon" src="assets/icons/supplement-sprout.webp" alt="" width="512" height="512">
+            <h3>Better wellness starts with better choices.</h3>
+            <p>Thoughtfully selected ingredients and purposeful formulations to complement your daily routine and support your health goals.</p>
+          </div>
+        </div>
+        <div class="sp__foot">
+          <a class="btn btn--primary btn--arrow" href="#supplements-link"><span class="btn__label">Explore Supplements</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+          <p class="sp__note">Formulated supplements designed to support your body's needs and overall <span class="sp__nowrap">well-being</span>.</p>
+        </div>
+        </div>
+      </div>
+
+      <!-- Photo: the woman (Magnific, the user's pick, 2026-11-21); brief in data-brief. The five details as glass cards over it,
+           after the user's "Appointment confirmed" card. The list's label is off the page (user: "i dont need that text"). -->
+      <div class="sp__panel media-brief" data-reveal data-brief="Photo, portrait: everyday wellness with the MEDARO supplements: a person outdoors or at home in warm natural light, our olive and sage tones; plain supplement jar, no drug names and no MEDARO on the bottle">
+        <!-- The user's pick of three (2026-11-21: "use the woman image"), cropped in about 1.44× so she fills the panel; her
+             head never cut and her chin above the card's top edge at every width -->
+        <img class="sp__photo" src="assets/images/supplements/sp-woman.webp" alt="" width="1600" height="1778" loading="lazy">
+        <p class="visually-hidden" id="sp-details">The difference is in the details:</p>
+        <!-- One glass card with the five details, after the user's list card (icon tile, name, a grey second line).
+             Second lines: words from the client's own paragraphs (case changed), a proposal to confirm. [COPY NEEDED] -->
+        <div class="sp__card">
+          <ul class="sp__list" aria-labelledby="sp-details">
+            <li class="sp__item"><span class="sp__item-icon" aria-hidden="true"><svg><use href="#i-leaf"/></svg></span><span class="sp__item-text"><span class="sp__item-name">Quality Ingredients</span><span class="sp__item-line">Thoughtfully formulated</span></span></li>
+            <li class="sp__item"><span class="sp__item-icon" aria-hidden="true"><svg><use href="#i-flask"/></svg></span><span class="sp__item-text"><span class="sp__item-name">Transparent Formulations</span><span class="sp__item-line">Purposeful formulations</span></span></li>
+            <li class="sp__item"><span class="sp__item-icon" aria-hidden="true"><svg><use href="#i-target"/></svg></span><span class="sp__item-text"><span class="sp__item-name">Targeted Nutritional Support</span><span class="sp__item-line">Support your wellness goals</span></span></li>
+            <li class="sp__item"><span class="sp__item-icon" aria-hidden="true"><svg><use href="#i-sun"/></svg></span><span class="sp__item-text"><span class="sp__item-name">Everyday Wellness</span><span class="sp__item-line">Feel your best every day</span></span></li>
+            <li class="sp__item"><span class="sp__item-icon" aria-hidden="true"><svg><use href="#i-search"/></svg></span><span class="sp__item-text"><span class="sp__item-name">Thoughtful Ingredient Selection</span><span class="sp__item-line">Thoughtfully selected ingredients</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- SECTION:home/supplements END -->
+
+  <!-- SECTION:home/how-it-works START · styles: components/steps.css, sections/home/how-it-works.css · scripts: main.js (steps, scenes) · assets: assets/images/standin-step-*.webp
+       After the user's Givingli reference (2026-11-20): the stage pins while you scroll; number, card and text change step by
+       step with a smooth roll / slide. The page turns sage while this section holds the middle of the screen (data-scene).
+       Copy: content/home.md → How Medaro Works, word for word. Cards hold one image each, no text (user, 2026-11-20); stand-ins until the photos are made (data-brief).
+       [LINK NEEDED] Get Started destination (brief says "Home Page"). -->
+  <section class="steps steps--home" id="how-it-works" aria-labelledby="hiw-title" data-scene="steps" data-steps>
+    <div class="steps__head">
+      <p class="steps__eyebrow chip"><span>How Medaro Works</span></p>
+      <h2 class="steps__title" id="hiw-title">Better Health Starts<br>in Three Simple Steps.</h2>
+    </div>
+
+    <div class="steps__track" data-steps-track>
+      <div class="steps__stage">
+        <div class="steps__inner">
+          <div class="steps__num" aria-hidden="true"><span>0</span><span class="steps__digits"><span>1</span><span>2</span><span>3</span></span></div>
+
+          <ol class="steps__list">
+            <li class="steps__item" data-step data-state="active" aria-current="step">
+              <div class="steps__card media-brief" data-brief="Photo, wide: a person at home completing the online health assessment on a phone or laptop, relaxed, natural light" aria-hidden="true"><img src="assets/images/standin-step-1.webp" alt="" width="1280" height="790" loading="lazy"></div>
+              <div class="steps__text">
+                <h3>Tell Us About Yourself</h3>
+                <p>Complete a quick online health assessment to help us understand your medical history, needs, and treatment goals.</p>
+              </div>
+            </li>
+            <li class="steps__item" data-step data-state="after">
+              <div class="steps__card media-brief" data-brief="Photo, wide: a licensed provider reviewing a patient's information on a laptop, hands and screen only (no lab coat, no name); or the MEDARO range in macro" aria-hidden="true"><img src="assets/images/standin-step-2.webp" alt="" width="1280" height="790" loading="lazy"></div>
+              <div class="steps__text">
+                <h3>Get Expert Medical Guidance</h3>
+                <p>A licensed medical provider reviews your information and determines the most appropriate treatment options for you. If medically appropriate, a prescription may be issued.</p>
+              </div>
+            </li>
+            <li class="steps__item" data-step data-state="after">
+              <div class="steps__card media-brief" data-brief="Photo, wide: a plain, discreet MEDARO box arriving at a front door, natural light; no drug names" aria-hidden="true"><img src="assets/images/standin-step-3.webp" alt="" width="1280" height="790" loading="lazy"></div>
+              <div class="steps__text">
+                <h3>Get Your Treatment Delivered</h3>
+                <p>If prescribed, your medication can be shipped discreetly to your door through a licensed pharmacy, so you can begin your treatment plan with confidence.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps__foot">
+      <a class="btn btn--primary btn--arrow" href="#get-started-link"><span class="btn__label">Get Started</span><span class="btn__icon" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+    </div>
+  </section>
+  <!-- SECTION:home/how-it-works END -->
 
     <main id="main">
       <!-- SECTION:home/hero--v1 START · styles: sections/home/hero--v1.css, components/promo-card.css · assets: assets/images/hero-run.webp, assets/images/standin-supplement.svg
@@ -148,6 +588,95 @@
     </main>
   </div>
 
+  <!-- SECTION:footer--full START · styles: components/footer.css, components/product.css · scripts: main.js (rolling links) · assets: assets/images/products/ (vial-tirzepatide.webp, print-vial-microdose.svg, sheen-vial.svg), assets/badges/hipaa-compliant.png
+       Design after the user's Ethical Life footer (2026-11-21): brand line top left, link columns top right, the MEDARO
+       wordmark across the foot behind the products ("i want our logo back of the suplement pic"), no glow; mist panel
+       on the frame, radius 18. Content: the client's footer (content/footer.md, word for word; user, 2026-11-21: "make
+       this footer according to this content and instead of tablets use bottles"). Product: the hero's Microdose Tirzepatide
+       vial only, large and centred, in front of the wordmark in ink (user, 2026-11-21).
+       [DATA NEEDED] LegitScript badge (a placeholder in the client's copy).
+       Legal pages (legal/<slug>.html) not built yet. -->
+  <footer class="site-footer site-footer--full">
+    <div class="site-footer__frame">
+
+      <div class="site-footer__top">
+        <div class="site-footer__brandline">
+          <p class="site-footer__tagline">Made for<br>Better Health.</p>
+          <ul class="site-footer__badges">
+            <li class="site-footer__badge site-footer__badge--placeholder">
+              <span class="site-footer__badge-tag">Placeholder</span>
+              <span class="site-footer__badge-text">Official LegitScript badge – placeholder only</span>
+            </li>
+            <!-- The client's HIPAA badge (user, 2026-11-21), recoloured to our ink: assets/badges/hipaa-compliant.png
+                 (original as delivered: hipaa-compliant-original.png) -->
+            <li class="site-footer__badge site-footer__badge--hipaa">
+              <img src="assets/badges/hipaa-compliant.png" alt="HIPAA Compliant" width="523" height="282">
+            </li>
+          </ul>
+        </div>
+
+        <div class="site-footer__cols">
+          <nav class="site-footer__col" aria-labelledby="footer-shop">
+            <p class="site-footer__label" id="footer-shop">Shop</p>
+            <ul class="site-footer__list">
+              <li><a class="link-roll" href="mens-health.html">Men's Health</a></li>
+              <li><a class="link-roll" href="#womens-health">Women's Health</a></li>
+            </ul>
+          </nav>
+
+          <nav class="site-footer__col" aria-labelledby="footer-support">
+            <p class="site-footer__label" id="footer-support">Support</p>
+            <ul class="site-footer__list">
+              <li><a class="link-roll" href="contact.html">Contact Us</a></li>
+              <li><a class="link-roll" href="legal/frequently-asked-questions.html">FAQs</a></li>
+            </ul>
+          </nav>
+
+          <nav class="site-footer__col" aria-labelledby="footer-legal">
+            <p class="site-footer__label" id="footer-legal">Legal</p>
+            <ul class="site-footer__list site-footer__list--split">
+              <li><a class="link-roll" href="legal/terms-of-use.html">Terms of Use</a></li>
+              <li><a class="link-roll" href="legal/privacy-policy.html">Privacy Policy</a></li>
+              <li><a class="link-roll" href="legal/notice-of-privacy-practices.html">HIPAA Notice of Privacy Practices</a></li>
+              <li><a class="link-roll" href="legal/cancellation-and-refund-policy.html">Returns &amp; Refund Policy</a></li>
+              <li><a class="link-roll" href="legal/california-privacy-disclosures.html">California Privacy Notice</a></li>
+              <li><a class="link-roll" href="legal/sms-and-mobile-terms.html">SMS Terms and Conditions</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <!-- The client's disclaimers, word for word (content/footer.md). Company name MEDARO and phone +1 559 236 8812 (client, 2026-11-23). -->
+      <div class="site-footer__fine">
+        <p>MEDARO operates as a marketplace platform connecting patients with independently licensed healthcare providers who deliver care through the MEDARO Patient Portal. MEDARO does not dispense medication or provide medical services directly; all clinical decisions rest solely with independent providers. Payment does not guarantee that a prescription will be written or that medication will be dispensed. Any prescription issued reflects only the professional judgment of the healthcare provider.</p>
+        <p>Where we operate: MEDARO services are available only to patients physically located in U.S. states where our affiliated providers are licensed. Availability varies by state, by treatment, and over time, and some products are not offered in every state. Eligibility is confirmed during intake, and if care cannot be offered in your state you will not be charged. Email <a href="mailto:support@mymedaro.com">support@mymedaro.com</a> to confirm availability where you live.</p>
+        <p>Prescription products: medications shown on this site require a valid prescription from a licensed provider following an evaluation. Pricing reflects the cost of the medication and associated clinical services when prescribed; it is not an offer to sell a prescription medication and does not guarantee approval.</p>
+        <p>Subscriptions: multi-month plans are billed as described at checkout and renew automatically until cancelled. You may cancel at any time before your next renewal by emailing <a href="mailto:support@mymedaro.com">support@mymedaro.com</a> or calling <a href="tel:+15592368812">+1 559 236 8812</a>. See our Terms of Service and Returns &amp; Refunds policy.</p>
+        <p>The information on this site is provided for general informational purposes only and is not a substitute for individualized medical advice, diagnosis, or treatment. Always consult your licensed healthcare provider about any medical concerns. This platform advertises healthcare services, not any specific prescription medication.</p>
+        <p>Disclaimer: FDA-approved brand-name medications, including Wegovy® and Ozempic®, are made and distributed solely by Novo Nordisk®. Mounjaro® and Zepbound® are made and distributed solely by Eli Lilly and Company®. MEDARO is not affiliated with, endorsed by, or sponsored by any of these companies or their products.</p>
+        <p>Compounded medications are not reviewed or approved by the U.S. Food and Drug Administration (FDA) for safety or efficacy. They are, however, prepared by licensed compounding pharmacies in accordance with Section 503A of the Federal Food, Drug, and Cosmetic Act, which permits compounding based on a valid patient-specific prescription from a licensed healthcare provider.</p>
+      </div>
+
+      <!-- Bottom bar between two hairlines, just above the wordmark (user, 2026-11-21, after their UGC reference;
+           the client's words, content/footer.md) -->
+      <div class="site-footer__bar">
+        <p class="site-footer__copy">© 2026 MEDARO. All rights reserved.</p>
+        <p class="site-footer__motto">Measured · Prescribed · Delivered</p>
+      </div>
+
+      <!-- The wordmark (ink) behind the Microdose Tirzepatide vial, large and centred (user, 2026-11-21) -->
+      <div class="site-footer__brand" aria-hidden="true">
+        <svg class="site-footer__mark"><use href="#wordmark"/></svg>
+        <div class="site-footer__scene">
+          <div class="product product--vial"><div class="product__float"><img src="assets/images/products/vial-tirzepatide.webp" alt="" width="466" height="1100"><img class="product__print" src="assets/images/products/print-vial-microdose.svg" alt="" width="466" height="1100"><img class="product__sheen" src="assets/images/products/sheen-vial.svg" alt="" width="466" height="1100"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  <!-- SECTION:footer--full END -->
+
   <script src="main.js" defer></script>
+  <script src="components/stage-light.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,36 @@
+/* ==========================================================================
+   Order Now + See Pricing (client, 2026-11-27, Men's Health: "add on the left
+   side of the blue bottle [Order now] and right side [See Pricing] let both be
+   big", and the same pair in "Four Ingredients. Different Mechanisms.").
+   Both buttons are xl (styles.css: 52–62px, 58 at 1440) and the same width,
+   so they balance around whatever sits between them. Order Now is the
+   primary: the page's dark pill. See Pricing is the secondary: a navy ring
+   on the page colour (the client's pick of three looks, 2026-11-28: sky,
+   outline, navy; outline approved).
+   After Mobbin: Square ("Learn more" / "Buy now"), hims ED ("Get started" /
+   "Is this right for me?"): one solid primary, a quieter partner, same size.
+   Framer: Button component, size XL, variants Navy and Navy Outline.
+   ========================================================================== */
+
+.cta-pair__btn {
+  min-width: clamp(190px, 14vw, 240px); /* 202 at 1440 */
+}
+
+/* the secondary: a 1.5px navy ring on the page colour */
+.cta-pair__btn--secondary {
+  --btn-bg: transparent;
+  background: var(--btn-bg);
+  color: var(--p-ink);
+  box-shadow: inset 0 0 0 1.5px var(--p-ink);
+}
+.cta-pair__btn--secondary:hover {
+  --btn-bg: color-mix(in srgb, var(--p-ink) 6%, transparent);
+}
+
+/* the client's prescription line, kept with the pair (content/footer.md) */
+.cta-pair__note {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}

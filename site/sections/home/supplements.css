@@ -1,0 +1,221 @@
+/* ==========================================================================
+   Home · Supplement. Approved 2026-11-23 ("this is the final one"): V3 of
+   the exploration on claude/festive-newton-eatsba, which replaces V1 (the
+   deep olive scene). V2 was scrapped by the user.
+   After the user's "Everything you need to stay aligned — in one place."
+   reference (hairline rows left, a rounded visual with stacked cards
+   right), then the user's round 2 (2026-11-21):
+   - "simple left right": the chip and heading sit above the two statements
+     in the left column, beside the panel (text sizes brought down to fit);
+   - "image on bg and those cards make them glassy like image 3": the
+     panel is a photo, the five details are frosted glass cards over it,
+     after their "Appointment confirmed" card (a small image tile left, the
+     title, a white check circle right);
+   - "i dont need that text": the panel's label is off the page (it still
+     names the list for screen readers).
+   Round 3 (2026-11-21): the right becomes one glass card with five rows
+   (a white line icon in a tile, the name, a grey second line; "no tablet
+   good simple icons"), and the two statements on the left become two
+   equal mist cards with an icon ("too plain and uneven"), the CTA with the
+   closing line beside it.
+   Alive: the card rises in and its rows follow one after another when the
+   panel comes into view (main.js, data-reveal); a row lights on hover.
+   Reduced motion: all still.
+   Light page like the reference (no scene: paper between Women's pink and
+   How Medaro Works' sage). Content on the header's logo line.
+   Copy: content/home.md → Supplement, word for word ("Support" in lower
+   case); placement changed, no words. [LINK NEEDED] Explore Supplements.
+   ========================================================================== */
+
+.sp {
+  --sp-pad: clamp(112px, 10vw, 192px);
+  padding: var(--sp-pad) calc(var(--frame-side) + 48px);
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+.sp__frame {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(32px, 4vw, 80px);
+  max-width: calc(var(--frame-max) - 96px);
+  margin-inline: auto;
+}
+
+/* ---------- Left: chip, heading, the two statements, CTA ---------- */
+/* The left column fills the photo's height: heading at the top, the cards
+   and CTA at the foot, the room between them (user, 2026-11-21: "push
+   bottom part down so it remains down, use space between so that it looks
+   and fits image height") */
+.sp__side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(40px, 3.6vw, 64px); /* never closer than this */
+}
+.sp .chip { margin-bottom: 24px; } /* leaf green on paper (styles.css default) */
+.sp__title {
+  max-width: 13em;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 3.3vw, 64px);
+  font-weight: var(--weight-regular);
+  line-height: 1.04;
+  letter-spacing: -0.038em;
+  text-wrap: balance;
+}
+
+/* The client's two statements as two equal cards with an icon (user,
+   2026-11-21: the rows looked "too plain and uneven"; after Intercom's
+   two-up cards and Slash's icon rows on Mobbin): mist cards, radius 12 like
+   our other cards, an ink icon tile, the title and the paragraph. */
+.sp__points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.sp__point {
+  padding: clamp(20px, 1.8vw, 32px);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+/* the icon: an illustrated icon on the card itself, no frame (user,
+   2026-11-21: "generate 2 icons … we will remove whole frame … similar to
+   image 1 style"; Magnific, after their gradient icon sheet, our greens) */
+.sp__point-icon {
+  display: block;
+  width: clamp(30px, 2.4vw, 46px); /* half the first size (user, 2026-11-21: "too big make it half") */
+  height: auto;
+  aspect-ratio: 1;
+  margin: -2px 0 0 -2px; /* the art's own margin back onto the text line */
+}
+.sp__point h3 {
+  margin-top: clamp(28px, 2.6vw, 48px);
+  font-size: clamp(20px, 1.5vw, 28px);
+  font-weight: var(--weight-regular);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.sp__point p {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+/* the CTA with the client's closing line beside it, both on the photo's
+   bottom line */
+.sp__foot {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  margin-top: clamp(28px, 2.4vw, 40px);
+}
+.sp__nowrap { white-space: nowrap; }
+.sp__note {
+  max-width: 24em;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Right: the photo with the glass card ----------
+   The photo covers the panel: a woman shot from below against a sage sky
+   (Magnific, the user's pick of three, 2026-11-21: "use the woman image …
+   make it bigger … i dont want to cut women head"), cropped in so she fills
+   the panel, held at the top so her head stays whole. The
+   card sits in the middle of the photo (user, 2026-11-21: "make it center
+   to the image as we will be changing the image"). */
+.sp__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: clamp(560px, 48vw, 900px);
+  padding: clamp(20px, 2vw, 36px);
+  overflow: hidden;
+  border-radius: var(--radius-m);
+  background: #9db5a6; /* the photos' sage sky while they load */
+  color: #fff;
+  isolation: isolate;
+}
+.sp__photo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0%; /* held at the top: her head is never cut; a wider panel trims the foot */
+}
+
+/* One glass card holding the five details, after the user's list card
+   (2026-11-21: "on right lets do like this no tablet good simple icons"):
+   warm dark frosted glass, radius 16; each row an icon tile (a lighter pane
+   of the glass, a white line icon), the name and a grey second line. */
+.sp__card {
+  width: min(100%, 506px); /* 15% larger (user, 2026-11-21: "increase this card by 15%"), everything inside with it */
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(44, 38, 32, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 16px 36px -18px rgba(16, 18, 12, 0.6);
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+}
+.sp__list {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sp__item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 7px 14px 7px 7px;
+  border-radius: 12px;
+  transition: background-color var(--dur-base) var(--ease-out), opacity 640ms var(--ease-out), transform 640ms var(--ease-out);
+}
+.sp__item:hover { background: rgba(255, 255, 255, 0.06); }
+.sp__item-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(46px, 3.45vw, 60px);
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.sp__item-icon svg { width: 46%; height: 46%; }
+.sp__item-text { display: grid; gap: 2px; }
+.sp__item-name {
+  font-size: clamp(18px, 1.38vw, 23px);
+  font-weight: var(--weight-medium);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+.sp__item-line {
+  font-size: clamp(15px, 1.09vw, 17px);
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* rise in, one after another, when the panel comes into view (main.js adds
+   .is-in): the card fades up, then its rows, 60ms apart */
+.sp__card { transition: opacity 640ms var(--ease-out), transform 640ms var(--ease-out); }
+.sp__item:nth-child(1) { transition-delay: 0ms, 120ms, 120ms; }
+.sp__item:nth-child(2) { transition-delay: 0ms, 180ms, 180ms; }
+.sp__item:nth-child(3) { transition-delay: 0ms, 240ms, 240ms; }
+.sp__item:nth-child(4) { transition-delay: 0ms, 300ms, 300ms; }
+.sp__item:nth-child(5) { transition-delay: 0ms, 360ms, 360ms; }
+.sp__panel[data-reveal]:not(.is-in) .sp__card { opacity: 0; transform: translateY(20px); }
+.sp__panel[data-reveal]:not(.is-in) .sp__item { opacity: 0; transform: translateY(10px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sp__panel[data-reveal]:not(.is-in) .sp__card,
+  .sp__panel[data-reveal]:not(.is-in) .sp__item { opacity: 1; transform: none; }
+}
