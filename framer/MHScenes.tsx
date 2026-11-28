@@ -7,7 +7,8 @@ import { forwardRef, useEffect, type ComponentType } from "react"
  * screen, the page turns deep navy: the "MH Scene …" colour styles are set on <body>
  * as CSS variables, registered with @property so they fade over 700ms
  * cubic-bezier(0.65, 0, 0.35, 1), like the HTML's tokens. Reduced motion: instant.
- * Only layers that use the MH Scene styles change (sections 4–8 of the page).
+ * Only layers that use the MH Scene styles change (sections 4–8 of the page), and the
+ * Button's "Scene L" variant (MH Scene Button / Hover / Label: navy → sky, like .btn--dark).
  * Separate from Scenes.tsx (Home and About keep their own scene set).
  */
 const V = {
@@ -18,6 +19,9 @@ const V = {
     line: "--token-pJMZvn6ih",
     chip: "--token-AnceJ5h4S",
     dots: "--token-DD8DzLKdr",
+    button: "--token-KaajoQmEe",
+    buttonHover: "--token-HRMVsi7gy",
+    buttonLabel: "--token-PdlSYBG4C",
 }
 type Values = Record<keyof typeof V, string>
 // The page at rest: the Men's paper (styles.css → :root[data-page="mens-health"])
@@ -29,6 +33,10 @@ const REST: Values = {
     line: "rgba(31, 57, 87, 0.14)",
     chip: "#0a6fc7",
     dots: "rgba(31, 57, 87, 0.22)",
+    // the dark pill (btn--dark): navy, deep on hover, paper label
+    button: "#1f3957",
+    buttonHover: "#162a40",
+    buttonLabel: "#edf2f8",
 }
 // The navy scene: --p-deep, its surface (deep 90% + paper), paper text, muted = paper 74% on deep, the sky chip
 const NAVY: Values = {
@@ -39,6 +47,10 @@ const NAVY: Values = {
     line: "rgba(237, 242, 248, 0.16)",
     chip: "#a7d5ff",
     dots: "rgba(237, 242, 248, 0.22)",
+    // in the scene the dark pill turns sky with a navy label (ongoing.css: :root[data-scene="mh-ongoing"] .btn--dark)
+    button: "#a7d5ff",
+    buttonHover: "#8cc8ff",
+    buttonLabel: "#1f3957",
 }
 const SCENES: Array<{ id: string; values: Values }> = [{ id: "mh-ongoing", values: NAVY }]
 
