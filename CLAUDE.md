@@ -66,7 +66,7 @@ Use the same class names everywhere (BEM-ish: `.hero__title`, `.btn--primary`). 
 
 | Page | File | Copy | Nav |
 |---|---|---|---|
-| Home | `index.html` | `content/home.md` | Full header, **the approved menu header** (2026-11-20): **logo left · Log In (text link, client 2026-11-28) + Get Started + round menu button right**; the six links, Contact and Get Started live in the menu sheet. Weight Loss · Men's Health · Women's Health · Supplement · How Medaro Works **scroll** to sections on Home (like home.medvi.org). About Us and Contact **open pages** (Contact goes to the Contact Support page). |
+| Home | `index.html` | `content/home.md` | Full header, **the approved menu header** (2026-11-20): **logo left · Log In (text link, client 2026-11-28) + Get Started + round menu button right**; the six links, Contact and Get Started live in the menu sheet. Weight Loss · Men's Health · Women's Health · Supplement · How Medaro Works **scroll** to sections on Home (like home.medvi.org). About Us **opens its page**; **Contact opens an email to `support@mymedaro.com`** (`mailto:`, client, 2026-11-28), as does the footer's Contact Us. |
 | About Us | `about.html` | `content/about.md` | Full header |
 | Contact Support | `contact.html` | **[COPY NEEDED]** | Full header |
 | Weight Loss landing | `weight-loss.html` | `content/weight-loss.md` | **No links to Home or any other page.** Logo is not a link. Every CTA goes to the Weight Loss intake form. The one exception is the header's **Log In** (client, 2026-11-28: "add log in too all pages"), which goes to the patient login `[LINK NEEDED]`. |
@@ -90,7 +90,7 @@ Women's Health has no page: every Women's Health link scrolls to the `#womens-he
 ## Open questions (ask the user, then move the answer into the right section)
 
 - Intake form URLs (weight loss, men's health) and the Supplements link.
-- Contact Support page copy (email, phone, hours, form?).
+- Contact Support page: Contact is a `mailto:support@mymedaro.com` for now (client, 2026-11-28). Ask whether a page (phone, hours, form) is still wanted.
 - Landing-page footer: may it link to Privacy / Terms? (Ad platforms and state laws usually require it, even when the page has no other links.)
 - Photography and product renders: **images are made after the user confirms a design** (user, 2026-11-19). Until then use stand-ins (`assets/images/standin-*.svg`, or UI built in code) and write the photo brief in `data-brief`.
 - Body/UI typeface: the logo is Montserrat; is there a brand palette or font beyond the logo?
