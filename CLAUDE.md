@@ -66,14 +66,14 @@ Use the same class names everywhere (BEM-ish: `.hero__title`, `.btn--primary`). 
 
 | Page | File | Copy | Nav |
 |---|---|---|---|
-| Home | `index.html` | `content/home.md` | Full header, **the approved menu header** (2026-11-20): **logo left · Get Started + round menu button right, no login**; the six links, Contact and Get Started live in the menu sheet. Weight Loss · Men's Health · Women's Health · Supplement · How Medaro Works **scroll** to sections on Home (like home.medvi.org). About Us and Contact **open pages** (Contact goes to the Contact Support page). |
+| Home | `index.html` | `content/home.md` | Full header, **the approved menu header** (2026-11-20): **logo left · Log In (text link, client 2026-11-28) + Get Started + round menu button right**; the six links, Contact and Get Started live in the menu sheet. Weight Loss · Men's Health · Women's Health · Supplement · How Medaro Works **scroll** to sections on Home (like home.medvi.org). About Us and Contact **open pages** (Contact goes to the Contact Support page). |
 | About Us | `about.html` | `content/about.md` | Full header |
 | Contact Support | `contact.html` | **[COPY NEEDED]** | Full header |
-| Weight Loss landing | `weight-loss.html` | `content/weight-loss.md` | **No links to Home or any other page.** Logo is not a link. Every CTA goes to the Weight Loss intake form. |
-| Men's Health landing | `mens-health.html` | `content/mens-health.md` | **No links to Home or any other page.** Every CTA goes to the Men's Health (ED) intake form. |
+| Weight Loss landing | `weight-loss.html` | `content/weight-loss.md` | **No links to Home or any other page.** Logo is not a link. Every CTA goes to the Weight Loss intake form. The one exception is the header's **Log In** (client, 2026-11-28: "add log in too all pages"), which goes to the patient login `[LINK NEEDED]`. |
+| Men's Health landing | `mens-health.html` | `content/mens-health.md` | **No links to Home or any other page.** Every CTA goes to the Men's Health (ED) intake form. The one exception is the header's **Log In** (client, 2026-11-28: "add log in too all pages"), which goes to the patient login `[LINK NEEDED]`. |
 | Legal (11) | `legal/<slug>.html` | `content/source/legal/*.pdf` | Footer links. Docs have placeholders like `[BRAND_NAME]`, `[EFFECTIVE_DATE]`: keep them visible until the client fills them. |
 
-Women's Health has no page: every Women's Health link scrolls to the `#womens-health` section on Home, whose CTA is the client's **[Coming Soon]** (client, 2026-11-20). Intake form URLs, the Supplements link and the hero CTA are unknown: use `#intake-weight-loss`, `#intake-mens-health`, `#supplements-link` and mark `[LINK NEEDED]`.
+Women's Health has no page: every Women's Health link scrolls to the `#womens-health` section on Home, whose CTA is the client's **[Coming Soon]** (client, 2026-11-20). **Supplements is Coming Soon too** (client, 2026-11-28): no Explore Supplements button, the Coming Soon tag instead. **Every Men's Health click goes to the Men's Health (Quad 4) landing page and every Weight Loss click to the Weight Loss landing page** (client, 2026-11-28), not to the Home sections. Intake form URLs, the Supplements link and the hero CTA are unknown: use `#intake-weight-loss`, `#intake-mens-health`, `#supplements-link` and mark `[LINK NEEDED]`.
 
 ## Copy and compliance (telehealth: this matters)
 
