@@ -308,6 +308,10 @@ The user: "other chat is already working on first 3 sections of mens page its tr
 
 **Not watched:** Framer Preview and the published site (not published; publish only when the user asks). Check there: the step list turning and pausing, the dial pinning and the navy scene (desktop), the FAQ opening and closing, the card hover, and Safari.
 
+### Footer ampoule: letters no longer show through (2026-11-28)
+
+The user (screenshot of the Men's landing footer, "Landing (Men's Health)" template): "this bottle is transparent so we can see words that are behind can we fix that?". The floating Quad 4 ampoule (`mh-ampoule-still.webp`, see-through glass from `tools/unmix-glass.py`) sat over the big MEDARO wordmark, so the D and Λ showed through the glass and the liquid. **Fixed without a new render:** the **Float** layer (`ihrRntIvp`, it keeps its loop and the parent's `withRiseIn`) no longer carries the image; it holds **Backing (panel colour, bottle shape)** (absolute, fill **MH Mist**, the panel's own style, masked with `mh-ampoule-still-silhouette.png` in alpha mode) under **Glass** (the same image). The silhouette is the image's outline (alpha > 5/255, the outside flood-filled from the edges so the clear glass inside counts as bottle, 0.8px soft edge; 406 × 2200 like the image). So the glass now reads as glass over the plain panel everywhere, and what is behind it (wordmark, bar hairlines) is hidden. Tablet and phone inherit. If the panel colour changes, the backing follows the style. Home's footer vial is not changed.
+
 ## Links (`[LINK NEEDED]`)
 
 **Linked 2026-11-24:** menu Weight Loss → `/#weight-loss` (closes the sheet). **Linked 2026-11-23:** menu Men's Health, Women's Health, Supplement, How Medaro Works → `/#mens-health`, `/#womens-health`, `/#supplements`, `/#how-it-works` (and they close the sheet); header and menu Get Started → `/#how-it-works` (as in the HTML); the hero's Women's Health card and the footer's Women's Health → `/#womens-health`; the menu's Supplements card → `/#supplements`; the disclaimers' email (`mailto:`) and phone (`tel:+15592368812`).
