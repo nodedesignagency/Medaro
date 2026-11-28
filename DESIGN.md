@@ -71,6 +71,7 @@ Contrast: ink on paper ≈ 10:1, ink on lime ≈ 8.6:1, ink on sage ≈ 5.2:1, p
 - Spacing on a 4px base: `--space-1` (4) … `--space-11` (160).
 - **The frame (user, 2026-11-19, after avenn):** `--edge` 16px, `--frame-max` 1888px, `--frame-side` = max(16px, (100% − 1888px) / 2). The glass nav sits on the frame edges and **hero content shares exactly those edges**: left blocks start where the nav bar starts, right blocks end where it ends. 32px between the nav bar and the first content row, 16px from the bottom. Big headlines use `text-box: trim-both cap alphabetic` and small optical offsets so the letters themselves (not their line boxes) sit on the edges; checked by measuring the rendered pixels at 1280, 1440 and 1920. Past 1888px (zooming out, big screens) the frame stops growing and centres; full-bleed photos still fill the screen.
 - Container max 1520px, gutter 40px, 12-column grid, 24px gap. Header 84px.
+- **Section-head rhythm (user, 2026-11-28: "uneven spacing many place … chip and heading has different spacing"; Mobbin: Function, Superpower, Calm, Hims):** chip → heading **24 / 20 / 16** (desktop / tablet / phone), heading → lede **24 / 20 / 16**, text → button **32 / 28 / 24**. Every section head on every page uses these; cards keep their own smaller rhythm (16). In Framer since 2026-11-28 (`FRAMER.md` → Spacing pass); `main`'s HTML still has 28px chip → headline (`.chip` margin).
 - Radius: `--radius-s` 8 (V1 buttons, nav icon), `--radius-m` 16, `--radius-l` 28, `--radius-pill` 999 (V2 buttons). V1 nav bar 10, V2 hero frame 18.
 - Motion: `--ease-out` cubic-bezier(0.22, 1, 0.36, 1), `--dur-fast` 160ms, `--dur-base` 260ms, `--dur-slow` 560ms. Every animation has a reduced-motion fallback.
 
@@ -144,6 +145,7 @@ Write what the user said, in their words where possible, with the date.
 
 ### Process
 
+- 2026-11-28: **Spacing pass** ("i see uneven spacing many place throughout the site … see mobbin and fix it please … also check every other page too"): one section-head rhythm site-wide (Space → Section-head rhythm), the empty first line removed from 11 headings, the Men's Health phone hero regrouped, and the FAQ card's button fixed for the navy scene (`FRAMER.md`).
 - 2026-11-28: **Landing footers** ("they did not add footer i want you to add footer there", then "we have to have footer without other pages links and all because of legal stuff"): the footer goes on both landing pages **without any links to other pages**; this answers the open question about the landing footer (no Privacy / Terms links either, for now). Built in Framer straight away (`FRAMER.md` on `claude/upbeat-cerf-ito550`); `main`'s HTML has no landing footer yet. Same day: **the Good Life text reveal on every landing section** ("in few place we have text animation in some it has not so check and fix").
 - 2026-11-19: Desktop only in HTML. Confirmed sections move to `main`; when the user says "move to Framer", the responsive versions are built in Framer during the transfer.
 - 2026-11-19: `main` created from the setup (docs, copy, logo, Home placeholder). No sections on it yet.
